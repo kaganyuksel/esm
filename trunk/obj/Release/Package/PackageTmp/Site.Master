@@ -1,0 +1,119 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="ESM.masterpage" %>
+
+<!DOCTYPE html >
+<html>
+<head id="Head1" runat="server">
+    <title>ESM-Evaluacion, Sistematizacion y Monitoreo</title>
+    <link href="Site.css" rel="stylesheet" type="text/css" />
+    <link href="mastercustom.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch:700' rel='stylesheet'
+        type='text/css'>
+    <link href="Style/jquery-ui-1.8.15.custom.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery-ui-1.8.15.custom.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var alto = screen.height;
+            var contenido = alto - 130;
+            $("#content").css("min-height", contenido);
+        });
+        
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div id="subcuerpo" style="height: auto;">
+        <form id="form1" runat="server">
+        <header>
+            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                <tr>
+                    <td>
+                        <img height="80" src="/Icons/clip_image002.jpg" alt="Ministerio de Educación" style="height: 100px;" />
+                    </td>
+                    <td style="width: 40%; height: 100px; vertical-align: middle; line-height: 100px;
+                        font-family: 'Cabin Sketch' , cursive; text-align: left;">
+                        <hgroup>
+                            <h1>
+                                ESM</h1>
+                        </hgroup>
+                        <p>
+                            Evaluación, Sistemtización y Monitoreo</p>
+                    </td>
+                    <td style="width: 30%; height: 100px; text-align: right;">
+                        <img height="80" src="/Icons/EducalidadHeader.png" alt="Educacion de Calidad" style="height: 100px;" />
+                    </td>
+                    <td style="width: 30%; height: 100px; text-align: right;">
+                        <img height="80" src="/Icons/MENHeader.png" alt="Ministerio de Educación" style="height: 100px;" />
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </header>
+        <div id="nav" class="ui-widget-header">
+            <section id="menu_left" style="width: 69%">
+                <ul>
+                    <li onclick="window.location = '/Default.aspx';">Inicio</li>
+                    <li onclick="window.location = '/AyudaPreguntas.aspx';">Preguntas</li>
+                    <li onclick="window.location = '/Evaluacion.aspx';">Evaluación</li>
+                    <li onclick="window.location = '/Consolidado.aspx';">Consolidado</li>
+                    <li onclick="window.location = 'http://esmllamadas.mggroupltda.com';">Agenda ESM</li>
+                </ul>
+            </section>
+            Usuario:
+            <asp:LoginName ID="LgName" runat="server" Font-Names="Helvetica, Arial, sans-serif">
+            </asp:LoginName>
+            <asp:LoginStatus ID="LgStatus" runat="server"></asp:LoginStatus>
+        </div>
+        <section id="content">
+            <div>
+                <%-- TODO: Habilite la presentación parcial estableciendo el atributo EnablePartialRendering en "true" para ofrecer una experiencia de exploración más regular.
+             Si se deja la presentación parcial deshabilitada, se consigue una experiencia de depuración mejor cuando la aplicación está en de<!DOCTYPE html><!DOCTYPE html>sarrollo. --%>
+                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                </asp:ScriptManager>
+                <script type="text/javascript">
+                    Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function (evt, args) {
+                        $("#accordionie").accordion();
+                        $("#accordionactor").accordion();
+                        $("#dialog:ui-dialog").dialog();
+                        $("#dialog-message").dialog();
+                        $("input:submit", ".demo").button();
+                        $(".checkclass").buttonset();
+                        $("a.pretty").prettyPhoto({
+                            callback: function () { //window.location.reload() 
+                            }, /* Called when prettyPhoto is closed */
+                            ie6_fallback: true,
+                            modal: true,
+                            social_tools: false
+                        });
+                    });
+                </script>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </section>
+        </form>
+        <div class="footer" style="border: 1px solid #dddddd; clear: both;">
+            <table cellpadding="80" cellspacing="30" style="margin: 0 auto; width: 100px;">
+                <tr>
+                    <td>
+                        <img src="/Icons/EducalidadFooter.png" height="80px" alt="Educacion de Calidad" />
+                    </td>
+                    <td>
+                        <img src="/Icons/ProsperidadTodosFooter.png" height="80px" alt="Prosperidad para Todos" />
+                    </td>
+                    <td>
+                        <img src="/Icons/MENFooter.png" alt="Ministerio de Educacion" height="80px" />
+                    </td>
+                    <td>
+                        <img src="/Icons/LOGO%20CISP.png" alt="CISP" height="50px" />
+                    </td>
+                    <td>
+                        <img src="/Icons/unicef.png" alt="Unicef" height="40px" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
