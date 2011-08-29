@@ -183,6 +183,7 @@
     <Content Include="Icons\MENFooter.png" />
     <Content Include="Icons\MENHeader.png" />
     <Content Include="Icons\Music.png" />
+    <Content Include="Icons\nav.png" />
     <Content Include="Icons\ok.png" />
     <Content Include="Icons\Options.png" />
     <Content Include="Icons\Paste.png" />

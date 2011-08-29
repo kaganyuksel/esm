@@ -80,8 +80,8 @@
       <Association Name="Consolidacion_ConslComponente" Member="ConslComponente" ThisKey="IdConsolidacion" OtherKey="IdConsolidado" Type="ConslComponente" />
       <Association Name="Consolidacion_ConslPregunta" Member="ConslPregunta" ThisKey="IdConsolidacion" OtherKey="IdConsolidado" Type="ConslPregunta" />
       <Association Name="Consolidacion_ConslProceso" Member="ConslProceso" ThisKey="IdConsolidacion" OtherKey="IdConsolidado" Type="ConslProceso" />
-      <Association Name="InstitucionEducativa_Consolidacion" Member="InstitucionEducativa" ThisKey="IdIE" OtherKey="IdIE" Type="InstitucionEducativa" IsForeignKey="true" />
       <Association Name="Mediciones_Consolidacion" Member="Mediciones" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Mediciones" IsForeignKey="true" />
+      <Association Name="Establecimiento_Educativo_Consolidacion" Member="Establecimiento_Educativo" ThisKey="IdIE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Consultores" Member="Consultores">
@@ -94,7 +94,7 @@
       <Column Name="TelefonoMovil1" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
       <Column Name="TelefonoMovil2" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
       <Column Name="CorreoElectronico" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Association Name="Consultores_InstitucionEducativa" Member="InstitucionEducativa" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="InstitucionEducativa" />
+      <Association Name="Consultores_Establecimiento_Educativo" Member="Establecimiento_Educativo" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Establecimiento_Educativo" />
     </Type>
   </Table>
   <Table Name="dbo.EstadoEvaluacion" Member="EstadoEvaluacion">
@@ -117,25 +117,8 @@
       <Association Name="Actores_Evaluacion" Member="Actores" ThisKey="IdActor" OtherKey="IdActor" Type="Actores" IsForeignKey="true" />
       <Association Name="EstadoEvaluacion_Evaluacion" Member="EstadoEvaluacion" ThisKey="IdEstado" OtherKey="IdEstado" Type="EstadoEvaluacion" IsForeignKey="true" />
       <Association Name="Usuarios_Evaluacion" Member="Usuarios" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuarios" IsForeignKey="true" />
-      <Association Name="InstitucionEducativa_Evaluacion" Member="InstitucionEducativa" ThisKey="IdIE" OtherKey="IdIE" Type="InstitucionEducativa" IsForeignKey="true" />
       <Association Name="Mediciones_Evaluacion" Member="Mediciones" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Mediciones" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.InstitucionEducativa" Member="InstitucionEducativa">
-    <Type Name="InstitucionEducativa">
-      <Column Name="IdIE" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IdConsultor" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CodigoDane" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="Nombre" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="Direccion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Telefono" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Municipio" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Rector" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Email" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="InstitucionEducativa_Consolidacion" Member="Consolidacion" ThisKey="IdIE" OtherKey="IdIE" Type="Consolidacion" />
-      <Association Name="InstitucionEducativa_Evaluacion" Member="Evaluacion" ThisKey="IdIE" OtherKey="IdIE" Type="Evaluacion" />
-      <Association Name="Consultores_InstitucionEducativa" Member="Consultores" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Consultores" IsForeignKey="true" />
+      <Association Name="Establecimiento_Educativo_Evaluacion" Member="Establecimiento_Educativo" ThisKey="IdIE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Mediciones" Member="Mediciones">
@@ -225,6 +208,23 @@
       <Column Name="Componente" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Association Name="Componentes_Preguntas" Member="Preguntas" ThisKey="IdComponente" OtherKey="IdComponente" Type="Preguntas" />
       <Association Name="Procesos_Componentes" Member="Procesos" ThisKey="IdProceso" OtherKey="IdProceso" Type="Procesos" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Establecimiento Educativo]" Member="Establecimiento_Educativo">
+    <Type Name="Establecimiento_Educativo">
+      <Column Name="IdIE" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdConsultor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CodigoDane" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Nombre" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Direccion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Telefono" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Municipio" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Rector" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Email" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Establecimiento_Educativo_Consolidacion" Member="Consolidacion" ThisKey="IdIE" OtherKey="IdIE" Type="Consolidacion" />
+      <Association Name="Establecimiento_Educativo_Evaluacion" Member="Evaluacion" ThisKey="IdIE" OtherKey="IdIE" Type="Evaluacion" />
+      <Association Name="Consultores_Establecimiento_Educativo" Member="Consultores" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Consultores" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

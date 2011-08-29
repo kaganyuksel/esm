@@ -14,7 +14,7 @@
         <br />
         <br />
         <h1 style="color: #005EA7;">
-            <%= table.DisplayName%></h1>
+            <%= table.DisplayName.Replace('_',' ') %></h1>
         <br />
         <br />
         <br />
@@ -58,7 +58,9 @@
                 </style>
                 <div style=" width:100%; overflow: scroll;">
                     <asp:GridView ID="GridView1" runat="server" DataSourceID="GridDataSource" EnablePersistedSelection="true"
-                        AllowPaging="True" CssClass="gridview" AllowSorting="True" CellPadding="10" OnDataBinding="GridView1_DataBinding">
+                        AllowPaging="True" CssClass="gridview" AllowSorting="True" 
+                        CellPadding="10" OnDataBinding="GridView1_DataBinding" 
+                        onpageindexchanging="GridView1_PageIndexChanging">
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>

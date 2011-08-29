@@ -100,5 +100,10 @@ namespace ESM
 
         }
 
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            ObtenerTema(GridView1);
+        }
+
     }
 }

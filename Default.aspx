@@ -65,11 +65,11 @@
         </tr>
         <tr>
             <td>
-                <a href="/InstitucionEducativa/list.aspx">
-                    <img src="Icons/Tutorial.png" alt="Institución Educativa" /></a>
+                <a href="/Establecimiento_Educativo/list.aspx">
+                    <img src="/Icons/Tutorial.png" alt="Institución Educativa" /></a>
             </td>
             <td class="td">
-                <h3 onclick="window.location='/InstitucionEducativa/list.aspx'">
+                <h3 onclick="window.location='/Establecimiento_Educativo/list.aspx'">
                     Establecimiento Educativo</h3>
                 <br />
                 Almacena la información de los establecimientos educativos administrando cada una de
@@ -77,7 +77,7 @@
             </td>
             <td>
                 <a href="/Consultores/list.aspx">
-                    <img src="Icons/Paste.png" alt="Consultores" /></a>
+                    <img src="/Icons/Paste.png" alt="Consultores" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Consultores/list.aspx'">
@@ -90,7 +90,7 @@
         <tr>
             <td>
                 <a href="/Ambientes/list.aspx">
-                    <img src="Icons/tag.png" alt="Ambientes" /></a>
+                    <img src="/Icons/tag.png" alt="Ambientes" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Ambientes/list.aspx'">
@@ -101,7 +101,7 @@
             </td>
             <td>
                 <a href="/Procesos/list.aspx">
-                    <img src="Icons/System.png" alt="Procesos" /></a>
+                    <img src="/Icons/System.png" alt="Procesos" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Procesos/list.aspx'">
@@ -113,7 +113,7 @@
         <tr>
             <td>
                 <a href="/Componentes/list.aspx">
-                    <img src="Icons/Template.png" alt="Actores" /></a>
+                    <img src="/Icons/Template.png" alt="Actores" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Componentes/list.aspx'">
@@ -124,7 +124,7 @@
             </td>
             <td>
                 <a href="/Procesos/list.aspx">
-                    <img src="Icons/Write.png" alt="Preguntas" /></a>
+                    <img src="/Icons/Write.png" alt="Preguntas" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Preguntas/list.aspx'">
@@ -140,7 +140,7 @@
     <table class="menuprincipalbyconfiguracion" cellspacing="10">
         <tr class="th">
             <td>
-                <img src="Icons/Edit.png" alt="Modulo de Administración y Configuración">
+                <img src="/Icons/Edit.png" alt="Modulo de Administración y Configuración">
             </td>
             <td colspan="3">
                 <h1>
@@ -150,7 +150,7 @@
         <tr>
             <td>
                 <a href="/Evaluacion.aspx">
-                    <img src="Icons/Flag.png" alt="Evaluar" /></a>
+                    <img src="/Icons/Flag.png" alt="Evaluar" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Evaluacion.aspx'">
@@ -161,7 +161,7 @@
             </td>
             <td>
                 <a href="/Consolidado.aspx">
-                    <img src="Icons/Stats.png" alt="Consolidado" /></a>
+                    <img src="/Icons/Stats.png" alt="Consolidado" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Consolidado.aspx'">
