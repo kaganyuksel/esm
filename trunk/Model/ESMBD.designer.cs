@@ -63,9 +63,6 @@ namespace ESM.Model
     partial void InsertEvaluacion(Evaluacion instance);
     partial void UpdateEvaluacion(Evaluacion instance);
     partial void DeleteEvaluacion(Evaluacion instance);
-    partial void InsertInstitucionEducativa(InstitucionEducativa instance);
-    partial void UpdateInstitucionEducativa(InstitucionEducativa instance);
-    partial void DeleteInstitucionEducativa(InstitucionEducativa instance);
     partial void InsertMediciones(Mediciones instance);
     partial void UpdateMediciones(Mediciones instance);
     partial void DeleteMediciones(Mediciones instance);
@@ -93,6 +90,9 @@ namespace ESM.Model
     partial void InsertComponentes(Componentes instance);
     partial void UpdateComponentes(Componentes instance);
     partial void DeleteComponentes(Componentes instance);
+    partial void InsertEstablecimiento_Educativo(Establecimiento_Educativo instance);
+    partial void UpdateEstablecimiento_Educativo(Establecimiento_Educativo instance);
+    partial void DeleteEstablecimiento_Educativo(Establecimiento_Educativo instance);
     #endregion
 		
 		public ESMBDDataContext() : 
@@ -221,14 +221,6 @@ namespace ESM.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<InstitucionEducativa> InstitucionEducativa
-		{
-			get
-			{
-				return this.GetTable<InstitucionEducativa>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Mediciones> Mediciones
 		{
 			get
@@ -298,6 +290,14 @@ namespace ESM.Model
 			get
 			{
 				return this.GetTable<Componentes>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Establecimiento_Educativo> Establecimiento_Educativo
+		{
+			get
+			{
+				return this.GetTable<Establecimiento_Educativo>();
 			}
 		}
 	}
@@ -1606,9 +1606,9 @@ namespace ESM.Model
 		
 		private EntitySet<ConslProceso> _ConslProceso;
 		
-		private EntityRef<InstitucionEducativa> _InstitucionEducativa;
-		
 		private EntityRef<Mediciones> _Mediciones;
+		
+		private EntityRef<Establecimiento_Educativo> _Establecimiento_Educativo;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -1628,8 +1628,8 @@ namespace ESM.Model
 			this._ConslComponente = new EntitySet<ConslComponente>(new Action<ConslComponente>(this.attach_ConslComponente), new Action<ConslComponente>(this.detach_ConslComponente));
 			this._ConslPregunta = new EntitySet<ConslPregunta>(new Action<ConslPregunta>(this.attach_ConslPregunta), new Action<ConslPregunta>(this.detach_ConslPregunta));
 			this._ConslProceso = new EntitySet<ConslProceso>(new Action<ConslProceso>(this.attach_ConslProceso), new Action<ConslProceso>(this.detach_ConslProceso));
-			this._InstitucionEducativa = default(EntityRef<InstitucionEducativa>);
 			this._Mediciones = default(EntityRef<Mediciones>);
+			this._Establecimiento_Educativo = default(EntityRef<Establecimiento_Educativo>);
 			OnCreated();
 		}
 		
@@ -1688,7 +1688,7 @@ namespace ESM.Model
 			{
 				if ((this._IdIE != value))
 				{
-					if (this._InstitucionEducativa.HasLoadedOrAssignedValue)
+					if (this._Establecimiento_Educativo.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1753,40 +1753,6 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InstitucionEducativa_Consolidacion", Storage="_InstitucionEducativa", ThisKey="IdIE", OtherKey="IdIE", IsForeignKey=true)]
-		public InstitucionEducativa InstitucionEducativa
-		{
-			get
-			{
-				return this._InstitucionEducativa.Entity;
-			}
-			set
-			{
-				InstitucionEducativa previousValue = this._InstitucionEducativa.Entity;
-				if (((previousValue != value) 
-							|| (this._InstitucionEducativa.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._InstitucionEducativa.Entity = null;
-						previousValue.Consolidacion.Remove(this);
-					}
-					this._InstitucionEducativa.Entity = value;
-					if ((value != null))
-					{
-						value.Consolidacion.Add(this);
-						this._IdIE = value.IdIE;
-					}
-					else
-					{
-						this._IdIE = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("InstitucionEducativa");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Mediciones_Consolidacion", Storage="_Mediciones", ThisKey="IdMedicion", OtherKey="IdMedicion", IsForeignKey=true)]
 		public Mediciones Mediciones
 		{
@@ -1817,6 +1783,40 @@ namespace ESM.Model
 						this._IdMedicion = default(int);
 					}
 					this.SendPropertyChanged("Mediciones");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Establecimiento_Educativo_Consolidacion", Storage="_Establecimiento_Educativo", ThisKey="IdIE", OtherKey="IdIE", IsForeignKey=true)]
+		public Establecimiento_Educativo Establecimiento_Educativo
+		{
+			get
+			{
+				return this._Establecimiento_Educativo.Entity;
+			}
+			set
+			{
+				Establecimiento_Educativo previousValue = this._Establecimiento_Educativo.Entity;
+				if (((previousValue != value) 
+							|| (this._Establecimiento_Educativo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Establecimiento_Educativo.Entity = null;
+						previousValue.Consolidacion.Remove(this);
+					}
+					this._Establecimiento_Educativo.Entity = value;
+					if ((value != null))
+					{
+						value.Consolidacion.Add(this);
+						this._IdIE = value.IdIE;
+					}
+					else
+					{
+						this._IdIE = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Establecimiento_Educativo");
 				}
 			}
 		}
@@ -1912,7 +1912,7 @@ namespace ESM.Model
 		
 		private string _CorreoElectronico;
 		
-		private EntitySet<InstitucionEducativa> _InstitucionEducativa;
+		private EntitySet<Establecimiento_Educativo> _Establecimiento_Educativo;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -1938,7 +1938,7 @@ namespace ESM.Model
 		
 		public Consultores()
 		{
-			this._InstitucionEducativa = new EntitySet<InstitucionEducativa>(new Action<InstitucionEducativa>(this.attach_InstitucionEducativa), new Action<InstitucionEducativa>(this.detach_InstitucionEducativa));
+			this._Establecimiento_Educativo = new EntitySet<Establecimiento_Educativo>(new Action<Establecimiento_Educativo>(this.attach_Establecimiento_Educativo), new Action<Establecimiento_Educativo>(this.detach_Establecimiento_Educativo));
 			OnCreated();
 		}
 		
@@ -2102,16 +2102,16 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Consultores_InstitucionEducativa", Storage="_InstitucionEducativa", ThisKey="IdConsultor", OtherKey="IdConsultor")]
-		public EntitySet<InstitucionEducativa> InstitucionEducativa
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Consultores_Establecimiento_Educativo", Storage="_Establecimiento_Educativo", ThisKey="IdConsultor", OtherKey="IdConsultor")]
+		public EntitySet<Establecimiento_Educativo> Establecimiento_Educativo
 		{
 			get
 			{
-				return this._InstitucionEducativa;
+				return this._Establecimiento_Educativo;
 			}
 			set
 			{
-				this._InstitucionEducativa.Assign(value);
+				this._Establecimiento_Educativo.Assign(value);
 			}
 		}
 		
@@ -2135,13 +2135,13 @@ namespace ESM.Model
 			}
 		}
 		
-		private void attach_InstitucionEducativa(InstitucionEducativa entity)
+		private void attach_Establecimiento_Educativo(Establecimiento_Educativo entity)
 		{
 			this.SendPropertyChanging();
 			entity.Consultores = this;
 		}
 		
-		private void detach_InstitucionEducativa(InstitucionEducativa entity)
+		private void detach_Establecimiento_Educativo(Establecimiento_Educativo entity)
 		{
 			this.SendPropertyChanging();
 			entity.Consultores = null;
@@ -2290,9 +2290,9 @@ namespace ESM.Model
 		
 		private EntityRef<Usuarios> _Usuarios;
 		
-		private EntityRef<InstitucionEducativa> _InstitucionEducativa;
-		
 		private EntityRef<Mediciones> _Mediciones;
+		
+		private EntityRef<Establecimiento_Educativo> _Establecimiento_Educativo;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -2320,8 +2320,8 @@ namespace ESM.Model
 			this._Actores = default(EntityRef<Actores>);
 			this._EstadoEvaluacion = default(EntityRef<EstadoEvaluacion>);
 			this._Usuarios = default(EntityRef<Usuarios>);
-			this._InstitucionEducativa = default(EntityRef<InstitucionEducativa>);
 			this._Mediciones = default(EntityRef<Mediciones>);
+			this._Establecimiento_Educativo = default(EntityRef<Establecimiento_Educativo>);
 			OnCreated();
 		}
 		
@@ -2356,7 +2356,7 @@ namespace ESM.Model
 			{
 				if ((this._IdIE != value))
 				{
-					if (this._InstitucionEducativa.HasLoadedOrAssignedValue)
+					if (this._Establecimiento_Educativo.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2600,40 +2600,6 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InstitucionEducativa_Evaluacion", Storage="_InstitucionEducativa", ThisKey="IdIE", OtherKey="IdIE", IsForeignKey=true)]
-		public InstitucionEducativa InstitucionEducativa
-		{
-			get
-			{
-				return this._InstitucionEducativa.Entity;
-			}
-			set
-			{
-				InstitucionEducativa previousValue = this._InstitucionEducativa.Entity;
-				if (((previousValue != value) 
-							|| (this._InstitucionEducativa.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._InstitucionEducativa.Entity = null;
-						previousValue.Evaluacion.Remove(this);
-					}
-					this._InstitucionEducativa.Entity = value;
-					if ((value != null))
-					{
-						value.Evaluacion.Add(this);
-						this._IdIE = value.IdIE;
-					}
-					else
-					{
-						this._IdIE = default(int);
-					}
-					this.SendPropertyChanged("InstitucionEducativa");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Mediciones_Evaluacion", Storage="_Mediciones", ThisKey="IdMedicion", OtherKey="IdMedicion", IsForeignKey=true)]
 		public Mediciones Mediciones
 		{
@@ -2668,6 +2634,40 @@ namespace ESM.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Establecimiento_Educativo_Evaluacion", Storage="_Establecimiento_Educativo", ThisKey="IdIE", OtherKey="IdIE", IsForeignKey=true)]
+		public Establecimiento_Educativo Establecimiento_Educativo
+		{
+			get
+			{
+				return this._Establecimiento_Educativo.Entity;
+			}
+			set
+			{
+				Establecimiento_Educativo previousValue = this._Establecimiento_Educativo.Entity;
+				if (((previousValue != value) 
+							|| (this._Establecimiento_Educativo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Establecimiento_Educativo.Entity = null;
+						previousValue.Evaluacion.Remove(this);
+					}
+					this._Establecimiento_Educativo.Entity = value;
+					if ((value != null))
+					{
+						value.Evaluacion.Add(this);
+						this._IdIE = value.IdIE;
+					}
+					else
+					{
+						this._IdIE = default(int);
+					}
+					this.SendPropertyChanged("Establecimiento_Educativo");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2698,381 +2698,6 @@ namespace ESM.Model
 		{
 			this.SendPropertyChanging();
 			entity.Evaluacion = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InstitucionEducativa")]
-	public partial class InstitucionEducativa : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IdIE;
-		
-		private System.Nullable<int> _IdConsultor;
-		
-		private string _CodigoDane;
-		
-		private string _Nombre;
-		
-		private string _Direccion;
-		
-		private string _Telefono;
-		
-		private string _Municipio;
-		
-		private string _Rector;
-		
-		private string _Email;
-		
-		private bool _Estado;
-		
-		private EntitySet<Consolidacion> _Consolidacion;
-		
-		private EntitySet<Evaluacion> _Evaluacion;
-		
-		private EntityRef<Consultores> _Consultores;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdIEChanging(int value);
-    partial void OnIdIEChanged();
-    partial void OnIdConsultorChanging(System.Nullable<int> value);
-    partial void OnIdConsultorChanged();
-    partial void OnCodigoDaneChanging(string value);
-    partial void OnCodigoDaneChanged();
-    partial void OnNombreChanging(string value);
-    partial void OnNombreChanged();
-    partial void OnDireccionChanging(string value);
-    partial void OnDireccionChanged();
-    partial void OnTelefonoChanging(string value);
-    partial void OnTelefonoChanged();
-    partial void OnMunicipioChanging(string value);
-    partial void OnMunicipioChanged();
-    partial void OnRectorChanging(string value);
-    partial void OnRectorChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnEstadoChanging(bool value);
-    partial void OnEstadoChanged();
-    #endregion
-		
-		public InstitucionEducativa()
-		{
-			this._Consolidacion = new EntitySet<Consolidacion>(new Action<Consolidacion>(this.attach_Consolidacion), new Action<Consolidacion>(this.detach_Consolidacion));
-			this._Evaluacion = new EntitySet<Evaluacion>(new Action<Evaluacion>(this.attach_Evaluacion), new Action<Evaluacion>(this.detach_Evaluacion));
-			this._Consultores = default(EntityRef<Consultores>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdIE", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IdIE
-		{
-			get
-			{
-				return this._IdIE;
-			}
-			set
-			{
-				if ((this._IdIE != value))
-				{
-					this.OnIdIEChanging(value);
-					this.SendPropertyChanging();
-					this._IdIE = value;
-					this.SendPropertyChanged("IdIE");
-					this.OnIdIEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdConsultor", DbType="Int")]
-		public System.Nullable<int> IdConsultor
-		{
-			get
-			{
-				return this._IdConsultor;
-			}
-			set
-			{
-				if ((this._IdConsultor != value))
-				{
-					if (this._Consultores.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdConsultorChanging(value);
-					this.SendPropertyChanging();
-					this._IdConsultor = value;
-					this.SendPropertyChanged("IdConsultor");
-					this.OnIdConsultorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoDane", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string CodigoDane
-		{
-			get
-			{
-				return this._CodigoDane;
-			}
-			set
-			{
-				if ((this._CodigoDane != value))
-				{
-					this.OnCodigoDaneChanging(value);
-					this.SendPropertyChanging();
-					this._CodigoDane = value;
-					this.SendPropertyChanged("CodigoDane");
-					this.OnCodigoDaneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string Nombre
-		{
-			get
-			{
-				return this._Nombre;
-			}
-			set
-			{
-				if ((this._Nombre != value))
-				{
-					this.OnNombreChanging(value);
-					this.SendPropertyChanging();
-					this._Nombre = value;
-					this.SendPropertyChanged("Nombre");
-					this.OnNombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string Direccion
-		{
-			get
-			{
-				return this._Direccion;
-			}
-			set
-			{
-				if ((this._Direccion != value))
-				{
-					this.OnDireccionChanging(value);
-					this.SendPropertyChanging();
-					this._Direccion = value;
-					this.SendPropertyChanged("Direccion");
-					this.OnDireccionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string Telefono
-		{
-			get
-			{
-				return this._Telefono;
-			}
-			set
-			{
-				if ((this._Telefono != value))
-				{
-					this.OnTelefonoChanging(value);
-					this.SendPropertyChanging();
-					this._Telefono = value;
-					this.SendPropertyChanged("Telefono");
-					this.OnTelefonoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Municipio", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string Municipio
-		{
-			get
-			{
-				return this._Municipio;
-			}
-			set
-			{
-				if ((this._Municipio != value))
-				{
-					this.OnMunicipioChanging(value);
-					this.SendPropertyChanging();
-					this._Municipio = value;
-					this.SendPropertyChanged("Municipio");
-					this.OnMunicipioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rector", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string Rector
-		{
-			get
-			{
-				return this._Rector;
-			}
-			set
-			{
-				if ((this._Rector != value))
-				{
-					this.OnRectorChanging(value);
-					this.SendPropertyChanging();
-					this._Rector = value;
-					this.SendPropertyChanged("Rector");
-					this.OnRectorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="Bit NOT NULL")]
-		public bool Estado
-		{
-			get
-			{
-				return this._Estado;
-			}
-			set
-			{
-				if ((this._Estado != value))
-				{
-					this.OnEstadoChanging(value);
-					this.SendPropertyChanging();
-					this._Estado = value;
-					this.SendPropertyChanged("Estado");
-					this.OnEstadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InstitucionEducativa_Consolidacion", Storage="_Consolidacion", ThisKey="IdIE", OtherKey="IdIE")]
-		public EntitySet<Consolidacion> Consolidacion
-		{
-			get
-			{
-				return this._Consolidacion;
-			}
-			set
-			{
-				this._Consolidacion.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="InstitucionEducativa_Evaluacion", Storage="_Evaluacion", ThisKey="IdIE", OtherKey="IdIE")]
-		public EntitySet<Evaluacion> Evaluacion
-		{
-			get
-			{
-				return this._Evaluacion;
-			}
-			set
-			{
-				this._Evaluacion.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Consultores_InstitucionEducativa", Storage="_Consultores", ThisKey="IdConsultor", OtherKey="IdConsultor", IsForeignKey=true)]
-		public Consultores Consultores
-		{
-			get
-			{
-				return this._Consultores.Entity;
-			}
-			set
-			{
-				Consultores previousValue = this._Consultores.Entity;
-				if (((previousValue != value) 
-							|| (this._Consultores.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Consultores.Entity = null;
-						previousValue.InstitucionEducativa.Remove(this);
-					}
-					this._Consultores.Entity = value;
-					if ((value != null))
-					{
-						value.InstitucionEducativa.Add(this);
-						this._IdConsultor = value.IdConsultor;
-					}
-					else
-					{
-						this._IdConsultor = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Consultores");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Consolidacion(Consolidacion entity)
-		{
-			this.SendPropertyChanging();
-			entity.InstitucionEducativa = this;
-		}
-		
-		private void detach_Consolidacion(Consolidacion entity)
-		{
-			this.SendPropertyChanging();
-			entity.InstitucionEducativa = null;
-		}
-		
-		private void attach_Evaluacion(Evaluacion entity)
-		{
-			this.SendPropertyChanging();
-			entity.InstitucionEducativa = this;
-		}
-		
-		private void detach_Evaluacion(Evaluacion entity)
-		{
-			this.SendPropertyChanging();
-			entity.InstitucionEducativa = null;
 		}
 	}
 	
@@ -4859,6 +4484,381 @@ namespace ESM.Model
 		{
 			this.SendPropertyChanging();
 			entity.Componentes = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Establecimiento Educativo]")]
+	public partial class Establecimiento_Educativo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IdIE;
+		
+		private System.Nullable<int> _IdConsultor;
+		
+		private string _CodigoDane;
+		
+		private string _Nombre;
+		
+		private string _Direccion;
+		
+		private string _Telefono;
+		
+		private string _Municipio;
+		
+		private string _Rector;
+		
+		private string _Email;
+		
+		private bool _Estado;
+		
+		private EntitySet<Consolidacion> _Consolidacion;
+		
+		private EntitySet<Evaluacion> _Evaluacion;
+		
+		private EntityRef<Consultores> _Consultores;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdIEChanging(int value);
+    partial void OnIdIEChanged();
+    partial void OnIdConsultorChanging(System.Nullable<int> value);
+    partial void OnIdConsultorChanged();
+    partial void OnCodigoDaneChanging(string value);
+    partial void OnCodigoDaneChanged();
+    partial void OnNombreChanging(string value);
+    partial void OnNombreChanged();
+    partial void OnDireccionChanging(string value);
+    partial void OnDireccionChanged();
+    partial void OnTelefonoChanging(string value);
+    partial void OnTelefonoChanged();
+    partial void OnMunicipioChanging(string value);
+    partial void OnMunicipioChanged();
+    partial void OnRectorChanging(string value);
+    partial void OnRectorChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnEstadoChanging(bool value);
+    partial void OnEstadoChanged();
+    #endregion
+		
+		public Establecimiento_Educativo()
+		{
+			this._Consolidacion = new EntitySet<Consolidacion>(new Action<Consolidacion>(this.attach_Consolidacion), new Action<Consolidacion>(this.detach_Consolidacion));
+			this._Evaluacion = new EntitySet<Evaluacion>(new Action<Evaluacion>(this.attach_Evaluacion), new Action<Evaluacion>(this.detach_Evaluacion));
+			this._Consultores = default(EntityRef<Consultores>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdIE", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdIE
+		{
+			get
+			{
+				return this._IdIE;
+			}
+			set
+			{
+				if ((this._IdIE != value))
+				{
+					this.OnIdIEChanging(value);
+					this.SendPropertyChanging();
+					this._IdIE = value;
+					this.SendPropertyChanged("IdIE");
+					this.OnIdIEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdConsultor", DbType="Int")]
+		public System.Nullable<int> IdConsultor
+		{
+			get
+			{
+				return this._IdConsultor;
+			}
+			set
+			{
+				if ((this._IdConsultor != value))
+				{
+					if (this._Consultores.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdConsultorChanging(value);
+					this.SendPropertyChanging();
+					this._IdConsultor = value;
+					this.SendPropertyChanged("IdConsultor");
+					this.OnIdConsultorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodigoDane", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string CodigoDane
+		{
+			get
+			{
+				return this._CodigoDane;
+			}
+			set
+			{
+				if ((this._CodigoDane != value))
+				{
+					this.OnCodigoDaneChanging(value);
+					this.SendPropertyChanging();
+					this._CodigoDane = value;
+					this.SendPropertyChanged("CodigoDane");
+					this.OnCodigoDaneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this.OnNombreChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre = value;
+					this.SendPropertyChanged("Nombre");
+					this.OnNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string Direccion
+		{
+			get
+			{
+				return this._Direccion;
+			}
+			set
+			{
+				if ((this._Direccion != value))
+				{
+					this.OnDireccionChanging(value);
+					this.SendPropertyChanging();
+					this._Direccion = value;
+					this.SendPropertyChanged("Direccion");
+					this.OnDireccionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string Telefono
+		{
+			get
+			{
+				return this._Telefono;
+			}
+			set
+			{
+				if ((this._Telefono != value))
+				{
+					this.OnTelefonoChanging(value);
+					this.SendPropertyChanging();
+					this._Telefono = value;
+					this.SendPropertyChanged("Telefono");
+					this.OnTelefonoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Municipio", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string Municipio
+		{
+			get
+			{
+				return this._Municipio;
+			}
+			set
+			{
+				if ((this._Municipio != value))
+				{
+					this.OnMunicipioChanging(value);
+					this.SendPropertyChanging();
+					this._Municipio = value;
+					this.SendPropertyChanged("Municipio");
+					this.OnMunicipioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rector", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string Rector
+		{
+			get
+			{
+				return this._Rector;
+			}
+			set
+			{
+				if ((this._Rector != value))
+				{
+					this.OnRectorChanging(value);
+					this.SendPropertyChanging();
+					this._Rector = value;
+					this.SendPropertyChanged("Rector");
+					this.OnRectorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="Bit NOT NULL")]
+		public bool Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this.OnEstadoChanging(value);
+					this.SendPropertyChanging();
+					this._Estado = value;
+					this.SendPropertyChanged("Estado");
+					this.OnEstadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Establecimiento_Educativo_Consolidacion", Storage="_Consolidacion", ThisKey="IdIE", OtherKey="IdIE")]
+		public EntitySet<Consolidacion> Consolidacion
+		{
+			get
+			{
+				return this._Consolidacion;
+			}
+			set
+			{
+				this._Consolidacion.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Establecimiento_Educativo_Evaluacion", Storage="_Evaluacion", ThisKey="IdIE", OtherKey="IdIE")]
+		public EntitySet<Evaluacion> Evaluacion
+		{
+			get
+			{
+				return this._Evaluacion;
+			}
+			set
+			{
+				this._Evaluacion.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Consultores_Establecimiento_Educativo", Storage="_Consultores", ThisKey="IdConsultor", OtherKey="IdConsultor", IsForeignKey=true)]
+		public Consultores Consultores
+		{
+			get
+			{
+				return this._Consultores.Entity;
+			}
+			set
+			{
+				Consultores previousValue = this._Consultores.Entity;
+				if (((previousValue != value) 
+							|| (this._Consultores.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Consultores.Entity = null;
+						previousValue.Establecimiento_Educativo.Remove(this);
+					}
+					this._Consultores.Entity = value;
+					if ((value != null))
+					{
+						value.Establecimiento_Educativo.Add(this);
+						this._IdConsultor = value.IdConsultor;
+					}
+					else
+					{
+						this._IdConsultor = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Consultores");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Consolidacion(Consolidacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Establecimiento_Educativo = this;
+		}
+		
+		private void detach_Consolidacion(Consolidacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Establecimiento_Educativo = null;
+		}
+		
+		private void attach_Evaluacion(Evaluacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Establecimiento_Educativo = this;
+		}
+		
+		private void detach_Evaluacion(Evaluacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Establecimiento_Educativo = null;
 		}
 	}
 }

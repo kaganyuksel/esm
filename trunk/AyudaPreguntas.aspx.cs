@@ -14,42 +14,55 @@ namespace ESM.Preguntas
         {
             if (Request.IsAuthenticated)
             {
-                #region Cargar Treeview
-                var trvambi = from am in new ESM.Model.ESMBDDataContext().Ambientes
-                              select am;
-                int contador = 0;
-                foreach (var item in trvambi)
+                if (!Page.IsPostBack)
                 {
 
-                    tvayuda.Nodes[0].ChildNodes.Add(new TreeNode(item.Ambiente, item.IdAmbiente.ToString()));
-
-                    var proces = from pro in new ESM.Model.ESMBDDataContext().Procesos
-                                 where pro.IdAmbiente == item.IdAmbiente
-                                 select pro;
-
-                    foreach (var proc in proces)
+                    #region Cargar Treeview
+                    var trvambi = from am in new ESM.Model.ESMBDDataContext().Ambientes
+                                  select am;
+                    int contador = 0;
+                    foreach (var item in trvambi)
                     {
-                        tvayuda.Nodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(proc.Proceso, proc.IdProceso.ToString()));
-                        tvayuda.Nodes[0].ChildNodes[contador].Expanded = false;
-                        var com = from comp in new ESM.Model.ESMBDDataContext().Componentes
-                                  where comp.IdProceso == proc.IdProceso
-                                  select comp;
 
-                        foreach (var compo in com)
+                        tvayuda.Nodes[0].ChildNodes.Add(new TreeNode(item.Ambiente, item.IdAmbiente.ToString()));
+
+                        var proces = from pro in new ESM.Model.ESMBDDataContext().Procesos
+                                     where pro.IdAmbiente == item.IdAmbiente
+                                     select pro;
+
+                        foreach (var proc in proces)
                         {
-                            if (tvayuda.Nodes[0].ChildNodes[0].ChildNodes.Count > contador)
-                                tvayuda.Nodes[0].ChildNodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(compo.Componente, compo.IdComponente.ToString()));
+                            tvayuda.Nodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(proc.Proceso, proc.IdProceso.ToString()));
+                            tvayuda.Nodes[0].ChildNodes[contador].Expanded = false;
+                            var com = from comp in new ESM.Model.ESMBDDataContext().Componentes
+                                      where comp.IdProceso == proc.IdProceso
+                                      select comp;
+
+                            foreach (var compo in com)
+                            {
+                                if (tvayuda.Nodes[0].ChildNodes[0].ChildNodes.Count > contador)
+                                    tvayuda.Nodes[0].ChildNodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(compo.Componente, compo.IdComponente.ToString()));
+
+                            }
+
 
                         }
 
+                        contador++;
 
                     }
 
-                    contador++;
+                    #endregion
 
                 }
+                else
+                {
+                    for (int i = 0; i < tvayuda.Nodes[0].ChildNodes.Count; i++)
+                    {
+                        tvayuda.Nodes[0].ChildNodes[i].Expanded = false;
+                    }
 
-                #endregion
+                }
             }
             else
                 Response.Redirect("Login.aspx");
@@ -117,13 +130,17 @@ namespace ESM.Preguntas
                             }
 
                         }
+                        else
+                        {
+                            Response.Write("<script type='text/javascript'>alert('No se encontraron resultados relacionados al componente seleccionado.');</script>");
+                        }
                     }
                 }
             }
-            catch(Exception){}
+            catch (Exception) { Response.Write("<script type='text/javascript'>alert('No se encontraron resultados relacionados al componente seleccionado.');</script>"); }
         }
 
-        
+
         //protected void CreateMessageAlert(string strMessage)
         //{
         //    Guid guidKey = Guid.NewGuid();
@@ -259,7 +276,7 @@ namespace ESM.Preguntas
                         Label lblidpregunta = (Label)e.Row.FindControl("lblIdPregunta");
                         TextBox txtPregunta = (TextBox)e.Row.FindControl("txtPregunta");
                         txtPregunta.Enabled = false;
-                        txtPregunta.CssClass = String.Format("txtmultiline text_{0}", lblidpregunta.Text);
+                        txtPregunta.CssClass = String.Format("txtmiltilinepregunta text_{0}", lblidpregunta.Text);
 
                         break;
                 }

@@ -104,7 +104,7 @@ namespace ESM.Consolidado
                 /*Instancio*/
                 Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-                var rFiltro = from i in db.InstitucionEducativa
+                var rFiltro = from i in db.Establecimiento_Educativo
                               where i.Nombre.Contains(texto)
                               select i;
 

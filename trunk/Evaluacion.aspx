@@ -128,7 +128,7 @@
                     <td>
                         <img src="/Icons/Edit.png" alt="Evaluacion" />
                     </td>
-                    <td style="vertical-align: middle; font-size: 13px;">
+                    <td style="vertical-align: middle; font-size: 13px; text-align: left;">
                         <h1 style="color: #0b72bc;">
                             Formulario de Evaluación</h1>
                         Administra la configuración para la evaluación a presentar.
@@ -189,7 +189,7 @@
                         <RowStyle CssClass="td"></RowStyle>
                     </asp:GridView>
                     <asp:LinqDataSource ID="ldsies" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
-                        EntityTypeName="" TableName="InstitucionEducativa">
+                        EntityTypeName="" TableName="Establecimiento_Educativo">
                     </asp:LinqDataSource>
                 </div>
                 <style type="text/css">

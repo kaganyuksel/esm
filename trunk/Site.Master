@@ -29,7 +29,7 @@
             <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
                 <tr>
                     <td>
-                        <img height="80" src="/Icons/clip_image002.jpg" alt="Ministerio de Educación" style="height: 100px;" />
+                        <img height="80px" src="/Icons/clip_image002.jpg" alt="Ministerio de Educación" />
                     </td>
                     <td style="width: 40%; height: 100px; vertical-align: middle; line-height: 100px;
                         font-family: 'Cabin Sketch' , cursive; text-align: left;">
@@ -41,16 +41,16 @@
                             Evaluación, Sistemtización y Monitoreo</p>
                     </td>
                     <td style="width: 30%; height: 100px; text-align: right;">
-                        <img height="80" src="/Icons/EducalidadHeader.png" alt="Educacion de Calidad" style="height: 100px;" />
+                        <img height="80" src="/Icons/EducalidadHeader.png" alt="Educacion de Calidad" />
                     </td>
                     <td style="width: 30%; height: 100px; text-align: right;">
-                        <img height="80" src="/Icons/MENHeader.png" alt="Ministerio de Educación" style="height: 100px;" />
+                        <img height="90" src="/Icons/MENHeader.png" alt="Ministerio de Educación" />
                     </td>
                 </tr>
             </table>
             <br />
         </header>
-        <div id="nav" class="ui-widget-header">
+        <div id="nav" <%--class="ui-widget-header"--%>>
             <section id="menu_left" style="width: 69%">
                 <ul>
                     <li onclick="window.location = '/Default.aspx';">Inicio</li>
