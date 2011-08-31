@@ -1,12 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="esm" Class="ESMBDDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=XOGOST-LAPTOP\SQLEXPRESS2008R2;Initial Catalog=esm;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="esmConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Actores" Member="Actores">
-    <Type Name="Actores">
-      <Column Name="IdActor" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Actor" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Association Name="Actores_Evaluacion" Member="Evaluacion" ThisKey="IdActor" OtherKey="IdActor" Type="Evaluacion" />
-    </Type>
-  </Table>
   <Table Name="dbo.Usuarios" Member="Usuarios">
     <Type Name="Usuarios">
       <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -114,11 +107,11 @@
       <Column Name="IdEstado" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IdMedicion" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Evaluacion_ResultadosByEvaluacion" Member="ResultadosByEvaluacion" ThisKey="IdEvaluacion" OtherKey="IdEvaluacion" Type="ResultadosByEvaluacion" />
-      <Association Name="Actores_Evaluacion" Member="Actores" ThisKey="IdActor" OtherKey="IdActor" Type="Actores" IsForeignKey="true" />
       <Association Name="EstadoEvaluacion_Evaluacion" Member="EstadoEvaluacion" ThisKey="IdEstado" OtherKey="IdEstado" Type="EstadoEvaluacion" IsForeignKey="true" />
       <Association Name="Usuarios_Evaluacion" Member="Usuarios" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuarios" IsForeignKey="true" />
       <Association Name="Mediciones_Evaluacion" Member="Mediciones" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Mediciones" IsForeignKey="true" />
       <Association Name="Establecimiento_Educativo_Evaluacion" Member="Establecimiento_Educativo" ThisKey="IdIE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
+      <Association Name="Actores_Evaluacion" Member="Actores" ThisKey="IdActor" OtherKey="IdActor" Type="Actores" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Mediciones" Member="Mediciones">
@@ -207,6 +200,7 @@
       <Column Name="IdProceso" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Componente" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Association Name="Componentes_Preguntas" Member="Preguntas" ThisKey="IdComponente" OtherKey="IdComponente" Type="Preguntas" />
+      <Association Name="Componentes_CategoryByComponente" Member="CategoryByComponente" ThisKey="IdComponente" OtherKey="IdComponente" Type="CategoryByComponente" />
       <Association Name="Procesos_Componentes" Member="Procesos" ThisKey="IdProceso" OtherKey="IdProceso" Type="Procesos" IsForeignKey="true" />
     </Type>
   </Table>
@@ -225,6 +219,33 @@
       <Association Name="Establecimiento_Educativo_Consolidacion" Member="Consolidacion" ThisKey="IdIE" OtherKey="IdIE" Type="Consolidacion" />
       <Association Name="Establecimiento_Educativo_Evaluacion" Member="Evaluacion" ThisKey="IdIE" OtherKey="IdIE" Type="Evaluacion" />
       <Association Name="Consultores_Establecimiento_Educativo" Member="Consultores" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Consultores" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rama" Member="Rama">
+    <Type Name="Rama">
+      <Column Name="IdRama" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Evaluado" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="Rama_Actores" Member="Actores" ThisKey="IdRama" OtherKey="IdRama" Type="Actores" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Actores" Member="Actores">
+    <Type Name="Actores">
+      <Column Name="IdActor" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdRama" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Actor" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="Actores_Evaluacion" Member="Evaluacion" ThisKey="IdActor" OtherKey="IdActor" Type="Evaluacion" />
+      <Association Name="Rama_Actores" Member="Rama" ThisKey="IdRama" OtherKey="IdRama" Type="Rama" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CategoryByComponente" Member="CategoryByComponente">
+    <Type Name="CategoryByComponente">
+      <Column Name="IdDesCategoria" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdComponente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Existencia" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Pertinencia" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Aprobacion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[Mejoramiento Continuo]" Member="Mejoramiento_Continuo" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Componentes_CategoryByComponente" Member="Componentes" ThisKey="IdComponente" OtherKey="IdComponente" Type="Componentes" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
