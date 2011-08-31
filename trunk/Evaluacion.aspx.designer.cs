@@ -94,6 +94,24 @@ namespace ESM.Evaluacion {
         protected global::System.Web.UI.WebControls.LinkButton lbtnVolver;
         
         /// <summary>
+        /// Control gvMediciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvMediciones;
+        
+        /// <summary>
+        /// Control btnMedicion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMedicion;
+        
+        /// <summary>
         /// Control titulo22.
         /// </summary>
         /// <remarks>
@@ -236,6 +254,15 @@ namespace ESM.Evaluacion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDefinitiva;
+        
+        /// <summary>
+        /// Control informacionuno.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl informacionuno;
         
         /// <summary>
         /// Control lbloki.
