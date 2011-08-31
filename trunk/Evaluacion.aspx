@@ -5,8 +5,8 @@
 <%@ Register Src="~/DynamicData/Content/GridViewPager.ascx" TagName="GridViewPager"
     TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="/Pretty/css/prettyPhoto.css" rel="stylesheet" charset="utf-8"
-        media="screen" type="text/css" />
+    <link href="/Pretty/css/prettyPhoto.css" rel="stylesheet" charset="utf-8" media="screen"
+        type="text/css" />
     <script src="/Pretty/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         $(function () {
@@ -118,7 +118,6 @@
         .demo h1, h3, h4
         {
             color: #005EA7;
-            font-weight: bold;
         }
     </style>
     <div class="demo" style="width: 90%; margin: 50px auto;">
@@ -214,8 +213,29 @@
                 </div>
                 <br />
                 <div>
+                    <h4>
+                        2.1 Listado de mediciones para el establecimiento educativo seleccionado</h4>
+                    <style type="text/css">
+                        .gvMediciones
+                        {
+                            border: 1px solid #dddddd;
+                        }
+                    </style>
+                    <br />
+                    <asp:GridView ID="gvMediciones" runat="server" Width="100%" OnSelectedIndexChanged="gvMediciones_SelectedIndexChanged"
+                        CssClass="gvMediciones">
+                        <Columns>
+                            <asp:CommandField ButtonType="Link" SelectText="<img  width='24px' src='/Icons/Calender.png' alt='Seleccionar Medicion'>"
+                                ShowSelectButton="True" />
+                        </Columns>
+                    </asp:GridView>
+                    <asp:Button Text="Relizar Nueva Medición" Visible="false" runat="server" ID="btnMedicion"
+                        OnClick="btnMedicion_Click" />
+                </div>
+                <div>
+                    <br />
                     <h4 id="titulo22" runat="server" visible="false">
-                        2.2 Listado de las ultimas evaluaciones realizadas para la Institucion Educativa.</h4>
+                        2.2 Listado de las ultimas evaluaciones realizadas para el establecimiento educativo.</h4>
                     <br />
                 </div>
                 <style type="text/css">
@@ -230,19 +250,11 @@
                         height: 30px;
                     }
                 </style>
-                <asp:GridView ID="gvTopEval" CssClass="gvTopEval" runat="server" AutoGenerateColumns="False"
+                <asp:GridView ID="gvTopEval" CssClass="gvTopEval" runat="server" AutoGenerateColumns="true"
                     Width="100%" OnSelectedIndexChanged="gvTopEval_SelectedIndexChanged">
                     <Columns>
-                        <asp:BoundField DataField="IdEvaluacion" HeaderText="Identificador de Evaluacion" />
-                        <asp:BoundField DataField="Fecha" HeaderText="Fecha de la Evaluación" />
-                        <asp:BoundField DataField="IdMedicion" HeaderText="No. Identificación para Medición" />
-                        <asp:CommandField ButtonType="Image" HeaderText="Cargar" SelectImageUrl="/Icons/Paste.png"
+                        <asp:CommandField ButtonType="Link" SelectText="<img  width='24px' src='/Icons/Paste.png' alt='Seleccionar Medicion'>"
                             ShowSelectButton="True" />
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:Label Visible="false" Text='<%# Eval("IdActor") %>' runat="server" ID="lblidActor" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
                 <br />
@@ -262,7 +274,11 @@
                                     <br />
                                     <asp:Label Text="Error" ID="lblerrorAc" runat="server" Visible="false" />
                                     <asp:LinqDataSource ID="ldsActores" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
-                                        EntityTypeName="" Select="new (IdActor, Actor)" TableName="Actores">
+                                        EntityTypeName="" Select="new (IdActor, Actor)" TableName="Actores" 
+                                        Where="IdRama != @IdRama">
+                                        <WhereParameters>
+                                            <asp:Parameter DefaultValue="1" Name="IdRama" Type="Int32" />
+                                        </WhereParameters>
                                     </asp:LinqDataSource>
                                 </asp:Panel>
                             </td>
@@ -291,14 +307,13 @@
                             </td>
                         </tr>
                     </table>
-                    <asp:GridView ID="gvEvaluacion" CssClass="evaluacion" runat="server" AutoGenerateColumns="False"
+                    <asp:GridView ID="gvEvaluacion" CssClass="evaluacion" runat="server" AutoGenerateColumns="true"
                         OnRowDataBound="gvEvaluacion_RowDataBound">
                         <Columns>
-                            <asp:BoundField DataField="Pregunta" HeaderText="Preguntas" HeaderStyle-CssClass="evaluacionth" />
-                            <asp:TemplateField>
+                            <asp:TemplateField HeaderStyle-Width="180px">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("IdPregunta") %>' Visible="false"></asp:Label>
-                                    <a id="lknAyuda" href="#" class="pretty" runat="server">
+                                    <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("No_Pregunta") %>' Visible="false"></asp:Label>
+                                    <a id="lknAyuda" href="#" style="width: 30px;" class="pretty" runat="server">
                                         <img style="line-height: 30px;" src="../Icons/1314381320_help_48.png" height="24px"
                                             alt="Ayuda" /></a>
                                     <asp:RadioButton ID="rbtnSi" GroupName="gpregunta" Text="Si" runat="server" />
@@ -311,9 +326,9 @@
                     </asp:GridView>
                     <br />
                 </div>
-                <asp:Button Text="Almacenar Evaluacion" runat="server" ID="btnalmacenarparcial" OnClick="btnalmacenarparcial_Click"
+                <asp:Button Text="Guardar" runat="server" ID="btnalmacenarparcial" OnClick="btnalmacenarparcial_Click"
                     Visible="false" />
-                <asp:Button Text="Actualizar Evaluacion" runat="server" ID="btnDefinitiva" Visible="false"
+                <asp:Button Text="Guardar y Bloquear" runat="server" ID="btnDefinitiva" Visible="false"
                     OnClick="btnDefinitiva_Click" />
                 <style type="text/css">
                     .labelok
@@ -321,6 +336,13 @@
                         margin: 0 auto;
                     }
                 </style>
+                
+                <p id="informacionuno" runat="server" visible="false" style="width: 300px; color: #8C8C8C;
+                    font-size: 12px; text-align: justify;">
+                    <b>Para tener en cuenta:</b> El boton "Guardar" almacena la información en estado
+                    "Parcial" para editar si es necesrio hacerlo, el boton "Guardar y Bloquear" almacena
+                    la evaluacion como en estado "Cerrada" y no permite realizar cambios.
+                </p>
                 <div style="width: 100%; color: #3f9c0d; text-align: center; margin: 0 auto; font-weight: bold;">
                     <label class="labelok" runat="server" id="lbloki">
                     </label>
