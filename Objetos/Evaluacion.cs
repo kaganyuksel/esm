@@ -128,7 +128,11 @@ namespace EvaluationSettings
                 {
                     var rEvaluacion = from e in db.Preguntas
                                       where e.Directivo == true
-                                      select e;
+                                      select new
+                                      {
+                                          No_Pregunta = e.IdPregunta,
+                                          Pregunta = e.Pregunta
+                                      };
                     return rEvaluacion;
                 }
                 //Valida si la evaluacion sera aplicada a Estudiantes
@@ -136,7 +140,11 @@ namespace EvaluationSettings
                 {
                     var rEvaluacion = from e in db.Preguntas
                                       where e.Estudiante == true
-                                      select e;
+                                      select new
+                                      {
+                                          No_Pregunta = e.IdPregunta,
+                                          Pregunta = e.Pregunta
+                                      };
                     return rEvaluacion;
                 }
                 //Valida si la evaluacion sera aplicada a un Profesional de Campo
@@ -144,7 +152,11 @@ namespace EvaluationSettings
                 {
                     var rEvaluacion = from e in db.Preguntas
                                       where e.Profesional == true
-                                      select e;
+                                      select new
+                                      {
+                                          No_Pregunta = e.IdPregunta,
+                                          Pregunta = e.Pregunta
+                                      };
                     return rEvaluacion;
                 }
                 //Valida si la evaluacion sera aplicada a Secretaria de Educacion
@@ -152,7 +164,11 @@ namespace EvaluationSettings
                 {
                     var rEvaluacion = from e in db.Preguntas
                                       where e.Secretaria == true
-                                      select e;
+                                      select new
+                                      {
+                                          No_Pregunta = e.IdPregunta,
+                                          Pregunta = e.Pregunta
+                                      };
                     return rEvaluacion;
                 }
                 //Valida si la evaluacion sera aplicada a Padres de Familia
@@ -160,7 +176,11 @@ namespace EvaluationSettings
                 {
                     var rEvaluacion = from e in db.Preguntas
                                       where e.Padres == true
-                                      select e;
+                                      select new
+                                      {
+                                          No_Pregunta = e.IdPregunta,
+                                          Pregunta = e.Pregunta
+                                      };
                     return rEvaluacion;
                 }
                 //Valida si la evaluacion sera aplicada a Docentes
@@ -168,7 +188,11 @@ namespace EvaluationSettings
                 {
                     var rEvaluacion = from e in db.Preguntas
                                       where e.Docente == true
-                                      select e;
+                                      select new
+                                      {
+                                          No_Pregunta = e.IdPregunta,
+                                          Pregunta = e.Pregunta
+                                      };
                     return rEvaluacion;
                 }
                 //Valida si la evaluacion sera aplicada a Ninguno
@@ -181,9 +205,9 @@ namespace EvaluationSettings
             catch (System.Exception) { return null; }
         }
 
-        public bool ValidarActores(int ie, int actor)
+        public bool ValidarActores(int ie, int actor, int idmedicion)
         {
-            return ValidarGrupo(ie, actor);
+            return ValidarGrupo(ie, actor, idmedicion);
         }
         /// <summary>
         /// Almacena los resultados obtenidos en la evaluacion presentada por un actor
@@ -193,26 +217,20 @@ namespace EvaluationSettings
         /// <param name="idactor"></param>
         /// <param name="idusuario"></param>
         /// <returns></returns>
-        public bool Almacenar(object[,] ResultadosByPre, int idie, int idactor, int idusuario, bool estado)
+        public bool Almacenar(object[,] ResultadosByPre, int idie, int idmedicion, int idactor, int idusuario, bool estado)
         {
             try
             {
-
-                if (RegistrarEvaluacion(idie, idactor, idusuario, estado))
+                int idevalinsert = RegistrarEvaluacion(idie, idmedicion, idactor, idusuario, estado);
+                if (idevalinsert != 0)
                 {
-                    int ideval = RecuperarIdEvaluacion();
-                    if (ideval != 0)
-                    {
-                        InsertarResultados(ResultadosByPre, ideval);
-                        db.SubmitChanges();
-                        return true;
-                    }
-                    else
-                        return false;
+                    InsertarResultados(ResultadosByPre, idevalinsert);
+                    db.SubmitChanges();
+
+                    return true;
                 }
                 else
                     return false;
-
 
             }
             catch (System.Exception) { return false; }
@@ -230,16 +248,11 @@ namespace EvaluationSettings
             catch (Exception) { return 0; }
         }
 
-        protected bool RegistrarEvaluacion(int idie, int idactor, int idusuario, bool estado)
+        protected int RegistrarEvaluacion(int idie, int idmedicion, int idactor, int idusuario, bool estado)
         {
             try
             {
-
-
                 ESM.Model.ESMBDDataContext db = new ESM.Model.ESMBDDataContext();
-
-                int idmedicion = (from m in db.Mediciones
-                                  select m.IdMedicion).Max();
 
                 Evaluacion objEvaluacion = null;
                 switch (estado)
@@ -269,14 +282,12 @@ namespace EvaluationSettings
                         break;
                 }
 
-
-
                 db.Evaluacion.InsertOnSubmit(objEvaluacion);
                 db.SubmitChanges();
 
-                return true;
+                return objEvaluacion.IdEvaluacion;
             }
-            catch (Exception) { return false; }
+            catch (Exception) { return 0; }
         }
 
         /// <summary>
@@ -360,122 +371,108 @@ namespace EvaluationSettings
         /// </summary>
         /// <param name="idie">Identificador de Institucion Educativa por la que realizaremos
         ///  el proceso de busqueda.</param>
-        protected bool ValidarGrupo(int idie, int idactor)
+        protected bool ValidarGrupo(int idie, int idactor, int idmedicion)
         {
             try
             {
-                int med = (from m in db.Evaluacion
-                           where m.IdIE == idie
-                           select m.IdMedicion).Count();
-                if (med != 0)
+
+                ///TODO: JCCM: Revisar esta variable
+                //Valido la cantidad de evaluaciones que hay para ese id de medicion consultado previamente
+                int cantidad_eval = (from eval in db.Evaluacion
+                                     where eval.IdIE == idie && eval.IdMedicion == idmedicion
+                                     select eval.IdActor).Count();
+
+
+                /*Obtengo la cantidad de actores que existen en la tabla para comparar con la cantidad de
+                 * evaluaciones realizadas en la institucion educativa*/
+                int cantidad_actores = (from actor in db.Actores
+                                        where actor.IdRama != 1
+                                        select actor.IdActor).Count();
+
+                //Creo una variable para almacenar el resultado de la validacion realizada por el presente metodo
+                bool result_valid = false;
+
+                //Valido si la cantidad de las dos variables coincide
+                switch (cantidad_actores == cantidad_eval)
                 {
-                    //Identifico cual es fue la ultima medicion para la instuticion educativa.
-                    var id_ult_medicion = (from eval in db.Evaluacion
-                                           where eval.IdIE == idie
-                                           select eval.IdMedicion).Max();
+                    /*En caso de ser el resultado de la validacion true entonces adsigno a la valiable
+                     *result_valid el valor true a retorar */
+                    //case true: result_valid = true;
+                    //    ESM.Model.Mediciones medi = new ESM.Model.Mediciones { FechaMedicion = DateTime.Now };
+                    //    db.Mediciones.InsertOnSubmit(medi);
+                    //    db.SubmitChanges();
 
-                    ///TODO: JCCM: Revisar esta variable
-                    //Valido la cantidad de evaluaciones que hay para ese id de medicion consultado previamente
-                    int cantidad_eval = (from eval in db.Evaluacion
-                                         where eval.IdIE == idie && eval.IdMedicion == id_ult_medicion
-                                         select eval.IdActor).Count();
+                    ///TODO: JCMM: Consolidar Pendiente
+                    ///
+                    //var valid = from con in db.Consolidacion
+                    //            where con.IdMedicion == idmedicion
+                    //            select con;
+                    //if (valid.Count() == 0)
+                    //    ConsolidarEvaluaciones(Convert.ToInt32(id_ult_medicion));
 
+                    //break;
+                    /*En caso de ser el resultado de la validacion false entonces adsigno a la valiable
+                    *result_valid el valor false a retorar */
+                    case false: result_valid = false;
+                        break;
 
-                    /*Obtengo la cantidad de actores que existen en la tabla para comparar con la cantidad de
-                     * evaluaciones realizadas en la institucion educativa*/
-                    int cantidad_actores = (from actor in db.Actores
-                                            select actor.IdActor).Count();
-
-                    //Creo una variable para almacenar el resultado de la validacion realizada por el presente metodo
-                    bool result_valid = false;
-
-                    //Valido si la cantidad de las dos variables coincide
-                    switch (cantidad_actores == cantidad_eval)
-                    {
-                        /*En caso de ser el resultado de la validacion true entonces adsigno a la valiable
-                         *result_valid el valor true a retorar */
-                        case true: result_valid = true;
-                            ESM.Model.Mediciones medi = new ESM.Model.Mediciones { FechaMedicion = DateTime.Now };
-                            db.Mediciones.InsertOnSubmit(medi);
-                            db.SubmitChanges();
-
-                            var valid = from con in db.Consolidacion
-                                        where con.IdMedicion == id_ult_medicion
-                                        select con;
-
-                            if (valid.Count() == 0)
-                                ConsolidarEvaluaciones(Convert.ToInt32(id_ult_medicion));
-
-                            break;
-                        /*En caso de ser el resultado de la validacion false entonces adsigno a la valiable
-                        *result_valid el valor false a retorar */
-                        case false: result_valid = false;
-                            break;
-
-                    }
-
-                    switch (result_valid)
-                    {
-                        case false:
-                            var colactores = from a in db.Actores
-                                             select new { a.IdActor };
-
-                            var coleval = (from e in db.Evaluacion
-                                           where e.IdIE == idie && e.IdMedicion == id_ult_medicion
-                                           select new { e.IdActor }).Distinct();
-
-                            List<int> listactores = new List<int>();
-                            List<int> listeval = new List<int>();
-                            foreach (var c in colactores)
-                            {
-                                listactores.Add(c.IdActor);
-                            }
-
-                            foreach (var e in coleval)
-                            {
-                                listeval.Add(e.IdActor);
-                            }
-
-                            listactores.Sort();
-                            listeval.Sort();
-
-                            int[] faltan = new int[listactores.Count - listeval.Count];
-
-                            if (listactores.Count != listeval.Count)
-                            {
-                                IEnumerable<int> query = (listactores.Count() > listeval.Count()) ? listactores.Except(listeval) : listeval.Except(listactores);
-                                int contador = 0;
-                                foreach (var q in query)
-                                {
-                                    faltan[contador] = q;
-                                    contador++;
-                                }
-                            }
-
-                            foreach (var item in faltan)
-                            {
-                                if (idactor == item)
-                                {
-                                    result_valid = true;
-                                    break;
-                                }
-
-                            }
-                            break;
-                    }
-
-                    this._error = "En la medicion actual ya existe una evaluacion para el actor seleccionado.";
-                    /*Retorno el valor de la variable que almacena el resultado de la validacion 
-                     * realizada por el metodo presente o actual*/
-                    return result_valid;
                 }
-                else
+
+                switch (result_valid)
                 {
-                    ESM.Model.Mediciones medi = new ESM.Model.Mediciones { FechaMedicion = DateTime.Now };
-                    db.Mediciones.InsertOnSubmit(medi);
-                    db.SubmitChanges();
-                    return true;
+                    case false:
+                        var colactores = from a in db.Actores
+                                         select new { a.IdActor };
+
+                        var coleval = (from e in db.Evaluacion
+                                       where e.IdIE == idie && e.IdMedicion == idmedicion
+                                       select new { e.IdActor }).Distinct();
+
+                        List<int> listactores = new List<int>();
+                        List<int> listeval = new List<int>();
+                        foreach (var c in colactores)
+                        {
+                            listactores.Add(c.IdActor);
+                        }
+
+                        foreach (var e in coleval)
+                        {
+                            listeval.Add(e.IdActor);
+                        }
+
+                        listactores.Sort();
+                        listeval.Sort();
+
+                        int[] faltan = new int[listactores.Count - listeval.Count];
+
+                        if (listactores.Count != listeval.Count)
+                        {
+                            IEnumerable<int> query = (listactores.Count() > listeval.Count()) ? listactores.Except(listeval) : listeval.Except(listactores);
+                            int contador = 0;
+                            foreach (var q in query)
+                            {
+                                faltan[contador] = q;
+                                contador++;
+                            }
+                        }
+
+                        foreach (var item in faltan)
+                        {
+                            if (idactor == item)
+                            {
+                                result_valid = true;
+                                break;
+                            }
+
+                        }
+                        break;
                 }
+
+                this._error = "En la medicion actual ya existe una evaluacion para el actor seleccionado.";
+                /*Retorno el valor de la variable que almacena el resultado de la validacion 
+                 * realizada por el metodo presente o actual*/
+                return result_valid;
+
             }
             /*En caso de presentarse algun tipo de Excepcion retorno un valor del tipo false
              */
@@ -505,32 +502,56 @@ namespace EvaluationSettings
                     case 1:
                         preguntas = from p in db.Preguntas
                                     where p.Estudiante == true
-                                    select p;
+                                    select new
+                                    {
+                                        No_Pregunta = p.IdPregunta,
+                                        Pregunta = p.Pregunta
+                                    };
                         break;
                     case 2:
                         preguntas = from p in db.Preguntas
                                     where p.Profesional == true
-                                    select p;
+                                    select new
+                                    {
+                                        No_Pregunta = p.IdPregunta,
+                                        Pregunta = p.Pregunta
+                                    };
                         break;
                     case 3:
                         preguntas = from p in db.Preguntas
                                     where p.Docente == true
-                                    select p;
+                                    select new
+                                    {
+                                        No_Pregunta = p.IdPregunta,
+                                        Pregunta = p.Pregunta
+                                    };
                         break;
                     case 4:
                         preguntas = from p in db.Preguntas
                                     where p.Padres == true
-                                    select p;
+                                    select new
+                                    {
+                                        No_Pregunta = p.IdPregunta,
+                                        Pregunta = p.Pregunta
+                                    };
                         break;
                     case 5:
                         preguntas = from p in db.Preguntas
                                     where p.Secretaria == true
-                                    select p;
+                                    select new
+                                    {
+                                        No_Pregunta = p.IdPregunta,
+                                        Pregunta = p.Pregunta
+                                    };
                         break;
                     case 6:
                         preguntas = from p in db.Preguntas
                                     where p.Directivo == true
-                                    select p;
+                                    select new
+                                    {
+                                        No_Pregunta = p.IdPregunta,
+                                        Pregunta = p.Pregunta
+                                    };
                         break;
                 }
 
@@ -542,7 +563,19 @@ namespace EvaluationSettings
 
         }
 
+        public IQueryable ObtenerTopEvaluacion(int top, int idmedicion, int idie)
+        {
+            try
+            {
+                var evalbymedi = (from e in db.Evaluacion
+                                  where e.IdMedicion == idmedicion && e.IdIE == idie
+                                  select new { No_Evaluacion = e.IdEvaluacion, No_Actor = e.IdActor, Actor = e.Actores.Actor, Fecha = e.Fecha, Estado = e.EstadoEvaluacion.Estado, Medicion = e.Mediciones.IdMedicion }).Take(top);
 
+                return evalbymedi;
+            }
+            catch (LinqDataSourceValidationException) { return null; }
+            catch (Exception) { return null; }
+        }
 
         protected void ConsolidarEvaluaciones(int idmedicion)
         {
@@ -1037,8 +1070,110 @@ namespace EvaluationSettings
             }
         }
 
+        public IQueryable MedicionesIE(int IdIe)
+        {
+            try
+            {
+                var medi = (from m in db.Evaluacion
+                            where m.IdIE == IdIe
+                            select new
+                            {
+                                Identificador = m.IdMedicion,
+                                Evaluaciones = (from eva in db.Evaluacion where eva.IdIE == IdIe && eva.IdMedicion == m.IdMedicion select eva).Count(),
+                                Fecha = m.Mediciones.FechaMedicion
+                            }).Distinct();
+
+                if (medi.Count() != 0)
+                {
+                    return medi;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception) { return null; }
+        }
+
+        public int CrearMedion()
+        {
+            try
+            {
+                Mediciones objMediciones = new Mediciones
+                {
+                    FechaMedicion = DateTime.Now
+                };
+
+                db.Mediciones.InsertOnSubmit(objMediciones);
+                db.SubmitChanges();
+
+                return objMediciones.IdMedicion;
+
+            }
+            catch (Exception) { return 0; }
+        }
+
+        public bool ActualizarEvaluacion(object[,] VResultados, int ideval, bool estado)
+        {
+            try
+            {
 
 
+                var results = from e in db.ResultadosByEvaluacion
+                              where e.IdEvaluacion == ideval
+                              select e;
+
+                int contador = 0;
+                int contadorvector = 0;
+                foreach (var item in results)
+                {
+                    for (int i = 0; i < VResultados.GetLength(0); i++)
+                    {
+                        int idpregunta = Convert.ToInt32(VResultados[i, 0]);
+
+                        if (item.Resultados.IdPregunta == idpregunta)
+                        {
+                            item.Resultados.Valor = (bool)VResultados[i, 1];
+                            db.SubmitChanges();
+                            contador++;
+                        }
+                    }
+                    if (contador == 0)
+                    {
+                        Resultados objResultados = new Resultados
+                        {
+                            IdPregunta = Convert.ToInt32(VResultados[contadorvector, 0]),
+                            Valor = Convert.ToBoolean(VResultados[contadorvector, 1])
+                        };
+
+                        db.Resultados.InsertOnSubmit(objResultados);
+                        db.SubmitChanges();
+
+                        ResultadosByEvaluacion objResultadosByEvaluacion = new ResultadosByEvaluacion
+                        {
+                            IdEvaluacion = ideval,
+                            IdResultado = objResultados.IdResultados
+                        };
+                        db.ResultadosByEvaluacion.InsertOnSubmit(objResultadosByEvaluacion);
+                        db.SubmitChanges();
+
+                    }
+
+                }
+                var eval = (from ev in db.Evaluacion
+                            where ev.IdEvaluacion == ideval
+                            select ev).Single();
+                if (estado)
+                    eval.IdEstado = 1;
+                else
+                    eval.IdEstado = 2;
+
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
     }
 
 }
