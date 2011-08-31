@@ -8,11 +8,11 @@ namespace ESM
 {
     public static class Alert
     {
-        public static void CreateMessageAlertInUpdatePanel(UpdatePanel up, string strMessage)
+        public static void Show(UpdatePanel objUpdatePanel, string Mensaje)
         {
-            string strScript = "alert('" + strMessage + "');";
+            string alert = String.Format("alert('{0}');",Mensaje);
             Guid guidKey = Guid.NewGuid();
-            ScriptManager.RegisterStartupScript(up, up.GetType(), guidKey.ToString(), strScript, true);
+            ScriptManager.RegisterStartupScript(objUpdatePanel, objUpdatePanel.GetType(), guidKey.ToString(), alert, true);
         }
     }
 }

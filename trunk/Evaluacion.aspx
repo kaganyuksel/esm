@@ -37,7 +37,9 @@
         function Ayuda(id) {
             alert(id);
         }
-    
+        window.onbeforeunload = function () {
+            return "¿Esta seguro que desea salir de ésta ventana? \n\nTenga en cuenta que la información ingresada puede perderce.";
+        };
     </script>
     <style>
         #format
@@ -157,25 +159,16 @@
                     </p>
                     <asp:GridView ID="gvResultados" runat="server" AllowPaging="True" AllowSorting="True"
                         CssClass="gvResultados" RowStyle-CssClass="td" HeaderStyle-CssClass="th" CellPadding="6"
-                        AutoGenerateColumns="False" OnSelectedIndexChanged="gvResultados_SelectedIndexChanged">
-                        <HeaderStyle CssClass="ui-widget-header" />
+                        AutoGenerateColumns="True" OnSelectedIndexChanged="gvResultados_SelectedIndexChanged">
+                        <HeaderStyle CssClass="trheader" />
                         <Columns>
-                            <asp:BoundField DataField="CodigoDane" HeaderText="Codigo Dane" />
-                            <asp:BoundField DataField="Nombre" HeaderText="Nombre de la Institucion Educativa" />
-                            <asp:BoundField DataField="Municipio" HeaderText="Municipio" />
-                            <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
-                            <asp:BoundField DataField="Rector" HeaderText="Rector" />
                             <asp:TemplateField Visible="false" SortExpression="IDIE" HeaderText="IDIE">
                                 <ItemTemplate>
                                     <asp:Label Text='<%# Eval("IdIE") %>' runat="server" ID="IDIE"></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField Visible="false" SortExpression="IDCON" HeaderText="IDCON">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" ID="IDCON" Text='<%# Eval("IdConsultor") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:CommandField SelectText="Evaluar" ShowSelectButton="True" ControlStyle-CssClass="a" />
+                            
+                            <asp:CommandField SelectText="<img  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />" ShowSelectButton="True" ControlStyle-CssClass="a" />
                         </Columns>
                         <HeaderStyle CssClass="th"></HeaderStyle>
                         <PagerStyle CssClass="DDFooter" />
@@ -188,7 +181,9 @@
                         <RowStyle CssClass="td"></RowStyle>
                     </asp:GridView>
                     <asp:LinqDataSource ID="ldsies" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
-                        EntityTypeName="" TableName="Establecimiento_Educativo">
+                        EntityTypeName="" TableName="Establecimiento_Educativo" 
+                        
+                        Select="new (IdIE, CodigoDane, Nombre, Telefono, Municipio, Rector)">
                     </asp:LinqDataSource>
                 </div>
                 <style type="text/css">
@@ -213,7 +208,7 @@
                 </div>
                 <br />
                 <div>
-                    <h4>
+                    <h4 runat="server" id="titulo21" visible="false">
                         2.1 Listado de mediciones para el establecimiento educativo seleccionado</h4>
                     <style type="text/css">
                         .gvMediciones
@@ -274,8 +269,7 @@
                                     <br />
                                     <asp:Label Text="Error" ID="lblerrorAc" runat="server" Visible="false" />
                                     <asp:LinqDataSource ID="ldsActores" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
-                                        EntityTypeName="" Select="new (IdActor, Actor)" TableName="Actores" 
-                                        Where="IdRama != @IdRama">
+                                        EntityTypeName="" Select="new (IdActor, Actor)" TableName="Actores" Where="IdRama != @IdRama">
                                         <WhereParameters>
                                             <asp:Parameter DefaultValue="1" Name="IdRama" Type="Int32" />
                                         </WhereParameters>
@@ -336,7 +330,6 @@
                         margin: 0 auto;
                     }
                 </style>
-                
                 <p id="informacionuno" runat="server" visible="false" style="width: 300px; color: #8C8C8C;
                     font-size: 12px; text-align: justify;">
                     <b>Para tener en cuenta:</b> El boton "Guardar" almacena la información en estado

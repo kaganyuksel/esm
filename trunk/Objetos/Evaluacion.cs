@@ -1124,29 +1124,46 @@ namespace EvaluationSettings
                               where e.IdEvaluacion == ideval
                               select e;
 
-                int contador = 0;
-                int contadorvector = 0;
-                foreach (var item in results)
+                int contvector = 0;
+                for (int i = 0; i < VResultados.GetLength(0); i++)
                 {
-                    for (int i = 0; i < VResultados.GetLength(0); i++)
+                    int contador = 0;
+
+                    foreach (var item in results)
                     {
-                        int idpregunta = Convert.ToInt32(VResultados[i, 0]);
+                        int idpregunta = Convert.ToInt32(VResultados[contvector, 0]);
 
                         if (item.Resultados.IdPregunta == idpregunta)
                         {
-                            item.Resultados.Valor = (bool)VResultados[i, 1];
-                            db.SubmitChanges();
+                            if (VResultados[contvector, 1] != null)
+                            {
+                                item.Resultados.Valor = (bool)VResultados[contvector, 1];
+                                db.SubmitChanges();
+                            }
                             contador++;
+                            break;
                         }
+
                     }
                     if (contador == 0)
                     {
-                        Resultados objResultados = new Resultados
-                        {
-                            IdPregunta = Convert.ToInt32(VResultados[contadorvector, 0]),
-                            Valor = Convert.ToBoolean(VResultados[contadorvector, 1])
-                        };
 
+                        Resultados objResultados = null;
+                        if (VResultados[contvector, 1] != null)
+                        {
+                            objResultados = new Resultados
+                            {
+                                IdPregunta = Convert.ToInt32(VResultados[contvector, 0]),
+                                Valor = Convert.ToBoolean(VResultados[contvector, 1])
+                            };
+                        }
+                        else
+                        {
+                            objResultados = new Resultados
+                            {
+                                IdPregunta = Convert.ToInt32(VResultados[contvector, 0])
+                            };
+                        }
                         db.Resultados.InsertOnSubmit(objResultados);
                         db.SubmitChanges();
 
@@ -1159,7 +1176,7 @@ namespace EvaluationSettings
                         db.SubmitChanges();
 
                     }
-
+                    contvector++;
                 }
                 var eval = (from ev in db.Evaluacion
                             where ev.IdEvaluacion == ideval
