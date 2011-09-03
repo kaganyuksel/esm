@@ -6,6 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Collections;
 using System.Web.UI.HtmlControls;
+using System.IO;
+using System.Diagnostics;
+using System.Configuration;
 
 
 
@@ -251,10 +254,10 @@ namespace ESM.Evaluacion
             bool exist = false;
             if (Session["ideval"] != null)
             {
-                string ideval = Session["ideval"].ToString();
+                string idactor = cboActores.SelectedValue;
                 for (int i = 0; i < gvTopEval.Rows.Count; i++)
                 {
-                    if (ideval == gvTopEval.Rows[i].Cells[1].Text)
+                    if (idactor == gvTopEval.Rows[i].Cells[2].Text)
                         exist = true;
                 }
             }
@@ -428,6 +431,9 @@ namespace ESM.Evaluacion
             Session.Add("idmedicion", idmedicion);
             btnMedicion.Visible = false;
             VisualizacionControles();
+            adocumentos.Title = "Información ESM";
+            adocumentos.HRef = Request.Url.Scheme + "://" + Request.Url.Authority + "/ModuloDocumentos.aspx?idmedicion=" + idmedicion.ToString() + "&iframe=true&amp;width=100%&amp;height=100%";
+            divcarga.Visible = true;
         }
 
         protected void gvMediciones_SelectedIndexChanged(object sender, EventArgs e)
@@ -620,7 +626,7 @@ namespace ESM.Evaluacion
 
         protected void TopEvaluaciones(int idmedicion)
         {
-
+            Session.Add("idmedicion", idmedicion);
             int idie = 0;
 
             if (Session["idie"] != null)
@@ -643,6 +649,7 @@ namespace ESM.Evaluacion
             gvEvaluacion.Enabled = true;
             lblerrorAc.Visible = false;
             lbloki.Visible = false;
+            informacionuno.Visible = true;
 
             int idie = Convert.ToInt32(Session["idie"]);
             int idmedicion = Convert.ToInt32(Session["idmedicion"]);
@@ -758,6 +765,7 @@ namespace ESM.Evaluacion
 
         protected void VolverSeleccion()
         {
+            divcarga.Visible = false;
             txtFiltro.Enabled = true;
             btnBuscar.Enabled = true;
             titulo21.Visible = false;
@@ -797,6 +805,7 @@ namespace ESM.Evaluacion
         }
 
         #endregion
+
 
     }
 }

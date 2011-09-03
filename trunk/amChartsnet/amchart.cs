@@ -24,7 +24,7 @@ namespace ESM.amChartsnet
                 ClientScriptManager cs = pagina.ClientScript;
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine("var params ={bgcolor: \"#FFFFFF\"}");
-                sb.AppendLine("var flashVars = { path: \"amcharts/flash/\", chart_settings: encodeURIComponent(\"<settings><background><alpha>100</alpha></background><balloon><alpha>77</alpha><border_width>3</border_width><border_color>000000</border_color><corner_radius>5</corner_radius></balloon><legend><enabled>0</enabled><align>center</align></legend><pie><colors>" + sColors + "</colors><y>50%</y><radius>30%</radius><inner_radius>40</inner_radius><height>40</height><angle>20</angle><start_angle>27</start_angle><outline_alpha>13</outline_alpha><brightness_step>24</brightness_step><gradient>radial</gradient></pie><animation><start_time>1.8</start_time><start_radius>251%</start_radius><start_alpha>8</start_alpha><pull_out_time>0.3</pull_out_time></animation><data_labels><show>{title}: {value} %</show><radius>40%</radius><text_size>14</text_size><max_width>160</max_width><line_alpha>7</line_alpha></data_labels><export_as_image><file>amcharts/flash/export.aspx</file><color>#CC0000</color><alpha>50</alpha></export_as_image><labels><label><x>0</x><y>40</y><align>center</align><text_size>12</text_size><text><![CDATA[<b>" + sTitulo + "</b>]]></text></label></labels></settings>\") ");
+                sb.AppendLine("var flashVars = { path: \"amcharts/flash/\", chart_settings: encodeURIComponent(\"<settings><redraw>1</redraw><background><alpha>100</alpha></background><balloon><alpha>77</alpha><border_width>3</border_width><border_color>000000</border_color><corner_radius>5</corner_radius></balloon><legend><enabled>0</enabled><align>center</align></legend><pie><colors>" + sColors + "</colors><y>50%</y><radius>30%</radius><inner_radius>40</inner_radius><height>40</height><angle>20</angle><start_angle>27</start_angle><outline_alpha>13</outline_alpha><brightness_step>24</brightness_step><gradient>radial</gradient></pie><animation><start_time>1.8</start_time><start_radius>251%</start_radius><start_alpha>8</start_alpha><pull_out_time>0.3</pull_out_time></animation><data_labels><show>{title}: {value} %</show><radius>40%</radius><text_size>14</text_size><max_width>160</max_width><line_alpha>7</line_alpha></data_labels><export_as_image><file>amcharts/flash/export.aspx</file><color>#CC0000</color><alpha>50</alpha></export_as_image><labels><label><x>0</x><y>40</y><align>center</align><text_size>12</text_size><text><![CDATA[<b>" + sTitulo + "</b>]]></text></label></labels></settings>\") ");
                 sb.AppendLine(", chart_data: encodeURIComponent(\"" + Sdatos + "\") };");
                 sb.AppendLine("window.onload = function () {");
                 sb.AppendLine(" if (swfobject.hasFlashPlayerVersion(\"8\")) {swfobject.embedSWF(\"amcharts/flash/ampie.swf?cache=0\", \"" + DivId + "\", \"" + ancho + "\", \"" + alto + "\", \"8.0.0\", \"amcharts/flash/expressInstall.swf\", flashVars, params);");
@@ -68,6 +68,7 @@ namespace ESM.amChartsnet
                 if ((cs.IsStartupScriptRegistered(DivId) == false))
                 {
                     cs.RegisterStartupScript(cstype, DivId, sb.ToString(), true);
+                    
                 }
                 return "";
             }

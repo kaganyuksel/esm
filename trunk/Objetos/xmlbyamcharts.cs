@@ -49,7 +49,7 @@ namespace ESM.Objetos
             xmldata.Append(" <series>");
             for (int i = 0; i < _series.GetLength(0); i++)
             {
-                xmldata.Append(String.Format("  <value xid='{0}'>{1}</value>", i, _series[i, 0]));
+                xmldata.Append(String.Format("  <value xid='{0}'>{1}</value>", i, _series[i, 1]));
             }
             xmldata.Append(" </series>");
             xmldata.Append(" <graphs>");

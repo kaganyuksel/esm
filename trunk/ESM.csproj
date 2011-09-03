@@ -88,6 +88,13 @@
     <Compile Include="Evaluacion.aspx.designer.cs">
       <DependentUpon>Evaluacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LecturaContextoSE.aspx.cs">
+      <DependentUpon>LecturaContextoSE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LecturaContextoSE.aspx.designer.cs">
+      <DependentUpon>LecturaContextoSE.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -95,6 +102,22 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MenuEvaluacion.aspx.cs">
+      <DependentUpon>MenuEvaluacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MenuEvaluacion.aspx.designer.cs">
+      <DependentUpon>MenuEvaluacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloDocumentos.aspx.cs">
+      <DependentUpon>ModuloDocumentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloDocumentos.aspx.designer.cs">
+      <DependentUpon>ModuloDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Objetos\CDocumentos.cs" />
+    <Compile Include="Objetos\LecturaContextoSE.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -143,7 +166,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Content Include="Icons\1314381320_help_48.png" />
+    <Content Include="Icons\1314641093_plus_48.png" />
     <Content Include="Icons\Add.png" />
+    <Content Include="Icons\added.png" />
     <Content Include="Icons\Address_Book.png" />
     <Content Include="Icons\Alert.png" />
     <Content Include="Icons\Announcement.png" />
@@ -153,6 +178,7 @@
     <Content Include="Icons\Box.png" />
     <Content Include="Icons\Burn.png" />
     <Content Include="Icons\Calender.png" />
+    <Content Include="Icons\cancel.png" />
     <Content Include="Icons\CD.png" />
     <Content Include="Icons\Chat.png" />
     <Content Include="Icons\clip_image002.jpg" />
@@ -166,6 +192,7 @@
     <Content Include="Icons\Edit.png" />
     <Content Include="Icons\EducalidadFooter.png" />
     <Content Include="Icons\EducalidadHeader.png" />
+    <Content Include="Icons\EE.png" />
     <Content Include="Icons\Favorite.png" />
     <Content Include="Icons\Flag.png" />
     <Content Include="Icons\Floppy.png" />
@@ -193,6 +220,7 @@
     <Content Include="Icons\Redo.png" />
     <Content Include="Icons\Refresh.png" />
     <Content Include="Icons\RSS.png" />
+    <Content Include="Icons\SE.png" />
     <Content Include="Icons\Search.png" />
     <Content Include="Icons\Security.png" />
     <Content Include="Icons\Speaker.png" />
@@ -213,8 +241,35 @@
     <Content Include="Icons\Window.png" />
     <Content Include="Icons\Wizard.png" />
     <Content Include="Icons\Write.png" />
+    <Content Include="LecturaContextoSE.aspx" />
     <Content Include="mastercustom.css" />
     <Content Include="AyudaPreguntas.aspx" />
+    <Content Include="MenuEvaluacion.aspx" />
+    <Content Include="ModuloDocumentos.aspx" />
+    <Content Include="plupload\jquery.plupload.queue\css\jquery.plupload.queue.css" />
+    <Content Include="plupload\jquery.plupload.queue\img\backgrounds.gif" />
+    <Content Include="plupload\jquery.plupload.queue\img\buttons-disabled.png" />
+    <Content Include="plupload\jquery.plupload.queue\img\buttons.png" />
+    <Content Include="plupload\jquery.plupload.queue\img\delete.gif" />
+    <Content Include="plupload\jquery.plupload.queue\img\done.gif" />
+    <Content Include="plupload\jquery.plupload.queue\img\error.gif" />
+    <Content Include="plupload\jquery.plupload.queue\img\throbber.gif" />
+    <Content Include="plupload\jquery.plupload.queue\img\transp50.png" />
+    <Content Include="plupload\jquery.plupload.queue\jquery.plupload.queue.js" />
+    <Content Include="plupload\jquery.ui.plupload\css\jquery.ui.plupload.css" />
+    <Content Include="plupload\jquery.ui.plupload\img\plupload-bw.png" />
+    <Content Include="plupload\jquery.ui.plupload\img\plupload.png" />
+    <Content Include="plupload\jquery.ui.plupload\jquery.ui.plupload.js" />
+    <Content Include="plupload\js\plupload.browserplus.js" />
+    <Content Include="plupload\js\plupload.flash.js" />
+    <Content Include="plupload\js\plupload.flash.swf" />
+    <Content Include="plupload\js\plupload.full.js" />
+    <Content Include="plupload\js\plupload.gears.js" />
+    <Content Include="plupload\js\plupload.html4.js" />
+    <Content Include="plupload\js\plupload.html5.js" />
+    <Content Include="plupload\js\plupload.js" />
+    <Content Include="plupload\js\plupload.silverlight.js" />
+    <Content Include="plupload\js\plupload.silverlight.xap" />
     <Content Include="Pretty\css\prettyPhoto.css" />
     <Content Include="Pretty\images\fullscreen\1.jpg" />
     <Content Include="Pretty\images\fullscreen\2.jpg" />
@@ -561,6 +616,7 @@
     <Folder Include="Consolidado\" />
     <Folder Include="DynamicData\CustomPages\" />
     <Folder Include="Evaluacion\" />
+    <Folder Include="Files\" />
     <Folder Include="Preguntas\" />
   </ItemGroup>
   <ItemGroup>
@@ -601,7 +657,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>55908</DevelopmentServerPort>
+          <DevelopmentServerPort>62243</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

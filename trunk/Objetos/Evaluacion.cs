@@ -576,7 +576,10 @@ namespace EvaluationSettings
             catch (LinqDataSourceValidationException) { return null; }
             catch (Exception) { return null; }
         }
-
+        public void Consolidar(int idmedicion)
+        {
+            ConsolidarEvaluaciones(idmedicion);
+        }
         protected void ConsolidarEvaluaciones(int idmedicion)
         {
             try
@@ -890,6 +893,7 @@ namespace EvaluationSettings
 
 
                     int cant_actores = (from a in db.Actores
+                                        where a.IdRama != 1
                                         select a.IdActor).Count();
                     int idie = 0;
 
@@ -897,124 +901,110 @@ namespace EvaluationSettings
 
                     foreach (var pre in colpre)
                     {
-                        object[,] actores_results = new object[6, 2];
+                        object[,] actores_results = new object[cant_actores, 2];
 
                         for (int i = 0; i < cant_actores - 1; i++)
                         {
                             bool valor = false;
                             bool noaplica = false;
 
-                            var resbyeval = (from rbe in db.ResultadosByEvaluacion
-                                             join r in db.Resultados on rbe.IdResultado equals r.IdResultados
-                                             join evalu in db.Evaluacion on rbe.IdEvaluacion equals evalu.IdEvaluacion
-                                             where r.IdPregunta == pre.IdPregunta && evalu.IdActor == i + 1
-                                             && evalu.IdEstado == 1 && evalu.IdMedicion == idmedicion
-                                             select new { r.IdPregunta, r.Valor, r.NoAplica, evalu.IdMedicion, evalu.IdIE }).Single();
+                            var resbyevalcount = (from rbe in db.ResultadosByEvaluacion
+                                                  join r in db.Resultados on rbe.IdResultado equals r.IdResultados
+                                                  join evalu in db.Evaluacion on rbe.IdEvaluacion equals evalu.IdEvaluacion
+                                                  where r.IdPregunta == pre.IdPregunta && evalu.IdActor == i + 1
+                                                  && evalu.IdEstado == 1 && evalu.IdMedicion == idmedicion
+                                                  select new { r.IdPregunta, r.Valor, r.NoAplica, evalu.IdMedicion, evalu.IdIE }).Count();
 
-                            idie = resbyeval.IdIE;
-
-                            if (resbyeval.Valor == true)
-                                valor = true;
-                            else if (resbyeval.Valor == false)
-                                valor = false;
-                            else if (resbyeval.Valor != true || resbyeval.Valor != false)
-                                noaplica = true;
-
-                            actores_results[i, 0] = i + 1;
-                            if (valor)
-                                actores_results[i, 1] = true;
-                            if (!valor)
+                            if (resbyevalcount != 0)
                             {
-                                if (!noaplica && !valor)
-                                    actores_results[i, 1] = false;
+
+                                var resbyeval = (from rbe in db.ResultadosByEvaluacion
+                                                 join r in db.Resultados on rbe.IdResultado equals r.IdResultados
+                                                 join evalu in db.Evaluacion on rbe.IdEvaluacion equals evalu.IdEvaluacion
+                                                 where r.IdPregunta == pre.IdPregunta && evalu.IdActor == i + 1
+                                                 && evalu.IdEstado == 1 && evalu.IdMedicion == idmedicion
+                                                 select new { r.IdPregunta, r.Valor, r.NoAplica, evalu.IdMedicion, evalu.IdIE }).Single();
+
+                                idie = Convert.ToInt32(resbyeval.IdIE);
+
+                                if (resbyeval.Valor == true)
+                                    valor = true;
+                                else if (resbyeval.Valor == false)
+                                    valor = false;
+                                else if (resbyeval.Valor != true || resbyeval.Valor != false)
+                                    noaplica = true;
+
+                                actores_results[i, 0] = i + 1;
+                                if (valor)
+                                    actores_results[i, 1] = true;
+                                if (!valor)
+                                {
+                                    if (!noaplica && !valor)
+                                        actores_results[i, 1] = false;
+                                    else
+                                        actores_results[i, 1] = null;
+
+                                }
+
+                            }
+                            int cant_si = 0;
+                            int cant_no = 0;
+                            int cant_noaplica = 0;
+                            int res_privilegiado = 0;
+                            for (int u = 0; u < actores_results.GetLength(0); u++)
+                            {
+                                if (pre.IdPrivilegiado == u)
+                                {
+                                    if (Convert.ToBoolean(actores_results[u, 1]) == true)
+                                    {
+                                        cant_si++;
+                                        res_privilegiado = 1;
+                                    }
+                                    else if (Convert.ToBoolean(actores_results[u, 1]) == false)
+                                    {
+                                        cant_no++;
+                                        res_privilegiado = 0;
+                                    }
+                                    else if (actores_results[u, 1] == null)
+                                    {
+                                        cant_noaplica++;
+                                        res_privilegiado = 2;
+                                    }
+                                }
                                 else
-                                    actores_results[i, 1] = null;
-
-                            }
-
-                        }
-                        int cant_si = 0;
-                        int cant_no = 0;
-                        int cant_noaplica = 0;
-                        int res_privilegiado = 0;
-                        for (int i = 0; i < actores_results.GetLength(0); i++)
-                        {
-                            if (pre.IdPrivilegiado == i)
-                            {
-                                if (Convert.ToBoolean(actores_results[i, 1]) == true)
                                 {
-                                    cant_si++;
-                                    res_privilegiado = 1;
-                                }
-                                else if (Convert.ToBoolean(actores_results[i, 1]) == false)
-                                {
-                                    cant_no++;
-                                    res_privilegiado = 0;
-                                }
-                                else if (actores_results[i, 1] == null)
-                                {
-                                    cant_noaplica++;
-                                    res_privilegiado = 2;
+                                    if (Convert.ToBoolean(actores_results[u, 1]) == true)
+                                    {
+                                        cant_si++;
+                                    }
+                                    else if (Convert.ToBoolean(actores_results[u, 1]) == false)
+                                    {
+                                        cant_no++;
+                                    }
+                                    else if (actores_results[u, 1] == null)
+                                        cant_noaplica++;
                                 }
                             }
-                            else
+                            if (contador == 0)
                             {
-                                if (Convert.ToBoolean(actores_results[i, 1]) == true)
+                                Consolidacion objConsolidacion = new Consolidacion
                                 {
-                                    cant_si++;
-                                }
-                                else if (Convert.ToBoolean(actores_results[i, 1]) == false)
-                                {
-                                    cant_no++;
-                                }
-                                else if (actores_results[i, 1] == null)
-                                    cant_noaplica++;
+                                    IdIE = idie,
+                                    IdMedicion = idmedicion
+                                };
+
+
+                                db.Consolidacion.InsertOnSubmit(objConsolidacion);
+                                db.SubmitChanges();
+                                contador++;
                             }
-                        }
-                        if (contador == 0)
-                        {
-                            Consolidacion objConsolidacion = new Consolidacion
-                            {
-                                IdIE = idie,
-                                IdMedicion = idmedicion
-                            };
 
+                            var ult_idcons = (from cons in db.Consolidacion
+                                              select cons.IdConsolidacion).Max();
 
-                            db.Consolidacion.InsertOnSubmit(objConsolidacion);
-                            db.SubmitChanges();
-                            contador++;
-                        }
+                            idconsolidado = ult_idcons;
 
-                        var ult_idcons = (from cons in db.Consolidacion
-                                          select cons.IdConsolidacion).Max();
-
-                        idconsolidado = ult_idcons;
-
-                        if (cant_si > cant_no)
-                        {
-                            ConslPregunta objConslPregunta = new ConslPregunta
-                            {
-                                IdConsolidado = ult_idcons,
-                                IdPregunta = pre.IdPregunta,
-                                Valor = true
-                            };
-                            db.ConslPregunta.InsertOnSubmit(objConslPregunta);
-                            db.SubmitChanges();
-                        }
-                        if (cant_si < cant_no)
-                        {
-                            ConslPregunta objConslPregunta = new ConslPregunta
-                            {
-                                IdConsolidado = ult_idcons,
-                                IdPregunta = pre.IdPregunta,
-                                Valor = false
-                            };
-                            db.ConslPregunta.InsertOnSubmit(objConslPregunta);
-                            db.SubmitChanges();
-                        }
-                        if (cant_si == cant_no)
-                        {
-                            if (res_privilegiado == 1)
+                            if (cant_si > cant_no)
                             {
                                 ConslPregunta objConslPregunta = new ConslPregunta
                                 {
@@ -1025,7 +1015,7 @@ namespace EvaluationSettings
                                 db.ConslPregunta.InsertOnSubmit(objConslPregunta);
                                 db.SubmitChanges();
                             }
-                            else if (res_privilegiado == 0)
+                            if (cant_si < cant_no)
                             {
                                 ConslPregunta objConslPregunta = new ConslPregunta
                                 {
@@ -1035,22 +1025,52 @@ namespace EvaluationSettings
                                 };
                                 db.ConslPregunta.InsertOnSubmit(objConslPregunta);
                                 db.SubmitChanges();
+                            }
+                            if (cant_si == cant_no)
+                            {
+                                if (res_privilegiado == 1)
+                                {
+                                    ConslPregunta objConslPregunta = new ConslPregunta
+                                    {
+                                        IdConsolidado = ult_idcons,
+                                        IdPregunta = pre.IdPregunta,
+                                        Valor = true
+                                    };
+                                    db.ConslPregunta.InsertOnSubmit(objConslPregunta);
+                                    db.SubmitChanges();
+                                }
+                                else if (res_privilegiado == 0)
+                                {
+                                    ConslPregunta objConslPregunta = new ConslPregunta
+                                    {
+                                        IdConsolidado = ult_idcons,
+                                        IdPregunta = pre.IdPregunta,
+                                        Valor = false
+                                    };
+                                    db.ConslPregunta.InsertOnSubmit(objConslPregunta);
+                                    db.SubmitChanges();
 
+
+                                }
+                                else
+                                {
+
+                                    ConslPregunta objConslPregunta = new ConslPregunta
+                                    {
+                                        IdConsolidado = ult_idcons,
+                                        IdPregunta = pre.IdPregunta,
+                                        NoAplica = true
+                                    };
+                                    db.ConslPregunta.InsertOnSubmit(objConslPregunta);
+                                    db.SubmitChanges();
+
+                                }
 
                             }
                             else
-                            {
+                                break;
 
-                                ConslPregunta objConslPregunta = new ConslPregunta
-                                {
-                                    IdConsolidado = ult_idcons,
-                                    IdPregunta = pre.IdPregunta,
-                                    NoAplica = true
-                                };
-                                db.ConslPregunta.InsertOnSubmit(objConslPregunta);
-                                db.SubmitChanges();
 
-                            }
                         }
                     }
                     #endregion
@@ -1069,6 +1089,8 @@ namespace EvaluationSettings
                 return 0;
             }
         }
+
+
 
         public IQueryable MedicionesIE(int IdIe)
         {

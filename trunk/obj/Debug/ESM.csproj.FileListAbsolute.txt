@@ -1,5 +1,5 @@
+D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\obj\Debug\ResolveAssemblyReference.cache
 D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\bin\ESM.dll
 D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\bin\ESM.pdb
-D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\obj\Debug\ResolveAssemblyReference.cache
 D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\obj\Debug\ESM.dll
 D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\obj\Debug\ESM.pdb

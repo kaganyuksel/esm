@@ -34,16 +34,16 @@ namespace ESM.Consolidado
                     {
                         trvConsolidacion.Nodes[0].ChildNodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(proc.Proceso, proc.IdProceso.ToString()));
 
-                        var com = from comp in new ESM.Model.ESMBDDataContext().Componentes
-                                  where comp.IdProceso == proc.IdProceso
-                                  select comp;
+                        //var com = from comp in new ESM.Model.ESMBDDataContext().Componentes
+                        //          where comp.IdProceso == proc.IdProceso
+                        //          select comp;
 
-                        foreach (var compo in com)
-                        {
-                            if (trvConsolidacion.Nodes[0].ChildNodes[0].ChildNodes[0].ChildNodes.Count > contador)
-                                trvConsolidacion.Nodes[0].ChildNodes[0].ChildNodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(compo.Componente, compo.IdComponente.ToString()));
+                        //foreach (var compo in com)
+                        //{
+                        //    if (trvConsolidacion.Nodes[0].ChildNodes[0].ChildNodes[0].ChildNodes.Count > contador)
+                        //        trvConsolidacion.Nodes[0].ChildNodes[0].ChildNodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(compo.Componente, compo.IdComponente.ToString()));
 
-                        }
+                        //}
 
 
                     }
@@ -68,21 +68,19 @@ namespace ESM.Consolidado
             CConsolidacion objConsolidacion = new CConsolidacion();
             string xmldata = objConsolidacion.ValidarNodos(id.ToString(), nombre, Convert.ToInt32(Session["idmedi"]));
             if (xmldata != null)
-                objAmCharts.genera_chart_column_Flash("amProces", xmldata, String.Format("Nivel General para Procesos para {0}", trvConsolidacion.SelectedNode.Text), Page, 600, 400);
+                objAmCharts.genera_chart_column_Flash("amcharts", xmldata, "Nivel General para Ambientes", Page, 900, 600);
 
         }
 
         protected void gvResultados_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            EvaluationSettings.CEvaluacion objevaluacion = new EvaluationSettings.CEvaluacion();
             GridViewRow _objRow = gvResultados.SelectedRow;
             Label lblIdIe = (Label)_objRow.Cells[5].FindControl("IDIE");
 
-            var ult = (from eval in new ESM.Model.ESMBDDataContext().Evaluacion
-                       where eval.IdIE == Convert.ToInt32(lblIdIe.Text)
-                       select eval.IdMedicion).Take(5);
+            var mediciones = objevaluacion.MedicionesIE(Convert.ToInt32(lblIdIe.Text));
 
-            gvMediciones.DataSource = ult;
+            gvMediciones.DataSource = mediciones;
             gvMediciones.DataBind();
             ObtenerTema(gvMediciones);
         }
@@ -145,19 +143,32 @@ namespace ESM.Consolidado
 
         protected void gvMediciones_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GridViewRow objRow = gvResultados.SelectedRow;
-
-            string idMedicion = objRow.Cells[0].Text;
-            int ult = Convert.ToInt32(idMedicion);
             CConsolidacion objCConsolidacion = new CConsolidacion();
-            trvConsolidacion.Visible = true;
-            string xmldata = null;
-            if (ult != 0)
-            {
-                xmldata = objCConsolidacion.ObtenerConslAmbiente(Convert.ToInt32(ult));
-                objAmCharts.genera_chart_column_Flash("amcharts", xmldata, "Nivel General para Ambientes", Page, 600, 400);
-            }
+            GridViewRow objRow = gvMediciones.SelectedRow;
 
+            int idMedicion = Convert.ToInt32(objRow.Cells[1].Text);
+            Session.Add("idmedi", idMedicion);
+            if (objCConsolidacion.Exist(idMedicion))
+            {
+                trvConsolidacion.Visible = true;
+                string xmldata = null;
+
+                xmldata = objCConsolidacion.ObtenerConslAmbiente(idMedicion);
+                objAmCharts.genera_chart_column_Flash("amcharts", xmldata, "Nivel General para Ambientes", Page, 900, 600);
+
+            }
+            else
+            {
+                EvaluationSettings.CEvaluacion objCEvaluacion = new EvaluationSettings.CEvaluacion();
+                objCEvaluacion.Consolidar(idMedicion);
+
+                trvConsolidacion.Visible = true;
+                string xmldata = null;
+
+                xmldata = objCConsolidacion.ObtenerConslAmbiente(idMedicion);
+                objAmCharts.genera_chart_column_Flash("amcharts", xmldata, "Nivel General para Ambientes", Page, 900, 600);
+
+            }
         }
 
     }
