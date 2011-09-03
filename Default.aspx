@@ -17,7 +17,7 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-    <table class="menuprincipalbyconfiguracion" cellspacing="10">
+    <table class="menuprincipalbyconfiguracion" runat="server" id="AdministracionUsuario" visible="false" cellspacing="10">
         <tr class="th">
             <td>
                 <img alt="Modulo de Acceso a ESM" src="Icons/Security.png" />
@@ -53,7 +53,7 @@
     </table>
     <br />
     <br />
-    <table class="menuprincipalbyconfiguracion" cellspacing="10">
+    <table class="menuprincipalbyconfiguracion" id="AdministracionConfiguracion" runat="server" visible="false" cellspacing="10">
         <tr class="th">
             <td>
                 <img src="Icons/Stationery.png" alt="Modulo de Administración y Configuración">
@@ -128,7 +128,7 @@
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Preguntas/list.aspx'">
-                    Preguntas</h3>
+                    Crear Preguntas</h3>
                 <br />
                 Administra la información de las preguntas que hacen parte del formulario de evaluación,
                 teniendo en cuenta los actores y privilegiados.
@@ -149,11 +149,11 @@
         </tr>
         <tr>
             <td>
-                <a href="/Evaluacion.aspx">
+                <a href="/MenuEvaluacion.aspx">
                     <img src="/Icons/Flag.png" alt="Evaluar" /></a>
             </td>
             <td class="td">
-                <h3 onclick="window.location='/Evaluacion.aspx'">
+                <h3 onclick="window.location='/MenuEvaluacion.aspx'">
                     Realizar Evaluación</h3>
                 <br />
                 Comienza con el proceso de evaluacion para determinar en estado del actor frente

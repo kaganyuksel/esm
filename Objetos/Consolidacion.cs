@@ -217,6 +217,24 @@ namespace ESM.Objetos
                 }
             }
 
+            if (pro.Count() != 0)
+            {
+
+                foreach (var ipro in pro)
+                {
+                    if (ipro.Proceso == nombre)
+                        banderaproceso = true;
+                    else
+                    {
+                        foreach (var icom in com)
+                        {
+                            if (icom.Componente == nombre)
+                                banderacomponente = true;
+                        }
+                    }
+                }
+            }
+
             if (banderaambiente)
                 return ObtenerProcesos(medicion);
             else if (banderaproceso)
@@ -225,6 +243,22 @@ namespace ESM.Objetos
                 return "";
 
             return null;
+        }
+
+        public bool Exist(int idmedicion)
+        {
+            try
+            {
+                int conso = (from con in db.Consolidacion
+                             where con.IdMedicion == idmedicion
+                             select con).Count();
+
+                if (conso != 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception) { return false; }
         }
     }
 

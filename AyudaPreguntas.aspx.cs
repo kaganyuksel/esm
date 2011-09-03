@@ -30,22 +30,24 @@ namespace ESM.Preguntas
                                      where pro.IdAmbiente == item.IdAmbiente
                                      select pro;
 
+                        int contadorcompo = 0;
                         foreach (var proc in proces)
                         {
+
                             tvayuda.Nodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(proc.Proceso, proc.IdProceso.ToString()));
                             tvayuda.Nodes[0].ChildNodes[contador].Expanded = false;
                             var com = from comp in new ESM.Model.ESMBDDataContext().Componentes
                                       where comp.IdProceso == proc.IdProceso
                                       select comp;
-
+                            
                             foreach (var compo in com)
                             {
-                                if (tvayuda.Nodes[0].ChildNodes[0].ChildNodes.Count > contador)
-                                    tvayuda.Nodes[0].ChildNodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(compo.Componente, compo.IdComponente.ToString()));
 
+                                if (tvayuda.Nodes[0].ChildNodes[contador].ChildNodes.Count > contadorcompo)
+                                    tvayuda.Nodes[0].ChildNodes[contador].ChildNodes[contadorcompo].ChildNodes.Add(new TreeNode(compo.Componente, compo.IdComponente.ToString()));
                             }
 
-
+                            contadorcompo++;
                         }
 
                         contador++;
@@ -60,12 +62,26 @@ namespace ESM.Preguntas
                     for (int i = 0; i < tvayuda.Nodes[0].ChildNodes.Count; i++)
                     {
                         tvayuda.Nodes[0].ChildNodes[i].Expanded = false;
+                        for (int u = 0; u < tvayuda.Nodes[0].ChildNodes[i].ChildNodes.Count; u++)
+                        {
+                            tvayuda.Nodes[0].ChildNodes[i].ChildNodes[u].Expanded = false;
+                        }
                     }
 
                 }
             }
             else
                 Response.Redirect("Login.aspx");
+
+            for (int i = 0; i < tvayuda.Nodes[0].ChildNodes.Count; i++)
+            {
+                tvayuda.Nodes[0].ChildNodes[i].Expanded = false;
+                for (int u = 0; u < tvayuda.Nodes[0].ChildNodes[i].ChildNodes.Count; u++)
+                {
+                    tvayuda.Nodes[0].ChildNodes[i].ChildNodes[u].Expanded = false;
+                }
+            }
+            ObtenerTema(gvPreguntas);
         }
 
         protected void tvayuda_SelectedNodeChanged(object sender, EventArgs e)
@@ -103,6 +119,7 @@ namespace ESM.Preguntas
                                     Label idpregunta = (Label)objRow.FindControl("lblIdPregunta");
                                     TextBox txtPregunta = (TextBox)objRow.FindControl("txtPregunta");
                                     CheckBoxList clist = (CheckBoxList)objRow.FindControl("listDocuments");
+                                    CheckBoxList clistMed = (CheckBoxList)objRow.FindControl("listMedios");
                                     TextBox txtDescripcion = (TextBox)objRow.FindControl("txtDescPre");
                                     if (abp.IdPregunta == Convert.ToInt32(idpregunta.Text))
                                     {
@@ -119,6 +136,22 @@ namespace ESM.Preguntas
                                                 q.Items[2].Selected = true;
                                             if ((bool)abp.Planes_de_Estudio)
                                                 q.Items[3].Selected = true;
+                                            if ((bool)abp.Actas)
+                                                q.Items[4].Selected = true;
+                                            if ((bool)abp.Proyectos)
+                                                q.Items[5].Selected = true;
+                                            if ((bool)abp.Convenios)
+                                                q.Items[6].Selected = true;
+                                            if ((bool)abp.PCC)
+                                                q.Items[7].Selected = true;
+                                        }
+                                        {
+                                            var m = clistMed;
+
+                                            if ((bool)abp.Lectura)
+                                                m.Items[0].Selected = true;
+                                            if ((bool)abp.Participacion)
+                                                m.Items[1].Selected = true;
                                         }
                                     }
                                 }
@@ -140,7 +173,6 @@ namespace ESM.Preguntas
             catch (Exception) { Response.Write("<script type='text/javascript'>alert('No se encontraron resultados relacionados al componente seleccionado.');</script>"); }
         }
 
-
         //protected void CreateMessageAlert(string strMessage)
         //{
         //    Guid guidKey = Guid.NewGuid();
@@ -148,6 +180,7 @@ namespace ESM.Preguntas
         //    string strScript = "alert('" + strMessage + "');";
         //    this.ClientScript.RegisterStartupScript(pg.GetType(), guidKey.ToString(), strScript, true);
         //}
+
         protected void ObtenerTema(GridView objGridView)
         {
             if (objGridView.Rows.Count != 0)
@@ -177,19 +210,26 @@ namespace ESM.Preguntas
             try
             {
 
-
                 for (int i = 0; i < gvPreguntas.Rows.Count; i++)
                 {
                     bool pei = false;
                     bool pmi = false;
                     bool manual = false;
                     bool planes = false;
+                    bool actas = false;
+                    bool proyectos = false;
+                    bool convenios = false;
+                    bool pcc = false;
+                    bool lectura = false;
+                    bool participacion = false;
+                    bool lp = false;
 
                     GridViewRow objRow = gvPreguntas.Rows[i];
 
                     Label idpregunta = (Label)objRow.FindControl("lblIdPregunta");
                     TextBox txtPregunta = (TextBox)objRow.FindControl("txtPregunta");
                     CheckBoxList clist = (CheckBoxList)objRow.FindControl("listDocuments");
+                    CheckBoxList clistMe = (CheckBoxList)objRow.FindControl("listMedios");
                     TextBox txtDescripcion = (TextBox)objRow.FindControl("txtDescPre");
 
 
@@ -201,11 +241,21 @@ namespace ESM.Preguntas
                         manual = true;
                     if (clist.Items[3].Selected)
                         planes = true;
+                    if (clist.Items[4].Selected)
+                        actas = true;
+                    if (clist.Items[5].Selected)
+                        proyectos = true;
+                    if (clist.Items[6].Selected)
+                        convenios = true;
+                    if (clist.Items[7].Selected)
+                        pcc = true;
 
-
-
-
-
+                    if (clistMe.Items[0].Selected)
+                        lectura = true;
+                    if (clistMe.Items[1].Selected)
+                        participacion = true;
+                    if (clistMe.Items[0].Selected && clistMe.Items[0].Selected)
+                        lp = true;
 
                     ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
@@ -222,8 +272,14 @@ namespace ESM.Preguntas
                             PEI = pei,
                             PMI = pmi,
                             Manual_de_Convivencia = manual,
-                            Planes_de_Estudio = planes
-
+                            Planes_de_Estudio = planes,
+                            Actas = actas,
+                            Proyectos = proyectos,
+                            Convenios = convenios,
+                            PCC = pcc,
+                            Lectura = lectura,
+                            Participacion = participacion,
+                            LP = lp
                         };
                         db.AyudaByPregunta.InsertOnSubmit(objAyudaPreguntas);
                         db.SubmitChanges();
@@ -242,6 +298,13 @@ namespace ESM.Preguntas
                         aybp.PMI = pmi;
                         aybp.Manual_de_Convivencia = manual;
                         aybp.Planes_de_Estudio = planes;
+                        aybp.Actas = actas;
+                        aybp.Proyectos = proyectos;
+                        aybp.Convenios = convenios;
+                        aybp.PCC = pcc;
+                        aybp.Lectura = lectura;
+                        aybp.Participacion = participacion;
+                        aybp.LP = lp;
 
                         db.SubmitChanges();
 
