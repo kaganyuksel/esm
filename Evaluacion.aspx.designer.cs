@@ -22,6 +22,33 @@ namespace ESM.Evaluacion {
         protected global::System.Web.UI.UpdatePanel udpnlFiltro;
         
         /// <summary>
+        /// Control titulose.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl titulose;
+        
+        /// <summary>
+        /// Control gvSE.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvSE;
+        
+        /// <summary>
+        /// Control lqdsSE.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinqDataSource lqdsSE;
+        
+        /// <summary>
         /// Control titulo1ie.
         /// </summary>
         /// <remarks>
@@ -164,6 +191,15 @@ namespace ESM.Evaluacion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tituloeval;
+        
+        /// <summary>
+        /// Control tituloevalse.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tituloevalse;
         
         /// <summary>
         /// Control infoEval.

@@ -252,16 +252,6 @@
       <Association Name="Rama_Actores" Member="Actores" ThisKey="IdRama" OtherKey="IdRama" Type="Actores" />
     </Type>
   </Table>
-  <Table Name="dbo.Resultados" Member="Resultados">
-    <Type Name="Resultados">
-      <Column Name="IdResultados" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IdPregunta" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Valor" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="NoAplica" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="Resultados_ResultadosByEvaluacion" Member="ResultadosByEvaluacion" ThisKey="IdResultados" OtherKey="IdResultado" Type="ResultadosByEvaluacion" />
-      <Association Name="Preguntas_Resultados" Member="Preguntas" ThisKey="IdPregunta" OtherKey="IdPregunta" Type="Preguntas" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.ResultadosByEvaluacion" Member="ResultadosByEvaluacion">
     <Type Name="ResultadosByEvaluacion">
       <Column Name="IdResultadosbyPregunta" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -276,21 +266,6 @@
       <Column Name="IdRol" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Rol" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
       <Association Name="Roles_Usuarios" Member="Usuarios" ThisKey="IdRol" OtherKey="IdRol" Type="Usuarios" />
-    </Type>
-  </Table>
-  <Table Name="dbo.[Secretaria Educacion]" Member="Secretaria_Educacion">
-    <Type Name="Secretaria_Educacion">
-      <Column Name="IdSecretaria" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
-      <Column Name="Direccion" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
-      <Column Name="Telefono" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
-      <Column Name="TelefonoMovil" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
-      <Column Name="Departamental" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Municipal" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[Nombre Secretario Educacion]" Member="Nombre_Secretario_Educacion" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="[Telefonos Secretario Educacion]" Member="Telefonos_Secretario_Educacion" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
-      <Association Name="Secretaria_Educacion_Evaluacion" Member="Evaluacion" ThisKey="IdSecretaria" OtherKey="IdSE" Type="Evaluacion" />
-      <Association Name="Secretaria_Educacion_LecturaContextoSE" Member="LecturaContextoSE" ThisKey="IdSecretaria" OtherKey="IdSecretaria" Type="LecturaContextoSE" />
     </Type>
   </Table>
   <Table Name="dbo.LecturaContextoSE" Member="LecturaContextoSE">
@@ -334,6 +309,33 @@
       <Column Name="Observaciones" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Mediciones_LecturaContextoSE" Member="Mediciones" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Mediciones" IsForeignKey="true" />
       <Association Name="Secretaria_Educacion_LecturaContextoSE" Member="Secretaria_Educacion" ThisKey="IdSecretaria" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Secretaria Educacion]" Member="Secretaria_Educacion">
+    <Type Name="Secretaria_Educacion">
+      <Column Name="IdSecretaria" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="TelefonoMovil" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="Departamental" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Municipal" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[Nombre Secretario Educacion]" Member="Nombre_Secretario_Educacion" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="[Telefonos Secretario Educacion]" Member="Telefonos_Secretario_Educacion" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="[Correo Electronico]" Member="Correo_Electronico" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="Secretaria_Educacion_Evaluacion" Member="Evaluacion" ThisKey="IdSecretaria" OtherKey="IdSE" Type="Evaluacion" />
+      <Association Name="Secretaria_Educacion_LecturaContextoSE" Member="LecturaContextoSE" ThisKey="IdSecretaria" OtherKey="IdSecretaria" Type="LecturaContextoSE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Resultados" Member="Resultados">
+    <Type Name="Resultados">
+      <Column Name="IdResultados" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdPregunta" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Valor" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="NoAplica" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Sesiones" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Resultados_ResultadosByEvaluacion" Member="ResultadosByEvaluacion" ThisKey="IdResultados" OtherKey="IdResultado" Type="ResultadosByEvaluacion" />
+      <Association Name="Preguntas_Resultados" Member="Preguntas" ThisKey="IdPregunta" OtherKey="IdPregunta" Type="Preguntas" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

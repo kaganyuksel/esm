@@ -17,9 +17,8 @@ namespace ESM.Evaluacion
     public partial class Evaluacion : System.Web.UI.Page
     {
         #region Propiedades Privadas y Publicas
-
         protected EvaluationSettings.CEvaluacion _objevaluacion = new EvaluationSettings.CEvaluacion();
-
+        int _tipo = 0;
         #endregion
 
         #region Almacenar Informacion de Evaluaciones
@@ -54,7 +53,7 @@ namespace ESM.Evaluacion
                         _objevaluacion = new EvaluationSettings.CEvaluacion();
                         object[,] CollectionResultados = null;
 
-                        CollectionResultados = new object[gvEvaluacion.Rows.Count, 2];
+                        CollectionResultados = new object[gvEvaluacion.Rows.Count, 3];
 
 
                         for (int e = 0; e < gvEvaluacion.Rows.Count; e++)
@@ -67,6 +66,7 @@ namespace ESM.Evaluacion
                                 CheckBox objsi = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnSi");
                                 CheckBox objno = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnNo");
                                 CheckBox objnoapli = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnNoAplica");
+                                TextBox objTextBox = (TextBox)objGridViewRow.FindControl("txtSesion");
 
                                 if (objsi.Checked)
                                 {
@@ -74,16 +74,11 @@ namespace ESM.Evaluacion
                                     CollectionResultados[e, 0] = Convert.ToInt32(objIdPregunta.Text);
                                     CollectionResultados[e, 1] = true;
 
-
-
                                 }
                                 else if (objno.Checked)
                                 {
-
                                     CollectionResultados[e, 0] = Convert.ToInt32(objIdPregunta.Text);
                                     CollectionResultados[e, 1] = false;
-
-
                                 }
                                 else if (!objno.Checked && !objsi.Checked)
                                 {
@@ -91,7 +86,7 @@ namespace ESM.Evaluacion
                                     CollectionResultados[e, 1] = null;
 
                                 }
-
+                                CollectionResultados[e, 2] = objTextBox.Text;
                             }
                         }
 
@@ -188,7 +183,7 @@ namespace ESM.Evaluacion
 
             _objevaluacion = new EvaluationSettings.CEvaluacion();
 
-            object[,] CollectionResultados = new object[gvEvaluacion.Rows.Count, 2];
+            object[,] CollectionResultados = new object[gvEvaluacion.Rows.Count, 3];
 
             for (int i = 0; i < gvEvaluacion.Rows.Count; i++)
             {
@@ -196,7 +191,7 @@ namespace ESM.Evaluacion
                 Label objIdPregunta = (Label)objGridViewRow.Cells[1].FindControl("lblIdPregunta");
                 CheckBox objsi = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnSi");
                 CheckBox objno = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnNo");
-
+                TextBox objTextBox = (TextBox)objGridViewRow.FindControl("txtsesion");
                 if (objsi.Checked)
                 {
                     CollectionResultados[i, 0] = Convert.ToInt32(objIdPregunta.Text);
@@ -212,14 +207,21 @@ namespace ESM.Evaluacion
                     CollectionResultados[i, 0] = Convert.ToInt32(objIdPregunta.Text);
                     CollectionResultados[i, 1] = null;
                 }
+
+                CollectionResultados[i, 2] = objTextBox.Text;
             }
 
             int idie = Convert.ToInt32(Session["idie"]);
             int idmedicion = Convert.ToInt32(Session["idmedicion"]);
-            int idactor = Convert.ToInt32(cboActores.SelectedItem.Value);
+            int idactor = 0;
+            if (_tipo == 1)
+                idactor = Convert.ToInt32(cboActores.SelectedItem.Value);
+            else
+                idactor = 5;
+
             int idusuario = Convert.ToInt32(Session["idusuario"]);
 
-            if (_objevaluacion.Almacenar(CollectionResultados, idie, idmedicion, idactor, idusuario, estado))
+            if (_objevaluacion.Almacenar(CollectionResultados, idie, idmedicion, idactor, idusuario, estado, _tipo))
             {
                 FinalizarProcesoEvaluacionEstado();
                 Alert.Show(udpnlFiltro, "El almacenamiento de la información finalizó correctamente");
@@ -288,21 +290,47 @@ namespace ESM.Evaluacion
                 /*En caso de ser postbak realiza validacion para no realizar proceso de recarga al datasource del gridview*/
                 if (!Page.IsPostBack && !ajax_result)
                 {
-                    Session.Remove("ideval");
-                    /*Asigno un valor false a las propiedades del objeto del tipo CEvaluacion para
-                     *Evitar que haya error por recivir mas de un tipo de actor al momento de carga de la evaluacion
-                     */
-                    _objevaluacion.Profesional = false;
-                    _objevaluacion.Estudiantes = false;
-                    _objevaluacion.SecretariaEducacion = false;
-                    _objevaluacion.Padres = false;
-                    _objevaluacion.Docentes = false;
-                    /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
-                    gvResultados.DataSourceID = "ldsies";
-                    /*Actualizo el control griview para que el formulario web tome los ultimos cambios realizados*/
-                    ObtenerTema(gvResultados);
-                    cboActores.DataSourceID = "ldsActores";
-                    cboActores.DataBind();
+                    if (Request.QueryString["idrama"] != null)
+                    {
+                        _tipo = Convert.ToInt32(Request.QueryString["idrama"]);
+                        if (_tipo == 2)
+                        {
+                            Session.Remove("ideval");
+                            /*Asigno un valor false a las propiedades del objeto del tipo CEvaluacion para
+                             *Evitar que haya error por recivir mas de un tipo de actor al momento de carga de la evaluacion
+                             */
+                            _objevaluacion.Profesional = false;
+                            _objevaluacion.Estudiantes = false;
+                            _objevaluacion.SecretariaEducacion = false;
+                            _objevaluacion.Padres = false;
+                            _objevaluacion.Docentes = false;
+                            /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
+                            gvResultados.DataSourceID = "ldsies";
+                            /*Actualizo el control griview para que el formulario web tome los ultimos cambios realizados*/
+                            ObtenerTema(gvResultados);
+                            cboActores.DataSourceID = "ldsActores";
+                            cboActores.DataBind();
+                            gvSE.Visible = false;
+                            titulose.Visible = false;
+                        }
+                        else if (_tipo == 1)
+                        {
+                            ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
+
+                            var a = from ac in db.Actores
+                                    where ac.IdRama == 1
+                                    select ac;
+
+                            cboActores.DataSource = a;
+                            cboActores.DataBind();
+
+                            titulo1ie.Visible = false;
+                            gvResultados.Visible = false;
+                            filtrosp.Visible = false;
+                            ObtenerTema(gvSE);
+
+                        }
+                    }
 
                 }
             }
@@ -434,6 +462,11 @@ namespace ESM.Evaluacion
             adocumentos.Title = "Información ESM";
             adocumentos.HRef = Request.Url.Scheme + "://" + Request.Url.Authority + "/ModuloDocumentos.aspx?idmedicion=" + idmedicion.ToString() + "&iframe=true&amp;width=100%&amp;height=100%";
             divcarga.Visible = true;
+            titulo3.Visible = false;
+            titulo21.Visible = false;
+            gvMediciones.Visible = false;
+            gvTopEval.Visible = false;
+            titulo22.Visible = false;
         }
 
         protected void gvMediciones_SelectedIndexChanged(object sender, EventArgs e)
@@ -806,6 +839,29 @@ namespace ESM.Evaluacion
 
         #endregion
 
+        protected void gvSE_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow objRow = gvSE.SelectedRow;
 
+            _objevaluacion = new EvaluationSettings.CEvaluacion();
+            _objevaluacion.SecretariaEducacion = true;
+            gvEvaluacion.DataSource = _objevaluacion.LoadEvaluation();
+            gvEvaluacion.DataBind();
+            lblActorEvaluado.Text = "Secretaria de Educacion";
+            cboActores.Visible = false;
+            lblCodIe.Text = objRow.Cells[1].Text;
+            lblIE.Text = objRow.Cells[2].Text;
+            lblMunicipio.Text = objRow.Cells[3].Text;
+            Session.Add("idie", lblCodIe.Text);
+            Session.Add("idmedicion", _objevaluacion.CrearMedion());
+            infoEval.Visible = true;
+            tituloevalse.Visible = true;
+            btnDefinitiva.Visible = true;
+            btnalmacenarparcial.Visible = true;
+            informacionuno.Visible = true;
+
+            ObtenerTema(gvEvaluacion);
+
+        }
     }
 }

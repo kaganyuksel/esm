@@ -145,6 +145,41 @@
                 <asp:AsyncPostBackTrigger ControlID="gvResultados" EventName="SelectedIndexChanged" />
             </Triggers>
             <ContentTemplate>
+                <h3 id="titulose" runat="server" visible="false">
+                1. Seleccione la Secretaría de Educacion a Evaluar.
+                </h3>
+                <br />
+                <asp:GridView ID="gvSE" runat="server" AllowPaging="True" AllowSorting="True"
+                        CssClass="gvResultados" RowStyle-CssClass="td" 
+                    HeaderStyle-CssClass="th" CellPadding="6" 
+                    OnSelectedIndexChanged="gvSE_SelectedIndexChanged" 
+                    DataSourceID="lqdsSE">
+                        <HeaderStyle CssClass="trheader" />
+                        <Columns>
+                            <asp:TemplateField Visible="false" SortExpression="IDSE" HeaderText="IDSE">
+                                <ItemTemplate>
+                                    <asp:Label Text='<%# Eval("IdSecretaria") %>' runat="server" ID="IDIE"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:CommandField SelectText="<img  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />"
+                                ShowSelectButton="True" ControlStyle-CssClass="a" />
+                        </Columns>
+                        <HeaderStyle CssClass="th"></HeaderStyle>
+                        <PagerStyle CssClass="DDFooter" />
+                        <PagerTemplate>
+                            <asp:GridViewPager ID="GridViewPager1" runat="server" />
+                        </PagerTemplate>
+                        <EmptyDataTemplate>
+                            Actualmente no hay elementos en esta tabla.
+                        </EmptyDataTemplate>
+                        <RowStyle CssClass="td"></RowStyle>
+                    </asp:GridView>
+                <asp:LinqDataSource ID="lqdsSE" runat="server" 
+                    ContextTypeName="ESM.Model.ESMBDDataContext" EntityTypeName="" 
+                    Select="new (IdSecretaria, Nombre, Direccion, Telefono, LecturaContextoSE)" 
+                    TableName="Secretaria_Educacion">
+                </asp:LinqDataSource>
+                <br />
                 <h3 id="titulo1ie" runat="server">
                     1. Seleccione el Establecimiento Educativo a evaluar.
                 </h3>
@@ -261,12 +296,14 @@
                 <br />
                 <h4 id="tituloeval" runat="server" visible="false">
                     2.4 Evaluación.</h4>
+                <h4 id="tituloevalse" runat="server" visible="false">
+                    1.3 Evaluación.</h4>
                 <br />
                 <div>
                     <table id="infoEval" runat="server" border="0" visible="false" cellpadding="0" cellspacing="0"
                         style="width: 100%; border: 1px solid #dddddd;">
                         <tr class="trheaderSecretaria" id="trActor" runat="server">
-                            <td colspan="2" style="color: #ffffff; font-weight: bold; font-size: 18px;">
+                            <td colspan="2" style="color: #ffffff; background: #005EA7; font-weight: bold; font-size: 18px;">
                                 <asp:Panel ID="Actorespnl" runat="server">
                                     Evaluando a:
                                     <asp:DropDownList ID="cboActores" runat="server" AutoPostBack="True" DataTextField="Actor"
@@ -290,15 +327,15 @@
                         </tr>
                         <tr class="trgris">
                             <td>
-                                Codigo Dane:<asp:Label Text="Codigo Dane" ID="lblCodIe" runat="server" />
+                                No.:<asp:Label Text="Codigo Dane" ID="lblCodIe" runat="server" />
                             </td>
                             <td>
-                                Establecimiento Educativo:<asp:Label ID="lblIE" Text="Institucion Educativa" runat="server"></asp:Label>
+                                Nombre:<asp:Label ID="lblIE" Text="Institucion Educativa" runat="server"></asp:Label>
                             </td>
                         </tr>
                         <tr class="trblanca">
                             <td>
-                                Municipio:
+                                Direccion:
                                 <asp:Label ID="lblMunicipio" Text="Municipio" runat="server" />
                             </td>
                             <td>
@@ -307,19 +344,25 @@
                             </td>
                         </tr>
                     </table>
-                    <asp:GridView ID="gvEvaluacion" CssClass="evaluacion" runat="server" AutoGenerateColumns="true"
+                    <asp:GridView ID="gvEvaluacion" CssClass="evaluacion" runat="server" AutoGenerateColumns="false"
                         OnRowDataBound="gvEvaluacion_RowDataBound">
                         <Columns>
                             <asp:TemplateField HeaderStyle-Width="180px">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("No_Pregunta") %>' Visible="false"></asp:Label>
-                                    <a id="lknAyuda" href="#" style="width: 30px;" class="pretty" runat="server">
-                                        <img style="line-height: 30px;" src="../Icons/1314381320_help_48.png" height="24px"
-                                            alt="Ayuda" /></a>
+                                <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("No_Pregunta") %>' Visible="true"></asp:Label>
                                     <asp:RadioButton ID="rbtnSi" GroupName="gpregunta" Text="Si" runat="server" />
                                     <asp:RadioButton ID="rbtnNo" GroupName="gpregunta" Text="No" runat="server" />
                                     <asp:RadioButton Visible="false" ID="rbtnNoAplica" GroupName="gpregunta" Text="No Aplica"
                                         runat="server" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:BoundField DataField="Pregunta" HeaderText="Pregunta" />
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtsesion" runat="server" Width="30px" Height="30px"></asp:TextBox>
+                                    <a id="lknAyuda" href="#" style="width: 30px;" class="pretty" runat="server">
+                                        <img style="line-height: 30px;" src="../Icons/1314381320_help_48.png" height="24px"
+                                            alt="Ayuda" /></a>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
