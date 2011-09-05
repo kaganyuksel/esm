@@ -37,7 +37,7 @@
                 </td>
                 <td>
                     <h4>
-                        <a href="#">Evaluacion</a></h4>
+                        <a href="/Evaluacion.aspx?idrama=1">Evaluacion</a></h4>
                     <h4>
                         <a href="/LecturaContextoSE.aspx">Lectura de Contexto</a></h4>
                 </td>
@@ -45,7 +45,7 @@
                 </td>
                 <td>
                     <h4>
-                        <a href="/Evaluacion.aspx">Evaluacion</a></h4>
+                        <a href="/Evaluacion.aspx?idrama=2">Evaluacion</a></h4>
                     <h4>
                         <a href="#">Lectura de Contexto</a></h4>
                 </td>

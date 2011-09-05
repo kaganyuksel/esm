@@ -60,9 +60,7 @@ body
     line-height: 30px;
     font-weight: normal;
     border-bottom: 1px solid #999999;
-    color: #005EA7;
-    /*font-family: Helvetica, Arial, sans-serif;*/
-    /*font-weight: bold;*/
+    color: #005EA7; /*font-family: Helvetica, Arial, sans-serif;*/ /*font-weight: bold;*/
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
@@ -70,9 +68,7 @@ body
 #subcuerpo #nav a
 {
     text-decoration: none;
-    color: #005EA7;
-    /*font-family: Helvetica, Arial, sans-serif;*/
-    /*font-weight: bold;*/
+    color: #005EA7; /*font-family: Helvetica, Arial, sans-serif;*/ /*font-weight: bold;*/
     font-size: 12px;
 }
 #subcuerpo #nav li
@@ -86,9 +82,7 @@ body
     line-height: 30px;
     cursor: pointer;
     color: #005EA7;
-    font-size: 12px;
-    /*font-weight: bold;*/
-    /*font-family: Helvetica, Arial, sans-serif;*/
+    font-size: 12px; /*font-weight: bold;*/ /*font-family: Helvetica, Arial, sans-serif;*/
     border-left: 1px solid #c3c1c1;
 }
 #subcuerpo #nav li:hover
@@ -221,4 +215,13 @@ body
     height: 40px;
     background: #dddddd;
     font-weight: bold;
+}
+.trheader a
+{
+    font-size: 14px;
+    color: #005EA7; /*color: #999999;*/
+    line-height: 40px;
+    height: 40px;
+    font-weight: bold;
+    text-decoration: none;
 }

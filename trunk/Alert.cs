@@ -10,9 +10,10 @@ namespace ESM
     {
         public static void Show(UpdatePanel objUpdatePanel, string Mensaje)
         {
-            string alert = String.Format("alert('{0}');",Mensaje);
+            string alert = String.Format("alert('{0}');", Mensaje);
             Guid guidKey = Guid.NewGuid();
             ScriptManager.RegisterStartupScript(objUpdatePanel, objUpdatePanel.GetType(), guidKey.ToString(), alert, true);
         }
+        
     }
 }

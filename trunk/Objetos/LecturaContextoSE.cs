@@ -269,7 +269,7 @@ namespace ESM.LecturasContexto
 
         #endregion
 
-        #region Propiedades Publicas y Privadas
+        #region Ultimo Modulo
 
         private bool _1_18;
 
@@ -297,11 +297,89 @@ namespace ESM.LecturasContexto
 
         #endregion
 
-        public bool Almacenar(int idsecretaria, int idmedicion)
+        #region Propiedades SE
+
+        private int _idse;
+
+        public int IdSec
+        {
+            get { return _idse; }
+            set { _idse = value; }
+        }
+
+        private string _nombreSe;
+
+        public string NombreSe
+        {
+            get { return _nombreSe; }
+            set { _nombreSe = value; }
+        }
+
+
+        private string _nombresecre;
+
+        public string NombreSecre
+        {
+            get { return _nombresecre; }
+            set { _nombresecre = value; }
+        }
+
+
+        private string _telefonoSe;
+
+        public string TelefonoSe
+        {
+            get { return _telefonoSe; }
+            set { _telefonoSe = value; }
+        }
+
+        private string _telefonoSecretario;
+
+        public string TelefonoSecretrio
+        {
+            get { return _telefonoSecretario; }
+            set { _telefonoSecretario = value; }
+        }
+
+        private string _correoelectronico;
+
+        public string CorreoElectronico
+        {
+            get { return _correoelectronico; }
+            set { _correoelectronico = value; }
+        }
+
+        private string _direcccion;
+
+        public string Direccion
+        {
+            get { return _direcccion; }
+            set { _direcccion = value; }
+        }
+
+        private bool _departamental;
+
+        public bool Departamental
+        {
+            get { return _departamental; }
+            set { _departamental = value; }
+        }
+
+        private bool _municipal;
+
+        public bool Municipal
+        {
+            get { return _municipal; }
+            set { _municipal = value; }
+        }
+
+        #endregion
+
+        public bool Almacenar(int idmedicion)
         {
             try
             {
-               #region Objeto Lectura de Contexto
+                #region Objeto Lectura de Contexto
                 LecturaContextoSE objLecturaContextoSE = new LecturaContextoSE
                 {
                     #region Modulo 2
@@ -359,17 +437,87 @@ namespace ESM.LecturasContexto
                     Observaciones = _observaciones,
                     #endregion
 
-                    IdSecretaria = idsecretaria,
+                    IdSecretaria = _idse,
                     IdMedicion = idmedicion
                 };
-#endregion
+                #endregion
 
-               db.LecturaContextoSE.InsertOnSubmit(objLecturaContextoSE);
-               db.SubmitChanges();
-               
+                db.LecturaContextoSE.InsertOnSubmit(objLecturaContextoSE);
+                db.SubmitChanges();
+
                 return true;
             }
             catch (Exception) { return false; }
+        }
+
+        public Secretaria_Educacion RecuperarSE(int idse)
+        {
+            try
+            {
+                var se = (from s in db.Secretaria_Educacion
+                          where s.IdSecretaria == idse
+                          select s).Single();
+
+                return se;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable CargarMediciones(int idse)
+        {
+            try
+            {
+                var m = (from med in db.LecturaContextoSE
+                         where med.IdSecretaria == idse
+                         select new { Medicion = med.IdMedicion, Fecha = med.Mediciones.FechaMedicion }).Distinct();
+
+                return m;
+            }
+            catch (Exception) { return null; }
+        }
+
+        public IQueryable ObtenerSE()
+        {
+            try
+            {
+                var se = from s in db.Secretaria_Educacion
+                         select new { No = s.IdSecretaria, s.Nombre, s.Telefono, s.Direccion, Secretario_Educacion = s.Nombre_Secretario_Educacion, s.Telefonos_Secretario_Educacion };
+
+                return se;
+            }
+            catch { return null; }
+        }
+
+        public int RegistrarMedicion()
+        {
+            try
+            {
+                Mediciones objMediciones = new Mediciones
+                {
+                    FechaMedicion = DateTime.Now
+                };
+
+                db.Mediciones.InsertOnSubmit(objMediciones);
+                db.SubmitChanges();
+
+                return objMediciones.IdMedicion;
+            }
+            catch (Exception) { return 0; }
+        }
+
+        public List<LecturaContextoSE> CargarLCSE(int idmedicion, int idse)
+        {
+            try
+            {
+                var lcse = from lc in db.LecturaContextoSE
+                           where lc.IdMedicion == idmedicion && lc.IdSecretaria == idse
+                           select lc;
+
+                return lcse.ToList();
+            }
+            catch (Exception) { return null; }
+
         }
     }
 }

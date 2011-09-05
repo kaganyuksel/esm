@@ -13,6 +13,51 @@ namespace ESM {
     public partial class LecturaContexto {
         
         /// <summary>
+        /// Control gvSE.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvSE;
+        
+        /// <summary>
+        /// Control titulomediciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl titulomediciones;
+        
+        /// <summary>
+        /// Control gvMediciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvMediciones;
+        
+        /// <summary>
+        /// Control btnRegistrar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegistrar;
+        
+        /// <summary>
+        /// Control lecturaContextoTable.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable lecturaContextoTable;
+        
+        /// <summary>
         /// Control txtNombreSE.
         /// </summary>
         /// <remarks>
@@ -49,13 +94,13 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.TextBox txtDireccionSE;
         
         /// <summary>
-        /// Control txtTelefonoIE.
+        /// Control txtTelefonoSE.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTelefonoIE;
+        protected global::System.Web.UI.WebControls.TextBox txtTelefonoSE;
         
         /// <summary>
         /// Control txtNombreSecre.

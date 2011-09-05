@@ -217,11 +217,11 @@ namespace EvaluationSettings
         /// <param name="idactor"></param>
         /// <param name="idusuario"></param>
         /// <returns></returns>
-        public bool Almacenar(object[,] ResultadosByPre, int idie, int idmedicion, int idactor, int idusuario, bool estado)
+        public bool Almacenar(object[,] ResultadosByPre, int idie, int idmedicion, int idactor, int idusuario, bool estado, int tipo)
         {
             try
             {
-                int idevalinsert = RegistrarEvaluacion(idie, idmedicion, idactor, idusuario, estado);
+                int idevalinsert = RegistrarEvaluacion(idie, idmedicion, idactor, idusuario, estado, tipo);
                 if (idevalinsert != 0)
                 {
                     InsertarResultados(ResultadosByPre, idevalinsert);
@@ -248,40 +248,75 @@ namespace EvaluationSettings
             catch (Exception) { return 0; }
         }
 
-        protected int RegistrarEvaluacion(int idie, int idmedicion, int idactor, int idusuario, bool estado)
+        protected int RegistrarEvaluacion(int idie, int idmedicion, int idactor, int idusuario, bool estado, int tipo)
         {
             try
             {
                 ESM.Model.ESMBDDataContext db = new ESM.Model.ESMBDDataContext();
 
                 Evaluacion objEvaluacion = null;
-                switch (estado)
+                if (tipo == 1)
                 {
-                    case true:
-                        objEvaluacion = new Evaluacion
-                        {
-                            IdActor = idactor,
-                            IdIE = idie,
-                            Fecha = DateTime.Now,
-                            IdUsuario = idusuario,
-                            IdMedicion = idmedicion,
-                            IdEstado = 2
-                        };
-                        break;
+                    #region Estado IE
+                    switch (estado)
+                    {
+                        case true:
+                            objEvaluacion = new Evaluacion
+                            {
+                                IdActor = idactor,
+                                IdIE = idie,
+                                Fecha = DateTime.Now,
+                                IdUsuario = idusuario,
+                                IdMedicion = idmedicion,
+                                IdEstado = 2
+                            };
+                            break;
 
-                    case false:
-                        objEvaluacion = new Evaluacion
-                        {
-                            IdActor = idactor,
-                            IdIE = idie,
-                            Fecha = DateTime.Now,
-                            IdUsuario = idusuario,
-                            IdMedicion = idmedicion,
-                            IdEstado = 1
-                        };
-                        break;
+                        case false:
+                            objEvaluacion = new Evaluacion
+                            {
+                                IdActor = idactor,
+                                IdIE = idie,
+                                Fecha = DateTime.Now,
+                                IdUsuario = idusuario,
+                                IdMedicion = idmedicion,
+                                IdEstado = 1
+                            };
+                            break;
+                    }
+                    #endregion
                 }
+                else
+                {
+                    #region Estado IE
+                    switch (estado)
+                    {
+                        case true:
+                            objEvaluacion = new Evaluacion
+                            {
+                                IdActor = idactor,
+                                IdSE = idie,
+                                Fecha = DateTime.Now,
+                                IdUsuario = idusuario,
+                                IdMedicion = idmedicion,
+                                IdEstado = 2
+                            };
+                            break;
 
+                        case false:
+                            objEvaluacion = new Evaluacion
+                            {
+                                IdActor = idactor,
+                                IdSE = idie,
+                                Fecha = DateTime.Now,
+                                IdUsuario = idusuario,
+                                IdMedicion = idmedicion,
+                                IdEstado = 1
+                            };
+                            break;
+                    }
+                    #endregion
+                }
                 db.Evaluacion.InsertOnSubmit(objEvaluacion);
                 db.SubmitChanges();
 
@@ -313,7 +348,8 @@ namespace EvaluationSettings
                         {
                             /*Asigno a los parametros de el mismo objeto los valores de la coleccion*/
                             IdPregunta = (int)ResultadosByPre[i, 0],
-                            Valor = (bool)ResultadosByPre[i, 1]
+                            Valor = (bool)ResultadosByPre[i, 1],
+                            Sesiones = (int)ResultadosByPre[i, 2]
                         };
                     }
                     else
@@ -1140,8 +1176,6 @@ namespace EvaluationSettings
         {
             try
             {
-
-
                 var results = from e in db.ResultadosByEvaluacion
                               where e.IdEvaluacion == ideval
                               select e;
@@ -1160,6 +1194,7 @@ namespace EvaluationSettings
                             if (VResultados[contvector, 1] != null)
                             {
                                 item.Resultados.Valor = (bool)VResultados[contvector, 1];
+                                item.Resultados.Sesiones = (int)VResultados[contvector, 2];
                                 db.SubmitChanges();
                             }
                             contador++;
@@ -1176,7 +1211,8 @@ namespace EvaluationSettings
                             objResultados = new Resultados
                             {
                                 IdPregunta = Convert.ToInt32(VResultados[contvector, 0]),
-                                Valor = Convert.ToBoolean(VResultados[contvector, 1])
+                                Valor = Convert.ToBoolean(VResultados[contvector, 1]),
+                                Sesiones = Convert.ToInt32(VResultados[contvector, 3])
                             };
                         }
                         else

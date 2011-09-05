@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="LecturaContextoSE.aspx.cs" Inherits="ESM.LecturaContexto" %>
+    CodeBehind="LecturaContextoSE.aspx.cs" MaintainScrollPositionOnPostback="true"
+    Inherits="ESM.LecturaContexto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
@@ -23,10 +24,33 @@
     <br />
     <br />
     <div class="demo" style="width: 90%; margin: 0 auto;">
-        <table cellpadding="10" cellspacing="6" style="width: 100%; border: 1px solid #dddddd;">
+        <h4>
+            Listado de Secretarias de Educación.</h4>
+        <asp:GridView ID="gvSE" runat="server" OnSelectedIndexChanged="gvSE_SelectedIndexChanged"
+            Width="100%">
+            <Columns>
+                <asp:CommandField ShowSelectButton="True" />
+            </Columns>
+        </asp:GridView>
+        <br />
+        <br />
+        <h4 id="titulomediciones" runat="server" visible="false">
+            Listado de Mediciones Realizadas</h4>
+        <asp:GridView ID="gvMediciones" runat="server" Width="100%" OnSelectedIndexChanged="gvMediciones_SelectedIndexChanged"
+            Visible="False">
+            <Columns>
+                <asp:CommandField ShowSelectButton="True" />
+            </Columns>
+        </asp:GridView>
+        <br />
+        <asp:Button Text="Registrar Nueva Medición" runat="server" ID="btnRegistrar" OnClick="btnRegistrar_Click"
+            Visible="False" />
+        <br />
+        <table id="lecturaContextoTable" runat="server" visible="false" cellpadding="10"
+            cellspacing="6" style="width: 100%; border: 1px solid #dddddd;">
             <tr>
                 <td class="style1" colspan="4">
-                    Lectura de Contexto<br />
+                    LECTURA DE CONTEXTO<br />
                     SECRETARÍA DE EDUCACIÓN
                 </td>
                 <td>
@@ -77,12 +101,12 @@
                     a. Nombre de la Secretaria: &nbsp;
                 </td>
                 <td>
-                    <asp:TextBox ID="txtNombreSE" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtNombreSE" runat="server" Enabled="False"></asp:TextBox>
                 </td>
                 <td>
-                    &nbsp;<asp:RadioButton 
-                        ID="rbtnDepartamentalSE" runat="server" Text="Departamental" />
-                    &nbsp;<asp:RadioButton ID="rbtnMunicipalSE" runat="server" Text="Municipal" />
+                    &nbsp;<asp:RadioButton ID="rbtnDepartamentalSE" runat="server" Text="Departamental"
+                        Enabled="False" />
+                    &nbsp;<asp:RadioButton ID="rbtnMunicipalSE" runat="server" Text="Municipal" Enabled="False" />
                 </td>
                 <td>
                     &nbsp;
@@ -96,13 +120,13 @@
                     b. Direccion:
                 </td>
                 <td>
-                    <asp:TextBox ID="txtDireccionSE" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtDireccionSE" runat="server" Enabled="False"></asp:TextBox>
                 </td>
                 <td>
                     d. Telefonos
                 </td>
                 <td>
-                    <asp:TextBox ID="txtTelefonoIE" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtTelefonoSE" runat="server" Enabled="False"></asp:TextBox>
                 </td>
                 <td>
                     &nbsp;
@@ -130,13 +154,13 @@
                     a.Nombre:
                 </td>
                 <td>
-                    <asp:TextBox ID="txtNombreSecre" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtNombreSecre" runat="server" Enabled="False"></asp:TextBox>
                 </td>
                 <td>
                     b. Correo Electronico:
                 </td>
                 <td>
-                    <asp:TextBox ID="txtCorreoSecre" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtCorreoSecre" runat="server" Enabled="False"></asp:TextBox>
                 </td>
                 <td>
                     &nbsp;
@@ -147,7 +171,7 @@
                     c. Telefonos de Contacto
                 </td>
                 <td>
-                    <asp:TextBox ID="txtTelefonoSecre" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtTelefonoSecre" runat="server" Enabled="False"></asp:TextBox>
                 </td>
                 <td>
                     &nbsp;
@@ -191,8 +215,10 @@
             </tr>
             <tr>
                 <td class="style1" colspan="4">
-                    <asp:RadioButton ID="rbtn22Si" runat="server" Text="Si" GroupName="group22" />
-                    <asp:RadioButton ID="rbtn22No" runat="server" Text="No" GroupName="group22" />
+                    <asp:RadioButton ID="rbtn22Si" runat="server" Text="Si" GroupName="group22" AutoPostBack="True"
+                        OnCheckedChanged="rbtn22Si_CheckedChanged" />
+                    <asp:RadioButton ID="rbtn22No" runat="server" Text="No" GroupName="group22" AutoPostBack="True"
+                        OnCheckedChanged="rbtn22No_CheckedChanged" />
                 </td>
                 <td>
                     &nbsp;
@@ -205,7 +231,7 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <asp:TextBox ID="txt221" runat="server" TextMode="MultiLine" Width="100%"></asp:TextBox>
+                    <asp:TextBox ID="txt221" runat="server" TextMode="MultiLine" Width="100%" Enabled="False"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -218,7 +244,7 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <asp:TextBox ID="txt222" runat="server" TextMode="MultiLine" Width="100%"></asp:TextBox>
+                    <asp:TextBox ID="txt222" runat="server" TextMode="MultiLine" Width="100%" Enabled="False"></asp:TextBox>
                 </td>
                 <td>
                     &nbsp;
@@ -243,7 +269,8 @@
                     </asp:CheckBoxList>
                 </td>
                 <td>
-                    &nbsp;</td>
+                    &nbsp;
+                </td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -298,8 +325,10 @@
             </tr>
             <tr>
                 <td class="style1" colspan="4">
-                    <asp:RadioButton ID="rbtn23Si" runat="server" Text="Si" GroupName="group23" />
-                    <asp:RadioButton ID="rbtn23No" runat="server" Text="No" GroupName="group23" />
+                    <asp:RadioButton ID="rbtn23Si" runat="server" Text="Si" GroupName="group23" 
+                        AutoPostBack="True" oncheckedchanged="rbtn23Si_CheckedChanged" />
+                    <asp:RadioButton ID="rbtn23No" runat="server" Text="No" GroupName="group23" 
+                        AutoPostBack="True" oncheckedchanged="rbtn23No_CheckedChanged" />
                 </td>
                 <td class="style1">
                     &nbsp;
@@ -315,7 +344,7 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <asp:TextBox ID="txt231" runat="server" TextMode="MultiLine" Width="100%"></asp:TextBox>
+                    <asp:TextBox ID="txt231" Enabled="false" runat="server" TextMode="MultiLine" Width="100%"></asp:TextBox>
                 </td>
                 <td>
                     &nbsp;
@@ -447,8 +476,10 @@
             </tr>
             <tr>
                 <td class="style1" colspan="4">
-                    <asp:RadioButton ID="rbtn41Si" runat="server" Text="Si" />
-                    <asp:RadioButton ID="rbtn41No" runat="server" Text="No" />
+                    <asp:RadioButton ID="rbtn41Si" runat="server" Text="Si" AutoPostBack="True" 
+                        oncheckedchanged="rbtn41Si_CheckedChanged" />
+                    <asp:RadioButton ID="rbtn41No" runat="server" Text="No" AutoPostBack="True" 
+                        oncheckedchanged="rbtn41No_CheckedChanged" />
                 </td>
                 <td>
                     &nbsp;
@@ -464,7 +495,8 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <asp:TextBox ID="txt411" runat="server" TextMode="MultiLine" Width="100%"></asp:TextBox>
+                    <asp:TextBox ID="txt411" runat="server" TextMode="MultiLine" Width="100%" 
+                        Enabled="False"></asp:TextBox>
                 </td>
                 <td>
                     &nbsp;
@@ -545,8 +577,10 @@
             </tr>
             <tr>
                 <td class="style1" colspan="4">
-                    <asp:RadioButton ID="rbtn118Si" runat="server" Text="Si" />
-                    <asp:RadioButton ID="rbtn118No" runat="server" Text="No" />
+                    <asp:RadioButton ID="rbtn118Si" runat="server" Text="Si" 
+                        oncheckedchanged="rbtn118Si_CheckedChanged" />
+                    <asp:RadioButton ID="rbtn118No" runat="server" Text="No" 
+                        oncheckedchanged="rbtn118No_CheckedChanged" />
                 </td>
                 <td>
                     &nbsp;
@@ -563,7 +597,8 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <asp:TextBox ID="txt119" runat="server" TextMode="MultiLine" Width="100%"></asp:TextBox>
+                    <asp:TextBox ID="txt119" runat="server" TextMode="MultiLine" Width="100%" 
+                        Enabled="False"></asp:TextBox>
                 </td>
                 <td>
                     &nbsp;
@@ -579,8 +614,7 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <asp:TextBox ID="txtObservaciones" runat="server" TextMode="MultiLine" 
-                        Width="100%"></asp:TextBox>
+                    <asp:TextBox ID="txtObservaciones" runat="server" TextMode="MultiLine" Width="100%"></asp:TextBox>
                 </td>
                 <td>
                     &nbsp;
@@ -588,7 +622,7 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <asp:Button ID="btnAlmacenar" runat="server" Text="Almacenar" />
+                    <asp:Button ID="btnAlmacenar" runat="server" Text="Almacenar" OnClick="btnAlmacenar_Click" />
                 </td>
                 <td>
                     &nbsp;
