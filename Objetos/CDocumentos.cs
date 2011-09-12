@@ -18,13 +18,13 @@ namespace EvaluationSettings
 
         }
 
-        public IQueryable Show(int idmedicion)
+        public IQueryable<AsignaDocumentos> Show(int idmedicion)
         {
             try
             {
                 var doc = from d in db.AsignaDocumentos
                           where d.IdMedicion == idmedicion
-                          select new { Documento = d.Documentos.Documento, Actualizado = d.Fecha, Ruta = d.Ruta };
+                          select d;
                 return doc;
             }
             catch (Exception) { return null; }

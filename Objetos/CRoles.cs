@@ -12,6 +12,21 @@ namespace ESM.Objetos
 
         ESM.Model.ESMBDDataContext _db = new Model.ESMBDDataContext();
 
+        private int _identificacion;
+
+        public int Identificacion
+        {
+            get { return _identificacion; }
+        }
+
+        private int _idconsultor;
+
+        public int IdConsultor
+        {
+            get { return _idconsultor; }
+            set { _idconsultor = value; }
+        }
+
         #endregion
         public CRoles()
         {
@@ -41,5 +56,21 @@ namespace ESM.Objetos
                 return Error;
             }
         }
+
+        public string ObtenerRol(int idusuario)
+        {
+            try
+            {
+                var us = (from u in _db.Usuarios
+                          join c in _db.Consultores on u.IdConsultor equals c.IdConsultor
+                          where u.IdUsuario == idusuario
+                          select new { u.Roles.Rol, c.Identificacion, c.IdConsultor }).Single();
+                _idconsultor = us.IdConsultor;
+                _identificacion = (int)us.Identificacion;
+                return us.Rol;
+            }
+            catch (Exception) { return String.Empty; }
+        }
+
     }
 }
