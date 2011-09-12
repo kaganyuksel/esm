@@ -44,7 +44,7 @@ public static class SecuritySesion
 
                 if (rUsuarios.Count() != 0)
                 {
-                    var tkc = new FormsAuthenticationTicket(usuario, true, 15);
+                    var tkc = new FormsAuthenticationTicket(usuario, true, 2000);
                     string encriptar = FormsAuthentication.Encrypt(tkc);
                     HttpContext.Current.Response.Cookies.Add(
                         new HttpCookie(FormsAuthentication.FormsCookieName, encriptar));
