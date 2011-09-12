@@ -31,6 +31,15 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.FileUpload FPEI;
         
         /// <summary>
+        /// Control lknPEI.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lknPEI;
+        
+        /// <summary>
         /// Control btnUpPEIS.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace ESM {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FPMI;
+        
+        /// <summary>
+        /// Control lknPMI.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lknPMI;
         
         /// <summary>
         /// Control btnUpPMI.
@@ -67,6 +85,15 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.FileUpload FMC;
         
         /// <summary>
+        /// Control lknMC.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lknMC;
+        
+        /// <summary>
         /// Control btnUpMC.
         /// </summary>
         /// <remarks>
@@ -85,6 +112,15 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.FileUpload FPS;
         
         /// <summary>
+        /// Control lknPS.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lknPS;
+        
+        /// <summary>
         /// Control btnUpPS.
         /// </summary>
         /// <remarks>
@@ -94,76 +130,58 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.Button btnUpPS;
         
         /// <summary>
-        /// Control FActas.
+        /// Control FDPP.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FActas;
+        protected global::System.Web.UI.WebControls.FileUpload FDPP;
         
         /// <summary>
-        /// Control btnUpActas.
+        /// Control lknDPP.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpActas;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lknDPP;
         
         /// <summary>
-        /// Control FProyecto.
+        /// Control btnUpDPP.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FProyecto;
+        protected global::System.Web.UI.WebControls.Button btnUpDPP;
         
         /// <summary>
-        /// Control btnUpPro.
+        /// Control FOtros.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpPro;
+        protected global::System.Web.UI.WebControls.FileUpload FOtros;
         
         /// <summary>
-        /// Control FConvenio.
+        /// Control lknOtros.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FConvenio;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lknOtros;
         
         /// <summary>
-        /// Control btnUpCon.
+        /// Control btnUpOtros.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpCon;
-        
-        /// <summary>
-        /// Control FPCC.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FPCC;
-        
-        /// <summary>
-        /// Control btnUpPCC.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpPCC;
+        protected global::System.Web.UI.WebControls.Button btnUpOtros;
         
         /// <summary>
         /// Control lblMensaje.
@@ -173,14 +191,5 @@ namespace ESM {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMensaje;
-        
-        /// <summary>
-        /// Control gvDocumentos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvDocumentos;
     }
 }

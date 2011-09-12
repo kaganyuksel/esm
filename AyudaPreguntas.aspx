@@ -66,15 +66,15 @@
             position: fixed;
             bottom: 320px;
             right: 0px;
-            margin-right: 70px;
+            margin-right: 3%;
             z-index: 99;
         }
     </style>
-    <div class="demo" style="clear: both;">
-        <asp:Button ID="btndescPreguntas" CssClass="flotante" runat="server" Text="ok" OnClick="btndescPreguntas_Click"
-            Visible="false" />
-    </div>
-    <div class="demo" style="width: 90%; margin: 0 auto; clear: both;">
+    <div class="demo" style="width: 95%; margin: 0 auto; clear: both;">
+        <%--<div class="demo" style="clear: both;"> --%>
+            <asp:Button ID="btndescPreguntas" CssClass="flotante" runat="server" Text="ok" OnClick="btndescPreguntas_Click"
+                Visible="false" />
+        <%--</div>--%>
         <br />
         <br />
         <h3 id="titulo1" runat="server" visible="false" style="color: #005EA7;">
@@ -124,7 +124,7 @@
             }
         </style>
         <asp:GridView ID="gvPreguntas" runat="server" AutoGenerateColumns="false" OnRowDataBound="gvPreguntas_RowDataBound"
-            Width="100%" CssClass="gvPreguntas">
+            Width="97%" CssClass="gvPreguntas">
             <Columns>
                 <asp:TemplateField HeaderText="No.">
                     <ItemTemplate>
@@ -141,22 +141,29 @@
                             runat="server" Text='<%# Eval("Pregunta") %>'></asp:TextBox>
                         <asp:TextBox CssClass="txtmultiline" TextMode="MultiLine" ID="txtDescPre" runat="server"></asp:TextBox>
                         <h4>
+                            Actores</h4>
+                        <asp:CheckBoxList ID="listActores" runat="server" Font-Size="12px" RepeatDirection="Horizontal">
+                            <asp:ListItem Text="Profesional de Campo" />
+                            <asp:ListItem Text="Estudiantes" />
+                            <asp:ListItem Text="Educadores" />
+                            <asp:ListItem Text="Directivos" />
+                            <asp:ListItem Text="Padres" />
+                        </asp:CheckBoxList>
+                        <h4>
                             Medios de Verificación</h4>
-                        <asp:CheckBoxList ID="listMedios" RepeatDirection="Horizontal" runat="server">
+                        <asp:CheckBoxList ID="listMedios" Font-Size="12px" RepeatDirection="Horizontal" runat="server">
                             <asp:ListItem Text="Lectura" Value="1"></asp:ListItem>
                             <asp:ListItem Text="Participación" Value="2"></asp:ListItem>
                         </asp:CheckBoxList>
                         <h4>
                             Documentos de Consulta</h4>
-                        <asp:CheckBoxList ID="listDocuments" runat="server" RepeatDirection="Horizontal">
+                        <asp:CheckBoxList ID="listDocuments" Font-Size="12px" runat="server" RepeatDirection="Horizontal">
                             <asp:ListItem Text="PEI" Value="1"></asp:ListItem>
                             <asp:ListItem Text="PMI" Value="2"></asp:ListItem>
                             <asp:ListItem Text="Manual de Convivencia" Value="3"></asp:ListItem>
                             <asp:ListItem Text="Planes de Estudio" Value="4"></asp:ListItem>
-                            <asp:ListItem Text="Actas" Value="4"></asp:ListItem>
-                            <asp:ListItem Text="Proyectos" Value="4"></asp:ListItem>
-                            <asp:ListItem Text="Convenios" Value="4"></asp:ListItem>
-                            <asp:ListItem Text="Programa de Competencias Ciudadanas" Value="4"></asp:ListItem>
+                            <asp:ListItem Text="Documentos de proyectos pedagógicos" Value="5"></asp:ListItem>
+                            <asp:ListItem Text="Otros" Value="6"></asp:ListItem>
                         </asp:CheckBoxList>
                     </ItemTemplate>
                 </asp:TemplateField>

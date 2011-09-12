@@ -3,11 +3,10 @@
 <!DOCTYPE html >
 <html>
 <head id="Head1" runat="server">
-    <title>ESM-Evaluacion, Sistematizacion y Monitoreo</title>
+    <title>Sistema de evaluación de competencias ciudadanas</title>
     <link href="Site.css" rel="stylesheet" type="text/css" />
     <link href="mastercustom.css" rel="stylesheet" type="text/css" />
-    <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch:700' rel='stylesheet'
-        type='text/css'>
+    <script src="/Scripts/jquery-1.6.3-vsdoc.js" type="text/javascript"></script>
     <link href="Style/jquery-ui-1.8.15.custom.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
     <script src="/Scripts/jquery-ui-1.8.15.custom.min.js" type="text/javascript"></script>
@@ -35,10 +34,8 @@
                         font-family: 'Cabin Sketch' , cursive; text-align: left;">
                         <hgroup>
                             <h1>
-                                ESM</h1>
+                                Sistema de evaluación de competencias ciudadanas</h1>
                         </hgroup>
-                        <p>
-                            Evaluación, Sistemtización y Monitoreo</p>
                     </td>
                     <td style="width: 30%; height: 100px; text-align: right;">
                         <img height="80" src="/Icons/EducalidadHeader.png" alt="Educacion de Calidad" />
@@ -50,12 +47,12 @@
             </table>
             <br />
         </header>
-        <div id="nav" <%--class="ui-widget-header"--%>>
+        <div id="nav">
             <section id="menu_left" style="width: 69%">
                 <ul>
                     <li onclick="window.location = '/Default.aspx';">Inicio</li>
                     <li onclick="window.location = '/AyudaPreguntas.aspx';">Preguntas</li>
-                    <li onclick="window.location = '/Evaluacion.aspx';">Evaluación</li>
+                    <li onclick="window.location = '/MenuEvaluacion.aspx';">Evaluación</li>
                     <li>Consolidado</li>
                     <li onclick="window.location = 'http://esmllamadas.mggroupltda.com';">Agenda ESM</li>
                 </ul>
