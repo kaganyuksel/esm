@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.DynamicData;
 using System.Linq;
+using ESM.Objetos;
 
 namespace ESM
 {
@@ -13,26 +14,44 @@ namespace ESM
             {
                 int idusuario = Convert.ToInt32(Session["idusuario"]);
 
-                ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
-                var us = (from u in db.Usuarios
-                          where u.IdUsuario == idusuario
-                          select new { u.Roles.Rol }).Single();
+                CRoles objCRoles = new CRoles();
 
-                if (us.Rol == "Administrador")
+                string rol = objCRoles.ObtenerRol(idusuario);
+
+                if (rol == "Administrador")
                 {
                     AdministracionConfiguracion.Visible = true;
                     AdministracionUsuario.Visible = true;
+                    MEN.Visible = true;
+                    ModEval.Visible = true;
                 }
-                else if (us.Rol == "Consultor")
+                else if (rol == "Consultor")
                 {
+                    var idc = objCRoles.Identificacion;
+
+                    Session.Add("identiConsultor", idc);
+                    citas.HRef = String.Concat("/Citas.aspx?id=", idc);
                     AdministracionConfiguracion.Visible = true;
                     AdministracionUsuario.Visible = true;
+                    AdministracionConfiguracion.Visible = false;
+                    AdministracionUsuario.Visible = false;
+                    MEN.Visible = false;
+                    ModEval.Visible = true;
+                }
+                else if (rol == "MEN")
+                {
+                    ModEval.Visible = false;
+                    AdministracionConfiguracion.Visible = false;
+                    AdministracionUsuario.Visible = false;
+                    AdministracionConfiguracion.Visible = false;
+                    AdministracionUsuario.Visible = false;
+                    MEN.Visible = true;
                 }
             }
 
             if (Request.IsAuthenticated)
             {
-                
+
                 System.Collections.IList visibleTables = Global.DefaultModel.VisibleTables;
                 if (visibleTables.Count == 0)
                 {
@@ -40,7 +59,7 @@ namespace ESM
                 }
                 Menu1.DataSource = visibleTables;
                 Menu1.DataBind();
-                
+
             }
             else
                 Response.Redirect("/Login.aspx");

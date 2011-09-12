@@ -17,7 +17,8 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-    <table class="menuprincipalbyconfiguracion" runat="server" id="AdministracionUsuario" visible="false" cellspacing="10">
+    <table class="menuprincipalbyconfiguracion" runat="server" id="AdministracionUsuario"
+        visible="false" cellspacing="10">
         <tr class="th">
             <td>
                 <img alt="Modulo de Acceso a ESM" src="Icons/Security.png" />
@@ -53,7 +54,8 @@
     </table>
     <br />
     <br />
-    <table class="menuprincipalbyconfiguracion" id="AdministracionConfiguracion" runat="server" visible="false" cellspacing="10">
+    <table class="menuprincipalbyconfiguracion" id="AdministracionConfiguracion" runat="server"
+        visible="false" cellspacing="10">
         <tr class="th">
             <td>
                 <img src="Icons/Stationery.png" alt="Modulo de Administración y Configuración">
@@ -72,8 +74,8 @@
                 <h3 onclick="window.location='/Establecimiento_Educativo/list.aspx'">
                     Establecimiento Educativo</h3>
                 <br />
-                Almacena la información de los establecimientos educativos administrando cada una de
-                las caracteristicas des la mismas.
+                Almacena la información de los establecimientos educativos administrando cada una
+                de las caracteristicas des la mismas.
             </td>
             <td>
                 <a href="/Consultores/list.aspx">
@@ -137,7 +139,7 @@
     </table>
     <br />
     <br />
-    <table class="menuprincipalbyconfiguracion" cellspacing="10">
+    <table id="ModEval" runat="server" class="menuprincipalbyconfiguracion" cellspacing="10">
         <tr class="th">
             <td>
                 <img src="/Icons/Edit.png" alt="Modulo de Administración y Configuración">
@@ -149,16 +151,28 @@
         </tr>
         <tr>
             <td>
+                <a id="citas" runat="server" href="/Citas.aspx">
+                    <img src="Icons/Calender.png" alt="Evaluar" /></a>
+            </td>
+            <td class="td">
+                <h3>
+                    Citas</h3>
+                <br />
+                Verifica las citas que existen a cada uno de los Establecimientos Educativos y Secretarías de Educación.
+            </td>
+            <td>
                 <a href="/MenuEvaluacion.aspx">
-                    <img src="/Icons/Flag.png" alt="Evaluar" /></a>
+                    <img height="48px" src="/Icons/Certificate.png" alt="Evaluar" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/MenuEvaluacion.aspx'">
                     Realizar Evaluación</h3>
                 <br />
-                Comienza con el proceso de evaluacion para determinar en estado del actor frente
+                Comienza con el proceso de evaluación para determinar en estado del actor frente
                 a los ambientes, procesos, componentes, y preguntas.
             </td>
+        </tr>
+        <tr id="consolidado" runat="server" visible="false">
             <td>
                 <a href="/Consolidado.aspx">
                     <img src="/Icons/Stats.png" alt="Consolidado" /></a>
@@ -169,6 +183,24 @@
                 <br />
                 Visualiza un consolidado que evalua los resultados obtenidos de cada una de las
                 evaluaciones realizadas por cada uno de los actores.
+            </td>
+        </tr>
+    </table>
+    <table id="MEN" runat="server" visible="false" class="menuprincipalbyconfiguracion"
+        cellspacing="10">
+        <tr>
+            <td style="width: 48px;">
+                <a href="/AyudaPreguntas.aspx">
+                    <img height="48px" src="Icons/Help.png" alt="AyudaPreguntas" /></a>
+            </td>
+            <td>
+                <h3 onclick="window.location='/AyudaPreguntas.aspx'">
+                    Ayuda Preguntas</h3>
+                <br />
+                Visualiza las preguntas almacendas por componente y asigna una descripción para
+                las mismas.
+            </td>
+            <td class="td">
             </td>
         </tr>
     </table>

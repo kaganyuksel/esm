@@ -20,7 +20,7 @@ body
     box-shadow: 0px 0px 16px #000000; /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
     background: #ffffff;
     margin: 0 auto;
-    width: 90%;
+    width: 95%;
     border-left: 1px solid #dddddd;
     border-right: 1px solid #dddddd;
     border-bottom: 1px solid #dddddd;
@@ -197,6 +197,11 @@ body
     height: 40px;
     text-align: left;
     background: #FFFFFF; /*EDEDED*/
+}
+.tds
+{
+    font-size: 15px;
+    font-weight: 600px;
 }
 .trheaderPadre
 {

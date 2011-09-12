@@ -22,13 +22,13 @@ namespace ESM.Evaluacion {
         protected global::System.Web.UI.UpdatePanel udpnlFiltro;
         
         /// <summary>
-        /// Control titulose.
+        /// Control modSEseleccion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl titulose;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl modSEseleccion;
         
         /// <summary>
         /// Control gvSE.
@@ -49,13 +49,13 @@ namespace ESM.Evaluacion {
         protected global::System.Web.UI.WebControls.LinqDataSource lqdsSE;
         
         /// <summary>
-        /// Control titulo1ie.
+        /// Control modEESeleccion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl titulo1ie;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl modEESeleccion;
         
         /// <summary>
         /// Control filtrosp.
@@ -103,31 +103,40 @@ namespace ESM.Evaluacion {
         protected global::System.Web.UI.WebControls.LinqDataSource ldsies;
         
         /// <summary>
-        /// Control titulo3.
+        /// Control ModMediciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl titulo3;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ModMediciones;
         
         /// <summary>
-        /// Control lbtnVolver.
+        /// Control lblCodIe.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnVolver;
+        protected global::System.Web.UI.WebControls.Label lblCodIe;
         
         /// <summary>
-        /// Control titulo21.
+        /// Control lblIE.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl titulo21;
+        protected global::System.Web.UI.WebControls.Label lblIE;
+        
+        /// <summary>
+        /// Control lblMunicipio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMunicipio;
         
         /// <summary>
         /// Control gvMediciones.
@@ -148,13 +157,13 @@ namespace ESM.Evaluacion {
         protected global::System.Web.UI.WebControls.Button btnMedicion;
         
         /// <summary>
-        /// Control titulo22.
+        /// Control ModTopEval.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl titulo22;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ModTopEval;
         
         /// <summary>
         /// Control gvTopEval.
@@ -166,13 +175,13 @@ namespace ESM.Evaluacion {
         protected global::System.Web.UI.WebControls.GridView gvTopEval;
         
         /// <summary>
-        /// Control divcarga.
+        /// Control ModDocumentos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divcarga;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ModDocumentos;
         
         /// <summary>
         /// Control adocumentos.
@@ -184,31 +193,13 @@ namespace ESM.Evaluacion {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor adocumentos;
         
         /// <summary>
-        /// Control tituloeval.
+        /// Control ModEvaluacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tituloeval;
-        
-        /// <summary>
-        /// Control tituloevalse.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tituloevalse;
-        
-        /// <summary>
-        /// Control infoEval.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable infoEval;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ModEvaluacion;
         
         /// <summary>
         /// Control trActor.
@@ -218,6 +209,15 @@ namespace ESM.Evaluacion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow trActor;
+        
+        /// <summary>
+        /// Control ModAc.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell ModAc;
         
         /// <summary>
         /// Control Actorespnl.
@@ -256,42 +256,6 @@ namespace ESM.Evaluacion {
         protected global::System.Web.UI.WebControls.LinqDataSource ldsActores;
         
         /// <summary>
-        /// Control lblCodIe.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCodIe;
-        
-        /// <summary>
-        /// Control lblIE.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblIE;
-        
-        /// <summary>
-        /// Control lblMunicipio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMunicipio;
-        
-        /// <summary>
-        /// Control lblActorEvaluado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblActorEvaluado;
-        
-        /// <summary>
         /// Control gvEvaluacion.
         /// </summary>
         /// <remarks>
@@ -319,6 +283,15 @@ namespace ESM.Evaluacion {
         protected global::System.Web.UI.WebControls.Button btnDefinitiva;
         
         /// <summary>
+        /// Control btnVolverEE.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVolverEE;
+        
+        /// <summary>
         /// Control informacionuno.
         /// </summary>
         /// <remarks>
@@ -335,5 +308,14 @@ namespace ESM.Evaluacion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbloki;
+        
+        /// <summary>
+        /// Control udpgss.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress udpgss;
     }
 }

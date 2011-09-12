@@ -18,13 +18,20 @@ namespace ESM
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if (Request.IsAuthenticated)
             {
-                gvSE.DataSource = _objLecturaContextoSECRE.ObtenerSE();
-                gvSE.DataBind();
+                if (!Page.IsPostBack)
+                {
+                    gvSE.DataSource = _objLecturaContextoSECRE.ObtenerSE();
+                    gvSE.DataBind();
+                    ObtenerTema(gvSE);
+                }
             }
+            else
+                Response.Redirect("Login.aspx");
 
         }
+
         protected void CargarSECRE(int idsecre)
         {
 
@@ -41,179 +48,209 @@ namespace ESM
                 txtNombreSecre.ReadOnly = true;
                 txtTelefonoSecre.Text = objSecretaria_Educacion.Telefonos_Secretario_Educacion;
                 txtCorreoSecre.Text = objSecretaria_Educacion.Correo_Electronico;
-                rbtnDepartamentalSE.Checked = (bool)objSecretaria_Educacion.Departamental;
-                rbtnMunicipalSE.Checked = (bool)objSecretaria_Educacion.Municipal;
+                if (objSecretaria_Educacion.Departamental != null)
+                    rbtnDepartamentalSE.Checked = (bool)objSecretaria_Educacion.Departamental;
+                if (objSecretaria_Educacion.Municipal != null)
+                    rbtnMunicipalSE.Checked = (bool)objSecretaria_Educacion.Municipal;
             }
             else
                 Response.Write("No puede ser cargada la información correspondiente para la Secretaria de Educación.");
         }
 
-        protected void Almacenar()
+        protected void ObtenerTema(GridView objGridView)
         {
-
-            _objLecturaContextoSECRE.IdSec = Convert.ToInt32(Session["idse"]);
-            _objLecturaContextoSECRE.TelefonoSe = txtTelefonoSE.Text;
-            _objLecturaContextoSECRE.TelefonoSecretrio = txtTelefonoSecre.Text;
-            _objLecturaContextoSECRE.Direccion = txtDireccionSE.Text;
-            _objLecturaContextoSECRE.CorreoElectronico = txtCorreoSecre.Text;
-
-            if (rbtnDepartamentalSE.Checked)
-                _objLecturaContextoSECRE.Departamental = true;
-            else
-                _objLecturaContextoSECRE.Departamental = false;
-
-            if (rbtnMunicipalSE.Checked)
-                _objLecturaContextoSECRE.Municipal = true;
-            else
-                _objLecturaContextoSECRE.Municipal = false;
-
-            _objLecturaContextoSECRE.__2_1 = txt21.Text;
-            if (rbtn22Si.Checked)
-                _objLecturaContextoSECRE.__2_2 = true;
-
-            else if (rbtn22No.Checked == true)
-                _objLecturaContextoSECRE.__2_2 = false;
-
-            _objLecturaContextoSECRE.__2_2_1 = txt221.Text;
-            _objLecturaContextoSECRE.__2_2_2 = txt222.Text;
-
-            #region 223
-
-            if (cblist223.Items[0].Selected)
-                _objLecturaContextoSECRE.__2_2_3EE = true;
-            else
-                _objLecturaContextoSECRE.__2_2_3EE = false;
-            if (cblist223.Items[1].Selected)
-                _objLecturaContextoSECRE.__2_2_3EST = true;
-            else
-                _objLecturaContextoSECRE.__2_2_3EST = false;
-
-            if (cblist223.Items[2].Selected)
-                _objLecturaContextoSECRE.__2_2_3EDU = true;
-            else
-                _objLecturaContextoSECRE.__2_2_3EDU = false;
-
-            if (cblist223.Items[3].Selected)
-                _objLecturaContextoSECRE.__2_2_3DIR = true;
-            else
-                _objLecturaContextoSECRE.__2_2_3DIR = false;
-
-            if (cblist223.Items[4].Selected)
-                _objLecturaContextoSECRE.__2_2_3PAD = true;
-            else
-                _objLecturaContextoSECRE.__2_2_3PAD = false;
-
-            #endregion
-
-            _objLecturaContextoSECRE.__2_2_3Otro = txt223Orto.Text;
-
-            _objLecturaContextoSECRE.__2_2_4 = txt224.Text;
-            _objLecturaContextoSECRE.__2_2_5 = txt225.Text;
-
-            if (rbtn23Si.Checked)
-                _objLecturaContextoSECRE.__2_3 = true;
-            else if (rbtn23No.Checked)
-                _objLecturaContextoSECRE.__2_3 = false;
-
-            _objLecturaContextoSECRE.__2_3_1 = txt231.Text;
-            _objLecturaContextoSECRE.__3_1 = txt31.Text;
-            _objLecturaContextoSECRE.__3_2 = txt32.Text;
-            _objLecturaContextoSECRE.__3_3 = txt33.Text;
-            _objLecturaContextoSECRE.__3_4 = txt34.Text;
-            _objLecturaContextoSECRE.__3_5 = txt35.Text;
-            _objLecturaContextoSECRE.__3_6 = txt36.Text;
-
-            if (rbtn41Si.Checked)
-                _objLecturaContextoSECRE.__4_1 = true;
-            else if (rbtn41No.Checked)
-                _objLecturaContextoSECRE.__4_1 = false;
-
-            _objLecturaContextoSECRE.__4_1_1 = txt411.Text;
-
-            #region 5.1 Departamental/Municipal
-            if (cblist51DedMun.Items[0].Selected)
-                _objLecturaContextoSECRE.__5_1_RADDEP = true;
-            else
-                _objLecturaContextoSECRE.__5_1_RADDEP = false;
-
-            if (cblist51DedMun.Items[1].Selected)
-                _objLecturaContextoSECRE.__5_1_PRENDEP = true;
-            else
-                _objLecturaContextoSECRE.__5_1_PRENDEP = false;
-
-            if (cblist51DedMun.Items[2].Selected)
-                _objLecturaContextoSECRE.__5_1_TELDEP = true;
-            else
-                _objLecturaContextoSECRE.__5_1_TELDEP = false;
-
-            if (cblist51DedMun.Items[0].Selected)
-                _objLecturaContextoSECRE.__5_1_INTDEP = true;
-            else
-                _objLecturaContextoSECRE.__5_1_INTDEP = false;
-            #endregion
-
-            #region Local
-
-            if (cblist51DedMun.Items[0].Selected)
-                _objLecturaContextoSECRE.__5_1_RADMUN = true;
-            else
-                _objLecturaContextoSECRE.__5_1_RADMUN = false;
-
-            if (cblist51DedMun.Items[1].Selected)
-                _objLecturaContextoSECRE.__5_1_PRENMUN = true;
-            else
-                _objLecturaContextoSECRE.__5_1_PRENMUN = false;
-
-            if (cblist51DedMun.Items[2].Selected)
-                _objLecturaContextoSECRE.__5_1_TELMUN = true;
-            else
-                _objLecturaContextoSECRE.__5_1_TELMUN = false;
-
-            if (cblist51DedMun.Items[0].Selected)
-                _objLecturaContextoSECRE.__5_1_INTMUN = true;
-            else
-                _objLecturaContextoSECRE.__5_1_INTMUN = false;
-
-            #endregion
-
-            _objLecturaContextoSECRE.__5_2 = txt52.Text;
-            if (rbtn118Si.Checked)
-                _objLecturaContextoSECRE.__1_18 = true;
-            else
-                _objLecturaContextoSECRE.__1_18 = false;
-
-            if (rbtn118No.Checked)
-                _objLecturaContextoSECRE.__1_18 = true;
-            else
-                _objLecturaContextoSECRE.__1_18 = false;
-
-            _objLecturaContextoSECRE.__1_19 = txt119.Text;
-            _objLecturaContextoSECRE.Observaciones = txtObservaciones.Text;
-
-            int idmedicion = Convert.ToInt32(Session["idmedicionLC"]);
-            if (_objLecturaContextoSECRE.Almacenar(idmedicion))
+            if (objGridView.Rows.Count != 0)
             {
-                Response.Write("<script>alert('El proceso de almacenamiento" +
-                "para Lectura de Contexto Finalizo satisfactoriamente.');</script>");
-            }
-            else
-                Response.Write("<script>alert('El proceso de almacenamiento" +
-                "para Lectura de Contexto Finalizo sin exito.');</script>");
+                objGridView.HeaderStyle.CssClass = "trheader";
 
+                int color = 0;
+                for (int i = 0; i < objGridView.Rows.Count; i++)
+                {
+                    if (color == 0)
+                    {
+                        objGridView.Rows[i].CssClass = "trgris";
+                        color = 1;
+                    }
+                    else if (color == 1)
+                    {
+                        objGridView.Rows[i].CssClass = "trblanca";
+                        color = 0;
+                    }
+                }
+            }
+
+        }
+
+        protected bool Almacenar()
+        {
+            try
+            {
+
+                _objLecturaContextoSECRE.IdSec = Convert.ToInt32(Session["idse"]);
+                _objLecturaContextoSECRE.TelefonoSe = txtTelefonoSE.Text;
+                _objLecturaContextoSECRE.TelefonoSecretrio = txtTelefonoSecre.Text;
+                _objLecturaContextoSECRE.Direccion = txtDireccionSE.Text;
+                _objLecturaContextoSECRE.CorreoElectronico = txtCorreoSecre.Text;
+
+                if (rbtnDepartamentalSE.Checked)
+                    _objLecturaContextoSECRE.Departamental = true;
+                else
+                    _objLecturaContextoSECRE.Departamental = false;
+
+                if (rbtnMunicipalSE.Checked)
+                    _objLecturaContextoSECRE.Municipal = true;
+                else
+                    _objLecturaContextoSECRE.Municipal = false;
+
+                _objLecturaContextoSECRE.__2_1 = txt21.Text;
+                if (rbtn22Si.Checked)
+                    _objLecturaContextoSECRE.__2_2 = true;
+
+                else if (rbtn22No.Checked == true)
+                    _objLecturaContextoSECRE.__2_2 = false;
+
+                _objLecturaContextoSECRE.__2_2_1 = txt221.Text;
+                _objLecturaContextoSECRE.__2_2_2 = txt222.Text;
+
+                #region 223
+
+                if (cblist223.Items[0].Selected)
+                    _objLecturaContextoSECRE.__2_2_3EE = true;
+                else
+                    _objLecturaContextoSECRE.__2_2_3EE = false;
+                if (cblist223.Items[1].Selected)
+                    _objLecturaContextoSECRE.__2_2_3EST = true;
+                else
+                    _objLecturaContextoSECRE.__2_2_3EST = false;
+
+                if (cblist223.Items[2].Selected)
+                    _objLecturaContextoSECRE.__2_2_3EDU = true;
+                else
+                    _objLecturaContextoSECRE.__2_2_3EDU = false;
+
+                if (cblist223.Items[3].Selected)
+                    _objLecturaContextoSECRE.__2_2_3DIR = true;
+                else
+                    _objLecturaContextoSECRE.__2_2_3DIR = false;
+
+                if (cblist223.Items[4].Selected)
+                    _objLecturaContextoSECRE.__2_2_3PAD = true;
+                else
+                    _objLecturaContextoSECRE.__2_2_3PAD = false;
+
+                #endregion
+
+                _objLecturaContextoSECRE.__2_2_3Otro = txt223Orto.Text;
+
+                _objLecturaContextoSECRE.__2_2_4 = txt224.Text;
+                _objLecturaContextoSECRE.__2_2_5 = txt225.Text;
+
+                if (rbtn23Si.Checked)
+                    _objLecturaContextoSECRE.__2_3 = true;
+                else if (rbtn23No.Checked)
+                    _objLecturaContextoSECRE.__2_3 = false;
+
+                _objLecturaContextoSECRE.__2_3_1 = txt231.Text;
+                _objLecturaContextoSECRE.__3_1 = txt31.Text;
+                _objLecturaContextoSECRE.__3_2 = txt32.Text;
+                _objLecturaContextoSECRE.__3_3 = txt33.Text;
+                _objLecturaContextoSECRE.__3_4 = txt34.Text;
+                _objLecturaContextoSECRE.__3_5 = txt35.Text;
+                _objLecturaContextoSECRE.__3_6 = txt36.Text;
+
+                if (rbtn41Si.Checked)
+                    _objLecturaContextoSECRE.__4_1 = true;
+                else if (rbtn41No.Checked)
+                    _objLecturaContextoSECRE.__4_1 = false;
+
+                _objLecturaContextoSECRE.__4_1_1 = txt411.Text;
+
+                #region 5.1 Departamental/Municipal
+                if (cblist51DedMun.Items[0].Selected)
+                    _objLecturaContextoSECRE.__5_1_RADDEP = true;
+                else
+                    _objLecturaContextoSECRE.__5_1_RADDEP = false;
+
+                if (cblist51DedMun.Items[1].Selected)
+                    _objLecturaContextoSECRE.__5_1_PRENDEP = true;
+                else
+                    _objLecturaContextoSECRE.__5_1_PRENDEP = false;
+
+                if (cblist51DedMun.Items[2].Selected)
+                    _objLecturaContextoSECRE.__5_1_TELDEP = true;
+                else
+                    _objLecturaContextoSECRE.__5_1_TELDEP = false;
+
+                if (cblist51DedMun.Items[0].Selected)
+                    _objLecturaContextoSECRE.__5_1_INTDEP = true;
+                else
+                    _objLecturaContextoSECRE.__5_1_INTDEP = false;
+                #endregion
+
+                #region Local
+
+                if (cblist51DedMun.Items[0].Selected)
+                    _objLecturaContextoSECRE.__5_1_RADMUN = true;
+                else
+                    _objLecturaContextoSECRE.__5_1_RADMUN = false;
+
+                if (cblist51DedMun.Items[1].Selected)
+                    _objLecturaContextoSECRE.__5_1_PRENMUN = true;
+                else
+                    _objLecturaContextoSECRE.__5_1_PRENMUN = false;
+
+                if (cblist51DedMun.Items[2].Selected)
+                    _objLecturaContextoSECRE.__5_1_TELMUN = true;
+                else
+                    _objLecturaContextoSECRE.__5_1_TELMUN = false;
+
+                if (cblist51DedMun.Items[0].Selected)
+                    _objLecturaContextoSECRE.__5_1_INTMUN = true;
+                else
+                    _objLecturaContextoSECRE.__5_1_INTMUN = false;
+
+                #endregion
+
+                _objLecturaContextoSECRE.__5_2 = txt52.Text;
+                if (rbtn118Si.Checked)
+                    _objLecturaContextoSECRE.__1_18 = true;
+                else
+                    _objLecturaContextoSECRE.__1_18 = false;
+
+                if (rbtn118No.Checked)
+                    _objLecturaContextoSECRE.__1_18 = true;
+                else
+                    _objLecturaContextoSECRE.__1_18 = false;
+
+                _objLecturaContextoSECRE.__1_19 = txt119.Text;
+                _objLecturaContextoSECRE.Observaciones = txtObservaciones.Text;
+
+                int idmedicion = Convert.ToInt32(Session["idmedicionLC"]);
+                if (_objLecturaContextoSECRE.Almacenar(idmedicion))
+                {
+                    Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo satisfactoriamente.');</script>");
+                }
+                else
+                    Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo sin exito.');</script>");
+
+                return true;
+            }
+            catch (Exception) { return false; }
         }
 
         protected void btnAlmacenar_Click(object sender, EventArgs e)
         {
             if (validar())
-                Almacenar();
-            else
-                Response.Write("<script>alert('Para realizar el proceso de almacenamiento corrija las advertencias.');</script>");
+                if (!Almacenar())
+                    Response.Write("<script>alert('Para realizar el proceso de almacenamiento corrija las advertencias.');</script>");
         }
+
         protected void CargarMediciones()
         {
             int idse = Convert.ToInt32(Session["idse"]);
             gvMediciones.DataSource = _objLecturaContextoSECRE.CargarMediciones(idse);
             gvMediciones.DataBind();
+            ObtenerTema(gvMediciones);
         }
 
         protected void gvMediciones_SelectedIndexChanged(object sender, EventArgs e)
@@ -222,12 +259,14 @@ namespace ESM
             Session.Add("idmedicionLC", objRow.Cells[1].Text);
             btnAlmacenar.Visible = false;
             CargarLecturaContexto();
+
         }
 
         protected void CargarSE()
         {
             gvSE.DataSource = _objLecturaContextoSECRE.ObtenerSE();
             gvSE.DataBind();
+            ObtenerTema(gvSE);
         }
 
         protected void gvSE_SelectedIndexChanged(object sender, EventArgs e)
@@ -240,6 +279,8 @@ namespace ESM
             gvMediciones.Visible = true;
             btnRegistrar.Visible = true;
             titulomediciones.Visible = true;
+            ModMediciones.Visible = true;
+            ModseleccionSE.Visible = false;
         }
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
@@ -251,6 +292,8 @@ namespace ESM
                 Session.Add("idmedicionLC", idmedicion);
                 lecturaContextoTable.Visible = true;
                 btnRegistrar.Visible = false;
+                ModMediciones.Visible = false;
+                LC.Visible = true;
             }
 
         }

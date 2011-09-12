@@ -61,7 +61,7 @@
                                 <td>
                                     <div style="line-height: 25px; line-height: 25px; font-family: Helvetica, Arial, sans-serif;
                                         height: 30px; font-size: 16px; color: #005ea7;" class="ui-widget-header">
-                                        Iniciar Sesión en ESM
+                                        Iniciar Sesión
                                     </div>
                                     <br />
                                 </td>
@@ -89,7 +89,8 @@
                             <tr>
                                 <td>
                                     <br />
-                                    <asp:Button ID="btnRecordar" runat="server" Text="Recordar Contraseña" TabIndex="1" />
+                                    <asp:Button ID="btnRecordar" runat="server" Text="Recordar Contraseña" TabIndex="1"
+                                        Visible="false" />
                                     <asp:Button ID="btnIniciarSesion" runat="server" Text="Iniciar Sesión" OnClick="btnIniciarSesion_Click" />
                                 </td>
                             </tr>

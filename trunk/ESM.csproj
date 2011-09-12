@@ -74,6 +74,13 @@
     <Compile Include="Ayuda.aspx.designer.cs">
       <DependentUpon>Ayuda.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Citas.aspx.cs">
+      <DependentUpon>Citas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Citas.aspx.designer.cs">
+      <DependentUpon>Citas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Consolidado.aspx.cs">
       <DependentUpon>Consolidado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -87,6 +94,20 @@
     </Compile>
     <Compile Include="Evaluacion.aspx.designer.cs">
       <DependentUpon>Evaluacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="json.aspx.cs">
+      <DependentUpon>json.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="json.aspx.designer.cs">
+      <DependentUpon>json.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LecturaContextoEE.aspx.cs">
+      <DependentUpon>LecturaContextoEE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LecturaContextoEE.aspx.designer.cs">
+      <DependentUpon>LecturaContextoEE.aspx</DependentUpon>
     </Compile>
     <Compile Include="LecturaContextoSE.aspx.cs">
       <DependentUpon>LecturaContextoSE.aspx</DependentUpon>
@@ -109,6 +130,11 @@
     <Compile Include="MenuEvaluacion.aspx.designer.cs">
       <DependentUpon>MenuEvaluacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Model\AgendaESM.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AgendaESM.dbml</DependentUpon>
+    </Compile>
     <Compile Include="ModuloDocumentos.aspx.cs">
       <DependentUpon>ModuloDocumentos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -116,7 +142,10 @@
     <Compile Include="ModuloDocumentos.aspx.designer.cs">
       <DependentUpon>ModuloDocumentos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Objetos\CCitas.cs" />
     <Compile Include="Objetos\CDocumentos.cs" />
+    <Compile Include="Objetos\CEE.cs" />
+    <Compile Include="Objetos\CFullCalendar.cs" />
     <Compile Include="Objetos\LecturaContextoSE.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -151,6 +180,7 @@
     <Content Include="AmCharts\javascript\images\lens.png" />
     <Content Include="AmCharts\javascript\raphael.js" />
     <Content Include="Ayuda.aspx" />
+    <Content Include="Citas.aspx" />
     <Content Include="Consolidado.aspx" />
     <Content Include="Default.aspx" />
     <Compile Include="Default.aspx.cs">
@@ -180,6 +210,7 @@
     <Content Include="Icons\Calender.png" />
     <Content Include="Icons\cancel.png" />
     <Content Include="Icons\CD.png" />
+    <Content Include="Icons\certificate.png" />
     <Content Include="Icons\Chat.png" />
     <Content Include="Icons\clip_image002.jpg" />
     <Content Include="Icons\Clock.png" />
@@ -215,7 +246,9 @@
     <Content Include="Icons\Options.png" />
     <Content Include="Icons\Paste.png" />
     <Content Include="Icons\Pictures.png" />
+    <Content Include="Icons\poll.png" />
     <Content Include="Icons\Portfolio.png" />
+    <Content Include="Icons\progres.gif" />
     <Content Include="Icons\ProsperidadTodosFooter.png" />
     <Content Include="Icons\Redo.png" />
     <Content Include="Icons\Refresh.png" />
@@ -236,11 +269,14 @@
     <Content Include="Icons\Undo.png" />
     <Content Include="Icons\unicef.png" />
     <Content Include="Icons\Up.png" />
+    <Content Include="Icons\upload.png" />
     <Content Include="Icons\User.png" />
     <Content Include="Icons\Web.png" />
     <Content Include="Icons\Window.png" />
     <Content Include="Icons\Wizard.png" />
     <Content Include="Icons\Write.png" />
+    <Content Include="json.aspx" />
+    <Content Include="LecturaContextoEE.aspx" />
     <Content Include="LecturaContextoSE.aspx" />
     <Content Include="mastercustom.css" />
     <Content Include="AyudaPreguntas.aspx" />
@@ -329,8 +365,16 @@
     <Content Include="Pretty\js\jquery-1.4.4.min.js" />
     <Content Include="Pretty\js\jquery-1.6.1.min.js" />
     <Content Include="Pretty\js\jquery.prettyPhoto.js" />
+    <Content Include="Scripts\full_calendar\fullcalendar.css" />
+    <Content Include="Scripts\full_calendar\fullcalendar.js" />
+    <Content Include="Scripts\full_calendar\fullcalendar.min.js" />
+    <Content Include="Scripts\full_calendar\fullcalendar.print.css" />
+    <Content Include="Scripts\full_calendar\gcal.js" />
     <Content Include="Scripts\jquery-1.6.2.min.js" />
+    <Content Include="Scripts\jquery-1.6.3-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.15.custom.min.js" />
+    <Content Include="Scripts\ScrollTo\jquery.scrollTo-min.js" />
+    <Content Include="Scripts\ScrollTo\jquery.scrollTo.js" />
     <Content Include="Site.css" />
     <Compile Include="Model\ESMBD.designer.cs">
       <AutoGen>True</AutoGen>
@@ -626,6 +670,11 @@
     <None Include="AmCharts\flash\patterns\horizontal.fla" />
     <None Include="AmCharts\flash\patterns\vertical.fla" />
     <Content Include="Site.Master" />
+    <None Include="Model\AgendaESM.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>AgendaESM.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Model\ESMBD.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>ESMBD.designer.cs</LastGenOutput>
@@ -649,6 +698,11 @@
       <DependentUpon>ESMBD.dbml</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Model\AgendaESM.dbml.layout">
+      <DependentUpon>AgendaESM.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
@@ -657,7 +711,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>62243</DevelopmentServerPort>
+          <DevelopmentServerPort>53975</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

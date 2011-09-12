@@ -9,75 +9,6 @@
     <script src="Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
     <script src="Scripts/jquery-ui-1.8.15.custom.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-        function ValidarDocumento(documento) {
-            var result = null;
-            $(".classdocument").each(function (i) {
-
-                var item = $(this).html();
-
-                if (documento == item) {
-                    result = confirm("Ya existe un documento para " + documento + " , Desea Reemplazarlo?");
-                    return result;
-                }
-            });
-            return result;
-        }
-        $(document).ready(function () {
-            $("#btnUpPEIS").click(function () {
-
-                return ValidarDocumento("PEI");
-
-            });
-        });
-        $(document).ready(function () {
-            $("#btnUpPMI").click(function () {
-
-                return ValidarDocumento("PMI");
-
-            });
-        });
-        $(document).ready(function () {
-            $("#btnUpMC").click(function () {
-
-                return ValidarDocumento("Manual de Convivencia");
-
-            });
-        });
-        $(document).ready(function () {
-            $("#btnUpPS").click(function () {
-
-                return ValidarDocumento("Plan de Estudio");
-
-            });
-        });
-        $(document).ready(function () {
-            $("#btnUpActas").click(function () {
-
-                return ValidarDocumento("Actas");
-
-            });
-        });
-        $(document).ready(function () {
-            $("#btnUpPro").click(function () {
-
-                return ValidarDocumento("Proyectos");
-
-            });
-        });
-        $(document).ready(function () {
-            $("#btnUpCon").click(function () {
-
-                return ValidarDocumento("Convenios");
-
-            });
-        });
-        $(document).ready(function () {
-            $("#btnUpPCC").click(function () {
-
-                return ValidarDocumento("Programa de Competencias Ciudadanas");
-
-            });
-        });
 
         $(function () {
             $("input:submit", ".demo").button({
@@ -101,12 +32,10 @@
             });
 
         });
+
     </script>
     <style type="text/css">
-        .files
-        {
-            width: 400px;
-        }
+        
     </style>
 </head>
 <body style="background: #dddddd; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
@@ -119,6 +48,21 @@
                     padding: 5px 5px 5px 5px;
                     font-size: 12px;
                 }
+                #archivos a
+                {
+                    text-decoration: none;
+                    color: #005EA7;
+                    font-size: 13px;
+                }
+                .style1
+                {
+                    font-size: 14px;
+                    width: 150px;
+                }
+                .style2
+                {
+                    text-align: right;
+                }
             </style>
             <table id="archivos" style="width: 100%; -moz-border-radius: 2px; -webkit-border-radius: 2px;
                 border-radius: 2px; /*ie 7 and 8 do not support border radius*/
@@ -129,155 +73,97 @@ background: #ffffff;" border="0" cellpadding="0" cellspacing="0">
                     <td colspan="3" style="-moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px;
                         background: #DEDEDE; color: #ffffff; height: 32px;">
                         <h1 style="font-weight: none; color: #005EA7; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
-                            <img height="48px" src="Icons/Upload.png" alt="Almacen de Documentos" />
+                            <img height="48px" src="/Icons/Upload.png" alt="Almacen de Documentos" />
                             Modulo para carga de documentos.</h1>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td colspan="3">
+                        Para el proceso de carga se debe tener en cuenta que el documento sea del tipo:
+                        pdf, rar, zip, doc, y que el tamaño sea igual o inferior a 2MB.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style1">
                         PEI:
                     </td>
                     <td>
-                        <asp:FileUpload ID="FPEI" runat="server" CssClass="files" />
+                        <asp:FileUpload ID="FPEI" runat="server" CssClass="files" Width="60%" />
+                        <a href="#" target="_blank" visible="false" runat="server" id="lknPEI">Visualizar</a>
                     </td>
-                    <td>
+                    <td class="style2">
                         <asp:Button ID="btnUpPEIS" Text="Cargar" runat="server" OnClick="btnUpPEIS_Click" />
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="style1">
                         PMI:
                     </td>
                     <td>
-                        <asp:FileUpload ID="FPMI" runat="server" CssClass="files" />
+                        <asp:FileUpload ID="FPMI" runat="server" CssClass="files" Width="60%" />
+                        <a visible="false" runat="server" id="lknPMI" target="_blank">Visualizar</a>
                     </td>
-                    <td>
-                        <asp:Button ID="btnUpPMI" Text="Cargar" runat="server" OnClick="btnUpPEIS_Click" />
+                    <td class="style2">
+                        <asp:Button ID="btnUpPMI" Text="Cargar" runat="server" OnClick="btnUpPMI_Click" />
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="style1">
                         Manual de Convivencia:
                     </td>
                     <td>
-                        <asp:FileUpload ID="FMC" runat="server" CssClass="files" />
+                        <asp:FileUpload ID="FMC" runat="server" CssClass="files" Width="60%" />
+                        <a target="_blank" href="#" visible="false" runat="server" id="lknMC">Visualizar</a>
                     </td>
-                    <td>
-                        <asp:Button ID="btnUpMC" Text="Cargar" runat="server" OnClick="btnUpPEIS_Click" />
+                    <td class="style2">
+                        <asp:Button ID="btnUpMC" Text="Cargar" runat="server" OnClick="btnUpMC_Click" />
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="style1">
                         Plan de Estudio:
                     </td>
                     <td>
-                        <asp:FileUpload ID="FPS" runat="server" CssClass="files" />
+                        <asp:FileUpload ID="FPS" runat="server" CssClass="files" Width="60%" />
+                        <a href="#" target="_blank" visible="false" runat="server" id="lknPS">Visualizar</a>
                     </td>
-                    <td>
-                        <asp:Button ID="btnUpPS" Text="Cargar" runat="server" OnClick="btnUpPEIS_Click" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Actas:
-                    </td>
-                    <td>
-                        <asp:FileUpload ID="FActas" runat="server" CssClass="files" />
-                    </td>
-                    <td>
-                        <asp:Button ID="btnUpActas" Text="Cargar" runat="server" OnClick="btnUpPEIS_Click" />
+                    <td class="style2">
+                        <asp:Button ID="btnUpPS" Text="Cargar" runat="server" OnClick="btnUpPS_Click" />
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        Proyectos:
+                    <td class="style1">
+                        Documentos de proyectos pedagógicos:
                     </td>
                     <td>
-                        <asp:FileUpload ID="FProyecto" runat="server" CssClass="files" />
+                        <asp:FileUpload ID="FDPP" runat="server" CssClass="files" Width="60%" />
+                        <a href="#" target="_blank" visible="false" runat="server" id="lknDPP">Visualizar</a>
                     </td>
-                    <td>
-                        <asp:Button ID="btnUpPro" Text="Cargar" runat="server" OnClick="btnUpPEIS_Click" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Convenios:
-                    </td>
-                    <td>
-                        <asp:FileUpload ID="FConvenio" runat="server" CssClass="files" />
-                    </td>
-                    <td>
-                        <asp:Button ID="btnUpCon" Text="Cargar" runat="server" OnClick="btnUpPEIS_Click" />
+                    <td class="style2">
+                        <asp:Button ID="btnUpDPP" Text="Cargar" runat="server" OnClick="btnUpPcc_Click" />
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        Programa de Competencias Ciudadanas:
+                    <td class="style1">
+                        Otros:
                     </td>
                     <td>
-                        <asp:FileUpload ID="FPCC" runat="server" CssClass="files" />
+                        <asp:FileUpload ID="FOtros" runat="server" CssClass="files" Width="60%" />
+                        <a href="#" target="_blank" visible="false" runat="server" id="lknOtros">Visualizar</a>
                     </td>
-                    <td>
-                        <asp:Button ID="btnUpPCC" Text="Cargar" runat="server" OnClick="btnUpPEIS_Click" />
+                    <td class="style2">
+                        <asp:Button ID="btnUpOtros" Text="Cargar" runat="server" OnClick="btnUpActas_Click" />
                     </td>
                 </tr>
                 <tr>
                     <td colspan="3" style="text-align: center;">
                         <br />
                         <asp:Label ID="lblMensaje" runat="server" Text="" ForeColor="Green" Font-Bold="true"
-                            Visible="false"></asp:Label>
+                            Visible="false" Font-Size="20px"></asp:Label>
                     </td>
                 </tr>
             </table>
             <br />
-            <style>
-                .gvDocumentos
-                {
-                    border: 1px solid #dddddd;
-                    -moz-border-radius: 1px;
-                    -webkit-border-radius: 1px;
-                    border-radius: 1px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
-                    -moz-box-shadow: 0px 0px 2px #000000;
-                    -webkit-box-shadow: 0px 0px 2px #000000;
-                    box-shadow: 0px 0px 2px #000000; /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
-                }
-                .header
-                {
-                    background: #d8d8d8;
-                    color: #005EA7;
-                    height: 40px;
-                }
-                .td
-                {
-                    border: 1px solid #dddddd;
-                    -moz-border-radius: 1px;
-                    -webkit-border-radius: 1px;
-                    border-radius: 1px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
-                    -moz-box-shadow: 0px 0px 2px #000000;
-                    -webkit-box-shadow: 0px 0px 2px #000000;
-                    box-shadow: 0px 0px 2px #000000; /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
-                    height: 30px;
-                    color: #005EA7;
-                    background: #ffffff;
-                    text-align: center;
-                }
-            </style>
-            <asp:GridView ID="gvDocumentos" CssClass="gvDocumentos" runat="server" AutoGenerateColumns="False"
-                Width="100%">
-                <HeaderStyle CssClass="header" />
-                <RowStyle CssClass="td" />
-                <Columns>
-                    <asp:BoundField DataField="Documento" HeaderText="Documento">
-                        <ItemStyle CssClass="classdocument" />
-                    </asp:BoundField>
-                    <asp:BoundField DataField="Actualizado" HeaderText="Actualizado" />
-                    <asp:TemplateField>
-                        <ItemTemplate>
-                            <a href='/Files/<%# Eval("Ruta") %>' target="_blank">Visualizar</a>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-            </asp:GridView>
         </div>
     </div>
     </form>

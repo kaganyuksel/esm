@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ESM.Model;
+using ESM.Objetos;
 
 namespace ESM.Preguntas
 {
@@ -14,60 +15,71 @@ namespace ESM.Preguntas
         {
             if (Request.IsAuthenticated)
             {
-                if (!Page.IsPostBack)
+                CRoles objCRoles = new CRoles();
+                int idusuario = Convert.ToInt32(Session["idusuario"]);
+                string rol = objCRoles.ObtenerRol(idusuario);
+                if (rol == "Administrador" || rol == "MEN")
                 {
-
-                    #region Cargar Treeview
-                    var trvambi = from am in new ESM.Model.ESMBDDataContext().Ambientes
-                                  select am;
-                    int contador = 0;
-                    foreach (var item in trvambi)
+                    if (!Page.IsPostBack)
                     {
 
-                        tvayuda.Nodes[0].ChildNodes.Add(new TreeNode(item.Ambiente, item.IdAmbiente.ToString()));
-
-                        var proces = from pro in new ESM.Model.ESMBDDataContext().Procesos
-                                     where pro.IdAmbiente == item.IdAmbiente
-                                     select pro;
-
-                        int contadorcompo = 0;
-                        foreach (var proc in proces)
+                        #region Cargar Treeview
+                        var trvambi = from am in new ESM.Model.ESMBDDataContext().Ambientes
+                                      select am;
+                        int contador = 0;
+                        foreach (var item in trvambi)
                         {
 
-                            tvayuda.Nodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(proc.Proceso, proc.IdProceso.ToString()));
-                            tvayuda.Nodes[0].ChildNodes[contador].Expanded = false;
-                            var com = from comp in new ESM.Model.ESMBDDataContext().Componentes
-                                      where comp.IdProceso == proc.IdProceso
-                                      select comp;
-                            
-                            foreach (var compo in com)
+                            tvayuda.Nodes[0].ChildNodes.Add(new TreeNode(item.Ambiente, item.IdAmbiente.ToString()));
+
+                            var proces = from pro in new ESM.Model.ESMBDDataContext().Procesos
+                                         where pro.IdAmbiente == item.IdAmbiente
+                                         select pro;
+
+                            int contadorcompo = 0;
+                            foreach (var proc in proces)
                             {
 
-                                if (tvayuda.Nodes[0].ChildNodes[contador].ChildNodes.Count > contadorcompo)
-                                    tvayuda.Nodes[0].ChildNodes[contador].ChildNodes[contadorcompo].ChildNodes.Add(new TreeNode(compo.Componente, compo.IdComponente.ToString()));
+                                tvayuda.Nodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(proc.Proceso, proc.IdProceso.ToString()));
+                                tvayuda.Nodes[0].ChildNodes[contador].Expanded = false;
+                                var com = from comp in new ESM.Model.ESMBDDataContext().Componentes
+                                          where comp.IdProceso == proc.IdProceso
+                                          select comp;
+
+                                foreach (var compo in com)
+                                {
+
+                                    if (tvayuda.Nodes[0].ChildNodes[contador].ChildNodes.Count > contadorcompo)
+                                        tvayuda.Nodes[0].ChildNodes[contador].ChildNodes[contadorcompo].ChildNodes.Add(new TreeNode(compo.Componente, compo.IdComponente.ToString()));
+                                }
+
+                                contadorcompo++;
                             }
 
-                            contadorcompo++;
+                            contador++;
+
                         }
 
-                        contador++;
+                        #endregion
 
                     }
+                    else
+                    {
+                        for (int i = 0; i < tvayuda.Nodes[0].ChildNodes.Count; i++)
+                        {
+                            tvayuda.Nodes[0].ChildNodes[i].Expanded = false;
+                            for (int u = 0; u < tvayuda.Nodes[0].ChildNodes[i].ChildNodes.Count; u++)
+                            {
+                                tvayuda.Nodes[0].ChildNodes[i].ChildNodes[u].Expanded = false;
+                            }
+                        }
 
-                    #endregion
-
+                    }
                 }
                 else
                 {
-                    for (int i = 0; i < tvayuda.Nodes[0].ChildNodes.Count; i++)
-                    {
-                        tvayuda.Nodes[0].ChildNodes[i].Expanded = false;
-                        for (int u = 0; u < tvayuda.Nodes[0].ChildNodes[i].ChildNodes.Count; u++)
-                        {
-                            tvayuda.Nodes[0].ChildNodes[i].ChildNodes[u].Expanded = false;
-                        }
-                    }
-
+                    Response.Write("<script>alert('Acceso Denegado!');</script>");
+                    Response.Redirect("Login.aspx");
                 }
             }
             else
@@ -107,6 +119,8 @@ namespace ESM.Preguntas
                             lblcomponente.Text = item.Componente;
                             ObtenerTema(gvPreguntas);
 
+
+
                             for (int i = 0; i < gvPreguntas.Rows.Count; i++)
                             {
                                 var aybpre = from ayuda in new ESM.Model.ESMBDDataContext().AyudaByPregunta
@@ -121,6 +135,8 @@ namespace ESM.Preguntas
                                     CheckBoxList clist = (CheckBoxList)objRow.FindControl("listDocuments");
                                     CheckBoxList clistMed = (CheckBoxList)objRow.FindControl("listMedios");
                                     TextBox txtDescripcion = (TextBox)objRow.FindControl("txtDescPre");
+                                    CheckBoxList clistActores = (CheckBoxList)objRow.FindControl("listActores");
+
                                     if (abp.IdPregunta == Convert.ToInt32(idpregunta.Text))
                                     {
                                         txtDescripcion.Text = abp.Descripcion;
@@ -136,14 +152,10 @@ namespace ESM.Preguntas
                                                 q.Items[2].Selected = true;
                                             if ((bool)abp.Planes_de_Estudio)
                                                 q.Items[3].Selected = true;
-                                            if ((bool)abp.Actas)
+                                            if ((bool)abp.DPP)
                                                 q.Items[4].Selected = true;
-                                            if ((bool)abp.Proyectos)
+                                            if ((bool)abp.Otros)
                                                 q.Items[5].Selected = true;
-                                            if ((bool)abp.Convenios)
-                                                q.Items[6].Selected = true;
-                                            if ((bool)abp.PCC)
-                                                q.Items[7].Selected = true;
                                         }
                                         {
                                             var m = clistMed;
@@ -153,7 +165,32 @@ namespace ESM.Preguntas
                                             if ((bool)abp.Participacion)
                                                 m.Items[1].Selected = true;
                                         }
+
+                                        foreach (var pr in pregun)
+                                        {
+                                            if (abp.IdPregunta == pr.IdPregunta)
+                                            {
+                                                {
+                                                    var ac = clistActores;
+
+                                                    if ((bool)pr.Profesional)
+                                                        ac.Items[0].Selected = true;
+                                                    if ((bool)pr.Estudiante)
+                                                        ac.Items[1].Selected = true;
+                                                    if ((bool)pr.Docente)
+                                                        ac.Items[2].Selected = true;
+                                                    if ((bool)pr.Directivo)
+                                                        ac.Items[3].Selected = true;
+                                                    if ((bool)pr.Padres)
+                                                        ac.Items[4].Selected = true;
+                                                }
+
+                                                break;
+                                            }
+                                        }
                                     }
+
+
                                 }
 
 
@@ -172,14 +209,6 @@ namespace ESM.Preguntas
             }
             catch (Exception) { Response.Write("<script type='text/javascript'>alert('No se encontraron resultados relacionados al componente seleccionado.');</script>"); }
         }
-
-        //protected void CreateMessageAlert(string strMessage)
-        //{
-        //    Guid guidKey = Guid.NewGuid();
-        //    this.Page pg = HttpContext.Current.CurrentHandler;
-        //    string strScript = "alert('" + strMessage + "');";
-        //    this.ClientScript.RegisterStartupScript(pg.GetType(), guidKey.ToString(), strScript, true);
-        //}
 
         protected void ObtenerTema(GridView objGridView)
         {
@@ -216,13 +245,15 @@ namespace ESM.Preguntas
                     bool pmi = false;
                     bool manual = false;
                     bool planes = false;
-                    bool actas = false;
-                    bool proyectos = false;
-                    bool convenios = false;
-                    bool pcc = false;
+                    bool otros = false;
+                    bool dpp = false;
                     bool lectura = false;
                     bool participacion = false;
-                    bool lp = false;
+                    bool profesional = false;
+                    bool estudiantes = false;
+                    bool educadores = false;
+                    bool directivos = false;
+                    bool padres = false;
 
                     GridViewRow objRow = gvPreguntas.Rows[i];
 
@@ -231,7 +262,7 @@ namespace ESM.Preguntas
                     CheckBoxList clist = (CheckBoxList)objRow.FindControl("listDocuments");
                     CheckBoxList clistMe = (CheckBoxList)objRow.FindControl("listMedios");
                     TextBox txtDescripcion = (TextBox)objRow.FindControl("txtDescPre");
-
+                    CheckBoxList clistActores = (CheckBoxList)objRow.FindControl("listActores");
 
                     if (clist.Items[0].Selected)
                         pei = true;
@@ -242,20 +273,25 @@ namespace ESM.Preguntas
                     if (clist.Items[3].Selected)
                         planes = true;
                     if (clist.Items[4].Selected)
-                        actas = true;
+                        dpp = true;
                     if (clist.Items[5].Selected)
-                        proyectos = true;
-                    if (clist.Items[6].Selected)
-                        convenios = true;
-                    if (clist.Items[7].Selected)
-                        pcc = true;
+                        otros = true;
 
                     if (clistMe.Items[0].Selected)
                         lectura = true;
                     if (clistMe.Items[1].Selected)
                         participacion = true;
-                    if (clistMe.Items[0].Selected && clistMe.Items[0].Selected)
-                        lp = true;
+
+                    if (clistActores.Items[0].Selected)
+                        profesional = true;
+                    if (clistActores.Items[1].Selected)
+                        estudiantes = true;
+                    if (clistActores.Items[2].Selected)
+                        educadores = true;
+                    if (clistActores.Items[3].Selected)
+                        directivos = true;
+                    if (clistActores.Items[4].Selected)
+                        padres = true;
 
                     ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
@@ -273,13 +309,10 @@ namespace ESM.Preguntas
                             PMI = pmi,
                             Manual_de_Convivencia = manual,
                             Planes_de_Estudio = planes,
-                            Actas = actas,
-                            Proyectos = proyectos,
-                            Convenios = convenios,
-                            PCC = pcc,
+                            Otros = otros,
+                            DPP = dpp,
                             Lectura = lectura,
-                            Participacion = participacion,
-                            LP = lp
+                            Participacion = participacion
                         };
                         db.AyudaByPregunta.InsertOnSubmit(objAyudaPreguntas);
                         db.SubmitChanges();
@@ -298,13 +331,10 @@ namespace ESM.Preguntas
                         aybp.PMI = pmi;
                         aybp.Manual_de_Convivencia = manual;
                         aybp.Planes_de_Estudio = planes;
-                        aybp.Actas = actas;
-                        aybp.Proyectos = proyectos;
-                        aybp.Convenios = convenios;
-                        aybp.PCC = pcc;
+                        aybp.DPP = dpp;
+                        aybp.Otros = otros;
                         aybp.Lectura = lectura;
                         aybp.Participacion = participacion;
-                        aybp.LP = lp;
 
                         db.SubmitChanges();
 
@@ -313,6 +343,11 @@ namespace ESM.Preguntas
                                    select pregun).Single();
 
                         pre.Pregunta = txtPregunta.Text;
+                        pre.Estudiante = estudiantes;
+                        pre.Docente = educadores;
+                        pre.Directivo = directivos;
+                        pre.Padres = padres;
+                        pre.Profesional = profesional;
 
                         db.SubmitChanges();
                     }
