@@ -24,6 +24,7 @@ namespace ESM
             {
                 GridQueryExtender.Expressions.Add(new OfTypeExpression(table.EntityType));
             }
+            ObtenerTema(GridView1);
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -93,6 +94,7 @@ namespace ESM
         protected void DynamicFilter_FilterChanged(object sender, EventArgs e)
         {
             GridView1.PageIndex = 0;
+            ObtenerTema(GridView1);
         }
 
         protected void GridView1_DataBinding(object sender, EventArgs e)
