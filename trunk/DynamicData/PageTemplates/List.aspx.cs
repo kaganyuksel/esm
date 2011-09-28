@@ -17,14 +17,19 @@ namespace ESM
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            table = DynamicDataRouteHandler.GetRequestMetaTable(Context);
-            GridView1.SetMetaTable(table, table.GetColumnValuesFromRoute(Context));
-            GridDataSource.EntityTypeName = table.EntityType.AssemblyQualifiedName;
-            if (table.EntityType != table.RootEntityType)
+            if (Request.IsAuthenticated)
             {
-                GridQueryExtender.Expressions.Add(new OfTypeExpression(table.EntityType));
+                table = DynamicDataRouteHandler.GetRequestMetaTable(Context);
+                GridView1.SetMetaTable(table, table.GetColumnValuesFromRoute(Context));
+                GridDataSource.EntityTypeName = table.EntityType.AssemblyQualifiedName;
+                if (table.EntityType != table.RootEntityType)
+                {
+                    GridQueryExtender.Expressions.Add(new OfTypeExpression(table.EntityType));
+                }
+                ObtenerTema(GridView1);
             }
-            ObtenerTema(GridView1);
+            else
+                Response.Redirect("/Login.aspx");
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -40,9 +45,7 @@ namespace ESM
                     GridView1.Columns[0].Visible = false;
                     InsertHyperLink.Visible = false;
                     GridView1.EnablePersistedSelection = false;
-
                 }
-
 
                 ObtenerTema(GridView1);
             }
@@ -99,7 +102,7 @@ namespace ESM
 
         protected void GridView1_DataBinding(object sender, EventArgs e)
         {
-
+            ObtenerTema(GridView1);
         }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)

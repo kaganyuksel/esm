@@ -8,7 +8,7 @@ using System.IO;
 
 namespace ESM
 {
-    public partial class ModuloDocumentos : System.Web.UI.Page
+    public partial class ModuloDocumentosSE : System.Web.UI.Page
     {
         #region Propiedades Publicas y Privadas
 
@@ -35,76 +35,37 @@ namespace ESM
 
                     foreach (var item in docs)
                     {
-                        if (i == 1)
+                        if (i == 12)
                         {
                             if (exist && i == item.IdDocumento)
                             {
-                                lknPEI.Visible = true;
-                                lknPEI.HRef = "/Files/" + item.Ruta;
-                                lknPEI.InnerHtml = item.Ruta.ToString();
-                                btnUpPEIS.Text = "Reemplazar";
+                                lknPAM.Visible = true;
+                                lknPAM.HRef = "/Files/" + item.Ruta;
+                                lknPAM.InnerHtml = item.Ruta.ToString();
+                                btnUpPAM.Text = "Reemplazar";
                             }
                         }
-                        else if (i == 2)
+                        else if (i == 13)
                         {
                             if (exist && i == item.IdDocumento)
                             {
-                                lknPMI.Visible = true;
-                                lknPMI.HRef = "/Files/" + item.Ruta;
-                                lknPMI.InnerHtml = item.Ruta.ToString();
-                                btnUpPMI.Text = "Reemplazar";
+                                lknConvenios.Visible = true;
+                                lknConvenios.HRef = "/Files/" + item.Ruta;
+                                lknConvenios.InnerHtml = item.Ruta.ToString();
+                                btnUpConvenios.Text = "Reemplazar";
                             }
                         }
-                        else if (i == 3)
+                        else if (i == 14)
                         {
                             if (exist && i == item.IdDocumento)
                             {
-                                lknMC.Visible = true;
-                                lknMC.HRef = "/Files/" + item.Ruta;
-                                lknMC.InnerHtml = item.Ruta.ToString();
-                                btnUpMC.Text = "Reemplazar";
+                                lknActaVisitaSE.Visible = true;
+                                lknActaVisitaSE.HRef = "/Files/" + item.Ruta;
+                                lknActaVisitaSE.InnerHtml = item.Ruta.ToString();
+                                btnUpActaVisitaSE.Text = "Reemplazar";
                             }
                         }
-                        else if (i == 4)
-                        {
-                            if (exist && i == item.IdDocumento)
-                            {
-                                lknPS.Visible = true;
-                                lknPS.HRef = "/Files/" + item.Ruta;
-                                lknPS.InnerHtml = item.Ruta.ToString();
-                                btnUpPS.Text = "Reemplazar";
-                            }
-                        }
-                        else if (i == 9)
-                        {
-                            if (exist && i == item.IdDocumento)
-                            {
-                                lknDPP.Visible = true;
-                                lknDPP.HRef = "/Files/" + item.Ruta;
-                                lknDPP.InnerHtml = item.Ruta.ToString();
-                                btnUpDPP.Text = "Reemplazar";
-                            }
-                        }
-                        else if (i == 10)
-                        {
-                            if (exist && i == item.IdDocumento)
-                            {
-                                lknOtros.Visible = true;
-                                lknOtros.HRef = "/Files/" + item.Ruta;
-                                lknOtros.InnerHtml = item.Ruta.ToString();
-                                btnUpOtros.Text = "Reemplazar";
-                            }
-                        }
-                        else if (i == 11)
-                        {
-                            if (exist && i == item.IdDocumento)
-                            {
-                                lknActaVisitaEE.Visible = true;
-                                lknActaVisitaEE.HRef = "/Files/" + item.Ruta;
-                                lknActaVisitaEE.InnerHtml = item.Ruta.ToString();
-                                btnUpActaVisitaEE.Text = "Reemplazar";
-                            }
-                        }
+
                     }
 
 
@@ -166,48 +127,22 @@ namespace ESM
 
                         switch (iddocumento)
                         {
-                            case 1:
-                                lknPEI.Visible = true;
-                                lknPEI.HRef = "/Files/" + objFileUpload.FileName;
-                                lknPEI.InnerHtml = objFileUpload.FileName;
-                                btnUpPEIS.Text = "Reemplazar";
+                            case 12:
+                                lknPAM.Visible = true;
+                                lknPAM.HRef = "/Files/" + objFileUpload.FileName;
+                                btnUpPAM.Text = "Reemplazar";
+                                lknPAM.InnerHtml = objFileUpload.FileName;
                                 break;
-                            case 2:
-                                lknPMI.Visible = true;
-                                lknPMI.HRef = "/Files/" + objFileUpload.FileName;
-                                lknPMI.InnerHtml = objFileUpload.FileName;
-                                btnUpPMI.Text = "Reemplazar";
+                            case 13:
+                                lknConvenios.Visible = true;
+                                lknConvenios.HRef = "/Files/" + objFileUpload.FileName;
+                                btnUpConvenios.Text = "Reemplazar";
                                 break;
-                            case 3:
-                                lknMC.Visible = true;
-                                lknMC.HRef = "/Files/" + objFileUpload.FileName;
-                                lknMC.InnerHtml = objFileUpload.FileName;
-                                btnUpMC.Text = "Reemplazar";
-                                break;
-                            case 4:
-                                lknPS.Visible = true;
-                                lknPS.HRef = "/Files/" + objFileUpload.FileName;
-                                lknPEI.InnerHtml = objFileUpload.FileName;
-                                btnUpPS.Text = "Reemplazar";
-                                break;
-                            case 9:
-                                lknDPP.Visible = true;
-                                lknDPP.HRef = "/Files/" + objFileUpload.FileName;
-                                lknDPP.InnerHtml = objFileUpload.FileName;
-                                btnUpDPP.Text = "Reemplazar";
-                                break;
-
-                            case 10:
-                                lknOtros.Visible = true;
-                                lknOtros.HRef = "/Files/" + objFileUpload.FileName;
-                                lknOtros.InnerHtml = objFileUpload.FileName;
-                                btnUpOtros.Text = "Reemplazar";
-                                break;
-                            case 11:
-                                lknActaVisitaEE.Visible = true;
-                                lknActaVisitaEE.HRef = "/Files/" + objFileUpload.FileName;
-                                lknActaVisitaEE.InnerHtml = objFileUpload.FileName;
-                                btnUpActaVisitaEE.Text = "Reemplazar";
+                            case 14:
+                                lknActaVisitaSE.Visible = true;
+                                lknActaVisitaSE.HRef = "/Files/" + objFileUpload.FileName;
+                                lknActaVisitaSE.InnerHtml = objFileUpload.FileName;
+                                btnUpActaVisitaSE.Text = "Reemplazar";
                                 break;
                         }
 
@@ -240,7 +175,7 @@ namespace ESM
                                         if (File.Exists(path))
                                             File.Delete(path);
 
-                                        FPEI.PostedFile.SaveAs(path);
+                                        objFileUpload.PostedFile.SaveAs(path);
 
                                         if (objCDocumentos.CargarDocumento(idmedicion, iddocumento, objFileUpload.FileName))
                                         {
@@ -261,46 +196,22 @@ namespace ESM
 
                             switch (iddocumento)
                             {
-                                case 1:
-                                    lknPEI.Visible = true;
-                                    lknPEI.HRef = "/Files/" + objFileUpload.FileName;
-                                    btnUpPEIS.Text = "Reemplazar";
-                                    lknPEI.InnerHtml = objFileUpload.FileName;
+                                case 12:
+                                    lknPAM.Visible = true;
+                                    lknPAM.HRef = "/Files/" + objFileUpload.FileName;
+                                    btnUpPAM.Text = "Reemplazar";
+                                    lknPAM.InnerHtml = objFileUpload.FileName;
                                     break;
-                                case 2:
-                                    lknPMI.Visible = true;
-                                    lknPMI.HRef = "/Files/" + objFileUpload.FileName;
-                                    btnUpPMI.Text = "Reemplazar";
+                                case 13:
+                                    lknConvenios.Visible = true;
+                                    lknConvenios.HRef = "/Files/" + objFileUpload.FileName;
+                                    btnUpConvenios.Text = "Reemplazar";
                                     break;
-                                case 3:
-                                    lknMC.Visible = true;
-                                    lknMC.HRef = "/Files/" + objFileUpload.FileName;
-                                    lknMC.InnerHtml = objFileUpload.FileName;
-                                    btnUpMC.Text = "Reemplazar";
-                                    break;
-                                case 4:
-                                    lknPS.Visible = true;
-                                    lknPS.HRef = "/Files/" + objFileUpload.FileName;
-                                    lknPS.InnerHtml = objFileUpload.FileName;
-                                    btnUpPS.Text = "Reemplazar";
-                                    break;
-                                case 9:
-                                    lknDPP.Visible = true;
-                                    lknDPP.HRef = "/Files/" + objFileUpload.FileName;
-                                    lknDPP.InnerHtml = objFileUpload.FileName;
-                                    btnUpDPP.Text = "Reemplazar";
-                                    break;
-                                case 10:
-                                    lknOtros.Visible = true;
-                                    lknOtros.HRef = "/Files/" + objFileUpload.FileName;
-                                    lknOtros.InnerHtml = objFileUpload.FileName;
-                                    btnUpOtros.Text = "Reemplazar";
-                                    break;
-                                case 11:
-                                    lknActaVisitaEE.Visible = true;
-                                    lknActaVisitaEE.HRef = "/Files/" + objFileUpload.FileName;
-                                    lknActaVisitaEE.InnerHtml = objFileUpload.FileName;
-                                    btnUpActaVisitaEE.Text = "Reemplazar";
+                                case 14:
+                                    lknActaVisitaSE.Visible = true;
+                                    lknActaVisitaSE.HRef = "/Files/" + objFileUpload.FileName;
+                                    lknActaVisitaSE.InnerHtml = objFileUpload.FileName;
+                                    btnUpActaVisitaSE.Text = "Reemplazar";
                                     break;
                             }
 
@@ -325,25 +236,20 @@ namespace ESM
             }
         }
 
-        protected void btnUpPS_Click(object sender, EventArgs e)
+
+        protected void btnUpPAM_Click(object sender, EventArgs e)
         {
-            CargarArchivos(FPS, 4);
+            CargarArchivos(FPAM, 12);
         }
 
-        protected void btnUpActas_Click(object sender, EventArgs e)
+        protected void btnUpConvenios_Click(object sender, EventArgs e)
         {
-            CargarArchivos(FOtros, 10);
+            CargarArchivos(FConvenios, 13);
         }
 
-
-        protected void btnUpPcc_Click(object sender, EventArgs e)
+        protected void btnUpActaVisitaSE_Click(object sender, EventArgs e)
         {
-            CargarArchivos(FDPP, 9);
-        }
-
-        protected void btnUpPEIS_Click(object sender, EventArgs e)
-        {
-            CargarArchivos(FPEI, 1);
+            CargarArchivos(FActaVisitaSE, 14);
         }
 
         protected void ReemplazarControles()
@@ -358,38 +264,23 @@ namespace ESM
             {
                 if (item.IdDocumento == 1)
                 {
-                    lknPEI.Visible = true;
-                    btnUpPEIS.Text = "Reemplazar";
-                    FPEI.Visible = false;
+                    lknPAM.Visible = true;
+                    btnUpPAM.Text = "Reemplazar";
+                    FPAM.Visible = false;
                 }
                 if (item.IdDocumento == 2)
                 {
-                    lknPMI.Visible = true;
-                    btnUpPMI.Text = "Reemplazar";
-                    FPMI.Visible = false;
+                    lknConvenios.Visible = true;
+                    btnUpConvenios.Text = "Reemplazar";
+                    FConvenios.Visible = false;
                 }
                 if (item.IdDocumento == 3)
                 {
-                    lknMC.Visible = true;
-                    btnUpMC.Text = "Reemplazar";
-                    FMC.Visible = false;
+                    lknActaVisitaSE.Visible = true;
+                    btnUpActaVisitaSE.Text = "Reemplazar";
+                    FActaVisitaSE.Visible = false;
                 }
             }
-        }
-
-        protected void btnUpPMI_Click(object sender, EventArgs e)
-        {
-            CargarArchivos(FPMI, 2);
-        }
-
-        protected void btnUpMC_Click(object sender, EventArgs e)
-        {
-            CargarArchivos(FMC, 3);
-        }
-
-        protected void btnUpActaVisitaEE_Click(object sender, EventArgs e)
-        {
-            CargarArchivos(FActaVisitaEE, 11);
         }
 
     }

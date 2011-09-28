@@ -184,6 +184,33 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.Button btnUpOtros;
         
         /// <summary>
+        /// Control FActaVisitaEE.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FActaVisitaEE;
+        
+        /// <summary>
+        /// Control lknActaVisitaEE.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lknActaVisitaEE;
+        
+        /// <summary>
+        /// Control btnUpActaVisitaEE.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpActaVisitaEE;
+        
+        /// <summary>
         /// Control lblMensaje.
         /// </summary>
         /// <remarks>

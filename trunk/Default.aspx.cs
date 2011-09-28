@@ -27,7 +27,7 @@ namespace ESM
                 }
                 else if (rol == "Consultor")
                 {
-                    var idc = objCRoles.Identificacion;
+                    var idc = objCRoles.IdConsultor;
 
                     Session.Add("identiConsultor", idc);
                     citas.HRef = String.Concat("/Citas.aspx?id=", idc);

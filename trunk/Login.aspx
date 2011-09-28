@@ -49,57 +49,53 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
-    <asp:UpdatePanel runat="server" ID="udpLogin">
-        <ContentTemplate>
-            <asp:Panel ID="pnlSesion" runat="server" DefaultButton="btnIniciarSesion">
-                <div class="demo">
-                    <table style="margin: 60px auto; font-size: 13px; width: 700px; height: 200px; text-align: center;
-                        border: 1px solid #dddddd; -moz-border-radius: 3px; -webkit-border-radius: 3px;
-                        border-radius: 3px; /*ie 7 and 8 do not support border radius*/">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div style="line-height: 25px; line-height: 25px; font-family: Helvetica, Arial, sans-serif;
-                                        height: 30px; font-size: 16px; color: #005ea7;" class="ui-widget-header">
-                                        Iniciar Sesión
-                                    </div>
-                                    <br />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Nombre de Usuario
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:TextBox ID="txtUsuario" runat="server" ToolTip="Nombre de Usuario"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Contraseña
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:TextBox ID="txtContrasena" runat="server" TextMode="Password"></asp:TextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <br />
-                                    <asp:Button ID="btnRecordar" runat="server" Text="Recordar Contraseña" TabIndex="1"
-                                        Visible="false" />
-                                    <asp:Button ID="btnIniciarSesion" runat="server" Text="Iniciar Sesión" OnClick="btnIniciarSesion_Click" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div id="formulario" runat="server">
-                    </div>
-                </div>
-            </asp:Panel>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+    <asp:Panel ID="pnlSesion" runat="server" DefaultButton="btnIniciarSesion">
+        <div class="demo">
+            <table style="margin: 60px auto; font-size: 13px; width: 700px; height: 200px; text-align: center;
+                border: 1px solid #dddddd; -moz-border-radius: 3px; -webkit-border-radius: 3px;
+                border-radius: 3px; /*ie 7 and 8 do not support border radius*/">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style="line-height: 25px; line-height: 25px; font-family: Helvetica, Arial, sans-serif;
+                                height: 30px; font-size: 16px; color: #005ea7;" class="ui-widget-header">
+                                Iniciar Sesión
+                            </div>
+                            <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Nombre de Usuario
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:TextBox ID="txtUsuario" runat="server" ToolTip="Nombre de Usuario"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Contraseña
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:TextBox ID="txtContrasena" runat="server" TextMode="Password"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            <asp:Button ID="btnRecordar" runat="server" Text="Recordar Contraseña" TabIndex="1"
+                                Visible="false" />
+                            <asp:Button ID="btnIniciarSesion" runat="server" Text="Iniciar Sesión" OnClick="btnIniciarSesion_Click" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="formulario" runat="server">
+            </div>
+        </div>
+    </asp:Panel>
 </asp:Content>

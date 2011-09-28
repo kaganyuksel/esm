@@ -19,12 +19,26 @@ namespace ESM.Objetos
             try
             {
                 var cee = from ee in _db.Establecimiento_Educativo
-                          where ee.IdConsultor == idconsultor
+                          where ee.Secretaria_Educacion.IdConsultor == idconsultor
                           select ee;
 
                 return cee;
             }
             catch (Exception) { return null; }
+        }
+
+        public static Establecimiento_Educativo ObtenerEE(int idie)
+        {
+            try
+            {
+                var ee = (from ie in _db.Establecimiento_Educativo
+                          where ie.IdIE == idie
+                          select ie).Single();
+
+                return ee;
+            }
+            catch (Exception) { return null; }
+
         }
 
     }

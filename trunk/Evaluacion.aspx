@@ -31,21 +31,38 @@
         function cambiarcolor() {
             $("#ContentPlaceHolder1_trActor").css("background", "#c4c4c4");
         }
+
+        $(function () {
+            $("#tabs").tabs().find(".ui-tabs-nav").sortable({ axis: "x" });
+        });
+
     </script>
     <script type="text/javascript">
+        
+        $(document).ready(function (){
+        
+        $(".sesiones").change(function() {
+            var text = $(this).val();
+
+            if(!isNaN(text))
+            {
+                $(this).val() = "";
+            }
+
+            });
+        }};
 
         $(document).ready(function () {
             $("#contenteval").scrollTop(600);
         });
         
     </script>
-    <style>
+    <style type="text/css">
         #format
         {
             margin-top: 2em;
         }
-    </style>
-    <style>
+    
         .evaluacion
         {
             -moz-border-radius: 3px 3px 0px 0px;
@@ -87,6 +104,15 @@
             text-align: left;
             padding: 3px;
         }
+        .flotante
+        {
+            display: scroll;
+            position: fixed;
+            bottom: 320px;
+            right: 0px;
+            margin-right: 3%;
+            z-index: 99;
+        }
     </style>
     <script type="text/javascript">
         function buscar() {
@@ -126,7 +152,6 @@
             }
         }
 
-        
     </script>
     <style type="text/css">
         .demo h1, h3, h4
@@ -142,6 +167,10 @@
         {
             line-height: 30px;
             height: 30px;
+        }
+        .gvMediciones
+        {
+            border: 1px solid #dddddd;
         }
     </style>
 </asp:Content>
@@ -164,7 +193,12 @@
         <br />
         <br />
         <asp:UpdatePanel ID="udpnlFiltro" runat="server">
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="objtimer" />
+            </Triggers>
             <ContentTemplate>
+                <asp:Timer ID="objtimer" runat="server" Interval="20000" OnTick="objtimer_Tick">
+                </asp:Timer>
                 <div id="modSEseleccion" runat="server" visible="false">
                     <h3>
                         * Seleccione la Secretaría de Educacion a Evaluar.
@@ -244,12 +278,6 @@
                 <div id="ModMediciones" runat="server" visible="false">
                     <h4>
                         * Datos Basicos del Establecimiento Educativo.</h4>
-                    <style type="text/css">
-                        .gvMediciones
-                        {
-                            border: 1px solid #dddddd;
-                        }
-                    </style>
                     <br />
                     <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; border: 1px solid #dddddd;">
                         <tr class="trheader">
@@ -309,7 +337,8 @@
                 <div id="ModEvaluacion" runat="server" visible="false">
                     <br />
                     <h3>
-                        * Evaluación.</h3>
+                        * Evaluación.
+                    </h3>
                     <br />
                     <div>
                         <style type="text/css">
@@ -340,52 +369,228 @@
                                 </td>
                             </tr>
                         </table>
-                        <asp:GridView ID="gvEvaluacion" CssClass="evaluacion" runat="server" AutoGenerateColumns="false"
-                            OnRowDataBound="gvEvaluacion_RowDataBound">
-                            <Columns>
-                                <asp:TemplateField>
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblidorden" runat="server" Text='<%# Eval("IdOrden") %>' Visible="true"></asp:Label>
-                                        <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("IdPregunta") %>' Visible="false"></asp:Label>
-                                        <asp:RadioButton ID="rbtnSi" onclick='sesionenable(this)' class="radiosi" alt='<%# Eval("IdPregunta") %>'
-                                            GroupName="gpregunta" Text="Si" runat="server" />
-                                        <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName="gpregunta"
-                                            alt='<%# Eval("IdPregunta") %>' Text="No" runat="server" />
-                                        <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName="gpregunta"
-                                            Text="No Aplica" runat="server" />
-                                        <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:BoundField DataField="Pregunta" HeaderStyle-Width="60%" HeaderText="Pregunta" />
-                                <asp:TemplateField HeaderText="Sesiones">
-                                    <ItemStyle CssClass="aditionals" />
-                                    <ItemTemplate>
-                                        <asp:TextBox ID="txtsesion" runat="server" Width="30px" Height="30px" Visible="false"></asp:TextBox>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField>
-                                    <ItemTemplate>
-                                        <b>
-                                            <asp:Label Text="" ID="lblLP" Font-Size="14px" runat="server" Visible="false" /></b>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Ayuda">
-                                    <ItemTemplate>
-                                        <a id="lknAyuda" href="#" style="width: 30px;" class="pretty" runat="server">
-                                            <img style="line-height: 30px;" src="../Icons/1314381320_help_48.png" height="24px"
-                                                alt="Ayuda" /></a>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>
+                        <div id="tabs">
+                            <ul>
+                                <li><a href="#tabs-1">Gestión institucional</a></li>
+                                <li><a href="#tabs-2">Instancias de participación</a></li>
+                                <li><a href="#tabs-3">Aula de clase</a></li>
+                                <li><a href="#tabs-4">Proyecto Pedagógico</a></li>
+                                <li><a href="#tabs-5">Tiempo Libre</a></li>
+                            </ul>
+                            <div id="tabs-1">
+                                <asp:GridView ID="gvAmb1" CssClass="evaluacion" runat="server" AutoGenerateColumns="false"
+                                    OnRowDataBound="gvAmb1_RowDataBound">
+                                    <Columns>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblidorden" runat="server" Text='<%# Eval("IdOrden") %>' Visible="true"></asp:Label>
+                                                <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("IdPregunta") %>' Visible="false"></asp:Label>
+                                                <asp:RadioButton ID="rbtnSi" onclick='sesionenable(this)' class="radiosi" alt='<%# Eval("IdPregunta") %>'
+                                                    GroupName="gpregunta" Text="Si" runat="server" />
+                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName="gpregunta"
+                                                    alt='<%# Eval("IdPregunta") %>' Text="No" runat="server" />
+                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName="gpregunta"
+                                                    Text="No Aplica" runat="server" />
+                                                <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="Pregunta" HeaderStyle-Width="60%" HeaderText="Pregunta" />
+                                        <asp:TemplateField HeaderText="Sesiones">
+                                            <ItemStyle CssClass="aditionals" />
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="txtsesion" CssClass="sesiones" runat="server" Width="30px" Height="30px"
+                                                    Visible="false" MaxLength="3"></asp:TextBox>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <b>
+                                                    <asp:Label Text="" ID="lblLP" Font-Size="14px" runat="server" Visible="false" /></b>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Ayuda">
+                                            <ItemTemplate>
+                                                <a id="lknAyuda" href="#" style="width: 30px;" class="pretty" runat="server">
+                                                    <img style="line-height: 30px;" src="../Icons/1314381320_help_48.png" height="24px"
+                                                        alt="Ayuda" /></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                            <div id="tabs-2">
+                                <asp:GridView ID="gvAmb2" CssClass="evaluacion" runat="server" AutoGenerateColumns="false"
+                                    OnRowDataBound="gvAmb2_RowDataBound">
+                                    <Columns>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblidorden" runat="server" Text='<%# Eval("IdOrden") %>' Visible="true"></asp:Label>
+                                                <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("IdPregunta") %>' Visible="false"></asp:Label>
+                                                <asp:RadioButton ID="rbtnSi" onclick='sesionenable(this)' class="radiosi" alt='<%# Eval("IdPregunta") %>'
+                                                    GroupName="gpregunta" Text="Si" runat="server" />
+                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName="gpregunta"
+                                                    alt='<%# Eval("IdPregunta") %>' Text="No" runat="server" />
+                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName="gpregunta"
+                                                    Text="No Aplica" runat="server" />
+                                                <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="Pregunta" HeaderStyle-Width="60%" HeaderText="Pregunta" />
+                                        <asp:TemplateField HeaderText="Sesiones">
+                                            <ItemStyle CssClass="aditionals" />
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="txtsesion" CssClass="sesiones" runat="server" Width="30px" Height="30px"
+                                                    Visible="false" MaxLength="3"></asp:TextBox>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <b>
+                                                    <asp:Label Text="" ID="lblLP" Font-Size="14px" runat="server" Visible="false" /></b>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Ayuda">
+                                            <ItemTemplate>
+                                                <a id="lknAyuda" href="#" style="width: 30px;" class="pretty" runat="server">
+                                                    <img style="line-height: 30px;" src="../Icons/1314381320_help_48.png" height="24px"
+                                                        alt="Ayuda" /></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                            <div id="tabs-3">
+                                <asp:GridView ID="gvAmb3" CssClass="evaluacion" runat="server" AutoGenerateColumns="false"
+                                    OnRowDataBound="gvAmb3_RowDataBound">
+                                    <Columns>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblidorden" runat="server" Text='<%# Eval("IdOrden") %>' Visible="true"></asp:Label>
+                                                <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("IdPregunta") %>' Visible="false"></asp:Label>
+                                                <asp:RadioButton ID="rbtnSi" onclick='sesionenable(this)' class="radiosi" alt='<%# Eval("IdPregunta") %>'
+                                                    GroupName="gpregunta" Text="Si" runat="server" />
+                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName="gpregunta"
+                                                    alt='<%# Eval("IdPregunta") %>' Text="No" runat="server" />
+                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName="gpregunta"
+                                                    Text="No Aplica" runat="server" />
+                                                <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="Pregunta" HeaderStyle-Width="60%" HeaderText="Pregunta" />
+                                        <asp:TemplateField HeaderText="Sesiones">
+                                            <ItemStyle CssClass="aditionals" />
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="txtsesion" CssClass="sesiones" runat="server" Width="30px" Height="30px"
+                                                    Visible="false" MaxLength="3"></asp:TextBox>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <b>
+                                                    <asp:Label Text="" ID="lblLP" Font-Size="14px" runat="server" Visible="false" /></b>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Ayuda">
+                                            <ItemTemplate>
+                                                <a id="lknAyuda" href="#" style="width: 30px;" class="pretty" runat="server">
+                                                    <img style="line-height: 30px;" src="../Icons/1314381320_help_48.png" height="24px"
+                                                        alt="Ayuda" /></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                            <div id="tabs-4">
+                                <asp:GridView ID="gvAmb4" CssClass="evaluacion" runat="server" AutoGenerateColumns="false"
+                                    OnRowDataBound="gvAmb4_RowDataBound">
+                                    <Columns>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblidorden" runat="server" Text='<%# Eval("IdOrden") %>' Visible="true"></asp:Label>
+                                                <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("IdPregunta") %>' Visible="false"></asp:Label>
+                                                <asp:RadioButton ID="rbtnSi" onclick='sesionenable(this)' class="radiosi" alt='<%# Eval("IdPregunta") %>'
+                                                    GroupName="gpregunta" Text="Si" runat="server" />
+                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName="gpregunta"
+                                                    alt='<%# Eval("IdPregunta") %>' Text="No" runat="server" />
+                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName="gpregunta"
+                                                    Text="No Aplica" runat="server" />
+                                                <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="Pregunta" HeaderStyle-Width="60%" HeaderText="Pregunta" />
+                                        <asp:TemplateField HeaderText="Sesiones">
+                                            <ItemStyle CssClass="aditionals" />
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="txtsesion" CssClass="sesiones" runat="server" Width="30px" Height="30px"
+                                                    Visible="false" MaxLength="3"></asp:TextBox>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <b>
+                                                    <asp:Label Text="" ID="lblLP" Font-Size="14px" runat="server" Visible="false" /></b>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Ayuda">
+                                            <ItemTemplate>
+                                                <a id="lknAyuda" href="#" style="width: 30px;" class="pretty" runat="server">
+                                                    <img style="line-height: 30px;" src="../Icons/1314381320_help_48.png" height="24px"
+                                                        alt="Ayuda" /></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                            <div id="tabs-5">
+                                <asp:GridView ID="gvAmb5" CssClass="evaluacion" runat="server" AutoGenerateColumns="false"
+                                    OnRowDataBound="gvAmb5_RowDataBound">
+                                    <Columns>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblidorden" runat="server" Text='<%# Eval("IdOrden") %>' Visible="true"></asp:Label>
+                                                <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("IdPregunta") %>' Visible="false"></asp:Label>
+                                                <asp:RadioButton ID="rbtnSi" onclick='sesionenable(this)' class="radiosi" alt='<%# Eval("IdPregunta") %>'
+                                                    GroupName="gpregunta" Text="Si" runat="server" />
+                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName="gpregunta"
+                                                    alt='<%# Eval("IdPregunta") %>' Text="No" runat="server" />
+                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName="gpregunta"
+                                                    Text="No Aplica" runat="server" />
+                                                <br />
+                                                <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="Pregunta" HeaderStyle-Width="60%" HeaderText="Pregunta" />
+                                        <asp:TemplateField HeaderText="Sesiones">
+                                            <ItemStyle CssClass="aditionals" />
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="txtsesion" CssClass="sesiones" runat="server" Width="30px" Height="30px"
+                                                    Visible="false" MaxLength="3"></asp:TextBox>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <b>
+                                                    <asp:Label Text="" ID="lblLP" Font-Size="14px" runat="server" Visible="false" /></b>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Ayuda">
+                                            <ItemTemplate>
+                                                <a id="lknAyuda" href="#" style="width: 30px;" class="pretty" runat="server">
+                                                    <img style="line-height: 30px;" src="../Icons/1314381320_help_48.png" height="24px"
+                                                        alt="Ayuda" /></a>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </div>
                         <br />
                     </div>
                     <asp:Button Text="Guardar" runat="server" ID="btnalmacenarparcial" OnClick="btnalmacenarparcial_Click"
                         Visible="false" />
                     <asp:Button Text="Guardar y Bloquear" runat="server" ID="btnDefinitiva" Visible="false"
                         OnClick="btnDefinitiva_Click" />
-                    <asp:Button Text="Volver" Visible="false" runat="server" ID="btnVolverEE"
-                        OnClick="btnVolver_Click" />
+                    <asp:Button Text="Volver" Visible="false" runat="server" ID="btnVolverEE" OnClick="btnVolver_Click" />
                     <style type="text/css">
                         .labelok
                         {
@@ -396,9 +601,15 @@
                         font-size: 12px; text-align: justify;">
                         <b>Para tener en cuenta:</b> El boton "Guardar" almacena la información en estado
                         "Parcial" para editar si es necesrio hacerlo, el boton "Guardar y Bloquear" almacena
-                        la evaluacion como en estado "Cerrada" y no permite realizar cambios.
+                        la evaluacion en estado "Cerrada" y no permite realizar cambios.
                     </p>
-                    <div style="width: 100%; color: #3f9c0d; text-align: center; margin: 0 auto; font-weight: bold;">
+                    <div style="z-index: 302; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+                        /*ie 7 and 8 do not support border radius*/
+-moz-box-shadow: 0px 0px 2px #000000; -webkit-box-shadow: 0px 0px 2px #000000; box-shadow: 0px 0px 2px #000000;
+                        /*ie 7 and 8 do not support blur property of shadows*/
+/*inner elements must not break this elements boundaries*/
+/*all filters must be placed together*/ width: 30%; color: #3f9c0d; text-align: center; margin: 0 40%;
+                        font-weight: bold; top: 0; position: fixed; font-size: 13px; background: #ffffff;">
                         <label class="labelok" runat="server" id="lbloki">
                         </label>
                     </div>

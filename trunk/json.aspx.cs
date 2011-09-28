@@ -18,7 +18,7 @@ namespace ESM
             {
                 if (Request.QueryString.Get("id") != null)
                 {
-                    string idconsultor = Request.QueryString.Get("id").ToString();
+                    int idconsultor = Convert.ToInt32(Request.QueryString.Get("id"));
                     Response.Write(Consulta(idconsultor));
                 }
                 else
@@ -30,7 +30,7 @@ namespace ESM
             Response.End();
         }
 
-        protected string Consulta(string idConsultor)
+        protected string Consulta(int idConsultor)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace ESM
                 JavaScriptSerializer objJavaScriptSerializer = new JavaScriptSerializer();
                 var objFullCalendar = new CFullCalendar();
 
-                List<Model.CitasAgenda> objCitas = CCitas.ObtenerCitas(idConsultor);
+                List<Model.Citas> objCitas = CCitas.ObtenerCitas(idConsultor);
 
                 foreach (var item in objCitas)
                 {
@@ -56,7 +56,7 @@ namespace ESM
                         objFullCalendar.start = item.FechaInicio.ToString("yyyy/MM/dd");
                         objFullCalendar.end = item.FechaFin.ToString("yyyy/MM/dd");
                     }
-                    objFullCalendar.title = item.LLamadasAgenda.InstitucionEducativaAgenda.Nombre;
+                    objFullCalendar.title = item.LLamadas.Establecimiento_Educativo.Nombre;
                     objFullCalendar.clases = "pretty";
                     objevents = String.Concat(objevents, objJavaScriptSerializer.Serialize(objFullCalendar), ",");
 

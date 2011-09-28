@@ -66,7 +66,7 @@
             <div>
                 <%-- TODO: Habilite la presentación parcial estableciendo el atributo EnablePartialRendering en "true" para ofrecer una experiencia de exploración más regular.
              Si se deja la presentación parcial deshabilitada, se consigue una experiencia de depuración mejor cuando la aplicación está en de<!DOCTYPE html><!DOCTYPE html>sarrollo. --%>
-                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                <asp:ScriptManager ID="ScriptManager1" runat="server" AsyncPostBackTimeout="2000">
                 </asp:ScriptManager>
                 <script type="text/javascript">
                     Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function (evt, args) {
@@ -84,6 +84,10 @@
                             social_tools: false
                         });
                         $("input:file", ".demo").button();
+
+
+                        $("#tabs").tabs().find(".ui-tabs-nav").sortable({ axis: "x" });
+
                     });
                 </script>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

@@ -9,18 +9,18 @@ namespace ESM.Objetos
     {
         #region Propiedades Publicas y Privadas
 
-        static Model.AgendaESMDataContext dbAgenda = new Model.AgendaESMDataContext();
+        static Model.ESMBDDataContext dbAgenda = new Model.ESMBDDataContext();
 
         #endregion
 
 
-        public static List<ESM.Model.CitasAgenda> ObtenerCitas(string idconsultor)
+        public static List<ESM.Model.Citas> ObtenerCitas(int idconsultor)
         {
             try
             {
-                var vcitas = from c in dbAgenda.CitasAgenda
-                             join con in dbAgenda.ConsultoresAgenda on c.IdConsultor equals con.IdConsultor
-                             where con.Identificacion == idconsultor
+                var vcitas = from c in dbAgenda.Citas
+                             join con in dbAgenda.Consultores on c.LLamadas.Secretaria_Educacion.IdConsultor equals con.IdConsultor
+                             where con.IdConsultor == idconsultor
                              select c;
 
                 return vcitas.ToList();

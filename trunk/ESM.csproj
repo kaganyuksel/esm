@@ -23,6 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -61,6 +63,20 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActaVisitaEE.aspx.cs">
+      <DependentUpon>ActaVisitaEE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActaVisitaEE.aspx.designer.cs">
+      <DependentUpon>ActaVisitaEE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActaVisitaSE.aspx.cs">
+      <DependentUpon>ActaVisitaSE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActaVisitaSE.aspx.designer.cs">
+      <DependentUpon>ActaVisitaSE.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Alert.cs" />
     <Compile Include="amChartsnet\amchart.cs" />
     <Compile Include="AmCharts\flash\export.aspx.cs">
@@ -142,10 +158,18 @@
     <Compile Include="ModuloDocumentos.aspx.designer.cs">
       <DependentUpon>ModuloDocumentos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ModuloDocumentosSE.aspx.cs">
+      <DependentUpon>ModuloDocumentosSE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloDocumentosSE.aspx.designer.cs">
+      <DependentUpon>ModuloDocumentosSE.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Objetos\CCitas.cs" />
     <Compile Include="Objetos\CDocumentos.cs" />
     <Compile Include="Objetos\CEE.cs" />
     <Compile Include="Objetos\CFullCalendar.cs" />
+    <Compile Include="Objetos\CLecturaContextoEE.cs" />
     <Compile Include="Objetos\LecturaContextoSE.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -157,6 +181,8 @@
     <Compile Include="Model\ESMBD.cs">
       <DependentUpon>ESMBD.dbml</DependentUpon>
     </Compile>
+    <Content Include="ActaVisitaEE.aspx" />
+    <Content Include="ActaVisitaSE.aspx" />
     <Content Include="AmCharts\flash\amcharts_key.txt" />
     <Content Include="AmCharts\flash\amcolumn.swf" />
     <Content Include="AmCharts\flash\amline.swf" />
@@ -282,6 +308,7 @@
     <Content Include="AyudaPreguntas.aspx" />
     <Content Include="MenuEvaluacion.aspx" />
     <Content Include="ModuloDocumentos.aspx" />
+    <Content Include="ModuloDocumentosSE.aspx" />
     <Content Include="plupload\jquery.plupload.queue\css\jquery.plupload.queue.css" />
     <Content Include="plupload\jquery.plupload.queue\img\backgrounds.gif" />
     <Content Include="plupload\jquery.plupload.queue\img\buttons-disabled.png" />
