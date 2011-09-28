@@ -13,7 +13,7 @@ namespace ESM
         #region Objetos, Propiedades Publicas y Privadas
 
         LecturasContexto.LecturaContextoSECRE _objLecturaContextoSECRE = new LecturasContexto.LecturaContextoSECRE();
-
+        ESM.Objetos.CRoles _objCRoles = new Objetos.CRoles();
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -22,9 +22,32 @@ namespace ESM
             {
                 if (!Page.IsPostBack)
                 {
-                    gvSE.DataSource = _objLecturaContextoSECRE.ObtenerSE();
-                    gvSE.DataBind();
-                    ObtenerTema(gvSE);
+
+                    if (Session["idusuario"] != null)
+                    {
+                        int idusuario = Convert.ToInt32(Session["idusuario"]);
+                        string rol = _objCRoles.ObtenerRol(idusuario);
+                        if (rol == "Administrador")
+                        {
+                            gvSE.DataSource = _objLecturaContextoSECRE.ObtenerSE();
+                            gvSE.DataBind();
+                            ObtenerTema(gvSE);
+                        }
+                        else if (rol == "Consultor")
+                        {
+                            ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
+                            var se = from s in db.Secretaria_Educacion
+                                     where s.IdConsultor == _objCRoles.IdConsultor
+                                     select s;
+
+                            gvSE.DataSource = se;
+                            gvSE.DataBind();
+                            ObtenerTema(gvSE);
+
+                        }
+                    }
+                    else
+                        Response.Redirect("/Login.aspx");
                 }
             }
             else
@@ -85,7 +108,6 @@ namespace ESM
         {
             try
             {
-
                 _objLecturaContextoSECRE.IdSec = Convert.ToInt32(Session["idse"]);
                 _objLecturaContextoSECRE.TelefonoSe = txtTelefonoSE.Text;
                 _objLecturaContextoSECRE.TelefonoSecretrio = txtTelefonoSecre.Text;
@@ -226,13 +248,25 @@ namespace ESM
                 _objLecturaContextoSECRE.Observaciones = txtObservaciones.Text;
 
                 int idmedicion = Convert.ToInt32(Session["idmedicionLC"]);
-                if (_objLecturaContextoSECRE.Almacenar(idmedicion))
+                if (Session["idlectura"] == null)
                 {
-                    Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo satisfactoriamente.');</script>");
+                    if (_objLecturaContextoSECRE.Almacenar(idmedicion))
+                    {
+                        Session.Add("idlectura", _objLecturaContextoSECRE.IdLectura);
+                        Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo satisfactoriamente.');</script>");
+                    }
+                    else
+                        Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo sin exito.');</script>");
                 }
-                else
-                    Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo sin exito.');</script>");
-
+                else if (Session["idlectura"] != null)
+                {
+                    if (_objLecturaContextoSECRE.Actualizar(Convert.ToInt32(Session["idlectura"])))
+                    {
+                        Response.Write("<script>alert('El proceso de actualización para Lectura de Contexto Finalizo satisfactoriamente.');</script>");
+                    }
+                    else
+                        Response.Write("<script>alert('El proceso de actualización para Lectura de Contexto Finalizo sin exito.');</script>");
+                }
                 return true;
             }
             catch (Exception) { return false; }
@@ -240,9 +274,9 @@ namespace ESM
 
         protected void btnAlmacenar_Click(object sender, EventArgs e)
         {
-            if (validar())
-                if (!Almacenar())
-                    Response.Write("<script>alert('Para realizar el proceso de almacenamiento corrija las advertencias.');</script>");
+            //if (validar())
+            if (!Almacenar())
+                Response.Write("<script>alert('Para realizar el proceso de almacenamiento corrija las advertencias.');</script>");
         }
 
         protected void CargarMediciones()
@@ -258,7 +292,13 @@ namespace ESM
             GridViewRow objRow = gvMediciones.SelectedRow;
             Session.Add("idmedicionLC", objRow.Cells[1].Text);
             btnAlmacenar.Visible = false;
+            CargarSE();
             CargarLecturaContexto();
+            lecturaContextoTable.Visible = true;
+            btnRegistrar.Visible = false;
+            ModMediciones.Visible = false;
+            LC.Visible = true;
+            btnAlmacenar.Visible = true;
 
         }
 
@@ -281,6 +321,9 @@ namespace ESM
             titulomediciones.Visible = true;
             ModMediciones.Visible = true;
             ModseleccionSE.Visible = false;
+
+            if (gvMediciones.Rows.Count != 0)
+                btnRegistrar.Visible = false;
         }
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
@@ -288,6 +331,7 @@ namespace ESM
             int idmedicion = _objLecturaContextoSECRE.RegistrarMedicion();
             if (idmedicion != 0)
             {
+                Session.Remove("idlectura");
                 lecturaContextoTable.Visible = true;
                 Session.Add("idmedicionLC", idmedicion);
                 lecturaContextoTable.Visible = true;

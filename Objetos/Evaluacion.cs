@@ -99,7 +99,15 @@ namespace EvaluationSettings
             set { _directivos = value; }
         }
 
+        private int _idEvaluacion;
+
+        public int IdEvaluacion
+        {
+            get { return _idEvaluacion; }
+        }
+
         #endregion
+
         /// <summary>
         /// Constructor de la Clase CEvaluacion
         /// </summary>
@@ -107,67 +115,87 @@ namespace EvaluationSettings
         {
 
         }
+
         /// <summary>
         /// Obtiene Evaluacion basado en el metodo ObtenerEvaluacion()
         /// </summary>
         /// <returns>IQueryable con la informacion de la evaluacion segun el actor seleccionado</returns>
-        public IQueryable<Preguntas> LoadEvaluation()
+        public List<IQueryable<Preguntas>> LoadEvaluation()
         {
             return ObtenerEvaluacion();
         }
+
         /// <summary>
         /// Obtiene la coleccion de preguntas que se va a mostrar para cada uno de los actores
         /// </summary>
         /// <returns>Coleccion de preguntas para el actor deseado</returns>
-        private IQueryable<Preguntas> ObtenerEvaluacion()
+        private List<IQueryable<Preguntas>> ObtenerEvaluacion()
         {
             try
             {
+                var rAmbientes = (from a in db.Ambientes
+                                  select new { a.IdAmbiente }).Distinct();
+
                 //Valida si la evaluacion sera aplicada a Directivos
                 if (_directivos)
                 {
-                    var rEvaluacion = from e in db.Preguntas
-                                      where e.Directivo == true
-                                      select e;
+                    List<IQueryable<Preguntas>> objlist = new List<IQueryable<Preguntas>>();
 
-                    return rEvaluacion;
+                    foreach (var item in rAmbientes)
+                    {
+                        objlist.Add(PreguntasDirectivos(item.IdAmbiente));
+                    }
+
+                    return objlist;
+
                 }
                 //Valida si la evaluacion sera aplicada a Estudiantes
                 if (_estudiantes)
                 {
-                    var rEvaluacion = from e in db.Preguntas
-                                      where e.Estudiante == true
-                                      select e;
+                    List<IQueryable<Preguntas>> objlist = new List<IQueryable<Preguntas>>();
 
-                    return rEvaluacion;
+                    foreach (var item in rAmbientes)
+                    {
+                        objlist.Add(PreguntasEstudiantes(item.IdAmbiente));
+                    }
+
+                    return objlist;
                 }
                 //Valida si la evaluacion sera aplicada a un Profesional de Campo
                 else if (_profesional)
                 {
-                    var rEvaluacion = from e in db.Preguntas
-                                      where e.Profesional == true
-                                      select e;
+                    List<IQueryable<Preguntas>> objlist = new List<IQueryable<Preguntas>>();
 
-                    return rEvaluacion;
+                    foreach (var item in rAmbientes)
+                    {
+                        objlist.Add(PreguntasProfesional(item.IdAmbiente));
+                    }
+
+                    return objlist;
                 }
 
                 //Valida si la evaluacion sera aplicada a Padres de Familia
                 else if (_padres)
                 {
-                    var rEvaluacion = from e in db.Preguntas
-                                      where e.Padres == true
-                                      select e;
+                    List<IQueryable<Preguntas>> objlist = new List<IQueryable<Preguntas>>();
 
-                    return rEvaluacion;
+                    foreach (var item in rAmbientes)
+                    {
+                        objlist.Add(PreguntasPadres(item.IdAmbiente));
+                    }
+
+                    return objlist;
                 }
                 //Valida si la evaluacion sera aplicada a Docentes
                 else if (_docentes)
                 {
-                    var rEvaluacion = from e in db.Preguntas
-                                      where e.Docente == true
-                                      select e;
+                    List<IQueryable<Preguntas>> objlist = new List<IQueryable<Preguntas>>();
 
-                    return rEvaluacion;
+                    foreach (var item in rAmbientes)
+                    {
+                        objlist.Add(PreguntasEducadores(item.IdAmbiente));
+                    }
+                    return objlist;
                 }
                 //Valida si la evaluacion sera aplicada a Ninguno
                 else
@@ -177,6 +205,87 @@ namespace EvaluationSettings
             }
             /*En caso de presentar excepcion retorno una Iqueryable vacia o null*/
             catch (System.Exception) { return null; }
+        }
+
+        public IQueryable<Preguntas> PreguntasEducadores(int idambiente)
+        {
+            try
+            {
+                var rEvaluacion = from e in db.Preguntas
+                                  where e.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && e.Docente == true
+                                  select e;
+
+                if (rEvaluacion.Count() != 0)
+                    return rEvaluacion;
+                else
+                    return null;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable<Preguntas> PreguntasEstudiantes(int idambiente)
+        {
+            try
+            {
+                var rEvaluacion = from e in db.Preguntas
+                                  where e.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && e.Estudiante == true
+                                  select e;
+                if (rEvaluacion.Count() != 0)
+                    return rEvaluacion;
+                else
+                    return null;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable<Preguntas> PreguntasPadres(int idambiente)
+        {
+            try
+            {
+                var rEvaluacion = from e in db.Preguntas
+                                  where e.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && e.Padres == true
+                                  select e;
+                if (rEvaluacion.Count() != 0)
+                    return rEvaluacion;
+                else
+                    return null;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable<Preguntas> PreguntasDirectivos(int idambiente)
+        {
+            try
+            {
+                var rEvaluacion = from e in db.Preguntas
+                                  where e.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && e.Directivo == true
+                                  select e;
+                if (rEvaluacion.Count() != 0)
+                    return rEvaluacion;
+                else
+                    return null;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable<Preguntas> PreguntasProfesional(int idambiente)
+        {
+            try
+            {
+                var rEvaluacion = from e in db.Preguntas
+                                  where e.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && e.Profesional == true
+                                  select e;
+                if (rEvaluacion.Count() != 0)
+                    return rEvaluacion;
+                else
+                    return null;
+            }
+            catch (Exception) { return null; }
+
         }
 
         public bool ValidarActores(int ie, int actor, int idmedicion)
@@ -294,6 +403,8 @@ namespace EvaluationSettings
                 db.Evaluacion.InsertOnSubmit(objEvaluacion);
                 db.SubmitChanges();
 
+                _idEvaluacion = objEvaluacion.IdEvaluacion;
+
                 return objEvaluacion.IdEvaluacion;
             }
             catch (Exception) { return 0; }
@@ -396,7 +507,6 @@ namespace EvaluationSettings
             /*En caso de presentar una excepcion retorno un valor false*/
             catch (Exception) { return false; }
         }
-
 
         public bool InsertarResultadosParcial(object[,] Results, int eval)
         {
@@ -522,7 +632,7 @@ namespace EvaluationSettings
 
         }
 
-        public IQueryable LoadEvalParcial(int eval, int actor)
+        public List<IQueryable> LoadEvalParcial(int eval, int actor)
         {
             return LoadParcial(eval, actor);
         }
@@ -541,74 +651,169 @@ namespace EvaluationSettings
 
         }
 
-        protected IQueryable LoadParcial(int eval, int actor)
+        protected List<IQueryable> LoadParcial(int eval, int actor)
         {
             try
             {
+                List<IQueryable> objList = null;
+
+                var rAmbientes = (from a in db.Ambientes
+                                  select new { a.IdAmbiente }).Distinct();
+
                 IQueryable preguntas = null;
 
                 switch (actor)
                 {
                     case 1:
-                        preguntas = from p in db.Preguntas
-                                    where p.Estudiante == true
-                                    select new
-                                    {
-                                        p.IdOrden,
-                                        p.IdPregunta,
-                                        No_Pregunta = p.IdPregunta,
-                                        Pregunta = p.Pregunta
-                                    };
+                        objList = new List<IQueryable>();
+
+                        foreach (var item in rAmbientes)
+                        {
+                            objList.Add(ParcialPreguntasEstudiantes(item.IdAmbiente));
+                        }
                         break;
                     case 2:
-                        preguntas = from p in db.Preguntas
-                                    where p.Profesional == true
-                                    select new
-                                    {
-                                        p.IdOrden,
-                                        p.IdPregunta,
-                                        No_Pregunta = p.IdPregunta,
-                                        Pregunta = p.Pregunta
-                                    };
+                        objList = new List<IQueryable>();
+
+                        foreach (var item in rAmbientes)
+                        {
+                            objList.Add(ParcialPreguntasProfesionales(item.IdAmbiente));
+                        }
                         break;
                     case 3:
-                        preguntas = from p in db.Preguntas
-                                    where p.Docente == true
-                                    select new
-                                    {
-                                        p.IdOrden,
-                                        p.IdPregunta,
-                                        No_Pregunta = p.IdPregunta,
-                                        Pregunta = p.Pregunta
-                                    };
+                        objList = new List<IQueryable>();
+
+                        foreach (var item in rAmbientes)
+                        {
+                            objList.Add(ParcialPreguntasDocentes(item.IdAmbiente));
+                        }
                         break;
                     case 4:
-                        preguntas = from p in db.Preguntas
-                                    where p.Padres == true
-                                    select new
-                                    {
-                                        p.IdOrden,
-                                        p.IdPregunta,
-                                        No_Pregunta = p.IdPregunta,
-                                        Pregunta = p.Pregunta
-                                    };
+                        objList = new List<IQueryable>();
+
+                        foreach (var item in rAmbientes)
+                        {
+                            objList.Add(ParcialPreguntasPadres(item.IdAmbiente));
+                        }
                         break;
                     case 6:
-                        preguntas = from p in db.Preguntas
-                                    where p.Directivo == true
-                                    select new
-                                    {
-                                        p.IdOrden,
-                                        p.IdPregunta,
-                                        No_Pregunta = p.IdPregunta,
-                                        Pregunta = p.Pregunta
-                                    };
+                        objList = new List<IQueryable>();
+
+                        foreach (var item in rAmbientes)
+                        {
+                            objList.Add(ParcialPreguntasDirectivos(item.IdAmbiente));
+                        }
                         break;
                 }
 
+                return objList;
+
+
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable ParcialPreguntasEstudiantes(int idambiente)
+        {
+            try
+            {
+                var preguntas = from p in db.Preguntas
+                                where p.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && p.Estudiante == true
+                                select new
+                                {
+                                    p.IdOrden,
+                                    p.IdPregunta,
+                                    No_Pregunta = p.IdPregunta,
+                                    Pregunta = p.Pregunta,
+                                    p.Etiqueta
+                                };
+
                 return preguntas;
+            }
+            catch (Exception) { return null; }
 
+        }
 
+        public IQueryable ParcialPreguntasProfesionales(int idambiente)
+        {
+            try
+            {
+                var preguntas = from p in db.Preguntas
+                                where p.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && p.Profesional == true
+                                select new
+                                {
+                                    p.IdOrden,
+                                    p.IdPregunta,
+                                    No_Pregunta = p.IdPregunta,
+                                    Pregunta = p.Pregunta,
+                                    p.Etiqueta
+                                };
+
+                return preguntas;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable ParcialPreguntasPadres(int idambiente)
+        {
+            try
+            {
+                var preguntas = from p in db.Preguntas
+                                where p.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && p.Padres == true
+                                select new
+                                {
+                                    p.IdOrden,
+                                    p.IdPregunta,
+                                    No_Pregunta = p.IdPregunta,
+                                    Pregunta = p.Pregunta,
+                                    p.Etiqueta
+                                };
+
+                return preguntas;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable ParcialPreguntasDocentes(int idambiente)
+        {
+            try
+            {
+                var preguntas = from p in db.Preguntas
+                                where p.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && p.Docente == true
+                                select new
+                                {
+                                    p.IdOrden,
+                                    p.IdPregunta,
+                                    No_Pregunta = p.IdPregunta,
+                                    Pregunta = p.Pregunta,
+                                    p.Etiqueta
+                                };
+
+                return preguntas;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable ParcialPreguntasDirectivos(int idambiente)
+        {
+            try
+            {
+                var preguntas = from p in db.Preguntas
+                                where p.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && p.Directivo == true
+                                select new
+                                {
+                                    p.IdOrden,
+                                    p.IdPregunta,
+                                    No_Pregunta = p.IdPregunta,
+                                    Pregunta = p.Pregunta,
+                                    p.Etiqueta
+                                };
+
+                return preguntas;
             }
             catch (Exception) { return null; }
 

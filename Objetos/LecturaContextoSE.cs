@@ -12,6 +12,15 @@ namespace ESM.LecturasContexto
 
         #region Propiedades Publicas y Privadas para Modulo Uno
 
+        private int idlectura;
+
+        public int IdLectura
+        {
+            get { return idlectura; }
+            set { idlectura = value; }
+        }
+
+
         private string _2_1;
 
         public string __2_1
@@ -445,6 +454,77 @@ namespace ESM.LecturasContexto
                 db.LecturaContextoSE.InsertOnSubmit(objLecturaContextoSE);
                 db.SubmitChanges();
 
+                idlectura = objLecturaContextoSE.IdLecturaContexto;
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
+        public bool Actualizar(int idlecturapr)
+        {
+            try
+            {
+                var lecturaac = (from l in db.LecturaContextoSE
+                                 where l.IdLecturaContexto == idlecturapr
+                                 select l).Single();
+
+                #region Modulo 2
+
+                lecturaac._2_1_ = _2_1;
+                lecturaac._2_2_ = _2_2;
+                lecturaac._2_2_1_ = _2_2_1;
+                lecturaac._2_2_2_ = _2_2_2;
+                lecturaac._2_2_3_DIR_ = _2_2_3DIR;
+                lecturaac._2_2_3_EDU = _2_2_3EDU;
+                lecturaac._2_2_3_EE_ = _2_2_3EE;
+                lecturaac._2_2_3_EST_ = _2_2_3EST;
+                lecturaac._2_2_3_OTR_ = _2_2_3Otro;
+                lecturaac._2_2_3_PAD_ = _2_2_3PAD;
+                lecturaac._2_2_4_ = _2_2_4;
+                lecturaac._2_2_5_ = _2_2_5;
+                lecturaac._2_3_ = _2_3;
+                lecturaac._2_3_1_ = _2_3_1;
+
+                #endregion
+
+                #region Modulo 3
+                lecturaac._3_1_ = _3_1;
+                lecturaac._3_2_ = _3_2;
+                lecturaac._3_3_ = _3_3;
+                lecturaac._3_4_ = _3_4;
+                lecturaac._3_5_ = _3_5;
+                lecturaac._3_6_ = _3_6;
+                #endregion
+
+                #region Modulo 4
+
+                lecturaac._4_1_ = _4_1;
+                lecturaac._4_1_1_ = _4_1_1;
+
+                #endregion
+
+                #region Modulo 5
+
+                lecturaac._5_1_INT = _5_1_INTDEP;
+                lecturaac._5_1_INTM = _5_1_INTMUN;
+                lecturaac._5_1_PREND = _5_1_PRENDEP;
+                lecturaac._5_1_PRENM = _5_1_PRENMUN;
+                lecturaac._5_1_RADD_ = _5_1_RADDEP;
+                lecturaac._5_1_RADM = _5_1_RADMUN;
+                lecturaac._5_1_TELD = _5_1_TELDEP;
+                lecturaac._5_1_TELM = _5_1_TELMUN;
+                lecturaac._5_2_ = _5_2;
+
+                #endregion
+
+                #region Modulo 6
+                lecturaac._1_1_8_ = _1_18;
+                lecturaac._1_1_9_ = _1_19;
+                lecturaac.Observaciones = _observaciones;
+                #endregion
+
+                db.SubmitChanges();
+
                 return true;
             }
             catch (Exception) { return false; }
@@ -482,7 +562,7 @@ namespace ESM.LecturasContexto
             try
             {
                 var se = from s in db.Secretaria_Educacion
-                         select new { No = s.IdSecretaria, s.Nombre, s.Telefono, s.Direccion, Secretario_Educacion = s.Nombre_Secretario_Educacion, s.Telefonos_Secretario_Educacion };
+                         select new { IdSecretaria = s.IdSecretaria, s.Nombre, s.Telefono, s.Direccion, Secretario_Educacion = s.Nombre_Secretario_Educacion, s.Telefonos_Secretario_Educacion };
 
                 return se;
             }

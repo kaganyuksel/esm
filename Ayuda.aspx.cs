@@ -33,6 +33,10 @@ namespace ESM
                             q.Items[2].Selected = true;
                         if ((bool)desc.Planes_de_Estudio)
                             q.Items[3].Selected = true;
+                        if ((bool)desc.DPP)
+                            q.Items[4].Selected = true;
+                        if ((bool)desc.Otros)
+                            q.Items[5].Selected = true;
                     }
                     lblDescripcion.Text = desc.Descripcion;
                 }

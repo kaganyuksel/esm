@@ -13,7 +13,7 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,agendaWeek'
+                    right: 'month'
                 },
                 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                 monthNameShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
@@ -28,7 +28,7 @@
                 allDaySlot: false,
                 allDayText: 'Todo el día',
                 theme: true,
-                defaultView: 'agendaWeek',
+                defaultView: 'month',
                 editable: true,
                 height: 600,
                 events: {

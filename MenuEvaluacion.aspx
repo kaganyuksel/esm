@@ -56,12 +56,12 @@
                     Ejecuta el proceso de evaluación para las Secretarias de Educacion.
                 </td>
                 <td>
-                    <a href="#">
+                    <a href="/ActaVisitaSE.aspx">
                         <img src="/Icons/Paste.png" height="48px" alt="Acta de Visita" /></a>
                 </td>
                 <td>
                     <h4>
-                        <a href="#" onclick="alert('En construción.');">Acta de Visita</a></h4>
+                        <a href="/ActaVisitaSE.aspx">Acta de Visita</a></h4>
                     Administra la información para el formato acta de visita de la SE.
                 </td>
             </tr>
@@ -81,32 +81,32 @@
             </tr>
             <tr>
                 <td>
+                    <a href="#" onclick="alert('Modulo en proceso de mantenimiento.');">
+                        <img src="/Icons/Stationery.png" height="48px" alt="Lectura Contexto" /></a>
+                </td>
+                <td>
+                    <h4>
+                        <a href="#" onclick="alert('Modulo en proceso de mantenimiento.');">Lectura de Contexto</a></h4>
+                    Administra la Información para el formato Lectura de Contexto EE.
+                </td>
+                <td>
                     <a href="/Evaluacion.aspx?idrama=2">
                         <img src="/Icons/Edit.png" alt="Evaluacion" /></a>
                 </td>
                 <td>
                     <h4>
-                        <a href="/Evaluacion.aspx?idrama=2">Evaluacion</a></h4>
+                        <a href="/Evaluacion.aspx?idrama=2">Evaluación</a></h4>
                     Realiza el proceso de evaluación para los Establecimientos Educativos.
-                </td>
-                <td>
-                    <a href="/LecturaContextoEE.aspx">
-                        <img src="/Icons/Stationery.png" height="48px" alt="Lectura Contexto" /></a>
-                </td>
-                <td>
-                    <h4>
-                        <a href="/LecturaContextoEE.aspx">Lectura de Contexto</a></h4>
-                    Administra la Información para el formato Lectura de Contexto EE.
                 </td>
             </tr>
             <tr>
                 <td>
-                    <a href="#">
+                    <a href="/ActaVisitaEE.aspx">
                         <img src="/Icons/Paste.png" height="48px" alt="Lectura Contexto" /></a>
                 </td>
                 <td>
                     <h4>
-                        <a href="#" onclick="alert('En construción.');">Acta de Visita</a></h4>
+                        <a href="/ActaVisitaEE.aspx">Acta de Visita</a></h4>
                     Administra la Información para el formato acta de visita del EE.
                 </td>
             </tr>

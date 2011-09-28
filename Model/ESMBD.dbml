@@ -1,12 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="esm" Class="ESMBDDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=XOGOST-LAPTOP\SQLEXPRESS2008R2;Initial Catalog=esm;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="esmConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Actores" Member="Actores">
-    <Type Name="Actores">
-      <Column Name="IdActor" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IdRama" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Actor" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Association Name="Actores_Evaluacion" Member="Evaluacion" ThisKey="IdActor" OtherKey="IdActor" Type="Evaluacion" />
-      <Association Name="Rama_Actores" Member="Rama" ThisKey="IdRama" OtherKey="IdRama" Type="Rama" IsForeignKey="true" />
+  <Table Name="dbo.ActaVisitaEE" Member="ActaVisitaEE">
+    <Type Name="ActaVisitaEE">
+      <Column Name="IdActaVisita" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdMedicion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdEE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Observaciones" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="ActaVisitaEE_AsociadosActaVisitaEE" Member="AsociadosActaVisitaEE" ThisKey="IdActaVisita" OtherKey="IdActaVisita" Type="AsociadosActaVisitaEE" />
+      <Association Name="Usuarios_ActaVisitaEE" Member="Usuarios" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuarios" IsForeignKey="true" />
+      <Association Name="Establecimiento_Educativo_ActaVisitaEE" Member="Establecimiento_Educativo" ThisKey="IdEE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
+      <Association Name="Mediciones_ActaVisitaEE" Member="Mediciones" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Mediciones" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Usuarios" Member="Usuarios">
@@ -17,10 +21,38 @@
       <Column Name="Usuario" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Contrasena" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="IdOperador" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Email" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Association Name="Usuarios_ActaVisitaEE" Member="ActaVisitaEE" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="ActaVisitaEE" />
+      <Association Name="Usuarios_ActaVisitaSE" Member="ActaVisitaSE" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="ActaVisitaSE" />
       <Association Name="Usuarios_Evaluacion" Member="Evaluacion" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Evaluacion" />
+      <Association Name="Usuarios_LLamadas" Member="LLamadas" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="LLamadas" />
       <Association Name="Consultores_Usuarios" Member="Consultores" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Consultores" IsForeignKey="true" />
+      <Association Name="Operadores_Usuarios" Member="Operadores" ThisKey="IdOperador" OtherKey="IdOperador" Type="Operadores" IsForeignKey="true" />
       <Association Name="Roles_Usuarios" Member="Roles" ThisKey="IdRol" OtherKey="IdRol" Type="Roles" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ActaVisitaSE" Member="ActaVisitaSE">
+    <Type Name="ActaVisitaSE">
+      <Column Name="IdActaVisita" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdMedicion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdSE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Observaciones" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="ActaVisitaSE_AsociadoActaVisitaSE" Member="AsociadoActaVisitaSE" ThisKey="IdActaVisita" OtherKey="IdActaVisita" Type="AsociadoActaVisitaSE" />
+      <Association Name="Usuarios_ActaVisitaSE" Member="Usuarios" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuarios" IsForeignKey="true" />
+      <Association Name="Mediciones_ActaVisitaSE" Member="Mediciones" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Mediciones" IsForeignKey="true" />
+      <Association Name="Secretaria_Educacion_ActaVisitaSE" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Actores" Member="Actores">
+    <Type Name="Actores">
+      <Column Name="IdActor" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdRama" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Actor" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="Actores_AsociadosActaVisitaEE" Member="AsociadosActaVisitaEE" ThisKey="IdActor" OtherKey="IdActor" Type="AsociadosActaVisitaEE" />
+      <Association Name="Actores_Evaluacion" Member="Evaluacion" ThisKey="IdActor" OtherKey="IdActor" Type="Evaluacion" />
+      <Association Name="Rama_Actores" Member="Rama" ThisKey="IdRama" OtherKey="IdRama" Type="Rama" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Ambientes" Member="Ambientes">
@@ -39,6 +71,36 @@
       <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="Documentos_AsignaDocumentos" Member="Documentos" ThisKey="IdDocumento" OtherKey="IdDocumento" Type="Documentos" IsForeignKey="true" />
       <Association Name="Mediciones_AsignaDocumentos" Member="Mediciones" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Mediciones" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AsociadoActaVisitaSE" Member="AsociadoActaVisitaSE">
+    <Type Name="AsociadoActaVisitaSE">
+      <Column Name="IdAsociado" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdActaVisita" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="CorreoElectronico" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Cargo" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="ActaVisitaSE_AsociadoActaVisitaSE" Member="ActaVisitaSE" ThisKey="IdActaVisita" OtherKey="IdActaVisita" Type="ActaVisitaSE" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AsociadosActaVisitaEE" Member="AsociadosActaVisitaEE">
+    <Type Name="AsociadosActaVisitaEE">
+      <Column Name="IdAsociado" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdActaVisita" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdActor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="CorreoElectronico" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Cargo" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Grado" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="AreasEnseñansa" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="IdNivelEducativo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GradosEnseñansa" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="GradoHijos" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Actores_AsociadosActaVisitaEE" Member="Actores" ThisKey="IdActor" OtherKey="IdActor" Type="Actores" IsForeignKey="true" />
+      <Association Name="ActaVisitaEE_AsociadosActaVisitaEE" Member="ActaVisitaEE" ThisKey="IdActaVisita" OtherKey="IdActaVisita" Type="ActaVisitaEE" IsForeignKey="true" />
+      <Association Name="NivelesEducativos_AsociadosActaVisitaEE" Member="NivelesEducativos" ThisKey="IdNivelEducativo" OtherKey="IdNivelEducativo" Type="NivelesEducativos" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.AyudaByPregunta" Member="AyudaByPregunta">
@@ -74,6 +136,19 @@
       <Column Name="Aprobacion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="[Mejoramiento Continuo]" Member="Mejoramiento_Continuo" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Componentes_CategoryByComponente" Member="Componentes" ThisKey="IdComponente" OtherKey="IdComponente" Type="Componentes" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Citas" Member="Citas">
+    <Type Name="Citas">
+      <Column Name="IdCita" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdLLamada" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdEstadoCita" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaInicio" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FechaFin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Lugar" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="EstadoCita_Citas" Member="EstadoCita" ThisKey="IdEstadoCita" OtherKey="IdEstadoCita" Type="EstadoCita" IsForeignKey="true" />
+      <Association Name="LLamadas_Citas" Member="LLamadas" ThisKey="IdLLamada" OtherKey="IdLlamada" Type="LLamadas" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Componentes" Member="Componentes">
@@ -147,7 +222,7 @@
       <Column Name="TelefonoMovil2" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
       <Column Name="CorreoElectronico" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Association Name="Consultores_Usuarios" Member="Usuarios" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Usuarios" />
-      <Association Name="Consultores_Establecimiento_Educativo" Member="Establecimiento_Educativo" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Establecimiento_Educativo" />
+      <Association Name="Consultores_Secretaria_Educacion" Member="Secretaria_Educacion" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Secretaria_Educacion" />
     </Type>
   </Table>
   <Table Name="dbo.Documentos" Member="Documentos">
@@ -160,7 +235,6 @@
   <Table Name="dbo.[Establecimiento Educativo]" Member="Establecimiento_Educativo">
     <Type Name="Establecimiento_Educativo">
       <Column Name="IdIE" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IdConsultor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CodigoDane" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="Nombre" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="Direccion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
@@ -168,10 +242,21 @@
       <Column Name="Municipio" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Rector" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Email" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IdSE" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Establecimiento_Educativo_ActaVisitaEE" Member="ActaVisitaEE" ThisKey="IdIE" OtherKey="IdEE" Type="ActaVisitaEE" />
       <Association Name="Establecimiento_Educativo_Consolidacion" Member="Consolidacion" ThisKey="IdIE" OtherKey="IdIE" Type="Consolidacion" />
       <Association Name="Establecimiento_Educativo_Evaluacion" Member="Evaluacion" ThisKey="IdIE" OtherKey="IdIE" Type="Evaluacion" />
-      <Association Name="Consultores_Establecimiento_Educativo" Member="Consultores" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Consultores" IsForeignKey="true" />
+      <Association Name="Establecimiento_Educativo_LecturaContextoEE" Member="LecturaContextoEE" ThisKey="IdIE" OtherKey="IdIE" Type="LecturaContextoEE" />
+      <Association Name="Establecimiento_Educativo_LLamadas" Member="LLamadas" ThisKey="IdIE" OtherKey="IdEE" Type="LLamadas" />
+      <Association Name="Secretaria_Educacion_Establecimiento_Educativo" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EstadoCita" Member="EstadoCita">
+    <Type Name="EstadoCita">
+      <Column Name="IdEstadoCita" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EstadoCita" Member="EstadoCita1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="EstadoCita_Citas" Member="Citas" ThisKey="IdEstadoCita" OtherKey="IdEstadoCita" Type="Citas" />
     </Type>
   </Table>
   <Table Name="dbo.EstadoEvaluacion" Member="EstadoEvaluacion">
@@ -179,6 +264,13 @@
       <Column Name="IdEstado" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Estado" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Association Name="EstadoEvaluacion_Evaluacion" Member="Evaluacion" ThisKey="IdEstado" OtherKey="IdEstado" Type="Evaluacion" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EstadoLLamadas" Member="EstadoLLamadas">
+    <Type Name="EstadoLLamadas">
+      <Column Name="IdEstadoLLamada" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EstadoLLamada" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="EstadoLLamadas_LLamadas" Member="LLamadas" ThisKey="IdEstadoLLamada" OtherKey="IdEstadoLLamada" Type="LLamadas" />
     </Type>
   </Table>
   <Table Name="dbo.Evaluacion" Member="Evaluacion">
@@ -198,6 +290,72 @@
       <Association Name="Usuarios_Evaluacion" Member="Usuarios" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuarios" IsForeignKey="true" />
       <Association Name="Mediciones_Evaluacion" Member="Mediciones" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Mediciones" IsForeignKey="true" />
       <Association Name="Secretaria_Educacion_Evaluacion" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LecturaContextoEE" Member="LecturaContextoEE">
+    <Type Name="LecturaContextoEE">
+      <Column Name="IdLecturaContextoEE" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdIE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdMedicion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="f11" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="f12" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="f13" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="f14" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="f15" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="d" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_1_2bUrbana]" Member="_1_2bUrbana" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_1_2bRural]" Member="_1_2bRural" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_2_1]" Member="_2_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_2_E1]" Member="_2_2_E1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_2_E2]" Member="_2_2_E2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_2_E3]" Member="_2_2_E3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_2_E4]" Member="_2_2_E4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_2_E5]" Member="_2_2_E5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_2_E6]" Member="_2_2_E6" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_3_S1]" Member="_2_3_S1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_3_S2]" Member="_2_3_S2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_3_S3]" Member="_2_3_S3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_3_S4]" Member="_2_3_S4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_3_NoSabe]" Member="_2_3_NoSabe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_3_NoTiene]" Member="_2_3_NoTiene" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_4_Si]" Member="_2_4_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_2_4_No]" Member="_2_4_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_2_5_1]" Member="_2_5_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_5_2]" Member="_2_5_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_5_3]" Member="_2_5_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_3_1]" Member="_3_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_2]" Member="_3_2" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_3]" Member="_3_3" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_4_Si]" Member="_3_4_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_4_No]" Member="_3_4_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_4_1]" Member="_3_4_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_Si]" Member="_3_5_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_5_No]" Member="_3_5_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_5_1]" Member="_3_5_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_2]" Member="_3_5_2" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_3]" Member="_3_5_3" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_4]" Member="_3_5_4" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_5]" Member="_3_5_5" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_6]" Member="_3_5_6" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_7]" Member="_3_5_7" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_6]" Member="_3_6" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_7]" Member="_3_7" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_8_Si]" Member="_3_8_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_8_No]" Member="_3_8_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_8_1]" Member="_3_8_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_9_Si]" Member="_3_9_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_9_No]" Member="_3_9_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_9_1]" Member="_3_9_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_4_1_Si]" Member="_4_1_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_4_1_No]" Member="_4_1_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_4_1_Algunas]" Member="_4_1_Algunas" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_4_2]" Member="_4_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_4_3_Si]" Member="_4_3_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_4_3_No]" Member="_4_3_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_4_3_1]" Member="_4_3_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Observaciones" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Establecimiento_Educativo_LecturaContextoEE" Member="Establecimiento_Educativo" ThisKey="IdIE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
+      <Association Name="Mediciones_LecturaContextoEE" Member="Mediciones" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Mediciones" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.LecturaContextoSE" Member="LecturaContextoSE">
@@ -240,24 +398,60 @@
       <Column Name="[_1_1_9_]" Member="_1_1_9_" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Observaciones" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Mediciones_LecturaContextoSE" Member="Mediciones" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Mediciones" IsForeignKey="true" />
-      <Association Name="Secretaria_Educacion_LecturaContextoSE" Member="Secretaria_Educacion" ThisKey="IdSecretaria" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
+      <Association Name="Secretaria_Educacion_LecturaContextoSE" Member="Secretaria_Educacion" ThisKey="IdSecretaria" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LLamadas" Member="LLamadas">
+    <Type Name="LLamadas">
+      <Column Name="IdLlamada" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdSE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdEE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdEstadoLLamada" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="LLamadas_Citas" Member="Citas" ThisKey="IdLlamada" OtherKey="IdLLamada" Type="Citas" />
+      <Association Name="Establecimiento_Educativo_LLamadas" Member="Establecimiento_Educativo" ThisKey="IdEE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
+      <Association Name="EstadoLLamadas_LLamadas" Member="EstadoLLamadas" ThisKey="IdEstadoLLamada" OtherKey="IdEstadoLLamada" Type="EstadoLLamadas" IsForeignKey="true" />
+      <Association Name="Usuarios_LLamadas" Member="Usuarios" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuarios" IsForeignKey="true" />
+      <Association Name="Secretaria_Educacion_LLamadas" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Mediciones" Member="Mediciones">
     <Type Name="Mediciones">
       <Column Name="IdMedicion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="FechaMedicion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Mediciones_ActaVisitaEE" Member="ActaVisitaEE" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="ActaVisitaEE" />
+      <Association Name="Mediciones_ActaVisitaSE" Member="ActaVisitaSE" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="ActaVisitaSE" />
       <Association Name="Mediciones_AsignaDocumentos" Member="AsignaDocumentos" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="AsignaDocumentos" />
       <Association Name="Mediciones_Consolidacion" Member="Consolidacion" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Consolidacion" />
       <Association Name="Mediciones_Evaluacion" Member="Evaluacion" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Evaluacion" />
+      <Association Name="Mediciones_LecturaContextoEE" Member="LecturaContextoEE" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="LecturaContextoEE" />
       <Association Name="Mediciones_LecturaContextoSE" Member="LecturaContextoSE" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="LecturaContextoSE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NivelesEducativos" Member="NivelesEducativos">
+    <Type Name="NivelesEducativos">
+      <Column Name="IdNivelEducativo" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NivelEducativo" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="NivelesEducativos_AsociadosActaVisitaEE" Member="AsociadosActaVisitaEE" ThisKey="IdNivelEducativo" OtherKey="IdNivelEducativo" Type="AsociadosActaVisitaEE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Operadores" Member="Operadores">
+    <Type Name="Operadores">
+      <Column Name="IdOperador" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Identificacion" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="CorreoElectonico" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Association Name="Operadores_Usuarios" Member="Usuarios" ThisKey="IdOperador" OtherKey="IdOperador" Type="Usuarios" />
     </Type>
   </Table>
   <Table Name="dbo.Preguntas" Member="Preguntas">
     <Type Name="Preguntas">
       <Column Name="IdPregunta" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IdComponente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Pregunta" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Pregunta" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Padres" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Docente" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Profesional" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
@@ -266,6 +460,8 @@
       <Column Name="Sesiones" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="IdPrivilegiado" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IdOrden" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Etiqueta" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Ocultar" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Preguntas_AyudaByPregunta" Member="AyudaByPregunta" ThisKey="IdPregunta" OtherKey="IdPregunta" Type="AyudaByPregunta" />
       <Association Name="Preguntas_Resultados" Member="Resultados" ThisKey="IdPregunta" OtherKey="IdPregunta" Type="Resultados" />
       <Association Name="Componentes_Preguntas" Member="Componentes" ThisKey="IdComponente" OtherKey="IdComponente" Type="Componentes" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
@@ -311,8 +507,8 @@
       <Column Name="IdResultadosbyPregunta" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IdResultado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdEvaluacion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Evaluacion_ResultadosByEvaluacion" Member="Evaluacion" ThisKey="IdEvaluacion" OtherKey="IdEvaluacion" Type="Evaluacion" IsForeignKey="true" />
-      <Association Name="Resultados_ResultadosByEvaluacion" Member="Resultados" ThisKey="IdResultado" OtherKey="IdResultados" Type="Resultados" IsForeignKey="true" />
+      <Association Name="Evaluacion_ResultadosByEvaluacion" Member="Evaluacion" ThisKey="IdEvaluacion" OtherKey="IdEvaluacion" Type="Evaluacion" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Resultados_ResultadosByEvaluacion" Member="Resultados" ThisKey="IdResultado" OtherKey="IdResultados" Type="Resultados" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Roles" Member="Roles">
@@ -326,6 +522,7 @@
     <Type Name="Secretaria_Educacion">
       <Column Name="IdSecretaria" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="DepMun" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
       <Column Name="Direccion" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
       <Column Name="Telefono" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
       <Column Name="TelefonoMovil" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
@@ -334,8 +531,13 @@
       <Column Name="[Nombre Secretario Educacion]" Member="Nombre_Secretario_Educacion" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
       <Column Name="[Telefonos Secretario Educacion]" Member="Telefonos_Secretario_Educacion" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
       <Column Name="[Correo Electronico]" Member="Correo_Electronico" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="IdConsultor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Secretaria_Educacion_ActaVisitaSE" Member="ActaVisitaSE" ThisKey="IdSecretaria" OtherKey="IdSE" Type="ActaVisitaSE" />
+      <Association Name="Secretaria_Educacion_Establecimiento_Educativo" Member="Establecimiento_Educativo" ThisKey="IdSecretaria" OtherKey="IdSE" Type="Establecimiento_Educativo" />
       <Association Name="Secretaria_Educacion_Evaluacion" Member="Evaluacion" ThisKey="IdSecretaria" OtherKey="IdSE" Type="Evaluacion" />
       <Association Name="Secretaria_Educacion_LecturaContextoSE" Member="LecturaContextoSE" ThisKey="IdSecretaria" OtherKey="IdSecretaria" Type="LecturaContextoSE" />
+      <Association Name="Secretaria_Educacion_LLamadas" Member="LLamadas" ThisKey="IdSecretaria" OtherKey="IdSE" Type="LLamadas" />
+      <Association Name="Consultores_Secretaria_Educacion" Member="Consultores" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Consultores" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

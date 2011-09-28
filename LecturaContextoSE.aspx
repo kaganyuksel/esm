@@ -42,9 +42,13 @@
         <br />
         <div id="ModseleccionSE" runat="server">
             <asp:GridView ID="gvSE" runat="server" OnSelectedIndexChanged="gvSE_SelectedIndexChanged"
-                Width="100%">
+                AutoGenerateColumns="false" Width="100%">
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" SelectText="<img id='imgEvaluar'  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />" />
+                    <asp:BoundField DataField="IdSecretaria" HeaderText="Identificación" />
+                    <asp:BoundField DataField="Nombre" HeaderText="Nombre SE" />
+                    <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
+                    <asp:BoundField DataField="Direccion" HeaderText="Direccion" />
                 </Columns>
             </asp:GridView>
         </div>
@@ -54,7 +58,7 @@
             <asp:GridView ID="gvMediciones" runat="server" Width="100%" OnSelectedIndexChanged="gvMediciones_SelectedIndexChanged"
                 Visible="False">
                 <Columns>
-                    <asp:CommandField ShowSelectButton="True" />
+                    <asp:CommandField ShowSelectButton="True" SelectText="<img  width='24px' src='/Icons/Calender.png' alt='Seleccionar Medicion'>" />
                 </Columns>
             </asp:GridView>
             <br />
@@ -110,23 +114,20 @@
                     </tr>
                     <tr>
                         <td>
-                            1.1 Datos de la Secretaria:
+                            1.1 Datos de la Secretaría:
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            a. Nombre de la Secretaria: &nbsp;
+                        <td colspan="4">
+                            a. Nombre de la Secretaría: &nbsp;
+                            <asp:TextBox ID="txtNombreSE" runat="server" Enabled="False" Width="100%"></asp:TextBox>
+                            &nbsp;&nbsp;
                         </td>
-                        <td>
-                            <asp:TextBox ID="txtNombreSE" runat="server" Enabled="False"></asp:TextBox>
-                        </td>
-                        <td>
-                            &nbsp;<asp:RadioButton ID="rbtnDepartamentalSE" runat="server" Text="Departamental"
-                                Enabled="False" />
-                            &nbsp;<asp:RadioButton ID="rbtnMunicipalSE" runat="server" Text="Municipal" Enabled="False" />
-                        </td>
-                        <td>
-                            &nbsp;
+                    </tr>
+                    <tr>
+                        <td class="style1" colspan="4">
+                            <asp:RadioButton ID="rbtnDepartamentalSE" runat="server" Enabled="False" Text="Departamental" />
+                            <asp:RadioButton ID="rbtnMunicipalSE" runat="server" Enabled="False" Text="Municipal" />
                         </td>
                         <td>
                             &nbsp;
@@ -134,13 +135,13 @@
                     </tr>
                     <tr>
                         <td>
-                            b. Direccion:
+                            b. Dirección:
                         </td>
                         <td>
                             <asp:TextBox ID="txtDireccionSE" runat="server" Enabled="False"></asp:TextBox>
                         </td>
                         <td>
-                            d. Telefonos
+                            d. Teléfonos
                         </td>
                         <td>
                             <asp:TextBox ID="txtTelefonoSE" runat="server" Enabled="False"></asp:TextBox>
@@ -156,10 +157,7 @@
                         <td>
                             &nbsp;
                         </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
+                        <td colspan="2">
                             &nbsp;
                         </td>
                         <td>
@@ -185,15 +183,12 @@
                     </tr>
                     <tr>
                         <td>
-                            c. Telefonos de Contacto
+                            c. Teléfonos de Contacto
                         </td>
                         <td>
                             <asp:TextBox ID="txtTelefonoSecre" runat="server" Enabled="False"></asp:TextBox>
                         </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
+                        <td colspan="2">
                             &nbsp;
                         </td>
                         <td>
@@ -242,7 +237,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3">
+                        <td colspan="4">
                             2.2.1 Nombre del programa(s) o proyecto(s) de formación ciudadana.
                         </td>
                     </tr>
@@ -647,4 +642,6 @@
             </asp:Panel>
         </div>
     </div>
+    <br />
+    <br />
 </asp:Content>

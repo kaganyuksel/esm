@@ -1,9 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ModuloDocumentos.aspx.cs"
-    Inherits="ESM.ModuloDocumentos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ModuloDocumentosSE.aspx.cs" Inherits="ESM.ModuloDocumentosSE" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title></title>
     <link href="Style/jquery-ui-1.8.15.custom.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
@@ -39,7 +38,7 @@
     </style>
 </head>
 <body style="background: #dddddd; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" enctype="multipart/form-data">
     <div style="width: 100%;">
         <div class="demo" style="width: 98%; margin: 0 auto;">
             <style type="text/css">
@@ -85,87 +84,42 @@ background: #ffffff;" border="0" cellpadding="0" cellspacing="0">
                 </tr>
                 <tr>
                     <td class="style1">
-                        PEI:
+                        PAM:
                     </td>
                     <td>
-                        <asp:FileUpload ID="FPEI" runat="server" CssClass="files" Width="60%" />
-                        <a href="#" target="_blank" visible="false" runat="server" id="lknPEI">Visualizar</a>
+                        <asp:FileUpload ID="FPAM" runat="server" CssClass="files" Width="60%" />
+                        <a href="#" target="_blank" visible="false" runat="server" id="lknPAM">Visualizar</a>
                     </td>
                     <td class="style2">
-                        <asp:Button ID="btnUpPEIS" Text="Cargar" runat="server" OnClick="btnUpPEIS_Click" />
+                        <asp:Button ID="btnUpPAM" Text="Cargar" runat="server" 
+                            OnClick="btnUpPAM_Click" />
                     </td>
                 </tr>
                 <tr>
                     <td class="style1">
-                        PMI:
+                        Convenios: 
                     </td>
                     <td>
-                        <asp:FileUpload ID="FPMI" runat="server" CssClass="files" Width="60%" />
-                        <a visible="false" runat="server" id="lknPMI" target="_blank">Visualizar</a>
+                        <asp:FileUpload ID="FConvenios" runat="server" CssClass="files" Width="60%" />
+                        <a visible="false" runat="server" id="lknConvenios" target="_blank">Visualizar</a>
                     </td>
                     <td class="style2">
-                        <asp:Button ID="btnUpPMI" Text="Cargar" runat="server" OnClick="btnUpPMI_Click" />
+                        <asp:Button ID="btnUpConvenios" Text="Cargar" runat="server" 
+                            OnClick="btnUpConvenios_Click" />
                     </td>
                 </tr>
                 <tr>
                     <td class="style1">
-                        Manual de Convivencia:
+                        Acta de Visita SE:  
                     </td>
                     <td>
-                        <asp:FileUpload ID="FMC" runat="server" CssClass="files" Width="60%" />
-                        <a target="_blank" href="#" visible="false" runat="server" id="lknMC">Visualizar</a>
+                        <asp:FileUpload ID="FActaVisitaSE" runat="server" CssClass="files" 
+                            Width="60%" />
+                        <a visible="false" runat="server" id="lknActaVisitaSE" target="_blank">Visualizar</a>
                     </td>
                     <td class="style2">
-                        <asp:Button ID="btnUpMC" Text="Cargar" runat="server" OnClick="btnUpMC_Click" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="style1">
-                        Plan de Estudio:
-                    </td>
-                    <td>
-                        <asp:FileUpload ID="FPS" runat="server" CssClass="files" Width="60%" />
-                        <a href="#" target="_blank" visible="false" runat="server" id="lknPS">Visualizar</a>
-                    </td>
-                    <td class="style2">
-                        <asp:Button ID="btnUpPS" Text="Cargar" runat="server" OnClick="btnUpPS_Click" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="style1">
-                        Documentos de proyectos pedagógicos:
-                    </td>
-                    <td>
-                        <asp:FileUpload ID="FDPP" runat="server" CssClass="files" Width="60%" />
-                        <a href="#" target="_blank" visible="false" runat="server" id="lknDPP">Visualizar</a>
-                    </td>
-                    <td class="style2">
-                        <asp:Button ID="btnUpDPP" Text="Cargar" runat="server" OnClick="btnUpPcc_Click" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="style1">
-                        Otros:
-                    </td>
-                    <td>
-                        <asp:FileUpload ID="FOtros" runat="server" CssClass="files" Width="60%" />
-                        <a href="#" target="_blank" visible="false" runat="server" id="lknOtros">Visualizar</a>
-                    </td>
-                    <td class="style2">
-                        <asp:Button ID="btnUpOtros" Text="Cargar" runat="server" OnClick="btnUpActas_Click" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="style1">
-                        Acta de Visita EE:
-                    </td>
-                    <td>
-                        <asp:FileUpload ID="FActaVisitaEE" runat="server" CssClass="files" Width="60%" />
-                        <a href="#" target="_blank" visible="false" runat="server" id="lknActaVisitaEE">Visualizar</a>
-                    </td>
-                    <td class="style2">
-                        <asp:Button ID="btnUpActaVisitaEE" Text="Cargar" runat="server" 
-                            onclick="btnUpActaVisitaEE_Click" />
+                        <asp:Button ID="btnUpActaVisitaSE" Text="Cargar" runat="server" 
+                            OnClick="btnUpActaVisitaSE_Click" />
                     </td>
                 </tr>
 
