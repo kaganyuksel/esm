@@ -68,11 +68,14 @@
             </p>
             <asp:GridView ID="gvResultados" runat="server" Width="100%" AllowPaging="True" AllowSorting="True"
                 CssClass="gvResultados" RowStyle-CssClass="td" HeaderStyle-CssClass="th" CellPadding="6"
-                AutoGenerateColumns="false" OnSelectedIndexChanged="gvResultados_SelectedIndexChanged">
+                AutoGenerateColumns="False" OnSelectedIndexChanged="gvResultados_SelectedIndexChanged">
                 <HeaderStyle CssClass="trheader" />
                 <Columns>
-                    <asp:CommandField SelectText="<img id='imgEvaluar'  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />"
-                        ShowSelectButton="True" ControlStyle-CssClass="a" />
+                    <asp:CommandField SelectText="" ShowSelectButton="True" ControlStyle-CssClass="a"
+                        ButtonType="Image" SelectImageUrl="~/Icons/Stationery.png">
+                        <ControlStyle CssClass="a" Height="24px" Width="24px"></ControlStyle>
+                        <ItemStyle Height="24px" Width="24px" />
+                    </asp:CommandField>
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre SE" />
                     <asp:BoundField DataField="DepMun" HeaderText="Departamento/Municipio" />
                     <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
@@ -135,8 +138,9 @@
             <asp:GridView ID="gvMediciones" runat="server" Width="100%" OnSelectedIndexChanged="gvMediciones_SelectedIndexChanged"
                 CssClass="gvMediciones">
                 <Columns>
-                    <asp:CommandField ButtonType="Link" SelectText="<img  width='24px' src='/Icons/Calender.png' alt='Seleccionar Medicion'>"
-                        ShowSelectButton="True" />
+                    <asp:CommandField ButtonType="Image" SelectText="" ShowSelectButton="True" SelectImageUrl="~/Icons/Calender.png">
+                        <ControlStyle Height="24px" Width="24px" />
+                    </asp:CommandField>
                 </Columns>
             </asp:GridView>
         </div>

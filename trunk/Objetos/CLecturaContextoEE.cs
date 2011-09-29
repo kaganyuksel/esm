@@ -540,6 +540,9 @@ namespace ESM.Objetos
             {
                 Model.LecturaContextoEE objLecturaContextoEE = new Model.LecturaContextoEE
                 {
+                    IdIE = idee,
+                    IdMedicion = idmedicion,
+
                     #region Seccion 1
 
                     f11 = this._f11,

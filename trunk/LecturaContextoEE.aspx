@@ -89,7 +89,22 @@
             </asp:LinqDataSource>
         </div>
         <br />
-        <asp:Button Text="Registrar Nueva Medición" runat="server" ID="btnRegistrar" Visible="False" />
+        <div id="ModMediciones" runat="server">
+            <h4 id="titulomediciones" runat="server" visible="false" style="color: #0b72bc;">
+                Listado de Mediciones Realizadas</h4>
+            <asp:GridView ID="gvMediciones" runat="server" Width="100%" Visible="False" 
+                AutoGenerateColumns="false" 
+                onselectedindexchanged="gvMediciones_SelectedIndexChanged">
+                <Columns>
+                    <asp:CommandField ShowSelectButton="True" SelectText="<img  width='24px' src='/Icons/Calender.png' alt='Seleccionar Medicion'>" />
+                    <asp:BoundField DataField="IdMedicion" HeaderText="Identificador de Medicion" />
+                    <asp:BoundField DataField="Fecha" HeaderText="Fecha de Medicion" />
+                </Columns>
+            </asp:GridView>
+            <br />
+            <asp:Button Text="Registrar Nueva Medición" runat="server" ID="btnRegistrar" OnClick="btnRegistrar_Click"
+                Visible="False" />
+        </div>
         <br />
         <asp:Panel ID="LC" runat="server" Visible="false">
             <h1 style="color: #005EA7;">
