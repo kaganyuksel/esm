@@ -56,7 +56,19 @@ namespace ESM
                         objFullCalendar.start = item.FechaInicio.ToString("yyyy/MM/dd");
                         objFullCalendar.end = item.FechaFin.ToString("yyyy/MM/dd");
                     }
-                    objFullCalendar.title = item.LLamadas.Establecimiento_Educativo.Nombre;
+                    int idrama = 0;
+                    if (item.LLamadas.IdEE != null)
+                    {
+                        idrama = (int)item.LLamadas.IdEE;
+                        objFullCalendar.title = item.LLamadas.Establecimiento_Educativo.Nombre;
+                    }
+                    else
+                    {
+                        idrama = (int)item.LLamadas.IdSE;
+                        objFullCalendar.title = item.LLamadas.Secretaria_Educacion.Nombre;
+                    }
+
+                    //objFullCalendar.url = Request.Url.Scheme + "://" + Request.Url.Authority + "/DescripcionCitas.aspx?id=" + idrama.ToString() + "&iframe=true&amp;width=500&amp;height=300";
                     objFullCalendar.clases = "pretty";
                     objevents = String.Concat(objevents, objJavaScriptSerializer.Serialize(objFullCalendar), ",");
 

@@ -3,6 +3,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <%--<script src="Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>--%>
+    <link href="/Pretty/css/prettyPhoto.css" rel="stylesheet" charset="utf-8" media="screen"
+        type="text/css" />
+    <script src="/Pretty/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
     <link href="Scripts/full_calendar/fullcalendar.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/full_calendar/fullcalendar.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -36,6 +39,14 @@
                     cache: true
                 }
             });
+        });
+
+        $("a.pretty").prettyPhoto({
+            ie6_fallback: true,
+            modal: true,
+            social_tools: false,
+            
+
         });
     </script>
 </asp:Content>

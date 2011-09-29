@@ -12,7 +12,7 @@
          <Members>
           <Member Name="#Page_Load(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="ExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\AmCharts\flash" File="export.aspx.cs" Line="61">En el método '_export.Page_Load(object, EventArgs)', no se elimina (Dispose) el objeto 'jpeg_quality' en todas las rutas de acceso de excepciones. Llame a System.IDisposable.Dispose en el objeto 'jpeg_quality' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\AmCharts\flash" File="export.aspx.cs" Line="62">En el método '_export.Page_Load(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'enc_params' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\AmCharts\flash" File="export.aspx.cs" Line="17">En el método '_export.Page_Load(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'result' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
@@ -29,43 +29,43 @@
          <Members>
           <Member Name="#AlmacenarActorActa()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
-             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaEE.aspx.cs" Line="300">En el método 'ActaVisitaEE.AlmacenarActorActa()', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaEE.aspx.cs" Line="301">En el método 'ActaVisitaEE.AlmacenarActorActa()', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#btnAlmacenarActa_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
-             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaEE.aspx.cs" Line="477">En el método 'ActaVisitaEE.btnAlmacenarActa_Click(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaEE.aspx.cs" Line="478">En el método 'ActaVisitaEE.btnAlmacenarActa_Click(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#CargarActores(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaEE.aspx.cs" Line="169">En el método 'ActaVisitaEE.CargarActores(int)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ExistActa(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
-             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaEE.aspx.cs" Line="253">En el método 'ActaVisitaEE.ExistActa(int)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaEE.aspx.cs" Line="254">En el método 'ActaVisitaEE.ExistActa(int)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#Filtro(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaEE.aspx.cs" Line="65">En el método 'ActaVisitaEE.Filtro(string)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#InsertarActaVisita()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
-             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaEE.aspx.cs" Line="275">En el método 'ActaVisitaEE.InsertarActaVisita()', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaEE.aspx.cs" Line="276">En el método 'ActaVisitaEE.InsertarActaVisita()', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
@@ -75,56 +75,56 @@
          <Members>
           <Member Name="#AlmacenarActorActa()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
-             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="288">En el método 'ActaVisitaSE.AlmacenarActorActa()', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="224">En el método 'ActaVisitaSE.AlmacenarActorActa()', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#btnAlmacenarActa_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
-             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="354">En el método 'ActaVisitaSE.btnAlmacenarActa_Click(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="290">En el método 'ActaVisitaSE.btnAlmacenarActa_Click(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#CargarActores(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
-             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="260">En el método 'ActaVisitaSE.CargarActores(int)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="196">En el método 'ActaVisitaSE.CargarActores(int)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#ExistActa(System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
-             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="213">En el método 'ActaVisitaSE.ExistActa(int)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="149">En el método 'ActaVisitaSE.ExistActa(int)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#Filtro(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="92">En el método 'ActaVisitaSE.Filtro(string)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#gvResultados_SelectedIndexChanged(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
-             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="122">En el método 'ActaVisitaSE.gvResultados_SelectedIndexChanged(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="319">En el método 'ActaVisitaSE.gvResultados_SelectedIndexChanged(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#InsertarActaVisita()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
-             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="235">En el método 'ActaVisitaSE.InsertarActaVisita()', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="171">En el método 'ActaVisitaSE.InsertarActaVisita()', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#Page_Load(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="31">En el método 'ActaVisitaSE.Page_Load(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ActaVisitaSE.aspx.cs" Line="41">En el método 'ActaVisitaSE.Page_Load(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
@@ -136,7 +136,7 @@
          <Members>
           <Member Name="#Page_Load(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="Ayuda.aspx.cs" Line="16">En el método 'Ayuda.Page_Load(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'new ESMBDDataContext()' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="Ayuda.aspx.cs" Line="21">En el método 'Ayuda.Page_Load(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'new ESMBDDataContext()' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
@@ -148,7 +148,7 @@
          <Members>
           <Member Name="#OnLoad(System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="ExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\DynamicData\EntityTemplates" File="Default_Edit.ascx.cs" Line="20">En el método 'Default_EditEntityTemplate.OnLoad(EventArgs)', no se elimina (Dispose) el objeto 'item' en todas las rutas de acceso de excepciones. Llame a System.IDisposable.Dispose en el objeto 'item' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
@@ -159,7 +159,7 @@
          <Members>
           <Member Name="#OnLoad(System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="ExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\DynamicData\EntityTemplates" File="Default_Insert.ascx.cs" Line="20">En el método 'Default_InsertEntityTemplate.OnLoad(EventArgs)', no se elimina (Dispose) el objeto 'item' en todas las rutas de acceso de excepciones. Llame a System.IDisposable.Dispose en el objeto 'item' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
@@ -170,7 +170,7 @@
          <Members>
           <Member Name="#OnLoad(System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="ExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\DynamicData\EntityTemplates" File="Default.ascx.cs" Line="20">En el método 'DefaultEntityTemplate.OnLoad(EventArgs)', no se elimina (Dispose) el objeto 'item' en todas las rutas de acceso de excepciones. Llame a System.IDisposable.Dispose en el objeto 'item' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
@@ -181,7 +181,7 @@
          <Members>
           <Member Name="#Page_Load(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="LecturaContextoSE.aspx.cs" Line="38">En el método 'LecturaContexto.Page_Load(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
@@ -192,8 +192,8 @@
          <Members>
           <Member Name="#gvResultados_SelectedIndexChanged(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
-             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="LecturaContextoEE.aspx.cs" Line="72">En el método 'LecturaContextoEE.gvResultados_SelectedIndexChanged(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
+             <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="LecturaContextoEE.aspx.cs" Line="79">En el método 'LecturaContextoEE.gvResultados_SelectedIndexChanged(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
@@ -203,7 +203,7 @@
          <Members>
           <Member Name="#ReemplazarControles()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ModuloDocumentos.aspx.cs" Line="351">En el método 'ModuloDocumentos.ReemplazarControles()', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
@@ -214,7 +214,7 @@
          <Members>
           <Member Name="#ReemplazarControles()" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="ModuloDocumentosSE.aspx.cs" Line="257">En el método 'ModuloDocumentosSE.ReemplazarControles()', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
@@ -229,14 +229,14 @@
          <Members>
           <Member Name="#Filtro(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="Consolidado.aspx.cs" Line="103">En el método 'Consolidado.Filtro(string)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#Page_Load(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="Consolidado.aspx.cs" Line="21">En el método 'Consolidado.Page_Load(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'new ESMBDDataContext()' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="Consolidado.aspx.cs" Line="29">En el método 'Consolidado.Page_Load(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'new ESMBDDataContext()' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
@@ -252,21 +252,21 @@
          <Members>
           <Member Name="#CargarParcial(System.Int32,System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="Evaluacion.aspx.cs" Line="907">En el método 'Evaluacion.CargarParcial(int, int)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#Filtro(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="Evaluacion.aspx.cs" Line="1195">En el método 'Evaluacion.Filtro(string)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#Page_Load(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="Evaluacion.aspx.cs" Line="474">En el método 'Evaluacion.Page_Load(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
@@ -279,7 +279,7 @@
        <Types>
         <Type Name="LecturaContextoSECRE" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
            <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">Implemente IDisposable en 'LecturaContextoSECRE' porque crea miembros de los tipos IDisposable siguientes: 'ESMBDDataContext'. Si ya se había distribuido 'LecturaContextoSECRE', agregar nuevos miembros que implementen IDisposable en este tipo se considera un cambio rotundo para los consumidores existentes.</Issue>
           </Message>
          </Messages>
@@ -290,21 +290,21 @@
        <Types>
         <Type Name="CConsolidacion" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
            <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">Implemente IDisposable en 'CConsolidacion' porque crea miembros de los tipos IDisposable siguientes: 'ESMBDDataContext'. Si ya se había distribuido 'CConsolidacion', agregar nuevos miembros que implementen IDisposable en este tipo se considera un cambio rotundo para los consumidores existentes.</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="CLecturaContextoEE" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
            <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">Implemente IDisposable en 'CLecturaContextoEE' porque crea miembros de los tipos IDisposable siguientes: 'ESMBDDataContext'. Si ya se había distribuido 'CLecturaContextoEE', agregar nuevos miembros que implementen IDisposable en este tipo se considera un cambio rotundo para los consumidores existentes.</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="CRoles" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
            <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">Implemente IDisposable en 'CRoles' porque crea miembros de los tipos IDisposable siguientes: 'ESMBDDataContext'. Si ya se había distribuido 'CRoles', agregar nuevos miembros que implementen IDisposable en este tipo se considera un cambio rotundo para los consumidores existentes.</Issue>
           </Message>
          </Messages>
@@ -317,14 +317,14 @@
          <Members>
           <Member Name="#btndescPreguntas_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="AyudaPreguntas.aspx.cs" Line="296">En el método 'AyudaPreguntas.btndescPreguntas_Click(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>
           </Member>
           <Member Name="#Page_Load(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="AyudaPreguntas.aspx.cs" Line="27">En el método 'AyudaPreguntas.Page_Load(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'new ESMBDDataContext()' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="AyudaPreguntas.aspx.cs" Line="35">En el método 'AyudaPreguntas.Page_Load(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'new ESMBDDataContext()' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="AyudaPreguntas.aspx.cs" Line="45">En el método 'AyudaPreguntas.Page_Load(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'new ESMBDDataContext()' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
@@ -333,7 +333,7 @@
           </Member>
           <Member Name="#tvayuda_SelectedNodeChanged(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="AyudaPreguntas.aspx.cs" Line="103">En el método 'AyudaPreguntas.tvayuda_SelectedNodeChanged(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'new ESMBDDataContext()' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="AyudaPreguntas.aspx.cs" Line="112">En el método 'AyudaPreguntas.tvayuda_SelectedNodeChanged(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'new ESMBDDataContext()' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM" File="AyudaPreguntas.aspx.cs" Line="126">En el método 'AyudaPreguntas.tvayuda_SelectedNodeChanged(object, EventArgs)', llame a System.IDisposable.Dispose en el objeto 'new ESMBDDataContext()' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
@@ -348,21 +348,21 @@
        <Types>
         <Type Name="CDocumentos" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
            <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">Implemente IDisposable en 'CDocumentos' porque crea miembros de los tipos IDisposable siguientes: 'ESMBDDataContext'. Si ya se había distribuido 'CDocumentos', agregar nuevos miembros que implementen IDisposable en este tipo se considera un cambio rotundo para los consumidores existentes.</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="CEvaluacion" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
            <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">Implemente IDisposable en 'CEvaluacion' porque crea miembros de los tipos IDisposable siguientes: 'ESMBDDataContext'. Si ya se había distribuido 'CEvaluacion', agregar nuevos miembros que implementen IDisposable en este tipo se considera un cambio rotundo para los consumidores existentes.</Issue>
           </Message>
          </Messages>
          <Members>
           <Member Name="#RegistrarEvaluacion(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean,System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
            <Messages>
-            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-28 16:10:15Z" FixCategory="DependsOnFix">
+            <Message TypeName="Eliminar (Dispose) objetos antes de perder el ámbito" Category="Microsoft.Reliability" CheckId="CA2000" Status="Active" Created="2011-09-29 15:08:31Z" FixCategory="DependsOnFix">
              <Issue Name="NonExceptionEdge" Certainty="75" Level="Warning" Path="D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\Objetos" File="Evaluacion.cs" Line="338">En el método 'CEvaluacion.RegistrarEvaluacion(int, int, int, int, bool, int)', llame a System.IDisposable.Dispose en el objeto 'db' antes de que todas las referencias a él estén fuera de ámbito.</Issue>
             </Message>
            </Messages>

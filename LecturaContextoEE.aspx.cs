@@ -54,13 +54,20 @@ namespace ESM
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
-            LC.Visible = true;
+            int idmedicion = CEE.CrearMedicionLC(DateTime.Now);
+
+            if (idmedicion != 0)
+            {
+                Session.Add("idmedicionlcee", idmedicion);
+                LC.Visible = true;
+            }
         }
 
         protected void gvResultados_SelectedIndexChanged(object sender, EventArgs e)
         {
             modEESeleccion.Visible = false;
-            LC.Visible = true;
+            ModMediciones.Visible = true;
+            //LC.Visible = true;
 
             Session.Add("codie", gvResultados.SelectedRow.Cells[1].Text);
             string codie = Session["codie"].ToString();
@@ -68,7 +75,7 @@ namespace ESM
             Label objIDIE = (Label)gvResultados.SelectedRow.FindControl("IDIE");
 
             int idie = Convert.ToInt32(objIDIE.Text);
-
+            Session.Add("ideelc", idie);
             ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
             var ie = from ies in db.Establecimiento_Educativo
                      where ies.IdIE == idie
@@ -87,6 +94,25 @@ namespace ESM
                 txtCorreoElectronico.Enabled = false;
                 txtCodigo.Enabled = false;
             }
+
+            IQueryable<ESM.Model.LecturaContextoEE> mediciones = CEE.ObtenerMedicionesEE(idie);
+
+
+
+            if (mediciones.Count() != 0 && mediciones != null)
+            {
+                var med = (from m in mediciones
+                           select new { IdMedicion = m.IdMedicion, Fecha = m.Mediciones.FechaMedicion }).Take(1);
+
+                gvMediciones.DataSource = med;
+                gvMediciones.DataBind();
+                gvMediciones.Visible = true;
+                ObtenerTema(gvMediciones);
+                btnRegistrar.Visible = false;
+            }
+            else
+                btnRegistrar.Visible = true;
+
 
         }
 
@@ -116,7 +142,9 @@ namespace ESM
 
         protected void btnAlmacenar_Click(object sender, EventArgs e)
         {
-            Response.Write("<script>alert('El proceso de almacenamiento finalizo correctamente.');</script>");
+            int idmedicion = Convert.ToInt32(Session["idmedicionlcee"]);
+            int idee = Convert.ToInt32(Session["ideelc"]);
+            Almacenar(idee, idmedicion);
         }
 
         protected void RadioButton2_CheckedChanged(object sender, EventArgs e)
@@ -151,7 +179,7 @@ namespace ESM
             txt341.Text = " ";
         }
 
-        protected void Almacenar()
+        protected void Almacenar(int idee, int idmed)
         {
             #region Asignacion
 
@@ -301,7 +329,25 @@ namespace ESM
 
             #endregion
 
-            //objCLecturaContextoEE.Almacenar();
+            if (objCLecturaContextoEE.Almacenar(idee, idmed))
+                Response.Write("<script>alert('El proceso de almacenamiento finalizo correctamente.');</script>");
+            else
+                Response.Write("<script>alert('El proceso de almacenamiento finalizo sin exito.');</script>");
+        }
+
+        protected void gvMediciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LC.Visible = true;
+            CargarLCEE();
+
+        }
+
+        protected void CargarLCEE()
+        {
+
+            #region Cargar Controles
+
+            #endregion
         }
     }
 }

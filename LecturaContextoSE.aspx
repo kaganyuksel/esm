@@ -41,8 +41,8 @@
         <br />
         <br />
         <div id="ModseleccionSE" runat="server">
-            <asp:GridView ID="gvSE" runat="server" OnSelectedIndexChanged="gvSE_SelectedIndexChanged"
-                AutoGenerateColumns="false" Width="100%">
+            <asp:GridView ID="gvSE" runat="server" AutoGenerateColumns="false" Width="100%" 
+                onselectedindexchanged="gvSE_SelectedIndexChanged">
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" SelectText="<img id='imgEvaluar'  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />" />
                     <asp:BoundField DataField="IdSecretaria" HeaderText="Identificación" />

@@ -28,7 +28,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="demo" style="width: 90%; margin: 0 auto;">
+    <div id="demo" class="demo" style="width: 90%; margin: 0 auto;">
         <br />
         <br />
         <div style="">
@@ -72,7 +72,7 @@
                     <asp:BoundField DataField="CodigoDane" HeaderText="Cod. DANE" />
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                     <asp:BoundField DataField="Municipio" HeaderText="Municipio" />
-                    <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
+                    <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
                     <asp:TemplateField Visible="false" SortExpression="IDIE" HeaderText="IDIE">
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("IdIE") %>' runat="server" ID="IDIE"></asp:Label>
@@ -106,7 +106,8 @@
             <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; border: 1px solid #dddddd;">
                 <tr class="trheader">
                     <td colspan="2">
-                        Información de Acta de Visita EE</td>
+                        Información de Acta de Visita EE
+                    </td>
                 </tr>
                 <tr class="trgris">
                     <td class="tds">
@@ -161,23 +162,23 @@
                 border-radius: 3px; /*ie 7 and 8 do not support border radius*/
 -moz-box-shadow: 0px 0px 1px #000000; -webkit-box-shadow: 0px 0px 1px #000000; box-shadow: 0px 0px 1px #000000;
                 font-size: 13px; /*ie 7 and 8 do not support blur property of shadows*/
- width: 100%;" cellpadding="4" cellspacing="10">
-                <tr>
-                    <td class="style1" colspan="7">
+ width: 100%;" cellpadding="0" cellspacing="0">
+                <tr class="trheader">
+                    <td style="text-align: center;" colspan="7">
                         ACTA DE VISITA
                     </td>
                 </tr>
-                <tr>
-                    <td class="tablehr" colspan="7">
+                <tr class="trheader">
+                    <td style="text-align: center;" colspan="7">
                         1. INFORMACIÓN DEL ESTABLECIMIENTO EDUCTIVO
                     </td>
                 </tr>
-                <tr>
+                <tr class="trgris">
                     <td colspan="7">
                         1.1 Información básica del Establecimiento :
                     </td>
                 </tr>
-                <tr>
+                <tr class="trblanca">
                     <td style="width: 150px;">
                         a. Nombre EE:
                     </td>
@@ -185,7 +186,7 @@
                         <asp:TextBox ID="txtNombreEE" runat="server" Width="100%"></asp:TextBox>
                     </td>
                 </tr>
-                <tr>
+                <tr class="trgris">
                     <td style="width: 150px;">
                         b. Código DANE:
                     </td>
@@ -193,7 +194,7 @@
                         <asp:TextBox ID="txtCodigoDANE" runat="server" Width="100%"></asp:TextBox>
                     </td>
                 </tr>
-                <tr>
+                <tr class="trblanca">
                     <td style="width: 150px;">
                         Dirección Sede Principal:
                     </td>
@@ -201,13 +202,13 @@
                         <asp:TextBox ID="txtDireccion" runat="server" Width="100%" Style="margin-bottom: 0px"></asp:TextBox>
                     </td>
                     <td style="width: 140px;">
-                        Telefonos:
+                        Teléfonos:
                     </td>
-                    <td>
+                    <td colspan="3">
                         <asp:TextBox ID="txtTelefonoEE" runat="server" Width="100%"></asp:TextBox>
                     </td>
                 </tr>
-                <tr>
+                <tr class="trgris">
                     <td style="width: 150px;">
                         Fecha Inicial:
                     </td>
@@ -217,16 +218,16 @@
                     <td style="width: 140px;">
                         Fecha Final:
                     </td>
-                    <td>
+                    <td colspan="3">
                         <asp:TextBox ID="txtFechaFinal" runat="server" Width="100%"></asp:TextBox>
                     </td>
                 </tr>
-                <tr>
-                    <td class="tablehr" colspan="7">
+                <tr class="trheader">
+                    <td style="text-align: center;" colspan="7">
                         2. PERSONAS QUE SUMINISTRAN LA INFORMACIÓN
                     </td>
                 </tr>
-                <tr>
+                <tr class="trgris">
                     <td class="style2" colspan="7" dir="ltr">
                         <div class="style1">
                             <span class="style3">Seleccion de actor</span>:
@@ -243,32 +244,37 @@
                         </asp:LinqDataSource>
                     </td>
                 </tr>
-                <tr>
-                    <td style="width: 100px;">
+                <tr class="trblanca">
+                    <td colspan="2">
                         Nombre:
                     </td>
-                    <td>
+                    <td colspan="2" style="width: 40%;">
                         <asp:TextBox ID="txtNombre" runat="server" Width="100%" Enabled="False"></asp:TextBox>
-                    </td>
-                    <td style="width: 100px;">
-                        &nbsp; Teléfono:
-                    </td>
-                    <td style="width: 140px;">
-                        <asp:TextBox ID="txtTelefono" runat="server" Width="100%" Enabled="False"></asp:TextBox>
                         <br />
                     </td>
-                    <td>
+                    <td style="width: 10%">
+                        Teléfono
+                    </td>
+                    <td colspan="2">
+                        <asp:TextBox ID="txtTelefono" runat="server" Width="100%" Enabled="False"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr class="trgris">
+                    <td colspan="2">
                         Correo Electronico:
                     </td>
-                    <td>
+                    <td colspan="2">
                         <asp:TextBox ID="txtCorreo" runat="server" Width="100%" Enabled="False"></asp:TextBox>
-                        <br />
+                    </td>
+                    <td>
+                    </td>
+                    <td colspan="2">
+                        &nbsp;
                     </td>
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <asp:Label Visible="False" Text="Áreas de Enseñanza:" ID="lblAEnsenansa" 
-                            runat="server"></asp:Label>
+                        <asp:Label Visible="False" Text="Áreas de Enseñanza:" ID="lblAEnsenansa" runat="server"></asp:Label>
                         <asp:TextBox Visible="false" ID="txtGensenanza" runat="server"></asp:TextBox>
                     </td>
                     <td colspan="3">
@@ -302,13 +308,13 @@
                         <asp:TextBox Visible="false" ID="txtCargo" runat="server"></asp:TextBox>
                     </td>
                 </tr>
-                <tr>
+                <tr class="trgris">
                     <td colspan="7">
                         <asp:Button ID="btnAlmacenar" Text="Almacenar" runat="server" OnClick="btnAlmacenar_Click" />
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="7" style="text-align: center;">
+                <tr class="trheader">
+                    <td style="text-align: center;" colspan="7">
                         * CARGAR DOCUMENTOS
                     </td>
                 </tr>
@@ -317,8 +323,8 @@
                         <a id="documentos" runat="server" href="#" class="pretty">Cargar Documentos</a>
                     </td>
                 </tr>
-                <tr>
-                    <td class="style2" colspan="7">
+                <tr class="trblanca">
+                    <td style="text-align: center;" colspan="7">
                         <h3>
                             Directivos:</h3>
                     </td>
@@ -328,8 +334,8 @@
                         <asp:GridView runat="server" ID="gvDirectivos" Width="100%" AllowSorting="True" AutoGenerateColumns="true" />
                     </td>
                 </tr>
-                <tr>
-                    <td class="style2" colspan="7">
+                <tr class="trblanca">
+                    <td style="text-align: center;" colspan="7">
                         <h3>
                             Estudiantes:</h3>
                     </td>
@@ -339,8 +345,8 @@
                         <asp:GridView runat="server" ID="gvEstudiantes" Width="100%" AutoGenerateColumns="true" />
                     </td>
                 </tr>
-                <tr>
-                    <td class="style2" colspan="7">
+                <tr class="trblanca">
+                    <td style="text-align: center;" colspan="7">
                         <h3>
                             Educadores:</h3>
                     </td>
@@ -350,8 +356,8 @@
                         <asp:GridView runat="server" ID="gvEducadores" Width="100%" AutoGenerateColumns="true" />
                     </td>
                 </tr>
-                <tr>
-                    <td class="style2" colspan="7">
+                <tr class="trblanca">
+                    <td style="text-align: center;" colspan="7">
                         <h3>
                             Padres de Familia:</h3>
                     </td>
@@ -361,18 +367,17 @@
                         <asp:GridView runat="server" ID="gvPadresFamilia" Width="100%" AutoGenerateColumns="true" />
                     </td>
                 </tr>
-                <tr>
-                    <td class="tablehr" colspan="7">
-                        &nbsp;OBSERVACIONES
+                <tr class="trheader">
+                    <td style="text-align: center;" colspan="7">
+                        OBSERVACIONES
                     </td>
                 </tr>
-                <tr>
+                <tr class="trgris">
                     <td class="style2" colspan="7">
-                        &nbsp;
                         <asp:TextBox ID="txtObservacion" runat="server" TextMode="MultiLine" Width="100%"></asp:TextBox>
                     </td>
                 </tr>
-                <tr>
+                <tr class="trblanca">
                     <td>
                         <asp:Button Text="Almacenar Acta" ID="btnAlmacenarActa" runat="server" OnClick="btnAlmacenarActa_Click" />
                     </td>

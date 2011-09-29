@@ -230,6 +230,7 @@ namespace ESM
             if (exist == 0)
             {
                 idactavisita = InsertarActaVisita();
+                Session.Add("idactaEE", idactavisita);
             }
             else
             {
@@ -358,7 +359,6 @@ namespace ESM
             catch (Exception)
             {
                 Response.Write("<script>alert('Error en BD.');</script>");
-                //Alert.Show("");
             }
 
             CargarActores(idacta);
@@ -460,6 +460,7 @@ namespace ESM
                 txtGrado.Text = " ";
                 txtGradoHijos.Text = " ";
                 txtGradosEnsenanza.Text = " ";
+                txtCorreo.Text = " ";
 
                 cboNivelesEducativos.DataBind();
 

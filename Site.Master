@@ -54,7 +54,6 @@
                     <li onclick="window.location = '/AyudaPreguntas.aspx';">Preguntas</li>
                     <li onclick="window.location = '/MenuEvaluacion.aspx';">Evaluación</li>
                     <li>Consolidado</li>
-                    <li onclick="window.location = 'http://esmllamadas.mggroupltda.com';">Agenda ESM</li>
                 </ul>
             </section>
             Usuario:

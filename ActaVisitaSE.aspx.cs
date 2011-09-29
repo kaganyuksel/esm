@@ -106,71 +106,7 @@ namespace ESM
 
         }
 
-        protected void gvResultados_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            GridViewRow _objRow = gvResultados.SelectedRow;
-            Label lblIdIe = (Label)_objRow.Cells[4].FindControl("IDIE");
-            Session.Remove("idseacc");
-            Session.Add("idseacc", lblIdIe.Text);
-            lblNombrese.Text = _objRow.Cells[1].Text;
-            lblTelefonose.Text = _objRow.Cells[3].Text;
-            lblMunicipio.Text = _objRow.Cells[2].Text;
-
-            int idse = Convert.ToInt32(lblIdIe.Text);
-
-            ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
-
-            var seinfo = (from se in db.Secretaria_Educacion
-                          where se.IdSecretaria == idse
-                          select se).Single();
-
-            txtNombreEE.Text = seinfo.Nombre;
-            txtNombreEE.Enabled = false;
-            txtDireccion.Text = seinfo.Direccion;
-            txtDireccion.Enabled = false;
-            txtTelefonoEE.Text = seinfo.Telefono;
-            txtTelefonoEE.Enabled = false;
-
-
-            var medse = (from lc in db.LecturaContextoSE
-                         where lc.IdSecretaria == idse
-                         select new { lc.IdMedicion, Fecha = lc.Mediciones.FechaMedicion }).Distinct();
-
-            if (medse != null)
-            {
-                gvMediciones.DataSource = medse;
-                gvMediciones.DataBind();
-                ObtenerTema(gvMediciones);
-
-                #region Visualizacion de Controles
-
-                modEESeleccion.Visible = false;
-                ModMediciones.Visible = true;
-                gvMediciones.Visible = true;
-                modEESeleccion.Visible = false;
-
-                for (int i = 0; i < gvMediciones.Rows.Count; i++)
-                {
-                    if (i == gvMediciones.Rows.Count - 1)
-                        gvMediciones.Rows[i].Visible = true;
-                    else
-                        gvMediciones.Rows[i].Visible = false;
-                }
-                #endregion
-            }
-            else
-            {
-                #region Visualizacion de Controles
-                modEESeleccion.Visible = false;
-                ModMediciones.Visible = true;
-                gvMediciones.Visible = true;
-                modEESeleccion.Visible = false;
-                #endregion
-
-                Response.Write("<script>alert('No existen mediciones existentes para la SE.');</script>");
-            }
-        }
+        
 
         protected void gvMediciones_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -365,6 +301,71 @@ namespace ESM
                     Response.Write("<script>alert('Acta almacenada Correctamente.');</script>");
                 }
                 catch (Exception) { Response.Write("<script>alert('Error de almacenamiento.');</script>"); }
+            }
+        }
+
+        protected void gvResultados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow _objRow = gvResultados.SelectedRow;
+            Label lblIdIe = (Label)_objRow.Cells[4].FindControl("IDIE");
+            Session.Remove("idseacc");
+            Session.Add("idseacc", lblIdIe.Text);
+            lblNombrese.Text = _objRow.Cells[1].Text;
+            lblTelefonose.Text = _objRow.Cells[3].Text;
+            lblMunicipio.Text = _objRow.Cells[2].Text;
+
+            int idse = Convert.ToInt32(lblIdIe.Text);
+
+            ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
+
+            var seinfo = (from se in db.Secretaria_Educacion
+                          where se.IdSecretaria == idse
+                          select se).Single();
+
+            txtNombreEE.Text = seinfo.Nombre;
+            txtNombreEE.Enabled = false;
+            txtDireccion.Text = seinfo.Direccion;
+            txtDireccion.Enabled = false;
+            txtTelefonoEE.Text = seinfo.Telefono;
+            txtTelefonoEE.Enabled = false;
+
+
+            var medse = (from lc in db.LecturaContextoSE
+                         where lc.IdSecretaria == idse
+                         select new { lc.IdMedicion, Fecha = lc.Mediciones.FechaMedicion }).Distinct();
+
+            if (medse != null)
+            {
+                gvMediciones.DataSource = medse;
+                gvMediciones.DataBind();
+                ObtenerTema(gvMediciones);
+
+                #region Visualizacion de Controles
+
+                modEESeleccion.Visible = false;
+                ModMediciones.Visible = true;
+                gvMediciones.Visible = true;
+                modEESeleccion.Visible = false;
+
+                for (int i = 0; i < gvMediciones.Rows.Count; i++)
+                {
+                    if (i == gvMediciones.Rows.Count - 1)
+                        gvMediciones.Rows[i].Visible = true;
+                    else
+                        gvMediciones.Rows[i].Visible = false;
+                }
+                #endregion
+            }
+            else
+            {
+                #region Visualizacion de Controles
+                modEESeleccion.Visible = false;
+                ModMediciones.Visible = true;
+                gvMediciones.Visible = true;
+                modEESeleccion.Visible = false;
+                #endregion
+
+                Response.Write("<script>alert('No existen mediciones existentes para la SE.');</script>");
             }
         }
 

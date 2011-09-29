@@ -41,5 +41,35 @@ namespace ESM.Objetos
 
         }
 
+        public static IQueryable<ESM.Model.LecturaContextoEE> ObtenerMedicionesEE(int idee)
+        {
+            try
+            {
+                var med = (from m in _db.LecturaContextoEE
+                           where m.IdIE == idee
+                           select m).Take(1);
+
+                return med;
+            }
+            catch (Exception) { return null; }
+        }
+
+        public static int CrearMedicionLC(DateTime fecha)
+        {
+            try
+            {
+                Mediciones objMediciones = new Mediciones
+                {
+                    FechaMedicion = fecha
+                };
+
+                _db.Mediciones.InsertOnSubmit(objMediciones);
+                _db.SubmitChanges();
+
+                return objMediciones.IdMedicion;
+            }
+            catch (Exception) { return 0; }
+        }
+
     }
 }
