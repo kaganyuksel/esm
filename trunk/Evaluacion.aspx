@@ -9,6 +9,23 @@
         type="text/css" />
     <script src="/Pretty/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#dialog:ui-dialog").dialog("destroy");
+
+            $("#dtimer").dialog({
+                height: 140,
+                modal: true,
+                autoOpen: false,
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+        });
+
         $(function () {
             $(".checkclass").buttonset();
         });
@@ -20,6 +37,7 @@
             });
 
         });
+
         $(function () {
             $("#ContentPlaceHolder1_rbtnEstudiante").change(function () {
                 alert("cambio");
@@ -38,19 +56,18 @@
 
     </script>
     <script type="text/javascript">
-        
-        $(document).ready(function (){
-        
-        $(".sesiones").change(function() {
-            var text = $(this).val();
 
-            if(!isNaN(text))
-            {
-                $(this).val() = "";
-            }
+        $(document).ready(function () {
+
+            $(".sesiones").change(function () {
+                var text = $(this).val();
+
+                if (!isNaN(text)) {
+                    $(this).val() = "";
+                }
 
             });
-        }};
+        });
 
         $(document).ready(function () {
             $("#contenteval").scrollTop(600);
@@ -152,6 +169,15 @@
             }
         }
 
+         $("#tabs").tabs({
+                    remote: true, cache: true,
+                    show: function (event, ui) {
+                        var sel = $('#tabs').tabs('option', 'selected');
+                        sel = sel+1;
+                        $("#hidLastTab").val(sel);
+                    },
+                    selected: $("#hidLastTab").val()
+                });
     </script>
     <style type="text/css">
         .demo h1, h3, h4
@@ -177,6 +203,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id="contenteval" class="demo" style="width: 90%; margin: 50px auto;">
         <section>
+        <div id="dtimer" title="Información de Evaluación">
+            <label class="labelok" runat="server" id="lbloki" style="color: #006314;">
+            </label>
+        </div>
             <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td>
@@ -192,12 +222,15 @@
         </section>
         <br />
         <br />
+        <input type="hidden" id="hidLastTab" value="0" />
         <asp:UpdatePanel ID="udpnlFiltro" runat="server">
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="objtimer" />
+                <asp:PostBackTrigger ControlID="gvResultados" />
             </Triggers>
             <ContentTemplate>
-                <asp:Timer ID="objtimer" runat="server" Interval="20000" OnTick="objtimer_Tick">
+                <asp:Timer ID="objtimer" runat="server" Interval="120000" 
+                    OnTick="objtimer_Tick">
                 </asp:Timer>
                 <div id="modSEseleccion" runat="server" visible="false">
                     <h3>
@@ -206,7 +239,7 @@
                     <br />
                     <asp:GridView ID="gvSE" runat="server" AllowPaging="True" AllowSorting="True" CssClass="gvResultados"
                         RowStyle-CssClass="td" HeaderStyle-CssClass="th" CellPadding="6" OnSelectedIndexChanged="gvSE_SelectedIndexChanged"
-                        DataSourceID="lqdsSE">
+                        DataSourceID="lqdsSE" OnPageIndexChanging="gvSE_PageIndexChanging">
                         <HeaderStyle CssClass="trheader" />
                         <Columns>
                             <asp:TemplateField Visible="false" SortExpression="IDSE" HeaderText="IDSE">
@@ -246,7 +279,8 @@
                     </p>
                     <asp:GridView ID="gvResultados" runat="server" AllowPaging="True" AllowSorting="True"
                         CssClass="gvResultados" RowStyle-CssClass="td" HeaderStyle-CssClass="th" CellPadding="6"
-                        AutoGenerateColumns="false" OnSelectedIndexChanged="gvResultados_SelectedIndexChanged">
+                        AutoGenerateColumns="false" OnSelectedIndexChanged="gvResultados_SelectedIndexChanged"
+                        OnPageIndexChanging="gvResultados_PageIndexChanging">
                         <HeaderStyle CssClass="trheader" />
                         <Columns>
                             <asp:CommandField SelectText="<img id='imgEvaluar'  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />"
@@ -603,16 +637,6 @@
                         "Parcial" para editar si es necesrio hacerlo, el boton "Guardar y Bloquear" almacena
                         la evaluacion en estado "Cerrada" y no permite realizar cambios.
                     </p>
-                    <div style="z-index: 302; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
-                        /*ie 7 and 8 do not support border radius*/
--moz-box-shadow: 0px 0px 2px #000000; -webkit-box-shadow: 0px 0px 2px #000000; box-shadow: 0px 0px 2px #000000;
-                        /*ie 7 and 8 do not support blur property of shadows*/
-/*inner elements must not break this elements boundaries*/
-/*all filters must be placed together*/ width: 30%; color: #3f9c0d; text-align: center; margin: 0 40%;
-                        font-weight: bold; top: 0; position: fixed; font-size: 13px; background: #ffffff;">
-                        <label class="labelok" runat="server" id="lbloki">
-                        </label>
-                    </div>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>

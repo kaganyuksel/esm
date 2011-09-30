@@ -87,6 +87,15 @@
 
                         $("#tabs").tabs().find(".ui-tabs-nav").sortable({ axis: "x" });
 
+                        $("#tabs").tabs({
+                            remote: true, cache: true,
+                            show: function (event, ui) {
+                                var sel = $('#tabs').tabs('option', 'selected');
+                                sel = sel + 1;
+                                $("#hidLastTab").val(sel);
+                            },
+                            selected: $("#hidLastTab").val()
+                        });
                     });
                 </script>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

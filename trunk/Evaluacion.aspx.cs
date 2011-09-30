@@ -25,6 +25,7 @@ namespace ESM.Evaluacion
 
         protected void AlmacenarParcialDefinitiva(bool estado)
         {
+            Guid guidKey = Guid.NewGuid();
             if (Session["ideval"] != null)
             {
                 int eval = Convert.ToInt32(Session["ideval"]);
@@ -62,6 +63,7 @@ namespace ESM.Evaluacion
                         int posiciones = gvAmb1.Rows.Count + gvAmb2.Rows.Count + gvAmb3.Rows.Count + gvAmb4.Rows.Count + gvAmb5.Rows.Count;
 
                         CollectionResultados = new object[posiciones, 4];
+                        int contador = 0;
                         for (int p = 0; p < 5; p++)
                         {
                             GridView objGridView = (GridView)Page.Form.FindControl(String.Format("gvAmb{0}", p));
@@ -82,34 +84,37 @@ namespace ESM.Evaluacion
                                     if (objsi.Checked)
                                     {
 
-                                        CollectionResultados[e, 0] = Convert.ToInt32(objIdPregunta.Text);
-                                        CollectionResultados[e, 1] = true;
+                                        CollectionResultados[contador, 0] = Convert.ToInt32(objIdPregunta.Text);
+                                        CollectionResultados[contador, 1] = true;
 
                                     }
                                     else if (objno.Checked)
                                     {
-                                        CollectionResultados[e, 0] = Convert.ToInt32(objIdPregunta.Text);
-                                        CollectionResultados[e, 1] = false;
+                                        CollectionResultados[contador, 0] = Convert.ToInt32(objIdPregunta.Text);
+                                        CollectionResultados[contador, 1] = false;
                                     }
                                     else if (!objno.Checked && !objsi.Checked)
                                     {
-                                        CollectionResultados[e, 0] = Convert.ToInt32(objIdPregunta.Text);
-                                        CollectionResultados[e, 1] = null;
+                                        CollectionResultados[contador, 0] = Convert.ToInt32(objIdPregunta.Text);
+                                        CollectionResultados[contador, 1] = null;
 
                                     }
-                                    CollectionResultados[e, 2] = objTextBox.Text;
-                                    CollectionResultados[e, 3] = objpendiente.Checked;
+                                    CollectionResultados[contador, 2] = objTextBox.Text;
+                                    CollectionResultados[contador, 3] = objpendiente.Checked;
                                 }
                             }
+                            contador++;
                         }
                         if (_objevaluacion.ActualizarEvaluacion(CollectionResultados, eval, estado))
                         {
-                            lbloki.InnerHtml = String.Format("Actualización exitosa. Hora:{0}", DateTime.Now.ToShortTimeString());
+                            string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Actualizada con exito. \\nEstado: Parcial. Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
+                            ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
                             FinalizarProcesoEvaluacionEstado();
                         }
                         else
                         {
-                            lbloki.InnerHtml = String.Format("Actualización exitosa. Hora:{0}", DateTime.Now.ToShortTimeString());
+                            string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Actualizada sin exito. \\n Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
+                            ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
                             FinalizarProcesoEvaluacionEstado();
                         }
 
@@ -117,7 +122,8 @@ namespace ESM.Evaluacion
                     }
                     else
                     {
-                        lbloki.InnerHtml = String.Format("Actualización falló. Hora:{0}", DateTime.Now.ToShortTimeString());
+                        string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Actualización fallo. \\n Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
+                        ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
                         FinalizarProcesoEvaluacionEstado();
                     }
                 }
@@ -130,7 +136,7 @@ namespace ESM.Evaluacion
                     int posiciones = gvAmb1.Rows.Count + gvAmb2.Rows.Count + gvAmb3.Rows.Count + gvAmb4.Rows.Count + gvAmb5.Rows.Count;
 
                     object[,] CollectionResultados = new object[posiciones, 4];
-
+                    int contador = 0;
                     for (int p = 0; p < 5; p++)
                     {
                         GridView objGridView = (GridView)udpnlFiltro.FindControl(String.Format("gvAmb{0}", p + 1));
@@ -148,22 +154,23 @@ namespace ESM.Evaluacion
                                 CheckBox objnoapli = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnNoAplica");
                                 TextBox objTextBox = (TextBox)objGridViewRow.FindControl("txtSesion");
 
-                                CollectionResultados[e, 0] = Convert.ToInt32(objIdPregunta.Text);
+                                CollectionResultados[contador, 0] = Convert.ToInt32(objIdPregunta.Text);
                                 if (objsi.Checked)
-                                    CollectionResultados[e, 1] = true;
+                                    CollectionResultados[contador, 1] = true;
                                 else if (objno.Checked)
-                                    CollectionResultados[e, 1] = false;
+                                    CollectionResultados[contador, 1] = false;
 
-                                CollectionResultados[e, 2] = objTextBox.Text;
-                                CollectionResultados[e, 3] = objpendiente.Checked;
+                                CollectionResultados[contador, 2] = objTextBox.Text;
+                                CollectionResultados[contador, 3] = objpendiente.Checked;
 
                             }
+                            contador++;
                         }
                     }
                     if (_objevaluacion.ActualizarEvaluacion(CollectionResultados, eval, estado))
                     {
-                        Session.Remove("ideval");
-                        lbloki.InnerHtml = String.Format("Actualización exitosa. Hora:{0}", DateTime.Now.ToShortTimeString());
+                        string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Actualización exitosa. \\n Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
+                        ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
                         FinalizarProcesoEvaluacionEstado();
                     }
 
@@ -184,14 +191,19 @@ namespace ESM.Evaluacion
             //btnalmacenarparcial.Visible = false;
             //btnDefinitiva.Visible = false;
             gvMediciones.DataBind();
-            gvTopEval.DataBind();
+            gvTopEval.Visible = true;
             btnVolverEE.Visible = true;
+            //int idevaluacion = Convert.ToInt32(Session["loadideval"]);
+            //int idactor = Convert.ToInt32(Session["loadidactor"]);
+
+            //CargarParcial(idevaluacion, idactor);
             //cboActores.SelectedItem.Value = "7";
         }
 
         protected void AlmacenarInformacion(bool estado, bool auto = false)
         {
             bool valid = true;
+            Guid guidKey = Guid.NewGuid();
 
             int posiciones = gvAmb1.Rows.Count + gvAmb2.Rows.Count + gvAmb3.Rows.Count + gvAmb4.Rows.Count + gvAmb5.Rows.Count;
             object[,] CollectionResultados = new object[posiciones, 4];
@@ -255,11 +267,15 @@ namespace ESM.Evaluacion
 
                     if (_objevaluacion.Almacenar(CollectionResultados, idie, idmedicion, idactor, idusuario, estado, _tipo))
                     {
+                        string mensaje;
+
                         lbloki.Visible = true;
                         if (estado)
-                            lbloki.InnerHtml = String.Format("Evaluación Almacenada. \nEstado: Parcial. Hora:{0}", DateTime.Now.ToShortTimeString());
+                            mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Almacenada. \\nEstado: Parcial. Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
                         else
-                            lbloki.InnerHtml = String.Format("Evaluación Almacenada. \nEstado: Terminada. Hora:{0}", DateTime.Now.ToShortTimeString());
+                            mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Almacenada. \\nEstado: Terminada. Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
+
+                        ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
                         FinalizarProcesoEvaluacionEstado();
 
                         cboActores.SelectedItem.Value = "7";
@@ -268,6 +284,7 @@ namespace ESM.Evaluacion
                     {
                         lbloki.InnerHtml = "Guardado Fallido.";
                         lbloki.Visible = true;
+                        ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), "$('#dtimer').dialog('open');", true);
                         FinalizarProcesoEvaluacionEstado();
                     }
                 }
@@ -311,21 +328,21 @@ namespace ESM.Evaluacion
                 idactor = Convert.ToInt32(cboActores.SelectedItem.Value);
 
                 int idusuario = Convert.ToInt32(Session["idusuario"]);
-
+                string mensaje;
                 if (_objevaluacion.Almacenar(CollectionResultados, idie, idmedicion, idactor, idusuario, estado, _tipo))
                 {
-                    lbloki.Visible = true;
                     if (estado)
-                        lbloki.InnerHtml = String.Format("Evaluación Almacenada. \nEstado: Parcial. Hora:{0}", DateTime.Now.ToShortTimeString());
+                        mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Almacenada. \\nEstado: Parcial. Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
                     else
-                        lbloki.InnerHtml = String.Format("Evaluación Almacenada. \nEstado: Terminada. Hora:{0}", DateTime.Now.ToShortTimeString());
+                        mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Almacenada. \\nEstado: Terminada. Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
 
+                    ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
                     FinalizarProcesoEvaluacionEstado();
                 }
                 else
                 {
                     lbloki.InnerHtml = "Guardado Fallido.";
-                    lbloki.Visible = true;
+                    //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
                     FinalizarProcesoEvaluacionEstado();
                 }
             }
@@ -426,6 +443,7 @@ namespace ESM.Evaluacion
                 /*Prueba de ajax realizada para actualizar un gridview fallida*/
                 if (!Page.IsPostBack)
                 {
+                    Session.Remove("ideval");
                     CRoles objCRoles = new CRoles();
 
                     int idusuario = Convert.ToInt32(Session["idusuario"]);
@@ -518,6 +536,8 @@ namespace ESM.Evaluacion
                         objrbtnNo.ToolTip = lblIdPregunta.Text;
                         objrbtnSi.CssClass = "radiosi";
                         objrbtnNo.CssClass = "radiono";
+                        if (objrbtnSi.Checked)
+                            objTextBox.Enabled = true;
                         a.Title = "Información ESM";
                         a.HRef = Request.Url.Scheme + "://" + Request.Url.Authority + "/Ayuda.aspx?id=" + lblIdPregunta.Text + "&iframe=true&amp;width=500&amp;height=300";
                         break;
@@ -557,6 +577,8 @@ namespace ESM.Evaluacion
                         objrbtnNo.ToolTip = lblIdPregunta.Text;
                         objrbtnSi.CssClass = "radiosi";
                         objrbtnNo.CssClass = "radiono";
+                        if (objrbtnSi.Checked)
+                            objTextBox.Enabled = true;
                         a.Title = "Información ESM";
                         a.HRef = Request.Url.Scheme + "://" + Request.Url.Authority + "/Ayuda.aspx?id=" + lblIdPregunta.Text + "&iframe=true&amp;width=500&amp;height=300";
                         break;
@@ -596,6 +618,8 @@ namespace ESM.Evaluacion
                         objrbtnNo.ToolTip = lblIdPregunta.Text;
                         objrbtnSi.CssClass = "radiosi";
                         objrbtnNo.CssClass = "radiono";
+                        if (objrbtnSi.Checked)
+                            objTextBox.Enabled = true;
                         a.Title = "Información ESM";
                         a.HRef = Request.Url.Scheme + "://" + Request.Url.Authority + "/Ayuda.aspx?id=" + lblIdPregunta.Text + "&iframe=true&amp;width=500&amp;height=300";
                         break;
@@ -636,6 +660,8 @@ namespace ESM.Evaluacion
                         objrbtnNo.ToolTip = lblIdPregunta.Text;
                         objrbtnSi.CssClass = "radiosi";
                         objrbtnNo.CssClass = "radiono";
+                        if (objrbtnSi.Checked)
+                            objTextBox.Enabled = true;
                         a.Title = "Información ESM";
                         a.HRef = Request.Url.Scheme + "://" + Request.Url.Authority + "/Ayuda.aspx?id=" + lblIdPregunta.Text + "&iframe=true&amp;width=500&amp;height=300";
                         break;
@@ -675,6 +701,8 @@ namespace ESM.Evaluacion
                         objrbtnNo.ToolTip = lblIdPregunta.Text;
                         objrbtnSi.CssClass = "radiosi";
                         objrbtnNo.CssClass = "radiono";
+                        if (objrbtnSi.Checked)
+                            objTextBox.Enabled = true;
                         a.Title = "Información ESM";
                         a.HRef = Request.Url.Scheme + "://" + Request.Url.Authority + "/Ayuda.aspx?id=" + lblIdPregunta.Text + "&iframe=true&amp;width=500&amp;height=300";
                         break;
@@ -763,7 +791,7 @@ namespace ESM.Evaluacion
 
         protected void cboActores_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            Session.Remove("ideval");
 
             bool actorexiste = false;
             for (int i = 0; i < gvTopEval.Rows.Count; i++)
@@ -811,8 +839,17 @@ namespace ESM.Evaluacion
 
             GridViewRow objrow = gvTopEval.SelectedRow;
 
-            int idevaluacion = Convert.ToInt32(objrow.Cells[1].Text);
-            int idactor = Convert.ToInt32(objrow.Cells[2].Text);
+            Session.Remove("loadideval");
+            Session.Remove("loadidactor");
+
+            if (objrow.Cells[1].Text != null && objrow.Cells[2].Text != null)
+            {
+                Session.Add("loadideval", objrow.Cells[1].Text);
+                Session.Add("loadidactor", objrow.Cells[2].Text);
+            }
+
+            int idevaluacion = Convert.ToInt32(Session["loadideval"]);
+            int idactor = Convert.ToInt32(Session["loadidactor"]);
 
             CargarParcial(idevaluacion, idactor);
             #region Visualizacion de Controles
@@ -924,21 +961,21 @@ namespace ESM.Evaluacion
                         resultbyeval = from rbe in db.ResultadosByEvaluacion
                                        join res in db.Resultados on rbe.IdResultado equals res.IdResultados
                                        join pre in db.Preguntas on res.IdPregunta equals pre.IdPregunta
-                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 5
+                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 1
                                        select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta, res.Sesiones, pre.Ocultar, pre.Etiqueta };
                         break;
                     case 2:
                         resultbyeval = from rbe in db.ResultadosByEvaluacion
                                        join res in db.Resultados on rbe.IdResultado equals res.IdResultados
                                        join pre in db.Preguntas on res.IdPregunta equals pre.IdPregunta
-                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 7
+                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 2
                                        select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta, res.Sesiones, pre.Ocultar, pre.Etiqueta };
                         break;
                     case 3:
                         resultbyeval = from rbe in db.ResultadosByEvaluacion
                                        join res in db.Resultados on rbe.IdResultado equals res.IdResultados
                                        join pre in db.Preguntas on res.IdPregunta equals pre.IdPregunta
-                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 8
+                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 3
                                        select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta, res.Sesiones, pre.Ocultar, pre.Etiqueta };
                         break;
 
@@ -946,14 +983,14 @@ namespace ESM.Evaluacion
                         resultbyeval = from rbe in db.ResultadosByEvaluacion
                                        join res in db.Resultados on rbe.IdResultado equals res.IdResultados
                                        join pre in db.Preguntas on res.IdPregunta equals pre.IdPregunta
-                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 9
+                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 4
                                        select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta, res.Sesiones, pre.Ocultar, pre.Etiqueta };
                         break;
                     case 5:
                         resultbyeval = from rbe in db.ResultadosByEvaluacion
                                        join res in db.Resultados on rbe.IdResultado equals res.IdResultados
                                        join pre in db.Preguntas on res.IdPregunta equals pre.IdPregunta
-                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 10
+                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 5
                                        select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta, res.Sesiones, pre.Ocultar, pre.Etiqueta };
                         break;
                 }
@@ -1516,6 +1553,59 @@ namespace ESM.Evaluacion
                         Session.Add("ideval", _objevaluacion.IdEvaluacion);
                     }
                 }
+
+            }
+        }
+
+        protected void gvSE_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            this.gvResultados.PageIndex = e.NewPageIndex;
+            CRoles objCRoles = new CRoles();
+
+            int idusuario = Convert.ToInt32(Session["idusuario"]);
+            string rol = objCRoles.ObtenerRol(idusuario);
+
+            if (_tipo == 2)
+            {
+                if (rol == "Administrador")
+                {
+                    /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
+                    gvResultados.DataSourceID = "ldsies";
+                }
+                else if (rol == "Consultor")
+                {
+                    gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
+                    gvResultados.DataBind();
+                }
+
+                ObtenerTema(gvResultados);
+
+
+            }
+        }
+        protected void gvResultados_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            this.gvResultados.PageIndex = e.NewPageIndex;
+            CRoles objCRoles = new CRoles();
+
+            int idusuario = Convert.ToInt32(Session["idusuario"]);
+            string rol = objCRoles.ObtenerRol(idusuario);
+
+            if (_tipo == 2)
+            {
+                if (rol == "Administrador")
+                {
+                    /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
+                    gvResultados.DataSourceID = "ldsies";
+                }
+                else if (rol == "Consultor")
+                {
+                    gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
+                    gvResultados.DataBind();
+                }
+
+                ObtenerTema(gvResultados);
+
 
             }
         }
