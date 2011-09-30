@@ -1418,90 +1418,106 @@ namespace EvaluationSettings
 
                     foreach (var item in results)
                     {
-                        int idpregunta = Convert.ToInt32(VResultados[contvector, 0]);
+                        int idpregunta = 0;
 
-                        if (item.Resultados.IdPregunta == idpregunta)
+                        if (VResultados[contvector, 0] != null)
+                            idpregunta = Convert.ToInt32(VResultados[contvector, 0]);
+
+                        if (idpregunta != 0)
                         {
+                            if (item.Resultados.IdPregunta == idpregunta)
+                            {
+                                if (VResultados[contvector, 2] != null && VResultados[contvector, 2].ToString() != "")
+                                {
+                                    if (VResultados[contvector, 1] != null)
+                                    {
+                                        item.Resultados.Valor = (bool)VResultados[contvector, 1];
+                                        item.Resultados.Sesiones = Convert.ToInt32(VResultados[contvector, 2]);
+                                        item.Resultados.Pendiente = (bool)VResultados[contvector, 3];
+
+                                        db.SubmitChanges();
+                                    }
+                                }
+                                else
+                                {
+                                    if (VResultados[contvector, 1] != null)
+                                    {
+                                        item.Resultados.Valor = (bool)VResultados[contvector, 1];
+                                        item.Resultados.Pendiente = (bool)VResultados[contvector, 3];
+
+                                        db.SubmitChanges();
+                                    }
+                                }
+                                contador++;
+                                break;
+                            }
+                        }
+                    }
+                    if (contador == 0)
+                    {
+                        int idpregunta = 0;
+
+                        if (VResultados[contvector, 0] != null)
+                            idpregunta = Convert.ToInt32(VResultados[contvector, 0]);
+
+                        if (idpregunta != 0)
+                        {
+                            Resultados objResultados = null;
                             if (VResultados[contvector, 2] != null && VResultados[contvector, 2].ToString() != "")
                             {
                                 if (VResultados[contvector, 1] != null)
                                 {
-                                    item.Resultados.Valor = (bool)VResultados[contvector, 1];
-                                    item.Resultados.Sesiones = Convert.ToInt32(VResultados[contvector, 2]);
-                                    item.Resultados.Pendiente = (bool)VResultados[contvector, 3];
-
-                                    db.SubmitChanges();
+                                    objResultados = new Resultados
+                                    {
+                                        IdPregunta = Convert.ToInt32(VResultados[contvector, 0]),
+                                        Valor = Convert.ToBoolean(VResultados[contvector, 1]),
+                                        Sesiones = Convert.ToInt32(VResultados[contvector, 2]),
+                                        Pendiente = Convert.ToBoolean(VResultados[contvector, 3])
+                                    };
+                                }
+                                else
+                                {
+                                    objResultados = new Resultados
+                                    {
+                                        IdPregunta = Convert.ToInt32(VResultados[contvector, 0])
+                                    };
                                 }
                             }
                             else
                             {
                                 if (VResultados[contvector, 1] != null)
                                 {
-                                    item.Resultados.Valor = (bool)VResultados[contvector, 1];
-                                    item.Resultados.Pendiente = (bool)VResultados[contvector, 3];
-
-                                    db.SubmitChanges();
+                                    objResultados = new Resultados
+                                    {
+                                        IdPregunta = Convert.ToInt32(VResultados[contvector, 0]),
+                                        Valor = Convert.ToBoolean(VResultados[contvector, 1]),
+                                        Pendiente = Convert.ToBoolean(VResultados[contvector, 3])
+                                    };
+                                }
+                                else
+                                {
+                                    objResultados = new Resultados
+                                    {
+                                        IdPregunta = Convert.ToInt32(VResultados[contvector, 0])
+                                    };
                                 }
                             }
-                            contador++;
-                            break;
-                        }
 
-                    }
-                    if (contador == 0)
-                    {
+                            if (objResultados != null)
+                            {
+                                db.Resultados.InsertOnSubmit(objResultados);
+                                db.SubmitChanges();
 
-                        Resultados objResultados = null;
-                        if (VResultados[contvector, 2] != null && VResultados[contvector, 2].ToString() != "")
-                        {
-                            if (VResultados[contvector, 1] != null)
-                            {
-                                objResultados = new Resultados
+
+                                ResultadosByEvaluacion objResultadosByEvaluacion = new ResultadosByEvaluacion
                                 {
-                                    IdPregunta = Convert.ToInt32(VResultados[contvector, 0]),
-                                    Valor = Convert.ToBoolean(VResultados[contvector, 1]),
-                                    Sesiones = Convert.ToInt32(VResultados[contvector, 2]),
-                                    Pendiente = Convert.ToBoolean(VResultados[contvector, 3])
+                                    IdEvaluacion = ideval,
+                                    IdResultado = objResultados.IdResultados
                                 };
-                            }
-                            else
-                            {
-                                objResultados = new Resultados
-                                {
-                                    IdPregunta = Convert.ToInt32(VResultados[contvector, 0])
-                                };
+                                db.ResultadosByEvaluacion.InsertOnSubmit(objResultadosByEvaluacion);
+                                db.SubmitChanges();
                             }
                         }
-                        else
-                        {
-                            if (VResultados[contvector, 1] != null)
-                            {
-                                objResultados = new Resultados
-                                {
-                                    IdPregunta = Convert.ToInt32(VResultados[contvector, 0]),
-                                    Valor = Convert.ToBoolean(VResultados[contvector, 1]),
-                                    Pendiente = Convert.ToBoolean(VResultados[contvector, 3])
-                                };
-                            }
-                            else
-                            {
-                                objResultados = new Resultados
-                                {
-                                    IdPregunta = Convert.ToInt32(VResultados[contvector, 0])
-                                };
-                            }
-                        }
-                        db.Resultados.InsertOnSubmit(objResultados);
-                        db.SubmitChanges();
-
-                        ResultadosByEvaluacion objResultadosByEvaluacion = new ResultadosByEvaluacion
-                        {
-                            IdEvaluacion = ideval,
-                            IdResultado = objResultados.IdResultados
-                        };
-                        db.ResultadosByEvaluacion.InsertOnSubmit(objResultadosByEvaluacion);
-                        db.SubmitChanges();
-
                     }
                     contvector++;
                 }

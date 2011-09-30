@@ -13,6 +13,15 @@ namespace ESM.Evaluacion {
     public partial class Evaluacion {
         
         /// <summary>
+        /// Control lbloki.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbloki;
+        
+        /// <summary>
         /// Control udpnlFiltro.
         /// </summary>
         /// <remarks>
@@ -344,15 +353,6 @@ namespace ESM.Evaluacion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl informacionuno;
-        
-        /// <summary>
-        /// Control lbloki.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbloki;
         
         /// <summary>
         /// Control udpgss.
