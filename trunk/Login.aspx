@@ -71,7 +71,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:TextBox ID="txtUsuario" runat="server" ToolTip="Nombre de Usuario"></asp:TextBox>
+                            <asp:TextBox ID="txtUsuario" runat="server" CssClass="txt" ToolTip="Nombre de Usuario"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>

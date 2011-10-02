@@ -247,8 +247,8 @@
       <Association Name="Establecimiento_Educativo_ActaVisitaEE" Member="ActaVisitaEE" ThisKey="IdIE" OtherKey="IdEE" Type="ActaVisitaEE" />
       <Association Name="Establecimiento_Educativo_Consolidacion" Member="Consolidacion" ThisKey="IdIE" OtherKey="IdIE" Type="Consolidacion" />
       <Association Name="Establecimiento_Educativo_Evaluacion" Member="Evaluacion" ThisKey="IdIE" OtherKey="IdIE" Type="Evaluacion" />
-      <Association Name="Establecimiento_Educativo_LecturaContextoEE" Member="LecturaContextoEE" ThisKey="IdIE" OtherKey="IdIE" Type="LecturaContextoEE" />
       <Association Name="Establecimiento_Educativo_LLamadas" Member="LLamadas" ThisKey="IdIE" OtherKey="IdEE" Type="LLamadas" />
+      <Association Name="Establecimiento_Educativo_LecturaContextoEE" Member="LecturaContextoEE" ThisKey="IdIE" OtherKey="IdIE" Type="LecturaContextoEE" />
       <Association Name="Secretaria_Educacion_Establecimiento_Educativo" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
     </Type>
   </Table>
@@ -290,72 +290,6 @@
       <Association Name="Usuarios_Evaluacion" Member="Usuarios" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuarios" IsForeignKey="true" />
       <Association Name="Mediciones_Evaluacion" Member="Mediciones" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Mediciones" IsForeignKey="true" />
       <Association Name="Secretaria_Educacion_Evaluacion" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.LecturaContextoEE" Member="LecturaContextoEE">
-    <Type Name="LecturaContextoEE">
-      <Column Name="IdLecturaContextoEE" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IdIE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IdMedicion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="f11" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="f12" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="f13" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="f14" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="f15" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="d" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_1_2bUrbana]" Member="_1_2bUrbana" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_1_2bRural]" Member="_1_2bRural" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_2_1]" Member="_2_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_2_E1]" Member="_2_2_E1" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_2_E2]" Member="_2_2_E2" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_2_E3]" Member="_2_2_E3" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_2_E4]" Member="_2_2_E4" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_2_E5]" Member="_2_2_E5" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_2_E6]" Member="_2_2_E6" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_3_S1]" Member="_2_3_S1" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_3_S2]" Member="_2_3_S2" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_3_S3]" Member="_2_3_S3" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_3_S4]" Member="_2_3_S4" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_3_NoSabe]" Member="_2_3_NoSabe" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_3_NoTiene]" Member="_2_3_NoTiene" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_4_Si]" Member="_2_4_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_2_4_No]" Member="_2_4_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_2_5_1]" Member="_2_5_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_5_2]" Member="_2_5_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_2_5_3]" Member="_2_5_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_3_1]" Member="_3_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_2]" Member="_3_2" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_3]" Member="_3_3" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_4_Si]" Member="_3_4_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_3_4_No]" Member="_3_4_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_3_4_1]" Member="_3_4_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_5_Si]" Member="_3_5_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_3_5_No]" Member="_3_5_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_3_5_1]" Member="_3_5_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_5_2]" Member="_3_5_2" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_5_3]" Member="_3_5_3" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_5_4]" Member="_3_5_4" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_5_5]" Member="_3_5_5" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_5_6]" Member="_3_5_6" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_5_7]" Member="_3_5_7" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_6]" Member="_3_6" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_7]" Member="_3_7" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_8_Si]" Member="_3_8_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_3_8_No]" Member="_3_8_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_3_8_1]" Member="_3_8_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_3_9_Si]" Member="_3_9_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_3_9_No]" Member="_3_9_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_3_9_1]" Member="_3_9_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="[_4_1_Si]" Member="_4_1_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_4_1_No]" Member="_4_1_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_4_1_Algunas]" Member="_4_1_Algunas" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_4_2]" Member="_4_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[_4_3_Si]" Member="_4_3_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_4_3_No]" Member="_4_3_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[_4_3_1]" Member="_4_3_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Observaciones" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Establecimiento_Educativo_LecturaContextoEE" Member="Establecimiento_Educativo" ThisKey="IdIE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
-      <Association Name="Mediciones_LecturaContextoEE" Member="Mediciones" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Mediciones" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.LecturaContextoSE" Member="LecturaContextoSE">
@@ -426,8 +360,8 @@
       <Association Name="Mediciones_AsignaDocumentos" Member="AsignaDocumentos" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="AsignaDocumentos" />
       <Association Name="Mediciones_Consolidacion" Member="Consolidacion" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Consolidacion" />
       <Association Name="Mediciones_Evaluacion" Member="Evaluacion" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Evaluacion" />
-      <Association Name="Mediciones_LecturaContextoEE" Member="LecturaContextoEE" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="LecturaContextoEE" />
       <Association Name="Mediciones_LecturaContextoSE" Member="LecturaContextoSE" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="LecturaContextoSE" />
+      <Association Name="Mediciones_LecturaContextoEE" Member="LecturaContextoEE" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="LecturaContextoEE" />
     </Type>
   </Table>
   <Table Name="dbo.NivelesEducativos" Member="NivelesEducativos">
@@ -538,6 +472,80 @@
       <Association Name="Secretaria_Educacion_LecturaContextoSE" Member="LecturaContextoSE" ThisKey="IdSecretaria" OtherKey="IdSecretaria" Type="LecturaContextoSE" />
       <Association Name="Secretaria_Educacion_LLamadas" Member="LLamadas" ThisKey="IdSecretaria" OtherKey="IdSE" Type="LLamadas" />
       <Association Name="Consultores_Secretaria_Educacion" Member="Consultores" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Consultores" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LecturaContextoEE" Member="LecturaContextoEE">
+    <Type Name="LecturaContextoEE">
+      <Column Name="IdLecturaContextoEE" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdIE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdMedicion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="C_1" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="C_2" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="C_3" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="C_4" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="C_5" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="f11" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="f12" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="f13" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="f14" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="f15" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="d" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_1_2bUrbana]" Member="_1_2bUrbana" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_1_2bRural]" Member="_1_2bRural" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_2_1]" Member="_2_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_2_E1]" Member="_2_2_E1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_2_E2]" Member="_2_2_E2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_2_E3]" Member="_2_2_E3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_2_E4]" Member="_2_2_E4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_2_E5]" Member="_2_2_E5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_2_E6]" Member="_2_2_E6" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_3_S1]" Member="_2_3_S1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_3_S2]" Member="_2_3_S2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_3_S3]" Member="_2_3_S3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_3_S4]" Member="_2_3_S4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_3_NoSabe]" Member="_2_3_NoSabe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_3_NoTiene]" Member="_2_3_NoTiene" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_4_Si]" Member="_2_4_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_2_4_No]" Member="_2_4_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_2_5_1]" Member="_2_5_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_5_2]" Member="_2_5_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_2_5_3]" Member="_2_5_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_3_1]" Member="_3_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_2]" Member="_3_2" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_3]" Member="_3_3" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_4_Si]" Member="_3_4_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_4_No]" Member="_3_4_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_4_1]" Member="_3_4_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_Si]" Member="_3_5_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_5_No]" Member="_3_5_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_5_1]" Member="_3_5_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_2]" Member="_3_5_2" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_3]" Member="_3_5_3" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_4]" Member="_3_5_4" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_5]" Member="_3_5_5" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_6]" Member="_3_5_6" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_5_7]" Member="_3_5_7" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_6]" Member="_3_6" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_7]" Member="_3_7" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_8_Si]" Member="_3_8_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_8_No]" Member="_3_8_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_8_1]" Member="_3_8_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_3_9_Si]" Member="_3_9_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_9_No]" Member="_3_9_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_3_9_1]" Member="_3_9_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_4_1_Si]" Member="_4_1_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_4_1_No]" Member="_4_1_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_4_1_Algunas]" Member="_4_1_Algunas" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_4_2]" Member="_4_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[_4_3_Si]" Member="_4_3_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_4_3_No]" Member="_4_3_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_4_3_1]" Member="_4_3_1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[_5_1_Si]" Member="_5_1_Si" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_5_1_No]" Member="_5_1_No" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[_5_1_1]" Member="_5_1_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Observaciones" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Establecimiento_Educativo_LecturaContextoEE" Member="Establecimiento_Educativo" ThisKey="IdIE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
+      <Association Name="Mediciones_LecturaContextoEE" Member="Mediciones" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Mediciones" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

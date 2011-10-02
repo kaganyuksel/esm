@@ -107,14 +107,18 @@ namespace ESM.Evaluacion
                         }
                         if (_objevaluacion.ActualizarEvaluacion(CollectionResultados, eval, estado))
                         {
-                            string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Actualizada con exito. \\nEstado: Parcial. Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
-                            ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
+                            string fecha = DateTime.Now.AddHours(2).ToShortTimeString();
+                            //string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Actualizada con exito. <br />Estado: Parcial. Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
+                            //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
+                            lbloki.InnerHtml = String.Format("Evaluación Actualizada con exito. <br />Estado: Parcial. Hora:{0}", fecha);
                             FinalizarProcesoEvaluacionEstado();
                         }
                         else
                         {
-                            string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Actualizada sin exito. \\n Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
-                            ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
+                            //string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Actualizada sin exito. <br /> Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
+                            //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
+                            string fecha = DateTime.Now.AddHours(2).ToShortTimeString();
+                            lbloki.InnerHtml = String.Format("Evaluación Actualizada sin exito. <br />Estado: Parcial. Hora:{0}", fecha);
                             FinalizarProcesoEvaluacionEstado();
                         }
 
@@ -122,8 +126,10 @@ namespace ESM.Evaluacion
                     }
                     else
                     {
-                        string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Actualización fallo. \\n Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
-                        ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
+                        //string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Actualización fallo. <br /> Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
+                        //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
+                        string fecha = DateTime.Now.AddHours(2).ToShortTimeString();
+                        lbloki.InnerHtml = String.Format("Actualización fallo. <br />Estado: Parcial. Hora:{0}", 2);
                         FinalizarProcesoEvaluacionEstado();
                     }
                 }
@@ -169,8 +175,10 @@ namespace ESM.Evaluacion
                     }
                     if (_objevaluacion.ActualizarEvaluacion(CollectionResultados, eval, estado))
                     {
-                        string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Actualización exitosa. \\n Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
-                        ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
+                        //string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Actualización exitosa. <br /> Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
+                        //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
+                        string fecha = DateTime.Now.AddHours(2).ToShortTimeString();
+                        lbloki.InnerHtml = String.Format("Actualización exitosa.<br />Estado: Parcial. Hora:{0}", fecha);
                         FinalizarProcesoEvaluacionEstado();
                     }
 
@@ -193,6 +201,8 @@ namespace ESM.Evaluacion
             gvMediciones.DataBind();
             gvTopEval.Visible = true;
             btnVolverEE.Visible = true;
+            lbloki.Visible = true;
+            divmensaje.Visible = true;
             //int idevaluacion = Convert.ToInt32(Session["loadideval"]);
             //int idactor = Convert.ToInt32(Session["loadidactor"]);
 
@@ -268,14 +278,15 @@ namespace ESM.Evaluacion
                     if (_objevaluacion.Almacenar(CollectionResultados, idie, idmedicion, idactor, idusuario, estado, _tipo))
                     {
                         string mensaje;
-
+                        string fecha = DateTime.Now.AddHours(2).ToShortTimeString();
                         lbloki.Visible = true;
                         if (estado)
-                            mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Almacenada. \\nEstado: Parcial. Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
+                            mensaje = String.Format("Evaluación Almacenada. <br />Estado: Parcial. Hora:{0})", fecha);
                         else
-                            mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Almacenada. \\nEstado: Terminada. Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
+                            mensaje = String.Format("Evaluación Almacenada. <br />Estado: Terminada. Hora:{0})", fecha);
 
-                        ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
+                        //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
+                        lbloki.InnerHtml = mensaje;
                         FinalizarProcesoEvaluacionEstado();
 
                         cboActores.SelectedItem.Value = "7";
@@ -284,13 +295,13 @@ namespace ESM.Evaluacion
                     {
                         lbloki.InnerHtml = "Guardado Fallido.";
                         lbloki.Visible = true;
-                        ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), "$('#dtimer').dialog('open');", true);
+                        //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), "$('#dtimer').dialog('open');", true);
                         FinalizarProcesoEvaluacionEstado();
                     }
                 }
                 else
                 {
-                    Alert.Show(udpnlFiltro, "No se pudo completar el proceso de almacenamiento. \n Faltan preguntas por responder.");
+                    Alert.Show(udpnlFiltro, "No se pudo completar el proceso de almacenamiento. <br /> Faltan preguntas por responder.");
                 }
             }
             else
@@ -331,12 +342,14 @@ namespace ESM.Evaluacion
                 string mensaje;
                 if (_objevaluacion.Almacenar(CollectionResultados, idie, idmedicion, idactor, idusuario, estado, _tipo))
                 {
+                    string fecha = DateTime.Now.AddHours(2).ToShortTimeString();
                     if (estado)
-                        mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Almacenada. \\nEstado: Parcial. Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
+                        mensaje = String.Format("Evaluación Almacenada. <br />Estado: Parcial. Hora:{0}", fecha);
                     else
-                        mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Almacenada. \\nEstado: Terminada. Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
+                        mensaje = String.Format("Evaluación Almacenada. <br />Estado: Terminada. Hora:{0}", fecha);
 
-                    ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
+                    //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
+                    lbloki.InnerHtml = mensaje;
                     FinalizarProcesoEvaluacionEstado();
                 }
                 else

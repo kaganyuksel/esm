@@ -709,7 +709,9 @@
     </None>
     <None Include="Pretty\images\.DS_Store" />
     <None Include="Pretty\images\fullscreen\.DS_Store" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
