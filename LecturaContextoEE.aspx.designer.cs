@@ -148,6 +148,15 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.TextBox txtTelefonos;
         
         /// <summary>
+        /// Control txtSedes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtSedes;
+        
+        /// <summary>
         /// Control txtCorreoElectronico.
         /// </summary>
         /// <remarks>
@@ -164,15 +173,6 @@ namespace ESM {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList cblistjornadas;
-        
-        /// <summary>
-        /// Control txtSedes.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSedes;
         
         /// <summary>
         /// Control txtMunicipio.
@@ -641,6 +641,33 @@ namespace ESM {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt431;
+        
+        /// <summary>
+        /// Control rbtnSi51.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnSi51;
+        
+        /// <summary>
+        /// Control rbtnNo51.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnNo51;
+        
+        /// <summary>
+        /// Control txt511.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt511;
         
         /// <summary>
         /// Control txtObservaciones.

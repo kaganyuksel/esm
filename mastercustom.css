@@ -230,3 +230,15 @@ body
     font-weight: bold;
     text-decoration: none;
 }
+.txt input[type="text"]
+{
+    background-color:#ffffff;
+    border-width:1px;
+    border-color:#8d8d8d;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+    /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+
+
+}

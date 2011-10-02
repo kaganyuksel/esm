@@ -117,6 +117,42 @@ namespace ESM.Objetos
             set { _numerosedes = value; }
         }
 
+        private bool __c_1;
+
+        public bool C_1
+        {
+            get { return __c_1; }
+            set { __c_1 = value; }
+        }
+
+        private bool __c_2;
+
+        public bool C_2
+        {
+            get { return __c_2; }
+            set { __c_2 = value; }
+        }
+        private bool __c_3;
+
+        public bool C_3
+        {
+            get { return __c_3; }
+            set { __c_3 = value; }
+        }
+        private bool __c_4;
+
+        public bool C_4
+        {
+            get { return __c_4; }
+            set { __c_4 = value; }
+        }
+        private bool __c_5;
+
+        public bool C_5
+        {
+            get { return __c_5; }
+            set { __c_5 = value; }
+        }
         #endregion
 
         #region Seccion 2
@@ -514,6 +550,35 @@ namespace ESM.Objetos
 
         #endregion
 
+        #region Seccion 5
+
+        private bool __5_1_si;
+
+        public bool _5_1_Si
+        {
+            get { return __5_1_si; }
+            set { __5_1_si = value; }
+        }
+
+        private bool __5_1_no;
+
+        public bool _5_1_No
+        {
+            get { return __5_1_no; }
+            set { __5_1_no = value; }
+        }
+
+        private int __5_1_1;
+
+        public int _5_1_1
+        {
+            get { return __5_1_1; }
+            set { __5_1_1 = value; }
+        }
+
+
+        #endregion
+
         #region Observaciones
 
         private string _observaciones;
@@ -553,6 +618,12 @@ namespace ESM.Objetos
                     d = this._d,
                     _1_2bRural = this.__1_2_rural,
                     _1_2bUrbana = this.__1_2_urbana,
+
+                    C_1 = __c_1,
+                    C_2 = __c_2,
+                    C_3 = __c_3,
+                    C_4 = __c_4,
+                    C_5 = __c_5,
 
                     #endregion
 
@@ -619,6 +690,14 @@ namespace ESM.Objetos
 
                     #endregion
 
+                    #region Seccion 5
+
+                    _5_1_Si = this.__5_1_si,
+                    _5_1_No = this.__5_1_no,
+                    _5_1_1 = this.__5_1_1,
+
+                    #endregion
+
                     #region Seccion Observaciones
 
                     Observaciones = _observaciones
@@ -633,6 +712,133 @@ namespace ESM.Objetos
                 return true;
             }
             catch (Exception) { return false; }
+        }
+
+        public bool Actualizar(int idee, int idmedicion)
+        {
+            try
+            {
+                var lcee = (from lc in _db.LecturaContextoEE
+                            where lc.IdIE == idee && lc.IdMedicion == idmedicion
+                            select lc).Single(); ;
+
+                #region Seccion 1
+
+                lcee.Mediciones.FechaMedicion = DateTime.Now.AddHours(2);
+
+                lcee.f11 = this._f11;
+                lcee.f12 = this._f12;
+                lcee.f13 = this._f13;
+                lcee.f14 = this._f14;
+                lcee.f15 = this._f15;
+                lcee.C_1 = this.__c_1;
+                lcee.C_2 = this.__c_2;
+                lcee.C_3 = this.__c_3;
+                lcee.C_4 = this.__c_4;
+                lcee.C_5 = this.__c_5;
+                lcee.d = this._d;
+                lcee._1_2bRural = this.__1_2_rural;
+                lcee._1_2bUrbana = this.__1_2_urbana;
+
+                #endregion
+
+                #region Seccion 2
+
+                lcee._2_1 = this.__2_1;
+                lcee._2_2_E1 = this.__2_2_e1;
+                lcee._2_2_E2 = this.__2_2_e2;
+                lcee._2_2_E3 = this.__2_2_e3;
+                lcee._2_2_E4 = this.__2_2_e4;
+                lcee._2_2_E5 = this.__2_2_e5;
+                lcee._2_2_E6 = this.__2_2_e6;
+                lcee._2_3_S1 = this.__2_3_s1;
+                lcee._2_3_S2 = this.__2_3_s2;
+                lcee._2_3_S3 = this.__2_3_s3;
+                lcee._2_3_S4 = this.__2_3_s4;
+                lcee._2_3_NoSabe = this.__2_3_sNosabe;
+                lcee._2_3_NoTiene = this.__2_3_sNoTiene;
+                lcee._2_4_Si = this.___2_4_Si;
+                lcee._2_4_No = this.___2_4_No;
+                lcee._2_5_1 = this.__2_5_1;
+                lcee._2_5_2 = this.__2_5_2;
+                lcee._2_5_3 = this.__2_5_3_;
+
+                #endregion
+
+                #region Seccion 3
+
+                lcee._3_1 = this.__3_1;
+                lcee._3_2 = this.__3_2_;
+                lcee._3_3 = this.__3_3_;
+                lcee._3_4_Si = this.__3_4_Si;
+                lcee._3_4_No = this.__3_4_No;
+                lcee._3_4_1 = this.__3_4_1;
+                lcee._3_5_Si = this.__3_5_Si;
+                lcee._3_5_No = this.__3_5_No;
+                lcee._3_5_1 = this.__3_5_1;
+                lcee._3_5_2 = this.__3_5_2;
+                lcee._3_5_3 = this.__3_5_3;
+                lcee._3_5_4 = this.__3_5_4;
+                lcee._3_5_5 = this.__3_5_5;
+                lcee._3_5_6 = this.__3_5_6;
+                lcee._3_5_7 = this.__3_5_7;
+                lcee._3_6 = this.__3_6;
+                lcee._3_7 = this.__3_7;
+                lcee._3_8_Si = this.__3_8_Si;
+                lcee._3_8_No = this.__3_8_No;
+                lcee._3_8_1 = this.__3_8_1;
+                lcee._3_9_Si = this.__3_9_Si;
+                lcee._3_9_No = this.__3_9_No;
+                lcee._3_9_1 = this.__3_9_1;
+
+                #endregion
+
+                #region Seccion 4
+
+                lcee._4_1_Si = this.__4_1_Si;
+                lcee._4_1_No = this.__4_1_No;
+                lcee._4_1_Algunas = this.__4_1_Algunas;
+                lcee._4_2 = this.__4_2;
+                lcee._4_3_Si = this._4_3_Si;
+                lcee._4_3_No = this._4_3_No;
+                lcee._4_3_1 = this.__4_3_1;
+
+                #endregion
+
+                #region Seccion 5
+
+                lcee._5_1_Si = this.__5_1_si;
+                lcee._5_1_No = this.__5_1_no;
+                lcee._5_1_1 = this.__5_1_1;
+
+                #endregion
+
+                #region Seccion Observaciones
+
+                lcee.Observaciones = _observaciones;
+
+                #endregion
+
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+
+        public ESM.Model.LecturaContextoEE ObtenerLCEE(int idmedicion)
+        {
+            try
+            {
+                var lcee = (from l in _db.LecturaContextoEE
+                            where l.IdMedicion == idmedicion
+                            select l).Single();
+
+                return lcee;
+            }
+            catch (Exception) { return null; }
         }
     }
 }

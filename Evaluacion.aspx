@@ -203,10 +203,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id="contenteval" class="demo" style="width: 90%; margin: 50px auto;">
         <section>
-        <div id="dtimer" title="Información de Evaluación">
-            <label class="labelok" runat="server" id="lbloki" style="color: #006314;">
-            </label>
-        </div>
+        
             <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td>
@@ -637,6 +634,25 @@
                         "Parcial" para editar si es necesrio hacerlo, el boton "Guardar y Bloquear" almacena
                         la evaluacion en estado "Cerrada" y no permite realizar cambios.
                     </p>
+                </div>
+                <div id="divmensaje" runat="server" style="height: 35px; top: 0; position: fixed;
+                    background: green; color: #ffffff; width: 300px; margin: 0 30%; font-size: 12px;
+                    text-align: center; -moz-border-radius:2px;
+-webkit-border-radius:2px;
+border-radius:2px;
+/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+-moz-box-shadow:0px 0px 1px #000000;
+-webkit-box-shadow:0px 0px 1px #000000;
+box-shadow:0px 0px 1px #000000;
+/*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+opacity:0.95;
+-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
+/*-ms-filter must come before filter*/
+filter: alpha(opacity=95);
+/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+/*All filters must be placed together*/" visible="false">
+                    <label class="labelok" runat="server" id="lbloki">
+                    </label>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
