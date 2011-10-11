@@ -18,7 +18,7 @@ namespace EvaluationSettings
 
         }
 
-        public IQueryable<AsignaDocumentos> Show(int idmedicion)
+        public IQueryable<AsignaDocumento> Show(int idmedicion)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace EvaluationSettings
         {
             try
             {
-                AsignaDocumentos objAsignaDocumentos = new AsignaDocumentos
+                AsignaDocumento objAsignaDocumentos = new AsignaDocumento
                 {
                     IdMedicion = idmedicion,
                     IdDocumento = iddocumento,

@@ -5,3 +5,8 @@ D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\bin\ESM.dll.lastcodeanalysiss
 D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\obj\Debug\ResolveAssemblyReference.cache
 D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\obj\Debug\ESM.dll
 D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\obj\Debug\ESM.pdb
+E:\ESM\obj\Debug\ResolveAssemblyReference.cache
+E:\ESM\obj\Debug\ESM.dll
+E:\ESM\obj\Debug\ESM.pdb
+E:\ESM\bin\ESM.dll
+E:\ESM\bin\ESM.pdb

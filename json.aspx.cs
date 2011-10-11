@@ -38,7 +38,7 @@ namespace ESM
                 JavaScriptSerializer objJavaScriptSerializer = new JavaScriptSerializer();
                 var objFullCalendar = new CFullCalendar();
 
-                List<Model.Citas> objCitas = CCitas.ObtenerCitas(idConsultor);
+                List<Model.Cita> objCitas = CCitas.ObtenerCitas(idConsultor);
 
                 foreach (var item in objCitas)
                 {
@@ -57,15 +57,15 @@ namespace ESM
                         objFullCalendar.end = item.FechaFin.ToString("yyyy/MM/dd");
                     }
                     int idrama = 0;
-                    if (item.LLamadas.IdEE != null)
+                    if (item.LLamada.IdEE != null)
                     {
-                        idrama = (int)item.LLamadas.IdEE;
-                        objFullCalendar.title = item.LLamadas.Establecimiento_Educativo.Nombre;
+                        idrama = (int)item.LLamada.IdEE;
+                        objFullCalendar.title = item.LLamada.Establecimiento_Educativo.Nombre;
                     }
                     else
                     {
-                        idrama = (int)item.LLamadas.IdSE;
-                        objFullCalendar.title = item.LLamadas.Secretaria_Educacion.Nombre;
+                        idrama = (int)item.LLamada.IdSE;
+                        objFullCalendar.title = item.LLamada.Secretaria_Educacion.Nombre;
                     }
 
                     //objFullCalendar.url = Request.Url.Scheme + "://" + Request.Url.Authority + "/DescripcionCitas.aspx?id=" + idrama.ToString() + "&iframe=true&amp;width=500&amp;height=300";

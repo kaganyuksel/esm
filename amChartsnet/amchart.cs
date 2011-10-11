@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.VisualBasic;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Text;
@@ -68,7 +66,7 @@ namespace ESM.amChartsnet
                 if ((cs.IsStartupScriptRegistered(DivId) == false))
                 {
                     cs.RegisterStartupScript(cstype, DivId, sb.ToString(), true);
-                    
+
                 }
                 return "";
             }
@@ -114,7 +112,6 @@ namespace ESM.amChartsnet
         {
             try
             {
-                string Qry = "";
                 Type cstype = Pagina.GetType();
                 ClientScriptManager cs = Pagina.ClientScript;
                 StringBuilder sb = new StringBuilder();

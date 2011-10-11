@@ -958,11 +958,11 @@ namespace ESM.Evaluacion
 
             bool reload = false;
 
-            var resultbyeval = from rbe in db.ResultadosByEvaluacion
+            var resultbyeval = from rbe in db.ResultadosByEvaluacions
                                join res in db.Resultados on rbe.IdResultado equals res.IdResultados
                                join pre in db.Preguntas on res.IdPregunta equals pre.IdPregunta
                                where rbe.IdEvaluacion == ideval
-                               select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta, res.Sesiones, Ocultar = pre.Ocultar, Etiqueta = pre.Etiqueta };
+                               select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta1, res.Sesiones, Ocultar = pre.Ocultar, Etiqueta = pre.Etiqueta };
 
             for (int g = 0; g < 5; g++)
             {
@@ -971,40 +971,40 @@ namespace ESM.Evaluacion
                 switch (g + 1)
                 {
                     case 1:
-                        resultbyeval = from rbe in db.ResultadosByEvaluacion
+                        resultbyeval = from rbe in db.ResultadosByEvaluacions
                                        join res in db.Resultados on rbe.IdResultado equals res.IdResultados
                                        join pre in db.Preguntas on res.IdPregunta equals pre.IdPregunta
-                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 1
-                                       select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta, res.Sesiones, pre.Ocultar, pre.Etiqueta };
+                                       where rbe.IdEvaluacion == ideval && pre.Componente.Proceso.Ambiente.IdAmbiente == 1
+                                       select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta1, res.Sesiones, pre.Ocultar, pre.Etiqueta };
                         break;
                     case 2:
-                        resultbyeval = from rbe in db.ResultadosByEvaluacion
+                        resultbyeval = from rbe in db.ResultadosByEvaluacions
                                        join res in db.Resultados on rbe.IdResultado equals res.IdResultados
                                        join pre in db.Preguntas on res.IdPregunta equals pre.IdPregunta
-                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 2
-                                       select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta, res.Sesiones, pre.Ocultar, pre.Etiqueta };
+                                       where rbe.IdEvaluacion == ideval && pre.Componente.Proceso.Ambiente.IdAmbiente == 2
+                                       select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta1, res.Sesiones, pre.Ocultar, pre.Etiqueta };
                         break;
                     case 3:
-                        resultbyeval = from rbe in db.ResultadosByEvaluacion
+                        resultbyeval = from rbe in db.ResultadosByEvaluacions
                                        join res in db.Resultados on rbe.IdResultado equals res.IdResultados
                                        join pre in db.Preguntas on res.IdPregunta equals pre.IdPregunta
-                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 3
-                                       select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta, res.Sesiones, pre.Ocultar, pre.Etiqueta };
+                                       where rbe.IdEvaluacion == ideval && pre.Componente.Proceso.Ambiente.IdAmbiente == 3
+                                       select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta1, res.Sesiones, pre.Ocultar, pre.Etiqueta };
                         break;
 
                     case 4:
-                        resultbyeval = from rbe in db.ResultadosByEvaluacion
+                        resultbyeval = from rbe in db.ResultadosByEvaluacions
                                        join res in db.Resultados on rbe.IdResultado equals res.IdResultados
                                        join pre in db.Preguntas on res.IdPregunta equals pre.IdPregunta
-                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 4
-                                       select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta, res.Sesiones, pre.Ocultar, pre.Etiqueta };
+                                       where rbe.IdEvaluacion == ideval && pre.Componente.Proceso.Ambiente.IdAmbiente == 4
+                                       select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta1, res.Sesiones, pre.Ocultar, pre.Etiqueta };
                         break;
                     case 5:
-                        resultbyeval = from rbe in db.ResultadosByEvaluacion
+                        resultbyeval = from rbe in db.ResultadosByEvaluacions
                                        join res in db.Resultados on rbe.IdResultado equals res.IdResultados
                                        join pre in db.Preguntas on res.IdPregunta equals pre.IdPregunta
-                                       where rbe.IdEvaluacion == ideval && pre.Componentes.Procesos.Ambientes.IdAmbiente == 5
-                                       select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta, res.Sesiones, pre.Ocultar, pre.Etiqueta };
+                                       where rbe.IdEvaluacion == ideval && pre.Componente.Proceso.Ambiente.IdAmbiente == 5
+                                       select new { res.IdPregunta, res.IdResultados, res.Valor, res.Pendiente, pre.Pregunta1, res.Sesiones, pre.Ocultar, pre.Etiqueta };
                         break;
                 }
 
@@ -1056,7 +1056,7 @@ namespace ESM.Evaluacion
                                 lbllp.Text = "P";
                             }
 
-                            if (listresults[e].Pregunta.Trim().Length == 0 || listresults[e].Pregunta == null || listresults[e].Pregunta == "")
+                            if (listresults[e].Pregunta1.Trim().Length == 0 || listresults[e].Pregunta1 == null || listresults[e].Pregunta1 == "")
                             {
                                 //listresults[e].Pregunta.Replace = listresults[e].Etiqueta.ToString();
                                 reload = true;
@@ -1083,7 +1083,7 @@ namespace ESM.Evaluacion
 
                             }
 
-                            ESM.Model.Preguntas objPreguntas = _objevaluacion.ObtenerDatosPregunta(Convert.ToInt32(idpregunta.Text));
+                            ESM.Model.Pregunta objPreguntas = _objevaluacion.ObtenerDatosPregunta(Convert.ToInt32(idpregunta.Text));
                             if ((bool)objPreguntas.Sesiones)
                             {
                                 objSesiones.Visible = true;
@@ -1110,7 +1110,7 @@ namespace ESM.Evaluacion
                 cboActores.SelectedValue = idactor.ToString();
                 //lblActorEvaluado.Text = cboActores.SelectedItem.Text;
 
-                var estadoeval = from e in db.Evaluacion
+                var estadoeval = from e in db.Evaluacions
                                  where e.IdEvaluacion == ideval
                                  select e;
 
@@ -1148,7 +1148,7 @@ namespace ESM.Evaluacion
             try
             {
                 #region Cargar Preguntas Ambientes
-                List<IQueryable<ESM.Model.Preguntas>> cpreguntas = new List<IQueryable<Model.Preguntas>>();
+                List<IQueryable<ESM.Model.Pregunta>> cpreguntas = new List<IQueryable<Model.Pregunta>>();
                 cpreguntas = objevaluacion.LoadEvaluation();
                 int contador = 0;
 
@@ -1244,7 +1244,7 @@ namespace ESM.Evaluacion
                 /*Instancio*/
                 Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-                var rFiltro = from i in db.Establecimiento_Educativo
+                var rFiltro = from i in db.Establecimiento_Educativos
                               where i.Nombre.Contains(texto)
                               select i;
 

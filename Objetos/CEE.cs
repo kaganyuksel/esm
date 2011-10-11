@@ -18,7 +18,7 @@ namespace ESM.Objetos
         {
             try
             {
-                var cee = from ee in _db.Establecimiento_Educativo
+                var cee = from ee in _db.Establecimiento_Educativos
                           where ee.Secretaria_Educacion.IdConsultor == idconsultor
                           select ee;
 
@@ -31,7 +31,7 @@ namespace ESM.Objetos
         {
             try
             {
-                var ee = (from ie in _db.Establecimiento_Educativo
+                var ee = (from ie in _db.Establecimiento_Educativos
                           where ie.IdIE == idie
                           select ie).Single();
 
@@ -45,7 +45,7 @@ namespace ESM.Objetos
         {
             try
             {
-                var med = (from m in _db.LecturaContextoEE
+                var med = (from m in _db.LecturaContextoEEs
                            where m.IdIE == idee
                            select m).Take(1);
 
@@ -58,7 +58,7 @@ namespace ESM.Objetos
         {
             try
             {
-                Mediciones objMediciones = new Mediciones
+                Medicione objMediciones = new Medicione
                 {
                     FechaMedicion = fecha
                 };

@@ -14,12 +14,12 @@ namespace ESM.Objetos
         #endregion
 
 
-        public static List<ESM.Model.Citas> ObtenerCitas(int idconsultor)
+        public static List<ESM.Model.Cita> ObtenerCitas(int idconsultor)
         {
             try
             {
                 var vcitas = from c in dbAgenda.Citas
-                             where c.LLamadas.Secretaria_Educacion.IdConsultor == idconsultor || c.LLamadas.Establecimiento_Educativo.Secretaria_Educacion.IdConsultor == idconsultor
+                             where c.LLamada.Secretaria_Educacion.IdConsultor == idconsultor || c.LLamada.Establecimiento_Educativo.Secretaria_Educacion.IdConsultor == idconsultor
                              select c;
 
                 return vcitas.ToList();

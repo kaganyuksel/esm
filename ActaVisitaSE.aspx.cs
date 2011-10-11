@@ -29,7 +29,7 @@ namespace ESM
                         if (rol == "Administrador")
                         {
                             ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
-                            var se = from s in db.Secretaria_Educacion
+                            var se = from s in db.Secretaria_Educacions
                                      select s;
                             gvResultados.DataSource = se;
                             gvResultados.DataBind();
@@ -39,7 +39,7 @@ namespace ESM
                         else if (rol == "Consultor")
                         {
                             ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
-                            var se = from s in db.Secretaria_Educacion
+                            var se = from s in db.Secretaria_Educacions
                                      where s.IdConsultor == _objCRoles.IdConsultor
                                      select s;
 
@@ -91,7 +91,7 @@ namespace ESM
                 /*Instancio*/
                 Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-                var rFiltro = from i in db.Secretaria_Educacion
+                var rFiltro = from i in db.Secretaria_Educacions
                               where i.Nombre.Contains(texto)
                               select i;
 
@@ -148,7 +148,7 @@ namespace ESM
             {
                 ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-                var ac = from a in db.ActaVisitaSE
+                var ac = from a in db.ActaVisitaSEs
                          where a.IdMedicion == medicion
                          select a;
 
@@ -177,7 +177,7 @@ namespace ESM
                     IdMedicion = idmedicion,
                 };
 
-                db.ActaVisitaSE.InsertOnSubmit(objActaVisitaSE);
+                db.ActaVisitaSEs.InsertOnSubmit(objActaVisitaSE);
                 db.SubmitChanges();
 
                 return objActaVisitaSE.IdActaVisita;
@@ -195,7 +195,7 @@ namespace ESM
             {
                 ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-                var seacc = from s in db.AsociadoActaVisitaSE
+                var seacc = from s in db.AsociadoActaVisitaSEs
                             where s.IdActaVisita == idacta
                             select new { s.Nombre, s.Telefono, s.CorreoElectronico, s.Cargo };
 
@@ -206,7 +206,7 @@ namespace ESM
 
                 ObtenerTema(gvIndividuos);
 
-                var ob = (from o in db.ActaVisitaSE
+                var ob = (from o in db.ActaVisitaSEs
                           where o.IdActaVisita == idacta
                           select new { o.Observaciones }).Single();
 
@@ -235,7 +235,7 @@ namespace ESM
             };
 
 
-            db.AsociadoActaVisitaSE.InsertOnSubmit(objAsociadosActaVisitaSE);
+            db.AsociadoActaVisitaSEs.InsertOnSubmit(objAsociadosActaVisitaSE);
             try
             {
                 db.SubmitChanges();
@@ -289,7 +289,7 @@ namespace ESM
                 int idacta = Convert.ToInt32(Session["idactaSE"]);
                 ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-                var acse = (from ase in db.ActaVisitaSE
+                var acse = (from ase in db.ActaVisitaSEs
                             where ase.IdActaVisita == idacta
                             select ase).Single();
 
@@ -318,7 +318,7 @@ namespace ESM
 
             ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-            var seinfo = (from se in db.Secretaria_Educacion
+            var seinfo = (from se in db.Secretaria_Educacions
                           where se.IdSecretaria == idse
                           select se).Single();
 
@@ -330,9 +330,9 @@ namespace ESM
             txtTelefonoEE.Enabled = false;
 
 
-            var medse = (from lc in db.LecturaContextoSE
+            var medse = (from lc in db.LecturaContextoSEs
                          where lc.IdSecretaria == idse
-                         select new { lc.IdMedicion, Fecha = lc.Mediciones.FechaMedicion }).Distinct();
+                         select new { lc.IdMedicion, Fecha = lc.Medicione.FechaMedicion }).Distinct();
 
             if (medse != null)
             {
