@@ -78,6 +78,13 @@
     <Compile Include="ActaVisitaSE.aspx.designer.cs">
       <DependentUpon>ActaVisitaSE.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddCita.aspx.cs">
+      <DependentUpon>AddCita.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddCita.aspx.designer.cs">
+      <DependentUpon>AddCita.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Alert.cs" />
     <Compile Include="amChartsnet\amchart.cs" />
     <Compile Include="AmCharts\flash\export.aspx.cs">
@@ -184,6 +191,7 @@
     </Compile>
     <Content Include="ActaVisitaEE.aspx" />
     <Content Include="ActaVisitaSE.aspx" />
+    <Content Include="AddCita.aspx" />
     <Content Include="AmCharts\flash\amcharts_key.txt" />
     <Content Include="AmCharts\flash\amcolumn.swf" />
     <Content Include="AmCharts\flash\amline.swf" />

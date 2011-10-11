@@ -19,7 +19,7 @@ namespace ESM.Objetos
             try
             {
                 var cee = from ee in _db.Establecimiento_Educativos
-                          where ee.Secretaria_Educacion.IdConsultor == idconsultor
+                          where ee.Secretaria_Educacion.IdConsultor == idconsultor && ee.Estado == true
                           select ee;
 
                 return cee;

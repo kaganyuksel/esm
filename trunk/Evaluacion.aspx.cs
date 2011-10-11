@@ -44,10 +44,12 @@ namespace ESM.Evaluacion
                         RadioButton objsi = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnSi");
                         RadioButton objno = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnNo");
                         CheckBox objnoapli = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnNoAplica");
-
-                        if (objsi.Checked == false && objno.Checked == false)
+                        if (objsi.Visible && objno.Visible)
                         {
-                            valid = false;
+                            if (objsi.Checked == false && objno.Checked == false)
+                            {
+                                valid = false;
+                            }
                         }
                     }
                 }
@@ -66,7 +68,7 @@ namespace ESM.Evaluacion
                         int contador = 0;
                         for (int p = 0; p < 5; p++)
                         {
-                            GridView objGridView = (GridView)Page.Form.FindControl(String.Format("gvAmb{0}", p));
+                            GridView objGridView = (GridView)udpnlFiltro.FindControl(String.Format("gvAmb{0}", p + 1));
 
                             for (int e = 0; e < objGridView.Rows.Count; e++)
                             {
@@ -190,24 +192,11 @@ namespace ESM.Evaluacion
 
         protected void FinalizarProcesoEvaluacionEstado()
         {
-            //gvAmb1.Visible = false;
-            //gvAmb2.Visible = false;
-            //gvAmb3.Visible = false;
-            //gvAmb4.Visible = false;
-            //gvAmb5.Visible = false;
-            //informacionuno.Visible = false;
-            //btnalmacenarparcial.Visible = false;
-            //btnDefinitiva.Visible = false;
             gvMediciones.DataBind();
             gvTopEval.Visible = true;
             btnVolverEE.Visible = true;
             lbloki.Visible = true;
             divmensaje.Visible = true;
-            //int idevaluacion = Convert.ToInt32(Session["loadideval"]);
-            //int idactor = Convert.ToInt32(Session["loadidactor"]);
-
-            //CargarParcial(idevaluacion, idactor);
-            //cboActores.SelectedItem.Value = "7";
         }
 
         protected void AlmacenarInformacion(bool estado, bool auto = false)
@@ -229,10 +218,12 @@ namespace ESM.Evaluacion
                     RadioButton objsi = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnSi");
                     RadioButton objno = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnNo");
                     CheckBox objnoapli = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnNoAplica");
-
-                    if (objsi.Checked == false && objno.Checked == false)
+                    if (objsi.Visible && objno.Visible)
                     {
-                        valid = false;
+                        if (objsi.Checked == false && objno.Checked == false)
+                        {
+                            valid = false;
+                        }
                     }
                 }
             }
@@ -432,7 +423,10 @@ namespace ESM.Evaluacion
                 }
             }
             if (!exist)
+            {
                 AlmacenarInformacion(false);
+                Session.Add("ideval", _objevaluacion.IdEvaluacion);
+            }
             else
                 AlmacenarParcialDefinitiva(true);
         }
@@ -882,6 +876,7 @@ namespace ESM.Evaluacion
         {
             int idmedicion = _objevaluacion.CrearMedion();
             Session.Remove("idmedicion");
+            Session.Remove("ideval");
             Session.Add("idmedicion", idmedicion);
             btnMedicion.Visible = false;
             adocumentos.Title = "Información ESM";

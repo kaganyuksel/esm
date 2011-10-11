@@ -57,15 +57,15 @@ namespace ESM
                         objFullCalendar.end = item.FechaFin.ToString("yyyy/MM/dd");
                     }
                     int idrama = 0;
-                    if (item.LLamada.IdEE != null)
+                    if (item.IdEE != null)
                     {
-                        idrama = (int)item.LLamada.IdEE;
-                        objFullCalendar.title = item.LLamada.Establecimiento_Educativo.Nombre;
+                        idrama = (int)item.IdEE;
+                        objFullCalendar.title = item.Establecimiento_Educativo.Nombre;
                     }
                     else
                     {
-                        idrama = (int)item.LLamada.IdSE;
-                        objFullCalendar.title = item.LLamada.Secretaria_Educacion.Nombre;
+                        idrama = (int)item.IdSE;
+                        objFullCalendar.title = item.Secretaria_Educacion.Nombre;
                     }
 
                     //objFullCalendar.url = Request.Url.Scheme + "://" + Request.Url.Authority + "/DescripcionCitas.aspx?id=" + idrama.ToString() + "&iframe=true&amp;width=500&amp;height=300";

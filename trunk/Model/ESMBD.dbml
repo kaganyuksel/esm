@@ -141,14 +141,16 @@
   <Table Name="dbo.Citas" Member="Citas">
     <Type Name="Cita">
       <Column Name="IdCita" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IdLLamada" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdEstadoCita" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FechaInicio" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="FechaFin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Lugar" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IdSE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdEE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Establecimiento_Educativo_Cita" Member="Establecimiento_Educativo" ThisKey="IdEE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
       <Association Name="EstadoCita_Cita" Member="EstadoCita" ThisKey="IdEstadoCita" OtherKey="IdEstadoCita" Type="EstadoCita" IsForeignKey="true" />
-      <Association Name="LLamada_Cita" Member="LLamada" ThisKey="IdLLamada" OtherKey="IdLlamada" Type="LLamada" IsForeignKey="true" />
+      <Association Name="Secretaria_Educacion_Cita" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Componentes" Member="Componentes">
@@ -245,6 +247,7 @@
       <Column Name="IdSE" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Establecimiento_Educativo_ActaVisitaEE" Member="ActaVisitaEEs" ThisKey="IdIE" OtherKey="IdEE" Type="ActaVisitaEE" />
+      <Association Name="Establecimiento_Educativo_Cita" Member="Citas" ThisKey="IdIE" OtherKey="IdEE" Type="Cita" />
       <Association Name="Establecimiento_Educativo_Consolidacion" Member="Consolidacions" ThisKey="IdIE" OtherKey="IdIE" Type="Consolidacion" />
       <Association Name="Establecimiento_Educativo_Evaluacion" Member="Evaluacions" ThisKey="IdIE" OtherKey="IdIE" Type="Evaluacion" />
       <Association Name="Establecimiento_Educativo_LecturaContextoEE" Member="LecturaContextoEEs" ThisKey="IdIE" OtherKey="IdIE" Type="LecturaContextoEE" />
@@ -432,7 +435,6 @@
       <Column Name="IdEstadoLLamada" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="LLamada_Cita" Member="Citas" ThisKey="IdLlamada" OtherKey="IdLLamada" Type="Cita" />
       <Association Name="Establecimiento_Educativo_LLamada" Member="Establecimiento_Educativo" ThisKey="IdEE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
       <Association Name="EstadoLLamada_LLamada" Member="EstadoLLamada" ThisKey="IdEstadoLLamada" OtherKey="IdEstadoLLamada" Type="EstadoLLamada" IsForeignKey="true" />
       <Association Name="Usuario_LLamada" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
@@ -555,6 +557,7 @@
       <Column Name="[Correo Electronico]" Member="Correo_Electronico" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="IdConsultor" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Secretaria_Educacion_ActaVisitaSE" Member="ActaVisitaSEs" ThisKey="IdSecretaria" OtherKey="IdSE" Type="ActaVisitaSE" />
+      <Association Name="Secretaria_Educacion_Cita" Member="Citas" ThisKey="IdSecretaria" OtherKey="IdSE" Type="Cita" />
       <Association Name="Secretaria_Educacion_Establecimiento_Educativo" Member="Establecimiento_Educativos" ThisKey="IdSecretaria" OtherKey="IdSE" Type="Establecimiento_Educativo" />
       <Association Name="Secretaria_Educacion_Evaluacion" Member="Evaluacions" ThisKey="IdSecretaria" OtherKey="IdSE" Type="Evaluacion" />
       <Association Name="Secretaria_Educacion_LecturaContextoSE" Member="LecturaContextoSEs" ThisKey="IdSecretaria" OtherKey="IdSecretaria" Type="LecturaContextoSE" />
