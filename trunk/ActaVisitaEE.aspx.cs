@@ -64,7 +64,7 @@ namespace ESM
                 /*Instancio*/
                 Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-                var rFiltro = from i in db.Establecimiento_Educativo
+                var rFiltro = from i in db.Establecimiento_Educativos
                               where i.Nombre.Contains(texto)
                               select i;
 
@@ -167,7 +167,7 @@ namespace ESM
         protected void CargarActores(int idacta)
         {
             ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
-            var dir = from d in db.AsociadosActaVisitaEE
+            var dir = from d in db.AsociadosActaVisitaEEs
                       where d.IdActaVisita == idacta && d.IdActor == 6
                       select new { d.Nombre, d.Telefono, d.CorreoElectronico, d.Cargo };
 
@@ -176,7 +176,7 @@ namespace ESM
 
             ObtenerTema(gvDirectivos);
 
-            var est = from e in db.AsociadosActaVisitaEE
+            var est = from e in db.AsociadosActaVisitaEEs
                       where e.IdActaVisita == idacta && e.IdActor == 1
                       select new { e.Nombre, e.Telefono, e.CorreoElectronico, e.Grado };
 
@@ -185,16 +185,16 @@ namespace ESM
 
             ObtenerTema(gvEstudiantes);
 
-            var pad = from p in db.AsociadosActaVisitaEE
+            var pad = from p in db.AsociadosActaVisitaEEs
                       where p.IdActaVisita == idacta && p.IdActor == 4
-                      select new { p.Nombre, p.Telefono, p.CorreoElectronico, p.GradoHijos, p.NivelesEducativos.NivelEducativo };
+                      select new { p.Nombre, p.Telefono, p.CorreoElectronico, p.GradoHijos, p.NivelesEducativo.NivelEducativo };
 
             gvPadresFamilia.DataSource = pad;
             gvPadresFamilia.DataBind();
 
             ObtenerTema(gvPadresFamilia);
-
-            var edu = from ed in db.AsociadosActaVisitaEE
+            
+            var edu = from ed in db.AsociadosActaVisitaEEs
                       where ed.IdActaVisita == idacta && ed.IdActor == 3
                       select new { ed.Nombre, ed.Telefono, ed.CorreoElectronico, ed.AreasEnseñansa, ed.GradosEnseñansa };
 
@@ -203,7 +203,7 @@ namespace ESM
 
             ObtenerTema(gvEducadores);
 
-            var ob = (from o in db.ActaVisitaEE
+            var ob = (from o in db.ActaVisitaEEs
                       where o.IdActaVisita == idacta
                       select new { o.Observaciones }).Single();
 
@@ -253,7 +253,7 @@ namespace ESM
             {
                 ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-                var ac = from a in db.ActaVisitaEE
+                var ac = from a in db.ActaVisitaEEs
                          where a.IdMedicion == medicion
                          select a;
 
@@ -282,7 +282,7 @@ namespace ESM
                     IdMedicion = idmedicion,
                 };
 
-                db.ActaVisitaEE.InsertOnSubmit(objActaVisitaEE);
+                db.ActaVisitaEEs.InsertOnSubmit(objActaVisitaEE);
                 db.SubmitChanges();
 
                 return objActaVisitaEE.IdActaVisita;
@@ -351,7 +351,7 @@ namespace ESM
                 };
             }
 
-            db.AsociadosActaVisitaEE.InsertOnSubmit(objAsociadosActaVisitaEE);
+            db.AsociadosActaVisitaEEs.InsertOnSubmit(objAsociadosActaVisitaEE);
             try
             {
                 db.SubmitChanges();
@@ -477,7 +477,7 @@ namespace ESM
                 int idacta = Convert.ToInt32(Session["idactaEE"]);
                 ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-                var acee = (from aee in db.ActaVisitaEE
+                var acee = (from aee in db.ActaVisitaEEs
                             where aee.IdActaVisita == idacta
                             select aee).Single();
 

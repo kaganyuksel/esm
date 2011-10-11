@@ -706,7 +706,7 @@ namespace ESM.Objetos
 
                 };
 
-                _db.LecturaContextoEE.InsertOnSubmit(objLecturaContextoEE);
+                _db.LecturaContextoEEs.InsertOnSubmit(objLecturaContextoEE);
                 _db.SubmitChanges();
 
                 return true;
@@ -718,13 +718,13 @@ namespace ESM.Objetos
         {
             try
             {
-                var lcee = (from lc in _db.LecturaContextoEE
+                var lcee = (from lc in _db.LecturaContextoEEs
                             where lc.IdIE == idee && lc.IdMedicion == idmedicion
                             select lc).Single(); ;
 
                 #region Seccion 1
 
-                lcee.Mediciones.FechaMedicion = DateTime.Now.AddHours(2);
+                lcee.Medicione.FechaMedicion = DateTime.Now.AddHours(2);
 
                 lcee.f11 = this._f11;
                 lcee.f12 = this._f12;
@@ -832,7 +832,7 @@ namespace ESM.Objetos
         {
             try
             {
-                var lcee = (from l in _db.LecturaContextoEE
+                var lcee = (from l in _db.LecturaContextoEEs
                             where l.IdMedicion == idmedicion
                             select l).Single();
 

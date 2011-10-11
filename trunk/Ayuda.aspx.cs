@@ -13,12 +13,12 @@ namespace ESM
         {
             if (Request.QueryString["id"] != null)
             {
-                var countp = from des in new ESM.Model.ESMBDDataContext().AyudaByPregunta
+                var countp = from des in new ESM.Model.ESMBDDataContext().AyudaByPreguntas
                              where des.IdPregunta == Convert.ToInt32(Request.QueryString["id"])
                              select des;
                 if (countp.Count() != 0)
                 {
-                    var desc = (from des in new ESM.Model.ESMBDDataContext().AyudaByPregunta
+                    var desc = (from des in new ESM.Model.ESMBDDataContext().AyudaByPreguntas
                                 where des.IdPregunta == Convert.ToInt32(Request.QueryString["id"])
                                 select des).Single();
 

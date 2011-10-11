@@ -64,7 +64,7 @@ namespace ESM.Objetos
                 var us = (from u in _db.Usuarios
                           join c in _db.Consultores on u.IdConsultor equals c.IdConsultor
                           where u.IdUsuario == idusuario
-                          select new { u.Roles.Rol, c.Identificacion, c.IdConsultor }).Single();
+                          select new { u.Role.Rol, c.Identificacion, c.IdConsultor }).Single();
                 _idconsultor = us.IdConsultor;
                 _identificacion = (int)us.Identificacion;
                 return us.Rol;

@@ -9,16 +9,16 @@ namespace ESM.Objetos
     {
         ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-        public string ObtenerConslAmbiente(int idmedicion)
+        public string ObtenerConslAmbientes(int idmedicion)
         {
-            int consolidadoNo = (from con in db.Consolidacion
+            int consolidadoNo = (from con in db.Consolidacions
                                  where con.IdMedicion == idmedicion
                                  select con.IdConsolidacion).Single();
 
-            var conls = from conamb in db.ConslAmbiente
+            var conls = from conamb in db.ConslAmbientes
                         join amd in db.Ambientes on conamb.IdAmbiente equals amd.IdAmbiente
                         where conamb.IdConsolidado == consolidadoNo
-                        select new { amd.Ambiente, conamb.Valor };
+                        select new { amd.Ambiente1, conamb.Valor };
 
 
             object[,] colseries = null; /*{ { "Ambiente1", "Ambiente2" }, { 0, 1 } };*/
@@ -30,7 +30,7 @@ namespace ESM.Objetos
             {
 
 
-                colseries[contador, 0] = item.Ambiente;
+                colseries[contador, 0] = item.Ambiente1;
                 colseries[contador, 1] = contador;
 
                 contador++;
@@ -66,14 +66,14 @@ namespace ESM.Objetos
 
         public string ObtenerProcesos(int idmedicion)
         {
-            int consolidadoNo = (from con in db.Consolidacion
+            int consolidadoNo = (from con in db.Consolidacions
                                  where con.IdMedicion == idmedicion
                                  select con.IdConsolidacion).Single();
 
-            var conls = from conamb in db.ConslProceso
+            var conls = from conamb in db.ConslProcesos
                         join pro in db.Procesos on conamb.IdProceso equals pro.IdProceso
                         where conamb.IdConsolidado == consolidadoNo
-                        select new { pro.Proceso, conamb.Valor };
+                        select new { pro.Proceso1, conamb.Valor };
 
 
             object[,] colseries = null; /*{ { "Ambiente1", "Ambiente2" }, { 0, 1 } };*/
@@ -85,7 +85,7 @@ namespace ESM.Objetos
             {
 
 
-                colseries[contador, 0] = item.Proceso;
+                colseries[contador, 0] = item.Proceso1;
                 colseries[contador, 1] = contador;
 
                 contador++;
@@ -121,14 +121,14 @@ namespace ESM.Objetos
 
         public string ObtenerComponentes(int idmedicion)
         {
-            int consolidadoNo = (from con in db.Consolidacion
+            int consolidadoNo = (from con in db.Consolidacions
                                  where con.IdMedicion == idmedicion
                                  select con.IdConsolidacion).Single();
 
-            var conls = from concomp in db.ConslComponente
+            var conls = from concomp in db.ConslComponentes
                         join com in db.Componentes on concomp.IdComponente equals com.IdComponente
                         where concomp.IdConsolidado == consolidadoNo
-                        select new { com.Componente, concomp.Valor };
+                        select new { com.Componente1, concomp.Valor };
 
 
             object[,] colseries = null; /*{ { "Ambiente1", "Ambiente2" }, { 0, 1 } };*/
@@ -140,7 +140,7 @@ namespace ESM.Objetos
             {
 
 
-                colseries[contador, 0] = item.Componente;
+                colseries[contador, 0] = item.Componente1;
                 colseries[contador, 1] = contador;
 
                 contador++;
@@ -196,19 +196,19 @@ namespace ESM.Objetos
             {
                 foreach (var item in amb)
                 {
-                    if (item.Ambiente == nombre)
+                    if (item.Ambiente1 == nombre)
                         banderaambiente = true;
                     else
                     {
                         foreach (var ipro in pro)
                         {
-                            if (ipro.Proceso == nombre)
+                            if (ipro.Proceso1 == nombre)
                                 banderaproceso = true;
                             else
                             {
                                 foreach (var icom in com)
                                 {
-                                    if (icom.Componente == nombre)
+                                    if (icom.Componente1 == nombre)
                                         banderacomponente = true;
                                 }
                             }
@@ -222,13 +222,13 @@ namespace ESM.Objetos
 
                 foreach (var ipro in pro)
                 {
-                    if (ipro.Proceso == nombre)
+                    if (ipro.Proceso1 == nombre)
                         banderaproceso = true;
                     else
                     {
                         foreach (var icom in com)
                         {
-                            if (icom.Componente == nombre)
+                            if (icom.Componente1 == nombre)
                                 banderacomponente = true;
                         }
                     }
@@ -249,7 +249,7 @@ namespace ESM.Objetos
         {
             try
             {
-                int conso = (from con in db.Consolidacion
+                int conso = (from con in db.Consolidacions
                              where con.IdMedicion == idmedicion
                              select con).Count();
 

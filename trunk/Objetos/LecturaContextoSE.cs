@@ -61,12 +61,28 @@ namespace ESM.LecturasContexto
             set { _2_2_3EE = value; }
         }
 
+        private int _2_2_3EE_Cant;
+
+        public int __2_2_3EE_Cant
+        {
+            get { return _2_2_3EE_Cant; }
+            set { _2_2_3EE_Cant = value; }
+        }
+
         private bool _2_2_3EST;
 
         public bool __2_2_3EST
         {
             get { return _2_2_3EST; }
             set { _2_2_3EST = value; }
+        }
+
+        private int _2_2_3EST_Cant;
+
+        public int __2_2_3EST_Cant
+        {
+            get { return _2_2_3EST_Cant; }
+            set { _2_2_3EST_Cant = value; }
         }
 
         private bool _2_2_3EDU;
@@ -77,6 +93,14 @@ namespace ESM.LecturasContexto
             set { _2_2_3EDU = value; }
         }
 
+        private int _2_2_3EDU_Cant;
+
+        public int __2_2_3EDU_Cant
+        {
+            get { return _2_2_3EDU_Cant; }
+            set { _2_2_3EDU_Cant = value; }
+        }
+
         private bool _2_2_3DIR;
 
         public bool __2_2_3DIR
@@ -84,6 +108,15 @@ namespace ESM.LecturasContexto
             get { return _2_2_3DIR; }
             set { _2_2_3DIR = value; }
         }
+
+        private int _2_2_3DIR_Cant;
+
+        public int __2_2_3DIR_Cant
+        {
+            get { return _2_2_3DIR_Cant; }
+            set { _2_2_3DIR_Cant = value; }
+        }
+
         private bool _2_2_3PAD;
 
         public bool __2_2_3PAD
@@ -92,12 +125,92 @@ namespace ESM.LecturasContexto
             set { _2_2_3PAD = value; }
         }
 
-        private string _2_2_3Otro;
+        private int _2_2_3PAD_Cant;
 
-        public string __2_2_3Otro
+        public int __2_2_3PAD_Cant
         {
-            get { return _2_2_3Otro; }
-            set { _2_2_3Otro = value; }
+            get { return _2_2_3PAD_Cant; }
+            set { _2_2_3PAD_Cant = value; }
+        }
+
+        private string _2_2_3Otro_Cual_1;
+
+        public string __2_2_3Otro_Cual_1
+        {
+            get { return _2_2_3Otro_Cual_1; }
+            set { _2_2_3Otro_Cual_1 = value; }
+        }
+
+        private int _2_2_3Otro_Cual_1_Cant;
+
+        public int __2_2_3Otro_Cual_1_Cant
+        {
+            get { return _2_2_3Otro_Cual_1_Cant; }
+            set { _2_2_3Otro_Cual_1_Cant = value; }
+        }
+
+        private string _2_2_3Otro_Cual_2;
+
+        public string __2_2_3Otro_Cual_2
+        {
+            get { return _2_2_3Otro_Cual_2; }
+            set { _2_2_3Otro_Cual_2 = value; }
+        }
+
+        private int _2_2_3Otro_Cual_2_Cant;
+
+        public int __2_2_3Otro_Cual_2_Cant
+        {
+            get { return _2_2_3Otro_Cual_2_Cant; }
+            set { _2_2_3Otro_Cual_2_Cant = value; }
+        }
+
+        private string _2_2_3Otro_Cual_3;
+
+        public string __2_2_3Otro_Cual_3
+        {
+            get { return _2_2_3Otro_Cual_3; }
+            set { _2_2_3Otro_Cual_3 = value; }
+        }
+
+        private int _2_2_3Otro_Cual_3_Cant;
+
+        public int __2_2_3Otro_Cual_3_Cant
+        {
+            get { return _2_2_3Otro_Cual_3_Cant; }
+            set { _2_2_3Otro_Cual_3_Cant = value; }
+        }
+
+        private string _2_2_3Otro_Cual_4;
+
+        public string __2_2_3Otro_Cual_4
+        {
+            get { return _2_2_3Otro_Cual_4; }
+            set { _2_2_3Otro_Cual_4 = value; }
+        }
+
+        private int _2_2_3Otro_Cual_4_Cant;
+
+        public int __2_2_3Otro_Cual_4_Cant
+        {
+            get { return _2_2_3Otro_Cual_4_Cant; }
+            set { _2_2_3Otro_Cual_4_Cant = value; }
+        }
+
+        private string _2_2_3Otro_Cual_5;
+
+        public string __2_2_3Otro_Cual_5
+        {
+            get { return _2_2_3Otro_Cual_5; }
+            set { _2_2_3Otro_Cual_5 = value; }
+        }
+
+        private int _2_2_3Otro_Cual_5_Cant;
+
+        public int __2_2_3Otro_Cual_5_Cant
+        {
+            get { return _2_2_3Otro_Cual_5_Cant; }
+            set { _2_2_3Otro_Cual_5_Cant = value; }
         }
 
         private string _2_2_4;
@@ -398,11 +511,25 @@ namespace ESM.LecturasContexto
                     _2_2_1_ = _2_2_1,
                     _2_2_2_ = _2_2_2,
                     _2_2_3_DIR_ = _2_2_3DIR,
+                    _2_2_3_DIR_Cant = _2_2_3DIR_Cant,
                     _2_2_3_EDU = _2_2_3EDU,
+                    _2_2_3_EDU_Cant = _2_2_3EDU_Cant,
                     _2_2_3_EE_ = _2_2_3EE,
+                    _2_2_3_EE_Cant = _2_2_3EE_Cant,                    
                     _2_2_3_EST_ = _2_2_3EST,
-                    _2_2_3_OTR_ = _2_2_3Otro,
+                    _2_2_3_EST_Cant = _2_2_3EST_Cant,
+                    _2_2_3_OTR_1 = _2_2_3Otro_Cual_1,
+                    _2_2_3_OTR_1_Cant = _2_2_3Otro_Cual_1_Cant,
+                    _2_2_3_OTR_2 = _2_2_3Otro_Cual_2,
+                    _2_2_3_OTR_2_Cant = _2_2_3Otro_Cual_2_Cant,
+                    _2_2_3_OTR_3_ = _2_2_3Otro_Cual_3,
+                    _2_2_3_OTR_3_Cant = _2_2_3Otro_Cual_3_Cant,
+                    _2_2_3_OTR_4_ = _2_2_3Otro_Cual_4,
+                    _2_2_3_OTR_4_Cant = _2_2_3Otro_Cual_4_Cant,
+                    _2_2_3_OTR_5_ = _2_2_3Otro_Cual_5,
+                    _2_2_3_OTR_5_Cant = _2_2_3Otro_Cual_5_Cant,
                     _2_2_3_PAD_ = _2_2_3PAD,
+                    _2_2_3_PAD_Cant = _2_2_3PAD_Cant,
                     _2_2_4_ = _2_2_4,
                     _2_2_5_ = _2_2_5,
                     _2_3_ = _2_3,
@@ -451,7 +578,7 @@ namespace ESM.LecturasContexto
                 };
                 #endregion
 
-                db.LecturaContextoSE.InsertOnSubmit(objLecturaContextoSE);
+                db.LecturaContextoSEs.InsertOnSubmit(objLecturaContextoSE);
                 db.SubmitChanges();
 
                 idlectura = objLecturaContextoSE.IdLecturaContexto;
@@ -464,7 +591,7 @@ namespace ESM.LecturasContexto
         {
             try
             {
-                var lecturaac = (from l in db.LecturaContextoSE
+                var lecturaac = (from l in db.LecturaContextoSEs
                                  where l.IdLecturaContexto == idlecturapr
                                  select l).Single();
 
@@ -475,11 +602,25 @@ namespace ESM.LecturasContexto
                 lecturaac._2_2_1_ = _2_2_1;
                 lecturaac._2_2_2_ = _2_2_2;
                 lecturaac._2_2_3_DIR_ = _2_2_3DIR;
+                lecturaac._2_2_3_DIR_Cant = _2_2_3DIR_Cant;
                 lecturaac._2_2_3_EDU = _2_2_3EDU;
+                lecturaac._2_2_3_EDU_Cant = _2_2_3EDU_Cant;
                 lecturaac._2_2_3_EE_ = _2_2_3EE;
+                lecturaac._2_2_3_EE_Cant = _2_2_3EE_Cant;
                 lecturaac._2_2_3_EST_ = _2_2_3EST;
-                lecturaac._2_2_3_OTR_ = _2_2_3Otro;
+                lecturaac._2_2_3_EST_Cant = _2_2_3EST_Cant;
+                lecturaac._2_2_3_OTR_1 = _2_2_3Otro_Cual_1;
+                lecturaac._2_2_3_OTR_1_Cant = _2_2_3Otro_Cual_1_Cant;
+                lecturaac._2_2_3_OTR_2 = _2_2_3Otro_Cual_2;
+                lecturaac._2_2_3_OTR_2_Cant = _2_2_3Otro_Cual_2_Cant;
+                lecturaac._2_2_3_OTR_3_ = _2_2_3Otro_Cual_3;
+                lecturaac._2_2_3_OTR_3_Cant = _2_2_3Otro_Cual_3_Cant;
+                lecturaac._2_2_3_OTR_4_ = _2_2_3Otro_Cual_4;
+                lecturaac._2_2_3_OTR_4_Cant = _2_2_3Otro_Cual_4_Cant;
+                lecturaac._2_2_3_OTR_5_ = _2_2_3Otro_Cual_5;
+                lecturaac._2_2_3_OTR_5_Cant = _2_2_3Otro_Cual_5_Cant;
                 lecturaac._2_2_3_PAD_ = _2_2_3PAD;
+                lecturaac._2_2_3_PAD_Cant = _2_2_3PAD_Cant;
                 lecturaac._2_2_4_ = _2_2_4;
                 lecturaac._2_2_5_ = _2_2_5;
                 lecturaac._2_3_ = _2_3;
@@ -534,7 +675,7 @@ namespace ESM.LecturasContexto
         {
             try
             {
-                var se = (from s in db.Secretaria_Educacion
+                var se = (from s in db.Secretaria_Educacions
                           where s.IdSecretaria == idse
                           select s).Single();
 
@@ -548,9 +689,9 @@ namespace ESM.LecturasContexto
         {
             try
             {
-                var m = (from med in db.LecturaContextoSE
+                var m = (from med in db.LecturaContextoSEs
                          where med.IdSecretaria == idse
-                         select new { Medicion = med.IdMedicion, Fecha = med.Mediciones.FechaMedicion }).Distinct();
+                         select new { Medicion = med.IdMedicion, Fecha = med.Medicione.FechaMedicion }).Distinct();
 
                 return m;
             }
@@ -561,7 +702,7 @@ namespace ESM.LecturasContexto
         {
             try
             {
-                var se = from s in db.Secretaria_Educacion
+                var se = from s in db.Secretaria_Educacions
                          select new { IdSecretaria = s.IdSecretaria, s.Nombre, s.Telefono, s.Direccion, Secretario_Educacion = s.Nombre_Secretario_Educacion, s.Telefonos_Secretario_Educacion };
 
                 return se;
@@ -573,7 +714,7 @@ namespace ESM.LecturasContexto
         {
             try
             {
-                Mediciones objMediciones = new Mediciones
+                Medicione objMediciones = new Medicione
                 {
                     FechaMedicion = DateTime.Now
                 };
@@ -586,15 +727,15 @@ namespace ESM.LecturasContexto
             catch (Exception) { return 0; }
         }
 
-        public List<LecturaContextoSE> CargarLCSE(int idmedicion, int idse)
+        public ESM.Model.LecturaContextoSE CargarLCSE(int idmedicion, int idse)
         {
             try
             {
-                var lcse = from lc in db.LecturaContextoSE
+                var lcse = (from lc in db.LecturaContextoSEs
                            where lc.IdMedicion == idmedicion && lc.IdSecretaria == idse
-                           select lc;
+                           select lc).Single();
 
-                return lcse.ToList();
+                return lcse;
             }
             catch (Exception) { return null; }
 

@@ -120,7 +120,7 @@ namespace EvaluationSettings
         /// Obtiene Evaluacion basado en el metodo ObtenerEvaluacion()
         /// </summary>
         /// <returns>IQueryable con la informacion de la evaluacion segun el actor seleccionado</returns>
-        public List<IQueryable<Preguntas>> LoadEvaluation()
+        public List<IQueryable<Pregunta>> LoadEvaluation()
         {
             return ObtenerEvaluacion();
         }
@@ -129,7 +129,7 @@ namespace EvaluationSettings
         /// Obtiene la coleccion de preguntas que se va a mostrar para cada uno de los actores
         /// </summary>
         /// <returns>Coleccion de preguntas para el actor deseado</returns>
-        private List<IQueryable<Preguntas>> ObtenerEvaluacion()
+        private List<IQueryable<Pregunta>> ObtenerEvaluacion()
         {
             try
             {
@@ -139,7 +139,7 @@ namespace EvaluationSettings
                 //Valida si la evaluacion sera aplicada a Directivos
                 if (_directivos)
                 {
-                    List<IQueryable<Preguntas>> objlist = new List<IQueryable<Preguntas>>();
+                    List<IQueryable<Pregunta>> objlist = new List<IQueryable<Pregunta>>();
 
                     foreach (var item in rAmbientes)
                     {
@@ -152,7 +152,7 @@ namespace EvaluationSettings
                 //Valida si la evaluacion sera aplicada a Estudiantes
                 if (_estudiantes)
                 {
-                    List<IQueryable<Preguntas>> objlist = new List<IQueryable<Preguntas>>();
+                    List<IQueryable<Pregunta>> objlist = new List<IQueryable<Pregunta>>();
 
                     foreach (var item in rAmbientes)
                     {
@@ -164,7 +164,7 @@ namespace EvaluationSettings
                 //Valida si la evaluacion sera aplicada a un Profesional de Campo
                 else if (_profesional)
                 {
-                    List<IQueryable<Preguntas>> objlist = new List<IQueryable<Preguntas>>();
+                    List<IQueryable<Pregunta>> objlist = new List<IQueryable<Pregunta>>();
 
                     foreach (var item in rAmbientes)
                     {
@@ -177,7 +177,7 @@ namespace EvaluationSettings
                 //Valida si la evaluacion sera aplicada a Padres de Familia
                 else if (_padres)
                 {
-                    List<IQueryable<Preguntas>> objlist = new List<IQueryable<Preguntas>>();
+                    List<IQueryable<Pregunta>> objlist = new List<IQueryable<Pregunta>>();
 
                     foreach (var item in rAmbientes)
                     {
@@ -189,7 +189,7 @@ namespace EvaluationSettings
                 //Valida si la evaluacion sera aplicada a Docentes
                 else if (_docentes)
                 {
-                    List<IQueryable<Preguntas>> objlist = new List<IQueryable<Preguntas>>();
+                    List<IQueryable<Pregunta>> objlist = new List<IQueryable<Pregunta>>();
 
                     foreach (var item in rAmbientes)
                     {
@@ -207,12 +207,12 @@ namespace EvaluationSettings
             catch (System.Exception) { return null; }
         }
 
-        public IQueryable<Preguntas> PreguntasEducadores(int idambiente)
+        public IQueryable<Pregunta> PreguntasEducadores(int idambiente)
         {
             try
             {
                 var rEvaluacion = from e in db.Preguntas
-                                  where e.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && e.Docente == true
+                                  where e.Componente.Proceso.Ambiente.IdAmbiente == idambiente && e.Docente == true
                                   select e;
 
                 if (rEvaluacion.Count() != 0)
@@ -224,12 +224,12 @@ namespace EvaluationSettings
 
         }
 
-        public IQueryable<Preguntas> PreguntasEstudiantes(int idambiente)
+        public IQueryable<Pregunta> PreguntasEstudiantes(int idambiente)
         {
             try
             {
                 var rEvaluacion = from e in db.Preguntas
-                                  where e.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && e.Estudiante == true
+                                  where e.Componente.Proceso.Ambiente.IdAmbiente == idambiente && e.Estudiante == true
                                   select e;
                 if (rEvaluacion.Count() != 0)
                     return rEvaluacion;
@@ -240,12 +240,12 @@ namespace EvaluationSettings
 
         }
 
-        public IQueryable<Preguntas> PreguntasPadres(int idambiente)
+        public IQueryable<Pregunta> PreguntasPadres(int idambiente)
         {
             try
             {
                 var rEvaluacion = from e in db.Preguntas
-                                  where e.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && e.Padres == true
+                                  where e.Componente.Proceso.Ambiente.IdAmbiente == idambiente && e.Padres == true
                                   select e;
                 if (rEvaluacion.Count() != 0)
                     return rEvaluacion;
@@ -256,12 +256,12 @@ namespace EvaluationSettings
 
         }
 
-        public IQueryable<Preguntas> PreguntasDirectivos(int idambiente)
+        public IQueryable<Pregunta> PreguntasDirectivos(int idambiente)
         {
             try
             {
                 var rEvaluacion = from e in db.Preguntas
-                                  where e.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && e.Directivo == true
+                                  where e.Componente.Proceso.Ambiente.IdAmbiente == idambiente && e.Directivo == true
                                   select e;
                 if (rEvaluacion.Count() != 0)
                     return rEvaluacion;
@@ -272,12 +272,12 @@ namespace EvaluationSettings
 
         }
 
-        public IQueryable<Preguntas> PreguntasProfesional(int idambiente)
+        public IQueryable<Pregunta> PreguntasProfesional(int idambiente)
         {
             try
             {
                 var rEvaluacion = from e in db.Preguntas
-                                  where e.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && e.Profesional == true
+                                  where e.Componente.Proceso.Ambiente.IdAmbiente == idambiente && e.Profesional == true
                                   select e;
                 if (rEvaluacion.Count() != 0)
                     return rEvaluacion;
@@ -323,7 +323,7 @@ namespace EvaluationSettings
         {
             try
             {
-                int idEvaluacion = (from e in db.Evaluacion
+                int idEvaluacion = (from e in db.Evaluacions
                                     select e.IdEvaluacion).Max();
 
                 return idEvaluacion;
@@ -400,7 +400,7 @@ namespace EvaluationSettings
                     }
                     #endregion
                 }
-                db.Evaluacion.InsertOnSubmit(objEvaluacion);
+                db.Evaluacions.InsertOnSubmit(objEvaluacion);
                 db.SubmitChanges();
 
                 _idEvaluacion = objEvaluacion.IdEvaluacion;
@@ -425,13 +425,13 @@ namespace EvaluationSettings
                  *almacena la informacion que se obtubo luego de responder la evaluacion*/
                 for (int i = 0; i < ResultadosByPre.GetLength(0); i++)
                 {
-                    Resultados objResultados = null;
+                    Resultado objResultados = null;
                     /*Instancio un nuevo elemento del tipo Resultados*/
                     if (ResultadosByPre[i, 1] != null)
                     {
                         if (ResultadosByPre[i, 2] != null && ResultadosByPre[i, 2].ToString() != "")
                         {
-                            objResultados = new Resultados
+                            objResultados = new Resultado
                             {
                                 /*Asigno a los parametros de el mismo objeto los valores de la coleccion*/
                                 IdPregunta = (int)ResultadosByPre[i, 0],
@@ -442,7 +442,7 @@ namespace EvaluationSettings
                         }
                         else
                         {
-                            objResultados = new Resultados
+                            objResultados = new Resultado
                             {
                                 /*Asigno a los parametros de el mismo objeto los valores de la coleccion*/
                                 IdPregunta = (int)ResultadosByPre[i, 0],
@@ -455,7 +455,7 @@ namespace EvaluationSettings
                     {
                         if (ResultadosByPre[i, 2] != null && ResultadosByPre[i, 2].ToString() != "")
                         {
-                            objResultados = new Resultados
+                            objResultados = new Resultado
                             {
                                 /*Asigno a los parametros de el mismo objeto los valores de la coleccion*/
                                 IdPregunta = (int)ResultadosByPre[i, 0],
@@ -465,7 +465,7 @@ namespace EvaluationSettings
                         }
                         else
                         {
-                            objResultados = new Resultados
+                            objResultados = new Resultado
                             {
                                 /*Asigno a los parametros de el mismo objeto los valores de la coleccion*/
                                 IdPregunta = (int)ResultadosByPre[i, 0],
@@ -498,7 +498,7 @@ namespace EvaluationSettings
                         IdResultado = idResultado
                     };
                     /*Realizo el proceso de insercion para el objeto ResultadosByEvaluacion*/
-                    db.ResultadosByEvaluacion.InsertOnSubmit(objResultadosByEvaluacion);
+                    db.ResultadosByEvaluacions.InsertOnSubmit(objResultadosByEvaluacion);
                     db.SubmitChanges();
                 }
                 /*retorno un valor verdadero en caso de no presentar excepcion de ningun tipo*/
@@ -526,7 +526,7 @@ namespace EvaluationSettings
 
                 ///TODO: JCCM: Revisar esta variable
                 //Valido la cantidad de evaluaciones que hay para ese id de medicion consultado previamente
-                int cantidad_eval = (from eval in db.Evaluacion
+                int cantidad_eval = (from eval in db.Evaluacions
                                      where eval.IdIE == idie && eval.IdMedicion == idmedicion
                                      select eval.IdActor).Count();
 
@@ -573,7 +573,7 @@ namespace EvaluationSettings
                                          where a.Actor != "No Asignado"
                                          select new { a.IdActor };
 
-                        var coleval = (from e in db.Evaluacion
+                        var coleval = (from e in db.Evaluacions
                                        where e.IdIE == idie && e.IdMedicion == idmedicion
                                        select new { e.IdActor }).Distinct();
 
@@ -637,7 +637,7 @@ namespace EvaluationSettings
             return LoadParcial(eval, actor);
         }
 
-        public Preguntas ObtenerDatosPregunta(int idpregunta)
+        public Pregunta ObtenerDatosPregunta(int idpregunta)
         {
             try
             {
@@ -660,7 +660,7 @@ namespace EvaluationSettings
                 var rAmbientes = (from a in db.Ambientes
                                   select new { a.IdAmbiente }).Distinct();
 
-                IQueryable preguntas = null;
+                //IQueryable preguntas = null;
 
                 switch (actor)
                 {
@@ -719,13 +719,13 @@ namespace EvaluationSettings
             try
             {
                 var preguntas = from p in db.Preguntas
-                                where p.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && p.Estudiante == true
+                                where p.Componente.Proceso.Ambiente.IdAmbiente == idambiente && p.Estudiante == true
                                 select new
                                 {
                                     p.IdOrden,
                                     p.IdPregunta,
                                     No_Pregunta = p.IdPregunta,
-                                    Pregunta = p.Pregunta,
+                                    Pregunta = p.Pregunta1,
                                     p.Etiqueta
                                 };
 
@@ -740,13 +740,13 @@ namespace EvaluationSettings
             try
             {
                 var preguntas = from p in db.Preguntas
-                                where p.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && p.Profesional == true
+                                where p.Componente.Proceso.Ambiente.IdAmbiente == idambiente && p.Profesional == true
                                 select new
                                 {
                                     p.IdOrden,
                                     p.IdPregunta,
                                     No_Pregunta = p.IdPregunta,
-                                    Pregunta = p.Pregunta,
+                                    Pregunta = p.Pregunta1,
                                     p.Etiqueta
                                 };
 
@@ -761,13 +761,13 @@ namespace EvaluationSettings
             try
             {
                 var preguntas = from p in db.Preguntas
-                                where p.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && p.Padres == true
+                                where p.Componente.Proceso.Ambiente.IdAmbiente == idambiente && p.Padres == true
                                 select new
                                 {
                                     p.IdOrden,
                                     p.IdPregunta,
                                     No_Pregunta = p.IdPregunta,
-                                    Pregunta = p.Pregunta,
+                                    Pregunta = p.Pregunta1,
                                     p.Etiqueta
                                 };
 
@@ -782,13 +782,13 @@ namespace EvaluationSettings
             try
             {
                 var preguntas = from p in db.Preguntas
-                                where p.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && p.Docente == true
+                                where p.Componente.Proceso.Ambiente.IdAmbiente == idambiente && p.Docente == true
                                 select new
                                 {
                                     p.IdOrden,
                                     p.IdPregunta,
                                     No_Pregunta = p.IdPregunta,
-                                    Pregunta = p.Pregunta,
+                                    Pregunta = p.Pregunta1,
                                     p.Etiqueta
                                 };
 
@@ -803,13 +803,13 @@ namespace EvaluationSettings
             try
             {
                 var preguntas = from p in db.Preguntas
-                                where p.Componentes.Procesos.Ambientes.IdAmbiente == idambiente && p.Directivo == true
+                                where p.Componente.Proceso.Ambiente.IdAmbiente == idambiente && p.Directivo == true
                                 select new
                                 {
                                     p.IdOrden,
                                     p.IdPregunta,
                                     No_Pregunta = p.IdPregunta,
-                                    Pregunta = p.Pregunta,
+                                    Pregunta = p.Pregunta1,
                                     p.Etiqueta
                                 };
 
@@ -823,9 +823,9 @@ namespace EvaluationSettings
         {
             try
             {
-                var evalbymedi = (from e in db.Evaluacion
+                var evalbymedi = (from e in db.Evaluacions
                                   where e.IdMedicion == idmedicion && e.IdIE == idie
-                                  select new { No_Evaluacion = e.IdEvaluacion, No_Actor = e.IdActor, Actor = e.Actores.Actor, Fecha = e.Fecha, Estado = e.EstadoEvaluacion.Estado, Medicion = e.Mediciones.IdMedicion }).Take(top);
+                                  select new { No_Evaluacion = e.IdEvaluacion, No_Actor = e.IdActor, Actor = e.Actore.Actor, Fecha = e.Fecha, Estado = e.EstadoEvaluacion.Estado, Medicion = e.Medicione.IdMedicion }).Take(top);
 
                 return evalbymedi;
             }
@@ -878,7 +878,7 @@ namespace EvaluationSettings
                 #region Consolidacion Componentes
                 foreach (var item in comp)
                 {
-                    var consldPre = from c in db.ConslPregunta
+                    var consldPre = from c in db.ConslPreguntas
                                     join pre in db.Preguntas on c.IdPregunta equals pre.IdPregunta
                                     where pre.IdComponente == item.IdComponente
                                     select c.Valor;
@@ -973,7 +973,7 @@ namespace EvaluationSettings
                                 Valor = valor_MC,
                                 IdConsolidado = idconsolidado
                             };
-                            db.ConslComponente.InsertOnSubmit(objConslComponente);
+                            db.ConslComponentes.InsertOnSubmit(objConslComponente);
                             db.SubmitChanges();
                         }
 
@@ -992,7 +992,7 @@ namespace EvaluationSettings
                                 Valor = valor_APRO,
                                 IdConsolidado = idconsolidado
                             };
-                            db.ConslComponente.InsertOnSubmit(objConslComponente);
+                            db.ConslComponentes.InsertOnSubmit(objConslComponente);
                             db.SubmitChanges();
                         }
 
@@ -1010,7 +1010,7 @@ namespace EvaluationSettings
                                 Valor = valor_PERT,
                                 IdConsolidado = idconsolidado
                             };
-                            db.ConslComponente.InsertOnSubmit(objConslComponente);
+                            db.ConslComponentes.InsertOnSubmit(objConslComponente);
                             db.SubmitChanges();
                         }
                         #endregion
@@ -1027,7 +1027,7 @@ namespace EvaluationSettings
                                 Valor = valor_EXIS,
                                 IdConsolidado = idconsolidado
                             };
-                            db.ConslComponente.InsertOnSubmit(objConslComponente);
+                            db.ConslComponentes.InsertOnSubmit(objConslComponente);
                             db.SubmitChanges();
                         }
                         #endregion
@@ -1041,7 +1041,7 @@ namespace EvaluationSettings
                                 Valor = 0,
                                 IdConsolidado = idconsolidado
                             };
-                            db.ConslComponente.InsertOnSubmit(objConslComponente);
+                            db.ConslComponentes.InsertOnSubmit(objConslComponente);
                             db.SubmitChanges();
                         }
                         #endregion
@@ -1057,7 +1057,7 @@ namespace EvaluationSettings
 
                 foreach (var item in colprocesos)
                 {
-                    var ccompo = from ccom in db.ConslComponente
+                    var ccompo = from ccom in db.ConslComponentes
                                  join com in db.Componentes on ccom.IdComponente equals com.IdComponente
                                  where ccom.IdConsolidado == idconsolidado && com.IdProceso == item.IdProceso
                                  select new { ccom.Valor };
@@ -1077,7 +1077,7 @@ namespace EvaluationSettings
                         Valor = valorproceso
                     };
 
-                    db.ConslProceso.InsertOnSubmit(objConslProceso);
+                    db.ConslProcesos.InsertOnSubmit(objConslProceso);
                     db.SubmitChanges();
                 }
                 #endregion
@@ -1089,7 +1089,7 @@ namespace EvaluationSettings
 
                 foreach (var item in colAmbientes)
                 {
-                    var cslproc = from cproc in db.ConslProceso
+                    var cslproc = from cproc in db.ConslProcesos
                                   join proc in db.Procesos on cproc.IdProceso equals proc.IdProceso
                                   where cproc.IdConsolidado == idconsolidado && proc.IdAmbiente == item.IdAmbiente
                                   select new { cproc.Valor };
@@ -1110,7 +1110,7 @@ namespace EvaluationSettings
                         Valor = valorAmbiente
                     };
 
-                    db.ConslAmbiente.InsertOnSubmit(objConslAmbiente);
+                    db.ConslAmbientes.InsertOnSubmit(objConslAmbiente);
                     db.SubmitChanges();
                 }
                 #endregion
@@ -1164,9 +1164,9 @@ namespace EvaluationSettings
                             bool valor = false;
                             bool noaplica = false;
 
-                            var resbyevalcount = (from rbe in db.ResultadosByEvaluacion
+                            var resbyevalcount = (from rbe in db.ResultadosByEvaluacions
                                                   join r in db.Resultados on rbe.IdResultado equals r.IdResultados
-                                                  join evalu in db.Evaluacion on rbe.IdEvaluacion equals evalu.IdEvaluacion
+                                                  join evalu in db.Evaluacions on rbe.IdEvaluacion equals evalu.IdEvaluacion
                                                   where r.IdPregunta == pre.IdPregunta && evalu.IdActor == i + 1
                                                   && evalu.IdEstado == 1 && evalu.IdMedicion == idmedicion
                                                   select new { r.IdPregunta, r.Valor, r.Pendiente, evalu.IdMedicion, evalu.IdIE }).Count();
@@ -1174,9 +1174,9 @@ namespace EvaluationSettings
                             if (resbyevalcount != 0)
                             {
 
-                                var resbyeval = (from rbe in db.ResultadosByEvaluacion
+                                var resbyeval = (from rbe in db.ResultadosByEvaluacions
                                                  join r in db.Resultados on rbe.IdResultado equals r.IdResultados
-                                                 join evalu in db.Evaluacion on rbe.IdEvaluacion equals evalu.IdEvaluacion
+                                                 join evalu in db.Evaluacions on rbe.IdEvaluacion equals evalu.IdEvaluacion
                                                  where r.IdPregunta == pre.IdPregunta && evalu.IdActor == i + 1
                                                  && evalu.IdEstado == 1 && evalu.IdMedicion == idmedicion
                                                  select new { r.IdPregunta, r.Valor, r.Pendiente, evalu.IdMedicion, evalu.IdIE }).Single();
@@ -1250,12 +1250,12 @@ namespace EvaluationSettings
                                 };
 
 
-                                db.Consolidacion.InsertOnSubmit(objConsolidacion);
+                                db.Consolidacions.InsertOnSubmit(objConsolidacion);
                                 db.SubmitChanges();
                                 contador++;
                             }
 
-                            var ult_idcons = (from cons in db.Consolidacion
+                            var ult_idcons = (from cons in db.Consolidacions
                                               select cons.IdConsolidacion).Max();
 
                             idconsolidado = ult_idcons;
@@ -1268,7 +1268,7 @@ namespace EvaluationSettings
                                     IdPregunta = pre.IdPregunta,
                                     Valor = true
                                 };
-                                db.ConslPregunta.InsertOnSubmit(objConslPregunta);
+                                db.ConslPreguntas.InsertOnSubmit(objConslPregunta);
                                 db.SubmitChanges();
                             }
                             if (cant_si < cant_no)
@@ -1279,7 +1279,7 @@ namespace EvaluationSettings
                                     IdPregunta = pre.IdPregunta,
                                     Valor = false
                                 };
-                                db.ConslPregunta.InsertOnSubmit(objConslPregunta);
+                                db.ConslPreguntas.InsertOnSubmit(objConslPregunta);
                                 db.SubmitChanges();
                             }
                             if (cant_si == cant_no)
@@ -1292,7 +1292,7 @@ namespace EvaluationSettings
                                         IdPregunta = pre.IdPregunta,
                                         Valor = true
                                     };
-                                    db.ConslPregunta.InsertOnSubmit(objConslPregunta);
+                                    db.ConslPreguntas.InsertOnSubmit(objConslPregunta);
                                     db.SubmitChanges();
                                 }
                                 else if (res_privilegiado == 0)
@@ -1303,7 +1303,7 @@ namespace EvaluationSettings
                                         IdPregunta = pre.IdPregunta,
                                         Valor = false
                                     };
-                                    db.ConslPregunta.InsertOnSubmit(objConslPregunta);
+                                    db.ConslPreguntas.InsertOnSubmit(objConslPregunta);
                                     db.SubmitChanges();
 
 
@@ -1317,7 +1317,7 @@ namespace EvaluationSettings
                                         IdPregunta = pre.IdPregunta,
                                         NoAplica = true
                                     };
-                                    db.ConslPregunta.InsertOnSubmit(objConslPregunta);
+                                    db.ConslPreguntas.InsertOnSubmit(objConslPregunta);
                                     db.SubmitChanges();
 
                                 }
@@ -1350,7 +1350,7 @@ namespace EvaluationSettings
         {
             try
             {
-                var abp = (from a in db.AyudaByPregunta
+                var abp = (from a in db.AyudaByPreguntas
                            where a.IdPregunta == idpregunta
                            select a).Single();
 
@@ -1363,13 +1363,13 @@ namespace EvaluationSettings
         {
             try
             {
-                var medi = (from m in db.Evaluacion
+                var medi = (from m in db.Evaluacions
                             where m.IdIE == IdIe
                             select new
                             {
                                 Identificador = m.IdMedicion,
-                                Evaluaciones = (from eva in db.Evaluacion where eva.IdIE == IdIe && eva.IdMedicion == m.IdMedicion select eva).Count(),
-                                Fecha = m.Mediciones.FechaMedicion
+                                Evaluaciones = (from eva in db.Evaluacions where eva.IdIE == IdIe && eva.IdMedicion == m.IdMedicion select eva).Count(),
+                                Fecha = m.Medicione.FechaMedicion
                             }).Distinct();
 
                 if (medi.Count() != 0)
@@ -1389,7 +1389,7 @@ namespace EvaluationSettings
         {
             try
             {
-                Mediciones objMediciones = new Mediciones
+                Medicione objMediciones = new Medicione
                 {
                     FechaMedicion = DateTime.Now
                 };
@@ -1407,7 +1407,7 @@ namespace EvaluationSettings
         {
             try
             {
-                var results = from e in db.ResultadosByEvaluacion
+                var results = from e in db.ResultadosByEvaluacions
                               where e.IdEvaluacion == ideval
                               select e;
 
@@ -1425,15 +1425,15 @@ namespace EvaluationSettings
 
                         if (idpregunta != 0)
                         {
-                            if (item.Resultados.IdPregunta == idpregunta)
+                            if (item.Resultado.IdPregunta == idpregunta)
                             {
                                 if (VResultados[contvector, 2] != null && VResultados[contvector, 2].ToString() != "")
                                 {
                                     if (VResultados[contvector, 1] != null)
                                     {
-                                        item.Resultados.Valor = (bool)VResultados[contvector, 1];
-                                        item.Resultados.Sesiones = Convert.ToInt32(VResultados[contvector, 2]);
-                                        item.Resultados.Pendiente = (bool)VResultados[contvector, 3];
+                                        item.Resultado.Valor = (bool)VResultados[contvector, 1];
+                                        item.Resultado.Sesiones = Convert.ToInt32(VResultados[contvector, 2]);
+                                        item.Resultado.Pendiente = (bool)VResultados[contvector, 3];
 
                                         db.SubmitChanges();
                                     }
@@ -1442,8 +1442,8 @@ namespace EvaluationSettings
                                 {
                                     if (VResultados[contvector, 1] != null)
                                     {
-                                        item.Resultados.Valor = (bool)VResultados[contvector, 1];
-                                        item.Resultados.Pendiente = (bool)VResultados[contvector, 3];
+                                        item.Resultado.Valor = (bool)VResultados[contvector, 1];
+                                        item.Resultado.Pendiente = (bool)VResultados[contvector, 3];
 
                                         db.SubmitChanges();
                                     }
@@ -1462,12 +1462,12 @@ namespace EvaluationSettings
 
                         if (idpregunta != 0)
                         {
-                            Resultados objResultados = null;
+                            Resultado objResultados = null;
                             if (VResultados[contvector, 2] != null && VResultados[contvector, 2].ToString() != "")
                             {
                                 if (VResultados[contvector, 1] != null)
                                 {
-                                    objResultados = new Resultados
+                                    objResultados = new Resultado
                                     {
                                         IdPregunta = Convert.ToInt32(VResultados[contvector, 0]),
                                         Valor = Convert.ToBoolean(VResultados[contvector, 1]),
@@ -1477,7 +1477,7 @@ namespace EvaluationSettings
                                 }
                                 else
                                 {
-                                    objResultados = new Resultados
+                                    objResultados = new Resultado
                                     {
                                         IdPregunta = Convert.ToInt32(VResultados[contvector, 0])
                                     };
@@ -1487,7 +1487,7 @@ namespace EvaluationSettings
                             {
                                 if (VResultados[contvector, 1] != null)
                                 {
-                                    objResultados = new Resultados
+                                    objResultados = new Resultado
                                     {
                                         IdPregunta = Convert.ToInt32(VResultados[contvector, 0]),
                                         Valor = Convert.ToBoolean(VResultados[contvector, 1]),
@@ -1496,7 +1496,7 @@ namespace EvaluationSettings
                                 }
                                 else
                                 {
-                                    objResultados = new Resultados
+                                    objResultados = new Resultado
                                     {
                                         IdPregunta = Convert.ToInt32(VResultados[contvector, 0])
                                     };
@@ -1514,14 +1514,14 @@ namespace EvaluationSettings
                                     IdEvaluacion = ideval,
                                     IdResultado = objResultados.IdResultados
                                 };
-                                db.ResultadosByEvaluacion.InsertOnSubmit(objResultadosByEvaluacion);
+                                db.ResultadosByEvaluacions.InsertOnSubmit(objResultadosByEvaluacion);
                                 db.SubmitChanges();
                             }
                         }
                     }
                     contvector++;
                 }
-                var eval = (from ev in db.Evaluacion
+                var eval = (from ev in db.Evaluacions
                             where ev.IdEvaluacion == ideval
                             select ev).Single();
                 if (estado)

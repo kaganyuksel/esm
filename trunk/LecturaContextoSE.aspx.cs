@@ -36,7 +36,7 @@ namespace ESM
                         else if (rol == "Consultor")
                         {
                             ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
-                            var se = from s in db.Secretaria_Educacion
+                            var se = from s in db.Secretaria_Educacions
                                      where s.IdConsultor == _objCRoles.IdConsultor
                                      select s;
 
@@ -136,33 +136,49 @@ namespace ESM
 
                 #region 223
 
-                if (cblist223.Items[0].Selected)
+                if (chxEE.Checked)
                     _objLecturaContextoSECRE.__2_2_3EE = true;
                 else
                     _objLecturaContextoSECRE.__2_2_3EE = false;
-                if (cblist223.Items[1].Selected)
+                if (chxest.Checked)
                     _objLecturaContextoSECRE.__2_2_3EST = true;
                 else
                     _objLecturaContextoSECRE.__2_2_3EST = false;
 
-                if (cblist223.Items[2].Selected)
+                if (chxEdu.Checked)
                     _objLecturaContextoSECRE.__2_2_3EDU = true;
                 else
                     _objLecturaContextoSECRE.__2_2_3EDU = false;
 
-                if (cblist223.Items[3].Selected)
+                if (chxdirectivos.Checked)
                     _objLecturaContextoSECRE.__2_2_3DIR = true;
                 else
                     _objLecturaContextoSECRE.__2_2_3DIR = false;
 
-                if (cblist223.Items[4].Selected)
+                if (chxpad.Checked)
                     _objLecturaContextoSECRE.__2_2_3PAD = true;
                 else
                     _objLecturaContextoSECRE.__2_2_3PAD = false;
 
-                #endregion
+                _objLecturaContextoSECRE.__2_2_3EE_Cant = Convert.ToInt32(txtcantee.Text);
+                _objLecturaContextoSECRE.__2_2_3EST_Cant = Convert.ToInt32(txtcantest.Text);
+                _objLecturaContextoSECRE.__2_2_3EDU_Cant = Convert.ToInt32(txtcantedu.Text);
+                _objLecturaContextoSECRE.__2_2_3DIR_Cant = Convert.ToInt32(txtcantdir.Text);
+                _objLecturaContextoSECRE.__2_2_3PAD_Cant = Convert.ToInt32(txtcantpad.Text);
 
-                _objLecturaContextoSECRE.__2_2_3Otro = txt223Orto.Text;
+                _objLecturaContextoSECRE.__2_2_3Otro_Cual_1 = txtotrocual1.Text;
+                _objLecturaContextoSECRE.__2_2_3Otro_Cual_2 = txtotrocual2.Text;
+                _objLecturaContextoSECRE.__2_2_3Otro_Cual_3 = txtotrocual3.Text;
+                _objLecturaContextoSECRE.__2_2_3Otro_Cual_4 = txtotrocual4.Text;
+                _objLecturaContextoSECRE.__2_2_3Otro_Cual_5 = txtotrocual5.Text;
+
+                _objLecturaContextoSECRE.__2_2_3Otro_Cual_1_Cant = Convert.ToInt32(Cantidadotro1.Text);
+                _objLecturaContextoSECRE.__2_2_3Otro_Cual_2_Cant = Convert.ToInt32(Cantidadotro2.Text);
+                _objLecturaContextoSECRE.__2_2_3Otro_Cual_3_Cant = Convert.ToInt32(Cantidadotro3.Text);
+                _objLecturaContextoSECRE.__2_2_3Otro_Cual_4_Cant = Convert.ToInt32(Cantidadotro4.Text);
+                _objLecturaContextoSECRE.__2_2_3Otro_Cual_5_Cant = Convert.ToInt32(Cantidadotro5.Text);
+
+                #endregion
 
                 _objLecturaContextoSECRE.__2_2_4 = txt224.Text;
                 _objLecturaContextoSECRE.__2_2_5 = txt225.Text;
@@ -274,7 +290,6 @@ namespace ESM
 
         protected void btnAlmacenar_Click(object sender, EventArgs e)
         {
-            //if (validar())
             if (!Almacenar())
                 Response.Write("<script>alert('Para realizar el proceso de almacenamiento corrija las advertencias.');</script>");
         }
@@ -420,92 +435,144 @@ namespace ESM
         {
             int idse = Convert.ToInt32(Session["idse"]);
             int idmedicion = Convert.ToInt32(Session["idmedicionLC"]);
-            List<LecturaContextoSE> objList = _objLecturaContextoSECRE.CargarLCSE(idmedicion, idse);
-            if (objList[0] != null)
+            ESM.Model.LecturaContextoSE objList = _objLecturaContextoSECRE.CargarLCSE(idmedicion, idse);
+            if (objList != null)
             {
+                Session.Add("idlectura", objList.IdLecturaContexto);
                 #region Cargar Controles
-                txt21.Text = objList[0]._2_1_;
+                txt21.Text = objList._2_1_;
 
-                if ((bool)objList[0]._2_2_)
+                if ((bool)objList._2_2_)
                     rbtn22Si.Checked = true;
-                else if (!(bool)objList[0]._2_2_)
+                else if (!(bool)objList._2_2_)
                     rbtn22No.Checked = true;
 
-                txt221.Text = objList[0]._2_2_1_;
-                txt222.Text = objList[0]._2_2_2_;
+                txt221.Text = objList._2_2_1_;
+                txt222.Text = objList._2_2_2_;
 
-                if ((bool)objList[0]._2_2_3_DIR_)
-                    cblist223.Items[3].Selected = true;
-                if ((bool)objList[0]._2_2_3_EDU)
-                    cblist223.Items[2].Selected = true;
-                if ((bool)objList[0]._2_2_3_EE_)
-                    cblist223.Items[0].Selected = true;
-                if ((bool)objList[0]._2_2_3_EST_)
-                    cblist223.Items[1].Selected = true;
-                if ((bool)objList[0]._2_2_3_PAD_)
-                    cblist223.Items[4].Selected = true;
+                if ((bool)objList._2_2_3_DIR_)
+                    chxdirectivos.Checked = true;
+                if ((bool)objList._2_2_3_EDU)
+                    chxEdu.Checked = true;
+                if ((bool)objList._2_2_3_EE_)
+                    chxEE.Checked = true;
+                if ((bool)objList._2_2_3_EST_)
+                    chxest.Checked = true;
+                if ((bool)objList._2_2_3_PAD_)
+                    chxpad.Checked = true;
 
-                txt223Orto.Text = objList[0]._2_2_3_OTR_;
-                txt224.Text = objList[0]._2_2_4_;
-                txt225.Text = objList[0]._2_2_5_;
+                txtcantee.Text = objList._2_2_3_EE_Cant.ToString();
+                txtcantest.Text = objList._2_2_3_EST_Cant.ToString();
+                txtcantedu.Text = objList._2_2_3_EDU_Cant.ToString();
+                txtcantdir.Text = objList._2_2_3_DIR_Cant.ToString();
+                txtcantpad.Text = objList._2_2_3_PAD_Cant.ToString();
 
-                if ((bool)objList[0]._2_3_)
+                txtotrocual1.Text = objList._2_2_3_OTR_1;
+                txtotrocual2.Text = objList._2_2_3_OTR_2;
+                txtotrocual3.Text = objList._2_2_3_OTR_3_;
+                txtotrocual4.Text = objList._2_2_3_OTR_4_;
+                txtotrocual5.Text = objList._2_2_3_OTR_5_;
+
+                Cantidadotro1.Text = objList._2_2_3_OTR_1_Cant.ToString();
+                Cantidadotro2.Text = objList._2_2_3_OTR_2_Cant.ToString();
+                Cantidadotro3.Text = objList._2_2_3_OTR_3_Cant.ToString();
+                Cantidadotro4.Text = objList._2_2_3_OTR_4_Cant.ToString();
+                Cantidadotro5.Text = objList._2_2_3_OTR_5_Cant.ToString();
+
+                txt224.Text = objList._2_2_4_;
+                txt225.Text = objList._2_2_5_;
+
+                if ((bool)objList._2_3_)
                     rbtn23Si.Checked = true;
                 else
                     rbtn23No.Checked = true;
 
-                txt231.Text = objList[0]._2_3_1_;
-                txt31.Text = objList[0]._3_1_;
-                txt32.Text = objList[0]._3_2_;
-                txt33.Text = objList[0]._3_3_;
-                txt34.Text = objList[0]._3_4_;
-                txt35.Text = objList[0]._3_5_;
-                txt36.Text = objList[0]._3_6_;
+                txt231.Text = objList._2_3_1_;
+                txt31.Text = objList._3_1_;
+                txt32.Text = objList._3_2_;
+                txt33.Text = objList._3_3_;
+                txt34.Text = objList._3_4_;
+                txt35.Text = objList._3_5_;
+                txt36.Text = objList._3_6_;
 
-                if ((bool)objList[0]._4_1_)
+                if ((bool)objList._4_1_)
                     rbtn41Si.Checked = true;
                 else
                     rbtn41No.Checked = true;
 
-                txt411.Text = objList[0]._4_1_1_;
+                txt411.Text = objList._4_1_1_;
 
-                if ((bool)objList[0]._5_1_INT)
+                if ((bool)objList._5_1_INT)
                     cblist51DedMun.Items[3].Selected = true;
-                if ((bool)objList[0]._5_1_INTM)
+                if ((bool)objList._5_1_INTM)
                     cblist51Local.Items[3].Selected = true;
-                if ((bool)objList[0]._5_1_PREND)
+                if ((bool)objList._5_1_PREND)
                     cblist51DedMun.Items[1].Selected = true;
-                if ((bool)objList[0]._5_1_PRENM)
+                if ((bool)objList._5_1_PRENM)
                     cblist51Local.Items[2].Selected = true;
-                if ((bool)objList[0]._5_1_RADD_)
+                if ((bool)objList._5_1_RADD_)
                     cblist51DedMun.Items[0].Selected = true;
-                if ((bool)objList[0]._5_1_RADM)
+                if ((bool)objList._5_1_RADM)
                     cblist51Local.Items[0].Selected = true;
-                if ((bool)objList[0]._5_1_TELD)
+                if ((bool)objList._5_1_TELD)
                     cblist51DedMun.Items[2].Selected = true;
-                if ((bool)objList[0]._5_1_TELM)
+                if ((bool)objList._5_1_TELM)
                     cblist51Local.Items[2].Selected = true;
 
-                txt52.Text = objList[0]._5_2_;
+                txt52.Text = objList._5_2_;
 
-                if ((bool)objList[0]._1_1_8_)
+                if ((bool)objList._1_1_8_)
                     rbtn118Si.Checked = true;
-                else if (!(bool)objList[0]._1_1_8_)
+                else if (!(bool)objList._1_1_8_)
                     rbtn118No.Checked = true;
 
-                txt119.Text = objList[0]._1_1_9_;
-                txtObservaciones.Text = objList[0].Observaciones;
+                txt119.Text = objList._1_1_9_;
+                txtObservaciones.Text = objList.Observaciones;
 
                 btnAlmacenar.Visible = false;
                 #endregion
                 lecturaContextoTable.Visible = true;
-
             }
+        }
+
+        protected void chxEE_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chxEE.Checked)
+                txtcantee.Enabled = true;
             else
-                Response.Write("<script>alert('No se puede cargar la informacion para lectura de contexto.');</script>");
+                txtcantee.Enabled = false;
+        }
 
+        protected void chxest_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chxest.Checked)
+                txtcantest.Enabled = true;
+            else
+                txtcantest.Enabled = false;
+        }
 
+        protected void chxEdu_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chxEdu.Checked)
+                txtcantedu.Enabled = true;
+            else
+                txtcantedu.Enabled = false;
+        }
 
+        protected void chxdirectivos_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chxdirectivos.Checked)
+                txtcantdir.Enabled = true;
+            else
+                txtcantdir.Enabled = false;
+        }
+
+        protected void chxpad_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chxpad.Checked)
+                txtcantpad.Enabled = true;
+            else
+                txtcantpad.Enabled = false;
         }
     }
 }

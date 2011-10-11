@@ -30,7 +30,7 @@ namespace ESM.Preguntas
                         foreach (var item in trvambi)
                         {
 
-                            tvayuda.Nodes[0].ChildNodes.Add(new TreeNode(item.Ambiente, item.IdAmbiente.ToString()));
+                            tvayuda.Nodes[0].ChildNodes.Add(new TreeNode(item.Ambiente1, item.IdAmbiente.ToString()));
 
                             var proces = from pro in new ESM.Model.ESMBDDataContext().Procesos
                                          where pro.IdAmbiente == item.IdAmbiente
@@ -40,7 +40,7 @@ namespace ESM.Preguntas
                             foreach (var proc in proces)
                             {
 
-                                tvayuda.Nodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(proc.Proceso, proc.IdProceso.ToString()));
+                                tvayuda.Nodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(proc.Proceso1, proc.IdProceso.ToString()));
                                 tvayuda.Nodes[0].ChildNodes[contador].Expanded = false;
                                 var com = from comp in new ESM.Model.ESMBDDataContext().Componentes
                                           where comp.IdProceso == proc.IdProceso
@@ -50,7 +50,7 @@ namespace ESM.Preguntas
                                 {
 
                                     if (tvayuda.Nodes[0].ChildNodes[contador].ChildNodes.Count > contadorcompo)
-                                        tvayuda.Nodes[0].ChildNodes[contador].ChildNodes[contadorcompo].ChildNodes.Add(new TreeNode(compo.Componente, compo.IdComponente.ToString()));
+                                        tvayuda.Nodes[0].ChildNodes[contador].ChildNodes[contadorcompo].ChildNodes.Add(new TreeNode(compo.Componente1, compo.IdComponente.ToString()));
                                 }
 
                                 contadorcompo++;
@@ -107,7 +107,7 @@ namespace ESM.Preguntas
                 {
 
 
-                    if (item.Componente == tvayuda.SelectedNode.Text)
+                    if (item.Componente1 == tvayuda.SelectedNode.Text)
                     {
                         var pregun = from pre in new ESM.Model.ESMBDDataContext().Preguntas
                                      where pre.IdComponente == Convert.ToInt32(tvayuda.SelectedNode.Value)
@@ -116,14 +116,14 @@ namespace ESM.Preguntas
                         {
                             gvPreguntas.DataSource = pregun;
                             gvPreguntas.DataBind();
-                            lblcomponente.Text = item.Componente;
+                            lblcomponente.Text = item.Componente1;
                             ObtenerTema(gvPreguntas);
 
 
 
                             for (int i = 0; i < gvPreguntas.Rows.Count; i++)
                             {
-                                var aybpre = from ayuda in new ESM.Model.ESMBDDataContext().AyudaByPregunta
+                                var aybpre = from ayuda in new ESM.Model.ESMBDDataContext().AyudaByPreguntas
                                              select ayuda;
 
                                 foreach (var abp in aybpre)
@@ -295,7 +295,7 @@ namespace ESM.Preguntas
 
                     ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-                    var caybp = (from ayu in db.AyudaByPregunta
+                    var caybp = (from ayu in db.AyudaByPreguntas
                                  where ayu.IdPregunta == Convert.ToInt32(idpregunta.Text)
                                  select ayu).Count();
                     if (caybp == 0)
@@ -314,7 +314,7 @@ namespace ESM.Preguntas
                             Lectura = lectura,
                             Participacion = participacion
                         };
-                        db.AyudaByPregunta.InsertOnSubmit(objAyudaPreguntas);
+                        db.AyudaByPreguntas.InsertOnSubmit(objAyudaPreguntas);
                         db.SubmitChanges();
 
 
@@ -322,7 +322,7 @@ namespace ESM.Preguntas
 
                     else
                     {
-                        var aybp = (from ayu in db.AyudaByPregunta
+                        var aybp = (from ayu in db.AyudaByPreguntas
                                     where ayu.IdPregunta == Convert.ToInt32(idpregunta.Text)
                                     select ayu).Single();
 
@@ -342,7 +342,7 @@ namespace ESM.Preguntas
                                    where pregun.IdPregunta == Convert.ToInt32(idpregunta.Text)
                                    select pregun).Single();
 
-                        pre.Pregunta = txtPregunta.Text;
+                        pre.Pregunta1 = txtPregunta.Text;
                         pre.Estudiante = estudiantes;
                         pre.Docente = educadores;
                         pre.Directivo = directivos;

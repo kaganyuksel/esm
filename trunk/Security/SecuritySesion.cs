@@ -32,9 +32,9 @@ public static class SecuritySesion
             using (ESM.Model.ESMBDDataContext db = new ESM.Model.ESMBDDataContext())
             {
                 string idusuario = null;
-                Table<Usuarios> tUsuarios = db.GetTable<Usuarios>();
+                Table<Usuario> tUsuarios = db.GetTable<Usuario>();
                 var rUsuarios = from u in tUsuarios
-                                where u.Contrasena == contrasena && u.Usuario == usuario
+                                where u.Contrasena == contrasena && u.Usuario1 == usuario
                                 select new { u.IdUsuario };
 
                 foreach (var r in rUsuarios)

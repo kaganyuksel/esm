@@ -31,7 +31,7 @@ namespace ESM
                 {
                     bool exist = false;
                     exist = objCDocumentos.ExisteDocumento(i, idmedicion);
-                    IQueryable<ESM.Model.AsignaDocumentos> docs = objCDocumentos.Show(idmedicion);
+                    IQueryable<ESM.Model.AsignaDocumento> docs = objCDocumentos.Show(idmedicion);
 
                     foreach (var item in docs)
                     {

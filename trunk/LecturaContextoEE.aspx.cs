@@ -81,7 +81,7 @@ namespace ESM
             int idie = Convert.ToInt32(objIDIE.Text);
             Session.Add("ideelc", idie);
             ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
-            var ie = from ies in db.Establecimiento_Educativo
+            var ie = from ies in db.Establecimiento_Educativos
                      where ies.IdIE == idie
                      select ies;
 
@@ -108,7 +108,7 @@ namespace ESM
             if (mediciones.Count() != 0 && mediciones != null)
             {
                 var med = (from m in mediciones
-                           select new { IdMedicion = m.IdMedicion, Fecha = m.Mediciones.FechaMedicion }).Take(1);
+                           select new { IdMedicion = m.IdMedicion, Fecha = m.Medicione.FechaMedicion }).Take(1);
 
                 gvMediciones.DataSource = med;
                 gvMediciones.DataBind();

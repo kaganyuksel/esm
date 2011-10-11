@@ -24,7 +24,7 @@ namespace ESM.Consolidado
                 foreach (var item in trvambi)
                 {
 
-                    trvConsolidacion.Nodes[0].ChildNodes[0].ChildNodes.Add(new TreeNode(item.Ambiente, item.IdAmbiente.ToString()));
+                    trvConsolidacion.Nodes[0].ChildNodes[0].ChildNodes.Add(new TreeNode(item.Ambiente1, item.IdAmbiente.ToString()));
 
                     var proces = from pro in new ESM.Model.ESMBDDataContext().Procesos
                                  where pro.IdAmbiente == item.IdAmbiente
@@ -32,7 +32,7 @@ namespace ESM.Consolidado
 
                     foreach (var proc in proces)
                     {
-                        trvConsolidacion.Nodes[0].ChildNodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(proc.Proceso, proc.IdProceso.ToString()));
+                        trvConsolidacion.Nodes[0].ChildNodes[0].ChildNodes[contador].ChildNodes.Add(new TreeNode(proc.Proceso1, proc.IdProceso.ToString()));
 
                         //var com = from comp in new ESM.Model.ESMBDDataContext().Componentes
                         //          where comp.IdProceso == proc.IdProceso
@@ -102,7 +102,7 @@ namespace ESM.Consolidado
                 /*Instancio*/
                 Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-                var rFiltro = from i in db.Establecimiento_Educativo
+                var rFiltro = from i in db.Establecimiento_Educativos
                               where i.Nombre.Contains(texto)
                               select i;
 
@@ -153,7 +153,7 @@ namespace ESM.Consolidado
                 trvConsolidacion.Visible = true;
                 string xmldata = null;
 
-                xmldata = objCConsolidacion.ObtenerConslAmbiente(idMedicion);
+                xmldata = objCConsolidacion.ObtenerConslAmbientes(idMedicion);
                 objAmCharts.genera_chart_column_Flash("amcharts", xmldata, "Nivel General para Ambientes", Page, 900, 600);
 
             }
@@ -165,7 +165,7 @@ namespace ESM.Consolidado
                 trvConsolidacion.Visible = true;
                 string xmldata = null;
 
-                xmldata = objCConsolidacion.ObtenerConslAmbiente(idMedicion);
+                xmldata = objCConsolidacion.ObtenerConslAmbientes(idMedicion);
                 objAmCharts.genera_chart_column_Flash("amcharts", xmldata, "Nivel General para Ambientes", Page, 900, 600);
 
             }
