@@ -1,582 +1,589 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.5, 54.25" name="ESMBD">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 20, 49.375" name="ESMBD">
   <DataContextMoniker Name="/ESMBDDataContext" />
   <nestedChildShapes>
-    <classShape Id="9582337c-a32a-4cf1-ab85-11450b972a6a" absoluteBounds="3.5, 22.75, 2, 1.7708968098958309">
+    <classShape Id="c9536f68-b5e6-4da5-a61d-d833d4347b8b" absoluteBounds="9, 29.375, 2, 1.7708968098958309">
       <DataClassMoniker Name="/ESMBDDataContext/ActaVisitaEE" />
       <nestedChildShapes>
-        <elementListCompartment Id="2b8e7f04-0565-4d2e-be1a-b14404512f53" absoluteBounds="3.515, 23.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="eeac8569-3a2e-4957-8506-9c6132cf6c7f" absoluteBounds="9.015, 29.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="951b3a34-484a-4f30-b9e5-9ad8e2a44e4a" absoluteBounds="0.75, 20.625, 2, 2.3478011067708309">
+    <classShape Id="001de3bf-920c-4bb0-ad8c-127fd7ed23e4" absoluteBounds="3.5, 26.375, 2, 2.3478011067708309">
       <DataClassMoniker Name="/ESMBDDataContext/Usuario" />
       <nestedChildShapes>
-        <elementListCompartment Id="1a5d9215-6b3e-41f9-97e8-81414f06ac1d" absoluteBounds="0.765, 21.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4bd19903-6a37-4173-8ced-7da2b82ae7f6" absoluteBounds="3.515, 26.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="85c10b2b-3b27-4fd7-b081-24dd01bbbca4" absoluteBounds="3.5, 28.75, 2, 1.7708968098958309">
+    <classShape Id="44aa9be8-4a60-497f-af0b-edaf8f02fad4" absoluteBounds="9.25, 21.875, 2, 1.7708968098958309">
       <DataClassMoniker Name="/ESMBDDataContext/ActaVisitaSE" />
       <nestedChildShapes>
-        <elementListCompartment Id="d1b7d6d2-2f26-4e63-a145-c6da9506bcf8" absoluteBounds="3.515, 29.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="14cfd935-8e69-4802-be27-204695e6a5e1" absoluteBounds="9.265, 22.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="844bfafd-d443-46e4-938a-495b9870730f" absoluteBounds="6.5, 5, 2, 1.3862939453125005">
+    <classShape Id="441a5097-576f-4b84-ad60-03d93e0830dc" absoluteBounds="12, 16.5, 2, 1.3862939453125023">
       <DataClassMoniker Name="/ESMBDDataContext/Actore" />
       <nestedChildShapes>
-        <elementListCompartment Id="0c6cf0fc-efef-402d-bb46-95e85769cde9" absoluteBounds="6.515, 5.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="fa5ac731-0a86-4a34-b3b7-0c66d25d7236" absoluteBounds="12.015, 16.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8f3184ef-7ede-462a-98c4-5e4dcd1c0820" absoluteBounds="1.5, 44.375, 2, 1.1939925130208309">
+    <classShape Id="19d46fd4-a8ef-45a7-a75e-fe7b8a1e94f4" absoluteBounds="4, 10.625, 2, 1.1939925130208344">
       <DataClassMoniker Name="/ESMBDDataContext/Ambiente" />
       <nestedChildShapes>
-        <elementListCompartment Id="85555290-ffd3-4908-8c80-e43cc689b0ba" absoluteBounds="1.5150000000000001, 44.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="476aaceb-ecba-4556-9063-6505da3b4c02" absoluteBounds="4.015, 11.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3686a660-9d37-4a45-a748-34f467f76001" absoluteBounds="6.5, 25.75, 2, 1.7708968098958309">
+    <classShape Id="e35eed21-fc78-47ec-bc87-be1824748eeb" absoluteBounds="9.25, 18.875, 2, 1.7708968098958309">
       <DataClassMoniker Name="/ESMBDDataContext/AsignaDocumento" />
       <nestedChildShapes>
-        <elementListCompartment Id="b36b659d-80b3-4112-b21f-c885835dddb7" absoluteBounds="6.515, 26.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b53d7ef5-af39-40dd-a9a9-527dccd061ff" absoluteBounds="9.265, 19.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="d476e075-52d9-405a-a550-33dcd603631f" absoluteBounds="6.25, 10.75, 2, 1.9631982421874987">
+    <classShape Id="f65cf424-d063-4031-b59e-c79589756edf" absoluteBounds="12, 21.875, 2, 1.9631982421875023">
       <DataClassMoniker Name="/ESMBDDataContext/AsociadoActaVisitaSE" />
       <nestedChildShapes>
-        <elementListCompartment Id="2ee0539a-4093-4b49-95a7-d1a741956b15" absoluteBounds="6.265, 11.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="dc3f713a-206d-4502-adf0-669ab746f3e6" absoluteBounds="12.015, 22.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="f8b98454-0378-4914-909d-befa068c87c2" absoluteBounds="9.25, 17.125, 2, 3.1170068359375023">
+    <classShape Id="73144cf6-d34e-420d-985a-55813b9acc3b" absoluteBounds="14.75, 25.75, 2, 3.1170068359375023">
       <DataClassMoniker Name="/ESMBDDataContext/AsociadosActaVisitaEE" />
       <nestedChildShapes>
-        <elementListCompartment Id="06545e8f-abf5-405c-871d-6d16e34e6be3" absoluteBounds="9.265, 17.585, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1993a199-8f3b-441d-93ab-fd36a1c26e27" absoluteBounds="14.765, 26.21, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="9a4bbd58-c607-407a-8c29-d8f6dc2f3c43" absoluteBounds="9.5, 4, 2, 2.9247054036458326">
+    <classShape Id="6b579f51-4fe5-474e-be04-399b0b1eadb7" absoluteBounds="15, 12.75, 2, 2.9247054036458309">
       <DataClassMoniker Name="/ESMBDDataContext/AyudaByPregunta" />
       <nestedChildShapes>
-        <elementListCompartment Id="92820492-5d1e-4832-8777-7a1dfaf1fcf6" absoluteBounds="9.515, 4.46, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="2b2c3644-c98e-4a1b-bb41-ff920a3140c8" absoluteBounds="15.015, 13.21, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fe6ca9ac-b6bd-4f03-b93d-75b13b6af4c0" absoluteBounds="0.75, 0.75, 2, 1.5785953776041666">
+    <classShape Id="4a6938ac-5758-4b2d-9624-c5a11a3e9982" absoluteBounds="0.75, 0.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/ESMBDDataContext/Categoria" />
       <nestedChildShapes>
-        <elementListCompartment Id="b4b53bea-ae68-4063-be2e-df26450b5c83" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7eeb3629-248f-4be0-bd6c-204480c68497" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="bc50cce9-ea3c-4f49-8030-6589db8763eb" absoluteBounds="6.75, 52, 2, 1.9631982421875023">
+    <classShape Id="7bf5661a-e300-4cfd-8acc-885b6a3c45d3" absoluteBounds="12.25, 5.25, 2, 1.9631982421875005">
       <DataClassMoniker Name="/ESMBDDataContext/CategoryByComponente" />
       <nestedChildShapes>
-        <elementListCompartment Id="2b1f8a2c-60e4-4882-9a4c-9404b7026e43" absoluteBounds="6.765, 52.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="32fb687c-fcea-492b-87bb-d0ceb88436e3" absoluteBounds="12.265, 5.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b9b16966-486b-487c-890c-fe206d30eb6a" absoluteBounds="12, 33.25, 2, 2.1554996744791595">
+    <classShape Id="817c9db0-029c-4767-90ea-27399f0a4ed5" absoluteBounds="9, 32, 2, 2.3478011067708309">
       <DataClassMoniker Name="/ESMBDDataContext/Cita" />
       <nestedChildShapes>
-        <elementListCompartment Id="4984b1db-a41e-4466-b7bb-2bbba7b33ebf" absoluteBounds="12.015, 33.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ac48e53b-8dd3-4442-ab30-2c27ea1fd820" absoluteBounds="9.015, 32.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="e80dabda-1881-4a39-978a-7bfff5fcab3a" absoluteBounds="4, 47.25, 2, 1.3862939453125023">
+    <classShape Id="6c1d0a70-9dae-49aa-8b3c-7e2de5647892" absoluteBounds="9.5, 10.5, 2, 1.3862939453124987">
       <DataClassMoniker Name="/ESMBDDataContext/Componente" />
       <nestedChildShapes>
-        <elementListCompartment Id="bed2395c-d3e1-4f3c-a658-174c9c9ca946" absoluteBounds="4.015, 47.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1e14b1d1-6592-45b5-95c0-66d39a173aa1" absoluteBounds="9.515, 10.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fbfedbe7-58aa-4c68-95fa-81ee9fddaff4" absoluteBounds="6.25, 19.25, 2, 1.5785953776041666">
+    <classShape Id="671c5164-b01d-43ee-a18d-fe5b832e3f52" absoluteBounds="11.75, 25.375, 2, 1.5785953776041666">
       <DataClassMoniker Name="/ESMBDDataContext/ConslAmbiente" />
       <nestedChildShapes>
-        <elementListCompartment Id="c8f1f164-9a6a-4881-bfce-94042fd542a3" absoluteBounds="6.265, 19.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8b10b3a7-29b7-4e9d-9cf5-c28bab404468" absoluteBounds="11.765, 25.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="57aec90d-4d04-4e60-8d31-edcf9c96ff39" absoluteBounds="6.25, 16.625, 2, 1.5785953776041666">
+    <classShape Id="f0476603-dd24-4683-a912-1e4ac8bce022" absoluteBounds="11.75, 42.75, 2, 1.5785953776041595">
       <DataClassMoniker Name="/ESMBDDataContext/ConslComponente" />
       <nestedChildShapes>
-        <elementListCompartment Id="10f54b79-3efd-43c6-b9dc-e4bf6344536d" absoluteBounds="6.265, 17.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f5836780-cd7f-4078-94f1-cc3170106b20" absoluteBounds="11.765, 43.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="eb062249-750b-4754-891c-5245c939e849" absoluteBounds="6.25, 44.25, 2, 1.7708968098958309">
+    <classShape Id="ce60e23d-2b53-4683-8787-f1c14ccddc96" absoluteBounds="11.75, 47.375, 2, 1.7708968098958309">
       <DataClassMoniker Name="/ESMBDDataContext/ConslPregunta" />
       <nestedChildShapes>
-        <elementListCompartment Id="ba8241ab-c8ce-4d49-a8a1-4219682c8139" absoluteBounds="6.265, 44.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="22bd4bb5-47a8-4fdc-836a-0ba804877f01" absoluteBounds="11.765, 47.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="dcd279b2-db76-41e6-9c60-62db7808d605" absoluteBounds="6.25, 14, 2, 1.5785953776041666">
+    <classShape Id="e14e52a9-a2ab-4e4e-a2b1-580426bd506d" absoluteBounds="11.75, 45, 2, 1.5785953776041595">
       <DataClassMoniker Name="/ESMBDDataContext/ConslProceso" />
       <nestedChildShapes>
-        <elementListCompartment Id="30348d7d-4db0-4f03-92d7-758c32384b74" absoluteBounds="6.265, 14.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="bf139853-d755-4743-96c7-90fe6e2a36cb" absoluteBounds="11.765, 45.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="6d2ba76f-9ad3-407c-8652-4a935ce4d3ea" absoluteBounds="3.5, 26, 2, 1.3862939453125023">
+    <classShape Id="8cf2e6ab-04c5-430c-a420-758d7c570120" absoluteBounds="9, 35.125, 2, 1.3862939453125023">
       <DataClassMoniker Name="/ESMBDDataContext/Consolidacion" />
       <nestedChildShapes>
-        <elementListCompartment Id="8d0c1c12-95e2-4105-8fcc-d00acd47df5f" absoluteBounds="3.515, 26.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8571fb0d-1b31-4cf4-a45a-cffd28c5afed" absoluteBounds="9.015, 35.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="412baa41-56a7-4cfe-ac4b-5940d1945c45" absoluteBounds="1.5, 31.75, 2, 2.3478011067708273">
+    <classShape Id="8a11aa7f-21c1-4f28-ad42-006a2a259e9a" absoluteBounds="0.75, 27.375, 2, 2.3478011067708309">
       <DataClassMoniker Name="/ESMBDDataContext/Consultore" />
       <nestedChildShapes>
-        <elementListCompartment Id="27e904af-0c12-4f3b-ad46-c808cd41417d" absoluteBounds="1.5150000000000001, 32.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4f7dabd5-1c96-483c-bbbb-776027809a24" absoluteBounds="0.765, 27.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="f8d8c2ae-f3f8-4582-9357-4481ed3a5f3a" absoluteBounds="3.75, 8.125, 2, 1.1939925130208344">
+    <classShape Id="d5505df3-0f79-46db-b24d-da679c48e3f8" absoluteBounds="6.5, 14.25, 2, 1.1939925130208344">
       <DataClassMoniker Name="/ESMBDDataContext/Documento" />
       <nestedChildShapes>
-        <elementListCompartment Id="03751bb4-0c83-49cb-b55a-29480e7e2ef6" absoluteBounds="3.765, 8.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="43963fc8-b706-496f-b31b-32dbd365130d" absoluteBounds="6.515, 14.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="491f5f91-c8a7-47ce-9db2-f17f3452ee70" absoluteBounds="0.75, 35.125, 2, 2.7324039713541595">
+    <classShape Id="c9a6f2ef-5475-4f0f-abb5-b7f2270b7ed0" absoluteBounds="6.25, 33.375, 2, 2.7324039713541595">
       <DataClassMoniker Name="/ESMBDDataContext/Establecimiento_Educativo" />
       <nestedChildShapes>
-        <elementListCompartment Id="8f3b79d9-b849-4329-9a70-adf97be9213e" absoluteBounds="0.765, 35.585, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7607f5c9-dded-4d61-85d0-dfbfa15c5417" absoluteBounds="6.265, 33.835, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ed68c315-0ff5-4553-a020-c22df4ccaef7" absoluteBounds="9.25, 36.75, 2, 1.1939925130208309">
+    <classShape Id="5d3e2783-5122-45da-b18e-939add97d7d5" absoluteBounds="6.25, 37.5, 2, 1.1939925130208309">
       <DataClassMoniker Name="/ESMBDDataContext/EstadoCita" />
       <nestedChildShapes>
-        <elementListCompartment Id="16920025-8920-4eda-8f73-0edb40f269ec" absoluteBounds="9.265, 37.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="203e0539-c314-4b5d-ad9a-665257919660" absoluteBounds="6.265, 37.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="bb0f852e-e0c4-4f6e-ab69-2ce467501e3a" absoluteBounds="3.75, 35.125, 2, 1.1939925130208309">
+    <classShape Id="b0c1cf00-ec81-492d-8fea-9b7c2d681dc9" absoluteBounds="12.25, 13.625, 2, 1.1939925130208344">
       <DataClassMoniker Name="/ESMBDDataContext/EstadoEvaluacion" />
       <nestedChildShapes>
-        <elementListCompartment Id="b928defd-d95f-4bce-8b72-bcfa58f70fa6" absoluteBounds="3.765, 35.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="bdb4e95e-d1d0-48ec-9f0d-ad5d7fccb245" absoluteBounds="12.265, 14.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="613dd17b-e073-46a5-9d92-ea5d94cdfa41" absoluteBounds="6.5, 49.75, 2, 1.1939925130208309">
+    <classShape Id="00fef940-3d63-4e81-a85b-c89599983336" absoluteBounds="6.25, 16.625, 2, 1.1939925130208309">
       <DataClassMoniker Name="/ESMBDDataContext/EstadoLLamada" />
       <nestedChildShapes>
-        <elementListCompartment Id="e50dc16d-4d04-442e-ad7b-d52f472f7c19" absoluteBounds="6.515, 50.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3ec0f377-9b86-4fc8-9a06-bb89b4acc3d1" absoluteBounds="6.265, 17.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="cda91f74-832c-4143-8069-7fdce54aa601" absoluteBounds="6.5, 22.5, 2, 2.3478011067708309">
+    <classShape Id="03089137-57c2-4ae7-810a-17846cdff0bd" absoluteBounds="15, 30.125, 2, 2.3478011067708309">
       <DataClassMoniker Name="/ESMBDDataContext/Evaluacion" />
       <nestedChildShapes>
-        <elementListCompartment Id="4c51c8dc-3380-4ceb-b4d6-9e4745f1866e" absoluteBounds="6.515, 22.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b15d7038-6d96-4abb-958e-4da97b0213b8" absoluteBounds="15.015, 30.585, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="592dc6f6-c13d-48a7-9ab6-0b823bb337ec" absoluteBounds="6.5, 28.75, 2, 13.885887044270834">
+    <classShape Id="07316c02-7420-4723-89c7-2b30b4fd9d7e" absoluteBounds="12, 27.875, 2, 13.885887044270831">
       <DataClassMoniker Name="/ESMBDDataContext/LecturaContextoEE" />
       <nestedChildShapes>
-        <elementListCompartment Id="d15667fd-dd87-4ace-9549-5edd4c372952" absoluteBounds="6.515, 29.21, 1.9700000000000002, 13.325887044270832" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4e62d083-efa5-4c0c-9483-82a6f58f874d" absoluteBounds="12.015, 28.335, 1.9700000000000002, 13.325887044270832" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ad1c0df6-66e7-4092-a319-f0a943cea22b" absoluteBounds="9.5, 21.375, 2, 10.616762695312502">
+    <classShape Id="e6fe2bca-2a5c-40b9-816f-898e277e1594" absoluteBounds="6.25, 21.375, 2, 10.616762695312502">
       <DataClassMoniker Name="/ESMBDDataContext/LecturaContextoSE" />
       <nestedChildShapes>
-        <elementListCompartment Id="e6381cec-fcd8-4009-93e5-226f55b3b7c0" absoluteBounds="9.515, 21.835, 1.9700000000000002, 10.0567626953125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a54198b0-ed51-4656-ae91-fa683ac332f2" absoluteBounds="6.265, 21.835, 1.9700000000000002, 10.0567626953125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ed28ed6b-1b0f-4a0c-8d2e-9ed98ae059b7" absoluteBounds="9.25, 33.25, 2, 2.1554996744791595">
+    <classShape Id="2c229479-5d00-47a5-9645-b92b4c71ee6e" absoluteBounds="9, 26.125, 2, 2.1554996744791666">
       <DataClassMoniker Name="/ESMBDDataContext/LLamada" />
       <nestedChildShapes>
-        <elementListCompartment Id="29e021e4-9470-486c-82f4-a5993605e0c2" absoluteBounds="9.265, 33.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="15aa24c3-a1e1-45d4-bad7-05082b667fbe" absoluteBounds="9.015, 26.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="d65b1e74-ddd9-492e-b23f-8aa888766957" absoluteBounds="0.75, 26.125, 2, 1.1939925130208309">
+    <classShape Id="dfcb087e-cb3c-4fe1-8cd8-f64d5a3e42e2" absoluteBounds="6.5, 19.25, 2, 1.1939925130208309">
       <DataClassMoniker Name="/ESMBDDataContext/Medicione" />
       <nestedChildShapes>
-        <elementListCompartment Id="322dabb7-5ad0-44d2-919b-0cd93a870d71" absoluteBounds="0.765, 26.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3b5579e5-9071-4c3f-bfc2-bbc166494fc6" absoluteBounds="6.515, 19.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="f10bee21-6a1f-4145-aa5c-6a7793b2aab3" absoluteBounds="6.5, 8, 2, 1.1939925130208344">
+    <classShape Id="861e617a-da5d-4adb-b4c9-7d031e02f4bb" absoluteBounds="12, 19.625, 2, 1.1939925130208309">
       <DataClassMoniker Name="/ESMBDDataContext/NivelesEducativo" />
       <nestedChildShapes>
-        <elementListCompartment Id="3179aa61-52d4-4f77-b99a-3de296f1ba8f" absoluteBounds="6.515, 8.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="0effa97e-7122-421e-b51f-f1ba3d469721" absoluteBounds="12.015, 20.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="05bf2fbd-e654-424a-aae7-5a3a4c35312e" absoluteBounds="1.5, 15.25, 2, 1.7708968098958327">
+    <classShape Id="086ac68e-a6cf-4361-9b8f-d8fc01fc4995" absoluteBounds="0.75, 30.625, 2, 1.7708968098958344">
       <DataClassMoniker Name="/ESMBDDataContext/Operadore" />
       <nestedChildShapes>
-        <elementListCompartment Id="936fed3f-448a-4058-9209-d67660ca0375" absoluteBounds="1.5150000000000001, 15.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="22735bfb-f61d-44f8-ad56-99ddcef9fdcd" absoluteBounds="0.765, 31.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="79929235-2618-44f4-b301-affb9dc2679f" absoluteBounds="6.75, 0.75, 2, 3.3093082682291666">
+    <classShape Id="beddfcfd-074e-4c59-a1eb-08ad4956aa3e" absoluteBounds="12.25, 8.625, 2, 3.3093082682291666">
       <DataClassMoniker Name="/ESMBDDataContext/Pregunta" />
       <nestedChildShapes>
-        <elementListCompartment Id="3acfe9c8-71cb-460d-b4b2-b2d4c22a7609" absoluteBounds="6.765, 1.21, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e0bff5fc-a156-446e-89ac-f9c1f540db07" absoluteBounds="12.265, 9.085, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="6613c82a-28a8-4ac0-a55e-580a610a8ac4" absoluteBounds="4, 2.375, 2, 1.1939925130208335">
+    <classShape Id="e0d53b94-220f-4af9-8c49-e78d9c969d90" absoluteBounds="9.5, 8.625, 2, 1.1939925130208344">
       <DataClassMoniker Name="/ESMBDDataContext/Privilegiado" />
       <nestedChildShapes>
-        <elementListCompartment Id="055c69a6-9511-4f6f-a1a4-3c0533b0db30" absoluteBounds="4.015, 2.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="10074b38-706f-4388-b8c9-2fbbb88c1bcf" absoluteBounds="9.515, 9.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8ece09a2-5ac2-4a25-a45d-91699468e725" absoluteBounds="1.25, 47.25, 2, 1.3862939453125023">
+    <classShape Id="166e4088-b714-481f-bb6a-bed1efda105f" absoluteBounds="6.75, 10.5, 2, 1.3862939453124987">
       <DataClassMoniker Name="/ESMBDDataContext/Proceso" />
       <nestedChildShapes>
-        <elementListCompartment Id="0dcf5ce7-eb8a-4984-b4ed-12c348e413aa" absoluteBounds="1.2650000000000001, 47.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ec7c3420-f331-4cf8-8eff-2956809326d2" absoluteBounds="6.765, 10.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="91bdb4f0-7c1f-4a4c-8247-cfbbda084e99" absoluteBounds="3.75, 5, 2, 1.1939925130208344">
+    <classShape Id="b9ff83dc-11d4-4d3b-8905-ecc0101c4557" absoluteBounds="9.25, 16.625, 2, 1.1939925130208309">
       <DataClassMoniker Name="/ESMBDDataContext/Rama" />
       <nestedChildShapes>
-        <elementListCompartment Id="1bbc6eb8-1aa8-41f7-b7aa-08bd5e724058" absoluteBounds="3.765, 5.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ffe56956-5a9a-447c-8e47-a624f126ea15" absoluteBounds="9.265, 17.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="6f79bed9-645b-4244-be4c-9f9cd89b5ba5" absoluteBounds="9.5, 0.75, 2, 1.7708968098958329">
+    <classShape Id="b997de5e-2806-4b4f-a5cf-ec318f00a00f" absoluteBounds="15, 9.375, 2, 1.7708968098958344">
       <DataClassMoniker Name="/ESMBDDataContext/Resultado" />
       <nestedChildShapes>
-        <elementListCompartment Id="e3dfb4c2-51f8-447a-92f3-d019cfc6b1de" absoluteBounds="9.515, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a8cf70db-62fd-4001-8ee9-43ae3fbcc59d" absoluteBounds="15.015, 9.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c405507f-53eb-4a2d-9a23-e14e8857943e" absoluteBounds="12.25, 23, 2, 1.3862939453125023">
+    <classShape Id="7ba2c960-0b26-4e68-a003-4f56281bd68e" absoluteBounds="17.75, 30.625, 2, 1.3862939453125023">
       <DataClassMoniker Name="/ESMBDDataContext/ResultadosByEvaluacion" />
       <nestedChildShapes>
-        <elementListCompartment Id="61604948-860f-4ecc-9115-4f41a962e829" absoluteBounds="12.265, 23.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="968dc5eb-2319-4174-83ce-2963cba3b9b1" absoluteBounds="17.765, 31.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ed18aa30-be1a-4d5b-aacb-f975e0d63015" absoluteBounds="1.5, 18.375, 2, 1.1939925130208309">
+    <classShape Id="9c915a10-4d76-47d6-bc2d-727ec4f2d54d" absoluteBounds="0.75, 24.75, 2, 1.1939925130208309">
       <DataClassMoniker Name="/ESMBDDataContext/Role" />
       <nestedChildShapes>
-        <elementListCompartment Id="43167e40-102f-4f56-b8c7-fa7b31c2136a" absoluteBounds="1.5150000000000001, 18.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6ecb2cca-51ca-4bc0-bbfa-5401ef439f47" absoluteBounds="0.765, 25.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="cd5c5b54-a96d-4eca-9b6a-f3c5cb245392" absoluteBounds="1.5, 38.875, 2, 3.1170068359375023">
+    <classShape Id="ec770688-ac93-4748-b714-8c24b13d1196" absoluteBounds="3.5, 30.125, 2, 3.1170068359375023">
       <DataClassMoniker Name="/ESMBDDataContext/Secretaria_Educacion" />
       <nestedChildShapes>
-        <elementListCompartment Id="4ed28f7c-7868-47ee-98b2-b6c986eecf6c" absoluteBounds="1.5150000000000001, 39.335, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="973538b2-3e9d-4ce7-bdaa-508c6b2d870e" absoluteBounds="3.515, 30.585, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 21.6874995); (4.5 : 21.6874995); (4.5 : 22.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.5 : 28.7228011067708); (4.5 : 29.875); (5.66666666666667 : 29.875 : JumpStart); (5.95833333333333 : 29.875 : JumpEnd); (6 : 29.875); (6 : 32.2417626953125); (6.04166666666667 : 32.2417626953125 : JumpStart); (6.20833333333333 : 32.2417626953125 : JumpEnd); (8.29166666666667 : 32.2417626953125 : JumpStart); (8.58333333333333 : 32.2417626953125 : JumpEnd); (8.625 : 32.2417626953125); (8.625 : 30.2604484049479); (8.72916666666667 : 30.2604484049479 : JumpStart); (8.89583333333333 : 30.2604484049479 : JumpEnd); (9 : 30.2604484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Usuario/Usuario_ActaVisitaEE" />
       <nodes>
-        <classShapeMoniker Id="951b3a34-484a-4f30-b9e5-9ad8e2a44e4a" />
-        <classShapeMoniker Id="9582337c-a32a-4cf1-ab85-11450b972a6a" />
+        <classShapeMoniker Id="001de3bf-920c-4bb0-ad8c-127fd7ed23e4" />
+        <classShapeMoniker Id="c9536f68-b5e6-4da5-a61d-d833d4347b8b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 22.9712616452324); (3.125 : 23.3462616452324); (3.125 : 29.6354484049479); (3.19791666666667 : 29.6354484049479 : JumpStart); (3.36458333333333 : 29.6354484049479 : JumpEnd); (3.5 : 29.6354484049479)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.5 : 26.375); (4.5 : 21.125); (7.29166666666667 : 21.125 : JumpStart); (7.45833333333333 : 21.125 : JumpEnd); (8.35416666666667 : 21.125 : JumpStart); (8.70833333333333 : 21.125 : JumpEnd); (8.875 : 21.125); (8.875 : 22.7604484049479); (8.91666666666667 : 22.7604484049479 : JumpStart); (9.08333333333333 : 22.7604484049479 : JumpEnd); (9.25 : 22.7604484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Usuario/Usuario_ActaVisitaSE" />
       <nodes>
-        <classShapeMoniker Id="951b3a34-484a-4f30-b9e5-9ad8e2a44e4a" />
-        <classShapeMoniker Id="85c10b2b-3b27-4fd7-b081-24dd01bbbca4" />
+        <classShapeMoniker Id="001de3bf-920c-4bb0-ad8c-127fd7ed23e4" />
+        <classShapeMoniker Id="44aa9be8-4a60-497f-af0b-edaf8f02fad4" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 28.7513612283153); (5.64419943490112 : 28.6071617934142 : JumpStart); (5.76205056509888 : 28.4893106632164 : JumpEnd); (5.875 : 28.3763612283153); (5.875 : 11.7315991210937); (6.25 : 11.7315991210937)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11.25 : 22.7604484049479); (12 : 22.7604484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/ActaVisitaSE/ActaVisitaSE_AsociadoActaVisitaSE" />
       <nodes>
-        <classShapeMoniker Id="85c10b2b-3b27-4fd7-b081-24dd01bbbca4" />
-        <classShapeMoniker Id="d476e075-52d9-405a-a550-33dcd603631f" />
+        <classShapeMoniker Id="44aa9be8-4a60-497f-af0b-edaf8f02fad4" />
+        <classShapeMoniker Id="f65cf424-d063-4031-b59e-c79589756edf" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.5 : 6.33190756745793); (8.56607193490112 : 6.39797950235905 : JumpStart); (8.68392306509888 : 6.51583063255681 : JumpEnd); (9.03125 : 6.86315756745793); (9.03125 : 18.6835034179688); (9.25 : 18.6835034179688)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(14 : 17.1931469726563); (14.1666666666667 : 17.1931469726563 : JumpStart); (14.3333333333333 : 17.1931469726563 : JumpEnd); (15.75 : 17.1931469726563); (15.75 : 25.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Actore/Actore_AsociadosActaVisitaEE" />
       <nodes>
-        <classShapeMoniker Id="844bfafd-d443-46e4-938a-495b9870730f" />
-        <classShapeMoniker Id="f8b98454-0378-4914-909d-befa068c87c2" />
+        <classShapeMoniker Id="441a5097-576f-4b84-ad60-03d93e0830dc" />
+        <classShapeMoniker Id="73144cf6-d34e-420d-985a-55813b9acc3b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.0312525 : 22.75); (5.0312525 : 18.9667542089844); (5.57291666666667 : 18.9667542089844 : JumpStart); (5.73958333333333 : 18.9667542089844 : JumpEnd); (5.79166666666667 : 18.9667542089844 : JumpStart); (6.17708333333333 : 18.9667542089844 : JumpEnd); (8.54166416666667 : 18.9667542089844 : JumpStart); (8.70833083333333 : 18.9667542089844 : JumpEnd); (8.79166666666667 : 18.9667542089844 : JumpStart); (8.95833333333333 : 18.9667542089844 : JumpEnd); (9.25 : 18.9667542089844)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(10 : 29.375); (10 : 28.5304996744792); (11.25 : 28.5304996744792); (11.25 : 27.4142976888021); (11.2916666666667 : 27.4142976888021 : JumpStart); (11.4583333333333 : 27.4142976888021 : JumpEnd); (11.5416666666667 : 27.4142976888021 : JumpStart); (11.7083333333333 : 27.4142976888021 : JumpEnd); (14.1666666666667 : 27.4142976888021 : JumpStart); (14.4583333333333 : 27.4142976888021 : JumpEnd); (14.75 : 27.4142976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/ActaVisitaEE/ActaVisitaEE_AsociadosActaVisitaEE" />
       <nodes>
-        <classShapeMoniker Id="9582337c-a32a-4cf1-ab85-11450b972a6a" />
-        <classShapeMoniker Id="f8b98454-0378-4914-909d-befa068c87c2" />
+        <classShapeMoniker Id="c9536f68-b5e6-4da5-a61d-d833d4347b8b" />
+        <classShapeMoniker Id="73144cf6-d34e-420d-985a-55813b9acc3b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5 : 48.6362939453125); (5 : 52.9815991210938); (6.75 : 52.9815991210938)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11.5 : 10.5); (11.875 : 10.125); (11.875 : 6.23159912109375); (12.25 : 6.23159912109375)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Componente/Componente_CategoryByComponente" />
       <nodes>
-        <classShapeMoniker Id="e80dabda-1881-4a39-978a-7bfff5fcab3a" />
-        <classShapeMoniker Id="bc50cce9-ea3c-4f49-8030-6589db8763eb" />
+        <classShapeMoniker Id="6c1d0a70-9dae-49aa-8b3c-7e2de5647892" />
+        <classShapeMoniker Id="7bf5661a-e300-4cfd-8acc-885b6a3c45d3" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 26.0341231586538); (5.64419943490112 : 25.8899237237527 : JumpStart); (5.76205056509888 : 25.772072593555 : JumpEnd); (5.81607443490112 : 25.7180487237527 : JumpStart); (5.93392556509888 : 25.600197593555 : JumpEnd); (6.1875 : 25.3466231586538); (6.1875 : 20.0392976888021); (6.25 : 20.0392976888021)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11 : 35.125); (11.375 : 34.75); (11.375 : 26.1642976888021); (11.75 : 26.1642976888021)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Consolidacion/Consolidacion_ConslAmbiente" />
       <nodes>
-        <classShapeMoniker Id="6d2ba76f-9ad3-407c-8652-4a935ce4d3ea" />
-        <classShapeMoniker Id="fbfedbe7-58aa-4c68-95fa-81ee9fddaff4" />
+        <classShapeMoniker Id="8cf2e6ab-04c5-430c-a420-758d7c570120" />
+        <classShapeMoniker Id="671c5164-b01d-43ee-a18d-fe5b832e3f52" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 26); (5.64419943490112 : 25.8558005650989 : JumpStart); (5.76205056509888 : 25.7379494349011 : JumpEnd); (5.81607443490112 : 25.6839255650989 : JumpStart); (5.93392556509888 : 25.5660744349011 : JumpEnd); (6.09375 : 25.40625); (6.09375 : 17.4142976888021); (6.25 : 17.4142976888021)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(10 : 36.5112939453125); (10 : 43.5392976888021); (10.4479191666667 : 43.5392976888021 : JumpStart); (10.6145858333333 : 43.5392976888021 : JumpEnd); (11.75 : 43.5392976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Consolidacion/Consolidacion_ConslComponente" />
       <nodes>
-        <classShapeMoniker Id="6d2ba76f-9ad3-407c-8652-4a935ce4d3ea" />
-        <classShapeMoniker Id="57aec90d-4d04-4e60-8d31-edcf9c96ff39" />
+        <classShapeMoniker Id="8cf2e6ab-04c5-430c-a420-758d7c570120" />
+        <classShapeMoniker Id="f0476603-dd24-4683-a912-1e4ac8bce022" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 26.7361286521935); (5.61979166666667 : 26.7361286521935 : JumpStart); (5.78645833333333 : 26.7361286521935 : JumpEnd); (5.79166666666667 : 26.7361286521935 : JumpStart); (5.95833333333333 : 26.7361286521935 : JumpEnd); (6.25 : 26.7361286521935); (6.25 : 43.875); (7.25 : 43.875); (7.25 : 44.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(10.5312525 : 36.5112939453125); (10.5312525 : 48.2604484049479); (11.75 : 48.2604484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Consolidacion/Consolidacion_ConslPregunta" />
       <nodes>
-        <classShapeMoniker Id="6d2ba76f-9ad3-407c-8652-4a935ce4d3ea" />
-        <classShapeMoniker Id="eb062249-750b-4754-891c-5245c939e849" />
+        <classShapeMoniker Id="8cf2e6ab-04c5-430c-a420-758d7c570120" />
+        <classShapeMoniker Id="ce60e23d-2b53-4683-8787-f1c14ccddc96" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.4968008601262 : 26); (5.64419943490112 : 25.8526014252251 : JumpStart); (5.76205056509888 : 25.7347502950273 : JumpEnd); (5.81607443490112 : 25.6807264252251 : JumpStart); (5.93392556509888 : 25.5628752950273 : JumpEnd); (6.03125 : 25.4655508601262); (6.03125 : 14.7892976888021); (6.25 : 14.7892976888021)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(9.4687475 : 36.5112939453125); (9.4687475 : 45.7892976888021); (10.4479191666667 : 45.7892976888021 : JumpStart); (10.6145858333333 : 45.7892976888021 : JumpEnd); (11.75 : 45.7892976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Consolidacion/Consolidacion_ConslProceso" />
       <nodes>
-        <classShapeMoniker Id="6d2ba76f-9ad3-407c-8652-4a935ce4d3ea" />
-        <classShapeMoniker Id="dcd279b2-db76-41e6-9c60-62db7808d605" />
+        <classShapeMoniker Id="8cf2e6ab-04c5-430c-a420-758d7c570120" />
+        <classShapeMoniker Id="e14e52a9-a2ab-4e4e-a2b1-580426bd506d" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.28125 : 31.75); (3.28125 : 22.3293805726162); (2.75 : 22.3293805726162)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 28.0489005533854); (3.04166666666667 : 28.0489005533854 : JumpStart); (3.20833333333333 : 28.0489005533854 : JumpEnd); (3.5 : 28.0489005533854)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Consultore/Consultore_Usuario" />
       <nodes>
-        <classShapeMoniker Id="412baa41-56a7-4cfe-ac4b-5940d1945c45" />
-        <classShapeMoniker Id="951b3a34-484a-4f30-b9e5-9ad8e2a44e4a" />
+        <classShapeMoniker Id="8a11aa7f-21c1-4f28-ad42-006a2a259e9a" />
+        <classShapeMoniker Id="001de3bf-920c-4bb0-ad8c-127fd7ed23e4" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.65625 : 9.31899251302083); (5.65625 : 25.84375); (5.79166666666667 : 25.84375 : JumpStart); (5.95833333333333 : 25.84375 : JumpEnd); (6.22916666666667 : 25.84375 : JumpStart); (6.45833333333333 : 25.84375 : JumpEnd); (6.5 : 25.84375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.5 : 15.4439925130208); (8.875 : 15.8189925130208); (8.875 : 19.7604484049479); (8.91666666666667 : 19.7604484049479 : JumpStart); (9.08333333333333 : 19.7604484049479 : JumpEnd); (9.25 : 19.7604484049479)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Documento/Documento_AsignaDocumento" />
       <nodes>
-        <classShapeMoniker Id="f8d8c2ae-f3f8-4582-9357-4481ed3a5f3a" />
-        <classShapeMoniker Id="3686a660-9d37-4a45-a748-34f467f76001" />
+        <classShapeMoniker Id="d5505df3-0f79-46db-b24d-da679c48e3f8" />
+        <classShapeMoniker Id="e35eed21-fc78-47ec-bc87-be1824748eeb" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 35.125); (1.75 : 34.3478011067708); (2.88541666666667 : 34.3478011067708 : JumpStart); (3.05208333333333 : 34.3478011067708 : JumpEnd); (3.16666666666667 : 34.3478011067708 : JumpStart); (3.33333333333333 : 34.3478011067708 : JumpEnd); (3.75 : 34.3478011067708); (3.75 : 30.7708968098958); (3.36458333333333 : 30.7708968098958 : JumpStart); (3.19791666666667 : 30.7708968098958 : JumpEnd); (3 : 30.7708968098958); (3 : 23.6354484049479); (3.04166666666667 : 23.6354484049479 : JumpStart); (3.36458333333333 : 23.6354484049479 : JumpEnd); (3.5 : 23.6354484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 33.4088451538462); (8.37857443490112 : 33.280270718945 : JumpStart); (8.52767556509888 : 33.1311695887473 : JumpEnd); (8.875 : 32.7838451538462); (8.875 : 30.7344246074219); (9 : 30.7344246074219)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Establecimiento_Educativo/Establecimiento_Educativo_ActaVisitaEE" />
       <nodes>
-        <classShapeMoniker Id="491f5f91-c8a7-47ce-9db2-f17f3452ee70" />
-        <classShapeMoniker Id="9582337c-a32a-4cf1-ab85-11450b972a6a" />
+        <classShapeMoniker Id="c9a6f2ef-5475-4f0f-abb5-b7f2270b7ed0" />
+        <classShapeMoniker Id="c9536f68-b5e6-4da5-a61d-d833d4347b8b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 36.4912019856771); (2.88541666666667 : 36.4912019856771 : JumpStart); (3.05208333333333 : 36.4912019856771 : JumpEnd); (3.16666666666667 : 36.4912019856771 : JumpStart); (3.33333333333333 : 36.4912019856771 : JumpEnd); (3.5 : 36.4912019856771); (3.5 : 34.875); (4.5 : 34.875); (4.5 : 31.0208968098958); (3.83333333333333 : 31.0208968098958 : JumpStart); (3.66666666666667 : 31.0208968098958 : JumpEnd); (3.36458333333333 : 31.0208968098958 : JumpStart); (3.19791666666667 : 31.0208968098958 : JumpEnd); (2.875 : 31.0208968098958); (2.875 : 27.7612939453125); (2.91666666666667 : 27.7612939453125 : JumpStart); (3.36458333333333 : 27.7612939453125 : JumpEnd); (4.5 : 27.7612939453125); (4.5 : 27.3862939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 33.9234217841546); (8.35416666666667 : 33.9234217841546 : JumpStart); (8.70833333333333 : 33.9234217841546 : JumpEnd); (9 : 33.9234217841546)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ESMBDDataContext/Establecimiento_Educativo/Establecimiento_Educativo_Cita" />
+      <nodes>
+        <classShapeMoniker Id="c9a6f2ef-5475-4f0f-abb5-b7f2270b7ed0" />
+        <classShapeMoniker Id="817c9db0-029c-4767-90ea-27399f0a4ed5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 35.6162019856771); (8.35416666666667 : 35.6162019856771 : JumpStart); (8.70833333333333 : 35.6162019856771 : JumpEnd); (9 : 35.6162019856771)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Establecimiento_Educativo/Establecimiento_Educativo_Consolidacion" />
       <nodes>
-        <classShapeMoniker Id="491f5f91-c8a7-47ce-9db2-f17f3452ee70" />
-        <classShapeMoniker Id="6d2ba76f-9ad3-407c-8652-4a935ce4d3ea" />
+        <classShapeMoniker Id="c9a6f2ef-5475-4f0f-abb5-b7f2270b7ed0" />
+        <classShapeMoniker Id="8cf2e6ab-04c5-430c-a420-758d7c570120" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(11.25 : 37.3469962565104); (13 : 37.3469962565104); (13 : 35.4054996744792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 37.5); (8.40982443490112 : 37.3401755650989 : JumpStart); (8.52767556509888 : 37.2223244349011 : JumpEnd); (8.625 : 37.125); (8.625 : 33.0513397397336); (9 : 33.0513397397336)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/EstadoCita/EstadoCita_Cita" />
       <nodes>
-        <classShapeMoniker Id="ed68c315-0ff5-4553-a020-c22df4ccaef7" />
-        <classShapeMoniker Id="b9b16966-486b-487c-890c-fe206d30eb6a" />
+        <classShapeMoniker Id="5d3e2783-5122-45da-b18e-939add97d7d5" />
+        <classShapeMoniker Id="817c9db0-029c-4767-90ea-27399f0a4ed5" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.47760602088341 : 6.3862939453125); (8.56607193490112 : 6.47475985933021 : JumpStart); (8.68392306509888 : 6.59261098952797 : JumpEnd); (8.875 : 6.78368792442909); (8.875 : 22.125); (8.68392306509888 : 22.3160769349011 : JumpStart); (8.56607193490112 : 22.4339280650989 : JumpEnd); (8.5 : 22.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(14 : 17.5709729589844); (14.1666666666667 : 17.5709729589844 : JumpStart); (14.3333333333333 : 17.5709729589844 : JumpEnd); (15.6666666666667 : 17.5709729589844 : JumpStart); (15.8333333333333 : 17.5709729589844 : JumpEnd); (16.90625 : 17.5709729589844); (16.90625 : 30.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Actore/Actore_Evaluacion" />
       <nodes>
-        <classShapeMoniker Id="844bfafd-d443-46e4-938a-495b9870730f" />
-        <classShapeMoniker Id="cda91f74-832c-4143-8069-7fdce54aa601" />
+        <classShapeMoniker Id="441a5097-576f-4b84-ad60-03d93e0830dc" />
+        <classShapeMoniker Id="03089137-57c2-4ae7-810a-17846cdff0bd" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.703125 : 35.125); (5.703125 : 24.7155989583333); (5.79166666666667 : 24.7155989583333 : JumpStart); (6.27083333333333 : 24.7155989583333 : JumpEnd); (6.5 : 24.7155989583333)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(13.25 : 14.8189925130208); (13.25 : 16.25); (14.25 : 16.25); (14.25 : 31.2989005533854); (14.4166666666667 : 31.2989005533854 : JumpStart); (14.5833333333333 : 31.2989005533854 : JumpEnd); (15 : 31.2989005533854)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/EstadoEvaluacion/EstadoEvaluacion_Evaluacion" />
       <nodes>
-        <classShapeMoniker Id="bb0f852e-e0c4-4f6e-ab69-2ce467501e3a" />
-        <classShapeMoniker Id="cda91f74-832c-4143-8069-7fdce54aa601" />
+        <classShapeMoniker Id="b0c1cf00-ec81-492d-8fea-9b7c2d681dc9" />
+        <classShapeMoniker Id="03089137-57c2-4ae7-810a-17846cdff0bd" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 35.125); (2.90982443490112 : 34.9651755650989 : JumpStart); (3.02767556509888 : 34.8473244349011 : JumpEnd); (3.125 : 34.75); (3.16666666666667 : 34.75 : JumpStart); (3.33333333333333 : 34.75 : JumpEnd); (4.41666666666667 : 34.75 : JumpStart); (4.58333333333333 : 34.75 : JumpEnd); (5.61979166666667 : 34.75 : JumpStart); (5.78645833333333 : 34.75 : JumpEnd); (5.91666666666667 : 34.75 : JumpStart); (6.08333333333333 : 34.75 : JumpEnd); (6.16666666666667 : 34.75 : JumpStart); (6.33333333333333 : 34.75 : JumpEnd); (6.375 : 34.75); (6.375 : 24.9235703375401); (6.5 : 24.7985703375401)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(8.25 : 34.7364005533854); (8.35416666666667 : 34.7364005533854 : JumpStart); (8.70833333333333 : 34.7364005533854 : JumpEnd); (11.75 : 34.7364005533854); (11.75 : 27.625); (14.1666666666667 : 27.625 : JumpStart); (14.4583333333333 : 27.625 : JumpEnd); (14.5 : 27.625); (14.5 : 32.8478011067708); (16 : 32.8478011067708); (16 : 32.4728011067708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Establecimiento_Educativo/Establecimiento_Educativo_Evaluacion" />
       <nodes>
-        <classShapeMoniker Id="491f5f91-c8a7-47ce-9db2-f17f3452ee70" />
-        <classShapeMoniker Id="cda91f74-832c-4143-8069-7fdce54aa601" />
+        <classShapeMoniker Id="c9a6f2ef-5475-4f0f-abb5-b7f2270b7ed0" />
+        <classShapeMoniker Id="03089137-57c2-4ae7-810a-17846cdff0bd" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 22.59375); (3.19791666666667 : 22.59375 : JumpStart); (3.36458333333333 : 22.59375 : JumpEnd); (4.41666666666667 : 22.59375 : JumpStart); (4.58333333333333 : 22.59375 : JumpEnd); (4.94791916666667 : 22.59375 : JumpStart); (5.11458583333333 : 22.59375 : JumpEnd); (5.57291666666667 : 22.59375 : JumpStart); (5.73958333333333 : 22.59375 : JumpEnd); (5.79166666666667 : 22.59375 : JumpStart); (6.27083333333333 : 22.59375 : JumpEnd); (6.5 : 22.59375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 27.5489005533854); (5.75 : 27.5489005533854); (5.75 : 32.4917626953125); (8.5 : 32.4917626953125); (8.5 : 31.75); (8.54166666666667 : 31.75 : JumpStart); (8.95833333333333 : 31.75 : JumpEnd); (11.2916666666667 : 31.75 : JumpStart); (11.4583333333333 : 31.75 : JumpEnd); (11.6666666666667 : 31.75 : JumpStart); (11.8333333333333 : 31.75 : JumpEnd); (11.875 : 31.75); (11.875 : 27.75); (14.1666666666667 : 27.75 : JumpStart); (14.5833333333333 : 27.75 : JumpEnd); (14.625 : 27.75); (14.625 : 29.1170068359375); (15.921873 : 29.1170068359375); (15.921873 : 30.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Usuario/Usuario_Evaluacion" />
       <nodes>
-        <classShapeMoniker Id="951b3a34-484a-4f30-b9e5-9ad8e2a44e4a" />
-        <classShapeMoniker Id="cda91f74-832c-4143-8069-7fdce54aa601" />
+        <classShapeMoniker Id="001de3bf-920c-4bb0-ad8c-127fd7ed23e4" />
+        <classShapeMoniker Id="03089137-57c2-4ae7-810a-17846cdff0bd" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 37.2368029785156); (2.88541666666667 : 37.2368029785156 : JumpStart); (3.05208333333333 : 37.2368029785156 : JumpEnd); (4.41666666666667 : 37.2368029785156 : JumpStart); (4.58333333333333 : 37.2368029785156 : JumpEnd); (5.91666666666667 : 37.2368029785156 : JumpStart); (6.08333333333333 : 37.2368029785156 : JumpEnd); (6.16666666666667 : 37.2368029785156 : JumpStart); (6.39583333333333 : 37.2368029785156 : JumpEnd); (6.5 : 37.2368029785156)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 34.9619502766927); (8.35416666666667 : 34.9619502766927 : JumpStart); (8.70833333333333 : 34.9619502766927 : JumpEnd); (11.079716389974 : 34.9619502766927 : JumpStart); (11.2463830566406 : 34.9619502766927 : JumpEnd); (12 : 34.9619502766927)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Establecimiento_Educativo/Establecimiento_Educativo_LecturaContextoEE" />
       <nodes>
-        <classShapeMoniker Id="491f5f91-c8a7-47ce-9db2-f17f3452ee70" />
-        <classShapeMoniker Id="592dc6f6-c13d-48a7-9ab6-0b823bb337ec" />
+        <classShapeMoniker Id="c9a6f2ef-5475-4f0f-abb5-b7f2270b7ed0" />
+        <classShapeMoniker Id="07316c02-7420-4723-89c7-2b30b4fd9d7e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(11.25 : 34.3277498372396); (12 : 34.3277498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/ESMBDDataContext/LLamada/LLamada_Cita" />
-      <nodes>
-        <classShapeMoniker Id="ed28ed6b-1b0f-4a0c-8d2e-9ed98ae059b7" />
-        <classShapeMoniker Id="b9b16966-486b-487c-890c-fe206d30eb6a" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(1.218748 : 35.125); (1.218748 : 34.5777498372396); (1.66666666666667 : 34.5777498372396 : JumpStart); (1.83333333333333 : 34.5777498372396 : JumpEnd); (2.88541666666667 : 34.5777498372396 : JumpStart); (3.05208333333333 : 34.5777498372396 : JumpEnd); (3.16666666666667 : 34.5777498372396 : JumpStart); (3.33333333333333 : 34.5777498372396 : JumpEnd); (4.41666666666667 : 34.5777498372396 : JumpStart); (4.58333333333333 : 34.5777498372396 : JumpEnd); (5.61979166666667 : 34.5777498372396 : JumpStart); (5.78645833333333 : 34.5777498372396 : JumpEnd); (5.91666666666667 : 34.5777498372396 : JumpStart); (6.08333333333333 : 34.5777498372396 : JumpEnd); (6.125 : 34.5777498372396); (6.125 : 28.5); (6.16666666666667 : 28.5 : JumpStart); (6.45833333333333 : 28.5 : JumpEnd); (8.54166416666667 : 28.5 : JumpStart); (8.70833083333333 : 28.5 : JumpEnd); (8.875 : 28.5); (8.875 : 34.3277498372396); (9.25 : 34.3277498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 33.4042297692308); (8.37857443490112 : 33.2756553343297 : JumpStart); (8.52767556509888 : 33.1265542041319 : JumpEnd); (8.8125 : 32.8417297692308); (8.8125 : 27.2027498372396); (9 : 27.2027498372396)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Establecimiento_Educativo/Establecimiento_Educativo_LLamada" />
       <nodes>
-        <classShapeMoniker Id="491f5f91-c8a7-47ce-9db2-f17f3452ee70" />
-        <classShapeMoniker Id="ed28ed6b-1b0f-4a0c-8d2e-9ed98ae059b7" />
+        <classShapeMoniker Id="c9a6f2ef-5475-4f0f-abb5-b7f2270b7ed0" />
+        <classShapeMoniker Id="2c229479-5d00-47a5-9645-b92b4c71ee6e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.5 : 49.7812264964944); (8.90625 : 49.3749764964944); (8.90625 : 34.8978767558594); (9.25 : 34.8978767558594)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 17.2219962565104); (8.79166666666667 : 17.2219962565104 : JumpStart); (8.95833333333333 : 17.2219962565104 : JumpEnd); (9 : 17.2219962565104); (9 : 25.75); (10 : 25.75); (10 : 26.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/EstadoLLamada/EstadoLLamada_LLamada" />
       <nodes>
-        <classShapeMoniker Id="613dd17b-e073-46a5-9d92-ea5d94cdfa41" />
-        <classShapeMoniker Id="ed28ed6b-1b0f-4a0c-8d2e-9ed98ae059b7" />
+        <classShapeMoniker Id="00fef940-3d63-4e81-a85b-c89599983336" />
+        <classShapeMoniker Id="2c229479-5d00-47a5-9645-b92b4c71ee6e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 21.1017976888021); (4.94791916666667 : 21.1017976888021 : JumpStart); (5.11458583333333 : 21.1017976888021 : JumpEnd); (5.57291666666667 : 21.1017976888021 : JumpStart); (5.73958333333333 : 21.1017976888021 : JumpEnd); (5.79166666666667 : 21.1017976888021 : JumpStart); (6.27083333333333 : 21.1017976888021 : JumpEnd); (8.54166416666667 : 21.1017976888021 : JumpStart); (8.70833083333333 : 21.1017976888021 : JumpEnd); (8.79166666666667 : 21.1017976888021 : JumpStart); (8.95833333333333 : 21.1017976888021 : JumpEnd); (9.34375 : 21.1017976888021); (9.34375 : 33.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.031252 : 28.7228011067708); (5.031252 : 28.9728011067708); (5.66666666666667 : 28.9728011067708 : JumpStart); (5.95833333333333 : 28.9728011067708 : JumpEnd); (6.125 : 28.9728011067708); (6.125 : 32.3667626953125); (8.375 : 32.3667626953125); (8.375 : 27.7728767558594); (8.38541666666667 : 27.7728767558594 : JumpStart); (8.70833333333333 : 27.7728767558594 : JumpEnd); (8.72916666666667 : 27.7728767558594 : JumpStart); (8.89583333333333 : 27.7728767558594 : JumpEnd); (9 : 27.7728767558594)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Usuario/Usuario_LLamada" />
       <nodes>
-        <classShapeMoniker Id="951b3a34-484a-4f30-b9e5-9ad8e2a44e4a" />
-        <classShapeMoniker Id="ed28ed6b-1b0f-4a0c-8d2e-9ed98ae059b7" />
+        <classShapeMoniker Id="001de3bf-920c-4bb0-ad8c-127fd7ed23e4" />
+        <classShapeMoniker Id="2c229479-5d00-47a5-9645-b92b4c71ee6e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.73071242863582 : 26.125); (2.94107443490112 : 25.9146379937347 : JumpStart); (3.05892556509888 : 25.7967868635369 : JumpEnd); (3.06607443490112 : 25.7896379937347 : JumpStart); (3.18392556509888 : 25.6717868635369 : JumpEnd); (3.21875 : 25.6369624286358); (3.21875 : 24.1094246074219); (3.5 : 24.1094246074219)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.5 : 19.8469962565104); (8.625 : 19.8469962565104); (8.625 : 29); (8.72916666666667 : 29 : JumpStart); (8.89583333333333 : 29 : JumpEnd); (9.468748 : 29); (9.468748 : 29.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Medicione/Medicione_ActaVisitaEE" />
       <nodes>
-        <classShapeMoniker Id="d65b1e74-ddd9-492e-b23f-8aa888766957" />
-        <classShapeMoniker Id="9582337c-a32a-4cf1-ab85-11450b972a6a" />
+        <classShapeMoniker Id="dfcb087e-cb3c-4fe1-8cd8-f64d5a3e42e2" />
+        <classShapeMoniker Id="c9536f68-b5e6-4da5-a61d-d833d4347b8b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 27.3189925130208); (1.75 : 29.161471702474); (2.79166666666667 : 29.161471702474 : JumpStart); (3.36458333333333 : 29.161471702474 : JumpEnd); (3.5 : 29.161471702474)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.5 : 20.4127640165264); (8.56607443490112 : 20.4788384514276 : JumpStart); (8.68392556509888 : 20.5966895816253 : JumpEnd); (8.69107443490112 : 20.6038384514276 : JumpStart); (8.80892556509888 : 20.7216895816253 : JumpEnd); (8.94107443490112 : 20.8538384514276 : JumpStart); (9.05892556509888 : 20.9716895816253 : JumpEnd); (9.09375 : 21.0065140165264); (9.09375 : 22.286472202474); (9.25 : 22.286472202474)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Medicione/Medicione_ActaVisitaSE" />
       <nodes>
-        <classShapeMoniker Id="d65b1e74-ddd9-492e-b23f-8aa888766957" />
-        <classShapeMoniker Id="85c10b2b-3b27-4fd7-b081-24dd01bbbca4" />
+        <classShapeMoniker Id="dfcb087e-cb3c-4fe1-8cd8-f64d5a3e42e2" />
+        <classShapeMoniker Id="44aa9be8-4a60-497f-af0b-edaf8f02fad4" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 26.125); (1.75 : 25.8124975); (2.91666666666667 : 25.8124975 : JumpStart); (3.36458333333333 : 25.8124975 : JumpEnd); (5.60097002679287 : 25.8124975 : JumpStart); (5.95833333333333 : 25.8124975 : JumpEnd); (6.22916666666667 : 25.8124975 : JumpStart); (6.45833333333333 : 25.8124975 : JumpEnd); (6.5 : 25.8124975)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.5 : 19.442724202474); (8.79166666666667 : 19.442724202474 : JumpStart); (9.08333333333333 : 19.442724202474 : JumpEnd); (9.25 : 19.442724202474)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Medicione/Medicione_AsignaDocumento" />
       <nodes>
-        <classShapeMoniker Id="d65b1e74-ddd9-492e-b23f-8aa888766957" />
-        <classShapeMoniker Id="3686a660-9d37-4a45-a748-34f467f76001" />
+        <classShapeMoniker Id="dfcb087e-cb3c-4fe1-8cd8-f64d5a3e42e2" />
+        <classShapeMoniker Id="e35eed21-fc78-47ec-bc87-be1824748eeb" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 26.7688620047576); (2.91666666666667 : 26.7688620047576 : JumpStart); (3.36458333333333 : 26.7688620047576 : JumpEnd); (3.5 : 26.7688620047576)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.4375 : 20.4439925130208); (8.4375 : 36.3405989583333); (8.54166666666667 : 36.3405989583333 : JumpStart); (8.70833333333333 : 36.3405989583333 : JumpEnd); (9 : 36.3405989583333)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Medicione/Medicione_Consolidacion" />
       <nodes>
-        <classShapeMoniker Id="d65b1e74-ddd9-492e-b23f-8aa888766957" />
-        <classShapeMoniker Id="6d2ba76f-9ad3-407c-8652-4a935ce4d3ea" />
+        <classShapeMoniker Id="dfcb087e-cb3c-4fe1-8cd8-f64d5a3e42e2" />
+        <classShapeMoniker Id="8cf2e6ab-04c5-430c-a420-758d7c570120" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 26.1764325236378); (2.94107443490112 : 25.9853580887367 : JumpStart); (3.05892556509888 : 25.8675069585389 : JumpEnd); (3.06607443490112 : 25.8603580887367 : JumpStart); (3.18392556509888 : 25.7425069585389 : JumpEnd); (3.22232443490112 : 25.7041080887367 : JumpStart); (3.34017556509888 : 25.5862569585389 : JumpEnd); (3.65625 : 25.2701825236378); (3.65625 : 25.2228011067708); (5.57291666666667 : 25.2228011067708 : JumpStart); (5.78645833333333 : 25.2228011067708 : JumpEnd); (5.79166666666667 : 25.2228011067708 : JumpStart); (6.11458333333333 : 25.2228011067708 : JumpEnd); (6.17422976923077 : 25.2228011067708); (6.31607443490112 : 25.0809564411005 : JumpStart); (6.43392556509888 : 24.9631053109027 : JumpEnd); (6.54922976923077 : 24.8478011067708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(8.5 : 20.1298801365184); (8.54166666666667 : 20.1298801365184 : JumpStart); (8.70833333333333 : 20.1298801365184 : JumpEnd); (8.75 : 20.1298801365184); (8.75 : 20.9439925130208); (8.91666666666667 : 20.9439925130208 : JumpStart); (9.11456182982773 : 20.9439925130208 : JumpEnd); (14.1666666666667 : 20.9439925130208 : JumpStart); (14.3333333333333 : 20.9439925130208 : JumpEnd); (15.1354141666667 : 20.9439925130208 : JumpStart); (15.3020808333333 : 20.9439925130208 : JumpEnd); (15.6666666666667 : 20.9439925130208 : JumpStart); (15.8333333333333 : 20.9439925130208 : JumpEnd); (16.8229166666667 : 20.9439925130208 : JumpStart); (16.9895833333333 : 20.9439925130208 : JumpEnd); (17.25 : 20.9439925130208); (17.25 : 29.75); (16.9895833333333 : 29.75 : JumpStart); (16.8229166666667 : 29.75 : JumpEnd); (16.0052063333333 : 29.75 : JumpStart); (15.8385396666667 : 29.75 : JumpEnd); (15.4296845 : 29.75); (15.4296845 : 30.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Medicione/Medicione_Evaluacion" />
       <nodes>
-        <classShapeMoniker Id="d65b1e74-ddd9-492e-b23f-8aa888766957" />
-        <classShapeMoniker Id="cda91f74-832c-4143-8069-7fdce54aa601" />
+        <classShapeMoniker Id="dfcb087e-cb3c-4fe1-8cd8-f64d5a3e42e2" />
+        <classShapeMoniker Id="03089137-57c2-4ae7-810a-17846cdff0bd" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 27.2868455607472); (2.94107443490112 : 27.4779199956483 : JumpStart); (3.05892556509888 : 27.5957711258461 : JumpEnd); (3.06607443490112 : 27.6029199956483 : JumpStart); (3.18392556509888 : 27.7207711258461 : JumpEnd); (3.22232443490112 : 27.7591699956483 : JumpStart); (3.34017556509888 : 27.8770211258461 : JumpEnd); (3.40625 : 27.9430955607472); (3.40625 : 28.125); (5.61979166666667 : 28.125 : JumpStart); (5.78645833333333 : 28.125 : JumpEnd); (5.875 : 28.125); (6.19107443490112 : 28.4410744349011 : JumpStart); (6.43392556509888 : 28.6839255650989 : JumpEnd); (6.5 : 28.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(8.46875 : 20.4439925130208); (8.46875 : 40.2586897786458); (9.38541416666667 : 40.2586897786458 : JumpStart); (9.55208083333333 : 40.2586897786458 : JumpEnd); (9.91666666666667 : 40.2586897786458 : JumpStart); (10.0833333333333 : 40.2586897786458 : JumpEnd); (10.4479191666667 : 40.2586897786458 : JumpStart); (10.6145858333333 : 40.2586897786458 : JumpEnd); (12 : 40.2586897786458)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Medicione/Medicione_LecturaContextoEE" />
       <nodes>
-        <classShapeMoniker Id="d65b1e74-ddd9-492e-b23f-8aa888766957" />
-        <classShapeMoniker Id="592dc6f6-c13d-48a7-9ab6-0b823bb337ec" />
+        <classShapeMoniker Id="dfcb087e-cb3c-4fe1-8cd8-f64d5a3e42e2" />
+        <classShapeMoniker Id="07316c02-7420-4723-89c7-2b30b4fd9d7e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.09375 : 27.3189925130208); (1.09375 : 28.3125); (1.66666666666667 : 28.3125 : JumpStart); (1.83333333333333 : 28.3125 : JumpEnd); (2.79166666666667 : 28.3125 : JumpStart); (3.36458333333333 : 28.3125 : JumpEnd); (5.61979166666667 : 28.3125 : JumpStart); (5.78645833333333 : 28.3125 : JumpEnd); (5.97916666666667 : 28.3125 : JumpStart); (6.14583333333333 : 28.3125 : JumpEnd); (6.16666666666667 : 28.3125 : JumpStart); (6.45833333333333 : 28.3125 : JumpEnd); (8.54166416666667 : 28.3125 : JumpStart); (8.70833083333333 : 28.3125 : JumpEnd); (9.26041666666667 : 28.3125 : JumpStart); (9.42708333333333 : 28.3125 : JumpEnd); (9.5 : 28.3125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(7.375 : 20.4439925130208); (7.375 : 21.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Medicione/Medicione_LecturaContextoSE" />
       <nodes>
-        <classShapeMoniker Id="d65b1e74-ddd9-492e-b23f-8aa888766957" />
-        <classShapeMoniker Id="ad1c0df6-66e7-4092-a319-f0a943cea22b" />
+        <classShapeMoniker Id="dfcb087e-cb3c-4fe1-8cd8-f64d5a3e42e2" />
+        <classShapeMoniker Id="e6fe2bca-2a5c-40b9-816f-898e277e1594" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.40625 : 9.19399251302083); (8.40625 : 18.4435468977865); (8.54166416666667 : 18.4435468977865 : JumpStart); (8.70833083333333 : 18.4435468977865 : JumpEnd); (8.79166666666667 : 18.4435468977865 : JumpStart); (9.11458333333333 : 18.4435468977865 : JumpEnd); (9.25 : 18.4435468977865)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(14 : 20.2219962565104); (14.1666666666667 : 20.2219962565104 : JumpStart); (14.3333333333333 : 20.2219962565104 : JumpEnd); (15.2187475 : 20.2219962565104); (15.2187475 : 25.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/NivelesEducativo/NivelesEducativo_AsociadosActaVisitaEE" />
       <nodes>
-        <classShapeMoniker Id="f10bee21-6a1f-4145-aa5c-6a7793b2aab3" />
-        <classShapeMoniker Id="f8b98454-0378-4914-909d-befa068c87c2" />
+        <classShapeMoniker Id="861e617a-da5d-4adb-b4c9-7d031e02f4bb" />
+        <classShapeMoniker Id="73144cf6-d34e-420d-985a-55813b9acc3b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.5 : 16.1354484049479); (1.1249995 : 16.1354484049479); (1.1249995 : 20.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 30.6263612283153); (3.125 : 30.2513612283153); (3.125 : 27.1806982766927); (3.5 : 27.1806982766927)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Operadore/Operadore_Usuario" />
       <nodes>
-        <classShapeMoniker Id="05bf2fbd-e654-424a-aae7-5a3a4c35312e" />
-        <classShapeMoniker Id="951b3a34-484a-4f30-b9e5-9ad8e2a44e4a" />
+        <classShapeMoniker Id="086ac68e-a6cf-4361-9b8f-d8fc01fc4995" />
+        <classShapeMoniker Id="001de3bf-920c-4bb0-ad8c-127fd7ed23e4" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.65625 : 4.05930826822917); (8.65625 : 4.49840463411458); (9.5 : 4.49840463411458)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(14.25 : 11.9343082682292); (14.625 : 12.3093082682292); (14.625 : 14.2123527018229); (15 : 14.2123527018229)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Pregunta/Pregunta_AyudaByPregunta" />
       <nodes>
-        <classShapeMoniker Id="79929235-2618-44f4-b301-affb9dc2679f" />
-        <classShapeMoniker Id="9a4bbd58-c607-407a-8c29-d8f6dc2f3c43" />
+        <classShapeMoniker Id="beddfcfd-074e-4c59-a1eb-08ad4956aa3e" />
+        <classShapeMoniker Id="6b579f51-4fe5-474e-be04-399b0b1eadb7" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6 : 47.9431469726563); (8.6249975 : 47.9431469726563); (8.6249975 : 4.05930826822917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11.5 : 11.2243994726562); (12.25 : 11.2243994726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Componente/Componente_Pregunta" />
       <nodes>
-        <classShapeMoniker Id="e80dabda-1881-4a39-978a-7bfff5fcab3a" />
-        <classShapeMoniker Id="79929235-2618-44f4-b301-affb9dc2679f" />
+        <classShapeMoniker Id="6c1d0a70-9dae-49aa-8b3c-7e2de5647892" />
+        <classShapeMoniker Id="beddfcfd-074e-4c59-a1eb-08ad4956aa3e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6 : 2.97199625651042); (6.75 : 2.97199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11.5 : 9.22199625651042); (11.7916666666667 : 9.22199625651042 : JumpStart); (11.9583333333333 : 9.22199625651042 : JumpEnd); (12.25 : 9.22199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Privilegiado/Privilegiado_Pregunta" />
       <nodes>
-        <classShapeMoniker Id="6613c82a-28a8-4ac0-a55e-580a610a8ac4" />
-        <classShapeMoniker Id="79929235-2618-44f4-b301-affb9dc2679f" />
+        <classShapeMoniker Id="e0d53b94-220f-4af9-8c49-e78d9c969d90" />
+        <classShapeMoniker Id="beddfcfd-074e-4c59-a1eb-08ad4956aa3e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.25 : 47.9431469726563); (4 : 47.9431469726563)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.75 : 11.1931469726562); (9.5 : 11.1931469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Proceso/Proceso_Componente" />
       <nodes>
-        <classShapeMoniker Id="8ece09a2-5ac2-4a25-a45d-91699468e725" />
-        <classShapeMoniker Id="e80dabda-1881-4a39-978a-7bfff5fcab3a" />
+        <classShapeMoniker Id="166e4088-b714-481f-bb6a-bed1efda105f" />
+        <classShapeMoniker Id="6c1d0a70-9dae-49aa-8b3c-7e2de5647892" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.375 : 45.5689925130208); (2.375 : 47.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(6 : 11.2219962565104); (6.75 : 11.2219962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Ambiente/Ambiente_Proceso" />
       <nodes>
-        <classShapeMoniker Id="8f3184ef-7ede-462a-98c4-5e4dcd1c0820" />
-        <classShapeMoniker Id="8ece09a2-5ac2-4a25-a45d-91699468e725" />
+        <classShapeMoniker Id="19d46fd4-a8ef-45a7-a75e-fe7b8a1e94f4" />
+        <classShapeMoniker Id="166e4088-b714-481f-bb6a-bed1efda105f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.75 : 5.59699625651042); (6.5 : 5.59699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11.25 : 17.2219962565104); (12 : 17.2219962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Rama/Rama_Actore" />
       <nodes>
-        <classShapeMoniker Id="91bdb4f0-7c1f-4a4c-8247-cfbbda084e99" />
-        <classShapeMoniker Id="844bfafd-d443-46e4-938a-495b9870730f" />
+        <classShapeMoniker Id="b9ff83dc-11d4-4d3b-8905-ecc0101c4557" />
+        <classShapeMoniker Id="441a5097-576f-4b84-ad60-03d93e0830dc" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.75 : 1.63544840494792); (9.5 : 1.63544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(14.25 : 10.2604484049479); (15 : 10.2604484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Pregunta/Pregunta_Resultado" />
       <nodes>
-        <classShapeMoniker Id="79929235-2618-44f4-b301-affb9dc2679f" />
-        <classShapeMoniker Id="6f79bed9-645b-4244-be4c-9f9cd89b5ba5" />
+        <classShapeMoniker Id="beddfcfd-074e-4c59-a1eb-08ad4956aa3e" />
+        <classShapeMoniker Id="b997de5e-2806-4b4f-a5cf-ec318f00a00f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7.468748 : 22.5); (7.468748 : 21.25); (8.54166416666667 : 21.25 : JumpStart); (8.70833083333333 : 21.25 : JumpEnd); (8.79166666666667 : 21.25 : JumpStart); (8.95833333333333 : 21.25 : JumpEnd); (9.26041666666667 : 21.25 : JumpStart); (9.42708333333333 : 21.25 : JumpEnd); (11.875 : 21.25); (11.875 : 23.6931469726563); (12.25 : 23.6931469726563)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(17 : 31.3181469726563); (17.75 : 31.3181469726563)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Evaluacion/Evaluacion_ResultadosByEvaluacion" />
       <nodes>
-        <classShapeMoniker Id="cda91f74-832c-4143-8069-7fdce54aa601" />
-        <classShapeMoniker Id="c405507f-53eb-4a2d-9a23-e14e8857943e" />
+        <classShapeMoniker Id="03089137-57c2-4ae7-810a-17846cdff0bd" />
+        <classShapeMoniker Id="7ba2c960-0b26-4e68-a003-4f56281bd68e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(11.5 : 1.63544840494792); (13.25 : 1.63544840494792); (13.25 : 23)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(17 : 10.2604484049479); (18.75 : 10.2604484049479); (18.75 : 30.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Resultado/Resultado_ResultadosByEvaluacion" />
       <nodes>
-        <classShapeMoniker Id="6f79bed9-645b-4244-be4c-9f9cd89b5ba5" />
-        <classShapeMoniker Id="c405507f-53eb-4a2d-9a23-e14e8857943e" />
+        <classShapeMoniker Id="b997de5e-2806-4b4f-a5cf-ec318f00a00f" />
+        <classShapeMoniker Id="7ba2c960-0b26-4e68-a003-4f56281bd68e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.125 : 19.5689925130208); (2.125 : 20.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 25.3469962565104); (3.9687475 : 25.3469962565104); (3.9687475 : 26.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Role/Role_Usuario" />
       <nodes>
-        <classShapeMoniker Id="ed18aa30-be1a-4d5b-aacb-f975e0d63015" />
-        <classShapeMoniker Id="951b3a34-484a-4f30-b9e5-9ad8e2a44e4a" />
+        <classShapeMoniker Id="9c915a10-4d76-47d6-bc2d-727ec4f2d54d" />
+        <classShapeMoniker Id="001de3bf-920c-4bb0-ad8c-127fd7ed23e4" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.5 : 40.4335034179688); (4.5 : 40.4335034179688); (4.5 : 36.8189925130208); (3.25 : 36.8189925130208); (3.25 : 34.2228011067708); (3.66666666666667 : 34.2228011067708 : JumpStart); (3.83333333333333 : 34.2228011067708 : JumpEnd); (4.41666666666667 : 34.2228011067708 : JumpStart); (4.58333333333333 : 34.2228011067708 : JumpEnd); (4.9999995 : 34.2228011067708); (4.9999995 : 30.5208968098958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 31.1833818476563); (5.54166666666667 : 31.1833818476563 : JumpStart); (5.83333333333333 : 31.1833818476563 : JumpEnd); (5.875 : 31.1833818476563); (5.875 : 21.25); (7.29166666666667 : 21.25 : JumpStart); (7.45833333333333 : 21.25 : JumpEnd); (8.35416666666667 : 21.25 : JumpStart); (8.70833333333333 : 21.25 : JumpEnd); (8.75 : 21.25); (8.75 : 24.0208968098958); (8.91666666666667 : 24.0208968098958 : JumpStart); (9.08333333333333 : 24.0208968098958 : JumpEnd); (10.25 : 24.0208968098958); (10.25 : 23.6458968098958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Secretaria_Educacion/Secretaria_Educacion_ActaVisitaSE" />
       <nodes>
-        <classShapeMoniker Id="cd5c5b54-a96d-4eca-9b6a-f3c5cb245392" />
-        <classShapeMoniker Id="85c10b2b-3b27-4fd7-b081-24dd01bbbca4" />
+        <classShapeMoniker Id="ec770688-ac93-4748-b714-8c24b13d1196" />
+        <classShapeMoniker Id="44aa9be8-4a60-497f-af0b-edaf8f02fad4" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.125 : 38.875); (2.125 : 37.8574039713542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 32.771551217523); (8.35416666666667 : 32.771551217523 : JumpStart); (8.55208333333333 : 32.771551217523 : JumpEnd); (9 : 32.771551217523)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ESMBDDataContext/Secretaria_Educacion/Secretaria_Educacion_Cita" />
+      <nodes>
+        <classShapeMoniker Id="ec770688-ac93-4748-b714-8c24b13d1196" />
+        <classShapeMoniker Id="817c9db0-029c-4767-90ea-27399f0a4ed5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.5 : 33.2420068359375); (4.5 : 34.7412019856771); (6.25 : 34.7412019856771)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Secretaria_Educacion/Secretaria_Educacion_Establecimiento_Educativo" />
       <nodes>
-        <classShapeMoniker Id="cd5c5b54-a96d-4eca-9b6a-f3c5cb245392" />
-        <classShapeMoniker Id="491f5f91-c8a7-47ce-9db2-f17f3452ee70" />
+        <classShapeMoniker Id="ec770688-ac93-4748-b714-8c24b13d1196" />
+        <classShapeMoniker Id="c9a6f2ef-5475-4f0f-abb5-b7f2270b7ed0" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.5 : 38.875); (3.875 : 38.5); (4.41666666666667 : 38.5 : JumpStart); (4.58333333333333 : 38.5 : JumpEnd); (5.91666666666667 : 38.5 : JumpStart); (6.08333333333333 : 38.5 : JumpEnd); (6.3125 : 38.5); (6.3125 : 25.0353011067708); (6.5 : 24.8478011067708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 31.7438247714844); (5.54166666666667 : 31.7438247714844 : JumpStart); (5.83333333333333 : 31.7438247714844 : JumpEnd); (5.875 : 31.7438247714844); (5.875 : 32.1167626953125); (5.91666666666667 : 32.1167626953125 : JumpStart); (6.20833333333333 : 32.1167626953125 : JumpEnd); (8.29166666666667 : 32.1167626953125 : JumpStart); (8.70833333333333 : 32.1167626953125 : JumpEnd); (8.75 : 32.1167626953125); (8.75 : 31.5); (8.79166666666667 : 31.5 : JumpStart); (8.95833333333333 : 31.5 : JumpEnd); (11.2916666666667 : 31.5 : JumpStart); (11.4583333333333 : 31.5 : JumpEnd); (11.625 : 31.5); (11.625 : 27.25); (14.1666666666667 : 27.25 : JumpStart); (14.3333333333333 : 27.25 : JumpEnd); (14.375 : 27.25); (14.375 : 29.875); (14.4166666666667 : 29.875 : JumpStart); (14.5833333333333 : 29.875 : JumpEnd); (15.3463511666667 : 29.875 : JumpStart); (15.5130178333333 : 29.875 : JumpEnd); (15.8385396666667 : 29.875 : JumpStart); (16.0052063333333 : 29.875 : JumpEnd); (16.4140615 : 29.875); (16.4140615 : 30.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Secretaria_Educacion/Secretaria_Educacion_Evaluacion" />
       <nodes>
-        <classShapeMoniker Id="cd5c5b54-a96d-4eca-9b6a-f3c5cb245392" />
-        <classShapeMoniker Id="cda91f74-832c-4143-8069-7fdce54aa601" />
+        <classShapeMoniker Id="ec770688-ac93-4748-b714-8c24b13d1196" />
+        <classShapeMoniker Id="03089137-57c2-4ae7-810a-17846cdff0bd" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.5 : 41.2440071269531); (6 : 41.2440071269531); (6 : 28.625); (6.04166666666667 : 28.625 : JumpStart); (6.45833333333333 : 28.625 : JumpEnd); (8.54166416666667 : 28.625 : JumpStart); (8.70833083333333 : 28.625 : JumpEnd); (8.79166666666667 : 28.625 : JumpStart); (8.95833333333333 : 28.625 : JumpEnd); (9.125 : 28.625); (9.125 : 32.2417626953125); (9.26041666666667 : 32.2417626953125 : JumpStart); (9.42708333333333 : 32.2417626953125 : JumpEnd); (10.5 : 32.2417626953125); (10.5 : 31.9917626953125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 30.5916909238281); (5.66666666666667 : 30.5916909238281 : JumpStart); (6.20833333333333 : 30.5916909238281 : JumpEnd); (6.25 : 30.5916909238281)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Secretaria_Educacion/Secretaria_Educacion_LecturaContextoSE" />
       <nodes>
-        <classShapeMoniker Id="cd5c5b54-a96d-4eca-9b6a-f3c5cb245392" />
-        <classShapeMoniker Id="ad1c0df6-66e7-4092-a319-f0a943cea22b" />
+        <classShapeMoniker Id="ec770688-ac93-4748-b714-8c24b13d1196" />
+        <classShapeMoniker Id="e6fe2bca-2a5c-40b9-816f-898e277e1594" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.5 : 39.6542517089844); (4.41666666666667 : 39.6542517089844 : JumpStart); (4.58333333333333 : 39.6542517089844 : JumpEnd); (5.91666666666667 : 39.6542517089844 : JumpStart); (6.08333333333333 : 39.6542517089844 : JumpEnd); (6.16666666666667 : 39.6542517089844 : JumpStart); (6.33333333333333 : 39.6542517089844 : JumpEnd); (6.375 : 39.6542517089844); (6.375 : 42.8858870442708); (8.54166416666667 : 42.8858870442708 : JumpStart); (8.70833083333333 : 42.8858870442708 : JumpEnd); (8.82291666666667 : 42.8858870442708 : JumpStart); (8.98958333333333 : 42.8858870442708 : JumpEnd); (9.125 : 42.8858870442708); (9.125 : 35.7804996744792); (10.25 : 35.7804996744792); (10.25 : 35.4054996744792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 30.8875363857422); (5.625 : 30.8875363857422); (5.625 : 32.2417626953125); (5.66666666666667 : 32.2417626953125 : JumpStart); (5.83333333333333 : 32.2417626953125 : JumpEnd); (6.04166666666667 : 32.2417626953125 : JumpStart); (6.20833333333333 : 32.2417626953125 : JumpEnd); (8.29166666666667 : 32.2417626953125 : JumpStart); (8.58333333333333 : 32.2417626953125 : JumpEnd); (8.6875 : 32.2417626953125); (8.6875 : 28.6554996744792); (8.72916666666667 : 28.6554996744792 : JumpStart); (8.89583333333333 : 28.6554996744792 : JumpEnd); (9.5000005 : 28.6554996744792); (9.5000005 : 28.2804996744792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ESMBDDataContext/Secretaria_Educacion/Secretaria_Educacion_LLamada" />
       <nodes>
-        <classShapeMoniker Id="cd5c5b54-a96d-4eca-9b6a-f3c5cb245392" />
-        <classShapeMoniker Id="ed28ed6b-1b0f-4a0c-8d2e-9ed98ae059b7" />
+        <classShapeMoniker Id="ec770688-ac93-4748-b714-8c24b13d1196" />
+        <classShapeMoniker Id="2c229479-5d00-47a5-9645-b92b4c71ee6e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.96875 : 34.0978011067708); (2.96875 : 38.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 29.6597231836939); (3.06607443490112 : 29.975797618595 : JumpStart); (3.18392556509888 : 30.0936487487928 : JumpEnd); (3.3125 : 30.2222231836939); (3.3125 : 29.9375); (3.5 : 30.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ESMBDDataContext/Consultore/Consultore_Secretaria_Educacion" />
       <nodes>
-        <classShapeMoniker Id="412baa41-56a7-4cfe-ac4b-5940d1945c45" />
-        <classShapeMoniker Id="cd5c5b54-a96d-4eca-9b6a-f3c5cb245392" />
+        <classShapeMoniker Id="8a11aa7f-21c1-4f28-ad42-006a2a259e9a" />
+        <classShapeMoniker Id="ec770688-ac93-4748-b714-8c24b13d1196" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

@@ -9,14 +9,22 @@
     <link href="Scripts/full_calendar/fullcalendar.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/full_calendar/fullcalendar.js" type="text/javascript"></script>
     <script type="text/javascript">
+        
         $(document).ready(function () {
-            alert($("#ContentPlaceHolder1_idconsultor").val());
+            var idConsultor = $("#ContentPlaceHolder1_idconsultor").val();
+            alert(idConsultor);
+            $("#pretty").prettyPhoto({
+                callback: function(){
+                    //TODO: Información del cierre para PrettyPhoto
+                }
+            });
+            
             $("#calendar").fullCalendar({
 
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month'
+                    right: 'month,agendaWeek,agendaDay'
                 },
                 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
                 monthNameShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
@@ -34,6 +42,25 @@
                 defaultView: 'month',
                 editable: true,
                 height: 600,
+                selectable: true,
+			    selectHelper: true,
+			    select: function(start, end, allDay) {
+
+                    $("#pretty").attr("href",'/AddCita.aspx?idc='+ idConsultor +'&iframe=true&width=100%&height=100%');
+                    $("#pretty").trigger("click");
+
+				    calendar.fullCalendar('renderEvent',
+						{
+							title: title,
+							start: start,
+							end: end,
+							allDay: allDay
+						},
+						true // make the event "stick"
+					);
+				    
+				    calendar.fullCalendar('unselect');
+			    },
                 events: {
                     url: '/json.aspx?id=' + $("#ContentPlaceHolder1_idconsultor").val(),
                     cache: true
@@ -46,7 +73,6 @@
             modal: true,
             social_tools: false,
             
-
         });
     </script>
 </asp:Content>
@@ -68,4 +94,5 @@
         <div id='calendar'>
         </div>
     </div>
+    <a href="#" id="pretty"></a>
 </asp:Content>

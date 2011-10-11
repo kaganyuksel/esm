@@ -19,7 +19,7 @@ namespace ESM.Objetos
             try
             {
                 var vcitas = from c in dbAgenda.Citas
-                             where c.LLamada.Secretaria_Educacion.IdConsultor == idconsultor || c.LLamada.Establecimiento_Educativo.Secretaria_Educacion.IdConsultor == idconsultor
+                             where c.Secretaria_Educacion.IdConsultor == idconsultor || c.Establecimiento_Educativo.Secretaria_Educacion.IdConsultor == idconsultor
                              select c;
 
                 return vcitas.ToList();
