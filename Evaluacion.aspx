@@ -425,7 +425,7 @@
                                                 <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="Pregunta" HeaderStyle-Width="60%" HeaderText="Pregunta" />
+                                        <asp:BoundField DataField="Pregunta1" HeaderStyle-Width="60%" HeaderText="Pregunta" />
                                         <asp:TemplateField HeaderText="Sesiones">
                                             <ItemStyle CssClass="aditionals" />
                                             <ItemTemplate>
@@ -466,7 +466,7 @@
                                                 <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="Pregunta" HeaderStyle-Width="60%" HeaderText="Pregunta" />
+                                        <asp:BoundField DataField="Pregunta1" HeaderStyle-Width="60%" HeaderText="Pregunta" />
                                         <asp:TemplateField HeaderText="Sesiones">
                                             <ItemStyle CssClass="aditionals" />
                                             <ItemTemplate>
@@ -507,7 +507,7 @@
                                                 <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="Pregunta" HeaderStyle-Width="60%" HeaderText="Pregunta" />
+                                        <asp:BoundField DataField="Pregunta1" HeaderStyle-Width="60%" HeaderText="Pregunta" />
                                         <asp:TemplateField HeaderText="Sesiones">
                                             <ItemStyle CssClass="aditionals" />
                                             <ItemTemplate>
@@ -548,7 +548,7 @@
                                                 <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="Pregunta" HeaderStyle-Width="60%" HeaderText="Pregunta" />
+                                        <asp:BoundField DataField="Pregunta1" HeaderStyle-Width="60%" HeaderText="Pregunta" />
                                         <asp:TemplateField HeaderText="Sesiones">
                                             <ItemStyle CssClass="aditionals" />
                                             <ItemTemplate>
@@ -590,7 +590,7 @@
                                                 <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="Pregunta" HeaderStyle-Width="60%" HeaderText="Pregunta" />
+                                        <asp:BoundField DataField="Pregunta1" HeaderStyle-Width="60%" HeaderText="Pregunta" />
                                         <asp:TemplateField HeaderText="Sesiones">
                                             <ItemStyle CssClass="aditionals" />
                                             <ItemTemplate>

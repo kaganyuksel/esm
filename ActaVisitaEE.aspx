@@ -64,11 +64,16 @@
             </p>
             <asp:GridView ID="gvResultados" runat="server" Width="100%" AllowPaging="True" AllowSorting="True"
                 CssClass="gvResultados" RowStyle-CssClass="td" HeaderStyle-CssClass="th" CellPadding="6"
-                AutoGenerateColumns="false" OnSelectedIndexChanged="gvResultados_SelectedIndexChanged">
-                <HeaderStyle CssClass="trheader" />
+                AutoGenerateColumns="false" 
+                OnSelectedIndexChanged="gvResultados_SelectedIndexChanged" 
+                onpageindexchanging="gvResultados_PageIndexChanging">
+                <HeaderStyle CssClass="th"></HeaderStyle>
+                <AlternatingRowStyle CssClass="trblanca" />
                 <Columns>
                     <asp:CommandField SelectText="<img id='imgEvaluar'  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />"
-                        ShowSelectButton="True" ControlStyle-CssClass="a" />
+                        ShowSelectButton="True" ControlStyle-CssClass="a" >
+<ControlStyle CssClass="a"></ControlStyle>
+                    </asp:CommandField>
                     <asp:BoundField DataField="CodigoDane" HeaderText="Cod. DANE" />
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                     <asp:BoundField DataField="Municipio" HeaderText="Municipio" />
@@ -79,15 +84,15 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
-                <HeaderStyle CssClass="th"></HeaderStyle>
+                <EmptyDataTemplate>
+                    Actualmente no hay elementos en esta tabla.
+                </EmptyDataTemplate>
+                <HeaderStyle CssClass="trheader" />
                 <PagerStyle CssClass="DDFooter" />
                 <PagerTemplate>
                     <asp:GridViewPager ID="GridViewPager1" runat="server" />
                 </PagerTemplate>
-                <EmptyDataTemplate>
-                    Actualmente no hay elementos en esta tabla.
-                </EmptyDataTemplate>
-                <RowStyle CssClass="td"></RowStyle>
+                <RowStyle CssClass="trgris"></RowStyle>
             </asp:GridView>
             <asp:LinqDataSource ID="ldsies" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
                 EntityTypeName="" TableName="Establecimiento_Educativo" Select="new (IdIE, CodigoDane, Nombre, Telefono, Municipio, Rector)">
