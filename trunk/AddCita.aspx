@@ -14,11 +14,11 @@
     <div>
         <h2 style="text-align: center; color: #005EA7;">
             <img src="/Icons/calender.png" width="48px" height="48px" alt="icon-citas" />
-            Asignacion de Citas
+            Asignación de Citas
         </h2>
         <br />
         <h3 style="color: #005EA7;">
-            * Seleccion de establecimiento:
+            * Selección de establecimiento:
         </h3>
         <br />
         <asp:RadioButton ID="RadioButton1" runat="server" AutoPostBack="True" GroupName="grupocita"
@@ -30,7 +30,7 @@
             OnPageIndexChanging="gvresultadosSE_PageIndexChanging" OnSelectedIndexChanged="gvresultadosSE_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" Height="40px" />
             <Columns>
-                <asp:BoundField DataField="Nombre" HeaderText="Nombre Secretaria" ReadOnly="True"
+                <asp:BoundField DataField="Nombre" HeaderText="Nombre Secretaría" ReadOnly="True"
                     SortExpression="Nombre" />
                 <asp:BoundField DataField="DepMun" HeaderText="Departamento/Municipio" ReadOnly="True"
                     SortExpression="DepMun" />

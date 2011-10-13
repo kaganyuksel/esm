@@ -70,19 +70,21 @@
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" SelectText="<img id='imgEvaluar'  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />" />
                     <asp:BoundField DataField="IdSecretaria" HeaderText="Identificación" />
-                    <asp:BoundField DataField="Nombre" HeaderText="Nombre SE" />
+                    <asp:BoundField DataField="Nombre" HeaderText="Nombre Secretaría" />
                     <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
-                    <asp:BoundField DataField="Direccion" HeaderText="Direccion" />
+                    <asp:BoundField DataField="Direccion" HeaderText="Dirección" />
                 </Columns>
             </asp:GridView>
         </div>
         <div id="ModMediciones" runat="server">
             <h4 id="titulomediciones" runat="server" visible="false" style="color: #0b72bc;">
                 Listado de Mediciones Realizadas</h4>
-            <asp:GridView ID="gvMediciones" runat="server" Width="100%" OnSelectedIndexChanged="gvMediciones_SelectedIndexChanged"
-                Visible="False">
+            <asp:GridView ID="gvMediciones" AutoGenerateColumns="false" runat="server" Width="100%"
+                OnSelectedIndexChanged="gvMediciones_SelectedIndexChanged" Visible="False">
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" SelectText="<img  width='24px' src='/Icons/Calender.png' alt='Seleccionar Medicion'>" />
+                    <asp:BoundField DataField="Medicion" HeaderText="Medición" />
+                    <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
                 </Columns>
             </asp:GridView>
             <br />
@@ -174,7 +176,7 @@
                             <asp:TextBox ID="txtNombreSecre" runat="server" Enabled="False" Width="100%"></asp:TextBox>
                         </td>
                         <td>
-                            B.) Correo Electronico:
+                            B.) Correo Electrónico:
                         </td>
                         <td colspan="2">
                             <asp:TextBox ID="txtCorreoSecre" runat="server" Enabled="False" Width="100%"></asp:TextBox>
@@ -206,7 +208,7 @@
                     </tr>
                     <tr class="trgris">
                         <td colspan="5">
-                            2.2 ¿Tiene la SE una politica, programa o proyecto de formacion ciudadana?
+                            2.2 ¿Tiene la SE una política, programa o proyecto de formación ciudadana?
                         </td>
                     </tr>
                     <tr class="trblanca">
@@ -239,7 +241,7 @@
                     </tr>
                     <tr class="trgris">
                         <td colspan="5">
-                            2.2.3 ¿ A qué poblaciones esta dirigido este programa Iniciativa?
+                            2.2.3 ¿ A qué poblaciones está dirigido este programa Iniciativa?
                         </td>
                     </tr>
                     <tr class="trblanca">
@@ -311,8 +313,7 @@
                             Cantidad:
                         </td>
                         <td colspan="2">
-                            <asp:TextBox ID="Cantidadotro1" runat="server" Width="25%" CssClass="numerico" 
-                                Enabled="False">0</asp:TextBox>
+                            <asp:TextBox ID="Cantidadotro1" runat="server" Width="25%" CssClass="numerico" Enabled="False">0</asp:TextBox>
                         </td>
                     </tr>
                     <tr class="trblanca">
@@ -326,8 +327,7 @@
                             Cantidad:
                         </td>
                         <td colspan="2">
-                            <asp:TextBox ID="Cantidadotro2" runat="server" Width="25%" CssClass="numerico" 
-                                Enabled="False">0</asp:TextBox>
+                            <asp:TextBox ID="Cantidadotro2" runat="server" Width="25%" CssClass="numerico" Enabled="False">0</asp:TextBox>
                         </td>
                     </tr>
                     <tr class="trgris">
@@ -341,8 +341,7 @@
                             Cantidad:
                         </td>
                         <td colspan="2">
-                            <asp:TextBox ID="Cantidadotro3" runat="server" Width="25%" CssClass="numerico" 
-                                Enabled="False">0</asp:TextBox>
+                            <asp:TextBox ID="Cantidadotro3" runat="server" Width="25%" CssClass="numerico" Enabled="False">0</asp:TextBox>
                         </td>
                     </tr>
                     <tr class="trblanca">
@@ -356,8 +355,7 @@
                             Cantidad:
                         </td>
                         <td colspan="2">
-                            <asp:TextBox ID="Cantidadotro4" runat="server" Width="25%" CssClass="numerico" 
-                                Enabled="False">0</asp:TextBox>
+                            <asp:TextBox ID="Cantidadotro4" runat="server" Width="25%" CssClass="numerico" Enabled="False">0</asp:TextBox>
                         </td>
                     </tr>
                     <tr class="trgris">
@@ -371,13 +369,12 @@
                             Cantidad:
                         </td>
                         <td colspan="2">
-                            <asp:TextBox ID="Cantidadotro5" runat="server" Width="25%" CssClass="numerico" 
-                                Enabled="False">0</asp:TextBox>
+                            <asp:TextBox ID="Cantidadotro5" runat="server" Width="25%" CssClass="numerico" Enabled="False">0</asp:TextBox>
                         </td>
                     </tr>
                     <tr class="trgris">
                         <td colspan="5">
-                            2.2.4 Explique como implementa este programa iniciativa
+                            2.2.4 Explique cómo implementa este programa iniciativa
                         </td>
                     </tr>
                     <tr class="trblanca">
@@ -387,7 +384,7 @@
                     </tr>
                     <tr class="trgris">
                         <td colspan="5">
-                            2.2.5 ¿Comó realiza el seguimiento, monitoreo y evaluación de este programa iniciativa?
+                            2.2.5 ¿cómo realiza el seguimiento, monitoreo y evaluación de este programa iniciativa?
                         </td>
                     </tr>
                     <tr class="trblanca">
@@ -410,7 +407,7 @@
                     </tr>
                     <tr class="trgris">
                         <td colspan="5">
-                            2.3.1 Explique como lo incluye
+                            2.3.1 Explique cómo lo incluye
                         </td>
                     </tr>
                     <tr class="trblanca">

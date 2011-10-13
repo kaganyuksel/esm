@@ -65,7 +65,7 @@ namespace ESM
                     }
 
                     objFullCalendar.editable = true;
-                    objFullCalendar.url = "JavaScript:$.prettyPhoto.open('/cita.aspx?id=" + idrama.ToString() + "&tipo=" + tipo.ToString() + "&idcita=" + item.IdCita.ToString() + "&iframe=true&width=100%&height=100%');";
+                    objFullCalendar.url = "Javascript:prettyevent('/cita.aspx?id=" + idrama.ToString() + "&tipo=" + tipo.ToString() + "&idcita=" + item.IdCita.ToString() + "&iframe=true&width=100%&height=100%');";
                     objFullCalendar.clases = "pretty";
                     objevents = String.Concat(objevents, objJavaScriptSerializer.Serialize(objFullCalendar), ",");
 
