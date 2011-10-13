@@ -515,7 +515,7 @@ namespace ESM.LecturasContexto
                     _2_2_3_EDU = _2_2_3EDU,
                     _2_2_3_EDU_Cant = _2_2_3EDU_Cant,
                     _2_2_3_EE_ = _2_2_3EE,
-                    _2_2_3_EE_Cant = _2_2_3EE_Cant,                    
+                    _2_2_3_EE_Cant = _2_2_3EE_Cant,
                     _2_2_3_EST_ = _2_2_3EST,
                     _2_2_3_EST_Cant = _2_2_3EST_Cant,
                     _2_2_3_OTR_1 = _2_2_3Otro_Cual_1,
@@ -555,14 +555,14 @@ namespace ESM.LecturasContexto
 
                     #region Modulo 5
 
-                    _5_1_INT = _5_1_INTDEP,
-                    _5_1_INTM = _5_1_INTMUN,
-                    _5_1_PREND = _5_1_PRENDEP,
-                    _5_1_PRENM = _5_1_PRENMUN,
                     _5_1_RADD_ = _5_1_RADDEP,
                     _5_1_RADM = _5_1_RADMUN,
+                    _5_1_PREND = _5_1_PRENDEP,
+                    _5_1_PRENM = _5_1_PRENMUN,
                     _5_1_TELD = _5_1_TELDEP,
                     _5_1_TELM = _5_1_TELMUN,
+                    _5_1_INT = _5_1_INTDEP,
+                    _5_1_INTM = _5_1_INTMUN,
                     _5_2_ = _5_2,
 
                     #endregion
@@ -646,14 +646,15 @@ namespace ESM.LecturasContexto
 
                 #region Modulo 5
 
-                lecturaac._5_1_INT = _5_1_INTDEP;
-                lecturaac._5_1_INTM = _5_1_INTMUN;
-                lecturaac._5_1_PREND = _5_1_PRENDEP;
-                lecturaac._5_1_PRENM = _5_1_PRENMUN;
                 lecturaac._5_1_RADD_ = _5_1_RADDEP;
                 lecturaac._5_1_RADM = _5_1_RADMUN;
+                lecturaac._5_1_PREND = _5_1_PRENDEP;
+                lecturaac._5_1_PRENM = _5_1_PRENMUN;
                 lecturaac._5_1_TELD = _5_1_TELDEP;
                 lecturaac._5_1_TELM = _5_1_TELMUN;
+                lecturaac._5_1_INT = _5_1_INTDEP;
+                lecturaac._5_1_INTM = _5_1_INTMUN;
+
                 lecturaac._5_2_ = _5_2;
 
                 #endregion
@@ -732,8 +733,8 @@ namespace ESM.LecturasContexto
             try
             {
                 var lcse = (from lc in db.LecturaContextoSEs
-                           where lc.IdMedicion == idmedicion && lc.IdSecretaria == idse
-                           select lc).Single();
+                            where lc.IdMedicion == idmedicion && lc.IdSecretaria == idse
+                            select lc).Single();
 
                 return lcse;
             }

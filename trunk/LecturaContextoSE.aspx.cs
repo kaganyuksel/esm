@@ -18,6 +18,8 @@ namespace ESM
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.MaintainScrollPositionOnPostBack = true;
+
             if (Request.IsAuthenticated)
             {
                 if (!Page.IsPostBack)
@@ -219,7 +221,7 @@ namespace ESM
                 else
                     _objLecturaContextoSECRE.__5_1_TELDEP = false;
 
-                if (cblist51DedMun.Items[0].Selected)
+                if (cblist51DedMun.Items[3].Selected)
                     _objLecturaContextoSECRE.__5_1_INTDEP = true;
                 else
                     _objLecturaContextoSECRE.__5_1_INTDEP = false;
@@ -227,22 +229,22 @@ namespace ESM
 
                 #region Local
 
-                if (cblist51DedMun.Items[0].Selected)
+                if (cblist51Local.Items[0].Selected)
                     _objLecturaContextoSECRE.__5_1_RADMUN = true;
                 else
                     _objLecturaContextoSECRE.__5_1_RADMUN = false;
 
-                if (cblist51DedMun.Items[1].Selected)
+                if (cblist51Local.Items[1].Selected)
                     _objLecturaContextoSECRE.__5_1_PRENMUN = true;
                 else
                     _objLecturaContextoSECRE.__5_1_PRENMUN = false;
 
-                if (cblist51DedMun.Items[2].Selected)
+                if (cblist51Local.Items[2].Selected)
                     _objLecturaContextoSECRE.__5_1_TELMUN = true;
                 else
                     _objLecturaContextoSECRE.__5_1_TELMUN = false;
 
-                if (cblist51DedMun.Items[0].Selected)
+                if (cblist51Local.Items[3].Selected)
                     _objLecturaContextoSECRE.__5_1_INTMUN = true;
                 else
                     _objLecturaContextoSECRE.__5_1_INTMUN = false;
@@ -266,22 +268,32 @@ namespace ESM
                 int idmedicion = Convert.ToInt32(Session["idmedicionLC"]);
                 if (Session["idlectura"] == null)
                 {
-                    if (_objLecturaContextoSECRE.Almacenar(idmedicion))
+                    var lcm = from lc in new ESM.Model.ESMBDDataContext().LecturaContextoSEs
+                              where lc.IdMedicion == idmedicion
+                              select lc;
+
+                    if (lcm.Count() != 0)
                     {
-                        Session.Add("idlectura", _objLecturaContextoSECRE.IdLectura);
-                        Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo satisfactoriamente.');</script>");
+                        if (_objLecturaContextoSECRE.Almacenar(idmedicion))
+                        {
+                            Session.Add("idlectura", _objLecturaContextoSECRE.IdLectura);
+                            Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo satisfactoriamente.');</script>");
+                        }
+                        else
+                            Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo sin exito.');</script>");
                     }
                     else
-                        Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo sin exito.');</script>");
+                        Response.Write("<script>alert('Ya existe un instrumento de lectura de contexto para la secretaría de educación seleccionada.');</script>");
+
                 }
                 else if (Session["idlectura"] != null)
                 {
                     if (_objLecturaContextoSECRE.Actualizar(Convert.ToInt32(Session["idlectura"])))
                     {
-                        Response.Write("<script>alert('El proceso de actualización para Lectura de Contexto Finalizo satisfactoriamente.');</script>");
+                        Response.Write("<script>alert('El proceso de actualización para lectura de contexto finalizó satisfactoriamente.');</script>");
                     }
                     else
-                        Response.Write("<script>alert('El proceso de actualización para Lectura de Contexto Finalizo sin exito.');</script>");
+                        Response.Write("<script>alert('El proceso de actualización para lectura de contexto finalizó sin exito.');</script>");
                 }
                 return true;
             }
@@ -450,16 +462,39 @@ namespace ESM
                 txt221.Text = objList._2_2_1_;
                 txt222.Text = objList._2_2_2_;
 
+                if (txt221.Text.Length != 0)
+                    txt221.Enabled = true;
+
+                if (txt222.Text.Length != 0)
+                    txt222.Enabled = true;
+
+
+
                 if ((bool)objList._2_2_3_DIR_)
+                {
                     chxdirectivos.Checked = true;
+                    txtcantdir.Enabled = true;
+                }
                 if ((bool)objList._2_2_3_EDU)
+                {
                     chxEdu.Checked = true;
+                    txtcantedu.Enabled = true;
+                }
                 if ((bool)objList._2_2_3_EE_)
+                {
                     chxEE.Checked = true;
+                    txtcantee.Enabled = true;
+                }
                 if ((bool)objList._2_2_3_EST_)
+                {
                     chxest.Checked = true;
+                    txtcantest.Enabled = true;
+                }
                 if ((bool)objList._2_2_3_PAD_)
+                {
                     chxpad.Checked = true;
+                    txtcantpad.Enabled = true;
+                }
 
                 txtcantee.Text = objList._2_2_3_EE_Cant.ToString();
                 txtcantest.Text = objList._2_2_3_EST_Cant.ToString();
@@ -473,6 +508,17 @@ namespace ESM
                 txtotrocual4.Text = objList._2_2_3_OTR_4_;
                 txtotrocual5.Text = objList._2_2_3_OTR_5_;
 
+                if (txtotrocual1.Text.Trim().Length != 0)
+                    Cantidadotro1.Enabled = true;
+                if (txtotrocual2.Text.Trim().Length != 0)
+                    Cantidadotro2.Enabled = true;
+                if (txtotrocual3.Text.Trim().Length != 0)
+                    Cantidadotro3.Enabled = true;
+                if (txtotrocual4.Text.Trim().Length != 0)
+                    Cantidadotro4.Enabled = true;
+                if (txtotrocual5.Text.Trim().Length != 0)
+                    Cantidadotro5.Enabled = true;
+
                 Cantidadotro1.Text = objList._2_2_3_OTR_1_Cant.ToString();
                 Cantidadotro2.Text = objList._2_2_3_OTR_2_Cant.ToString();
                 Cantidadotro3.Text = objList._2_2_3_OTR_3_Cant.ToString();
@@ -483,11 +529,15 @@ namespace ESM
                 txt225.Text = objList._2_2_5_;
 
                 if ((bool)objList._2_3_)
+                {
                     rbtn23Si.Checked = true;
+                    txt231.Enabled = true;
+                }
                 else
                     rbtn23No.Checked = true;
 
                 txt231.Text = objList._2_3_1_;
+
                 txt31.Text = objList._3_1_;
                 txt32.Text = objList._3_2_;
                 txt33.Text = objList._3_3_;
@@ -496,33 +546,47 @@ namespace ESM
                 txt36.Text = objList._3_6_;
 
                 if ((bool)objList._4_1_)
+                {
                     rbtn41Si.Checked = true;
+                    txt411.Enabled = true;
+                }
                 else
                     rbtn41No.Checked = true;
 
                 txt411.Text = objList._4_1_1_;
 
-                if ((bool)objList._5_1_INT)
-                    cblist51DedMun.Items[3].Selected = true;
-                if ((bool)objList._5_1_INTM)
-                    cblist51Local.Items[3].Selected = true;
-                if ((bool)objList._5_1_PREND)
-                    cblist51DedMun.Items[1].Selected = true;
-                if ((bool)objList._5_1_PRENM)
-                    cblist51Local.Items[2].Selected = true;
+
                 if ((bool)objList._5_1_RADD_)
                     cblist51DedMun.Items[0].Selected = true;
+
                 if ((bool)objList._5_1_RADM)
                     cblist51Local.Items[0].Selected = true;
+
+                if ((bool)objList._5_1_PREND)
+                    cblist51DedMun.Items[1].Selected = true;
+
+                if ((bool)objList._5_1_PRENM)
+                    cblist51Local.Items[1].Selected = true;
+
                 if ((bool)objList._5_1_TELD)
                     cblist51DedMun.Items[2].Selected = true;
+
                 if ((bool)objList._5_1_TELM)
                     cblist51Local.Items[2].Selected = true;
+
+                if ((bool)objList._5_1_INT)
+                    cblist51DedMun.Items[3].Selected = true;
+
+                if ((bool)objList._5_1_INTM)
+                    cblist51Local.Items[3].Selected = true;
 
                 txt52.Text = objList._5_2_;
 
                 if ((bool)objList._1_1_8_)
+                {
                     rbtn118Si.Checked = true;
+                    txt119.Enabled = true;
+                }
                 else if (!(bool)objList._1_1_8_)
                     rbtn118No.Checked = true;
 

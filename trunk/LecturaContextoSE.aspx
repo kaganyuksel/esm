@@ -24,7 +24,49 @@
                     $("#ContentPlaceHolder1_Cantidadotro1").attr("disabled", true);
                 }
             });
+            $("#ContentPlaceHolder1_txtotrocual2").change(function () {
 
+                var texto = $(this).val();
+                if ($.trim(texto) != null && $.trim(texto) != "") {
+                    $("#ContentPlaceHolder1_Cantidadotro2").attr("disabled", false);
+                }
+                else {
+                    $("#ContentPlaceHolder1_Cantidadotro2").attr("disabled", true);
+                }
+            });
+
+            $("#ContentPlaceHolder1_txtotrocual3").change(function () {
+
+                var texto = $(this).val();
+                if ($.trim(texto) != null && $.trim(texto) != "") {
+                    $("#ContentPlaceHolder1_Cantidadotro3").attr("disabled", false);
+                }
+                else {
+                    $("#ContentPlaceHolder1_Cantidadotro3").attr("disabled", true);
+                }
+            });
+
+            $("#ContentPlaceHolder1_txtotrocual4").change(function () {
+
+                var texto = $(this).val();
+                if ($.trim(texto) != null && $.trim(texto) != "") {
+                    $("#ContentPlaceHolder1_Cantidadotro4").attr("disabled", false);
+                }
+                else {
+                    $("#ContentPlaceHolder1_Cantidadotro4").attr("disabled", true);
+                }
+            });
+
+            $("#ContentPlaceHolder1_txtotrocual5").change(function () {
+
+                var texto = $(this).val();
+                if ($.trim(texto) != null && $.trim(texto) != "") {
+                    $("#ContentPlaceHolder1_Cantidadotro5").attr("disabled", false);
+                }
+                else {
+                    $("#ContentPlaceHolder1_Cantidadotro5").attr("disabled", true);
+                }
+            });
         });
     
     </script>
@@ -71,7 +113,7 @@
                     <asp:CommandField ShowSelectButton="True" SelectText="<img id='imgEvaluar'  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />" />
                     <asp:BoundField DataField="IdSecretaria" HeaderText="Identificación" />
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre Secretaría" />
-                    <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
+                    <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
                     <asp:BoundField DataField="Direccion" HeaderText="Dirección" />
                 </Columns>
             </asp:GridView>
@@ -292,7 +334,7 @@
                     </tr>
                     <tr class="trblanca">
                         <td colspan="2">
-                            <asp:CheckBox ID="chxpad" runat="server" Text="Padres de Familia" AutoPostBack="True"
+                            <asp:CheckBox ID="chxpad" runat="server" Text="Pa<s de Familia" AutoPostBack="True"
                                 OnCheckedChanged="chxpad_CheckedChanged" />
                         </td>
                         <td>
@@ -520,7 +562,7 @@
                     <tr class="trgris">
                         <td colspan="5">
                             5.1 ¿A través de qué medios de comunicación en el Municipio o en el Departamento
-                            se promueven temas drelacionados con formación ciudadana ?
+                            se promueven temas relacionados con formación ciudadana ?
                         </td>
                     </tr>
                     <tr class="trblanca">
