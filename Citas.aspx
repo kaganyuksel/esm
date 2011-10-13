@@ -12,6 +12,11 @@
         
         var calendarv = null;
 
+        function prettyevent(url)
+        {
+            $.prettyPhoto.open(url);
+        }
+
         $(document).ready(function () {
         
             var idConsultor = $("#ContentPlaceHolder1_idconsultor").val();
@@ -106,7 +111,8 @@
                 callback: function(){
                     calendarv.fullCalendar( 'destroy' );
                     calendario();
-                }
+                },
+                social_tools: ' '
             });
             
             calendario();
@@ -138,5 +144,5 @@
         <div id='calendar'>
         </div>
     </div>
-    <a href="#" id="pretty"></a>
+    <a href="#" title="Administración de Citas" id="pretty"></a>
 </asp:Content>

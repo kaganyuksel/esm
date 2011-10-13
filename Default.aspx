@@ -2,6 +2,17 @@
     Inherits="ESM._Default" %>
 
 <asp:Content ID="headContent" runat="Server" ContentPlaceHolderID="head">
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#citastext").click(function () {
+
+                var url = $("#ContentPlaceHolder1_citas").attr("href");
+                window.location = url;
+            });
+
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content1" runat="Server" ContentPlaceHolderID="ContentPlaceHolder1">
     <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" />
@@ -155,10 +166,12 @@
                     <img src="Icons/Calender.png" alt="Evaluar" /></a>
             </td>
             <td class="td">
-                <h3>
-                    Citas</h3>
+                <h3 id="citastext">
+                    Citas
+                </h3>
                 <br />
-                Verifica las citas que existen a cada uno de los Establecimientos Educativos y Secretarías de Educación.
+                Verifica las citas que existen a cada uno de los Establecimientos Educativos y Secretarías
+                de Educación.
             </td>
             <td>
                 <a href="/MenuEvaluacion.aspx">
