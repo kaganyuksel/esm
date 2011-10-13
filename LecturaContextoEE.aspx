@@ -82,11 +82,11 @@
         <br />
         <div id="modEESeleccion" runat="server" visible="false">
             <h3>
-                1. Seleccione el Establecimiento Educativo a evaluar.
+                1. Seleccione el establecimiento educativo a evaluar.
             </h3>
             <br />
             <p id="filtrosp" runat="server">
-                Busqueda de Establecimiento Educativo:
+                Búsqueda de Establecimiento Educativo:
                 <asp:TextBox runat="server" ID="txtFiltro" />
                 <%--<input type="button" name="btnFiltro" value="Buscar" onclick="buscar();" />--%>
                 <asp:Button ID="btnBuscar" Text="Buscar" runat="server" CausesValidation="false"
@@ -94,17 +94,19 @@
             </p>
             <asp:GridView ID="gvResultados" runat="server" AllowPaging="True" AllowSorting="True"
                 CssClass="gvResultados" RowStyle-CssClass="td" HeaderStyle-CssClass="th" CellPadding="6"
-                AutoGenerateColumns="false" Width="100%" 
+                AutoGenerateColumns="False" Width="100%" 
                 OnSelectedIndexChanged="gvResultados_SelectedIndexChanged" 
                 onpageindexchanging="gvResultados_PageIndexChanging">
                 <HeaderStyle CssClass="trheader" />
                 <Columns>
                     <asp:CommandField SelectText="<img id='imgEvaluar'  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />"
-                        ShowSelectButton="True" ControlStyle-CssClass="a" />
+                        ShowSelectButton="True" ControlStyle-CssClass="a" >
+<ControlStyle CssClass="a"></ControlStyle>
+                    </asp:CommandField>
                     <asp:BoundField DataField="CodigoDane" HeaderText="Cod. DANE" />
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                     <asp:BoundField DataField="Municipio" HeaderText="Municipio" />
-                    <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
+                    <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
                     <asp:TemplateField Visible="false" SortExpression="IDIE" HeaderText="IDIE">
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("IdIE") %>' runat="server" ID="IDIE"></asp:Label>
@@ -129,12 +131,12 @@
         <div id="ModMediciones" runat="server">
             <h4 id="titulomediciones" runat="server" visible="false" style="color: #0b72bc;">
                 Listado de Mediciones Realizadas</h4>
-            <asp:GridView ID="gvMediciones" runat="server" Width="100%" Visible="False" AutoGenerateColumns="false"
+            <asp:GridView ID="gvMediciones" runat="server" Width="100%" Visible="False" AutoGenerateColumns="False"
                 OnSelectedIndexChanged="gvMediciones_SelectedIndexChanged">
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" SelectText="<img  width='24px' src='/Icons/Calender.png' alt='Seleccionar Medicion'>" />
-                    <asp:BoundField DataField="IdMedicion" HeaderText="Identificador de Medicion" />
-                    <asp:BoundField DataField="Fecha" HeaderText="Fecha de Medicion" />
+                    <asp:BoundField DataField="IdMedicion" HeaderText="Identificador de Medición" />
+                    <asp:BoundField DataField="Fecha" HeaderText="Fecha de Medición" />
                 </Columns>
             </asp:GridView>
             <br />
@@ -225,7 +227,7 @@
                 </tr>
                 <tr class="trblanca">
                     <td>
-                        E.) Correo electronico
+                        E.) Correo electrónico
                     </td>
                     <td colspan="4">
                         <asp:TextBox ID="txtCorreoElectronico" runat="server" Width="99%"></asp:TextBox>

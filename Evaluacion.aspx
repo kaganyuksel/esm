@@ -267,7 +267,7 @@
                     </h3>
                     <br />
                     <p id="filtrosp" runat="server">
-                        Busqueda de Establecimiento Educativo:
+                        Búsqueda de Establecimiento Educativo:
                         <asp:TextBox runat="server" ID="txtFiltro" />
                         <%--<input type="button" name="btnFiltro" value="Buscar" onclick="buscar();" />--%>
                         <asp:Button ID="btnBuscar" Text="Buscar" runat="server" CausesValidation="false"

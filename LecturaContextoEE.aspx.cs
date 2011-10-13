@@ -434,9 +434,19 @@ namespace ESM
                 txtNotiene.Text = lc._2_3_NoTiene.ToString();
 
                 if ((bool)lc._2_4_Si)
+                {
                     rbtnSi24.Checked = true;
+                    rbtnNo24.Checked = false;
+
+                    txt25_1.Enabled = true;
+                    txt25_2.Enabled = true;
+                    txt25_3.Enabled = true;
+                }
                 else if ((bool)lc._2_4_No)
+                {
+                    rbtnSi24.Checked = false;
                     rbtnNo24.Checked = true;
+                }
 
                 txt25_1.Text = lc._2_5_1.ToString();
                 txt25_2.Text = lc._2_5_2.ToString();
@@ -447,16 +457,38 @@ namespace ESM
                 txt33.Text = lc._3_3.ToString();
 
                 if ((bool)lc._3_4_Si)
+                {
                     rbtnSi34.Checked = true;
+                    rbtnNo34.Checked = false;
+                    txt341.Enabled = true;
+                }
                 else if ((bool)lc._3_4_No)
+                {
                     rbtnNo34.Checked = true;
+                    rbtnSi34.Checked = false;
+
+                }
 
                 txt341.Text = lc._3_4_1.ToString();
 
                 if ((bool)lc._3_5_Si)
+                {
                     rbtnSi35.Checked = true;
+                    rbtnNo35.Checked = false;
+
+                    txt351.Enabled = true;
+                    txt352.Enabled = true;
+                    txt353.Enabled = true;
+                    txt354.Enabled = true;
+                    txt355.Enabled = true;
+                    txt356.Enabled = true;
+                    txt357.Enabled = true;
+                }
                 else if ((bool)lc._3_5_No)
+                {
                     rbtnNo35.Checked = true;
+                    rbtnSi35.Checked = false;
+                }
 
                 txt351.Text = lc._3_5_1.ToString();
                 txt352.Text = lc._3_5_2.ToString();
@@ -469,16 +501,30 @@ namespace ESM
                 txt37.Text = lc._3_7.ToString();
 
                 if ((bool)lc._3_8_Si)
+                {
                     rbtnSi38.Checked = true;
+                    rbtnNo38.Checked = false;
+                    txt381.Enabled = true;
+                }
                 else if ((bool)lc._3_8_No)
+                {
                     rbtnNo38.Checked = true;
+                    rbtnSi38.Checked = false;
+                }
 
                 txt381.Text = lc._3_8_1.ToString();
 
                 if ((bool)lc._3_9_Si)
+                {
                     rbtnSi39.Checked = true;
+                    rbtnNo39.Checked = false;
+                    txt391.Enabled = true;
+                }
                 else if ((bool)lc._3_9_No)
+                {
                     rbtnNo39.Checked = true;
+                    rbtnSi39.Checked = false;
+                }
 
                 txt391.Text = lc._3_9_1.ToString();
 
@@ -499,9 +545,16 @@ namespace ESM
                 txt431.Text = lc._4_3_1.ToString();
 
                 if ((bool)lc._5_1_Si)
+                {
                     rbtnSi51.Checked = true;
+                    rbtnNo51.Checked = false;
+                    txt511.Enabled = true;
+                }
                 else if ((bool)lc._5_1_No)
+                {
                     rbtnNo51.Checked = true;
+                    rbtnSi51.Checked = false;
+                }
 
                 txt511.Text = lc._5_1_1.ToString();
 
