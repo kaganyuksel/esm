@@ -136,11 +136,13 @@
                 </tr>
             </table>
             <asp:GridView ID="gvMediciones" runat="server" Width="100%" OnSelectedIndexChanged="gvMediciones_SelectedIndexChanged"
-                CssClass="gvMediciones">
+                CssClass="gvMediciones" AutoGenerateColumns="false">
                 <Columns>
                     <asp:CommandField ButtonType="Image" SelectText="" ShowSelectButton="True" SelectImageUrl="~/Icons/Calender.png">
                         <ControlStyle Height="24px" Width="24px" />
                     </asp:CommandField>
+                    <asp:BoundField DataField="IdMedicion" HeaderText="Medición No." />
+                    <asp:BoundField DataField="Fecha" HeaderText="Fecha de Medición" />
                 </Columns>
             </asp:GridView>
         </div>
@@ -165,7 +167,7 @@
                 {
                     font-size: 14px;
                 }
-                </style>
+            </style>
             <table id="acta" style="max-width: 100%; -moz-border-radius: 3px; -webkit-border-radius: 3px;
                 border-radius: 3px; /*ie 7 and 8 do not support border radius*/
 -moz-box-shadow: 0px 0px 1px #000000; -webkit-box-shadow: 0px 0px 1px #000000; box-shadow: 0px 0px 1px #000000;

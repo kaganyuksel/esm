@@ -111,7 +111,7 @@
                 /*ie 7 and 8 do not support blur property of shadows*/
 /*inner elements must not break this elements boundaries*/
 /*all filters must be placed together*/
- width: 20%; height: 40px; position: fixed; top: 0; background: #ffffff; margin: 0 40%;">
+ width: 20%; height: 40px; position: fixed; top:0; background: #ffffff; margin: 0 40%;">
                 <table style="width: 100%;">
                     <tr style="background: #ffffff;">
                         <td>
