@@ -391,16 +391,15 @@ namespace ESM.Evaluacion
         {
             _objTimer.Stop();
             bool exist = false;
-            if (Session["ideval"] != null)
+
+            string idactor = cboActores.SelectedValue;
+            for (int i = 0; i < gvTopEval.Rows.Count; i++)
             {
-                string idactor = cboActores.SelectedValue;
-                for (int i = 0; i < gvTopEval.Rows.Count; i++)
-                {
-                    if (idactor == gvTopEval.Rows[i].Cells[2].Text)
-                        exist = true;
-                }
+                if (idactor == gvTopEval.Rows[i].Cells[2].Text)
+                    exist = true;
             }
-            if (!exist)
+
+            if (!exist && Session["ideval"] == null)
             {
                 AlmacenarInformacion(true);
                 Session.Add("ideval", _objevaluacion.IdEvaluacion);
@@ -413,16 +412,15 @@ namespace ESM.Evaluacion
         {
             _objTimer.Stop();
             bool exist = false;
-            if (Session["ideval"] != null)
+
+            string idactor = cboActores.SelectedValue;
+            for (int i = 0; i < gvTopEval.Rows.Count; i++)
             {
-                string idactor = cboActores.SelectedValue;
-                for (int i = 0; i < gvTopEval.Rows.Count; i++)
-                {
-                    if (idactor == gvTopEval.Rows[i].Cells[2].Text)
-                        exist = true;
-                }
+                if (idactor == gvTopEval.Rows[i].Cells[2].Text)
+                    exist = true;
             }
-            if (!exist)
+
+            if (!exist && Session["ideval"] == null)
             {
                 AlmacenarInformacion(false);
                 Session.Add("ideval", _objevaluacion.IdEvaluacion);
@@ -1240,7 +1238,7 @@ namespace ESM.Evaluacion
                 Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
                 var rFiltro = from i in db.Establecimiento_Educativos
-                              where i.Nombre.Contains(texto)
+                              where i.Nombre.Contains(texto) && i.Estado == true
                               select i;
 
                 gvResultados.DataSourceID = null;

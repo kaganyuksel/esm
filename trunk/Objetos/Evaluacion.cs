@@ -725,7 +725,7 @@ namespace EvaluationSettings
                                     p.IdOrden,
                                     p.IdPregunta,
                                     No_Pregunta = p.IdPregunta,
-                                    Pregunta = p.Pregunta1,
+                                    Pregunta1 = p.Pregunta1,
                                     p.Etiqueta
                                 };
 
@@ -746,7 +746,7 @@ namespace EvaluationSettings
                                     p.IdOrden,
                                     p.IdPregunta,
                                     No_Pregunta = p.IdPregunta,
-                                    Pregunta = p.Pregunta1,
+                                    Pregunta1 = p.Pregunta1,
                                     p.Etiqueta
                                 };
 
@@ -767,7 +767,7 @@ namespace EvaluationSettings
                                     p.IdOrden,
                                     p.IdPregunta,
                                     No_Pregunta = p.IdPregunta,
-                                    Pregunta = p.Pregunta1,
+                                    Pregunta1 = p.Pregunta1,
                                     p.Etiqueta
                                 };
 
@@ -788,7 +788,7 @@ namespace EvaluationSettings
                                     p.IdOrden,
                                     p.IdPregunta,
                                     No_Pregunta = p.IdPregunta,
-                                    Pregunta = p.Pregunta1,
+                                    Pregunta1 = p.Pregunta1,
                                     p.Etiqueta
                                 };
 
@@ -809,7 +809,7 @@ namespace EvaluationSettings
                                     p.IdOrden,
                                     p.IdPregunta,
                                     No_Pregunta = p.IdPregunta,
-                                    Pregunta = p.Pregunta1,
+                                    Pregunta1 = p.Pregunta1,
                                     p.Etiqueta
                                 };
 
