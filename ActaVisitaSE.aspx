@@ -101,7 +101,7 @@
         </div>
         <div id="ModMediciones" runat="server" visible="false">
             <h4>
-                * Datos Basicos de la Secretaría de Educación.</h4>
+                * Datos básicos de la secretaría de educación.</h4>
             <style type="text/css">
                 .gvMediciones
                 {
@@ -247,7 +247,7 @@
                 </tr>
                 <tr class="trblanca">
                     <td colspan="2" style="width: 30%">
-                        Correo Electronico:
+                        Correo Electrónico:
                     </td>
                     <td>
                         <asp:TextBox ID="txtCorreo" runat="server" Width="100%"></asp:TextBox>
@@ -283,7 +283,14 @@
                 </tr>
                 <tr>
                     <td class="style2" colspan="7">
-                        <asp:GridView runat="server" ID="gvIndividuos" Width="100%" AllowSorting="True" AutoGenerateColumns="true" />
+                        <asp:GridView runat="server" ID="gvIndividuos" Width="100%" AllowSorting="True" AutoGenerateColumns="false">
+                            <Columns>
+                                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
+                                <asp:BoundField DataField="CorreoElectronico" HeaderText="Correo Electrónico" />
+                                <asp:BoundField DataField="Cargo" HeaderText="Cargo" />
+                            </Columns>
+                        </asp:GridView>
                     </td>
                 </tr>
                 <tr class="trheader">
