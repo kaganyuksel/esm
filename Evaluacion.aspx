@@ -79,7 +79,7 @@
         {
             margin-top: 2em;
         }
-    
+        
         .evaluacion
         {
             -moz-border-radius: 3px 3px 0px 0px;
@@ -226,8 +226,7 @@
                 <asp:PostBackTrigger ControlID="gvResultados" />
             </Triggers>
             <ContentTemplate>
-                <asp:Timer ID="objtimer" runat="server" Interval="120000" 
-                    OnTick="objtimer_Tick">
+                <asp:Timer ID="objtimer" runat="server" Interval="120000" OnTick="objtimer_Tick">
                 </asp:Timer>
                 <div id="modSEseleccion" runat="server" visible="false">
                     <h3>
@@ -285,7 +284,7 @@
                             <asp:BoundField DataField="CodigoDane" HeaderText="Cod. DANE" />
                             <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                             <asp:BoundField DataField="Municipio" HeaderText="Municipio" />
-                            <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
+                            <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
                             <asp:TemplateField Visible="false" SortExpression="IDIE" HeaderText="IDIE">
                                 <ItemTemplate>
                                     <asp:Label Text='<%# Eval("IdIE") %>' runat="server" ID="IDIE"></asp:Label>
@@ -308,7 +307,7 @@
                 </div>
                 <div id="ModMediciones" runat="server" visible="false">
                     <h4>
-                        * Datos Basicos del Establecimiento Educativo.</h4>
+                        * Datos básicos del establecimiento educativo.</h4>
                     <br />
                     <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; border: 1px solid #dddddd;">
                         <tr class="trheader">
@@ -348,13 +347,19 @@
                 </div>
                 <div id="ModTopEval" runat="server" visible="false">
                     <h3>
-                        * Listado de las ultimas evaluaciones realizadas para el establecimiento educativo.</h3>
+                        * Listado de las últimas evaluaciones realizadas para el establecimiento educativo.</h3>
                     <br />
-                    <asp:GridView ID="gvTopEval" CssClass="gvTopEval" runat="server" AutoGenerateColumns="true"
+                    <asp:GridView ID="gvTopEval" CssClass="gvTopEval" runat="server" AutoGenerateColumns="false"
                         Width="100%" OnSelectedIndexChanged="gvTopEval_SelectedIndexChanged">
                         <Columns>
                             <asp:CommandField ButtonType="Link" SelectText="<img  width='24px' src='/Icons/Paste.png' alt='Seleccionar Medicion'>"
                                 ShowSelectButton="True" />
+                            <asp:BoundField DataField="No_Evaluacion" HeaderText="No. Evaluación" />
+                            <asp:BoundField DataField="No_Actor" HeaderText="No. Actor" />
+                            <asp:BoundField DataField="Actor" HeaderText="Actor" />
+                            <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
+                            <asp:BoundField DataField="Estado" HeaderText="Estado" />
+                            <asp:BoundField DataField="Medicion" HeaderText="Medición" />
                         </Columns>
                     </asp:GridView>
                 </div>
@@ -630,27 +635,20 @@
                     </style>
                     <p id="informacionuno" runat="server" visible="false" style="width: 300px; color: #8C8C8C;
                         font-size: 12px; text-align: justify;">
-                        <b>Para tener en cuenta:</b> El boton "Guardar" almacena la información en estado
-                        "Parcial" para editar si es necesrio hacerlo, el boton "Guardar y Bloquear" almacena
-                        la evaluacion en estado "Cerrada" y no permite realizar cambios.
+                        <b>Para tener en cuenta:</b> El botón "Guardar" almacena la información en estado
+                        "Parcial" para editar si es necesario hacerlo. El botón "Guardar y Bloquear" almacena
+                        la evaluación en estado "Cerrada" y no permite realizar cambios.
                     </p>
                 </div>
                 <div id="divmensaje" runat="server" style="height: 35px; top: 0; position: fixed;
                     background: green; color: #ffffff; width: 300px; margin: 0 30%; font-size: 12px;
-                    text-align: center; -moz-border-radius:2px;
--webkit-border-radius:2px;
-border-radius:2px;
-/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
--moz-box-shadow:0px 0px 1px #000000;
--webkit-box-shadow:0px 0px 1px #000000;
-box-shadow:0px 0px 1px #000000;
-/*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
-opacity:0.95;
--ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
-/*-ms-filter must come before filter*/
-filter: alpha(opacity=95);
-/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
-/*All filters must be placed together*/" visible="false">
+                    text-align: center; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px;
+                    /*ie 7 and 8 do not support border radius*/
+-moz-box-shadow: 0px 0px 1px #000000; -webkit-box-shadow: 0px 0px 1px #000000; box-shadow: 0px 0px 1px #000000;
+                    /*ie 7 and 8 do not support blur property of shadows*/
+opacity: 0.95; -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95); /*-ms-filter must come before filter*/
+filter: alpha(opacity=95); /*inner elements must not break this elements boundaries*/
+/*all filters must be placed together*/" visible="false">
                     <label class="labelok" runat="server" id="lbloki">
                     </label>
                 </div>

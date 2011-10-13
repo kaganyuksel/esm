@@ -32,11 +32,11 @@
         visible="false" cellspacing="10">
         <tr class="th">
             <td>
-                <img alt="Modulo de Acceso a ESM" src="Icons/Security.png" />
+                <img alt="Módulo de Acceso a ESM" src="Icons/Security.png" />
             </td>
             <td colspan="3">
                 <h1>
-                    Modulo de Acceso a ESM</h1>
+                    Módulo de Acceso a ESM</h1>
             </td>
         </tr>
         <tr>
@@ -69,11 +69,11 @@
         visible="false" cellspacing="10">
         <tr class="th">
             <td>
-                <img src="Icons/Stationery.png" alt="Modulo de Administración y Configuración">
+                <img src="Icons/Stationery.png" alt="Módulo de Administración y Configuración">
             </td>
             <td colspan="3">
                 <h1>
-                    Modulo de Administración y Configuración</h1>
+                    Módulo de Administración y Configuración</h1>
             </td>
         </tr>
         <tr>
@@ -153,11 +153,11 @@
     <table id="ModEval" runat="server" class="menuprincipalbyconfiguracion" cellspacing="10">
         <tr class="th">
             <td>
-                <img src="/Icons/Edit.png" alt="Modulo de Administración y Configuración">
+                <img src="/Icons/Edit.png" alt="Módulo de Administración y Configuración">
             </td>
             <td colspan="3">
                 <h1>
-                    Modulo de Evaluación</h1>
+                    Módulo de Evaluación</h1>
             </td>
         </tr>
         <tr>
