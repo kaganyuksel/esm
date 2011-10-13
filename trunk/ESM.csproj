@@ -40,6 +40,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="Artem.GoogleMap, Version=4.1.0.0, Culture=neutral, PublicKeyToken=fc8d6190a3aeb01c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -97,6 +100,13 @@
     </Compile>
     <Compile Include="Ayuda.aspx.designer.cs">
       <DependentUpon>Ayuda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cita.aspx.cs">
+      <DependentUpon>Cita.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cita.aspx.designer.cs">
+      <DependentUpon>Cita.aspx</DependentUpon>
     </Compile>
     <Compile Include="Citas.aspx.cs">
       <DependentUpon>Citas.aspx</DependentUpon>
@@ -215,6 +225,7 @@
     <Content Include="AmCharts\javascript\images\lens.png" />
     <Content Include="AmCharts\javascript\raphael.js" />
     <Content Include="Ayuda.aspx" />
+    <Content Include="Cita.aspx" />
     <Content Include="Citas.aspx" />
     <Content Include="Consolidado.aspx" />
     <Content Include="Default.aspx" />
@@ -265,6 +276,7 @@
     <Content Include="Icons\Folder.png" />
     <Content Include="Icons\Folder_Open.png" />
     <Content Include="Icons\Forward.png" />
+    <Content Include="Icons\google-maps-icon.gif" />
     <Content Include="Icons\Help.png" />
     <Content Include="Icons\Home.png" />
     <Content Include="Icons\Info.png" />

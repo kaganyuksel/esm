@@ -38,6 +38,7 @@ namespace ESM
                         }
                         else if (rol == "Consultor")
                         {
+                            Session.Add("idcon", _objCRoles.IdConsultor);
                             gvResultados.DataSource = CEE.ObtenerEEs(_objCRoles.IdConsultor);
                             gvResultados.DataBind();
                             ObtenerTema(gvResultados);
@@ -491,6 +492,14 @@ namespace ESM
                 catch (Exception) { Response.Write("<script>alert('Error de almacenamiento.');</script>"); }
 
             }
+        }
+
+        protected void gvResultados_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            this.gvResultados.PageIndex = e.NewPageIndex;
+            int idconsultor = Convert.ToInt32(Session["idcon"]);
+            gvResultados.DataSource = CEE.ObtenerEEs(idconsultor);
+            gvResultados.DataBind();
         }
     }
 }

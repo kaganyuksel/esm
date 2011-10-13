@@ -10,7 +10,7 @@
 namespace ESM {
     
     
-    public partial class AddCita {
+    public partial class Cita {
         
         /// <summary>
         /// form1 control.
@@ -22,66 +22,48 @@ namespace ESM {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// RadioButton1 control.
+        /// lblNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton1;
+        protected global::System.Web.UI.WebControls.Label lblNombre;
         
         /// <summary>
-        /// RadioButton2 control.
+        /// lblTelefono control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton2;
+        protected global::System.Web.UI.WebControls.Label lblTelefono;
         
         /// <summary>
-        /// gvresultadosSE control.
+        /// lblDirección control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvresultadosSE;
+        protected global::System.Web.UI.WebControls.Label lblDirección;
         
         /// <summary>
-        /// lqSecreatarias control.
+        /// lblmunicipio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinqDataSource lqSecreatarias;
+        protected global::System.Web.UI.WebControls.Label lblmunicipio;
         
         /// <summary>
-        /// gvresultadosIE control.
+        /// GoogleMap1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvresultadosIE;
-        
-        /// <summary>
-        /// lqIES control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinqDataSource lqIES;
-        
-        /// <summary>
-        /// lblmensaje control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblmensaje;
+        protected global::Artem.Web.UI.Controls.GoogleMap GoogleMap1;
     }
 }

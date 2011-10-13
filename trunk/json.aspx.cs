@@ -43,32 +43,29 @@ namespace ESM
                 foreach (var item in objCitas)
                 {
                     objFullCalendar.id = item.IdCita;
-                    objFullCalendar.backgroundColor = "#ffgghh";
+                    objFullCalendar.backgroundColor = "#0369A8";
                     objFullCalendar.textColor = "white";
-                    if (item.FechaInicio == item.FechaFin)
-                    {
-                        objFullCalendar.allDay = true;
-                        objFullCalendar.start = item.FechaInicio.ToString("yyyy/MM/dd");
-                        objFullCalendar.end = item.FechaFin.ToString("yyyy/MM/dd");
-                    }
-                    else
-                    {
-                        objFullCalendar.start = item.FechaInicio.ToString("yyyy/MM/dd");
-                        objFullCalendar.end = item.FechaFin.ToString("yyyy/MM/dd");
-                    }
+
+                    objFullCalendar.start = item.FechaInicio.ToString("yyyy/MM/dd HH:mm:ss");
+                    objFullCalendar.end = item.FechaFin.ToString("yyyy/MM/dd HH:mm:ss");
+
                     int idrama = 0;
+                    int tipo = -1;
                     if (item.IdEE != null)
                     {
                         idrama = (int)item.IdEE;
+                        tipo = 1;
                         objFullCalendar.title = item.Establecimiento_Educativo.Nombre;
                     }
                     else
                     {
                         idrama = (int)item.IdSE;
+                        tipo = 0;
                         objFullCalendar.title = item.Secretaria_Educacion.Nombre;
                     }
 
-                    //objFullCalendar.url = Request.Url.Scheme + "://" + Request.Url.Authority + "/DescripcionCitas.aspx?id=" + idrama.ToString() + "&iframe=true&amp;width=500&amp;height=300";
+                    objFullCalendar.editable = true;
+                    objFullCalendar.url = "JavaScript:$.prettyPhoto.open('/cita.aspx?id=" + idrama.ToString() + "&tipo=" + tipo.ToString() + "&idcita=" + item.IdCita.ToString() + "&iframe=true&width=100%&height=100%');";
                     objFullCalendar.clases = "pretty";
                     objevents = String.Concat(objevents, objJavaScriptSerializer.Serialize(objFullCalendar), ",");
 
