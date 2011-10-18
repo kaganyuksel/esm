@@ -216,6 +216,20 @@
             <td class="td">
             </td>
         </tr>
+        <tr>
+            <td style="width: 48px;">
+                <a href="/ReportesMEN.aspx">
+                    <img height="48px" src="/Icons/Stats.png" alt="ReportesMEN" /></a>
+            </td>
+            <td>
+                <h3 onclick="window.location='/ReportesMEN.aspx'">
+                    Reportes MEN</h3>
+                <br />
+                Visualiza las consultas generadas de acuerdo a la información almacenada.
+            </td>
+            <td class="td">
+            </td>
+        </tr>
     </table>
     <br />
     <br />

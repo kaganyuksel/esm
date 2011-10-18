@@ -230,7 +230,7 @@
                     </td>
                 </tr>
                 <tr class="trgris">
-                    <td style="width: 100px;">
+                    <td style="width: 30%;">
                         Nombre:
                     </td>
                     <td colspan="2" style="width: 30%">

@@ -194,7 +194,7 @@ namespace ESM
             gvPadresFamilia.DataBind();
 
             ObtenerTema(gvPadresFamilia);
-            
+
             var edu = from ed in db.AsociadosActaVisitaEEs
                       where ed.IdActaVisita == idacta && ed.IdActor == 3
                       select new { ed.Nombre, ed.Telefono, ed.CorreoElectronico, ed.AreasEnseñansa, ed.GradosEnseñansa };
@@ -336,7 +336,8 @@ namespace ESM
                     GradoHijos = txtGradoHijos.Text,
                     Telefono = txtTelefono.Text,
                     Nombre = txtNombre.Text,
-                    CorreoElectronico = txtCorreo.Text
+                    CorreoElectronico = txtCorreo.Text,
+                    IdNivelEducativo = Convert.ToInt32(cboNivelesEducativos.SelectedValue)
                 };
             }
             else if (cboActores.SelectedItem.Value == "6")

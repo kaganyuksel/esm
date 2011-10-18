@@ -188,7 +188,15 @@
     <Compile Include="Objetos\CEE.cs" />
     <Compile Include="Objetos\CFullCalendar.cs" />
     <Compile Include="Objetos\CLecturaContextoEE.cs" />
+    <Compile Include="Objetos\CReportes.cs" />
     <Compile Include="Objetos\LecturaContextoSE.cs" />
+    <Compile Include="ReportesMen.aspx.cs">
+      <DependentUpon>ReportesMen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportesMen.aspx.designer.cs">
+      <DependentUpon>ReportesMen.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -413,6 +421,7 @@
     <Content Include="Pretty\js\jquery-1.4.4.min.js" />
     <Content Include="Pretty\js\jquery-1.6.1.min.js" />
     <Content Include="Pretty\js\jquery.prettyPhoto.js" />
+    <Content Include="ReportesMen.aspx" />
     <Content Include="Scripts\full_calendar\fullcalendar.css" />
     <Content Include="Scripts\full_calendar\fullcalendar.js" />
     <Content Include="Scripts\full_calendar\fullcalendar.min.js" />
