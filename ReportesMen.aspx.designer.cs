@@ -40,6 +40,15 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.LinkButton lknDiliSE;
         
         /// <summary>
+        /// lknDiliEE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lknDiliEE;
+        
+        /// <summary>
         /// lbltotal control.
         /// </summary>
         /// <remarks>
@@ -74,5 +83,23 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvdilise;
+        
+        /// <summary>
+        /// pnlgveedili control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlgveedili;
+        
+        /// <summary>
+        /// gvDiliEE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvDiliEE;
     }
 }

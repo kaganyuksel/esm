@@ -334,7 +334,7 @@
                     </tr>
                     <tr class="trblanca">
                         <td colspan="2">
-                            <asp:CheckBox ID="chxpad" runat="server" Text="Pa<s de Familia" AutoPostBack="True"
+                            <asp:CheckBox ID="chxpad" runat="server" Text="Padres de Familia" AutoPostBack="True"
                                 OnCheckedChanged="chxpad_CheckedChanged" />
                         </td>
                         <td>
