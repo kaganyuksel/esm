@@ -25,6 +25,16 @@
             modal: true,
             social_tools: false
         });
+        $(document).ready(function () {
+            $(".numerico").change(function () {
+                var valor = $(this).val();
+                if (isNaN(valor)) {
+                    alert("El valor ingresado no es del tipo numerico.");
+                    $(this).val(0);
+                }
+            });
+
+        });
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -64,15 +74,14 @@
             </p>
             <asp:GridView ID="gvResultados" runat="server" Width="100%" AllowPaging="True" AllowSorting="True"
                 CssClass="gvResultados" RowStyle-CssClass="td" HeaderStyle-CssClass="th" CellPadding="6"
-                AutoGenerateColumns="false" 
-                OnSelectedIndexChanged="gvResultados_SelectedIndexChanged" 
-                onpageindexchanging="gvResultados_PageIndexChanging">
+                AutoGenerateColumns="false" OnSelectedIndexChanged="gvResultados_SelectedIndexChanged"
+                OnPageIndexChanging="gvResultados_PageIndexChanging">
                 <HeaderStyle CssClass="th"></HeaderStyle>
                 <AlternatingRowStyle CssClass="trblanca" />
                 <Columns>
                     <asp:CommandField SelectText="<img id='imgEvaluar'  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />"
-                        ShowSelectButton="True" ControlStyle-CssClass="a" >
-<ControlStyle CssClass="a"></ControlStyle>
+                        ShowSelectButton="True" ControlStyle-CssClass="a">
+                        <ControlStyle CssClass="a"></ControlStyle>
                     </asp:CommandField>
                     <asp:BoundField DataField="CodigoDane" HeaderText="Cod. DANE" />
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
@@ -266,7 +275,7 @@
                 </tr>
                 <tr class="trgris">
                     <td colspan="2">
-                        Correo Electronico:
+                        Correo Electrónico:
                     </td>
                     <td colspan="2">
                         <asp:TextBox ID="txtCorreo" runat="server" Width="100%" Enabled="False"></asp:TextBox>
@@ -308,7 +317,7 @@
                 <tr>
                     <td colspan="7">
                         <asp:Label Visible="false" ID="lblGrado" runat="server" Text="Grado:"></asp:Label>
-                        <asp:TextBox Visible="false" ID="txtGrado" runat="server"></asp:TextBox>
+                        <asp:TextBox Visible="false" ID="txtGrado" runat="server" CssClass="numerico">0</asp:TextBox>
                         <asp:Label Visible="false" ID="lblCargo" runat="server" Text="Cargo"></asp:Label>
                         <asp:TextBox Visible="false" ID="txtCargo" runat="server"></asp:TextBox>
                     </td>
@@ -323,12 +332,12 @@
                         * CARGAR DOCUMENTOS
                     </td>
                 </tr>
-                <tr>
+                <tr class="trblanca">
                     <td class="style2" colspan="7" style="text-align: center;">
                         <a id="documentos" runat="server" href="#" class="pretty">Cargar Documentos</a>
                     </td>
                 </tr>
-                <tr class="trblanca">
+                <tr class="trheader">
                     <td style="text-align: center;" colspan="7">
                         <h3>
                             Directivos:</h3>
@@ -336,10 +345,20 @@
                 </tr>
                 <tr>
                     <td class="style2" colspan="7">
-                        <asp:GridView runat="server" ID="gvDirectivos" Width="100%" AllowSorting="True" AutoGenerateColumns="true" />
+                        <asp:GridView runat="server" ID="gvDirectivos" Width="100%" AllowSorting="True" AutoGenerateColumns="false">
+                            <AlternatingRowStyle CssClass="trblanca" />
+                            <Columns>
+                                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
+                                <asp:BoundField DataField="CorreoElectronico" HeaderText="Correo Electrónico" />
+                                <asp:BoundField DataField="Cargo" HeaderText="Cargo" />
+                            </Columns>
+                            <HeaderStyle CssClass="trheader" />
+                            <RowStyle CssClass="trgris" />
+                        </asp:GridView>
                     </td>
                 </tr>
-                <tr class="trblanca">
+                <tr class="trheader">
                     <td style="text-align: center;" colspan="7">
                         <h3>
                             Estudiantes:</h3>
@@ -347,10 +366,20 @@
                 </tr>
                 <tr>
                     <td class="style2" colspan="7">
-                        <asp:GridView runat="server" ID="gvEstudiantes" Width="100%" AutoGenerateColumns="true" />
+                        <asp:GridView runat="server" ID="gvEstudiantes" Width="100%" AutoGenerateColumns="false">
+                            <AlternatingRowStyle CssClass="trblanca" />
+                            <Columns>
+                                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
+                                <asp:BoundField DataField="CorreoElectronico" HeaderText="Correo Electrónico" />
+                                <asp:BoundField DataField="Grado" HeaderText="Grado" />
+                            </Columns>
+                            <HeaderStyle CssClass="trheader" />
+                            <RowStyle CssClass="trgris" />
+                        </asp:GridView>
                     </td>
                 </tr>
-                <tr class="trblanca">
+                <tr class="trheader">
                     <td style="text-align: center;" colspan="7">
                         <h3>
                             Educadores:</h3>
@@ -358,10 +387,21 @@
                 </tr>
                 <tr>
                     <td class="style2" colspan="7">
-                        <asp:GridView runat="server" ID="gvEducadores" Width="100%" AutoGenerateColumns="true" />
+                        <asp:GridView runat="server" ID="gvEducadores" Width="100%" AutoGenerateColumns="false">
+                            <AlternatingRowStyle CssClass="trblanca" />
+                            <Columns>
+                                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
+                                <asp:BoundField DataField="CorreoElectronico" HeaderText="Correo Electrónico" />
+                                <asp:BoundField DataField="AreasEnseñansa" HeaderText="Areas Enseñanza" />
+                                <asp:BoundField DataField="GradosEnseñansa" HeaderText="Grados Enseñanza" />
+                            </Columns>
+                            <HeaderStyle CssClass="trheader" />
+                            <RowStyle CssClass="trgris" />
+                        </asp:GridView>
                     </td>
                 </tr>
-                <tr class="trblanca">
+                <tr class="trheader">
                     <td style="text-align: center;" colspan="7">
                         <h3>
                             Padres de Familia:</h3>
@@ -369,7 +409,18 @@
                 </tr>
                 <tr>
                     <td class="style2" colspan="7">
-                        <asp:GridView runat="server" ID="gvPadresFamilia" Width="100%" AutoGenerateColumns="true" />
+                        <asp:GridView runat="server" ID="gvPadresFamilia" Width="100%" AutoGenerateColumns="false">
+                            <AlternatingRowStyle CssClass="trblanca" />
+                            <Columns>
+                                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
+                                <asp:BoundField DataField="CorreoElectronico" HeaderText="Correo Electrónico" />
+                                <asp:BoundField DataField="GradoHijos" HeaderText="Grado Hijos" />
+                                <asp:BoundField DataField="NivelEducativo" HeaderText="Nivel Educativo" />
+                            </Columns>
+                            <HeaderStyle CssClass="trheader" />
+                            <RowStyle CssClass="trgris" />
+                        </asp:GridView>
                     </td>
                 </tr>
                 <tr class="trheader">

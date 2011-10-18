@@ -106,7 +106,7 @@ namespace ESM
 
         }
 
-        
+
 
         protected void gvMediciones_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -294,6 +294,7 @@ namespace ESM
                             select ase).Single();
 
                 acse.Observaciones = txtObservacion.Text;
+                acse.Medicione.FechaMedicion = DateTime.Now.AddHours(2);
 
                 try
                 {
