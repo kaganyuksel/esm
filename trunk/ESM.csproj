@@ -189,6 +189,7 @@
     <Compile Include="Objetos\CFullCalendar.cs" />
     <Compile Include="Objetos\CLecturaContextoEE.cs" />
     <Compile Include="Objetos\CReportes.cs" />
+    <Compile Include="Objetos\GridViewExportUtil.cs" />
     <Compile Include="Objetos\LecturaContextoSE.cs" />
     <Compile Include="ReportesMen.aspx.cs">
       <DependentUpon>ReportesMen.aspx</DependentUpon>
