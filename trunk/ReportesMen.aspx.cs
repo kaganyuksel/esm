@@ -427,14 +427,97 @@ namespace ESM
                     Label lblevalprof = (Label)gvDiliEE.Rows[j].FindControl("lblevalprof");
                     Label lblevaldir = (Label)gvDiliEE.Rows[j].FindControl("lblevaldir");
                     Label lblevaledu = (Label)gvDiliEE.Rows[j].FindControl("lblevaledu");
+                    Label lblcantdir = (Label)gvDiliEE.Rows[j].FindControl("lblcantdir");
+                    Label lblcantest = (Label)gvDiliEE.Rows[j].FindControl("lblcantest");
+                    Label lblcantpad = (Label)gvDiliEE.Rows[j].FindControl("lblcantpad");
+                    Label lblcantedu = (Label)gvDiliEE.Rows[j].FindControl("lblcantedu");
+                    Label lblcantpro = (Label)gvDiliEE.Rows[j].FindControl("lblcantpro");
+                    Label lblpei = (Label)gvDiliEE.Rows[j].FindControl("lblpei");
+                    Label lblpmi = (Label)gvDiliEE.Rows[j].FindControl("lblpmi");
+                    Label lblmaco = (Label)gvDiliEE.Rows[j].FindControl("lblmaco");
+                    Label lblplan = (Label)gvDiliEE.Rows[j].FindControl("lblplan");
+                    Label lblproy = (Label)gvDiliEE.Rows[j].FindControl("lblproy");
+                    Label lblotros = (Label)gvDiliEE.Rows[j].FindControl("lblotros");
+                    Label lblactaeecargada = (Label)gvDiliEE.Rows[j].FindControl("lblactaeecargada");
 
+
+                    int idmedicion = 0;
                     for (short i = 0; i < 6; i++)
                     {
                         try
                         {
-                            string evalact = (from ev in db.Evaluacions
-                                              where ev.IdActor == i + 1 && ev.IdIE == Convert.ToInt32(lblidie.Text)
-                                              select ev.EstadoEvaluacion.Estado).Single();
+
+                            #region Seccion Consulta Acta
+
+                            var acee = from aee in db.ActaVisitaEEs
+                                       where aee.IdEE == Convert.ToInt32(lblidie.Text)
+                                       select new { aee.AsociadosActaVisitaEEs, aee.Medicione.FechaMedicion };
+
+                            #region Seccion Consulta Documentos
+
+                            foreach (var item in acee)
+                            {
+                                foreach (var asistitem in item.AsociadosActaVisitaEEs)
+                                {
+                                    switch (asistitem.IdActor)
+                                    {
+                                        //Estudiante
+                                        case 1:
+                                            int cantest = (from c in item.AsociadosActaVisitaEEs
+                                                           where c.IdActor == 1
+                                                           select c).Count();
+
+                                            lblcantest.Text = cantest.ToString();
+
+                                            break;
+                                        //Profesional
+                                        case 2:
+                                            int cantpro = (from c in item.AsociadosActaVisitaEEs
+                                                           where c.IdActor == 2
+                                                           select c).Count();
+
+                                            lblcantpro.Text = cantpro.ToString();
+                                            break;
+                                        //Educador
+                                        case 3:
+                                            int cantedu = (from c in item.AsociadosActaVisitaEEs
+                                                           where c.IdActor == 3
+                                                           select c).Count();
+
+                                            lblcantedu.Text = cantedu.ToString();
+                                            break;
+                                        //Padre de Familia
+                                        case 4:
+                                            int cantpad = (from c in item.AsociadosActaVisitaEEs
+                                                           where c.IdActor == 4
+                                                           select c).Count();
+
+                                            lblcantpad.Text = cantpad.ToString();
+                                            break;
+                                        //Directivos
+                                        case 6:
+                                            int cantdir = (from c in item.AsociadosActaVisitaEEs
+                                                           where c.IdActor == 6
+                                                           select c).Count();
+
+                                            lblcantdir.Text = cantdir.ToString();
+                                            break;
+                                    }
+                                }
+                            }
+
+                            #endregion
+
+                            #endregion
+
+                            #region Seccion Consulta Evaluacion
+                            var coleval = (from ev in db.Evaluacions
+                                           where ev.IdActor == i + 1 && ev.IdIE == Convert.ToInt32(lblidie.Text)
+                                           select new { ev.IdMedicion, ev.EstadoEvaluacion.Estado }).Single();
+
+                            string evalact = coleval.Estado;
+
+                            idmedicion = (int)coleval.IdMedicion;
 
                             switch (i + 1)
                             {
@@ -455,14 +538,62 @@ namespace ESM
                                     break;
 
                             }
+
+
+                            #region Documentos Establecimiento Educativo
+
+                            var docsaee = from deec in db.AsignaDocumentos
+                                          where deec.IdMedicion == idmedicion
+                                          select deec;
+
+                            foreach (var docsitem in docsaee)
+                            {
+                                switch (docsitem.IdDocumento)
+                                {
+                                    //PEI
+                                    case 1:
+                                        lblpei.Text = "Si";
+                                        break;
+                                    //PMI
+                                    case 2:
+                                        lblpmi.Text = "Si";
+                                        break;
+                                    //Manual de Convivencia
+                                    case 3:
+                                        lblmaco.Text = "Si";
+                                        break;
+                                    //Plan de Estudios
+                                    case 4:
+                                        lblplan.Text = "Si";
+                                        break;
+                                    //DPP
+                                    case 9:
+                                        lblproy.Text = "Si";
+                                        break;
+                                    //Otros
+                                    case 10:
+                                        lblotros.Text = "Si";
+                                        break;
+                                    //ActaVisitaEE
+                                    case 11:
+                                        lblactaeecargada.Text = "Si";
+                                        break;
+
+                                }
+                            }
+
+                            #endregion
+
+
+                            #endregion
                         }
-                        catch (Exception exx) { }
+                        catch (Exception) { }
 
 
                     }
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
         }
 
         protected void lknDiliEE_Click(object sender, EventArgs e)
