@@ -163,6 +163,78 @@
                             </ItemTemplate>
                             <HeaderStyle Width="20%" />
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="PEI">
+                            <ItemTemplate>
+                                <asp:Label Text="No" runat="server" ID="lblpei" />
+                            </ItemTemplate>
+                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="PMI">
+                            <ItemTemplate>
+                                <asp:Label Text="No" runat="server" ID="lblpmi" />
+                            </ItemTemplate>
+                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Manual de Convivencia">
+                            <ItemTemplate>
+                                <asp:Label Text="No" runat="server" ID="lblmaco" />
+                            </ItemTemplate>
+                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Plan de Estudios">
+                            <ItemTemplate>
+                                <asp:Label Text="No" runat="server" ID="lblplan" />
+                            </ItemTemplate>
+                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Proyecto Pedagogico">
+                            <ItemTemplate>
+                                <asp:Label Text="No" runat="server" ID="lblproy" />
+                            </ItemTemplate>
+                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Otros">
+                            <ItemTemplate>
+                                <asp:Label Text="No" runat="server" ID="lblotros" />
+                            </ItemTemplate>
+                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Acta Cargada">
+                            <ItemTemplate>
+                                <asp:Label Text="No" runat="server" ID="lblactaeecargada" />
+                            </ItemTemplate>
+                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Directivos Acta">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblcantdir" />
+                            </ItemTemplate>
+                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Estudiantes Acta">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblcantest" />
+                            </ItemTemplate>
+                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Educadores Acta">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblcantedu" />
+                            </ItemTemplate>
+                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Padres Acta">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblcantpad" />
+                            </ItemTemplate>
+                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Profesionales Acta">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblcantpro" />
+                            </ItemTemplate>
+                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Estudiante">
                             <ItemTemplate>
                                 <asp:Label Text="Sin Diligenciar" runat="server" ID="lblevalest" />
