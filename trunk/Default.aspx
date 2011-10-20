@@ -223,7 +223,7 @@
             </td>
             <td>
                 <h3 onclick="window.location='/ReportesMEN.aspx'">
-                    Reportes MEN</h3>
+                    Reportes Consolidados</h3>
                 <br />
                 Visualiza las consultas generadas de acuerdo a la información almacenada.
             </td>
