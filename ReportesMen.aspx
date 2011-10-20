@@ -46,6 +46,10 @@
             <asp:LinkButton ID="lknDiliSE" Text="Diligenciamiento SE" runat="server" OnClick="lknDiliSE_Click" />
             <br />
             -
+            <asp:LinkButton ID="lknDiliEEres" Text="Resumen Diligenciamiento EE" runat="server"
+                OnClick="lknDiliEEres_Click" />
+            <br />
+            -
             <asp:LinkButton ID="lknDiliEE" Text="Diligenciamiento EE" runat="server" OnClick="lknDiliEE_Click" />
         </div>
         <div style="width: 80%; float: right;">
@@ -84,8 +88,8 @@
                     Actualmente no hay elementos en esta tabla.
                 </EmptyDataTemplate>
             </asp:GridView>
-            <div>
-                <asp:GridView runat="server" ID="gvdilise" Width="100%" AutoGenerateColumns="False"
+            <div style="overflow-x: scroll;" id="divse" runat="server" visible="false">
+                <asp:GridView runat="server" ID="gvdilise" Width="1024px" AutoGenerateColumns="False"
                     AllowSorting="True" AllowPaging="True" Font-Size="14px" OnPageIndexChanging="gvdilise_PageIndexChanging">
                     <AlternatingRowStyle CssClass="trblanca" />
                     <Columns>
@@ -100,13 +104,11 @@
                             <ItemTemplate>
                                 <asp:Label Text='No Asignada' runat="server" ID="lblfechavisita" />
                             </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Estado Acta">
                             <ItemTemplate>
                                 <asp:Label Text='Sin Diligenciar' runat="server" ID="lblactaestado" />
                             </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Acta Fecha">
                             <ItemTemplate>
@@ -136,134 +138,211 @@
                     </EmptyDataTemplate>
                 </asp:GridView>
             </div>
-            <asp:Panel ID="pnlgveedili" runat="server" ScrollBars="Horizontal" Width="100%">
+            <asp:Panel ID="pnlgveedili" runat="server" ScrollBars="Horizontal" Visible="false">
                 <asp:GridView runat="server" ID="gvDiliEE" AutoGenerateColumns="False" AllowSorting="True"
-                    AllowPaging="True" Font-Size="14px" OnPageIndexChanging="gvDiliEE_PageIndexChanging">
+                    AllowPaging="True" Width="4000px" Font-Size="14px" OnPageIndexChanging="gvDiliEE_PageIndexChanging">
                     <AlternatingRowStyle CssClass="trblanca" />
                     <Columns>
-                        <asp:BoundField DataField="Nombre" HeaderText="Nombre" HeaderStyle-Width="20%"></asp:BoundField>
-                        <asp:BoundField DataField="Consultor" HeaderText="Consultor">
-                            <HeaderStyle Width="20%" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="CodigoDane" HeaderText="Codigo DANE">
-                            <HeaderStyle Width="20%" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="EENombre" HeaderText="Nombre EE">
-                            <HeaderStyle Width="20%" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="Municipio" HeaderText="Departamento/Municipio">
-                            <HeaderStyle Width="20%" />
-                        </asp:BoundField>
-                        <%--<asp:BoundField DataField="FechaInicio" HeaderText="Fecha Visita">
-                            <HeaderStyle Width="20%" />
-                        </asp:BoundField>--%>
-                        <asp:TemplateField>
+                        <asp:BoundField DataField="Nombre" HeaderText="Nombre SE" HtmlEncode="False"></asp:BoundField>
+                        <asp:BoundField DataField="Consultor" HeaderText="Consultor" HtmlEncode="False"></asp:BoundField>
+                        <asp:BoundField DataField="CodigoDane" HeaderText="Codigo DANE"></asp:BoundField>
+                        <asp:BoundField DataField="EENombre" HeaderText="Nombre EE" HtmlEncode="False"></asp:BoundField>
+                        <asp:BoundField DataField="Municipio" HeaderText="Departamento/Municipio" 
+                            HtmlEncode="False"></asp:BoundField>
+                        <asp:TemplateField HeaderText="Fecha Visita">
                             <ItemTemplate>
-                                <asp:Label Visible="false" Text='<%# Eval("idie") %>' runat="server" ID="lblidie" />
+                                <asp:Label Visible="true" Text='No Asignada' runat="server" ID="lblcita" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="PEI">
                             <ItemTemplate>
-                                <asp:Label Text="No" runat="server" ID="lblpei" />
+                                <asp:Label Text="Sin Diligenciar" runat="server" ID="lblpei" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="PMI">
                             <ItemTemplate>
-                                <asp:Label Text="No" runat="server" ID="lblpmi" />
+                                <asp:Label Text="Sin Diligenciar" runat="server" ID="lblpmi" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Manual de Convivencia">
                             <ItemTemplate>
-                                <asp:Label Text="No" runat="server" ID="lblmaco" />
+                                <asp:Label Text="Sin Diligenciar" runat="server" ID="lblmaco" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Plan de Estudios">
                             <ItemTemplate>
-                                <asp:Label Text="No" runat="server" ID="lblplan" />
+                                <asp:Label Text="Sin Diligenciar" runat="server" ID="lblplan" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Proyecto Pedagogico">
                             <ItemTemplate>
-                                <asp:Label Text="No" runat="server" ID="lblproy" />
+                                <asp:Label Text="Sin Diligenciar" runat="server" ID="lblproy" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Otros">
                             <ItemTemplate>
-                                <asp:Label Text="No" runat="server" ID="lblotros" />
+                                <asp:Label Text="Sin Diligenciar" runat="server" ID="lblotros" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Acta Cargada">
                             <ItemTemplate>
-                                <asp:Label Text="No" runat="server" ID="lblactaeecargada" />
+                                <asp:Label Text="Sin Diligenciar" runat="server" ID="lblactaeecargada" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Directivos Acta">
                             <ItemTemplate>
                                 <asp:Label Text="0" runat="server" ID="lblcantdir" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Estudiantes Acta">
                             <ItemTemplate>
                                 <asp:Label Text="0" runat="server" ID="lblcantest" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Educadores Acta">
                             <ItemTemplate>
                                 <asp:Label Text="0" runat="server" ID="lblcantedu" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Padres Acta">
                             <ItemTemplate>
                                 <asp:Label Text="0" runat="server" ID="lblcantpad" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Profesionales Acta">
                             <ItemTemplate>
                                 <asp:Label Text="0" runat="server" ID="lblcantpro" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Lectura Contexto">
+                            <ItemTemplate>
+                                <asp:Label Text="Sin Diligenciar" runat="server" ID="lblestadoactaee" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Observaciones">
+                            <ItemTemplate>
+                                <asp:Label Text="Ninguna" runat="server" ID="lblobservaciones" />
+                            </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Estudiante">
                             <ItemTemplate>
                                 <asp:Label Text="Sin Diligenciar" runat="server" ID="lblevalest" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Padres">
                             <ItemTemplate>
                                 <asp:Label Text="Sin Diligenciar" runat="server" ID="lblevalpad" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Profesional">
                             <ItemTemplate>
                                 <asp:Label Text="Sin Diligenciar" runat="server" ID="lblevalprof" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Directivos">
                             <ItemTemplate>
                                 <asp:Label Text="Sin Diligenciar" runat="server" ID="lblevaldir" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Educador">
                             <ItemTemplate>
                                 <asp:Label Text="Sin Diligenciar" runat="server" ID="lblevaledu" />
                             </ItemTemplate>
-                            <HeaderStyle Width="20%" />
+                        </asp:TemplateField>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:Label Visible="false" Text='<%# Eval("idie") %>' runat="server" ID="lblidie" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <HeaderStyle CssClass="trheader" />
+                    <RowStyle CssClass="trgris" />
+                    <EmptyDataTemplate>
+                        Actualmente no hay elementos en esta tabla.
+                    </EmptyDataTemplate>
+                </asp:GridView>
+            </asp:Panel>
+            <asp:Panel ID="pnlgveedilires" runat="server" ScrollBars="Horizontal" Visible="false">
+                <asp:GridView runat="server" ID="GvDiliEEres" AutoGenerateColumns="False" AllowSorting="True"
+                    AllowPaging="True" Width="4000px" Font-Size="14px" OnPageIndexChanging="GvDiliEEres_PageIndexChanging">
+                    <AlternatingRowStyle CssClass="trblanca" />
+                    <Columns>
+                        <asp:BoundField DataField="Nombre" HeaderText="Nombre SE"></asp:BoundField>
+                        <asp:BoundField DataField="Consultor" HeaderText="Consultor"></asp:BoundField>
+                        <asp:TemplateField HeaderText="Categoria">
+                            <ItemTemplate>
+                                <asp:Label Visible="true" Text='Sin Diligenciar' runat="server" ID="lblcategoria" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Fecha Visita">
+                            <ItemTemplate>
+                                <asp:Label Visible="true" Text='No Asignada' runat="server" ID="lblcita" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="PEI">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblpei" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="PMI">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblpmi" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Manual de Convivencia">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblmaco" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Plan de Estudios">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblplan" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Proyecto Pedagogico">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblproy" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Otros">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblotros" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Acta Cargada">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblactaeecargada" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Lectura Contexto">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblestadoactaee" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Estudiante">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblevalest" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Padres">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblevalpad" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Profesional">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblevalprof" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Directivos">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblevaldir" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Educador">
+                            <ItemTemplate>
+                                <asp:Label Text="0" runat="server" ID="lblevaledu" />
+                            </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                     <HeaderStyle CssClass="trheader" />

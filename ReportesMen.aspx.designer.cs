@@ -40,6 +40,15 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.LinkButton lknDiliSE;
         
         /// <summary>
+        /// lknDiliEEres control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lknDiliEEres;
+        
+        /// <summary>
         /// lknDiliEE control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.GridView gvAgendaSE;
         
         /// <summary>
+        /// divse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divse;
+        
+        /// <summary>
         /// gvdilise control.
         /// </summary>
         /// <remarks>
@@ -101,5 +119,23 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvDiliEE;
+        
+        /// <summary>
+        /// pnlgveedilires control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlgveedilires;
+        
+        /// <summary>
+        /// GvDiliEEres control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GvDiliEEres;
     }
 }
