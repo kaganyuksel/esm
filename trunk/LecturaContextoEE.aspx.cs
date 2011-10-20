@@ -229,7 +229,7 @@ namespace ESM
 
             objCLecturaContextoEE._2_2_E1_ = Convert.ToInt32(txtE1.Text);
             objCLecturaContextoEE._2_2_E2_ = Convert.ToInt32(txtE2.Text);
-            objCLecturaContextoEE._2_2_E2_ = Convert.ToInt32(txtE3.Text);
+            objCLecturaContextoEE._2_2_E3_ = Convert.ToInt32(txtE3.Text);
             objCLecturaContextoEE._2_2_E4_ = Convert.ToInt32(txtE4.Text);
             objCLecturaContextoEE._2_2_E5_ = Convert.ToInt32(txtE5.Text);
             objCLecturaContextoEE._2_2_E6_ = Convert.ToInt32(txtE6.Text);
