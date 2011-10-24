@@ -26,7 +26,6 @@ namespace ESM
                 {
                     GridQueryExtender.Expressions.Add(new OfTypeExpression(table.EntityType));
                 }
-                ObtenerTema(GridView1);
             }
             else
                 Response.Redirect("/Login.aspx");
@@ -34,21 +33,18 @@ namespace ESM
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+
+            Title = table.DisplayName;
+
+
+            // Deshabilitar varias opciones si la tabla es de solo lectura
+            if (table.IsReadOnly)
             {
-                Title = table.DisplayName;
-
-
-                // Deshabilitar varias opciones si la tabla es de solo lectura
-                if (table.IsReadOnly)
-                {
-                    GridView1.Columns[0].Visible = false;
-                    InsertHyperLink.Visible = false;
-                    GridView1.EnablePersistedSelection = false;
-                }
-
-                ObtenerTema(GridView1);
+                GridView1.Columns[0].Visible = false;
+                InsertHyperLink.Visible = false;
+                GridView1.EnablePersistedSelection = false;
             }
+
 
         }
 
@@ -97,17 +93,6 @@ namespace ESM
         protected void DynamicFilter_FilterChanged(object sender, EventArgs e)
         {
             GridView1.PageIndex = 0;
-            ObtenerTema(GridView1);
-        }
-
-        protected void GridView1_DataBinding(object sender, EventArgs e)
-        {
-            ObtenerTema(GridView1);
-        }
-
-        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            ObtenerTema(GridView1);
         }
 
     }

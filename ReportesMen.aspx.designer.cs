@@ -40,15 +40,6 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.LinkButton lknDiliSE;
         
         /// <summary>
-        /// lknDiliEEres control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lknDiliEEres;
-        
-        /// <summary>
         /// lknDiliEE control.
         /// </summary>
         /// <remarks>
@@ -58,6 +49,15 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.LinkButton lknDiliEE;
         
         /// <summary>
+        /// lknDiliRes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lknDiliRes;
+        
+        /// <summary>
         /// lbltotal control.
         /// </summary>
         /// <remarks>
@@ -65,6 +65,15 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbltotal;
+        
+        /// <summary>
+        /// lknExportExcel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lknExportExcel;
         
         /// <summary>
         /// gvAgendaEE control.
@@ -121,21 +130,12 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.GridView gvDiliEE;
         
         /// <summary>
-        /// pnlgveedilires control.
+        /// gvcopyDiliEE control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlgveedilires;
-        
-        /// <summary>
-        /// GvDiliEEres control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GvDiliEEres;
+        protected global::System.Web.UI.WebControls.GridView gvcopyDiliEE;
     }
 }

@@ -9,11 +9,21 @@ using System.Text;
 using System.Web.UI.HtmlControls;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Data;
+using System.Threading;
+using System.IO;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace ESM
 {
     public partial class ReportesMen : System.Web.UI.Page
     {
+        #region Propiedades Privadas y Publicas
+
+        volatile bool ProcesoFinalizado = false;
+
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.IsAuthenticated)
@@ -58,7 +68,7 @@ namespace ESM
 
             lbltotal.Text = "Total registros: " + total.ToString() + " de " + cantidadse + " = " + result.ToString() + "% -- ";
 
-            Visualizacion(true, false, false, false, false);
+            Visualizacion(true, false, false, false);
         }
 
         protected void lknAgendaEE_Click(object sender, EventArgs e)
@@ -83,19 +93,17 @@ namespace ESM
 
             lbltotal.Text = "Total registros: " + total.ToString() + " de " + cantidadee + " = " + result.ToString() + "% -- ";
 
-            Visualizacion(false, true, false, false, false);
+            Visualizacion(false, true, false, false);
         }
 
-        protected void Visualizacion(bool AgendaSE, bool AgendaEE, bool DiligenSE, bool DiliEE, bool DiliEEres)
+        protected void Visualizacion(bool AgendaSE, bool AgendaEE, bool DiligenSE, bool DiliEE)
         {
             gvAgendaSE.Visible = AgendaSE;
             gvAgendaEE.Visible = AgendaEE;
             gvdilise.Visible = DiligenSE;
             gvDiliEE.Visible = DiliEE;
-            GvDiliEEres.Visible = DiliEEres;
             divse.Visible = DiligenSE;
             pnlgveedili.Visible = DiliEE;
-            pnlgveedilires.Visible = DiliEEres;
         }
 
         protected void gvAgendaSE_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -129,7 +137,7 @@ namespace ESM
                 StringBuilder objsb = new StringBuilder();
                 System.IO.StringWriter sw = new System.IO.StringWriter(objsb);
                 HtmlTextWriter htw = new HtmlTextWriter(sw);
-                Page pagina = new Page();
+                System.Web.UI.Page pagina = new System.Web.UI.Page();
                 var form = new HtmlForm();
                 GridView objgv = new GridView();
                 objgv.EnableViewState = false;
@@ -156,7 +164,48 @@ namespace ESM
 
         }
 
-        protected void Unnamed1_Click(object sender, EventArgs e)
+        protected bool Export(GridView objGridView, string nombre)
+        {
+            try
+            {
+                objGridView.Visible = true;
+                StringBuilder objsb = new StringBuilder();
+                System.IO.StringWriter sw = new System.IO.StringWriter(objsb);
+                HtmlTextWriter htw = new HtmlTextWriter(sw);
+                System.Web.UI.Page pagina = new System.Web.UI.Page();
+                var form = new HtmlForm();
+                pagina.EnableEventValidation = false;
+                pagina.DesignerInitialize();
+                pagina.Controls.Add(form);
+                form.Controls.Add(objGridView);
+                pagina.RenderControl(htw);
+                Response.Clear();
+                Response.Buffer = true;
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + nombre + ".xls");
+                Response.Charset = "UTF-8";
+                Response.ContentEncoding = Encoding.Default;
+                Response.Write(objsb.ToString());
+                Response.End();
+                objGridView.Visible = false;
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        protected void ExportExcel_Click(object sender, EventArgs e)
+        {
+            if (Session["ExportResumen"] != null)
+            {
+                bool resumido = Convert.ToBoolean(Session["ExportResumen"]);
+                StartExport(resumido);
+            }
+            else
+                StartExport();
+        }
+
+        protected void StartExport(bool resumido = false)
         {
             if (gvAgendaEE.Visible)
                 Export(CReportes.ReportAgendaEE(), "AgendaEE");
@@ -169,14 +218,11 @@ namespace ESM
                 Objetos.GridViewExportUtil.Export("Diligenciamiento SE.xls", gvdilise);
 
             }
-            else if (gvDiliEE.Visible)
-            {
-                gvDiliEE.AllowPaging = false;
-                ReportEE();
-                ExcelDoc(gvDiliEE);
-                //Objetos.GridViewExportUtil.Export("Diligenciamiento EE.xls", gvDiliEE);
+            else if (gvDiliEE.Visible && !resumido)
+                Export(gvcopyDiliEE, "Diligenciamiento EE.xls");
 
-            }
+            else if (gvDiliEE.Visible && resumido)
+                ExcelDoc(gvcopyDiliEE);
         }
 
         protected void ReportDiligenciamientoSE()
@@ -376,7 +422,7 @@ namespace ESM
         protected void lknDiliSE_Click(object sender, EventArgs e)
         {
             ReportDiligenciamientoSE();
-            Visualizacion(false, false, true, false, false);
+            Visualizacion(false, false, true, false);
             lbltotal.Visible = false;
         }
 
@@ -404,18 +450,6 @@ namespace ESM
 
         }
 
-        protected void GvDiliEEres_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            try
-            {
-                this.GvDiliEEres.PageIndex = e.NewPageIndex;
-                ReportEEResumido();
-            }
-            catch (Exception) { }
-
-
-        }
-
         protected void ReportEE()
         {
             try
@@ -436,6 +470,9 @@ namespace ESM
 
                 gvDiliEE.DataSource = ee;
                 gvDiliEE.DataBind();
+                gvcopyDiliEE.DataSource = ee;
+                gvcopyDiliEE.DataBind();
+
 
                 for (short j = 0; j < gvDiliEE.Rows.Count; j++)
                 {
@@ -462,6 +499,27 @@ namespace ESM
                     Label lblcita = (Label)gvDiliEE.Rows[j].FindControl("lblcita");
                     Label lblobservaciones = (Label)gvDiliEE.Rows[j].FindControl("lblobservaciones");
 
+                    Label lblidiec = (Label)gvcopyDiliEE.Rows[j].FindControl("lblidie");
+                    Label lblevalestc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblevalest");
+                    Label lblevalpadc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblevalpad");
+                    Label lblevalprofc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblevalprof");
+                    Label lblevaldirc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblevaldir");
+                    Label lblevaleduc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblevaledu");
+                    Label lblcantdirc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblcantdir");
+                    Label lblcantestc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblcantest");
+                    Label lblcantpadc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblcantpad");
+                    Label lblcanteduc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblcantedu");
+                    Label lblcantproc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblcantpro");
+                    Label lblpeic = (Label)gvcopyDiliEE.Rows[j].FindControl("lblpei");
+                    Label lblpmic = (Label)gvcopyDiliEE.Rows[j].FindControl("lblpmi");
+                    Label lblmacoc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblmaco");
+                    Label lblplanc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblplan");
+                    Label lblproyc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblproy");
+                    Label lblotrosc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblotros");
+                    Label lblactaeecargadac = (Label)gvcopyDiliEE.Rows[j].FindControl("lblactaeecargada");
+                    Label lblestadoactaeec = (Label)gvcopyDiliEE.Rows[j].FindControl("lblestadoactaee");
+                    Label lblcitac = (Label)gvcopyDiliEE.Rows[j].FindControl("lblcita");
+                    Label lblobservacionesc = (Label)gvcopyDiliEE.Rows[j].FindControl("lblobservaciones");
 
                     int idmedicion = 0;
                     for (short i = 0; i < 6; i++)
@@ -489,6 +547,7 @@ namespace ESM
                                                            select c).Count();
 
                                             lblcantest.Text = cantest.ToString();
+                                            lblcantestc.Text = cantest.ToString();
 
                                             break;
                                         //Profesional
@@ -498,6 +557,7 @@ namespace ESM
                                                            select c).Count();
 
                                             lblcantpro.Text = cantpro.ToString();
+                                            lblcantproc.Text = cantpro.ToString();
                                             break;
                                         //Educador
                                         case 3:
@@ -506,6 +566,7 @@ namespace ESM
                                                            select c).Count();
 
                                             lblcantedu.Text = cantedu.ToString();
+                                            lblcanteduc.Text = cantedu.ToString();
                                             break;
                                         //Padre de Familia
                                         case 4:
@@ -514,6 +575,7 @@ namespace ESM
                                                            select c).Count();
 
                                             lblcantpad.Text = cantpad.ToString();
+                                            lblcantpadc.Text = cantpad.ToString();
                                             break;
                                         //Directivos
                                         case 6:
@@ -522,6 +584,7 @@ namespace ESM
                                                            select c).Count();
 
                                             lblcantdir.Text = cantdir.ToString();
+                                            lblcantdirc.Text = cantdir.ToString();
                                             break;
                                     }
                                 }
@@ -544,18 +607,23 @@ namespace ESM
                             {
                                 case 1:
                                     lblevalest.Text = evalact;
+                                    lblevalestc.Text = evalact;
                                     break;
                                 case 2:
                                     lblevalprof.Text = evalact;
+                                    lblevalprofc.Text = evalact;
                                     break;
                                 case 3:
                                     lblevaledu.Text = evalact;
+                                    lblevaleduc.Text = evalact;
                                     break;
                                 case 4:
                                     lblevalpad.Text = evalact;
+                                    lblevalpadc.Text = evalact;
                                     break;
                                 case 6:
                                     lblevaldir.Text = evalact;
+                                    lblevaldirc.Text = evalact;
                                     break;
 
                             }
@@ -574,30 +642,37 @@ namespace ESM
                                     //PEI
                                     case 1:
                                         lblpei.Text = "Diligenciado";
+                                        lblpeic.Text = "Diligenciado";
                                         break;
                                     //PMI
                                     case 2:
                                         lblpmi.Text = "Diligenciado";
+                                        lblpmic.Text = "Diligenciado";
                                         break;
                                     //Manual de Convivencia
                                     case 3:
                                         lblmaco.Text = "Diligenciado";
+                                        lblmacoc.Text = "Diligenciado";
                                         break;
                                     //Plan de Estudios
                                     case 4:
                                         lblplan.Text = "Diligenciado";
+                                        lblplanc.Text = "Diligenciado";
                                         break;
                                     //DPP
                                     case 9:
                                         lblproy.Text = "Diligenciado";
+                                        lblproyc.Text = "Diligenciado";
                                         break;
                                     //Otros
                                     case 10:
                                         lblotros.Text = "Diligenciado";
+                                        lblotrosc.Text = "Diligenciado";
                                         break;
                                     //ActaVisitaEE
                                     case 11:
                                         lblactaeecargada.Text = "Diligenciado";
+                                        lblactaeecargadac.Text = "Diligenciado";
                                         break;
 
                                 }
@@ -727,9 +802,16 @@ namespace ESM
 
                                 //Validacion General para acta de establecimiento educativo
                                 if (estadolcee)
+                                {
                                     lblestadoactaee.Text = "Diligenciado";
+                                    lblestadoactaeec.Text = "Diligenciado";
+
+                                }
                                 else
+                                {
                                     lblestadoactaee.Text = "Parcial";
+                                    lblestadoactaeec.Text = "Parcial";
+                                }
 
                             }
 
@@ -750,196 +832,32 @@ namespace ESM
                             if (objCita != null)
                             {
                                 lblcita.Text = objCita.FechaInicio.ToShortDateString();
+                                lblcitac.Text = objCita.FechaInicio.ToShortDateString();
                             }
                             #endregion
 
                         }
                         catch (Exception) { }
-
-
                     }
-
-
                 }
             }
-            catch (Exception) { }
-        }
-
-        protected void ReportEEResumido()
-        {
-            try
+            catch (Exception)
             {
-                ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
-
-                var ee = from eec in db.Secretaria_Educacions
-                         select new
-                         {
-                             eec.Nombre,
-                             Consultor = eec.Consultore.Nombre,
-                             eec.Establecimiento_Educativos
-                         };
-
-                GvDiliEEres.DataSource = ee;
-                GvDiliEEres.DataBind();
-                int Contador = 0;
-
-
-
-                foreach (var eeitem in ee)
-                {
-                    Label lblevalest = (Label)GvDiliEEres.Rows[Contador].FindControl("lblevalest");
-                    Label lblevalpad = (Label)GvDiliEEres.Rows[Contador].FindControl("lblevalpad");
-                    Label lblevalprof = (Label)GvDiliEEres.Rows[Contador].FindControl("lblevalprof");
-                    Label lblevaldir = (Label)GvDiliEEres.Rows[Contador].FindControl("lblevaldir");
-                    Label lblevaledu = (Label)GvDiliEEres.Rows[Contador].FindControl("lblevaledu");
-                    Label lblpei = (Label)GvDiliEEres.Rows[Contador].FindControl("lblpei");
-                    Label lblpmi = (Label)GvDiliEEres.Rows[Contador].FindControl("lblpmi");
-                    Label lblmaco = (Label)GvDiliEEres.Rows[Contador].FindControl("lblmaco");
-                    Label lblplan = (Label)GvDiliEEres.Rows[Contador].FindControl("lblplan");
-                    Label lblproy = (Label)GvDiliEEres.Rows[Contador].FindControl("lblproy");
-                    Label lblotros = (Label)GvDiliEEres.Rows[Contador].FindControl("lblotros");
-                    Label lblactaeecargada = (Label)GvDiliEEres.Rows[Contador].FindControl("lblactaeecargada");
-
-                    int totalpei = 0;
-                    int totalpmi = 0;
-                    int totalmaco = 0;
-                    int totalproy = 0;
-                    int totalplan = 0;
-                    int totalotros = 0;
-                    int totalactas = 0;
-
-                    foreach (var eesingleitem in eeitem.Establecimiento_Educativos)
-                    {
-                        int idmedicion = 0;
-
-                        for (short i = 0; i < 6; i++)
-                        {
-                            try
-                            {
-                                #region Seccion Consulta Evaluacion
-                                var coleval = (from ev in db.Evaluacions
-                                               where ev.IdActor == i + 1 && ev.IdIE == eesingleitem.IdIE
-                                               select new { ev.IdMedicion, ev.EstadoEvaluacion.Estado }).Single();
-
-                                string evalact = coleval.Estado;
-
-                                idmedicion = (int)coleval.IdMedicion;
-
-                                //switch (i + 1)
-                                //{
-                                //    case 1:
-                                //        lblevalest.Text = evalact;
-                                //        break;
-                                //    case 2:
-                                //        lblevalprof.Text = evalact;
-                                //        break;
-                                //    case 3:
-                                //        lblevaledu.Text = evalact;
-                                //        break;
-                                //    case 4:
-                                //        lblevalpad.Text = evalact;
-                                //        break;
-                                //    case 6:
-                                //        lblevaldir.Text = evalact;
-                                //        break;
-
-                                //}
-                                #endregion
-
-                            }
-                            catch (Exception) { }
-
-                        }
-
-                        #region Documentos Establecimiento Educativo
-
-                        var docsaee = from deec in db.AsignaDocumentos
-                                      where deec.IdMedicion == idmedicion
-                                      select deec;
-
-                        totalpei = totalpei + (from docsee in docsaee
-                                               where docsee.IdDocumento == 1
-                                               select docsee).Count();
-
-                        totalpmi = totalpmi + (from docsee in docsaee
-                                               where docsee.IdDocumento == 2
-                                               select docsee).Count();
-
-                        totalmaco = totalmaco + (from docsee in docsaee
-                                                 where docsee.IdDocumento == 3
-                                                 select docsee).Count();
-
-                        totalplan = totalplan + (from docsee in docsaee
-                                                 where docsee.IdDocumento == 4
-                                                 select docsee).Count();
-
-                        totalproy = totalproy + (from docsee in docsaee
-                                                 where docsee.IdDocumento == 9
-                                                 select docsee).Count();
-
-                        totalotros = totalotros + (from docsee in docsaee
-                                                   where docsee.IdDocumento == 10
-                                                   select docsee).Count();
-
-                        totalactas = totalactas + (from docsee in docsaee
-                                                   where docsee.IdDocumento == 11
-                                                   select docsee).Count();
-
-
-                        #endregion
-
-                        #region Seccion Consulta Lectura Contexto EE
-                        ESM.Model.LecturaContextoEE lcee = null;
-                        try
-                        {
-                            lcee = (from lceec in db.LecturaContextoEEs
-                                    where lceec.IdIE == eesingleitem.IdIE
-                                    select lceec).Single();
-                        }
-                        catch (Exception) { lcee = null; }
-
-
-
-                        if (lcee != null)
-                        {
-
-                        }
-
-
-                        #endregion
-                    }
-
-                    lblpei.Text = totalpei.ToString();
-                    lblpmi.Text = totalpmi.ToString();
-                    lblplan.Text = totalplan.ToString();
-                    lblproy.Text = totalproy.ToString();
-                    lblmaco.Text = totalmaco.ToString();
-                    lblotros.Text = totalotros.ToString();
-                    lblactaeecargada.Text = totalactas.ToString();
-
-                    Contador++;
-                }
-
+                ProcesoFinalizado = false;
             }
-            catch (Exception) { }
         }
 
         protected void lknDiliEE_Click(object sender, EventArgs e)
         {
+            Session.Remove("ExportResumen");
             ReportEE();
-            Visualizacion(false, false, false, true, false);
-        }
-
-        protected void lknDiliEEres_Click(object sender, EventArgs e)
-        {
-
-            Visualizacion(false, false, false, false, true);
+            Visualizacion(false, false, false, true);
         }
 
         protected void ExcelDoc(GridView objGridView = null)
         {
             var xls = new Excel.Application();
-            var libro = xls.Workbooks.Open(@"E:\ESM\Excel\Diligenciamiento_EE_v01.xls");
+            var libro = xls.Workbooks.Open(Server.MapPath("/Excel/Diligenciamiento_EE_v01.xls"));
             var hoja = xls.Worksheets[1];
 
             #region Carga de Archivo
@@ -1047,9 +965,169 @@ namespace ESM
 
             #endregion
 
-            xls.ActiveWorkbook.SaveCopyAs(@"E:\ESM\Excel\Nuevo"+ DateTime.Now.ToString("yyMMdd") +".xlsx");
-
+            string filename = "/Excel/Diligenciamiento_EE_" + DateTime.Now.ToString("yyMMdd") + ".xls";
+            string serverpath = Server.MapPath(filename);
+            if (!File.Exists(filename))
+            {
+                xls.ActiveWorkbook.SaveCopyAs(serverpath);
+                if (File.Exists(serverpath))
+                    Response.Redirect(filename);
+            }
+            else
+            {
+                File.Delete(serverpath);
+                xls.ActiveWorkbook.SaveCopyAs(serverpath);
+                if (File.Exists(serverpath))
+                    Response.Redirect(filename);
+            }
 
         }
+
+        protected void lknDiliRes_Click(object sender, EventArgs e)
+        {
+            ReportEE();
+            Visualizacion(false, false, false, true);
+            Session.Add("ExportResumen", true);
+        }
+
+        #region Metodo Excel Open XML
+        //protected void OpenXmlExcelDoc(GridView objGridView = null)
+        //{
+        //    string filenameserver = Server.MapPath("/Excel/Diligenciamiento_EE_v01.xls");
+
+        //    SpreadsheetDocument document = SpreadsheetDocument.Open(filenameserver, true);
+        //    //var xls = new Excel.Application();
+        //    var libro = document.WorkbookPart.Workbook;
+        //    //var libro = xls.Workbooks.Open(Server.MapPath("/Excel/Diligenciamiento_EE_v01.xls"));
+        //    var hoja = (WorksheetPart)document.WorkbookPart.GetPartById("Diligenciamiento EE");
+        //    //var hoja = xls.Worksheets[1];
+
+        //    Cell cell = (Cell)hoja.Parts;
+
+        //    #region Carga de Archivo
+        //    for (int i = 0; i < objGridView.Columns.Count; i++)
+        //    {
+        //        cell.InnerText = objGridView.Columns[i].HeaderText.ToString();
+
+        //        //hoja.Cells[1, i + 1] = objGridView.Columns[i].HeaderText;
+
+        //    }
+
+
+        //    //for (int i = 0; i < objGridView.Columns.Count; i++)
+        //    //{
+        //    //    for (int j = 0; j < objGridView.Rows.Count; j++)
+        //    //    {
+        //    //        if (i < 5)
+        //    //            hoja.Cells[j + 2, i + 1] = objGridView.Rows[j].Cells[i].Text.ToString();
+
+        //    //        switch (i)
+        //    //        {
+        //    //            case 5:
+        //    //                Label lblcita = (Label)objGridView.Rows[j].FindControl("lblcita");
+        //    //                hoja.Cells[j + 2, i + 1] = lblcita.Text;
+        //    //                break;
+        //    //            case 6:
+        //    //                Label lblpei = (Label)objGridView.Rows[j].FindControl("lblpei");
+        //    //                hoja.Cells[j + 2, i + 1] = lblpei.Text;
+        //    //                break;
+        //    //            case 7:
+        //    //                Label lblpmi = (Label)objGridView.Rows[j].FindControl("lblpmi");
+        //    //                hoja.Cells[j + 2, i + 1] = lblpmi.Text;
+        //    //                break;
+        //    //            case 8:
+        //    //                Label lblmaco = (Label)objGridView.Rows[j].FindControl("lblmaco");
+        //    //                hoja.Cells[j + 2, i + 1] = lblmaco.Text;
+        //    //                break;
+        //    //            case 9:
+        //    //                Label lblplan = (Label)objGridView.Rows[j].FindControl("lblplan");
+        //    //                hoja.Cells[j + 2, i + 1] = lblplan.Text;
+        //    //                break;
+        //    //            case 10:
+        //    //                Label lblproy = (Label)objGridView.Rows[j].FindControl("lblproy");
+        //    //                hoja.Cells[j + 2, i + 1] = lblproy.Text;
+        //    //                break;
+        //    //            case 11:
+        //    //                Label lblotros = (Label)objGridView.Rows[j].FindControl("lblotros");
+        //    //                hoja.Cells[j + 2, i + 1] = lblotros.Text;
+        //    //                break;
+        //    //            case 12:
+        //    //                Label lblactaeecargada = (Label)objGridView.Rows[j].FindControl("lblactaeecargada");
+        //    //                hoja.Cells[j + 2, i + 1] = lblactaeecargada.Text;
+        //    //                break;
+        //    //            case 13:
+        //    //                Label lblcantdir = (Label)objGridView.Rows[j].FindControl("lblcantdir");
+        //    //                hoja.Cells[j + 2, i + 1] = lblcantdir.Text;
+        //    //                break;
+        //    //            case 14:
+        //    //                Label lblcantest = (Label)objGridView.Rows[j].FindControl("lblcantest");
+        //    //                hoja.Cells[j + 2, i + 1] = lblcantest.Text;
+        //    //                break;
+        //    //            case 15:
+        //    //                Label lblcantedu = (Label)objGridView.Rows[j].FindControl("lblcantedu");
+        //    //                hoja.Cells[j + 2, i + 1] = lblcantedu.Text;
+        //    //                break;
+        //    //            case 16:
+        //    //                Label lblcantpad = (Label)objGridView.Rows[j].FindControl("lblcantpad");
+        //    //                hoja.Cells[j + 2, i + 1] = lblcantpad.Text;
+        //    //                break;
+        //    //            case 17:
+        //    //                Label lblcantpro = (Label)objGridView.Rows[j].FindControl("lblcantpro");
+        //    //                hoja.Cells[j + 2, i + 1] = lblcantpro.Text;
+        //    //                break;
+        //    //            case 18:
+        //    //                Label lblestadoactaee = (Label)objGridView.Rows[j].FindControl("lblestadoactaee");
+        //    //                hoja.Cells[j + 2, i + 1] = lblestadoactaee.Text;
+        //    //                break;
+        //    //            case 19:
+        //    //                Label lblobservaciones = (Label)objGridView.Rows[j].FindControl("lblobservaciones");
+        //    //                hoja.Cells[j + 2, i + 1] = lblobservaciones.Text;
+        //    //                break;
+        //    //            case 20:
+        //    //                Label lblevalest = (Label)objGridView.Rows[j].FindControl("lblevalest");
+        //    //                hoja.Cells[j + 2, i + 1] = lblevalest.Text;
+        //    //                break;
+        //    //            case 21:
+        //    //                Label lblevalpad = (Label)objGridView.Rows[j].FindControl("lblevalpad");
+        //    //                hoja.Cells[j + 2, i + 1] = lblevalpad.Text;
+        //    //                break;
+        //    //            case 22:
+        //    //                Label lblevalprof = (Label)objGridView.Rows[j].FindControl("lblevalprof");
+        //    //                hoja.Cells[j + 2, i + 1] = lblevalprof.Text;
+        //    //                break;
+        //    //            case 23:
+        //    //                Label lblevaldir = (Label)objGridView.Rows[j].FindControl("lblevaldir");
+        //    //                hoja.Cells[j + 2, i + 1] = lblevaldir.Text;
+        //    //                break;
+        //    //            case 24:
+        //    //                Label lblevaledu = (Label)objGridView.Rows[j].FindControl("lblevaledu");
+        //    //                hoja.Cells[j + 2, i + 1] = lblevaledu.Text;
+        //    //                break;
+        //    //        }
+
+
+        //    //    }
+        //    //}
+
+        //    #endregion
+
+        //    string filename = "/Excel/Diligenciamiento_EE_" + DateTime.Now.ToString("yyMMdd") + ".xls";
+        //    string serverpath = Server.MapPath(filename);
+        //    if (!File.Exists(filename))
+        //    {
+        //        xls.ActiveWorkbook.SaveCopyAs(serverpath);
+        //        if (File.Exists(serverpath))
+        //            Response.Redirect(filename);
+        //    }
+        //    else
+        //    {
+        //        File.Delete(serverpath);
+        //        xls.ActiveWorkbook.SaveCopyAs(serverpath);
+        //        if (File.Exists(serverpath))
+        //            Response.Redirect(filename);
+        //    }
+
+        //}
+        #endregion
     }
 }

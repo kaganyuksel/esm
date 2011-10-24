@@ -52,8 +52,8 @@
                 <ul>
                     <li onclick="window.location = '/Default.aspx';">Inicio</li>
                     <li onclick="window.location = '/AyudaPreguntas.aspx';">Preguntas</li>
-                    <li onclick="window.location = '/MenuEvaluacion.aspx';">Evaluación</li>
-                    <li>Consolidado</li>
+                    <li onclick="window.location = '/MenuEvaluacion.aspx';">Recursos</li>
+                    <%--<li>Consolidado</li>--%>
                 </ul>
             </section>
             Usuario:
@@ -105,6 +105,16 @@
         </form>
         <div class="footer" style="border: 1px solid #dddddd; clear: both;">
             <table cellpadding="80" cellspacing="30" style="margin: 0 auto; width: 100px;">
+                <tr style="text-align: center;">
+                    <td colspan="5">
+                        <a href="http://www.mggroup.com.co" target="_blank" style="text-decoration: none;
+                            color: #000000; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
+                            <p style="font-size: 9px;">
+                                <b>Desarrollado por <span style="color: #ED9200; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
+                                    MGGroup Ltda</span></b></p>
+                        </a>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <img src="/Icons/EducalidadFooter.png" height="80px" alt="Educacion de Calidad" />

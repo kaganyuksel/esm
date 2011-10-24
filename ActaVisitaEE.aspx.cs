@@ -497,10 +497,32 @@ namespace ESM
 
         protected void gvResultados_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            this.gvResultados.PageIndex = e.NewPageIndex;
-            int idconsultor = Convert.ToInt32(Session["idcon"]);
-            gvResultados.DataSource = CEE.ObtenerEEs(idconsultor);
-            gvResultados.DataBind();
+            try
+            {
+                this.gvResultados.PageIndex = e.NewPageIndex;
+                if (Session["idusuario"] != null)
+                {
+                    int idusuario = Convert.ToInt32(Session["idusuario"]);
+                    string rol = _objCRoles.ObtenerRol(idusuario);
+                    if (rol == "Administrador")
+                    {
+                        gvResultados.DataSourceID = "ldsies";
+                        gvResultados.DataBind();
+                        ObtenerTema(gvResultados);
+
+                    }
+                    else if (rol == "Consultor")
+                    {
+                        Session.Add("idcon", _objCRoles.IdConsultor);
+                        gvResultados.DataSource = CEE.ObtenerEEs(_objCRoles.IdConsultor);
+                        gvResultados.DataBind();
+                        ObtenerTema(gvResultados);
+
+                    }
+                }
+            }
+            catch (Exception) { }
+
         }
     }
 }

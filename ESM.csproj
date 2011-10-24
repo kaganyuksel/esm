@@ -47,6 +47,10 @@
     <Reference Include="Artem.GoogleMap, Version=4.1.0.0, Culture=neutral, PublicKeyToken=fc8d6190a3aeb01c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="ExcelPackage">
+      <HintPath>..\Complementos\ExcelPackageBinary\ExcelPackage.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -74,6 +78,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActaVisitaEE.aspx.cs">
@@ -200,12 +205,20 @@
     <Compile Include="Objetos\CReportes.cs" />
     <Compile Include="Objetos\GridViewExportUtil.cs" />
     <Compile Include="Objetos\LecturaContextoSE.cs" />
+    <Compile Include="Objetos\CSistematizacion.cs" />
     <Compile Include="ReportesMen.aspx.cs">
       <DependentUpon>ReportesMen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ReportesMen.aspx.designer.cs">
       <DependentUpon>ReportesMen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sistematizacion.aspx.cs">
+      <DependentUpon>Sistematizacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sistematizacion.aspx.designer.cs">
+      <DependentUpon>Sistematizacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -442,6 +455,7 @@
     <Content Include="Scripts\jquery-ui-1.8.15.custom.min.js" />
     <Content Include="Scripts\ScrollTo\jquery.scrollTo-min.js" />
     <Content Include="Scripts\ScrollTo\jquery.scrollTo.js" />
+    <Content Include="Sistematizacion.aspx" />
     <Content Include="Site.css" />
     <Compile Include="Model\ESMBD.designer.cs">
       <AutoGen>True</AutoGen>

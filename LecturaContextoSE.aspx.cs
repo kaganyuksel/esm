@@ -272,18 +272,18 @@ namespace ESM
                               where lc.IdMedicion == idmedicion
                               select lc;
 
-                    if (lcm.Count() != 0)
+                    //if (lcm.Count() != 0)
+                    //{
+                    if (_objLecturaContextoSECRE.Almacenar(idmedicion))
                     {
-                        if (_objLecturaContextoSECRE.Almacenar(idmedicion))
-                        {
-                            Session.Add("idlectura", _objLecturaContextoSECRE.IdLectura);
-                            Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo satisfactoriamente.');</script>");
-                        }
-                        else
-                            Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo sin exito.');</script>");
+                        Session.Add("idlectura", _objLecturaContextoSECRE.IdLectura);
+                        Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo satisfactoriamente.');</script>");
                     }
                     else
-                        Response.Write("<script>alert('Ya existe un instrumento de lectura de contexto para la secretaría de educación seleccionada.');</script>");
+                        Response.Write("<script>alert('El proceso de almacenamiento para Lectura de Contexto Finalizo sin exito.');</script>");
+                    //}
+                    //else
+                    //    Response.Write("<script>alert('Ya existe un instrumento de lectura de contexto para la secretaría de educación seleccionada.');</script>");
 
                 }
                 else if (Session["idlectura"] != null)

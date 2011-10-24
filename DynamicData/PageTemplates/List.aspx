@@ -56,11 +56,10 @@
                         width: 100px;
                     }
                 </style>
-                <div style=" width:100%; overflow: scroll;">
+                <div style="width: 100%; overflow-x: scroll;">
                     <asp:GridView ID="GridView1" runat="server" DataSourceID="GridDataSource" EnablePersistedSelection="true"
-                        AllowPaging="True" CssClass="gridview" AllowSorting="True" 
-                        CellPadding="10" OnDataBinding="GridView1_DataBinding" 
-                        onpageindexchanging="GridView1_PageIndexChanging">
+                        AllowPaging="True" CssClass="gridview" AllowSorting="True" CellPadding="10">
+                        <AlternatingRowStyle CssClass="trblanca" />
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
@@ -70,6 +69,7 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
+                        <HeaderStyle CssClass="trheader" />
                         <PagerStyle CssClass="DDFooter" />
                         <PagerTemplate>
                             <asp:GridViewPager runat="server" />
@@ -77,6 +77,7 @@
                         <EmptyDataTemplate>
                             Actualmente no hay elementos en esta tabla.
                         </EmptyDataTemplate>
+                        <RowStyle CssClass="trgris" />
                     </asp:GridView>
                 </div>
                 <asp:LinqDataSource ID="GridDataSource" runat="server" EnableDelete="true" />

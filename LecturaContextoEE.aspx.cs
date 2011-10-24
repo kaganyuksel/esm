@@ -50,7 +50,7 @@ namespace ESM
                 }
             }
             else
-                Response.Write("/Login.aspx");
+                Response.Redirect("/Login.aspx");
         }
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
@@ -674,26 +674,30 @@ namespace ESM
 
         protected void gvResultados_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            this.gvResultados.PageIndex = e.NewPageIndex;
-            CRoles objCRoles = new CRoles();
-
-            int idusuario = Convert.ToInt32(Session["idusuario"]);
-            string rol = objCRoles.ObtenerRol(idusuario);
-
-
-            if (rol == "Administrador")
+            try
             {
-                /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
-                gvResultados.DataSourceID = "ldsies";
-            }
-            else if (rol == "Consultor")
-            {
-                gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
-                gvResultados.DataBind();
-            }
+                this.gvResultados.PageIndex = e.NewPageIndex;
+                CRoles objCRoles = new CRoles();
 
-            ObtenerTema(gvResultados);
+                int idusuario = Convert.ToInt32(Session["idusuario"]);
+                string rol = objCRoles.ObtenerRol(idusuario);
 
+
+                if (rol == "Administrador")
+                {
+                    /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
+                    gvResultados.DataSourceID = "ldsies";
+                }
+                else if (rol == "Consultor")
+                {
+                    gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
+                    gvResultados.DataBind();
+                }
+
+                ObtenerTema(gvResultados);
+
+            }
+            catch (Exception) { }
 
 
         }

@@ -78,11 +78,11 @@
         </tr>
         <tr>
             <td>
-                <a href="/Establecimiento_Educativo/list.aspx">
-                    <img src="/Icons/Tutorial.png" alt="Institución Educativa" /></a>
+                <a href="/Establecimiento_Educativos/list.aspx">
+                    <img src="/Icons/Tutorial.png" alt="Establecimiento Educativo" /></a>
             </td>
             <td class="td">
-                <h3 onclick="window.location='/Establecimiento_Educativo/list.aspx'">
+                <h3 onclick="window.location='/Establecimiento_Educativos/list.aspx'">
                     Establecimiento Educativo</h3>
                 <br />
                 Almacena la información de los establecimientos educativos administrando cada una
@@ -201,6 +201,15 @@
     </table>
     <table id="MEN" runat="server" visible="false" class="menuprincipalbyconfiguracion"
         cellspacing="10">
+        <tr class="th">
+            <td>
+                <img src="/Icons/Search.png" alt="Módulo de Administración y Configuración">
+            </td>
+            <td colspan="3">
+                <h1>
+                    Módulo Consulta de Información</h1>
+            </td>
+        </tr>
         <tr>
             <td style="width: 48px;">
                 <a href="/AyudaPreguntas.aspx">
@@ -213,10 +222,6 @@
                 Visualiza las preguntas almacendas por componente y asigna una descripción para
                 las mismas.
             </td>
-            <td class="td">
-            </td>
-        </tr>
-        <tr>
             <td style="width: 48px;">
                 <a href="/ReportesMEN.aspx">
                     <img height="48px" src="/Icons/Stats.png" alt="ReportesMEN" /></a>
@@ -227,8 +232,8 @@
                 <br />
                 Visualiza las consultas generadas de acuerdo a la información almacenada.
             </td>
-            <td class="td">
-            </td>
+        </tr>
+        <tr>
         </tr>
     </table>
     <br />

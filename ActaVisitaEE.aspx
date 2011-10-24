@@ -104,7 +104,7 @@
                 <RowStyle CssClass="trgris"></RowStyle>
             </asp:GridView>
             <asp:LinqDataSource ID="ldsies" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
-                EntityTypeName="" TableName="Establecimiento_Educativo" Select="new (IdIE, CodigoDane, Nombre, Telefono, Municipio, Rector)">
+                EntityTypeName="" TableName="Establecimiento_Educativos">
             </asp:LinqDataSource>
         </div>
         <div id="ModMediciones" runat="server" visible="false">

@@ -277,10 +277,12 @@
                         CssClass="gvResultados" RowStyle-CssClass="td" HeaderStyle-CssClass="th" CellPadding="6"
                         AutoGenerateColumns="false" OnSelectedIndexChanged="gvResultados_SelectedIndexChanged"
                         OnPageIndexChanging="gvResultados_PageIndexChanging">
-                        <HeaderStyle CssClass="trheader" />
+                        <AlternatingRowStyle CssClass="trblanca" />
                         <Columns>
                             <asp:CommandField SelectText="<img id='imgEvaluar'  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />"
-                                ShowSelectButton="True" ControlStyle-CssClass="a" />
+                                ShowSelectButton="True" ControlStyle-CssClass="a" >
+                            <ControlStyle CssClass="a" />
+                            </asp:CommandField>
                             <asp:BoundField DataField="CodigoDane" HeaderText="Cod. DANE" />
                             <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                             <asp:BoundField DataField="Municipio" HeaderText="Municipio" />
@@ -291,7 +293,7 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
-                        <HeaderStyle CssClass="th"></HeaderStyle>
+                        <HeaderStyle CssClass="trheader"></HeaderStyle>
                         <PagerStyle CssClass="DDFooter" />
                         <PagerTemplate>
                             <asp:GridViewPager ID="GridViewPager1" runat="server" />
@@ -299,10 +301,10 @@
                         <EmptyDataTemplate>
                             Actualmente no hay elementos en esta tabla.
                         </EmptyDataTemplate>
-                        <RowStyle CssClass="td"></RowStyle>
+                        <RowStyle CssClass="trgris"></RowStyle>
                     </asp:GridView>
                     <asp:LinqDataSource ID="ldsies" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
-                        EntityTypeName="" TableName="Establecimiento_Educativo" Select="new (IdIE, CodigoDane, Nombre, Telefono, Municipio, Rector)">
+                        EntityTypeName="" TableName="Establecimiento_Educativos">
                     </asp:LinqDataSource>
                 </div>
                 <div id="ModMediciones" runat="server" visible="false">
