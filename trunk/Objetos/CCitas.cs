@@ -18,11 +18,22 @@ namespace ESM.Objetos
         {
             try
             {
-                var vcitas = from c in dbAgenda.Citas
-                             where c.Secretaria_Educacion.IdConsultor == idconsultor || c.Establecimiento_Educativo.Secretaria_Educacion.IdConsultor == idconsultor
-                             select c;
+                if (idconsultor != 0)
+                {
+                    var vcitas = from c in dbAgenda.Citas
+                                 where c.Secretaria_Educacion.IdConsultor == idconsultor || c.Establecimiento_Educativo.Secretaria_Educacion.IdConsultor == idconsultor
+                                 select c;
+                    return vcitas.ToList();
+                }
+                else
+                {
+                    var vcitas = from c in dbAgenda.Citas
+                                 select c;
+                    return vcitas.ToList();
+                }
 
-                return vcitas.ToList();
+
+
             }
             catch (Exception) { return null; }
         }

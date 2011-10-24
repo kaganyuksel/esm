@@ -22,7 +22,9 @@ namespace ESM
                     Response.Write(Consulta(idconsultor));
                 }
                 else
-                    Response.Write("La información proporcionada no es correcta.");
+                {
+                    Response.Write(Consulta(0));
+                }
 
             }
             catch (Exception) { Response.Write(""); }
