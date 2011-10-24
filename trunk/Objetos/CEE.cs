@@ -14,15 +14,26 @@ namespace ESM.Objetos
 
         #endregion
 
-        public static IQueryable<Establecimiento_Educativo> ObtenerEEs(int idconsultor)
+        public static IQueryable<Establecimiento_Educativo> ObtenerEEs(int idconsultor, bool sistematizacion = false)
         {
             try
             {
-                var cee = from ee in _db.Establecimiento_Educativos
-                          where ee.Secretaria_Educacion.IdConsultor == idconsultor && ee.Estado == true
-                          select ee;
+                IQueryable<ESM.Model.Establecimiento_Educativo> cee = null;
 
-                return cee;
+                cee = from ee in _db.Establecimiento_Educativos
+                      where ee.Secretaria_Educacion.IdConsultor == idconsultor && ee.Estado == true
+                      select ee;
+
+                if (sistematizacion)
+                {
+                    var csistematizacion = from s in cee
+                                           where s.Sistematizacion == true
+                                           select s;
+
+                    return csistematizacion;
+                }
+                else
+                    return cee;
             }
             catch (Exception) { return null; }
         }
@@ -54,13 +65,28 @@ namespace ESM.Objetos
             catch (Exception) { return null; }
         }
 
+        public static IQueryable<ESM.Model.Sistematizacion> ObtenerMedicionesEESis(int idee)
+        {
+            try
+            {
+                var csistematizacion = (from m in _db.Sistematizacions
+                                        where m.IdEE == idee
+                                        select m).Take(1);
+
+                return csistematizacion;
+
+            }
+            catch (Exception) { return null; }
+
+        }
+
         public static int CrearMedicionLC(DateTime fecha)
         {
             try
             {
                 Medicione objMediciones = new Medicione
                 {
-                    FechaMedicion = fecha
+                    FechaMedicion = fecha.AddHours(2)
                 };
 
                 _db.Mediciones.InsertOnSubmit(objMediciones);

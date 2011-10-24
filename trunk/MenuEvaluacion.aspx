@@ -26,7 +26,35 @@
         <br />
         <br />
         <br />
-        <table class="menuevaluacion" style="width: 80%; margin: 0 auto; border: 0px; margin: 0 auto;">
+        <table class="menuevaluacion" style="width: 50%; margin: 0 auto; border: 0px; margin: 0 auto;">
+            <tr>
+                <td style="text-align: left; vertical-align: middle;">
+                    <h1>
+                        <img height="48px" width="48px" src="Icons/Help.png" alt="Documentación" />
+                        Documentación</h1>
+                </td>
+                <td style="padding-left: 30px;">
+                    <br />
+                    <img src="Icons/Address_Book.png" width="24px" alt="docs" />
+                    <a href="/Documentacion/ESM_lectura_de_contexto _EE_v05.xls" target="_blank">Lectura
+                        Contexto SE</a>
+                    <br />
+                    <img src="Icons/Address_Book.png" width="24px" alt="docs" />
+                    <a href="/Documentacion/ESM_lectura_de_contexto _SE_v05.xls" target="_blank">Lectura
+                        Contexto EE</a>
+                    <br />
+                    <img src="Icons/Address_Book.png" width="24px" alt="docs" />
+                    <a href="/Documentacion/Evaluación_PDF_v01.rar" target="_blank">Formatos Evaluación
+                        EE</a>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <br />
+        <br />
+        <table class="menuevaluacion menuprincipalbyconfiguracion" style="margin: 0 auto;
+            border: 0px; margin: 0 auto;">
             <tr>
                 <td colspan="4" style="text-align: center;">
                     <h1>
@@ -69,7 +97,7 @@
         <br />
         <br />
         <br />
-        <table class="menuevaluacion" style="width: 80%; margin: 0 auto;">
+        <table class="menuevaluacion menuprincipalbyconfiguracion" style="margin: 0 auto;">
             <tr>
                 <td colspan="4" style="text-align: center;">
                     <h1>
@@ -109,7 +137,20 @@
                         <a href="/ActaVisitaEE.aspx">Acta de Visita</a></h4>
                     Administra la Información para el formato acta de visita del EE.
                 </td>
+                <td style="">
+                    <a href="/Sistematizacion.aspx">
+                        <img src="/Icons/Computer.png" height="48px" alt="Sistematización" /></a>
+                </td>
+                <td style="">
+                    <h4>
+                        <a href="/Sistematizacion.aspx">Sistematización</a></h4>
+                    Administra la Información para el formato sistematización del EE.
+                </td>
             </tr>
         </table>
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
 </asp:Content>

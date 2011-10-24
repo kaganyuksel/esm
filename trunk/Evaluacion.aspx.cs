@@ -1591,29 +1591,34 @@ namespace ESM.Evaluacion
         }
         protected void gvResultados_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            this.gvResultados.PageIndex = e.NewPageIndex;
-            CRoles objCRoles = new CRoles();
-
-            int idusuario = Convert.ToInt32(Session["idusuario"]);
-            string rol = objCRoles.ObtenerRol(idusuario);
-
-            if (_tipo == 2)
+            try
             {
-                if (rol == "Administrador")
+                this.gvResultados.PageIndex = e.NewPageIndex;
+                CRoles objCRoles = new CRoles();
+
+                int idusuario = Convert.ToInt32(Session["idusuario"]);
+                string rol = objCRoles.ObtenerRol(idusuario);
+
+                if (_tipo == 2)
                 {
-                    /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
-                    gvResultados.DataSourceID = "ldsies";
+                    if (rol == "Administrador")
+                    {
+                        /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
+                        gvResultados.DataSourceID = "ldsies";
+                    }
+                    else if (rol == "Consultor")
+                    {
+                        gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
+                        gvResultados.DataBind();
+                    }
+
+                    ObtenerTema(gvResultados);
+
+
                 }
-                else if (rol == "Consultor")
-                {
-                    gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
-                    gvResultados.DataBind();
-                }
-
-                ObtenerTema(gvResultados);
-
-
             }
+            catch (Exception) { }
+
         }
     }
 }
