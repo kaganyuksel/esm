@@ -48,6 +48,7 @@ namespace ESM
 
         protected void lknAgendaSE_Click(object sender, EventArgs e)
         {
+            lbltotal.Visible = true;
             gvAgendaSE.DataSource = CReportes.ReportAgendaSE(); ;
             gvAgendaSE.DataBind();
 
@@ -73,11 +74,18 @@ namespace ESM
 
         protected void lknAgendaEE_Click(object sender, EventArgs e)
         {
-            gvAgendaEE.DataSource = CReportes.ReportAgendaEE();
+            lbltotal.Visible = false;
+            var objlist = CReportes.ReportAgendaEE();
+
+            IQueryable agenda_ee = (IQueryable)objlist[0];
+            int visitados = (int)objlist[1];
+            int porvisitar = (int)objlist[2];
+
+            gvAgendaEE.DataSource = agenda_ee;
             gvAgendaEE.DataBind();
 
             GridView objgv = new GridView();
-            objgv.DataSource = CReportes.ReportAgendaEE();
+            objgv.DataSource = agenda_ee;
             objgv.DataBind();
 
             decimal total = 0;
@@ -91,7 +99,14 @@ namespace ESM
 
             decimal result = Math.Round((total / cantidadee) * 100, 1);
 
-            lbltotal.Text = "Total registros: " + total.ToString() + " de " + cantidadee + " = " + result.ToString() + "% -- ";
+            //lbltotal.Text = "Total registros: " + total.ToString() + " de " + cantidadee + " = " + result.ToString() + "% -- ";
+
+            decimal porvisitart = cantidadee - visitados;
+            decimal porvisitaree = cantidadee - visitados;
+            lbltotalees.Text = cantidadee.ToString();
+            lblvisitados.Text = visitados.ToString() + " - " + Math.Round((visitados / cantidadee) * 100, 1).ToString();
+            lblporvisitar.Text = porvisitart.ToString() + " - " + Math.Round((porvisitaree / cantidadee) * 100, 1).ToString();
+            lblporvisitaragendados.Text = porvisitar.ToString() + " - " + Math.Round(porvisitar / porvisitart * 100, 1);
 
             Visualizacion(false, true, false, false);
         }
@@ -104,6 +119,7 @@ namespace ESM
             gvDiliEE.Visible = DiliEE;
             divse.Visible = DiligenSE;
             pnlgveedili.Visible = DiliEE;
+            infoadicionalAgendaEE.Visible = AgendaEE;
         }
 
         protected void gvAgendaSE_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -208,7 +224,10 @@ namespace ESM
         protected void StartExport(bool resumido = false)
         {
             if (gvAgendaEE.Visible)
-                Export(CReportes.ReportAgendaEE(), "AgendaEE");
+            {
+                var objlist = CReportes.ReportAgendaEE();
+                Export((IQueryable)objlist[0], "AgendaEE");
+            }
             else if (gvAgendaSE.Visible)
                 Export(CReportes.ReportAgendaSE(), "AgendaSE");
             else if (gvdilise.Visible)
@@ -421,6 +440,7 @@ namespace ESM
 
         protected void lknDiliSE_Click(object sender, EventArgs e)
         {
+            lbltotal.Visible = false;
             ReportDiligenciamientoSE();
             Visualizacion(false, false, true, false);
             lbltotal.Visible = false;
@@ -849,6 +869,7 @@ namespace ESM
 
         protected void lknDiliEE_Click(object sender, EventArgs e)
         {
+            lbltotal.Visible = false;
             Session.Remove("ExportResumen");
             ReportEE();
             Visualizacion(false, false, false, true);

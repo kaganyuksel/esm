@@ -27,6 +27,7 @@
       <Association Name="Usuario_ActaVisitaSE" Member="ActaVisitaSEs" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="ActaVisitaSE" />
       <Association Name="Usuario_Evaluacion" Member="Evaluacions" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Evaluacion" />
       <Association Name="Usuario_LLamada" Member="LLamadas" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="LLamada" />
+      <Association Name="Usuario_ActaVisitaSistematizacion" Member="ActaVisitaSistematizacions" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="ActaVisitaSistematizacion" />
       <Association Name="Consultore_Usuario" Member="Consultore" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Consultore" IsForeignKey="true" />
       <Association Name="Operadore_Usuario" Member="Operadore" ThisKey="IdOperador" OtherKey="IdOperador" Type="Operadore" IsForeignKey="true" />
       <Association Name="Role_Usuario" Member="Role" ThisKey="IdRol" OtherKey="IdRol" Type="Role" IsForeignKey="true" />
@@ -431,6 +432,7 @@
       <Association Name="Medicione_Evaluacion" Member="Evaluacions" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Evaluacion" />
       <Association Name="Medicione_LecturaContextoEE" Member="LecturaContextoEEs" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="LecturaContextoEE" />
       <Association Name="Medicione_LecturaContextoSE" Member="LecturaContextoSEs" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="LecturaContextoSE" />
+      <Association Name="Medicione_ActaVisitaSistematizacion" Member="ActaVisitaSistematizacions" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="ActaVisitaSistematizacion" />
       <Association Name="Medicione_Sistematizacion" Member="Sistematizacions" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Sistematizacion" />
     </Type>
   </Table>
@@ -545,21 +547,6 @@
       <Association Name="Consultore_Secretaria_Educacion" Member="Consultore" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Consultore" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Sistematizacion" Member="Sistematizacions">
-    <Type Name="Sistematizacion">
-      <Column Name="IdSistematizacion" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="IdMedicion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IdEE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="P1" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
-      <Column Name="P2" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
-      <Column Name="P3" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
-      <Column Name="P4" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
-      <Column Name="P5" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
-      <Column Name="P6" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
-      <Association Name="Medicione_Sistematizacion" Member="Medicione" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Medicione" IsForeignKey="true" />
-      <Association Name="Establecimiento_Educativo_Sistematizacion" Member="Establecimiento_Educativo" ThisKey="IdEE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.[Establecimiento Educativo]" Member="Establecimiento_Educativos">
     <Type Name="Establecimiento_Educativo">
       <Column Name="IdIE" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -579,8 +566,49 @@
       <Association Name="Establecimiento_Educativo_Evaluacion" Member="Evaluacions" ThisKey="IdIE" OtherKey="IdIE" Type="Evaluacion" />
       <Association Name="Establecimiento_Educativo_LecturaContextoEE" Member="LecturaContextoEEs" ThisKey="IdIE" OtherKey="IdIE" Type="LecturaContextoEE" />
       <Association Name="Establecimiento_Educativo_LLamada" Member="LLamadas" ThisKey="IdIE" OtherKey="IdEE" Type="LLamada" />
+      <Association Name="Establecimiento_Educativo_ActaVisitaSistematizacion" Member="ActaVisitaSistematizacions" ThisKey="IdIE" OtherKey="IdEE" Type="ActaVisitaSistematizacion" />
       <Association Name="Establecimiento_Educativo_Sistematizacion" Member="Sistematizacions" ThisKey="IdIE" OtherKey="IdEE" Type="Sistematizacion" />
       <Association Name="Secretaria_Educacion_Establecimiento_Educativo" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ActaVisitaSistematizacion" Member="ActaVisitaSistematizacions">
+    <Type Name="ActaVisitaSistematizacion">
+      <Column Name="IdActaVisita" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdEE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdMedicion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Observaciones" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="ActaVisitaSistematizacion_AsociadoActaVisitaSistematizacion" Member="AsociadoActaVisitaSistematizacions" ThisKey="IdActaVisita" OtherKey="IdActaVisita" Type="AsociadoActaVisitaSistematizacion" />
+      <Association Name="Establecimiento_Educativo_ActaVisitaSistematizacion" Member="Establecimiento_Educativo" ThisKey="IdEE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
+      <Association Name="Medicione_ActaVisitaSistematizacion" Member="Medicione" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Medicione" IsForeignKey="true" />
+      <Association Name="Usuario_ActaVisitaSistematizacion" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sistematizacion" Member="Sistematizacions">
+    <Type Name="Sistematizacion">
+      <Column Name="IdSistematizacion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdMedicion" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdEE" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="P1" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="P2" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="P3" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="P4" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="P5" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="P6" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Association Name="Establecimiento_Educativo_Sistematizacion" Member="Establecimiento_Educativo" ThisKey="IdEE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
+      <Association Name="Medicione_Sistematizacion" Member="Medicione" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Medicione" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AsociadoActaVisitaSistematizacion" Member="AsociadoActaVisitaSistematizacions">
+    <Type Name="AsociadoActaVisitaSistematizacion">
+      <Column Name="IdAsociado" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdActaVisita" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="CorreoElectronico" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Cargo" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Institucion" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="ActaVisitaSistematizacion_AsociadoActaVisitaSistematizacion" Member="ActaVisitaSistematizacion" ThisKey="IdActaVisita" OtherKey="IdActaVisita" Type="ActaVisitaSistematizacion" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

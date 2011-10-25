@@ -20,14 +20,14 @@ namespace ESM.Objetos
             {
                 if (idconsultor != 0)
                 {
-                    var vcitas = from c in dbAgenda.Citas
+                    var vcitas = from c in new ESM.Model.ESMBDDataContext().Citas
                                  where c.Secretaria_Educacion.IdConsultor == idconsultor || c.Establecimiento_Educativo.Secretaria_Educacion.IdConsultor == idconsultor
                                  select c;
                     return vcitas.ToList();
                 }
                 else
                 {
-                    var vcitas = from c in dbAgenda.Citas
+                    var vcitas = from c in new ESM.Model.ESMBDDataContext().Citas
                                  select c;
                     return vcitas.ToList();
                 }

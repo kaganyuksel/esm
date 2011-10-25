@@ -21,10 +21,6 @@ namespace ESM
                     int idconsultor = Convert.ToInt32(Request.QueryString.Get("id"));
                     Response.Write(Consulta(idconsultor));
                 }
-                else
-                {
-                    Response.Write(Consulta(0));
-                }
 
             }
             catch (Exception) { Response.Write(""); }
