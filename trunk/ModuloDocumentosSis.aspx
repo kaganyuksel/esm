@@ -1,5 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ModuloDocumentosSE.aspx.cs"
-    Inherits="ESM.ModuloDocumentosSE" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ModuloDocumentosSis.aspx.cs"
+    Inherits="ESM.ModuloDocumentosSis" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -85,38 +85,14 @@ background: #ffffff;" border="0" cellpadding="0" cellspacing="0">
                 </tr>
                 <tr>
                     <td class="style1">
-                        PAM:
+                        Acta de Visita Sistematización:
                     </td>
                     <td>
-                        <asp:FileUpload ID="FPAM" runat="server" CssClass="files" Width="60%" />
-                        <a href="#" target="_blank" visible="false" runat="server" id="lknPAM">Visualizar</a>
+                        <asp:FileUpload ID="FActaVisitaSis" runat="server" CssClass="files" Width="60%" />
+                        <a visible="false" runat="server" id="lknActaVisitaSis" target="_blank">Visualizar</a>
                     </td>
                     <td class="style2">
-                        <asp:Button ID="btnUpPAM" Text="Cargar" runat="server" OnClick="btnUpPAM_Click" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="style1">
-                        Convenios:
-                    </td>
-                    <td>
-                        <asp:FileUpload ID="FConvenios" runat="server" CssClass="files" Width="60%" />
-                        <a visible="false" runat="server" id="lknConvenios" target="_blank">Visualizar</a>
-                    </td>
-                    <td class="style2">
-                        <asp:Button ID="btnUpConvenios" Text="Cargar" runat="server" OnClick="btnUpConvenios_Click" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="style1">
-                        Acta de Visita SE:
-                    </td>
-                    <td>
-                        <asp:FileUpload ID="FActaVisitaSE" runat="server" CssClass="files" Width="60%" />
-                        <a visible="false" runat="server" id="lknActaVisitaSE" target="_blank">Visualizar</a>
-                    </td>
-                    <td class="style2">
-                        <asp:Button ID="btnUpActaVisitaSE" Text="Cargar" runat="server" OnClick="btnUpActaVisitaSE_Click" />
+                        <asp:Button ID="btnUpActaVisitaSis" Text="Cargar" runat="server" OnClick="btnUpActaVisitaSE_Click" />
                     </td>
                 </tr>
                 <tr>

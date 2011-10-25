@@ -46,6 +46,9 @@
                     <img src="Icons/Address_Book.png" width="24px" alt="docs" />
                     <a href="/Documentacion/Evaluación_PDF_v01.rar" target="_blank">Formatos Evaluación
                         EE</a>
+                    <br />
+                    <img src="Icons/Address_Book.png" width="24px" alt="docs" />
+                    <a href="/Documentacion/Evaluación_PDF_v01.rar" target="_blank">Formato y acta de visita para Sistematización</a>
                 </td>
             </tr>
         </table>
@@ -145,6 +148,17 @@
                     <h4>
                         <a href="/Sistematizacion.aspx">Sistematización</a></h4>
                     Administra la Información para el formato sistematización del EE.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="/ActaVisitaSistematizacion.aspx">
+                        <img src="/Icons/window.png" height="48px" alt="Acta Visita Sistematización" /></a>
+                </td>
+                <td>
+                    <h4>
+                        <a href="/ActaVisitaSistematizacion.aspx">Acta de Visita Sistematización</a></h4>
+                    Administra la Información para el formato acta de visita sistematización.
                 </td>
             </tr>
         </table>

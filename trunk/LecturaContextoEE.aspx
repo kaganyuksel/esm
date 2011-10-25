@@ -97,7 +97,7 @@
                 AutoGenerateColumns="False" Width="100%" 
                 OnSelectedIndexChanged="gvResultados_SelectedIndexChanged" 
                 onpageindexchanging="gvResultados_PageIndexChanging">
-                <HeaderStyle CssClass="trheader" />
+                <AlternatingRowStyle CssClass="trblanca" />
                 <Columns>
                     <asp:CommandField SelectText="<img id='imgEvaluar'  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />"
                         ShowSelectButton="True" ControlStyle-CssClass="a" >
@@ -113,15 +113,15 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
-                <HeaderStyle CssClass="th"></HeaderStyle>
+                <EmptyDataTemplate>
+                    Actualmente no hay elementos en esta tabla.
+                </EmptyDataTemplate>
+                <HeaderStyle CssClass="trheader"></HeaderStyle>
                 <PagerStyle CssClass="DDFooter" />
                 <PagerTemplate>
                     <asp:GridViewPager ID="GridViewPager1" runat="server" />
                 </PagerTemplate>
-                <EmptyDataTemplate>
-                    Actualmente no hay elementos en esta tabla.
-                </EmptyDataTemplate>
-                <RowStyle CssClass="td"></RowStyle>
+                <RowStyle CssClass="trgris"></RowStyle>
             </asp:GridView>
             <asp:LinqDataSource ID="ldsies" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
                 EntityTypeName="" TableName="Establecimiento_Educativos">

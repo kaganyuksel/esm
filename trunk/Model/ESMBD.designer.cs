@@ -138,12 +138,18 @@ namespace ESM.Model
     partial void InsertSecretaria_Educacion(Secretaria_Educacion instance);
     partial void UpdateSecretaria_Educacion(Secretaria_Educacion instance);
     partial void DeleteSecretaria_Educacion(Secretaria_Educacion instance);
-    partial void InsertSistematizacion(Sistematizacion instance);
-    partial void UpdateSistematizacion(Sistematizacion instance);
-    partial void DeleteSistematizacion(Sistematizacion instance);
     partial void InsertEstablecimiento_Educativo(Establecimiento_Educativo instance);
     partial void UpdateEstablecimiento_Educativo(Establecimiento_Educativo instance);
     partial void DeleteEstablecimiento_Educativo(Establecimiento_Educativo instance);
+    partial void InsertActaVisitaSistematizacion(ActaVisitaSistematizacion instance);
+    partial void UpdateActaVisitaSistematizacion(ActaVisitaSistematizacion instance);
+    partial void DeleteActaVisitaSistematizacion(ActaVisitaSistematizacion instance);
+    partial void InsertSistematizacion(Sistematizacion instance);
+    partial void UpdateSistematizacion(Sistematizacion instance);
+    partial void DeleteSistematizacion(Sistematizacion instance);
+    partial void InsertAsociadoActaVisitaSistematizacion(AsociadoActaVisitaSistematizacion instance);
+    partial void UpdateAsociadoActaVisitaSistematizacion(AsociadoActaVisitaSistematizacion instance);
+    partial void DeleteAsociadoActaVisitaSistematizacion(AsociadoActaVisitaSistematizacion instance);
     #endregion
 		
 		public ESMBDDataContext() : 
@@ -480,6 +486,22 @@ namespace ESM.Model
 			}
 		}
 		
+		public System.Data.Linq.Table<Establecimiento_Educativo> Establecimiento_Educativos
+		{
+			get
+			{
+				return this.GetTable<Establecimiento_Educativo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ActaVisitaSistematizacion> ActaVisitaSistematizacions
+		{
+			get
+			{
+				return this.GetTable<ActaVisitaSistematizacion>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Sistematizacion> Sistematizacions
 		{
 			get
@@ -488,11 +510,11 @@ namespace ESM.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<Establecimiento_Educativo> Establecimiento_Educativos
+		public System.Data.Linq.Table<AsociadoActaVisitaSistematizacion> AsociadoActaVisitaSistematizacions
 		{
 			get
 			{
-				return this.GetTable<Establecimiento_Educativo>();
+				return this.GetTable<AsociadoActaVisitaSistematizacion>();
 			}
 		}
 	}
@@ -836,6 +858,8 @@ namespace ESM.Model
 		
 		private EntitySet<LLamada> _LLamadas;
 		
+		private EntitySet<ActaVisitaSistematizacion> _ActaVisitaSistematizacions;
+		
 		private EntityRef<Consultore> _Consultore;
 		
 		private EntityRef<Operadore> _Operadore;
@@ -870,6 +894,7 @@ namespace ESM.Model
 			this._ActaVisitaSEs = new EntitySet<ActaVisitaSE>(new Action<ActaVisitaSE>(this.attach_ActaVisitaSEs), new Action<ActaVisitaSE>(this.detach_ActaVisitaSEs));
 			this._Evaluacions = new EntitySet<Evaluacion>(new Action<Evaluacion>(this.attach_Evaluacions), new Action<Evaluacion>(this.detach_Evaluacions));
 			this._LLamadas = new EntitySet<LLamada>(new Action<LLamada>(this.attach_LLamadas), new Action<LLamada>(this.detach_LLamadas));
+			this._ActaVisitaSistematizacions = new EntitySet<ActaVisitaSistematizacion>(new Action<ActaVisitaSistematizacion>(this.attach_ActaVisitaSistematizacions), new Action<ActaVisitaSistematizacion>(this.detach_ActaVisitaSistematizacions));
 			this._Consultore = default(EntityRef<Consultore>);
 			this._Operadore = default(EntityRef<Operadore>);
 			this._Role = default(EntityRef<Role>);
@@ -1100,6 +1125,19 @@ namespace ESM.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaSistematizacion", Storage="_ActaVisitaSistematizacions", ThisKey="IdUsuario", OtherKey="IdUsuario")]
+		public EntitySet<ActaVisitaSistematizacion> ActaVisitaSistematizacions
+		{
+			get
+			{
+				return this._ActaVisitaSistematizacions;
+			}
+			set
+			{
+				this._ActaVisitaSistematizacions.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Consultore_Usuario", Storage="_Consultore", ThisKey="IdConsultor", OtherKey="IdConsultor", IsForeignKey=true)]
 		public Consultore Consultore
 		{
@@ -1265,6 +1303,18 @@ namespace ESM.Model
 		}
 		
 		private void detach_LLamadas(LLamada entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
+		private void attach_ActaVisitaSistematizacions(ActaVisitaSistematizacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_ActaVisitaSistematizacions(ActaVisitaSistematizacion entity)
 		{
 			this.SendPropertyChanging();
 			entity.Usuario = null;
@@ -9650,6 +9700,8 @@ namespace ESM.Model
 		
 		private EntitySet<LecturaContextoSE> _LecturaContextoSEs;
 		
+		private EntitySet<ActaVisitaSistematizacion> _ActaVisitaSistematizacions;
+		
 		private EntitySet<Sistematizacion> _Sistematizacions;
 		
     #region Extensibility Method Definitions
@@ -9671,6 +9723,7 @@ namespace ESM.Model
 			this._Evaluacions = new EntitySet<Evaluacion>(new Action<Evaluacion>(this.attach_Evaluacions), new Action<Evaluacion>(this.detach_Evaluacions));
 			this._LecturaContextoEEs = new EntitySet<LecturaContextoEE>(new Action<LecturaContextoEE>(this.attach_LecturaContextoEEs), new Action<LecturaContextoEE>(this.detach_LecturaContextoEEs));
 			this._LecturaContextoSEs = new EntitySet<LecturaContextoSE>(new Action<LecturaContextoSE>(this.attach_LecturaContextoSEs), new Action<LecturaContextoSE>(this.detach_LecturaContextoSEs));
+			this._ActaVisitaSistematizacions = new EntitySet<ActaVisitaSistematizacion>(new Action<ActaVisitaSistematizacion>(this.attach_ActaVisitaSistematizacions), new Action<ActaVisitaSistematizacion>(this.detach_ActaVisitaSistematizacions));
 			this._Sistematizacions = new EntitySet<Sistematizacion>(new Action<Sistematizacion>(this.attach_Sistematizacions), new Action<Sistematizacion>(this.detach_Sistematizacions));
 			OnCreated();
 		}
@@ -9806,6 +9859,19 @@ namespace ESM.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Medicione_ActaVisitaSistematizacion", Storage="_ActaVisitaSistematizacions", ThisKey="IdMedicion", OtherKey="IdMedicion")]
+		public EntitySet<ActaVisitaSistematizacion> ActaVisitaSistematizacions
+		{
+			get
+			{
+				return this._ActaVisitaSistematizacions;
+			}
+			set
+			{
+				this._ActaVisitaSistematizacions.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Medicione_Sistematizacion", Storage="_Sistematizacions", ThisKey="IdMedicion", OtherKey="IdMedicion")]
 		public EntitySet<Sistematizacion> Sistematizacions
 		{
@@ -9918,6 +9984,18 @@ namespace ESM.Model
 		}
 		
 		private void detach_LecturaContextoSEs(LecturaContextoSE entity)
+		{
+			this.SendPropertyChanging();
+			entity.Medicione = null;
+		}
+		
+		private void attach_ActaVisitaSistematizacions(ActaVisitaSistematizacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Medicione = this;
+		}
+		
+		private void detach_ActaVisitaSistematizacions(ActaVisitaSistematizacion entity)
 		{
 			this.SendPropertyChanging();
 			entity.Medicione = null;
@@ -12199,342 +12277,6 @@ namespace ESM.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sistematizacion")]
-	public partial class Sistematizacion : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IdSistematizacion;
-		
-		private int _IdMedicion;
-		
-		private int _IdEE;
-		
-		private string _P1;
-		
-		private string _P2;
-		
-		private string _P3;
-		
-		private string _P4;
-		
-		private string _P5;
-		
-		private string _P6;
-		
-		private EntityRef<Medicione> _Medicione;
-		
-		private EntityRef<Establecimiento_Educativo> _Establecimiento_Educativo;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdSistematizacionChanging(int value);
-    partial void OnIdSistematizacionChanged();
-    partial void OnIdMedicionChanging(int value);
-    partial void OnIdMedicionChanged();
-    partial void OnIdEEChanging(int value);
-    partial void OnIdEEChanged();
-    partial void OnP1Changing(string value);
-    partial void OnP1Changed();
-    partial void OnP2Changing(string value);
-    partial void OnP2Changed();
-    partial void OnP3Changing(string value);
-    partial void OnP3Changed();
-    partial void OnP4Changing(string value);
-    partial void OnP4Changed();
-    partial void OnP5Changing(string value);
-    partial void OnP5Changed();
-    partial void OnP6Changing(string value);
-    partial void OnP6Changed();
-    #endregion
-		
-		public Sistematizacion()
-		{
-			this._Medicione = default(EntityRef<Medicione>);
-			this._Establecimiento_Educativo = default(EntityRef<Establecimiento_Educativo>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSistematizacion", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int IdSistematizacion
-		{
-			get
-			{
-				return this._IdSistematizacion;
-			}
-			set
-			{
-				if ((this._IdSistematizacion != value))
-				{
-					this.OnIdSistematizacionChanging(value);
-					this.SendPropertyChanging();
-					this._IdSistematizacion = value;
-					this.SendPropertyChanged("IdSistematizacion");
-					this.OnIdSistematizacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMedicion", DbType="Int NOT NULL")]
-		public int IdMedicion
-		{
-			get
-			{
-				return this._IdMedicion;
-			}
-			set
-			{
-				if ((this._IdMedicion != value))
-				{
-					if (this._Medicione.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdMedicionChanging(value);
-					this.SendPropertyChanging();
-					this._IdMedicion = value;
-					this.SendPropertyChanged("IdMedicion");
-					this.OnIdMedicionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdEE", DbType="Int NOT NULL")]
-		public int IdEE
-		{
-			get
-			{
-				return this._IdEE;
-			}
-			set
-			{
-				if ((this._IdEE != value))
-				{
-					if (this._Establecimiento_Educativo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdEEChanging(value);
-					this.SendPropertyChanging();
-					this._IdEE = value;
-					this.SendPropertyChanged("IdEE");
-					this.OnIdEEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P1", DbType="NVarChar(300)")]
-		public string P1
-		{
-			get
-			{
-				return this._P1;
-			}
-			set
-			{
-				if ((this._P1 != value))
-				{
-					this.OnP1Changing(value);
-					this.SendPropertyChanging();
-					this._P1 = value;
-					this.SendPropertyChanged("P1");
-					this.OnP1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P2", DbType="NVarChar(300)")]
-		public string P2
-		{
-			get
-			{
-				return this._P2;
-			}
-			set
-			{
-				if ((this._P2 != value))
-				{
-					this.OnP2Changing(value);
-					this.SendPropertyChanging();
-					this._P2 = value;
-					this.SendPropertyChanged("P2");
-					this.OnP2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P3", DbType="NVarChar(300)")]
-		public string P3
-		{
-			get
-			{
-				return this._P3;
-			}
-			set
-			{
-				if ((this._P3 != value))
-				{
-					this.OnP3Changing(value);
-					this.SendPropertyChanging();
-					this._P3 = value;
-					this.SendPropertyChanged("P3");
-					this.OnP3Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P4", DbType="NVarChar(300)")]
-		public string P4
-		{
-			get
-			{
-				return this._P4;
-			}
-			set
-			{
-				if ((this._P4 != value))
-				{
-					this.OnP4Changing(value);
-					this.SendPropertyChanging();
-					this._P4 = value;
-					this.SendPropertyChanged("P4");
-					this.OnP4Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P5", DbType="NVarChar(300)")]
-		public string P5
-		{
-			get
-			{
-				return this._P5;
-			}
-			set
-			{
-				if ((this._P5 != value))
-				{
-					this.OnP5Changing(value);
-					this.SendPropertyChanging();
-					this._P5 = value;
-					this.SendPropertyChanged("P5");
-					this.OnP5Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P6", DbType="NVarChar(300)")]
-		public string P6
-		{
-			get
-			{
-				return this._P6;
-			}
-			set
-			{
-				if ((this._P6 != value))
-				{
-					this.OnP6Changing(value);
-					this.SendPropertyChanging();
-					this._P6 = value;
-					this.SendPropertyChanged("P6");
-					this.OnP6Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Medicione_Sistematizacion", Storage="_Medicione", ThisKey="IdMedicion", OtherKey="IdMedicion", IsForeignKey=true)]
-		public Medicione Medicione
-		{
-			get
-			{
-				return this._Medicione.Entity;
-			}
-			set
-			{
-				Medicione previousValue = this._Medicione.Entity;
-				if (((previousValue != value) 
-							|| (this._Medicione.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Medicione.Entity = null;
-						previousValue.Sistematizacions.Remove(this);
-					}
-					this._Medicione.Entity = value;
-					if ((value != null))
-					{
-						value.Sistematizacions.Add(this);
-						this._IdMedicion = value.IdMedicion;
-					}
-					else
-					{
-						this._IdMedicion = default(int);
-					}
-					this.SendPropertyChanged("Medicione");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Establecimiento_Educativo_Sistematizacion", Storage="_Establecimiento_Educativo", ThisKey="IdEE", OtherKey="IdIE", IsForeignKey=true)]
-		public Establecimiento_Educativo Establecimiento_Educativo
-		{
-			get
-			{
-				return this._Establecimiento_Educativo.Entity;
-			}
-			set
-			{
-				Establecimiento_Educativo previousValue = this._Establecimiento_Educativo.Entity;
-				if (((previousValue != value) 
-							|| (this._Establecimiento_Educativo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Establecimiento_Educativo.Entity = null;
-						previousValue.Sistematizacions.Remove(this);
-					}
-					this._Establecimiento_Educativo.Entity = value;
-					if ((value != null))
-					{
-						value.Sistematizacions.Add(this);
-						this._IdEE = value.IdIE;
-					}
-					else
-					{
-						this._IdEE = default(int);
-					}
-					this.SendPropertyChanged("Establecimiento_Educativo");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Establecimiento Educativo]")]
 	public partial class Establecimiento_Educativo : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -12574,6 +12316,8 @@ namespace ESM.Model
 		private EntitySet<LecturaContextoEE> _LecturaContextoEEs;
 		
 		private EntitySet<LLamada> _LLamadas;
+		
+		private EntitySet<ActaVisitaSistematizacion> _ActaVisitaSistematizacions;
 		
 		private EntitySet<Sistematizacion> _Sistematizacions;
 		
@@ -12615,6 +12359,7 @@ namespace ESM.Model
 			this._Evaluacions = new EntitySet<Evaluacion>(new Action<Evaluacion>(this.attach_Evaluacions), new Action<Evaluacion>(this.detach_Evaluacions));
 			this._LecturaContextoEEs = new EntitySet<LecturaContextoEE>(new Action<LecturaContextoEE>(this.attach_LecturaContextoEEs), new Action<LecturaContextoEE>(this.detach_LecturaContextoEEs));
 			this._LLamadas = new EntitySet<LLamada>(new Action<LLamada>(this.attach_LLamadas), new Action<LLamada>(this.detach_LLamadas));
+			this._ActaVisitaSistematizacions = new EntitySet<ActaVisitaSistematizacion>(new Action<ActaVisitaSistematizacion>(this.attach_ActaVisitaSistematizacions), new Action<ActaVisitaSistematizacion>(this.detach_ActaVisitaSistematizacions));
 			this._Sistematizacions = new EntitySet<Sistematizacion>(new Action<Sistematizacion>(this.attach_Sistematizacions), new Action<Sistematizacion>(this.detach_Sistematizacions));
 			this._Secretaria_Educacion = default(EntityRef<Secretaria_Educacion>);
 			OnCreated();
@@ -12922,6 +12667,19 @@ namespace ESM.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Establecimiento_Educativo_ActaVisitaSistematizacion", Storage="_ActaVisitaSistematizacions", ThisKey="IdIE", OtherKey="IdEE")]
+		public EntitySet<ActaVisitaSistematizacion> ActaVisitaSistematizacions
+		{
+			get
+			{
+				return this._ActaVisitaSistematizacions;
+			}
+			set
+			{
+				this._ActaVisitaSistematizacions.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Establecimiento_Educativo_Sistematizacion", Storage="_Sistematizacions", ThisKey="IdIE", OtherKey="IdEE")]
 		public EntitySet<Sistematizacion> Sistematizacions
 		{
@@ -13061,6 +12819,18 @@ namespace ESM.Model
 			entity.Establecimiento_Educativo = null;
 		}
 		
+		private void attach_ActaVisitaSistematizacions(ActaVisitaSistematizacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Establecimiento_Educativo = this;
+		}
+		
+		private void detach_ActaVisitaSistematizacions(ActaVisitaSistematizacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Establecimiento_Educativo = null;
+		}
+		
 		private void attach_Sistematizacions(Sistematizacion entity)
 		{
 			this.SendPropertyChanging();
@@ -13071,6 +12841,898 @@ namespace ESM.Model
 		{
 			this.SendPropertyChanging();
 			entity.Establecimiento_Educativo = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ActaVisitaSistematizacion")]
+	public partial class ActaVisitaSistematizacion : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IdActaVisita;
+		
+		private int _IdEE;
+		
+		private int _IdMedicion;
+		
+		private int _IdUsuario;
+		
+		private string _Observaciones;
+		
+		private EntitySet<AsociadoActaVisitaSistematizacion> _AsociadoActaVisitaSistematizacions;
+		
+		private EntityRef<Establecimiento_Educativo> _Establecimiento_Educativo;
+		
+		private EntityRef<Medicione> _Medicione;
+		
+		private EntityRef<Usuario> _Usuario;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdActaVisitaChanging(int value);
+    partial void OnIdActaVisitaChanged();
+    partial void OnIdEEChanging(int value);
+    partial void OnIdEEChanged();
+    partial void OnIdMedicionChanging(int value);
+    partial void OnIdMedicionChanged();
+    partial void OnIdUsuarioChanging(int value);
+    partial void OnIdUsuarioChanged();
+    partial void OnObservacionesChanging(string value);
+    partial void OnObservacionesChanged();
+    #endregion
+		
+		public ActaVisitaSistematizacion()
+		{
+			this._AsociadoActaVisitaSistematizacions = new EntitySet<AsociadoActaVisitaSistematizacion>(new Action<AsociadoActaVisitaSistematizacion>(this.attach_AsociadoActaVisitaSistematizacions), new Action<AsociadoActaVisitaSistematizacion>(this.detach_AsociadoActaVisitaSistematizacions));
+			this._Establecimiento_Educativo = default(EntityRef<Establecimiento_Educativo>);
+			this._Medicione = default(EntityRef<Medicione>);
+			this._Usuario = default(EntityRef<Usuario>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdActaVisita", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdActaVisita
+		{
+			get
+			{
+				return this._IdActaVisita;
+			}
+			set
+			{
+				if ((this._IdActaVisita != value))
+				{
+					this.OnIdActaVisitaChanging(value);
+					this.SendPropertyChanging();
+					this._IdActaVisita = value;
+					this.SendPropertyChanged("IdActaVisita");
+					this.OnIdActaVisitaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdEE", DbType="Int NOT NULL")]
+		public int IdEE
+		{
+			get
+			{
+				return this._IdEE;
+			}
+			set
+			{
+				if ((this._IdEE != value))
+				{
+					if (this._Establecimiento_Educativo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdEEChanging(value);
+					this.SendPropertyChanging();
+					this._IdEE = value;
+					this.SendPropertyChanged("IdEE");
+					this.OnIdEEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMedicion", DbType="Int NOT NULL")]
+		public int IdMedicion
+		{
+			get
+			{
+				return this._IdMedicion;
+			}
+			set
+			{
+				if ((this._IdMedicion != value))
+				{
+					if (this._Medicione.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdMedicionChanging(value);
+					this.SendPropertyChanging();
+					this._IdMedicion = value;
+					this.SendPropertyChanged("IdMedicion");
+					this.OnIdMedicionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUsuario", DbType="Int NOT NULL")]
+		public int IdUsuario
+		{
+			get
+			{
+				return this._IdUsuario;
+			}
+			set
+			{
+				if ((this._IdUsuario != value))
+				{
+					if (this._Usuario.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._IdUsuario = value;
+					this.SendPropertyChanged("IdUsuario");
+					this.OnIdUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Observaciones", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string Observaciones
+		{
+			get
+			{
+				return this._Observaciones;
+			}
+			set
+			{
+				if ((this._Observaciones != value))
+				{
+					this.OnObservacionesChanging(value);
+					this.SendPropertyChanging();
+					this._Observaciones = value;
+					this.SendPropertyChanged("Observaciones");
+					this.OnObservacionesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ActaVisitaSistematizacion_AsociadoActaVisitaSistematizacion", Storage="_AsociadoActaVisitaSistematizacions", ThisKey="IdActaVisita", OtherKey="IdActaVisita")]
+		public EntitySet<AsociadoActaVisitaSistematizacion> AsociadoActaVisitaSistematizacions
+		{
+			get
+			{
+				return this._AsociadoActaVisitaSistematizacions;
+			}
+			set
+			{
+				this._AsociadoActaVisitaSistematizacions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Establecimiento_Educativo_ActaVisitaSistematizacion", Storage="_Establecimiento_Educativo", ThisKey="IdEE", OtherKey="IdIE", IsForeignKey=true)]
+		public Establecimiento_Educativo Establecimiento_Educativo
+		{
+			get
+			{
+				return this._Establecimiento_Educativo.Entity;
+			}
+			set
+			{
+				Establecimiento_Educativo previousValue = this._Establecimiento_Educativo.Entity;
+				if (((previousValue != value) 
+							|| (this._Establecimiento_Educativo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Establecimiento_Educativo.Entity = null;
+						previousValue.ActaVisitaSistematizacions.Remove(this);
+					}
+					this._Establecimiento_Educativo.Entity = value;
+					if ((value != null))
+					{
+						value.ActaVisitaSistematizacions.Add(this);
+						this._IdEE = value.IdIE;
+					}
+					else
+					{
+						this._IdEE = default(int);
+					}
+					this.SendPropertyChanged("Establecimiento_Educativo");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Medicione_ActaVisitaSistematizacion", Storage="_Medicione", ThisKey="IdMedicion", OtherKey="IdMedicion", IsForeignKey=true)]
+		public Medicione Medicione
+		{
+			get
+			{
+				return this._Medicione.Entity;
+			}
+			set
+			{
+				Medicione previousValue = this._Medicione.Entity;
+				if (((previousValue != value) 
+							|| (this._Medicione.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Medicione.Entity = null;
+						previousValue.ActaVisitaSistematizacions.Remove(this);
+					}
+					this._Medicione.Entity = value;
+					if ((value != null))
+					{
+						value.ActaVisitaSistematizacions.Add(this);
+						this._IdMedicion = value.IdMedicion;
+					}
+					else
+					{
+						this._IdMedicion = default(int);
+					}
+					this.SendPropertyChanged("Medicione");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaSistematizacion", Storage="_Usuario", ThisKey="IdUsuario", OtherKey="IdUsuario", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.ActaVisitaSistematizacions.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.ActaVisitaSistematizacions.Add(this);
+						this._IdUsuario = value.IdUsuario;
+					}
+					else
+					{
+						this._IdUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_AsociadoActaVisitaSistematizacions(AsociadoActaVisitaSistematizacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.ActaVisitaSistematizacion = this;
+		}
+		
+		private void detach_AsociadoActaVisitaSistematizacions(AsociadoActaVisitaSistematizacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.ActaVisitaSistematizacion = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sistematizacion")]
+	public partial class Sistematizacion : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IdSistematizacion;
+		
+		private int _IdMedicion;
+		
+		private int _IdEE;
+		
+		private string _P1;
+		
+		private string _P2;
+		
+		private string _P3;
+		
+		private string _P4;
+		
+		private string _P5;
+		
+		private string _P6;
+		
+		private EntityRef<Establecimiento_Educativo> _Establecimiento_Educativo;
+		
+		private EntityRef<Medicione> _Medicione;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdSistematizacionChanging(int value);
+    partial void OnIdSistematizacionChanged();
+    partial void OnIdMedicionChanging(int value);
+    partial void OnIdMedicionChanged();
+    partial void OnIdEEChanging(int value);
+    partial void OnIdEEChanged();
+    partial void OnP1Changing(string value);
+    partial void OnP1Changed();
+    partial void OnP2Changing(string value);
+    partial void OnP2Changed();
+    partial void OnP3Changing(string value);
+    partial void OnP3Changed();
+    partial void OnP4Changing(string value);
+    partial void OnP4Changed();
+    partial void OnP5Changing(string value);
+    partial void OnP5Changed();
+    partial void OnP6Changing(string value);
+    partial void OnP6Changed();
+    #endregion
+		
+		public Sistematizacion()
+		{
+			this._Establecimiento_Educativo = default(EntityRef<Establecimiento_Educativo>);
+			this._Medicione = default(EntityRef<Medicione>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSistematizacion", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdSistematizacion
+		{
+			get
+			{
+				return this._IdSistematizacion;
+			}
+			set
+			{
+				if ((this._IdSistematizacion != value))
+				{
+					this.OnIdSistematizacionChanging(value);
+					this.SendPropertyChanging();
+					this._IdSistematizacion = value;
+					this.SendPropertyChanged("IdSistematizacion");
+					this.OnIdSistematizacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMedicion", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int IdMedicion
+		{
+			get
+			{
+				return this._IdMedicion;
+			}
+			set
+			{
+				if ((this._IdMedicion != value))
+				{
+					if (this._Medicione.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdMedicionChanging(value);
+					this.SendPropertyChanging();
+					this._IdMedicion = value;
+					this.SendPropertyChanged("IdMedicion");
+					this.OnIdMedicionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdEE", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int IdEE
+		{
+			get
+			{
+				return this._IdEE;
+			}
+			set
+			{
+				if ((this._IdEE != value))
+				{
+					if (this._Establecimiento_Educativo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdEEChanging(value);
+					this.SendPropertyChanging();
+					this._IdEE = value;
+					this.SendPropertyChanged("IdEE");
+					this.OnIdEEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P1", DbType="NVarChar(300)")]
+		public string P1
+		{
+			get
+			{
+				return this._P1;
+			}
+			set
+			{
+				if ((this._P1 != value))
+				{
+					this.OnP1Changing(value);
+					this.SendPropertyChanging();
+					this._P1 = value;
+					this.SendPropertyChanged("P1");
+					this.OnP1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P2", DbType="NVarChar(300)")]
+		public string P2
+		{
+			get
+			{
+				return this._P2;
+			}
+			set
+			{
+				if ((this._P2 != value))
+				{
+					this.OnP2Changing(value);
+					this.SendPropertyChanging();
+					this._P2 = value;
+					this.SendPropertyChanged("P2");
+					this.OnP2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P3", DbType="NVarChar(300)")]
+		public string P3
+		{
+			get
+			{
+				return this._P3;
+			}
+			set
+			{
+				if ((this._P3 != value))
+				{
+					this.OnP3Changing(value);
+					this.SendPropertyChanging();
+					this._P3 = value;
+					this.SendPropertyChanged("P3");
+					this.OnP3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P4", DbType="NVarChar(300)")]
+		public string P4
+		{
+			get
+			{
+				return this._P4;
+			}
+			set
+			{
+				if ((this._P4 != value))
+				{
+					this.OnP4Changing(value);
+					this.SendPropertyChanging();
+					this._P4 = value;
+					this.SendPropertyChanged("P4");
+					this.OnP4Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P5", DbType="NVarChar(300)")]
+		public string P5
+		{
+			get
+			{
+				return this._P5;
+			}
+			set
+			{
+				if ((this._P5 != value))
+				{
+					this.OnP5Changing(value);
+					this.SendPropertyChanging();
+					this._P5 = value;
+					this.SendPropertyChanged("P5");
+					this.OnP5Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P6", DbType="NVarChar(300)")]
+		public string P6
+		{
+			get
+			{
+				return this._P6;
+			}
+			set
+			{
+				if ((this._P6 != value))
+				{
+					this.OnP6Changing(value);
+					this.SendPropertyChanging();
+					this._P6 = value;
+					this.SendPropertyChanged("P6");
+					this.OnP6Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Establecimiento_Educativo_Sistematizacion", Storage="_Establecimiento_Educativo", ThisKey="IdEE", OtherKey="IdIE", IsForeignKey=true)]
+		public Establecimiento_Educativo Establecimiento_Educativo
+		{
+			get
+			{
+				return this._Establecimiento_Educativo.Entity;
+			}
+			set
+			{
+				Establecimiento_Educativo previousValue = this._Establecimiento_Educativo.Entity;
+				if (((previousValue != value) 
+							|| (this._Establecimiento_Educativo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Establecimiento_Educativo.Entity = null;
+						previousValue.Sistematizacions.Remove(this);
+					}
+					this._Establecimiento_Educativo.Entity = value;
+					if ((value != null))
+					{
+						value.Sistematizacions.Add(this);
+						this._IdEE = value.IdIE;
+					}
+					else
+					{
+						this._IdEE = default(int);
+					}
+					this.SendPropertyChanged("Establecimiento_Educativo");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Medicione_Sistematizacion", Storage="_Medicione", ThisKey="IdMedicion", OtherKey="IdMedicion", IsForeignKey=true)]
+		public Medicione Medicione
+		{
+			get
+			{
+				return this._Medicione.Entity;
+			}
+			set
+			{
+				Medicione previousValue = this._Medicione.Entity;
+				if (((previousValue != value) 
+							|| (this._Medicione.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Medicione.Entity = null;
+						previousValue.Sistematizacions.Remove(this);
+					}
+					this._Medicione.Entity = value;
+					if ((value != null))
+					{
+						value.Sistematizacions.Add(this);
+						this._IdMedicion = value.IdMedicion;
+					}
+					else
+					{
+						this._IdMedicion = default(int);
+					}
+					this.SendPropertyChanged("Medicione");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AsociadoActaVisitaSistematizacion")]
+	public partial class AsociadoActaVisitaSistematizacion : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IdAsociado;
+		
+		private int _IdActaVisita;
+		
+		private string _Nombre;
+		
+		private string _Telefono;
+		
+		private string _CorreoElectronico;
+		
+		private string _Cargo;
+		
+		private string _Institucion;
+		
+		private EntityRef<ActaVisitaSistematizacion> _ActaVisitaSistematizacion;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdAsociadoChanging(int value);
+    partial void OnIdAsociadoChanged();
+    partial void OnIdActaVisitaChanging(int value);
+    partial void OnIdActaVisitaChanged();
+    partial void OnNombreChanging(string value);
+    partial void OnNombreChanged();
+    partial void OnTelefonoChanging(string value);
+    partial void OnTelefonoChanged();
+    partial void OnCorreoElectronicoChanging(string value);
+    partial void OnCorreoElectronicoChanged();
+    partial void OnCargoChanging(string value);
+    partial void OnCargoChanged();
+    partial void OnInstitucionChanging(string value);
+    partial void OnInstitucionChanged();
+    #endregion
+		
+		public AsociadoActaVisitaSistematizacion()
+		{
+			this._ActaVisitaSistematizacion = default(EntityRef<ActaVisitaSistematizacion>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAsociado", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdAsociado
+		{
+			get
+			{
+				return this._IdAsociado;
+			}
+			set
+			{
+				if ((this._IdAsociado != value))
+				{
+					this.OnIdAsociadoChanging(value);
+					this.SendPropertyChanging();
+					this._IdAsociado = value;
+					this.SendPropertyChanged("IdAsociado");
+					this.OnIdAsociadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdActaVisita", DbType="Int NOT NULL")]
+		public int IdActaVisita
+		{
+			get
+			{
+				return this._IdActaVisita;
+			}
+			set
+			{
+				if ((this._IdActaVisita != value))
+				{
+					if (this._ActaVisitaSistematizacion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdActaVisitaChanging(value);
+					this.SendPropertyChanging();
+					this._IdActaVisita = value;
+					this.SendPropertyChanged("IdActaVisita");
+					this.OnIdActaVisitaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this.OnNombreChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre = value;
+					this.SendPropertyChanged("Nombre");
+					this.OnNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string Telefono
+		{
+			get
+			{
+				return this._Telefono;
+			}
+			set
+			{
+				if ((this._Telefono != value))
+				{
+					this.OnTelefonoChanging(value);
+					this.SendPropertyChanging();
+					this._Telefono = value;
+					this.SendPropertyChanged("Telefono");
+					this.OnTelefonoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CorreoElectronico", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string CorreoElectronico
+		{
+			get
+			{
+				return this._CorreoElectronico;
+			}
+			set
+			{
+				if ((this._CorreoElectronico != value))
+				{
+					this.OnCorreoElectronicoChanging(value);
+					this.SendPropertyChanging();
+					this._CorreoElectronico = value;
+					this.SendPropertyChanged("CorreoElectronico");
+					this.OnCorreoElectronicoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cargo", DbType="NVarChar(30)")]
+		public string Cargo
+		{
+			get
+			{
+				return this._Cargo;
+			}
+			set
+			{
+				if ((this._Cargo != value))
+				{
+					this.OnCargoChanging(value);
+					this.SendPropertyChanging();
+					this._Cargo = value;
+					this.SendPropertyChanged("Cargo");
+					this.OnCargoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Institucion", DbType="NVarChar(30)")]
+		public string Institucion
+		{
+			get
+			{
+				return this._Institucion;
+			}
+			set
+			{
+				if ((this._Institucion != value))
+				{
+					this.OnInstitucionChanging(value);
+					this.SendPropertyChanging();
+					this._Institucion = value;
+					this.SendPropertyChanged("Institucion");
+					this.OnInstitucionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ActaVisitaSistematizacion_AsociadoActaVisitaSistematizacion", Storage="_ActaVisitaSistematizacion", ThisKey="IdActaVisita", OtherKey="IdActaVisita", IsForeignKey=true)]
+		public ActaVisitaSistematizacion ActaVisitaSistematizacion
+		{
+			get
+			{
+				return this._ActaVisitaSistematizacion.Entity;
+			}
+			set
+			{
+				ActaVisitaSistematizacion previousValue = this._ActaVisitaSistematizacion.Entity;
+				if (((previousValue != value) 
+							|| (this._ActaVisitaSistematizacion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ActaVisitaSistematizacion.Entity = null;
+						previousValue.AsociadoActaVisitaSistematizacions.Remove(this);
+					}
+					this._ActaVisitaSistematizacion.Entity = value;
+					if ((value != null))
+					{
+						value.AsociadoActaVisitaSistematizacions.Add(this);
+						this._IdActaVisita = value.IdActaVisita;
+					}
+					else
+					{
+						this._IdActaVisita = default(int);
+					}
+					this.SendPropertyChanged("ActaVisitaSistematizacion");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

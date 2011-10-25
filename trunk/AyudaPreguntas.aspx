@@ -72,8 +72,8 @@
     </style>
     <div class="demo" style="width: 95%; margin: 0 auto; clear: both;">
         <%--<div class="demo" style="clear: both;"> --%>
-            <asp:Button ID="btndescPreguntas" CssClass="flotante" runat="server" Text="ok" OnClick="btndescPreguntas_Click"
-                Visible="false" />
+        <asp:Button ID="btndescPreguntas" CssClass="flotante" runat="server" Text="ok" OnClick="btndescPreguntas_Click"
+            Visible="false" />
         <%--</div>--%>
         <br />
         <br />
@@ -138,7 +138,7 @@
                         <h4>
                             Pregunta y Descripción</h4>
                         <asp:TextBox CssClass="txtmiltilinepregunta" TextMode="MultiLine" ID="txtPregunta"
-                            runat="server" Text='<%# Eval("Pregunta") %>'></asp:TextBox>
+                            runat="server" Text='<%# Eval("Pregunta1") %>'></asp:TextBox>
                         <asp:TextBox CssClass="txtmultiline" TextMode="MultiLine" ID="txtDescPre" runat="server"></asp:TextBox>
                         <h4>
                             Actores</h4>

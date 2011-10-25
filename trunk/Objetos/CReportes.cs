@@ -25,11 +25,13 @@ namespace ESM.Objetos
 
         }
 
-        public static IQueryable ReportAgendaEE()
+        public static List<object> ReportAgendaEE()
         {
             var db = new ESM.Model.ESMBDDataContext();
             try
             {
+                List<object> objList = new List<object>();
+
                 var cee = from c in db.Citas
                           where c.IdEE != null
                           orderby c.Secretaria_Educacion.Nombre
@@ -44,7 +46,21 @@ namespace ESM.Objetos
                               c.FechaInicio
                           };
 
-                return cee;
+                DateTime fecha_actual = DateTime.Now.AddHours(2);
+
+                int visitados = (from v in cee
+                                 where v.FechaInicio <= fecha_actual
+                                 select v).Count();
+
+                int porvisitar = (from v in cee
+                                  where v.FechaInicio > fecha_actual
+                                  select v).Count();
+
+                objList.Add(cee);
+                objList.Add(visitados);
+                objList.Add(porvisitar);
+
+                return objList;
             }
             catch (Exception) { return null; }
 

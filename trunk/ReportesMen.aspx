@@ -10,6 +10,15 @@
             text-decoration: none;
             color: #005EA7;
         }
+        /*.tables
+        {
+            <%---moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS
+            -moz-box-shadow: 0px 0px 2px #000000;
+            -webkit-box-shadow: 0px 0px 2px #000000;
+            box-shadow: 0px 0px 2px #000000; /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS--%>
+        }*/
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -49,16 +58,47 @@
             <asp:LinkButton ID="lknDiliEE" Text="Diligenciamiento EE" runat="server" OnClick="lknDiliEE_Click" />
             <br />
             -
-            <asp:LinkButton ID="lknDiliRes" Text="Diligenciamiento EE Resumido" 
-                runat="server" onclick="lknDiliRes_Click"
-                 />
+            <asp:LinkButton ID="lknDiliRes" Text="Diligenciamiento EE Resumido" runat="server"
+                OnClick="lknDiliRes_Click" />
         </div>
         <div style="width: 80%; float: right;">
             <asp:Label Text="" runat="server" ID="lbltotal" />
             <asp:LinkButton Text="Exportar a Excel" runat="server" OnClick="ExportExcel_Click"
                 ID="lknExportExcel" />
+            <table id="infoadicionalAgendaEE" class="tables" runat="server" visible="false" border="0"
+                cellpadding="0" width="100%" cellspacing="0">
+                <tr class="trheader" style="padding: 5 5 5 5;">
+                    <td>
+                        Información para Agenda EE
+                    </td>
+                </tr>
+                <tr>
+                    <td class="trgris">
+                        Total EE:
+                        <asp:Label Text="" runat="server" ID="lbltotalees" />
+                    </td>
+                </tr>
+                <tr class="trblanca">
+                    <td>
+                        Visitados:
+                        <asp:Label Text="" runat="server" ID="lblvisitados" />%
+                    </td>
+                </tr>
+                <tr class="trgris">
+                    <td>
+                        Por visitar:
+                        <asp:Label Text="" runat="server" ID="lblporvisitar" />%
+                    </td>
+                </tr>
+                <tr class="trblanca">
+                    <td>
+                        Por visitar agendados:
+                        <asp:Label Text="" runat="server" ID="lblporvisitaragendados" />%
+                    </td>
+                </tr>
+            </table>
             <asp:GridView runat="server" ID="gvAgendaEE" AutoGenerateColumns="False" Width="100%"
-                AllowSorting="True" AllowPaging="true" Font-Size="0.5em" OnPageIndexChanging="gvAgendaEE_PageIndexChanging">
+                AllowSorting="True" AllowPaging="true" CssClass="tables" Font-Size="0.5em" OnPageIndexChanging="gvAgendaEE_PageIndexChanging">
                 <AlternatingRowStyle CssClass="trblanca" />
                 <Columns>
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre SE" />
@@ -66,7 +106,7 @@
                     <asp:BoundField DataField="CodigoDane" HeaderText="Codigo Dane" />
                     <asp:BoundField DataField="Establecimiento" HeaderText="Nombre EE" />
                     <asp:BoundField DataField="Municipio" HeaderText="Departamento/Municipio" />
-                    <%--<asp:BoundField DataField="FechaInicio" HeaderText="Fecha de Visita" />--%>
+                    <asp:BoundField DataField="FechaInicio" HeaderText="Fecha de Visita" />
                 </Columns>
                 <HeaderStyle CssClass="trheader" />
                 <RowStyle CssClass="trgris" />
@@ -76,7 +116,7 @@
             </asp:GridView>
             <asp:GridView runat="server" ID="gvAgendaSE" AutoGenerateColumns="False" Width="100%"
                 AllowSorting="True" AllowPaging="True" OnPageIndexChanging="gvAgendaSE_PageIndexChanging"
-                Font-Size="14px">
+                Font-Size="14px" CssClass="tables">
                 <AlternatingRowStyle CssClass="trblanca" />
                 <Columns>
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
@@ -92,7 +132,8 @@
             </asp:GridView>
             <div style="overflow-x: scroll;" id="divse" runat="server" visible="false">
                 <asp:GridView runat="server" ID="gvdilise" Width="1024px" AutoGenerateColumns="False"
-                    AllowSorting="True" AllowPaging="True" Font-Size="14px" OnPageIndexChanging="gvdilise_PageIndexChanging">
+                    AllowSorting="True" AllowPaging="True" Font-Size="14px" OnPageIndexChanging="gvdilise_PageIndexChanging"
+                    CssClass="tables">
                     <AlternatingRowStyle CssClass="trblanca" />
                     <Columns>
                         <asp:TemplateField>

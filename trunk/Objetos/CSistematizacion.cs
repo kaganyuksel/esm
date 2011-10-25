@@ -139,5 +139,19 @@ namespace ESM.Objetos
             catch (Exception) { return null; }
 
         }
+
+        public static IQueryable ObtenerMediciones(int idee)
+        {
+            try
+            {
+                var medsis = from s in new ESM.Model.ESMBDDataContext().Sistematizacions
+                             where s.IdEE == idee
+                             select new { s.Medicione.IdMedicion, Fecha = s.Medicione.FechaMedicion };
+
+                return medsis;
+            }
+            catch (Exception) { return null; }
+
+        }
     }
 }

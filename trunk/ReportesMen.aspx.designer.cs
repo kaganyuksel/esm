@@ -76,6 +76,51 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.LinkButton lknExportExcel;
         
         /// <summary>
+        /// infoadicionalAgendaEE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable infoadicionalAgendaEE;
+        
+        /// <summary>
+        /// lbltotalees control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbltotalees;
+        
+        /// <summary>
+        /// lblvisitados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblvisitados;
+        
+        /// <summary>
+        /// lblporvisitar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblporvisitar;
+        
+        /// <summary>
+        /// lblporvisitaragendados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblporvisitaragendados;
+        
+        /// <summary>
         /// gvAgendaEE control.
         /// </summary>
         /// <remarks>

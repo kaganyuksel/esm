@@ -95,6 +95,13 @@
     <Compile Include="ActaVisitaSE.aspx.designer.cs">
       <DependentUpon>ActaVisitaSE.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ActaVisitaSistematizacion.aspx.cs">
+      <DependentUpon>ActaVisitaSistematizacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActaVisitaSistematizacion.aspx.designer.cs">
+      <DependentUpon>ActaVisitaSistematizacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddCita.aspx.cs">
       <DependentUpon>AddCita.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -197,6 +204,13 @@
     <Compile Include="ModuloDocumentosSE.aspx.designer.cs">
       <DependentUpon>ModuloDocumentosSE.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ModuloDocumentosSis.aspx.cs">
+      <DependentUpon>ModuloDocumentosSis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloDocumentosSis.aspx.designer.cs">
+      <DependentUpon>ModuloDocumentosSis.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Objetos\CCitas.cs" />
     <Compile Include="Objetos\CDocumentos.cs" />
     <Compile Include="Objetos\CEE.cs" />
@@ -232,6 +246,7 @@
     </Compile>
     <Content Include="ActaVisitaEE.aspx" />
     <Content Include="ActaVisitaSE.aspx" />
+    <Content Include="ActaVisitaSistematizacion.aspx" />
     <Content Include="AddCita.aspx" />
     <Content Include="AmCharts\flash\amcharts_key.txt" />
     <Content Include="AmCharts\flash\amcolumn.swf" />
@@ -361,6 +376,7 @@
     <Content Include="MenuEvaluacion.aspx" />
     <Content Include="ModuloDocumentos.aspx" />
     <Content Include="ModuloDocumentosSE.aspx" />
+    <Content Include="ModuloDocumentosSis.aspx" />
     <Content Include="plupload\jquery.plupload.queue\css\jquery.plupload.queue.css" />
     <Content Include="plupload\jquery.plupload.queue\img\backgrounds.gif" />
     <Content Include="plupload\jquery.plupload.queue\img\buttons-disabled.png" />
