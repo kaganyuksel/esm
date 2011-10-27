@@ -48,7 +48,8 @@
                         EE</a>
                     <br />
                     <img src="Icons/Address_Book.png" width="24px" alt="docs" />
-                    <a href="/Documentacion/Evaluación_PDF_v01.rar" target="_blank">Formato y acta de visita para Sistematización</a>
+                    <a href="/Documentacion/Evaluación_PDF_v01.rar" target="_blank">Formato y acta de visita
+                        para Sistematización</a>
                 </td>
             </tr>
         </table>
@@ -94,6 +95,26 @@
                     <h4>
                         <a href="/ActaVisitaSE.aspx">Acta de Visita</a></h4>
                     Administra la información para el formato acta de visita de la SE.
+                </td>
+            </tr>
+            <tr>
+                <td style="">
+                    <a href="/SistematizacionSE.aspx">
+                        <img src="/Icons/Computer.png" height="48px" alt="Sistematización Secretaría" /></a>
+                </td>
+                <td style="">
+                    <h4>
+                        <a href="/SistematizacionSE.aspx">Sistematización</a></h4>
+                    Administra la Información para el formato sistematización de la SE.
+                </td>
+                <td>
+                    <a href="/ActaVisitaSistematizacionSE.aspx">
+                        <img src="/Icons/window.png" height="48px" alt="Acta Visita Sistematización" /></a>
+                </td>
+                <td>
+                    <h4>
+                        <a href="/ActaVisitaSistematizacionSE.aspx">Acta de Visita Sistematización SE</a></h4>
+                    Administra la Información para el formato acta de visita sistematización.
                 </td>
             </tr>
         </table>

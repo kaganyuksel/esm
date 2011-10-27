@@ -36,7 +36,7 @@ namespace ESM
                             ObtenerTema(gvResultados);
 
                         }
-                        else if (rol == "Consultor")
+                        else if (rol == "Consultor" || rol == "MEN")
                         {
                             ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
                             var se = from s in db.Secretaria_Educacions

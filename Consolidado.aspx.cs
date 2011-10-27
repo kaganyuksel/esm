@@ -56,7 +56,7 @@ namespace ESM.Consolidado
 
                 gvResultados.DataSourceID = "ldsies";
                 gvResultados.DataBind();
-                ObtenerTema(gvResultados);
+                //ObtenerTema(gvResultados);
             }
         }
 

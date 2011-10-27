@@ -452,7 +452,7 @@
                         <asp:RadioButton ID="rbtnSi24" runat="server" AutoPostBack="True" GroupName="group24"
                             OnCheckedChanged="RadioButton1_CheckedChanged" Text="Si" />
                         <asp:RadioButton ID="rbtnNo24" runat="server" AutoPostBack="True" GroupName="group24"
-                            OnCheckedChanged="RadioButton2_CheckedChanged" Text="No" Checked="True" />
+                            OnCheckedChanged="RadioButton2_CheckedChanged" Text="No" />
                     </td>
                 </tr>
                 <tr class="trgris">
@@ -533,7 +533,7 @@
                         <asp:RadioButton ID="rbtnSi34" runat="server" AutoPostBack="True" GroupName="Group34"
                             OnCheckedChanged="RadioButton3_CheckedChanged" Text="Si" />
                         <asp:RadioButton ID="rbtnNo34" runat="server" AutoPostBack="True" GroupName="Group34"
-                            OnCheckedChanged="RadioButton4_CheckedChanged" Text="No" Checked="True" />
+                            OnCheckedChanged="RadioButton4_CheckedChanged" Text="No" />
                     </td>
                 </tr>
                 <tr class="trgris">
@@ -556,7 +556,7 @@
                         <asp:RadioButton ID="rbtnSi35" runat="server" AutoPostBack="True" GroupName="Group35"
                             Text="Si" OnCheckedChanged="rbtnSi35_CheckedChanged" />
                         <asp:RadioButton ID="rbtnNo35" runat="server" AutoPostBack="True" GroupName="Group35"
-                            Text="No" Checked="True" OnCheckedChanged="rbtnNo35_CheckedChanged" />
+                            Text="No" OnCheckedChanged="rbtnNo35_CheckedChanged" />
                     </td>
                 </tr>
                 <tr class="trgris">
@@ -663,7 +663,7 @@
                         <asp:RadioButton ID="rbtnSi38" runat="server" AutoPostBack="True" GroupName="Group38"
                             Text="Si" Enabled="False" OnCheckedChanged="rbtnSi38_CheckedChanged" />
                         <asp:RadioButton ID="rbtnNo38" runat="server" AutoPostBack="True" GroupName="Group38"
-                            Text="No" Checked="True" Enabled="False" OnCheckedChanged="rbtnNo38_CheckedChanged" />
+                            Text="No" Enabled="False" OnCheckedChanged="rbtnNo38_CheckedChanged" />
                     </td>
                 </tr>
                 <tr class="trgris">
@@ -686,7 +686,7 @@
                         <asp:RadioButton ID="rbtnSi39" runat="server" AutoPostBack="True" GroupName="Group39"
                             Text="Si" Enabled="False" OnCheckedChanged="rbtnSi39_CheckedChanged" />
                         <asp:RadioButton ID="rbtnNo39" runat="server" AutoPostBack="True" GroupName="Group39"
-                            Text="No" Checked="True" Enabled="False" OnCheckedChanged="rbtnNo39_CheckedChanged" />
+                            Text="No" Enabled="False" OnCheckedChanged="rbtnNo39_CheckedChanged" />
                     </td>
                 </tr>
                 <tr class="trgris">
@@ -714,7 +714,7 @@
                         <asp:RadioButton ID="rbtnSi41" runat="server" AutoPostBack="True" GroupName="Group41"
                             Text="Si" OnCheckedChanged="rbtnSi41_CheckedChanged" />
                         <asp:RadioButton ID="rbtnNo41" runat="server" AutoPostBack="True" GroupName="Group41"
-                            Text="No" Checked="True" OnCheckedChanged="rbtnNo41_CheckedChanged" />
+                            Text="No" OnCheckedChanged="rbtnNo41_CheckedChanged" />
                         <asp:RadioButton ID="rbtnAlgunnas41" runat="server" AutoPostBack="True" GroupName="Group41"
                             Text="Algunas de las sedes" OnCheckedChanged="rbtnAlgunnas41_CheckedChanged" />
                     </td>
@@ -734,10 +734,10 @@
                 <tr class="trblanca">
                     <td class="style1" colspan="5">
                         &nbsp;
-                        <asp:RadioButton ID="rbtnSi43" runat="server" AutoPostBack="True" GroupName="Group43"
-                            Text="Si" OnCheckedChanged="rbtnSi43_CheckedChanged" />
-                        <asp:RadioButton ID="rbtnNo43" runat="server" AutoPostBack="True" GroupName="Group43"
-                            Text="No" Checked="True" OnCheckedChanged="rbtnNo43_CheckedChanged" />
+                        <asp:RadioButton ID="rbtnSi43" runat="server" AutoPostBack="True" 
+                            GroupName="43" oncheckedchanged="rbtnSi43_CheckedChanged" Text="Si" />
+                        <asp:RadioButton ID="rbtnNo43" runat="server" AutoPostBack="True" 
+                            GroupName="43" oncheckedchanged="rbtnNo43_CheckedChanged" Text="No" />
                     </td>
                 </tr>
                 <tr class="trgris">
@@ -765,7 +765,7 @@
                         <asp:RadioButton ID="rbtnSi51" runat="server" AutoPostBack="True" GroupName="Group43"
                             Text="Si" OnCheckedChanged="rbtnSi51_CheckedChanged" />
                         <asp:RadioButton ID="rbtnNo51" runat="server" AutoPostBack="True" GroupName="Group43"
-                            Text="No" Checked="True" OnCheckedChanged="rbtnNo51_CheckedChanged" />
+                            Text="No" OnCheckedChanged="rbtnNo51_CheckedChanged" />
                     </td>
                 </tr>
                 <tr class="trblanca">

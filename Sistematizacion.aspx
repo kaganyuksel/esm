@@ -67,7 +67,8 @@
                     </td>
                     <td style="vertical-align: middle; font-size: 13px; text-align: left;">
                         <h1 style="color: #0b72bc;">
-                            Instrumento de Sistematización</h1>
+                            Instrumento de Sistematización 
+                            para Establecimiento Educativo</h1>
                         Componente Evaluación, Sistematización y Monitoreo
                     </td>
                 </tr>

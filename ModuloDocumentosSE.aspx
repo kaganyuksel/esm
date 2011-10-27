@@ -80,7 +80,7 @@ background: #ffffff;" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td colspan="3">
                         Para el proceso de carga se debe tener en cuenta que el documento sea del tipo:
-                        pdf, rar, zip, doc, y que el tamaño sea igual o inferior a 2MB.
+                        pdf, rar, zip, doc, docx, y que el tamaño sea igual o inferior a 2MB.
                     </td>
                 </tr>
                 <tr>

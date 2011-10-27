@@ -469,7 +469,7 @@ namespace ESM.Evaluacion
                             /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
                             gvResultados.DataSourceID = "ldsies";
                         }
-                        else if (rol == "Consultor")
+                        else if (rol == "Consultor" || rol == "MEN")
                         {
                             gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
                             gvResultados.DataBind();
@@ -1578,7 +1578,7 @@ namespace ESM.Evaluacion
                     /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
                     gvResultados.DataSourceID = "ldsies";
                 }
-                else if (rol == "Consultor")
+                else if (rol == "Consultor" || rol == "MEN")
                 {
                     gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
                     gvResultados.DataBind();
@@ -1606,7 +1606,7 @@ namespace ESM.Evaluacion
                         /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
                         gvResultados.DataSourceID = "ldsies";
                     }
-                    else if (rol == "Consultor")
+                    else if (rol == "Consultor" || rol == "MEN")
                     {
                         gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
                         gvResultados.DataBind();
