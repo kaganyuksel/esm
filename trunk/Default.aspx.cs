@@ -25,7 +25,7 @@ namespace ESM
                     MEN.Visible = true;
                     ModEval.Visible = true;
                 }
-                else if (rol == "Consultor")
+                else if (rol == "Consultor" )
                 {
                     var idc = objCRoles.IdConsultor;
 
@@ -46,6 +46,7 @@ namespace ESM
                     AdministracionConfiguracion.Visible = false;
                     AdministracionUsuario.Visible = false;
                     MEN.Visible = true;
+                    ModEval.Visible = true;
                 }
             }
 

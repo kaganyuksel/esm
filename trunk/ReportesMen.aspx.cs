@@ -241,7 +241,13 @@ namespace ESM
                 Export(gvcopyDiliEE, "Diligenciamiento EE.xls");
 
             else if (gvDiliEE.Visible && resumido)
-                ExcelDoc(gvcopyDiliEE);
+            {
+                DataTable dt = new DataTable();
+                dt = ConvertToDataTable(gvcopyDiliEE);
+                string filename = Server.MapPath("/Excel/Diligenciamiento_EE_v01.xlsx");
+                ExportDataTable(dt, filename);
+                Response.Redirect("/Excel/Diligenciamiento_EE_v01.xlsx");
+            }
         }
 
         protected void ReportDiligenciamientoSE()
@@ -875,134 +881,136 @@ namespace ESM
             Visualizacion(false, false, false, true);
         }
 
-        protected void ExcelDoc(GridView objGridView = null)
-        {
-            var xls = new Excel.Application();
-            var libro = xls.Workbooks.Open(Server.MapPath("/Excel/Diligenciamiento_EE_v01.xls"));
-            var hoja = xls.Worksheets[1];
+        #region ExcelDocs Coment
+        //protected void ExcelDoc(GridView objGridView = null)
+        //{
+        //    var xls = new Excel.Application();
+        //    var libro = xls.Workbooks.Open(Server.MapPath("/Excel/Diligenciamiento_EE_v01.xls"));
+        //    var hoja = xls.Worksheets[1];
 
-            #region Carga de Archivo
-            for (int i = 0; i < objGridView.Columns.Count; i++)
-            {
-                hoja.Cells[1, i + 1] = objGridView.Columns[i].HeaderText;
+        //    #region Carga de Archivo
+        //    for (int i = 0; i < objGridView.Columns.Count; i++)
+        //    {
+        //        hoja.Cells[1, i + 1] = objGridView.Columns[i].HeaderText;
 
-            }
-
-
-            for (int i = 0; i < objGridView.Columns.Count; i++)
-            {
-                for (int j = 0; j < objGridView.Rows.Count; j++)
-                {
-                    if (i < 5)
-                        hoja.Cells[j + 2, i + 1] = objGridView.Rows[j].Cells[i].Text.ToString();
-
-                    switch (i)
-                    {
-                        case 5:
-                            Label lblcita = (Label)objGridView.Rows[j].FindControl("lblcita");
-                            hoja.Cells[j + 2, i + 1] = lblcita.Text;
-                            break;
-                        case 6:
-                            Label lblpei = (Label)objGridView.Rows[j].FindControl("lblpei");
-                            hoja.Cells[j + 2, i + 1] = lblpei.Text;
-                            break;
-                        case 7:
-                            Label lblpmi = (Label)objGridView.Rows[j].FindControl("lblpmi");
-                            hoja.Cells[j + 2, i + 1] = lblpmi.Text;
-                            break;
-                        case 8:
-                            Label lblmaco = (Label)objGridView.Rows[j].FindControl("lblmaco");
-                            hoja.Cells[j + 2, i + 1] = lblmaco.Text;
-                            break;
-                        case 9:
-                            Label lblplan = (Label)objGridView.Rows[j].FindControl("lblplan");
-                            hoja.Cells[j + 2, i + 1] = lblplan.Text;
-                            break;
-                        case 10:
-                            Label lblproy = (Label)objGridView.Rows[j].FindControl("lblproy");
-                            hoja.Cells[j + 2, i + 1] = lblproy.Text;
-                            break;
-                        case 11:
-                            Label lblotros = (Label)objGridView.Rows[j].FindControl("lblotros");
-                            hoja.Cells[j + 2, i + 1] = lblotros.Text;
-                            break;
-                        case 12:
-                            Label lblactaeecargada = (Label)objGridView.Rows[j].FindControl("lblactaeecargada");
-                            hoja.Cells[j + 2, i + 1] = lblactaeecargada.Text;
-                            break;
-                        case 13:
-                            Label lblcantdir = (Label)objGridView.Rows[j].FindControl("lblcantdir");
-                            hoja.Cells[j + 2, i + 1] = lblcantdir.Text;
-                            break;
-                        case 14:
-                            Label lblcantest = (Label)objGridView.Rows[j].FindControl("lblcantest");
-                            hoja.Cells[j + 2, i + 1] = lblcantest.Text;
-                            break;
-                        case 15:
-                            Label lblcantedu = (Label)objGridView.Rows[j].FindControl("lblcantedu");
-                            hoja.Cells[j + 2, i + 1] = lblcantedu.Text;
-                            break;
-                        case 16:
-                            Label lblcantpad = (Label)objGridView.Rows[j].FindControl("lblcantpad");
-                            hoja.Cells[j + 2, i + 1] = lblcantpad.Text;
-                            break;
-                        case 17:
-                            Label lblcantpro = (Label)objGridView.Rows[j].FindControl("lblcantpro");
-                            hoja.Cells[j + 2, i + 1] = lblcantpro.Text;
-                            break;
-                        case 18:
-                            Label lblestadoactaee = (Label)objGridView.Rows[j].FindControl("lblestadoactaee");
-                            hoja.Cells[j + 2, i + 1] = lblestadoactaee.Text;
-                            break;
-                        case 19:
-                            Label lblobservaciones = (Label)objGridView.Rows[j].FindControl("lblobservaciones");
-                            hoja.Cells[j + 2, i + 1] = lblobservaciones.Text;
-                            break;
-                        case 20:
-                            Label lblevalest = (Label)objGridView.Rows[j].FindControl("lblevalest");
-                            hoja.Cells[j + 2, i + 1] = lblevalest.Text;
-                            break;
-                        case 21:
-                            Label lblevalpad = (Label)objGridView.Rows[j].FindControl("lblevalpad");
-                            hoja.Cells[j + 2, i + 1] = lblevalpad.Text;
-                            break;
-                        case 22:
-                            Label lblevalprof = (Label)objGridView.Rows[j].FindControl("lblevalprof");
-                            hoja.Cells[j + 2, i + 1] = lblevalprof.Text;
-                            break;
-                        case 23:
-                            Label lblevaldir = (Label)objGridView.Rows[j].FindControl("lblevaldir");
-                            hoja.Cells[j + 2, i + 1] = lblevaldir.Text;
-                            break;
-                        case 24:
-                            Label lblevaledu = (Label)objGridView.Rows[j].FindControl("lblevaledu");
-                            hoja.Cells[j + 2, i + 1] = lblevaledu.Text;
-                            break;
-                    }
+        //    }
 
 
-                }
-            }
+        //    for (int i = 0; i < objGridView.Columns.Count; i++)
+        //    {
+        //        for (int j = 0; j < objGridView.Rows.Count; j++)
+        //        {
+        //            if (i < 5)
+        //                dr[i] = row.Cells[i].Cells[i].Text.ToString();
 
-            #endregion
+        //            switch (i)
+        //            {
+        //                case 5:
+        //                    Label lblcita = (Label)row.Cells[i].FindControl("lblcita");
+        //                    dr[i] = lblcita.Text;
+        //                    break;
+        //                case 6:
+        //                    Label lblpei = (Label)row.Cells[i].FindControl("lblpei");
+        //                    dr[i] = lblpei.Text;
+        //                    break;
+        //                case 7:
+        //                    Label lblpmi = (Label)row.Cells[i].FindControl("lblpmi");
+        //                    dr[i] = lblpmi.Text;
+        //                    break;
+        //                case 8:
+        //                    Label lblmaco = (Label)row.Cells[i].FindControl("lblmaco");
+        //                    dr[i] = lblmaco.Text;
+        //                    break;
+        //                case 9:
+        //                    Label lblplan = (Label)row.Cells[i].FindControl("lblplan");
+        //                    dr[i] = lblplan.Text;
+        //                    break;
+        //                case 10:
+        //                    Label lblproy = (Label)row.Cells[i].FindControl("lblproy");
+        //                    dr[i] = lblproy.Text;
+        //                    break;
+        //                case 11:
+        //                    Label lblotros = (Label)row.Cells[i].FindControl("lblotros");
+        //                    dr[i] = lblotros.Text;
+        //                    break;
+        //                case 12:
+        //                    Label lblactaeecargada = (Label)row.Cells[i].FindControl("lblactaeecargada");
+        //                    dr[i] = lblactaeecargada.Text;
+        //                    break;
+        //                case 13:
+        //                    Label lblcantdir = (Label)row.Cells[i].FindControl("lblcantdir");
+        //                    dr[i] = lblcantdir.Text;
+        //                    break;
+        //                case 14:
+        //                    Label lblcantest = (Label)row.Cells[i].FindControl("lblcantest");
+        //                    dr[i] = lblcantest.Text;
+        //                    break;
+        //                case 15:
+        //                    Label lblcantedu = (Label)row.Cells[i].FindControl("lblcantedu");
+        //                    dr[i] = lblcantedu.Text;
+        //                    break;
+        //                case 16:
+        //                    Label lblcantpad = (Label)row.Cells[i].FindControl("lblcantpad");
+        //                    dr[i] = lblcantpad.Text;
+        //                    break;
+        //                case 17:
+        //                    Label lblcantpro = (Label)row.Cells[i].FindControl("lblcantpro");
+        //                    dr[i] = lblcantpro.Text;
+        //                    break;
+        //                case 18:
+        //                    Label lblestadoactaee = (Label)row.Cells[i].FindControl("lblestadoactaee");
+        //                    dr[i] = lblestadoactaee.Text;
+        //                    break;
+        //                case 19:
+        //                    Label lblobservaciones = (Label)row.Cells[i].FindControl("lblobservaciones");
+        //                    dr[i] = lblobservaciones.Text;
+        //                    break;
+        //                case 20:
+        //                    Label lblevalest = (Label)row.Cells[i].FindControl("lblevalest");
+        //                    dr[i] = lblevalest.Text;
+        //                    break;
+        //                case 21:
+        //                    Label lblevalpad = (Label)row.Cells[i].FindControl("lblevalpad");
+        //                    dr[i] = lblevalpad.Text;
+        //                    break;
+        //                case 22:
+        //                    Label lblevalprof = (Label)row.Cells[i].FindControl("lblevalprof");
+        //                    dr[i] = lblevalprof.Text;
+        //                    break;
+        //                case 23:
+        //                    Label lblevaldir = (Label)row.Cells[i].FindControl("lblevaldir");
+        //                    dr[i] = lblevaldir.Text;
+        //                    break;
+        //                case 24:
+        //                    Label lblevaledu = (Label)row.Cells[i].FindControl("lblevaledu");
+        //                    dr[i] = lblevaledu.Text;
+        //                    break;
+        //            }
 
-            string filename = "/Excel/Diligenciamiento_EE_" + DateTime.Now.ToString("yyMMdd") + ".xls";
-            string serverpath = Server.MapPath(filename);
-            if (!File.Exists(filename))
-            {
-                xls.ActiveWorkbook.SaveCopyAs(serverpath);
-                if (File.Exists(serverpath))
-                    Response.Redirect(filename);
-            }
-            else
-            {
-                File.Delete(serverpath);
-                xls.ActiveWorkbook.SaveCopyAs(serverpath);
-                if (File.Exists(serverpath))
-                    Response.Redirect(filename);
-            }
 
-        }
+        //        }
+        //    }
+
+
+
+        //string filename = "/Excel/Diligenciamiento_EE_" + DateTime.Now.ToString("yyMMdd") + ".xls";
+        //string serverpath = Server.MapPath(filename);
+        //if (!File.Exists(filename))
+        //{
+        //    xls.ActiveWorkbook.SaveCopyAs(serverpath);
+        //    if (File.Exists(serverpath))
+        //        Response.Redirect(filename);
+        //}
+        //else
+        //{
+        //    File.Delete(serverpath);
+        //    xls.ActiveWorkbook.SaveCopyAs(serverpath);
+        //    if (File.Exists(serverpath))
+        //        Response.Redirect(filename);
+        //}
+
+        //}
+        #endregion
 
         protected void lknDiliRes_Click(object sender, EventArgs e)
         {
@@ -1012,143 +1020,220 @@ namespace ESM
         }
 
         #region Metodo Excel Open XML
-        //protected void OpenXmlExcelDoc(GridView objGridView = null)
-        //{
-        //    string filenameserver = Server.MapPath("/Excel/Diligenciamiento_EE_v01.xls");
 
-        //    SpreadsheetDocument document = SpreadsheetDocument.Open(filenameserver, true);
-        //    //var xls = new Excel.Application();
-        //    var libro = document.WorkbookPart.Workbook;
-        //    //var libro = xls.Workbooks.Open(Server.MapPath("/Excel/Diligenciamiento_EE_v01.xls"));
-        //    var hoja = (WorksheetPart)document.WorkbookPart.GetPartById("Diligenciamiento EE");
-        //    //var hoja = xls.Worksheets[1];
+        public void ExportDataTable(DataTable table, string exportFile)
+        {
+            //create the empty spreadsheet template and save the file //using the class generated by the Productivity tool  
+            ExcelDocument excelDocument = new ExcelDocument();
+            excelDocument.CreatePackage(exportFile);
+            //string filename = "";
+            //File.Copy(filename, filename, true);
+            //populate the data into the spreadsheet  
+            using (SpreadsheetDocument spreadsheet = SpreadsheetDocument.Open(exportFile, true))
+            {
+                WorkbookPart workbook = spreadsheet.WorkbookPart;
+                //create a reference to Sheet1  
+                WorksheetPart worksheet = workbook.WorksheetParts.Last();
+                SheetData data = worksheet.Worksheet.GetFirstChild<SheetData>();
 
-        //    Cell cell = (Cell)hoja.Parts;
+                //add column names to the first row  
+                Row header = new Row();
+                header.RowIndex = (UInt32)1;
 
-        //    #region Carga de Archivo
-        //    for (int i = 0; i < objGridView.Columns.Count; i++)
-        //    {
-        //        cell.InnerText = objGridView.Columns[i].HeaderText.ToString();
+                foreach (DataColumn column in table.Columns)
+                {
+                    Cell headerCell = createTextCell(
+                        table.Columns.IndexOf(column) + 1,
+                        1,
+                        column.ColumnName);
 
-        //        //hoja.Cells[1, i + 1] = objGridView.Columns[i].HeaderText;
+                    header.AppendChild(headerCell);
+                }
+                data.AppendChild(header);
 
-        //    }
+                //loop through each data row  
+                DataRow contentRow;
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    contentRow = table.Rows[i];
+                    data.AppendChild(createContentRow(contentRow, i + 2));
+                }
+            }
+        }
+        private Cell createTextCell(int columnIndex, int rowIndex, object cellValue)
+        {
+            Cell cell = new Cell();
 
+            cell.DataType = CellValues.InlineString;
+            cell.CellReference = getColumnName(columnIndex) + rowIndex;
 
-        //    //for (int i = 0; i < objGridView.Columns.Count; i++)
-        //    //{
-        //    //    for (int j = 0; j < objGridView.Rows.Count; j++)
-        //    //    {
-        //    //        if (i < 5)
-        //    //            hoja.Cells[j + 2, i + 1] = objGridView.Rows[j].Cells[i].Text.ToString();
+            InlineString inlineString = new InlineString();
+            Text t = new Text();
 
-        //    //        switch (i)
-        //    //        {
-        //    //            case 5:
-        //    //                Label lblcita = (Label)objGridView.Rows[j].FindControl("lblcita");
-        //    //                hoja.Cells[j + 2, i + 1] = lblcita.Text;
-        //    //                break;
-        //    //            case 6:
-        //    //                Label lblpei = (Label)objGridView.Rows[j].FindControl("lblpei");
-        //    //                hoja.Cells[j + 2, i + 1] = lblpei.Text;
-        //    //                break;
-        //    //            case 7:
-        //    //                Label lblpmi = (Label)objGridView.Rows[j].FindControl("lblpmi");
-        //    //                hoja.Cells[j + 2, i + 1] = lblpmi.Text;
-        //    //                break;
-        //    //            case 8:
-        //    //                Label lblmaco = (Label)objGridView.Rows[j].FindControl("lblmaco");
-        //    //                hoja.Cells[j + 2, i + 1] = lblmaco.Text;
-        //    //                break;
-        //    //            case 9:
-        //    //                Label lblplan = (Label)objGridView.Rows[j].FindControl("lblplan");
-        //    //                hoja.Cells[j + 2, i + 1] = lblplan.Text;
-        //    //                break;
-        //    //            case 10:
-        //    //                Label lblproy = (Label)objGridView.Rows[j].FindControl("lblproy");
-        //    //                hoja.Cells[j + 2, i + 1] = lblproy.Text;
-        //    //                break;
-        //    //            case 11:
-        //    //                Label lblotros = (Label)objGridView.Rows[j].FindControl("lblotros");
-        //    //                hoja.Cells[j + 2, i + 1] = lblotros.Text;
-        //    //                break;
-        //    //            case 12:
-        //    //                Label lblactaeecargada = (Label)objGridView.Rows[j].FindControl("lblactaeecargada");
-        //    //                hoja.Cells[j + 2, i + 1] = lblactaeecargada.Text;
-        //    //                break;
-        //    //            case 13:
-        //    //                Label lblcantdir = (Label)objGridView.Rows[j].FindControl("lblcantdir");
-        //    //                hoja.Cells[j + 2, i + 1] = lblcantdir.Text;
-        //    //                break;
-        //    //            case 14:
-        //    //                Label lblcantest = (Label)objGridView.Rows[j].FindControl("lblcantest");
-        //    //                hoja.Cells[j + 2, i + 1] = lblcantest.Text;
-        //    //                break;
-        //    //            case 15:
-        //    //                Label lblcantedu = (Label)objGridView.Rows[j].FindControl("lblcantedu");
-        //    //                hoja.Cells[j + 2, i + 1] = lblcantedu.Text;
-        //    //                break;
-        //    //            case 16:
-        //    //                Label lblcantpad = (Label)objGridView.Rows[j].FindControl("lblcantpad");
-        //    //                hoja.Cells[j + 2, i + 1] = lblcantpad.Text;
-        //    //                break;
-        //    //            case 17:
-        //    //                Label lblcantpro = (Label)objGridView.Rows[j].FindControl("lblcantpro");
-        //    //                hoja.Cells[j + 2, i + 1] = lblcantpro.Text;
-        //    //                break;
-        //    //            case 18:
-        //    //                Label lblestadoactaee = (Label)objGridView.Rows[j].FindControl("lblestadoactaee");
-        //    //                hoja.Cells[j + 2, i + 1] = lblestadoactaee.Text;
-        //    //                break;
-        //    //            case 19:
-        //    //                Label lblobservaciones = (Label)objGridView.Rows[j].FindControl("lblobservaciones");
-        //    //                hoja.Cells[j + 2, i + 1] = lblobservaciones.Text;
-        //    //                break;
-        //    //            case 20:
-        //    //                Label lblevalest = (Label)objGridView.Rows[j].FindControl("lblevalest");
-        //    //                hoja.Cells[j + 2, i + 1] = lblevalest.Text;
-        //    //                break;
-        //    //            case 21:
-        //    //                Label lblevalpad = (Label)objGridView.Rows[j].FindControl("lblevalpad");
-        //    //                hoja.Cells[j + 2, i + 1] = lblevalpad.Text;
-        //    //                break;
-        //    //            case 22:
-        //    //                Label lblevalprof = (Label)objGridView.Rows[j].FindControl("lblevalprof");
-        //    //                hoja.Cells[j + 2, i + 1] = lblevalprof.Text;
-        //    //                break;
-        //    //            case 23:
-        //    //                Label lblevaldir = (Label)objGridView.Rows[j].FindControl("lblevaldir");
-        //    //                hoja.Cells[j + 2, i + 1] = lblevaldir.Text;
-        //    //                break;
-        //    //            case 24:
-        //    //                Label lblevaledu = (Label)objGridView.Rows[j].FindControl("lblevaledu");
-        //    //                hoja.Cells[j + 2, i + 1] = lblevaledu.Text;
-        //    //                break;
-        //    //        }
+            t.Text = cellValue.ToString();
+            inlineString.AppendChild(t);
+            cell.AppendChild(inlineString);
 
+            return cell;
+        }
+        private Row createContentRow(DataRow dataRow, int rowIndex)
+        {
+            Row row = new Row
+            {
+                RowIndex = (UInt32)rowIndex
+            };
 
-        //    //    }
-        //    //}
+            for (int i = 0; i < dataRow.Table.Columns.Count; i++)
+            {
+                Cell dataCell = createTextCell(i + 1, rowIndex, dataRow[i]);
+                row.AppendChild(dataCell);
+            }
+            return row;
+        }
+        private string getColumnName(int columnIndex)
+        {
+            int dividend = columnIndex;
+            string columnName = String.Empty;
+            int modifier;
 
-        //    #endregion
+            while (dividend > 0)
+            {
+                modifier = (dividend - 1) % 26;
+                columnName =
+                    Convert.ToChar(65 + modifier).ToString() + columnName;
+                dividend = (int)((dividend - modifier) / 26);
+            }
 
-        //    string filename = "/Excel/Diligenciamiento_EE_" + DateTime.Now.ToString("yyMMdd") + ".xls";
-        //    string serverpath = Server.MapPath(filename);
-        //    if (!File.Exists(filename))
-        //    {
-        //        xls.ActiveWorkbook.SaveCopyAs(serverpath);
-        //        if (File.Exists(serverpath))
-        //            Response.Redirect(filename);
-        //    }
-        //    else
-        //    {
-        //        File.Delete(serverpath);
-        //        xls.ActiveWorkbook.SaveCopyAs(serverpath);
-        //        if (File.Exists(serverpath))
-        //            Response.Redirect(filename);
-        //    }
+            return columnName;
+        }
 
-        //}
+        protected DataTable ConvertToDataTable(GridView objgv)
+        {
+            DataTable dt = new DataTable();
+
+            // add the columns to the datatable            
+            if (objgv.HeaderRow != null)
+            {
+
+                for (int i = 0; i < objgv.HeaderRow.Cells.Count; i++)
+                {
+                    dt.Columns.Add(objgv.HeaderRow.Cells[i].Text);
+                }
+            }
+
+            //  add each of the data rows to the table
+            foreach (GridViewRow row in objgv.Rows)
+            {
+                DataRow dr;
+                dr = dt.NewRow();
+
+                for (int i = 0; i < row.Cells.Count; i++)
+                {
+                    if (i < 5)
+                        dr[i] = row.Cells[i].Text.Replace("&nbsp;", "");
+
+                    switch (i)
+                    {
+                        case 5:
+                            Label lblcita = (Label)row.Cells[i].FindControl("lblcita");
+                            dr[i] = lblcita.Text;
+                            break;
+                        case 6:
+                            Label lblpei = (Label)row.Cells[i].FindControl("lblpei");
+                            dr[i] = lblpei.Text;
+                            break;
+                        case 7:
+                            Label lblpmi = (Label)row.Cells[i].FindControl("lblpmi");
+                            dr[i] = lblpmi.Text;
+                            break;
+                        case 8:
+                            Label lblmaco = (Label)row.Cells[i].FindControl("lblmaco");
+                            dr[i] = lblmaco.Text;
+                            break;
+                        case 9:
+                            Label lblplan = (Label)row.Cells[i].FindControl("lblplan");
+                            dr[i] = lblplan.Text;
+                            break;
+                        case 10:
+                            Label lblproy = (Label)row.Cells[i].FindControl("lblproy");
+                            dr[i] = lblproy.Text;
+                            break;
+                        case 11:
+                            Label lblotros = (Label)row.Cells[i].FindControl("lblotros");
+                            dr[i] = lblotros.Text;
+                            break;
+                        case 12:
+                            Label lblactaeecargada = (Label)row.Cells[i].FindControl("lblactaeecargada");
+                            dr[i] = lblactaeecargada.Text;
+                            break;
+                        case 13:
+                            Label lblcantdir = (Label)row.Cells[i].FindControl("lblcantdir");
+                            dr[i] = lblcantdir.Text;
+                            break;
+                        case 14:
+                            Label lblcantest = (Label)row.Cells[i].FindControl("lblcantest");
+                            dr[i] = lblcantest.Text;
+                            break;
+                        case 15:
+                            Label lblcantedu = (Label)row.Cells[i].FindControl("lblcantedu");
+                            dr[i] = lblcantedu.Text;
+                            break;
+                        case 16:
+                            Label lblcantpad = (Label)row.Cells[i].FindControl("lblcantpad");
+                            dr[i] = lblcantpad.Text;
+                            break;
+                        case 17:
+                            Label lblcantpro = (Label)row.Cells[i].FindControl("lblcantpro");
+                            dr[i] = lblcantpro.Text;
+                            break;
+                        case 18:
+                            Label lblestadoactaee = (Label)row.Cells[i].FindControl("lblestadoactaee");
+                            dr[i] = lblestadoactaee.Text;
+                            break;
+                        case 19:
+                            Label lblobservaciones = (Label)row.Cells[i].FindControl("lblobservaciones");
+                            dr[i] = lblobservaciones.Text;
+                            break;
+                        case 20:
+                            Label lblevalest = (Label)row.Cells[i].FindControl("lblevalest");
+                            dr[i] = lblevalest.Text;
+                            break;
+                        case 21:
+                            Label lblevalpad = (Label)row.Cells[i].FindControl("lblevalpad");
+                            dr[i] = lblevalpad.Text;
+                            break;
+                        case 22:
+                            Label lblevalprof = (Label)row.Cells[i].FindControl("lblevalprof");
+                            dr[i] = lblevalprof.Text;
+                            break;
+                        case 23:
+                            Label lblevaldir = (Label)row.Cells[i].FindControl("lblevaldir");
+                            dr[i] = lblevaldir.Text;
+                            break;
+                        case 24:
+                            Label lblevaledu = (Label)row.Cells[i].FindControl("lblevaledu");
+                            dr[i] = lblevaledu.Text;
+                            break;
+                    }
+                }
+                dt.Rows.Add(dr);
+            }
+
+            //  add the footer row to the table
+            if (objgv.FooterRow != null)
+            {
+                DataRow dr;
+                dr = dt.NewRow();
+
+                for (int i = 0; i < objgv.FooterRow.Cells.Count; i++)
+                {
+                    dr[i] = objgv.FooterRow.Cells[i].Text.Replace("&nbsp;", "");
+                }
+                dt.Rows.Add(dr);
+            }
+
+            return dt;
+        }
         #endregion
     }
 }

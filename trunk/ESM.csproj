@@ -47,7 +47,9 @@
     <Reference Include="Artem.GoogleMap, Version=4.1.0.0, Culture=neutral, PublicKeyToken=fc8d6190a3aeb01c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ExcelPackage">
       <HintPath>..\Complementos\ExcelPackageBinary\ExcelPackage.dll</HintPath>
     </Reference>
@@ -101,6 +103,13 @@
     </Compile>
     <Compile Include="ActaVisitaSistematizacion.aspx.designer.cs">
       <DependentUpon>ActaVisitaSistematizacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActaVisitaSistematizacionSE.aspx.cs">
+      <DependentUpon>ActaVisitaSistematizacionSE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActaVisitaSistematizacionSE.aspx.designer.cs">
+      <DependentUpon>ActaVisitaSistematizacionSE.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddCita.aspx.cs">
       <DependentUpon>AddCita.aspx</DependentUpon>
@@ -185,11 +194,6 @@
     <Compile Include="MenuEvaluacion.aspx.designer.cs">
       <DependentUpon>MenuEvaluacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Model\AgendaESM.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AgendaESM.dbml</DependentUpon>
-    </Compile>
     <Compile Include="ModuloDocumentos.aspx.cs">
       <DependentUpon>ModuloDocumentos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -217,6 +221,7 @@
     <Compile Include="Objetos\CFullCalendar.cs" />
     <Compile Include="Objetos\CLecturaContextoEE.cs" />
     <Compile Include="Objetos\CReportes.cs" />
+    <Compile Include="Objetos\ExcelDocument.cs" />
     <Compile Include="Objetos\GridViewExportUtil.cs" />
     <Compile Include="Objetos\LecturaContextoSE.cs" />
     <Compile Include="Objetos\CSistematizacion.cs" />
@@ -234,6 +239,13 @@
     <Compile Include="Sistematizacion.aspx.designer.cs">
       <DependentUpon>Sistematizacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SistematizacionSE.aspx.cs">
+      <DependentUpon>SistematizacionSE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SistematizacionSE.aspx.designer.cs">
+      <DependentUpon>SistematizacionSE.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -247,6 +259,7 @@
     <Content Include="ActaVisitaEE.aspx" />
     <Content Include="ActaVisitaSE.aspx" />
     <Content Include="ActaVisitaSistematizacion.aspx" />
+    <Content Include="ActaVisitaSistematizacionSE.aspx" />
     <Content Include="AddCita.aspx" />
     <Content Include="AmCharts\flash\amcharts_key.txt" />
     <Content Include="AmCharts\flash\amcolumn.swf" />
@@ -472,6 +485,7 @@
     <Content Include="Scripts\ScrollTo\jquery.scrollTo-min.js" />
     <Content Include="Scripts\ScrollTo\jquery.scrollTo.js" />
     <Content Include="Sistematizacion.aspx" />
+    <Content Include="SistematizacionSE.aspx" />
     <Content Include="Site.css" />
     <Compile Include="Model\ESMBD.designer.cs">
       <AutoGen>True</AutoGen>
@@ -768,11 +782,6 @@
     <None Include="AmCharts\flash\patterns\horizontal.fla" />
     <None Include="AmCharts\flash\patterns\vertical.fla" />
     <Content Include="Site.Master" />
-    <None Include="Model\AgendaESM.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>AgendaESM.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Model\ESMBD.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>ESMBD.designer.cs</LastGenOutput>
@@ -796,11 +805,6 @@
   <ItemGroup>
     <None Include="Model\ESMBD.dbml.layout">
       <DependentUpon>ESMBD.dbml</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Model\AgendaESM.dbml.layout">
-      <DependentUpon>AgendaESM.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

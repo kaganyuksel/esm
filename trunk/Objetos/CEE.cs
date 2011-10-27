@@ -80,6 +80,21 @@ namespace ESM.Objetos
 
         }
 
+        public static IQueryable<ESM.Model.SistematizacionSE> ObtenerMedicionesSESis(int idse)
+        {
+            try
+            {
+                var csistematizacion = (from m in _db.SistematizacionSEs
+                                        where m.IdSE == idse
+                                        select m).Take(1);
+
+                return csistematizacion;
+
+            }
+            catch (Exception) { return null; }
+
+        }
+
         public static int CrearMedicionLC(DateTime fecha)
         {
             try

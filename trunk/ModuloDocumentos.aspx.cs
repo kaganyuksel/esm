@@ -132,7 +132,7 @@ namespace ESM
 
                             string strextencion = extencion.ToString();
 
-                            if (strextencion != "pdf" && strextencion != "zip" && strextencion != "rar" && strextencion != "doc")
+                            if (strextencion != "pdf" && strextencion != "zip" && strextencion != "rar" && strextencion != "doc" && strextencion != "docx")
                             {
                                 Response.Write("<script>alert('Error el archivo no pudo ser cargado, revise el tipo de documento que intenta cargar. \n\nFormatos compatibles:pdf,doc,zip,rar.');</script>");
                                 lblMensaje.Text = "Error el archivo no pudo ser cargado, revise el tipo de documento que intenta cargar. \n\nFormatos compatibles:pdf,doc,zip,rar.";

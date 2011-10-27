@@ -33,7 +33,7 @@ namespace ESM
                         gvResultados.DataSourceID = "ldsies";
                         gvResultados.DataBind();
                     }
-                    else if (rol == "Consultor")
+                    else if (rol == "Consultor" || rol == "MEN")
                     {
                         gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
                         gvResultados.DataBind();
@@ -227,6 +227,8 @@ namespace ESM
             if (cblistTipo.Items[3].Selected)
                 objCLecturaContextoEE._1_2_c4 = true;
 
+            objCLecturaContextoEE._2_1_ = Convert.ToInt32(txt21.Text);
+
             objCLecturaContextoEE._2_2_E1_ = Convert.ToInt32(txtE1.Text);
             objCLecturaContextoEE._2_2_E2_ = Convert.ToInt32(txtE2.Text);
             objCLecturaContextoEE._2_2_E3_ = Convert.ToInt32(txtE3.Text);
@@ -336,8 +338,8 @@ namespace ESM
                 objCLecturaContextoEE._4_3_No = true;
             else
             {
-                objCLecturaContextoEE._4_3_Si = true;
-                objCLecturaContextoEE._4_3_No = true;
+                objCLecturaContextoEE._4_3_Si = false;
+                objCLecturaContextoEE._4_3_No = false;
             }
 
             objCLecturaContextoEE._4_3_1_ = txt431.Text;
@@ -483,6 +485,14 @@ namespace ESM
                     txt355.Enabled = true;
                     txt356.Enabled = true;
                     txt357.Enabled = true;
+                    txt36.Enabled = true;
+                    txt37.Enabled = true;
+                    rbtnNo38.Enabled = true;
+                    rbtnSi38.Enabled = true;
+                    txt381.Enabled = true;
+                    rbtnNo39.Enabled = true;
+                    rbtnSi39.Enabled = true;
+                    txt391.Enabled = true;
                 }
                 else if ((bool)lc._3_5_No)
                 {
@@ -529,16 +539,26 @@ namespace ESM
                 txt391.Text = lc._3_9_1.ToString();
 
                 if ((bool)lc._4_1_Si)
+                {
                     rbtnSi41.Checked = true;
+                    txt42.Enabled = true;
+                }
                 else if ((bool)lc._4_1_No)
                     rbtnNo41.Checked = true;
                 else if ((bool)lc._4_1_Algunas)
+                {
                     rbtnAlgunnas41.Checked = true;
+                    txt42.Enabled = true;
+                }
 
                 txt42.Text = lc._4_2.ToString();
 
                 if ((bool)lc._4_3_Si)
+                {
                     rbtnSi43.Checked = true;
+                    rbtnNo43.Checked = false;
+                    txt431.Enabled = true;
+                }
                 else if ((bool)lc._4_3_No)
                     rbtnNo43.Checked = true;
 
@@ -688,7 +708,7 @@ namespace ESM
                     /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
                     gvResultados.DataSourceID = "ldsies";
                 }
-                else if (rol == "Consultor")
+                else if (rol == "Consultor" || rol == "MEN")
                 {
                     gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
                     gvResultados.DataBind();

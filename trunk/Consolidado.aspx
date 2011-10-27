@@ -42,11 +42,11 @@
                             <asp:Label Text='<%# Eval("IdIE") %>' runat="server" ID="IDIE"></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField Visible="false" SortExpression="IDCON" HeaderText="IDCON">
+                   <%-- <asp:TemplateField Visible="false" SortExpression="IDCON" HeaderText="IDCON">
                         <ItemTemplate>
                             <asp:Label runat="server" ID="IDCON" Text='<%# Eval("IdConsultor") %>'></asp:Label>
                         </ItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
                     <asp:CommandField SelectText="Mediciones" ShowSelectButton="True" ControlStyle-CssClass="a" />
                 </Columns>
                 <HeaderStyle CssClass="th"></HeaderStyle>
@@ -60,7 +60,7 @@
                 <RowStyle CssClass="td"></RowStyle>
             </asp:GridView>
             <asp:LinqDataSource ID="ldsies" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
-                EntityTypeName="" TableName="Establecimiento_Educativo">
+                EntityTypeName="" TableName="Establecimiento_Educativos">
             </asp:LinqDataSource>
             <asp:GridView runat="server" Width="100%" ID="gvMediciones" AutoGenerateColumns="True"
                 OnSelectedIndexChanged="gvMediciones_SelectedIndexChanged">
