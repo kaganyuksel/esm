@@ -721,5 +721,38 @@ namespace ESM
 
 
         }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CRoles objCRoles = new CRoles();
+            int idusuario = Convert.ToInt32(Session["idusuario"]);
+            string rol = objCRoles.ObtenerRol(idusuario);
+            int idconsultor = objCRoles.IdConsultor;
+            Filtro(txtFiltro.Text, idconsultor);
+        }
+
+        protected bool Filtro(string texto, int idconsultor)
+        {
+            try
+            {
+                /*Instancio*/
+                Model.ESMBDDataContext db = new Model.ESMBDDataContext();
+
+                var rFiltro = from i in db.Establecimiento_Educativos
+                              where i.Nombre.Contains(texto) && i.Estado == true && i.Secretaria_Educacion.IdConsultor == idconsultor
+                              select i;
+
+                gvResultados.DataSourceID = null;
+                gvResultados.DataSource = rFiltro;
+                gvResultados.DataBind();
+
+                ObtenerTema(gvResultados);
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+
     }
 }
