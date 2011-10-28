@@ -11,6 +11,9 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+            $("#ContentPlaceHolder1_gvResultados_GridViewPagergvresults_DropDownListPageSize").css("display", "none");
+            $("#ContentPlaceHolder1_gvResultados_GridViewPagergvresults_LabelRows").css("display", "none");
+
             $("#dialog:ui-dialog").dialog("destroy");
 
             $("#dtimer").dialog({
@@ -249,7 +252,7 @@
                         <HeaderStyle CssClass="th"></HeaderStyle>
                         <PagerStyle CssClass="DDFooter" />
                         <PagerTemplate>
-                            <asp:GridViewPager ID="GridViewPager1" runat="server" />
+                            <%--<asp:GridViewPager ID="GridViewPager1" runat="server" />--%>
                         </PagerTemplate>
                         <EmptyDataTemplate>
                             Actualmente no hay elementos en esta tabla.
@@ -280,8 +283,8 @@
                         <AlternatingRowStyle CssClass="trblanca" />
                         <Columns>
                             <asp:CommandField SelectText="<img id='imgEvaluar'  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />"
-                                ShowSelectButton="True" ControlStyle-CssClass="a" >
-                            <ControlStyle CssClass="a" />
+                                ShowSelectButton="True" ControlStyle-CssClass="a">
+                                <ControlStyle CssClass="a" />
                             </asp:CommandField>
                             <asp:BoundField DataField="CodigoDane" HeaderText="Cod. DANE" />
                             <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
@@ -296,7 +299,7 @@
                         <HeaderStyle CssClass="trheader"></HeaderStyle>
                         <PagerStyle CssClass="DDFooter" />
                         <PagerTemplate>
-                            <asp:GridViewPager ID="GridViewPager1" runat="server" />
+                            <asp:GridViewPager ID="GridViewPagergvresults" runat="server" />
                         </PagerTemplate>
                         <EmptyDataTemplate>
                             Actualmente no hay elementos en esta tabla.

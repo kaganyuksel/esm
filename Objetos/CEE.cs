@@ -14,15 +14,20 @@ namespace ESM.Objetos
 
         #endregion
 
-        public static IQueryable<Establecimiento_Educativo> ObtenerEEs(int idconsultor, bool sistematizacion = false)
+        public static IQueryable<Establecimiento_Educativo> ObtenerEEs(int idconsultor, bool sistematizacion = false, bool Admin = false)
         {
             try
             {
                 IQueryable<ESM.Model.Establecimiento_Educativo> cee = null;
 
-                cee = from ee in _db.Establecimiento_Educativos
-                      where ee.Secretaria_Educacion.IdConsultor == idconsultor && ee.Estado == true
-                      select ee;
+                if (!Admin)
+                    cee = from ee in _db.Establecimiento_Educativos
+                          where ee.Secretaria_Educacion.IdConsultor == idconsultor && ee.Estado == true
+                          select ee;
+                else if (Admin)
+                    cee = from ee in _db.Establecimiento_Educativos
+                          where ee.Estado == true
+                          select ee;
 
                 if (sistematizacion)
                 {

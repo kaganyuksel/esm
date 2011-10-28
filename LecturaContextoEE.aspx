@@ -90,7 +90,7 @@
                 <asp:TextBox runat="server" ID="txtFiltro" />
                 <%--<input type="button" name="btnFiltro" value="Buscar" onclick="buscar();" />--%>
                 <asp:Button ID="btnBuscar" Text="Buscar" runat="server" CausesValidation="false"
-                    UseSubmitBehavior="true" />
+                    UseSubmitBehavior="true" onclick="btnBuscar_Click" />
             </p>
             <asp:GridView ID="gvResultados" runat="server" AllowPaging="True" AllowSorting="True"
                 CssClass="gvResultados" RowStyle-CssClass="td" HeaderStyle-CssClass="th" CellPadding="6"

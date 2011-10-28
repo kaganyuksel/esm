@@ -467,7 +467,8 @@ namespace ESM.Evaluacion
                         if (rol == "Administrador")
                         {
                             /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
-                            gvResultados.DataSourceID = "ldsies";
+                            gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor, false, true);
+                            gvResultados.DataBind();
                         }
                         else if (rol == "Consultor" || rol == "MEN")
                         {
@@ -640,7 +641,6 @@ namespace ESM.Evaluacion
 
         }
 
-
         /// <summary>
         /// Se ejecuta al momento de la carga de controles dentro del gridview
         /// </summary>
@@ -723,8 +723,6 @@ namespace ESM.Evaluacion
 
         }
 
-
-
         protected void gvResultados_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -785,7 +783,11 @@ namespace ESM.Evaluacion
 
         protected void Unnamed2_Click(object sender, EventArgs e)
         {
-            Filtro(txtFiltro.Text);
+            CRoles objCRoles = new CRoles();
+            int idusuario = Convert.ToInt32(Session["idusuario"]);
+            string rol = objCRoles.ObtenerRol(idusuario);
+            int idconsultor = objCRoles.IdConsultor;
+            Filtro(txtFiltro.Text, idconsultor);
         }
 
         protected void ldsIes_Selecting(object sender, LinqDataSourceSelectEventArgs e)
@@ -832,7 +834,6 @@ namespace ESM.Evaluacion
 
 
         }
-
 
         protected void gvTopEval_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1230,7 +1231,7 @@ namespace ESM.Evaluacion
         }
 
 
-        protected bool Filtro(string texto)
+        protected bool Filtro(string texto, int idconsultor)
         {
             try
             {
@@ -1238,7 +1239,7 @@ namespace ESM.Evaluacion
                 Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
                 var rFiltro = from i in db.Establecimiento_Educativos
-                              where i.Nombre.Contains(texto) && i.Estado == true
+                              where i.Nombre.Contains(texto) && i.Estado == true && i.Secretaria_Educacion.IdConsultor == idconsultor
                               select i;
 
                 gvResultados.DataSourceID = null;
@@ -1589,6 +1590,7 @@ namespace ESM.Evaluacion
 
             }
         }
+
         protected void gvResultados_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try
@@ -1599,26 +1601,26 @@ namespace ESM.Evaluacion
                 int idusuario = Convert.ToInt32(Session["idusuario"]);
                 string rol = objCRoles.ObtenerRol(idusuario);
 
-                if (_tipo == 2)
+
+                if (rol == "Administrador")
                 {
-                    if (rol == "Administrador")
-                    {
-                        /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
-                        gvResultados.DataSourceID = "ldsies";
-                    }
-                    else if (rol == "Consultor" || rol == "MEN")
-                    {
-                        gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
-                        gvResultados.DataBind();
-                    }
-
-                    ObtenerTema(gvResultados);
-
-
+                    /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
+                    gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor, false, true);
+                    gvResultados.DataBind();
                 }
+                else if (rol == "Consultor" || rol == "MEN")
+                {
+                    gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
+                    gvResultados.DataBind();
+                }
+
+                ObtenerTema(gvResultados);
+
             }
             catch (Exception) { }
 
         }
+
+
     }
 }
