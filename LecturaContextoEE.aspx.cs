@@ -190,6 +190,8 @@ namespace ESM
         {
             #region Asignacion
 
+            objCLecturaContextoEE.Numero_Sedes = Convert.ToInt32(txtSedes.Text);
+
             if (cblistjornadas.Items[0].Selected)
                 objCLecturaContextoEE.F11 = true;
             if (cblistjornadas.Items[1].Selected)
@@ -209,9 +211,6 @@ namespace ESM
                 objCLecturaContextoEE.C_3 = true;
             if (cblistTipo.Items[3].Selected)
                 objCLecturaContextoEE.C_4 = true;
-
-
-            objCLecturaContextoEE.Sedes = Convert.ToInt32(txtSedes.Value);
 
             if (rbtnRural.Checked)
                 objCLecturaContextoEE._1_2_Rural = true;
@@ -391,6 +390,8 @@ namespace ESM
 
             if (lc != null)
             {
+                txtSedes.Text = lc.NumeroSedes.ToString();
+
                 if ((bool)lc.f11)
                     cblistjornadas.Items[0].Selected = true;
                 if ((bool)lc.f12)
@@ -411,13 +412,10 @@ namespace ESM
                 if ((bool)lc.C_4)
                     cblistTipo.Items[3].Selected = true;
 
-
-                txtSedes.Value = lc.d.ToString();
-
                 if ((bool)lc._1_2bRural)
                     rbtnRural.Checked = true;
                 else if ((bool)lc._1_2bUrbana)
-                    rbtnRural.Checked = true;
+                    rbtnUrbana.Checked = true;
 
                 txt21.Text = lc._2_1.ToString();
 
