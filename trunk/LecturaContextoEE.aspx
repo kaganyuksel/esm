@@ -13,7 +13,7 @@
         {
             text-align: left;
         }
-        </style>
+    </style>
     <script type="text/javascript">
         $(document).ready(function () {
             $(".numerico").change(function () {
@@ -90,18 +90,17 @@
                 <asp:TextBox runat="server" ID="txtFiltro" />
                 <%--<input type="button" name="btnFiltro" value="Buscar" onclick="buscar();" />--%>
                 <asp:Button ID="btnBuscar" Text="Buscar" runat="server" CausesValidation="false"
-                    UseSubmitBehavior="true" onclick="btnBuscar_Click" />
+                    UseSubmitBehavior="true" OnClick="btnBuscar_Click" />
             </p>
             <asp:GridView ID="gvResultados" runat="server" AllowPaging="True" AllowSorting="True"
                 CssClass="gvResultados" RowStyle-CssClass="td" HeaderStyle-CssClass="th" CellPadding="6"
-                AutoGenerateColumns="False" Width="100%" 
-                OnSelectedIndexChanged="gvResultados_SelectedIndexChanged" 
-                onpageindexchanging="gvResultados_PageIndexChanging">
+                AutoGenerateColumns="False" Width="100%" OnSelectedIndexChanged="gvResultados_SelectedIndexChanged"
+                OnPageIndexChanging="gvResultados_PageIndexChanging">
                 <AlternatingRowStyle CssClass="trblanca" />
                 <Columns>
                     <asp:CommandField SelectText="<img id='imgEvaluar'  height='24px' src='/Icons/Stationery.png' alt='Evaluar' />"
-                        ShowSelectButton="True" ControlStyle-CssClass="a" >
-<ControlStyle CssClass="a"></ControlStyle>
+                        ShowSelectButton="True" ControlStyle-CssClass="a">
+                        <ControlStyle CssClass="a"></ControlStyle>
                     </asp:CommandField>
                     <asp:BoundField DataField="CodigoDane" HeaderText="Cod. DANE" />
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
@@ -221,8 +220,8 @@
                         D.) Numero de sedes para EE:
                     </td>
                     <td colspan="4">
-                        <input onkeypress="return mis_datos(event)" type="text" id="txtSedes" runat="server"
-                            class="numerico" style="width: 100%;" value="0" />
+                        <asp:TextBox type="text" ID="txtSedes" runat="server" class="numerico" Style="width: 100%;"
+                            value="0" />
                     </td>
                 </tr>
                 <tr class="trblanca">
@@ -734,10 +733,10 @@
                 <tr class="trblanca">
                     <td class="style1" colspan="5">
                         &nbsp;
-                        <asp:RadioButton ID="rbtnSi43" runat="server" AutoPostBack="True" 
-                            GroupName="43" oncheckedchanged="rbtnSi43_CheckedChanged" Text="Si" />
-                        <asp:RadioButton ID="rbtnNo43" runat="server" AutoPostBack="True" 
-                            GroupName="43" oncheckedchanged="rbtnNo43_CheckedChanged" Text="No" />
+                        <asp:RadioButton ID="rbtnSi43" runat="server" AutoPostBack="True" GroupName="43"
+                            OnCheckedChanged="rbtnSi43_CheckedChanged" Text="Si" />
+                        <asp:RadioButton ID="rbtnNo43" runat="server" AutoPostBack="True" GroupName="43"
+                            OnCheckedChanged="rbtnNo43_CheckedChanged" Text="No" />
                     </td>
                 </tr>
                 <tr class="trgris">

@@ -12,6 +12,18 @@ namespace ESM.Objetos
 
         ESM.Model.ESMBDDataContext _db = new Model.ESMBDDataContext();
 
+        #region Seccion Informacion
+
+        private int _num_sedes;
+
+        public int Numero_Sedes
+        {
+            get { return _num_sedes; }
+            set { _num_sedes = value; }
+        }
+        
+        #endregion
+
         #region Seccion 1
         private bool _f11;
 
@@ -607,6 +619,7 @@ namespace ESM.Objetos
                 {
                     IdIE = idee,
                     IdMedicion = idmedicion,
+                    NumeroSedes = _num_sedes,
 
                     #region Seccion 1
 
@@ -721,6 +734,12 @@ namespace ESM.Objetos
                 var lcee = (from lc in _db.LecturaContextoEEs
                             where lc.IdIE == idee && lc.IdMedicion == idmedicion
                             select lc).Single(); ;
+
+                #region Seccion Informacion
+
+                lcee.NumeroSedes = _num_sedes;
+
+                #endregion
 
                 #region Seccion 1
 

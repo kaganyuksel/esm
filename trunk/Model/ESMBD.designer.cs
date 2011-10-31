@@ -8601,6 +8601,8 @@ namespace ESM.Model
 		
 		private int _IdMedicion;
 		
+		private System.Nullable<int> _NumeroSedes;
+		
 		private System.Nullable<bool> _f11;
 		
 		private System.Nullable<bool> _f12;
@@ -8745,6 +8747,8 @@ namespace ESM.Model
     partial void OnIdIEChanged();
     partial void OnIdMedicionChanging(int value);
     partial void OnIdMedicionChanged();
+    partial void OnNumeroSedesChanging(System.Nullable<int> value);
+    partial void OnNumeroSedesChanged();
     partial void Onf11Changing(System.Nullable<bool> value);
     partial void Onf11Changed();
     partial void Onf12Changing(System.Nullable<bool> value);
@@ -8948,6 +8952,26 @@ namespace ESM.Model
 					this._IdMedicion = value;
 					this.SendPropertyChanged("IdMedicion");
 					this.OnIdMedicionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumeroSedes", DbType="Int")]
+		public System.Nullable<int> NumeroSedes
+		{
+			get
+			{
+				return this._NumeroSedes;
+			}
+			set
+			{
+				if ((this._NumeroSedes != value))
+				{
+					this.OnNumeroSedesChanging(value);
+					this.SendPropertyChanging();
+					this._NumeroSedes = value;
+					this.SendPropertyChanged("NumeroSedes");
+					this.OnNumeroSedesChanged();
 				}
 			}
 		}
