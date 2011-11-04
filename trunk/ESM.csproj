@@ -124,6 +124,20 @@
       <DependentUpon>export.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ArbolObjetivos.aspx.cs">
+      <DependentUpon>ArbolObjetivos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArbolObjetivos.aspx.designer.cs">
+      <DependentUpon>ArbolObjetivos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ArbolProblemas.aspx.cs">
+      <DependentUpon>ArbolProblemas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArbolProblemas.aspx.designer.cs">
+      <DependentUpon>ArbolProblemas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Ayuda.aspx.cs">
       <DependentUpon>Ayuda.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -225,6 +239,7 @@
     <Compile Include="Objetos\GridViewExportUtil.cs" />
     <Compile Include="Objetos\LecturaContextoSE.cs" />
     <Compile Include="Objetos\CSistematizacion.cs" />
+    <Compile Include="Objetos\MarcoLogico.cs" />
     <Compile Include="ReportesMen.aspx.cs">
       <DependentUpon>ReportesMen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -283,6 +298,8 @@
     <Content Include="AmCharts\javascript\images\dragIcon.gif" />
     <Content Include="AmCharts\javascript\images\lens.png" />
     <Content Include="AmCharts\javascript\raphael.js" />
+    <Content Include="ArbolObjetivos.aspx" />
+    <Content Include="ArbolProblemas.aspx" />
     <Content Include="Ayuda.aspx" />
     <Content Include="Cita.aspx" />
     <Content Include="Citas.aspx" />
@@ -482,6 +499,7 @@
     <Content Include="Scripts\jquery-1.6.2.min.js" />
     <Content Include="Scripts\jquery-1.6.3-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.15.custom.min.js" />
+    <Content Include="Scripts\jquery.ui.datepicker-es.js" />
     <Content Include="Scripts\ScrollTo\jquery.scrollTo-min.js" />
     <Content Include="Scripts\ScrollTo\jquery.scrollTo.js" />
     <Content Include="Sistematizacion.aspx" />

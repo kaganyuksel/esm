@@ -238,16 +238,22 @@ namespace ESM
 
             }
             else if (gvDiliEE.Visible && !resumido)
-                Export(gvcopyDiliEE, "Diligenciamiento EE.xls");
-
-            else if (gvDiliEE.Visible && resumido)
             {
-                DataTable dt = new DataTable();
-                dt = ConvertToDataTable(gvcopyDiliEE);
-                string filename = Server.MapPath("/Excel/Diligenciamiento_EE_v01.xlsx");
-                ExportDataTable(dt, filename);
-                Response.Redirect("/Excel/Diligenciamiento_EE_v01.xlsx");
+                gvDiliEE.AllowPaging = false;
+                ReportEE();
+                Export(gvcopyDiliEE, "Diligenciamiento EE");
             }
+
+            //else if (gvDiliEE.Visible && resumido)
+            //{
+            //    //gvDiliEE.AllowPaging = false;
+            //    //ReportEE();
+            //    //DataTable dt = new DataTable();
+            //    //dt = ConvertToDataTable(gvcopyDiliEE);
+            //    //string filename = Server.MapPath("/Excel/Diligenciamiento_EE_v01.xlsx");
+            //    //ExportDataTable(dt, filename);
+            //    Response.Redirect("/Excel/Diligenciamiento_EE_v01.xlsx");
+            //}
         }
 
         protected void ReportDiligenciamientoSE()
@@ -312,9 +318,6 @@ namespace ESM
 
                         lblCantAsocioados.Text = cantasis.ToString();
                     }
-
-
-
 
                     #endregion
 
@@ -552,84 +555,18 @@ namespace ESM
                     {
                         try
                         {
-                            #region Seccion Consulta Acta
-
-                            var acee = from aee in db.ActaVisitaEEs
-                                       where aee.IdEE == Convert.ToInt32(lblidie.Text)
-                                       select new { aee.AsociadosActaVisitaEEs, aee.Medicione.FechaMedicion };
-
-                            #region Seccion Consulta Documentos
-
-                            foreach (var item in acee)
-                            {
-                                foreach (var asistitem in item.AsociadosActaVisitaEEs)
-                                {
-                                    switch (asistitem.IdActor)
-                                    {
-                                        //Estudiante
-                                        case 1:
-                                            int cantest = (from c in item.AsociadosActaVisitaEEs
-                                                           where c.IdActor == 1
-                                                           select c).Count();
-
-                                            lblcantest.Text = cantest.ToString();
-                                            lblcantestc.Text = cantest.ToString();
-
-                                            break;
-                                        //Profesional
-                                        case 2:
-                                            int cantpro = (from c in item.AsociadosActaVisitaEEs
-                                                           where c.IdActor == 2
-                                                           select c).Count();
-
-                                            lblcantpro.Text = cantpro.ToString();
-                                            lblcantproc.Text = cantpro.ToString();
-                                            break;
-                                        //Educador
-                                        case 3:
-                                            int cantedu = (from c in item.AsociadosActaVisitaEEs
-                                                           where c.IdActor == 3
-                                                           select c).Count();
-
-                                            lblcantedu.Text = cantedu.ToString();
-                                            lblcanteduc.Text = cantedu.ToString();
-                                            break;
-                                        //Padre de Familia
-                                        case 4:
-                                            int cantpad = (from c in item.AsociadosActaVisitaEEs
-                                                           where c.IdActor == 4
-                                                           select c).Count();
-
-                                            lblcantpad.Text = cantpad.ToString();
-                                            lblcantpadc.Text = cantpad.ToString();
-                                            break;
-                                        //Directivos
-                                        case 6:
-                                            int cantdir = (from c in item.AsociadosActaVisitaEEs
-                                                           where c.IdActor == 6
-                                                           select c).Count();
-
-                                            lblcantdir.Text = cantdir.ToString();
-                                            lblcantdirc.Text = cantdir.ToString();
-                                            break;
-                                    }
-                                }
-                            }
-
-                            #endregion
-
-                            #endregion
-
                             #region Seccion Consulta Evaluacion
+                            int Idactor = i + 1;
+
                             var coleval = (from ev in db.Evaluacions
-                                           where ev.IdActor == i + 1 && ev.IdIE == Convert.ToInt32(lblidie.Text)
+                                           where ev.IdActor == Idactor && ev.IdIE == Convert.ToInt32(lblidie.Text)
                                            select new { ev.IdMedicion, ev.EstadoEvaluacion.Estado }).Single();
 
                             string evalact = coleval.Estado;
 
                             idmedicion = (int)coleval.IdMedicion;
 
-                            switch (i + 1)
+                            switch (Idactor)
                             {
                                 case 1:
                                     lblevalest.Text = evalact;
@@ -653,219 +590,290 @@ namespace ESM
                                     break;
 
                             }
-
-
-                            #region Documentos Establecimiento Educativo
-
-                            var docsaee = from deec in db.AsignaDocumentos
-                                          where deec.IdMedicion == idmedicion
-                                          select deec;
-
-                            foreach (var docsitem in docsaee)
-                            {
-                                switch (docsitem.IdDocumento)
-                                {
-                                    //PEI
-                                    case 1:
-                                        lblpei.Text = "Diligenciado";
-                                        lblpeic.Text = "Diligenciado";
-                                        break;
-                                    //PMI
-                                    case 2:
-                                        lblpmi.Text = "Diligenciado";
-                                        lblpmic.Text = "Diligenciado";
-                                        break;
-                                    //Manual de Convivencia
-                                    case 3:
-                                        lblmaco.Text = "Diligenciado";
-                                        lblmacoc.Text = "Diligenciado";
-                                        break;
-                                    //Plan de Estudios
-                                    case 4:
-                                        lblplan.Text = "Diligenciado";
-                                        lblplanc.Text = "Diligenciado";
-                                        break;
-                                    //DPP
-                                    case 9:
-                                        lblproy.Text = "Diligenciado";
-                                        lblproyc.Text = "Diligenciado";
-                                        break;
-                                    //Otros
-                                    case 10:
-                                        lblotros.Text = "Diligenciado";
-                                        lblotrosc.Text = "Diligenciado";
-                                        break;
-                                    //ActaVisitaEE
-                                    case 11:
-                                        lblactaeecargada.Text = "Diligenciado";
-                                        lblactaeecargadac.Text = "Diligenciado";
-                                        break;
-
-                                }
-                            }
-
-                            #endregion
-
-
-                            #endregion
-
-                            #region Seccion Consulta Lectura Contexto EE
-                            ESM.Model.LecturaContextoEE lcee = null;
-                            try
-                            {
-                                lcee = (from lceec in db.LecturaContextoEEs
-                                        where lceec.IdIE == Convert.ToInt32(lblidie.Text)
-                                        select lceec).Single();
-                            }
-                            catch (Exception) { lcee = null; }
-
-
-
-                            if (lcee != null)
-                            {
-                                bool estadolcee = true;
-
-                                if (!(bool)lcee.f11 && !(bool)lcee.f12 && !(bool)lcee.f13 && !(bool)lcee.f14 && !(bool)lcee.f15)
-                                    estadolcee = false;
-
-                                if (!(bool)lcee._1_2bRural && !(bool)lcee._1_2bUrbana)
-                                    estadolcee = false;
-
-                                if (!(bool)lcee.C_1 && !(bool)lcee.C_2 && !(bool)lcee.C_3 && !(bool)lcee.C_4 && !(bool)lcee.C_5)
-                                    estadolcee = false;
-
-                                int totalestrato = Convert.ToInt32(lcee._2_2_E1) + Convert.ToInt32(lcee._2_2_E2) + Convert.ToInt32(lcee._2_2_E3) + Convert.ToInt32(lcee._2_2_E4) + Convert.ToInt32(lcee._2_2_E5) + Convert.ToInt32(lcee._2_2_E6);
-
-                                if (totalestrato < 100)
-                                {
-                                    if (lblobservaciones.Text == "Ninguna")
-                                        lblobservaciones.Text = "La suma total de estratos no puede ser menor a 100%.";
-                                    estadolcee = false;
-                                }
-                                else if (totalestrato > 100)
-                                {
-                                    estadolcee = false;
-                                    if (lblobservaciones.Text == "Ninguna")
-                                        lblobservaciones.Text = "La suma total de estratos no puede ser mayor a 100%.";
-                                }
-
-                                int totalsisben = Convert.ToInt32(lcee._2_3_S1) + Convert.ToInt32(lcee._2_3_S2) + Convert.ToInt32(lcee._2_3_S3) + Convert.ToInt32(lcee._2_3_S4) + Convert.ToInt32(lcee._2_3_NoSabe) + Convert.ToInt32(lcee._2_3_NoTiene);
-
-                                if (totalsisben < 100)
-                                {
-                                    if (lblobservaciones.Text == "Ninguna")
-                                        lblobservaciones.Text = "La suma total de sisben no puede ser menor a 100%.";
-                                    estadolcee = false;
-                                }
-                                else if (totalsisben > 100)
-                                {
-                                    if (lblobservaciones.Text == "Ninguna")
-                                        lblobservaciones.Text = "La suma total de sisben no puede ser mayor a 100%.";
-                                    estadolcee = false;
-                                }
-
-                                if ((bool)lcee._2_4_Si)
-                                    if (lcee._2_5_1.ToString().ToString().Trim() == "0" && lcee._2_5_2.ToString().ToString().Trim() == "0" && lcee._2_5_3.ToString().ToString().Trim() == "0")
-                                        estadolcee = false;
-
-                                if (lcee._3_1.ToString().Trim().Length == 0)
-                                    estadolcee = false;
-                                if (lcee._3_2.ToString().Trim().Length == 0)
-                                    estadolcee = false;
-                                if (lcee._3_3.ToString().Trim().Length == 0)
-                                    estadolcee = false;
-
-                                if ((bool)lcee._3_4_Si)
-                                    if (lcee._3_4_1.ToString().Trim().Length == 0)
-                                        estadolcee = false;
-
-                                if ((bool)lcee._3_5_Si)
-                                {
-                                    if (lcee._3_5_1.ToString().Trim().Length == 0)
-                                        estadolcee = false;
-                                    if (lcee._3_5_2.ToString().Trim().Length == 0)
-                                        estadolcee = false;
-                                    if (lcee._3_5_3.ToString().Trim().Length == 0)
-                                        estadolcee = false;
-                                    if (lcee._3_5_4.ToString().Trim().Length == 0)
-                                        estadolcee = false;
-                                    if (lcee._3_5_5.ToString().Trim().Length == 0)
-                                        estadolcee = false;
-                                    if (lcee._3_5_6.ToString().Trim().Length == 0)
-                                        estadolcee = false;
-                                    if (lcee._3_5_7.ToString().Trim().Length == 0)
-                                        estadolcee = false;
-                                }
-
-                                if (lcee._3_6.ToString().Trim().Length == 0)
-                                    estadolcee = false;
-                                if (lcee._3_7.ToString().Trim().Length == 0)
-                                    estadolcee = false;
-
-
-                                if ((bool)lcee._3_8_Si)
-                                    if (lcee._3_8_1.ToString().Trim().Length == 0)
-                                        estadolcee = false;
-
-                                if ((bool)lcee._3_9_Si)
-                                    if (lcee._3_9_1.ToString().Trim().Length == 0)
-                                        estadolcee = false;
-
-                                if (!(bool)lcee._4_1_Algunas && (bool)lcee._4_1_Si && (bool)lcee._4_1_No)
-                                    estadolcee = false;
-                                else
-                                    if ((bool)lcee._4_1_Si)
-                                        if (lcee._4_2.ToString().Trim().Length == 0)
-                                            estadolcee = false;
-
-                                if ((bool)lcee._4_3_Si)
-                                    if (lcee._4_3_1.ToString().Trim().Length == 0)
-                                        estadolcee = false;
-
-                                if ((bool)lcee._5_1_Si)
-                                    if (lcee._5_1_1.ToString().Trim().Length == 0)
-                                        estadolcee = false;
-
-                                //Validacion General para acta de establecimiento educativo
-                                if (estadolcee)
-                                {
-                                    lblestadoactaee.Text = "Diligenciado";
-                                    lblestadoactaeec.Text = "Diligenciado";
-
-                                }
-                                else
-                                {
-                                    lblestadoactaee.Text = "Parcial";
-                                    lblestadoactaeec.Text = "Parcial";
-                                }
-
-                            }
-
-
-                            #endregion
-
-                            #region Fecha Visita
-                            ESM.Model.Cita objCita = null;
-
-                            try
-                            {
-                                objCita = (from c in db.Citas
-                                           where c.IdEE == Convert.ToInt32(lblidie.Text)
-                                           select c).Take(1).Single();
-                            }
-                            catch (Exception) { objCita = null; }
-
-                            if (objCita != null)
-                            {
-                                lblcita.Text = objCita.FechaInicio.ToShortDateString();
-                                lblcitac.Text = objCita.FechaInicio.ToShortDateString();
-                            }
                             #endregion
 
                         }
                         catch (Exception) { }
                     }
+
+                    #region Documentos Establecimiento Educativo
+
+                    var docsaee = from deec in db.AsignaDocumentos
+                                  where deec.IdMedicion == idmedicion
+                                  select deec;
+
+                    foreach (var docsitem in docsaee)
+                    {
+                        switch (docsitem.IdDocumento)
+                        {
+                            //PEI
+                            case 1:
+                                lblpei.Text = "Diligenciado";
+                                lblpeic.Text = "Diligenciado";
+                                break;
+                            //PMI
+                            case 2:
+                                lblpmi.Text = "Diligenciado";
+                                lblpmic.Text = "Diligenciado";
+                                break;
+                            //Manual de Convivencia
+                            case 3:
+                                lblmaco.Text = "Diligenciado";
+                                lblmacoc.Text = "Diligenciado";
+                                break;
+                            //Plan de Estudios
+                            case 4:
+                                lblplan.Text = "Diligenciado";
+                                lblplanc.Text = "Diligenciado";
+                                break;
+                            //DPP
+                            case 9:
+                                lblproy.Text = "Diligenciado";
+                                lblproyc.Text = "Diligenciado";
+                                break;
+                            //Otros
+                            case 10:
+                                lblotros.Text = "Diligenciado";
+                                lblotrosc.Text = "Diligenciado";
+                                break;
+                            //ActaVisitaEE
+                            case 11:
+                                lblactaeecargada.Text = "Diligenciado";
+                                lblactaeecargadac.Text = "Diligenciado";
+                                break;
+
+                        }
+                    }
+
+                    #endregion
+
+                    #region Seccion Consulta Acta
+
+                    var acee = from aee in db.ActaVisitaEEs
+                               where aee.IdEE == Convert.ToInt32(lblidie.Text)
+                               select new { aee.AsociadosActaVisitaEEs, aee.Medicione.FechaMedicion };
+
+                    #region Seccion Consulta Documentos
+
+                    foreach (var item in acee)
+                    {
+                        foreach (var asistitem in item.AsociadosActaVisitaEEs)
+                        {
+                            switch (asistitem.IdActor)
+                            {
+                                //Estudiante
+                                case 1:
+                                    int cantest = (from c in item.AsociadosActaVisitaEEs
+                                                   where c.IdActor == 1
+                                                   select c).Count();
+
+                                    lblcantest.Text = cantest.ToString();
+                                    lblcantestc.Text = cantest.ToString();
+
+                                    break;
+                                //Profesional
+                                case 2:
+                                    int cantpro = (from c in item.AsociadosActaVisitaEEs
+                                                   where c.IdActor == 2
+                                                   select c).Count();
+
+                                    lblcantpro.Text = cantpro.ToString();
+                                    lblcantproc.Text = cantpro.ToString();
+                                    break;
+                                //Educador
+                                case 3:
+                                    int cantedu = (from c in item.AsociadosActaVisitaEEs
+                                                   where c.IdActor == 3
+                                                   select c).Count();
+
+                                    lblcantedu.Text = cantedu.ToString();
+                                    lblcanteduc.Text = cantedu.ToString();
+                                    break;
+                                //Padre de Familia
+                                case 4:
+                                    int cantpad = (from c in item.AsociadosActaVisitaEEs
+                                                   where c.IdActor == 4
+                                                   select c).Count();
+
+                                    lblcantpad.Text = cantpad.ToString();
+                                    lblcantpadc.Text = cantpad.ToString();
+                                    break;
+                                //Directivos
+                                case 6:
+                                    int cantdir = (from c in item.AsociadosActaVisitaEEs
+                                                   where c.IdActor == 6
+                                                   select c).Count();
+
+                                    lblcantdir.Text = cantdir.ToString();
+                                    lblcantdirc.Text = cantdir.ToString();
+                                    break;
+                            }
+                        }
+                    }
+
+                    #endregion
+
+                    #endregion
+
+                    #region Seccion Consulta Lectura Contexto EE
+                    ESM.Model.LecturaContextoEE lcee = null;
+                    try
+                    {
+                        lcee = (from lceec in db.LecturaContextoEEs
+                                where lceec.IdIE == Convert.ToInt32(lblidie.Text)
+                                select lceec).Single();
+                    }
+                    catch (Exception) { lcee = null; }
+
+
+
+                    if (lcee != null)
+                    {
+                        bool estadolcee = true;
+
+                        if (!(bool)lcee.f11 && !(bool)lcee.f12 && !(bool)lcee.f13 && !(bool)lcee.f14 && !(bool)lcee.f15)
+                            estadolcee = false;
+
+                        if (!(bool)lcee._1_2bRural && !(bool)lcee._1_2bUrbana)
+                            estadolcee = false;
+
+                        if (!(bool)lcee.C_1 && !(bool)lcee.C_2 && !(bool)lcee.C_3 && !(bool)lcee.C_4 && !(bool)lcee.C_5)
+                            estadolcee = false;
+
+                        int totalestrato = Convert.ToInt32(lcee._2_2_E1) + Convert.ToInt32(lcee._2_2_E2) + Convert.ToInt32(lcee._2_2_E3) + Convert.ToInt32(lcee._2_2_E4) + Convert.ToInt32(lcee._2_2_E5) + Convert.ToInt32(lcee._2_2_E6);
+
+                        if (totalestrato < 100)
+                        {
+                            if (lblobservaciones.Text == "Ninguna")
+                                lblobservaciones.Text = "La suma total de estratos no puede ser menor a 100%.";
+                            estadolcee = false;
+                        }
+                        else if (totalestrato > 100)
+                        {
+                            estadolcee = false;
+                            if (lblobservaciones.Text == "Ninguna")
+                                lblobservaciones.Text = "La suma total de estratos no puede ser mayor a 100%.";
+                        }
+
+                        int totalsisben = Convert.ToInt32(lcee._2_3_S1) + Convert.ToInt32(lcee._2_3_S2) + Convert.ToInt32(lcee._2_3_S3) + Convert.ToInt32(lcee._2_3_S4) + Convert.ToInt32(lcee._2_3_NoSabe) + Convert.ToInt32(lcee._2_3_NoTiene);
+
+                        if (totalsisben < 100)
+                        {
+                            if (lblobservaciones.Text == "Ninguna")
+                                lblobservaciones.Text = "La suma total de sisben no puede ser menor a 100%.";
+                            estadolcee = false;
+                        }
+                        else if (totalsisben > 100)
+                        {
+                            if (lblobservaciones.Text == "Ninguna")
+                                lblobservaciones.Text = "La suma total de sisben no puede ser mayor a 100%.";
+                            estadolcee = false;
+                        }
+
+                        if ((bool)lcee._2_4_Si)
+                            if (lcee._2_5_1.ToString().ToString().Trim() == "0" && lcee._2_5_2.ToString().ToString().Trim() == "0" && lcee._2_5_3.ToString().ToString().Trim() == "0")
+                                estadolcee = false;
+
+                        if (lcee._3_1.ToString().Trim().Length == 0)
+                            estadolcee = false;
+                        if (lcee._3_2.ToString().Trim().Length == 0)
+                            estadolcee = false;
+                        if (lcee._3_3.ToString().Trim().Length == 0)
+                            estadolcee = false;
+
+                        if ((bool)lcee._3_4_Si)
+                            if (lcee._3_4_1.ToString().Trim().Length == 0)
+                                estadolcee = false;
+
+                        if ((bool)lcee._3_5_Si)
+                        {
+                            if (lcee._3_5_1.ToString().Trim().Length == 0)
+                                estadolcee = false;
+                            if (lcee._3_5_2.ToString().Trim().Length == 0)
+                                estadolcee = false;
+                            if (lcee._3_5_3.ToString().Trim().Length == 0)
+                                estadolcee = false;
+                            if (lcee._3_5_4.ToString().Trim().Length == 0)
+                                estadolcee = false;
+                            if (lcee._3_5_5.ToString().Trim().Length == 0)
+                                estadolcee = false;
+                            if (lcee._3_5_6.ToString().Trim().Length == 0)
+                                estadolcee = false;
+                            if (lcee._3_5_7.ToString().Trim().Length == 0)
+                                estadolcee = false;
+                        }
+
+                        if (lcee._3_6.ToString().Trim().Length == 0)
+                            estadolcee = false;
+                        if (lcee._3_7.ToString().Trim().Length == 0)
+                            estadolcee = false;
+
+
+                        if ((bool)lcee._3_8_Si)
+                            if (lcee._3_8_1.ToString().Trim().Length == 0)
+                                estadolcee = false;
+
+                        if ((bool)lcee._3_9_Si)
+                            if (lcee._3_9_1.ToString().Trim().Length == 0)
+                                estadolcee = false;
+
+                        if (!(bool)lcee._4_1_Algunas && (bool)lcee._4_1_Si && (bool)lcee._4_1_No)
+                            estadolcee = false;
+                        else
+                            if ((bool)lcee._4_1_Si)
+                                if (lcee._4_2.ToString().Trim().Length == 0)
+                                    estadolcee = false;
+
+                        if ((bool)lcee._4_3_Si)
+                            if (lcee._4_3_1.ToString().Trim().Length == 0)
+                                estadolcee = false;
+
+                        if ((bool)lcee._5_1_Si)
+                            if (lcee._5_1_1.ToString().Trim().Length == 0)
+                                estadolcee = false;
+
+                        //Validacion General para acta de establecimiento educativo
+                        if (estadolcee)
+                        {
+                            lblestadoactaee.Text = "Diligenciado";
+                            lblestadoactaeec.Text = "Diligenciado";
+
+                        }
+                        else
+                        {
+                            lblestadoactaee.Text = "Parcial";
+                            lblestadoactaeec.Text = "Parcial";
+                        }
+
+                    }
+
+
+                    #endregion
+
+                    #region Fecha Visita
+                    ESM.Model.Cita objCita = null;
+
+                    try
+                    {
+                        objCita = (from c in db.Citas
+                                   where c.IdEE == Convert.ToInt32(lblidie.Text)
+                                   select c).Take(1).Single();
+                    }
+                    catch (Exception) { objCita = null; }
+
+                    if (objCita != null)
+                    {
+                        lblcita.Text = objCita.FechaInicio.ToShortDateString();
+                        lblcitac.Text = objCita.FechaInicio.ToShortDateString();
+                    }
+                    #endregion
                 }
+
+                //DataTable dt = new DataTable();
+                //dt = ConvertToDataTable(gvDiliEE);
+                //string filename = Server.MapPath("/Excel/Diligenciamiento_EE_v01.xlsx");
+                //ExportDataTable(dt, filename);
+
             }
             catch (Exception)
             {
@@ -1122,6 +1130,8 @@ namespace ESM
             }
 
             //  add each of the data rows to the table
+
+
             foreach (GridViewRow row in objgv.Rows)
             {
                 DataRow dr;
@@ -1218,6 +1228,7 @@ namespace ESM
                 }
                 dt.Rows.Add(dr);
             }
+
 
             //  add the footer row to the table
             if (objgv.FooterRow != null)

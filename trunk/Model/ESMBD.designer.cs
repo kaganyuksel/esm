@@ -45,9 +45,6 @@ namespace ESM.Model
     partial void InsertActividade(Actividade instance);
     partial void UpdateActividade(Actividade instance);
     partial void DeleteActividade(Actividade instance);
-    partial void InsertActividades_Indicadore(Actividades_Indicadore instance);
-    partial void UpdateActividades_Indicadore(Actividades_Indicadore instance);
-    partial void DeleteActividades_Indicadore(Actividades_Indicadore instance);
     partial void InsertActividades_Medio(Actividades_Medio instance);
     partial void UpdateActividades_Medio(Actividades_Medio instance);
     partial void DeleteActividades_Medio(Actividades_Medio instance);
@@ -78,6 +75,9 @@ namespace ESM.Model
     partial void InsertCausa(Causa instance);
     partial void UpdateCausa(Causa instance);
     partial void DeleteCausa(Causa instance);
+    partial void InsertCausas_Efecto(Causas_Efecto instance);
+    partial void UpdateCausas_Efecto(Causas_Efecto instance);
+    partial void DeleteCausas_Efecto(Causas_Efecto instance);
     partial void InsertCita(Cita instance);
     partial void UpdateCita(Cita instance);
     partial void DeleteCita(Cita instance);
@@ -105,9 +105,6 @@ namespace ESM.Model
     partial void InsertDocumento(Documento instance);
     partial void UpdateDocumento(Documento instance);
     partial void DeleteDocumento(Documento instance);
-    partial void InsertEfecto(Efecto instance);
-    partial void UpdateEfecto(Efecto instance);
-    partial void DeleteEfecto(Efecto instance);
     partial void InsertEstablecimiento_Educativo(Establecimiento_Educativo instance);
     partial void UpdateEstablecimiento_Educativo(Establecimiento_Educativo instance);
     partial void DeleteEstablecimiento_Educativo(Establecimiento_Educativo instance);
@@ -123,6 +120,15 @@ namespace ESM.Model
     partial void InsertEvaluacion(Evaluacion instance);
     partial void UpdateEvaluacion(Evaluacion instance);
     partial void DeleteEvaluacion(Evaluacion instance);
+    partial void InsertIndicadore(Indicadore instance);
+    partial void UpdateIndicadore(Indicadore instance);
+    partial void DeleteIndicadore(Indicadore instance);
+    partial void InsertIndicadores_Meta(Indicadores_Meta instance);
+    partial void UpdateIndicadores_Meta(Indicadores_Meta instance);
+    partial void DeleteIndicadores_Meta(Indicadores_Meta instance);
+    partial void InsertIndicadores_Valor(Indicadores_Valor instance);
+    partial void UpdateIndicadores_Valor(Indicadores_Valor instance);
+    partial void DeleteIndicadores_Valor(Indicadores_Valor instance);
     partial void InsertLecturaContextoEE(LecturaContextoEE instance);
     partial void UpdateLecturaContextoEE(LecturaContextoEE instance);
     partial void DeleteLecturaContextoEE(LecturaContextoEE instance);
@@ -150,15 +156,6 @@ namespace ESM.Model
     partial void InsertPAC_Indicadores_Medio(PAC_Indicadores_Medio instance);
     partial void UpdatePAC_Indicadores_Medio(PAC_Indicadores_Medio instance);
     partial void DeletePAC_Indicadores_Medio(PAC_Indicadores_Medio instance);
-    partial void InsertPAC(PAC instance);
-    partial void UpdatePAC(PAC instance);
-    partial void DeletePAC(PAC instance);
-    partial void InsertPACS_Medio(PACS_Medio instance);
-    partial void UpdatePACS_Medio(PACS_Medio instance);
-    partial void DeletePACS_Medio(PACS_Medio instance);
-    partial void InsertPACS_Supuesto(PACS_Supuesto instance);
-    partial void UpdatePACS_Supuesto(PACS_Supuesto instance);
-    partial void DeletePACS_Supuesto(PACS_Supuesto instance);
     partial void InsertPregunta(Pregunta instance);
     partial void UpdatePregunta(Pregunta instance);
     partial void DeletePregunta(Pregunta instance);
@@ -168,9 +165,24 @@ namespace ESM.Model
     partial void InsertProceso(Proceso instance);
     partial void UpdateProceso(Proceso instance);
     partial void DeleteProceso(Proceso instance);
+    partial void InsertProyecto(Proyecto instance);
+    partial void UpdateProyecto(Proyecto instance);
+    partial void DeleteProyecto(Proyecto instance);
+    partial void InsertProyectos_Medio(Proyectos_Medio instance);
+    partial void UpdateProyectos_Medio(Proyectos_Medio instance);
+    partial void DeleteProyectos_Medio(Proyectos_Medio instance);
+    partial void InsertProyectos_Supuesto(Proyectos_Supuesto instance);
+    partial void UpdateProyectos_Supuesto(Proyectos_Supuesto instance);
+    partial void DeleteProyectos_Supuesto(Proyectos_Supuesto instance);
     partial void InsertRama(Rama instance);
     partial void UpdateRama(Rama instance);
     partial void DeleteRama(Rama instance);
+    partial void InsertResponsable(Responsable instance);
+    partial void UpdateResponsable(Responsable instance);
+    partial void DeleteResponsable(Responsable instance);
+    partial void InsertResponsables_Resultado(Responsables_Resultado instance);
+    partial void UpdateResponsables_Resultado(Responsables_Resultado instance);
+    partial void DeleteResponsables_Resultado(Responsables_Resultado instance);
     partial void InsertResultado(Resultado instance);
     partial void UpdateResultado(Resultado instance);
     partial void DeleteResultado(Resultado instance);
@@ -180,9 +192,9 @@ namespace ESM.Model
     partial void InsertResultados_Medio(Resultados_Medio instance);
     partial void UpdateResultados_Medio(Resultados_Medio instance);
     partial void DeleteResultados_Medio(Resultados_Medio instance);
-    partial void InsertResultados_PAC(Resultados_PAC instance);
-    partial void UpdateResultados_PAC(Resultados_PAC instance);
-    partial void DeleteResultados_PAC(Resultados_PAC instance);
+    partial void InsertResultados_Proyecto(Resultados_Proyecto instance);
+    partial void UpdateResultados_Proyecto(Resultados_Proyecto instance);
+    partial void DeleteResultados_Proyecto(Resultados_Proyecto instance);
     partial void InsertResultados_Supuesto(Resultados_Supuesto instance);
     partial void UpdateResultados_Supuesto(Resultados_Supuesto instance);
     partial void DeleteResultados_Supuesto(Resultados_Supuesto instance);
@@ -276,14 +288,6 @@ namespace ESM.Model
 			get
 			{
 				return this.GetTable<Actividade>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Actividades_Indicadore> Actividades_Indicadores
-		{
-			get
-			{
-				return this.GetTable<Actividades_Indicadore>();
 			}
 		}
 		
@@ -383,6 +387,14 @@ namespace ESM.Model
 			}
 		}
 		
+		public System.Data.Linq.Table<Causas_Efecto> Causas_Efectos
+		{
+			get
+			{
+				return this.GetTable<Causas_Efecto>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Cita> Citas
 		{
 			get
@@ -455,14 +467,6 @@ namespace ESM.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<Efecto> Efectos
-		{
-			get
-			{
-				return this.GetTable<Efecto>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Establecimiento_Educativo> Establecimiento_Educativos
 		{
 			get
@@ -500,6 +504,30 @@ namespace ESM.Model
 			get
 			{
 				return this.GetTable<Evaluacion>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Indicadore> Indicadores
+		{
+			get
+			{
+				return this.GetTable<Indicadore>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Indicadores_Meta> Indicadores_Metas
+		{
+			get
+			{
+				return this.GetTable<Indicadores_Meta>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Indicadores_Valor> Indicadores_Valors
+		{
+			get
+			{
+				return this.GetTable<Indicadores_Valor>();
 			}
 		}
 		
@@ -575,30 +603,6 @@ namespace ESM.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<PAC> PACs
-		{
-			get
-			{
-				return this.GetTable<PAC>();
-			}
-		}
-		
-		public System.Data.Linq.Table<PACS_Medio> PACS_Medios
-		{
-			get
-			{
-				return this.GetTable<PACS_Medio>();
-			}
-		}
-		
-		public System.Data.Linq.Table<PACS_Supuesto> PACS_Supuestos
-		{
-			get
-			{
-				return this.GetTable<PACS_Supuesto>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Pregunta> Preguntas
 		{
 			get
@@ -623,11 +627,51 @@ namespace ESM.Model
 			}
 		}
 		
+		public System.Data.Linq.Table<Proyecto> Proyectos
+		{
+			get
+			{
+				return this.GetTable<Proyecto>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Proyectos_Medio> Proyectos_Medios
+		{
+			get
+			{
+				return this.GetTable<Proyectos_Medio>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Proyectos_Supuesto> Proyectos_Supuestos
+		{
+			get
+			{
+				return this.GetTable<Proyectos_Supuesto>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Rama> Ramas
 		{
 			get
 			{
 				return this.GetTable<Rama>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Responsable> Responsables
+		{
+			get
+			{
+				return this.GetTable<Responsable>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Responsables_Resultado> Responsables_Resultados
+		{
+			get
+			{
+				return this.GetTable<Responsables_Resultado>();
 			}
 		}
 		
@@ -655,11 +699,11 @@ namespace ESM.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<Resultados_PAC> Resultados_PACs
+		public System.Data.Linq.Table<Resultados_Proyecto> Resultados_Proyectos
 		{
 			get
 			{
-				return this.GetTable<Resultados_PAC>();
+				return this.GetTable<Resultados_Proyecto>();
 			}
 		}
 		
@@ -1047,9 +1091,7 @@ namespace ESM.Model
 		
 		private string _Verbo1;
 		
-		private System.Data.Linq.Binary _upsize_ts;
-		
-		private EntitySet<Actividades_Indicadore> _Actividades_Indicadores;
+		private EntitySet<Indicadore> _Indicadores;
 		
 		private EntitySet<PAC_Indicadore> _PAC_Indicadores;
 		
@@ -1063,19 +1105,17 @@ namespace ESM.Model
     partial void OnIdChanged();
     partial void OnVerbo1Changing(string value);
     partial void OnVerbo1Changed();
-    partial void Onupsize_tsChanging(System.Data.Linq.Binary value);
-    partial void Onupsize_tsChanged();
     #endregion
 		
 		public Verbo()
 		{
-			this._Actividades_Indicadores = new EntitySet<Actividades_Indicadore>(new Action<Actividades_Indicadore>(this.attach_Actividades_Indicadores), new Action<Actividades_Indicadore>(this.detach_Actividades_Indicadores));
+			this._Indicadores = new EntitySet<Indicadore>(new Action<Indicadore>(this.attach_Indicadores), new Action<Indicadore>(this.detach_Indicadores));
 			this._PAC_Indicadores = new EntitySet<PAC_Indicadore>(new Action<PAC_Indicadore>(this.attach_PAC_Indicadores), new Action<PAC_Indicadore>(this.detach_PAC_Indicadores));
 			this._Resultados_Indicadores = new EntitySet<Resultados_Indicadore>(new Action<Resultados_Indicadore>(this.attach_Resultados_Indicadores), new Action<Resultados_Indicadore>(this.detach_Resultados_Indicadores));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Id
 		{
 			get
@@ -1115,36 +1155,16 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_upsize_ts", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary upsize_ts
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_Indicadore", Storage="_Indicadores", ThisKey="Id", OtherKey="verbo_id")]
+		public EntitySet<Indicadore> Indicadores
 		{
 			get
 			{
-				return this._upsize_ts;
+				return this._Indicadores;
 			}
 			set
 			{
-				if ((this._upsize_ts != value))
-				{
-					this.Onupsize_tsChanging(value);
-					this.SendPropertyChanging();
-					this._upsize_ts = value;
-					this.SendPropertyChanged("upsize_ts");
-					this.Onupsize_tsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_Actividades_Indicadore", Storage="_Actividades_Indicadores", ThisKey="Id", OtherKey="verbo_id")]
-		public EntitySet<Actividades_Indicadore> Actividades_Indicadores
-		{
-			get
-			{
-				return this._Actividades_Indicadores;
-			}
-			set
-			{
-				this._Actividades_Indicadores.Assign(value);
+				this._Indicadores.Assign(value);
 			}
 		}
 		
@@ -1194,13 +1214,13 @@ namespace ESM.Model
 			}
 		}
 		
-		private void attach_Actividades_Indicadores(Actividades_Indicadore entity)
+		private void attach_Indicadores(Indicadore entity)
 		{
 			this.SendPropertyChanging();
 			entity.Verbo = this;
 		}
 		
-		private void detach_Actividades_Indicadores(Actividades_Indicadore entity)
+		private void detach_Indicadores(Indicadore entity)
 		{
 			this.SendPropertyChanging();
 			entity.Verbo = null;
@@ -1926,17 +1946,17 @@ namespace ESM.Model
 		
 		private string _Actividad;
 		
-		private string _Plan_Operativo;
-		
-		private System.Data.Linq.Binary _upsize_ts;
-		
-		private EntitySet<Actividades_Indicadore> _Actividades_Indicadores;
+		private System.Nullable<decimal> _Presupuesto;
 		
 		private EntitySet<Actividades_Medio> _Actividades_Medios;
 		
 		private EntitySet<Actividades_Supuesto> _Actividades_Supuestos;
 		
-		private EntityRef<Resultados_PAC> _Resultados_PAC;
+		private EntitySet<Indicadore> _Indicadores;
+		
+		private EntitySet<Responsables_Resultado> _Responsables_Resultados;
+		
+		private EntityRef<Resultados_Proyecto> _Resultados_Proyecto;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1948,22 +1968,21 @@ namespace ESM.Model
     partial void OnResultado_idChanged();
     partial void OnActividadChanging(string value);
     partial void OnActividadChanged();
-    partial void OnPlan_OperativoChanging(string value);
-    partial void OnPlan_OperativoChanged();
-    partial void Onupsize_tsChanging(System.Data.Linq.Binary value);
-    partial void Onupsize_tsChanged();
+    partial void OnPresupuestoChanging(System.Nullable<decimal> value);
+    partial void OnPresupuestoChanged();
     #endregion
 		
 		public Actividade()
 		{
-			this._Actividades_Indicadores = new EntitySet<Actividades_Indicadore>(new Action<Actividades_Indicadore>(this.attach_Actividades_Indicadores), new Action<Actividades_Indicadore>(this.detach_Actividades_Indicadores));
 			this._Actividades_Medios = new EntitySet<Actividades_Medio>(new Action<Actividades_Medio>(this.attach_Actividades_Medios), new Action<Actividades_Medio>(this.detach_Actividades_Medios));
 			this._Actividades_Supuestos = new EntitySet<Actividades_Supuesto>(new Action<Actividades_Supuesto>(this.attach_Actividades_Supuestos), new Action<Actividades_Supuesto>(this.detach_Actividades_Supuestos));
-			this._Resultados_PAC = default(EntityRef<Resultados_PAC>);
+			this._Indicadores = new EntitySet<Indicadore>(new Action<Indicadore>(this.attach_Indicadores), new Action<Indicadore>(this.detach_Indicadores));
+			this._Responsables_Resultados = new EntitySet<Responsables_Resultado>(new Action<Responsables_Resultado>(this.attach_Responsables_Resultados), new Action<Responsables_Resultado>(this.detach_Responsables_Resultados));
+			this._Resultados_Proyecto = default(EntityRef<Resultados_Proyecto>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Id
 		{
 			get
@@ -1983,7 +2002,7 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Resultado_id", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Resultado_id", DbType="Int")]
 		public System.Nullable<int> Resultado_id
 		{
 			get
@@ -1994,7 +2013,7 @@ namespace ESM.Model
 			{
 				if ((this._Resultado_id != value))
 				{
-					if (this._Resultados_PAC.HasLoadedOrAssignedValue)
+					if (this._Resultados_Proyecto.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2027,56 +2046,23 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Plan_Operativo", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string Plan_Operativo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Presupuesto", DbType="Money")]
+		public System.Nullable<decimal> Presupuesto
 		{
 			get
 			{
-				return this._Plan_Operativo;
+				return this._Presupuesto;
 			}
 			set
 			{
-				if ((this._Plan_Operativo != value))
+				if ((this._Presupuesto != value))
 				{
-					this.OnPlan_OperativoChanging(value);
+					this.OnPresupuestoChanging(value);
 					this.SendPropertyChanging();
-					this._Plan_Operativo = value;
-					this.SendPropertyChanged("Plan_Operativo");
-					this.OnPlan_OperativoChanged();
+					this._Presupuesto = value;
+					this.SendPropertyChanged("Presupuesto");
+					this.OnPresupuestoChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_upsize_ts", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary upsize_ts
-		{
-			get
-			{
-				return this._upsize_ts;
-			}
-			set
-			{
-				if ((this._upsize_ts != value))
-				{
-					this.Onupsize_tsChanging(value);
-					this.SendPropertyChanging();
-					this._upsize_ts = value;
-					this.SendPropertyChanged("upsize_ts");
-					this.Onupsize_tsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Actividades_Indicadore", Storage="_Actividades_Indicadores", ThisKey="Id", OtherKey="Actividad_id")]
-		public EntitySet<Actividades_Indicadore> Actividades_Indicadores
-		{
-			get
-			{
-				return this._Actividades_Indicadores;
-			}
-			set
-			{
-				this._Actividades_Indicadores.Assign(value);
 			}
 		}
 		
@@ -2106,26 +2092,52 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_PAC_Actividade", Storage="_Resultados_PAC", ThisKey="Resultado_id", OtherKey="Id", IsForeignKey=true)]
-		public Resultados_PAC Resultados_PAC
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Indicadore", Storage="_Indicadores", ThisKey="Id", OtherKey="Actividad_id")]
+		public EntitySet<Indicadore> Indicadores
 		{
 			get
 			{
-				return this._Resultados_PAC.Entity;
+				return this._Indicadores;
 			}
 			set
 			{
-				Resultados_PAC previousValue = this._Resultados_PAC.Entity;
+				this._Indicadores.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Responsables_Resultado", Storage="_Responsables_Resultados", ThisKey="Id", OtherKey="Actividad_id")]
+		public EntitySet<Responsables_Resultado> Responsables_Resultados
+		{
+			get
+			{
+				return this._Responsables_Resultados;
+			}
+			set
+			{
+				this._Responsables_Resultados.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_Proyecto_Actividade", Storage="_Resultados_Proyecto", ThisKey="Resultado_id", OtherKey="Id", IsForeignKey=true)]
+		public Resultados_Proyecto Resultados_Proyecto
+		{
+			get
+			{
+				return this._Resultados_Proyecto.Entity;
+			}
+			set
+			{
+				Resultados_Proyecto previousValue = this._Resultados_Proyecto.Entity;
 				if (((previousValue != value) 
-							|| (this._Resultados_PAC.HasLoadedOrAssignedValue == false)))
+							|| (this._Resultados_Proyecto.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Resultados_PAC.Entity = null;
+						this._Resultados_Proyecto.Entity = null;
 						previousValue.Actividades.Remove(this);
 					}
-					this._Resultados_PAC.Entity = value;
+					this._Resultados_Proyecto.Entity = value;
 					if ((value != null))
 					{
 						value.Actividades.Add(this);
@@ -2135,7 +2147,7 @@ namespace ESM.Model
 					{
 						this._Resultado_id = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("Resultados_PAC");
+					this.SendPropertyChanged("Resultados_Proyecto");
 				}
 			}
 		}
@@ -2158,18 +2170,6 @@ namespace ESM.Model
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Actividades_Indicadores(Actividades_Indicadore entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = this;
-		}
-		
-		private void detach_Actividades_Indicadores(Actividades_Indicadore entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = null;
 		}
 		
 		private void attach_Actividades_Medios(Actividades_Medio entity)
@@ -2195,293 +2195,29 @@ namespace ESM.Model
 			this.SendPropertyChanging();
 			entity.Actividade = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Actividades_Indicadores")]
-	public partial class Actividades_Indicadore : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _Actividad_id;
-		
-		private string _Actividad_indicador;
-		
-		private string _unidad;
-		
-		private System.Nullable<System.DateTime> _fecha;
-		
-		private System.Nullable<int> _verbo_id;
-		
-		private System.Data.Linq.Binary _upsize_ts;
-		
-		private EntityRef<Actividade> _Actividade;
-		
-		private EntityRef<Verbo> _Verbo;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnActividad_idChanging(System.Nullable<int> value);
-    partial void OnActividad_idChanged();
-    partial void OnActividad_indicadorChanging(string value);
-    partial void OnActividad_indicadorChanged();
-    partial void OnunidadChanging(string value);
-    partial void OnunidadChanged();
-    partial void OnfechaChanging(System.Nullable<System.DateTime> value);
-    partial void OnfechaChanged();
-    partial void Onverbo_idChanging(System.Nullable<int> value);
-    partial void Onverbo_idChanged();
-    partial void Onupsize_tsChanging(System.Data.Linq.Binary value);
-    partial void Onupsize_tsChanged();
-    #endregion
-		
-		public Actividades_Indicadore()
+		private void attach_Indicadores(Indicadore entity)
 		{
-			this._Actividade = default(EntityRef<Actividade>);
-			this._Verbo = default(EntityRef<Verbo>);
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.Actividade = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public int Id
+		private void detach_Indicadores(Indicadore entity)
 		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
+			this.SendPropertyChanging();
+			entity.Actividade = null;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Actividad_id", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> Actividad_id
+		private void attach_Responsables_Resultados(Responsables_Resultado entity)
 		{
-			get
-			{
-				return this._Actividad_id;
-			}
-			set
-			{
-				if ((this._Actividad_id != value))
-				{
-					if (this._Actividade.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnActividad_idChanging(value);
-					this.SendPropertyChanging();
-					this._Actividad_id = value;
-					this.SendPropertyChanged("Actividad_id");
-					this.OnActividad_idChanged();
-				}
-			}
+			this.SendPropertyChanging();
+			entity.Actividade = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Actividad_indicador", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string Actividad_indicador
+		private void detach_Responsables_Resultados(Responsables_Resultado entity)
 		{
-			get
-			{
-				return this._Actividad_indicador;
-			}
-			set
-			{
-				if ((this._Actividad_indicador != value))
-				{
-					this.OnActividad_indicadorChanging(value);
-					this.SendPropertyChanging();
-					this._Actividad_indicador = value;
-					this.SendPropertyChanged("Actividad_indicador");
-					this.OnActividad_indicadorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unidad", DbType="NVarChar(255)", UpdateCheck=UpdateCheck.Never)]
-		public string unidad
-		{
-			get
-			{
-				return this._unidad;
-			}
-			set
-			{
-				if ((this._unidad != value))
-				{
-					this.OnunidadChanging(value);
-					this.SendPropertyChanging();
-					this._unidad = value;
-					this.SendPropertyChanged("unidad");
-					this.OnunidadChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<System.DateTime> fecha
-		{
-			get
-			{
-				return this._fecha;
-			}
-			set
-			{
-				if ((this._fecha != value))
-				{
-					this.OnfechaChanging(value);
-					this.SendPropertyChanging();
-					this._fecha = value;
-					this.SendPropertyChanged("fecha");
-					this.OnfechaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_verbo_id", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> verbo_id
-		{
-			get
-			{
-				return this._verbo_id;
-			}
-			set
-			{
-				if ((this._verbo_id != value))
-				{
-					if (this._Verbo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onverbo_idChanging(value);
-					this.SendPropertyChanging();
-					this._verbo_id = value;
-					this.SendPropertyChanged("verbo_id");
-					this.Onverbo_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_upsize_ts", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary upsize_ts
-		{
-			get
-			{
-				return this._upsize_ts;
-			}
-			set
-			{
-				if ((this._upsize_ts != value))
-				{
-					this.Onupsize_tsChanging(value);
-					this.SendPropertyChanging();
-					this._upsize_ts = value;
-					this.SendPropertyChanged("upsize_ts");
-					this.Onupsize_tsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Actividades_Indicadore", Storage="_Actividade", ThisKey="Actividad_id", OtherKey="Id", IsForeignKey=true)]
-		public Actividade Actividade
-		{
-			get
-			{
-				return this._Actividade.Entity;
-			}
-			set
-			{
-				Actividade previousValue = this._Actividade.Entity;
-				if (((previousValue != value) 
-							|| (this._Actividade.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Actividade.Entity = null;
-						previousValue.Actividades_Indicadores.Remove(this);
-					}
-					this._Actividade.Entity = value;
-					if ((value != null))
-					{
-						value.Actividades_Indicadores.Add(this);
-						this._Actividad_id = value.Id;
-					}
-					else
-					{
-						this._Actividad_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Actividade");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_Actividades_Indicadore", Storage="_Verbo", ThisKey="verbo_id", OtherKey="Id", IsForeignKey=true)]
-		public Verbo Verbo
-		{
-			get
-			{
-				return this._Verbo.Entity;
-			}
-			set
-			{
-				Verbo previousValue = this._Verbo.Entity;
-				if (((previousValue != value) 
-							|| (this._Verbo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Verbo.Entity = null;
-						previousValue.Actividades_Indicadores.Remove(this);
-					}
-					this._Verbo.Entity = value;
-					if ((value != null))
-					{
-						value.Actividades_Indicadores.Add(this);
-						this._verbo_id = value.Id;
-					}
-					else
-					{
-						this._verbo_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Verbo");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.SendPropertyChanging();
+			entity.Actividade = null;
 		}
 	}
 	
@@ -4904,8 +4640,6 @@ namespace ESM.Model
 		
 		private System.Data.Linq.Binary _upsize_ts;
 		
-		private EntityRef<PAC> _PAC;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -4922,7 +4656,6 @@ namespace ESM.Model
 		
 		public Causa()
 		{
-			this._PAC = default(EntityRef<PAC>);
 			OnCreated();
 		}
 		
@@ -4957,10 +4690,6 @@ namespace ESM.Model
 			{
 				if ((this._PAC_id != value))
 				{
-					if (this._PAC.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnPAC_idChanging(value);
 					this.SendPropertyChanging();
 					this._PAC_id = value;
@@ -5010,36 +4739,177 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PAC_Causa", Storage="_PAC", ThisKey="PAC_id", OtherKey="Id", IsForeignKey=true)]
-		public PAC PAC
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Causas_Efectos")]
+	public partial class Causas_Efecto : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Proyecto_id;
+		
+		private string _Causa;
+		
+		private string _Efecto;
+		
+		private EntityRef<Proyecto> _Proyecto;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnProyecto_idChanging(System.Nullable<int> value);
+    partial void OnProyecto_idChanged();
+    partial void OnCausaChanging(string value);
+    partial void OnCausaChanged();
+    partial void OnEfectoChanging(string value);
+    partial void OnEfectoChanged();
+    #endregion
+		
+		public Causas_Efecto()
+		{
+			this._Proyecto = default(EntityRef<Proyecto>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
 		{
 			get
 			{
-				return this._PAC.Entity;
+				return this._Id;
 			}
 			set
 			{
-				PAC previousValue = this._PAC.Entity;
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proyecto_id", DbType="Int")]
+		public System.Nullable<int> Proyecto_id
+		{
+			get
+			{
+				return this._Proyecto_id;
+			}
+			set
+			{
+				if ((this._Proyecto_id != value))
+				{
+					if (this._Proyecto.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProyecto_idChanging(value);
+					this.SendPropertyChanging();
+					this._Proyecto_id = value;
+					this.SendPropertyChanged("Proyecto_id");
+					this.OnProyecto_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Causa", DbType="NVarChar(2000)")]
+		public string Causa
+		{
+			get
+			{
+				return this._Causa;
+			}
+			set
+			{
+				if ((this._Causa != value))
+				{
+					this.OnCausaChanging(value);
+					this.SendPropertyChanging();
+					this._Causa = value;
+					this.SendPropertyChanged("Causa");
+					this.OnCausaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Efecto", DbType="NVarChar(2000)")]
+		public string Efecto
+		{
+			get
+			{
+				return this._Efecto;
+			}
+			set
+			{
+				if ((this._Efecto != value))
+				{
+					this.OnEfectoChanging(value);
+					this.SendPropertyChanging();
+					this._Efecto = value;
+					this.SendPropertyChanged("Efecto");
+					this.OnEfectoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Causas_Efecto", Storage="_Proyecto", ThisKey="Proyecto_id", OtherKey="Id", IsForeignKey=true)]
+		public Proyecto Proyecto
+		{
+			get
+			{
+				return this._Proyecto.Entity;
+			}
+			set
+			{
+				Proyecto previousValue = this._Proyecto.Entity;
 				if (((previousValue != value) 
-							|| (this._PAC.HasLoadedOrAssignedValue == false)))
+							|| (this._Proyecto.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._PAC.Entity = null;
-						previousValue.Causas.Remove(this);
+						this._Proyecto.Entity = null;
+						previousValue.Causas_Efectos.Remove(this);
 					}
-					this._PAC.Entity = value;
+					this._Proyecto.Entity = value;
 					if ((value != null))
 					{
-						value.Causas.Add(this);
-						this._PAC_id = value.Id;
+						value.Causas_Efectos.Add(this);
+						this._Proyecto_id = value.Id;
 					}
 					else
 					{
-						this._PAC_id = default(Nullable<int>);
+						this._Proyecto_id = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("PAC");
+					this.SendPropertyChanged("Proyecto");
 				}
 			}
 		}
@@ -7025,157 +6895,6 @@ namespace ESM.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Efectos")]
-	public partial class Efecto : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _PAC_id;
-		
-		private string _Efecto1;
-		
-		private EntityRef<PAC> _PAC;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnPAC_idChanging(System.Nullable<int> value);
-    partial void OnPAC_idChanged();
-    partial void OnEfecto1Changing(string value);
-    partial void OnEfecto1Changed();
-    #endregion
-		
-		public Efecto()
-		{
-			this._PAC = default(EntityRef<PAC>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PAC_id", DbType="Int")]
-		public System.Nullable<int> PAC_id
-		{
-			get
-			{
-				return this._PAC_id;
-			}
-			set
-			{
-				if ((this._PAC_id != value))
-				{
-					if (this._PAC.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPAC_idChanging(value);
-					this.SendPropertyChanging();
-					this._PAC_id = value;
-					this.SendPropertyChanged("PAC_id");
-					this.OnPAC_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Efecto", Storage="_Efecto1", DbType="NVarChar(50)")]
-		public string Efecto1
-		{
-			get
-			{
-				return this._Efecto1;
-			}
-			set
-			{
-				if ((this._Efecto1 != value))
-				{
-					this.OnEfecto1Changing(value);
-					this.SendPropertyChanging();
-					this._Efecto1 = value;
-					this.SendPropertyChanged("Efecto1");
-					this.OnEfecto1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PAC_Efecto", Storage="_PAC", ThisKey="PAC_id", OtherKey="Id", IsForeignKey=true)]
-		public PAC PAC
-		{
-			get
-			{
-				return this._PAC.Entity;
-			}
-			set
-			{
-				PAC previousValue = this._PAC.Entity;
-				if (((previousValue != value) 
-							|| (this._PAC.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._PAC.Entity = null;
-						previousValue.Efectos.Remove(this);
-					}
-					this._PAC.Entity = value;
-					if ((value != null))
-					{
-						value.Efectos.Add(this);
-						this._PAC_id = value.Id;
-					}
-					else
-					{
-						this._PAC_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("PAC");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Establecimiento Educativo]")]
 	public partial class Establecimiento_Educativo : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -8586,6 +8305,676 @@ namespace ESM.Model
 		{
 			this.SendPropertyChanging();
 			entity.Evaluacion = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Indicadores")]
+	public partial class Indicadore : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Actividad_id;
+		
+		private string _Indicador;
+		
+		private string _unidad;
+		
+		private System.Nullable<int> _verbo_id;
+		
+		private System.Nullable<System.DateTime> _Fecha_Creacion;
+		
+		private EntitySet<Indicadores_Meta> _Indicadores_Metas;
+		
+		private EntitySet<Indicadores_Valor> _Indicadores_Valors;
+		
+		private EntityRef<Actividade> _Actividade;
+		
+		private EntityRef<Verbo> _Verbo;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnActividad_idChanging(System.Nullable<int> value);
+    partial void OnActividad_idChanged();
+    partial void OnIndicadorChanging(string value);
+    partial void OnIndicadorChanged();
+    partial void OnunidadChanging(string value);
+    partial void OnunidadChanged();
+    partial void Onverbo_idChanging(System.Nullable<int> value);
+    partial void Onverbo_idChanged();
+    partial void OnFecha_CreacionChanging(System.Nullable<System.DateTime> value);
+    partial void OnFecha_CreacionChanged();
+    #endregion
+		
+		public Indicadore()
+		{
+			this._Indicadores_Metas = new EntitySet<Indicadores_Meta>(new Action<Indicadores_Meta>(this.attach_Indicadores_Metas), new Action<Indicadores_Meta>(this.detach_Indicadores_Metas));
+			this._Indicadores_Valors = new EntitySet<Indicadores_Valor>(new Action<Indicadores_Valor>(this.attach_Indicadores_Valors), new Action<Indicadores_Valor>(this.detach_Indicadores_Valors));
+			this._Actividade = default(EntityRef<Actividade>);
+			this._Verbo = default(EntityRef<Verbo>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Actividad_id", DbType="Int")]
+		public System.Nullable<int> Actividad_id
+		{
+			get
+			{
+				return this._Actividad_id;
+			}
+			set
+			{
+				if ((this._Actividad_id != value))
+				{
+					if (this._Actividade.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnActividad_idChanging(value);
+					this.SendPropertyChanging();
+					this._Actividad_id = value;
+					this.SendPropertyChanged("Actividad_id");
+					this.OnActividad_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Indicador
+		{
+			get
+			{
+				return this._Indicador;
+			}
+			set
+			{
+				if ((this._Indicador != value))
+				{
+					this.OnIndicadorChanging(value);
+					this.SendPropertyChanging();
+					this._Indicador = value;
+					this.SendPropertyChanged("Indicador");
+					this.OnIndicadorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unidad", DbType="NVarChar(255)")]
+		public string unidad
+		{
+			get
+			{
+				return this._unidad;
+			}
+			set
+			{
+				if ((this._unidad != value))
+				{
+					this.OnunidadChanging(value);
+					this.SendPropertyChanging();
+					this._unidad = value;
+					this.SendPropertyChanged("unidad");
+					this.OnunidadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_verbo_id", DbType="Int")]
+		public System.Nullable<int> verbo_id
+		{
+			get
+			{
+				return this._verbo_id;
+			}
+			set
+			{
+				if ((this._verbo_id != value))
+				{
+					if (this._Verbo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onverbo_idChanging(value);
+					this.SendPropertyChanging();
+					this._verbo_id = value;
+					this.SendPropertyChanged("verbo_id");
+					this.Onverbo_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha_Creacion", DbType="Date")]
+		public System.Nullable<System.DateTime> Fecha_Creacion
+		{
+			get
+			{
+				return this._Fecha_Creacion;
+			}
+			set
+			{
+				if ((this._Fecha_Creacion != value))
+				{
+					this.OnFecha_CreacionChanging(value);
+					this.SendPropertyChanging();
+					this._Fecha_Creacion = value;
+					this.SendPropertyChanged("Fecha_Creacion");
+					this.OnFecha_CreacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Indicadore_Indicadores_Meta", Storage="_Indicadores_Metas", ThisKey="Id", OtherKey="Indicador_id")]
+		public EntitySet<Indicadores_Meta> Indicadores_Metas
+		{
+			get
+			{
+				return this._Indicadores_Metas;
+			}
+			set
+			{
+				this._Indicadores_Metas.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Indicadore_Indicadores_Valor", Storage="_Indicadores_Valors", ThisKey="Id", OtherKey="Indicador_id")]
+		public EntitySet<Indicadores_Valor> Indicadores_Valors
+		{
+			get
+			{
+				return this._Indicadores_Valors;
+			}
+			set
+			{
+				this._Indicadores_Valors.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Indicadore", Storage="_Actividade", ThisKey="Actividad_id", OtherKey="Id", IsForeignKey=true)]
+		public Actividade Actividade
+		{
+			get
+			{
+				return this._Actividade.Entity;
+			}
+			set
+			{
+				Actividade previousValue = this._Actividade.Entity;
+				if (((previousValue != value) 
+							|| (this._Actividade.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Actividade.Entity = null;
+						previousValue.Indicadores.Remove(this);
+					}
+					this._Actividade.Entity = value;
+					if ((value != null))
+					{
+						value.Indicadores.Add(this);
+						this._Actividad_id = value.Id;
+					}
+					else
+					{
+						this._Actividad_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Actividade");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_Indicadore", Storage="_Verbo", ThisKey="verbo_id", OtherKey="Id", IsForeignKey=true)]
+		public Verbo Verbo
+		{
+			get
+			{
+				return this._Verbo.Entity;
+			}
+			set
+			{
+				Verbo previousValue = this._Verbo.Entity;
+				if (((previousValue != value) 
+							|| (this._Verbo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Verbo.Entity = null;
+						previousValue.Indicadores.Remove(this);
+					}
+					this._Verbo.Entity = value;
+					if ((value != null))
+					{
+						value.Indicadores.Add(this);
+						this._verbo_id = value.Id;
+					}
+					else
+					{
+						this._verbo_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Verbo");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Indicadores_Metas(Indicadores_Meta entity)
+		{
+			this.SendPropertyChanging();
+			entity.Indicadore = this;
+		}
+		
+		private void detach_Indicadores_Metas(Indicadores_Meta entity)
+		{
+			this.SendPropertyChanging();
+			entity.Indicadore = null;
+		}
+		
+		private void attach_Indicadores_Valors(Indicadores_Valor entity)
+		{
+			this.SendPropertyChanging();
+			entity.Indicadore = this;
+		}
+		
+		private void detach_Indicadores_Valors(Indicadores_Valor entity)
+		{
+			this.SendPropertyChanging();
+			entity.Indicadore = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Indicadores_Metas")]
+	public partial class Indicadores_Meta : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Indicador_id;
+		
+		private System.Nullable<int> _Meta;
+		
+		private System.Nullable<System.DateTime> _Fecha_Meta;
+		
+		private EntityRef<Indicadore> _Indicadore;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnIndicador_idChanging(System.Nullable<int> value);
+    partial void OnIndicador_idChanged();
+    partial void OnMetaChanging(System.Nullable<int> value);
+    partial void OnMetaChanged();
+    partial void OnFecha_MetaChanging(System.Nullable<System.DateTime> value);
+    partial void OnFecha_MetaChanged();
+    #endregion
+		
+		public Indicadores_Meta()
+		{
+			this._Indicadore = default(EntityRef<Indicadore>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador_id", DbType="Int")]
+		public System.Nullable<int> Indicador_id
+		{
+			get
+			{
+				return this._Indicador_id;
+			}
+			set
+			{
+				if ((this._Indicador_id != value))
+				{
+					if (this._Indicadore.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIndicador_idChanging(value);
+					this.SendPropertyChanging();
+					this._Indicador_id = value;
+					this.SendPropertyChanged("Indicador_id");
+					this.OnIndicador_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Meta", DbType="Int")]
+		public System.Nullable<int> Meta
+		{
+			get
+			{
+				return this._Meta;
+			}
+			set
+			{
+				if ((this._Meta != value))
+				{
+					this.OnMetaChanging(value);
+					this.SendPropertyChanging();
+					this._Meta = value;
+					this.SendPropertyChanged("Meta");
+					this.OnMetaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha_Meta", DbType="Date")]
+		public System.Nullable<System.DateTime> Fecha_Meta
+		{
+			get
+			{
+				return this._Fecha_Meta;
+			}
+			set
+			{
+				if ((this._Fecha_Meta != value))
+				{
+					this.OnFecha_MetaChanging(value);
+					this.SendPropertyChanging();
+					this._Fecha_Meta = value;
+					this.SendPropertyChanged("Fecha_Meta");
+					this.OnFecha_MetaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Indicadore_Indicadores_Meta", Storage="_Indicadore", ThisKey="Indicador_id", OtherKey="Id", IsForeignKey=true)]
+		public Indicadore Indicadore
+		{
+			get
+			{
+				return this._Indicadore.Entity;
+			}
+			set
+			{
+				Indicadore previousValue = this._Indicadore.Entity;
+				if (((previousValue != value) 
+							|| (this._Indicadore.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Indicadore.Entity = null;
+						previousValue.Indicadores_Metas.Remove(this);
+					}
+					this._Indicadore.Entity = value;
+					if ((value != null))
+					{
+						value.Indicadores_Metas.Add(this);
+						this._Indicador_id = value.Id;
+					}
+					else
+					{
+						this._Indicador_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Indicadore");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Indicadores_Valor")]
+	public partial class Indicadores_Valor : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Indicador_id;
+		
+		private System.Nullable<int> _Valor;
+		
+		private System.Nullable<System.DateTime> _Fecha_Valor;
+		
+		private EntityRef<Indicadore> _Indicadore;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnIndicador_idChanging(System.Nullable<int> value);
+    partial void OnIndicador_idChanged();
+    partial void OnValorChanging(System.Nullable<int> value);
+    partial void OnValorChanged();
+    partial void OnFecha_ValorChanging(System.Nullable<System.DateTime> value);
+    partial void OnFecha_ValorChanged();
+    #endregion
+		
+		public Indicadores_Valor()
+		{
+			this._Indicadore = default(EntityRef<Indicadore>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador_id", DbType="Int")]
+		public System.Nullable<int> Indicador_id
+		{
+			get
+			{
+				return this._Indicador_id;
+			}
+			set
+			{
+				if ((this._Indicador_id != value))
+				{
+					if (this._Indicadore.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIndicador_idChanging(value);
+					this.SendPropertyChanging();
+					this._Indicador_id = value;
+					this.SendPropertyChanged("Indicador_id");
+					this.OnIndicador_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Valor", DbType="Int")]
+		public System.Nullable<int> Valor
+		{
+			get
+			{
+				return this._Valor;
+			}
+			set
+			{
+				if ((this._Valor != value))
+				{
+					this.OnValorChanging(value);
+					this.SendPropertyChanging();
+					this._Valor = value;
+					this.SendPropertyChanged("Valor");
+					this.OnValorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha_Valor", DbType="Date")]
+		public System.Nullable<System.DateTime> Fecha_Valor
+		{
+			get
+			{
+				return this._Fecha_Valor;
+			}
+			set
+			{
+				if ((this._Fecha_Valor != value))
+				{
+					this.OnFecha_ValorChanging(value);
+					this.SendPropertyChanging();
+					this._Fecha_Valor = value;
+					this.SendPropertyChanged("Fecha_Valor");
+					this.OnFecha_ValorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Indicadore_Indicadores_Valor", Storage="_Indicadore", ThisKey="Indicador_id", OtherKey="Id", IsForeignKey=true)]
+		public Indicadore Indicadore
+		{
+			get
+			{
+				return this._Indicadore.Entity;
+			}
+			set
+			{
+				Indicadore previousValue = this._Indicadore.Entity;
+				if (((previousValue != value) 
+							|| (this._Indicadore.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Indicadore.Entity = null;
+						previousValue.Indicadores_Valors.Remove(this);
+					}
+					this._Indicadore.Entity = value;
+					if ((value != null))
+					{
+						value.Indicadores_Valors.Add(this);
+						this._Indicador_id = value.Id;
+					}
+					else
+					{
+						this._Indicador_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Indicadore");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -12461,7 +12850,7 @@ namespace ESM.Model
 		
 		private EntitySet<PAC_Indicadores_Medio> _PAC_Indicadores_Medios;
 		
-		private EntitySet<PACS_Medio> _PACS_Medios;
+		private EntitySet<Proyectos_Medio> _Proyectos_Medios;
 		
 		private EntitySet<Resultados_Medio> _Resultados_Medios;
 		
@@ -12481,7 +12870,7 @@ namespace ESM.Model
 		{
 			this._Actividades_Medios = new EntitySet<Actividades_Medio>(new Action<Actividades_Medio>(this.attach_Actividades_Medios), new Action<Actividades_Medio>(this.detach_Actividades_Medios));
 			this._PAC_Indicadores_Medios = new EntitySet<PAC_Indicadores_Medio>(new Action<PAC_Indicadores_Medio>(this.attach_PAC_Indicadores_Medios), new Action<PAC_Indicadores_Medio>(this.detach_PAC_Indicadores_Medios));
-			this._PACS_Medios = new EntitySet<PACS_Medio>(new Action<PACS_Medio>(this.attach_PACS_Medios), new Action<PACS_Medio>(this.detach_PACS_Medios));
+			this._Proyectos_Medios = new EntitySet<Proyectos_Medio>(new Action<Proyectos_Medio>(this.attach_Proyectos_Medios), new Action<Proyectos_Medio>(this.detach_Proyectos_Medios));
 			this._Resultados_Medios = new EntitySet<Resultados_Medio>(new Action<Resultados_Medio>(this.attach_Resultados_Medios), new Action<Resultados_Medio>(this.detach_Resultados_Medios));
 			OnCreated();
 		}
@@ -12572,16 +12961,16 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Medios_de_verificacion_PACS_Medio", Storage="_PACS_Medios", ThisKey="Id", OtherKey="Medios_de_verificacion_id")]
-		public EntitySet<PACS_Medio> PACS_Medios
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Medios_de_verificacion_Proyectos_Medio", Storage="_Proyectos_Medios", ThisKey="Id", OtherKey="Medios_de_verificacion_id")]
+		public EntitySet<Proyectos_Medio> Proyectos_Medios
 		{
 			get
 			{
-				return this._PACS_Medios;
+				return this._Proyectos_Medios;
 			}
 			set
 			{
-				this._PACS_Medios.Assign(value);
+				this._Proyectos_Medios.Assign(value);
 			}
 		}
 		
@@ -12642,13 +13031,13 @@ namespace ESM.Model
 			entity.Medios_de_verificacion = null;
 		}
 		
-		private void attach_PACS_Medios(PACS_Medio entity)
+		private void attach_Proyectos_Medios(Proyectos_Medio entity)
 		{
 			this.SendPropertyChanging();
 			entity.Medios_de_verificacion = this;
 		}
 		
-		private void detach_PACS_Medios(PACS_Medio entity)
+		private void detach_Proyectos_Medios(Proyectos_Medio entity)
 		{
 			this.SendPropertyChanging();
 			entity.Medios_de_verificacion = null;
@@ -12991,8 +13380,6 @@ namespace ESM.Model
 		
 		private EntityRef<Verbo> _Verbo;
 		
-		private EntityRef<PAC> _PAC;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -13017,7 +13404,6 @@ namespace ESM.Model
 		{
 			this._PAC_Indicadores_Medios = new EntitySet<PAC_Indicadores_Medio>(new Action<PAC_Indicadores_Medio>(this.attach_PAC_Indicadores_Medios), new Action<PAC_Indicadores_Medio>(this.detach_PAC_Indicadores_Medios));
 			this._Verbo = default(EntityRef<Verbo>);
-			this._PAC = default(EntityRef<PAC>);
 			OnCreated();
 		}
 		
@@ -13052,10 +13438,6 @@ namespace ESM.Model
 			{
 				if ((this._PAC_id != value))
 				{
-					if (this._PAC.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnPAC_idChanging(value);
 					this.SendPropertyChanging();
 					this._PAC_id = value;
@@ -13212,40 +13594,6 @@ namespace ESM.Model
 						this._verbo_id = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Verbo");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PAC_PAC_Indicadore", Storage="_PAC", ThisKey="PAC_id", OtherKey="Id", IsForeignKey=true)]
-		public PAC PAC
-		{
-			get
-			{
-				return this._PAC.Entity;
-			}
-			set
-			{
-				PAC previousValue = this._PAC.Entity;
-				if (((previousValue != value) 
-							|| (this._PAC.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._PAC.Entity = null;
-						previousValue.PAC_Indicadores.Remove(this);
-					}
-					this._PAC.Entity = value;
-					if ((value != null))
-					{
-						value.PAC_Indicadores.Add(this);
-						this._PAC_id = value.Id;
-					}
-					else
-					{
-						this._PAC_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("PAC");
 				}
 			}
 		}
@@ -13450,740 +13798,6 @@ namespace ESM.Model
 						this._PAC_indicador_id = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("PAC_Indicadore");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PACS")]
-	public partial class PAC : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _PAC1;
-		
-		private string _Problema;
-		
-		private string _Finalidad;
-		
-		private string _Proposito;
-		
-		private System.Data.Linq.Binary _upsize_ts;
-		
-		private EntitySet<Causa> _Causas;
-		
-		private EntitySet<Efecto> _Efectos;
-		
-		private EntitySet<PAC_Indicadore> _PAC_Indicadores;
-		
-		private EntitySet<PACS_Medio> _PACS_Medios;
-		
-		private EntitySet<PACS_Supuesto> _PACS_Supuestos;
-		
-		private EntitySet<Resultados_PAC> _Resultados_PACs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnPAC1Changing(string value);
-    partial void OnPAC1Changed();
-    partial void OnProblemaChanging(string value);
-    partial void OnProblemaChanged();
-    partial void OnFinalidadChanging(string value);
-    partial void OnFinalidadChanged();
-    partial void OnPropositoChanging(string value);
-    partial void OnPropositoChanged();
-    partial void Onupsize_tsChanging(System.Data.Linq.Binary value);
-    partial void Onupsize_tsChanged();
-    #endregion
-		
-		public PAC()
-		{
-			this._Causas = new EntitySet<Causa>(new Action<Causa>(this.attach_Causas), new Action<Causa>(this.detach_Causas));
-			this._Efectos = new EntitySet<Efecto>(new Action<Efecto>(this.attach_Efectos), new Action<Efecto>(this.detach_Efectos));
-			this._PAC_Indicadores = new EntitySet<PAC_Indicadore>(new Action<PAC_Indicadore>(this.attach_PAC_Indicadores), new Action<PAC_Indicadore>(this.detach_PAC_Indicadores));
-			this._PACS_Medios = new EntitySet<PACS_Medio>(new Action<PACS_Medio>(this.attach_PACS_Medios), new Action<PACS_Medio>(this.detach_PACS_Medios));
-			this._PACS_Supuestos = new EntitySet<PACS_Supuesto>(new Action<PACS_Supuesto>(this.attach_PACS_Supuestos), new Action<PACS_Supuesto>(this.detach_PACS_Supuestos));
-			this._Resultados_PACs = new EntitySet<Resultados_PAC>(new Action<Resultados_PAC>(this.attach_Resultados_PACs), new Action<Resultados_PAC>(this.detach_Resultados_PACs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="PAC", Storage="_PAC1", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string PAC1
-		{
-			get
-			{
-				return this._PAC1;
-			}
-			set
-			{
-				if ((this._PAC1 != value))
-				{
-					this.OnPAC1Changing(value);
-					this.SendPropertyChanging();
-					this._PAC1 = value;
-					this.SendPropertyChanged("PAC1");
-					this.OnPAC1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Problema", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string Problema
-		{
-			get
-			{
-				return this._Problema;
-			}
-			set
-			{
-				if ((this._Problema != value))
-				{
-					this.OnProblemaChanging(value);
-					this.SendPropertyChanging();
-					this._Problema = value;
-					this.SendPropertyChanged("Problema");
-					this.OnProblemaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Finalidad", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string Finalidad
-		{
-			get
-			{
-				return this._Finalidad;
-			}
-			set
-			{
-				if ((this._Finalidad != value))
-				{
-					this.OnFinalidadChanging(value);
-					this.SendPropertyChanging();
-					this._Finalidad = value;
-					this.SendPropertyChanged("Finalidad");
-					this.OnFinalidadChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proposito", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string Proposito
-		{
-			get
-			{
-				return this._Proposito;
-			}
-			set
-			{
-				if ((this._Proposito != value))
-				{
-					this.OnPropositoChanging(value);
-					this.SendPropertyChanging();
-					this._Proposito = value;
-					this.SendPropertyChanged("Proposito");
-					this.OnPropositoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_upsize_ts", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary upsize_ts
-		{
-			get
-			{
-				return this._upsize_ts;
-			}
-			set
-			{
-				if ((this._upsize_ts != value))
-				{
-					this.Onupsize_tsChanging(value);
-					this.SendPropertyChanging();
-					this._upsize_ts = value;
-					this.SendPropertyChanged("upsize_ts");
-					this.Onupsize_tsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PAC_Causa", Storage="_Causas", ThisKey="Id", OtherKey="PAC_id")]
-		public EntitySet<Causa> Causas
-		{
-			get
-			{
-				return this._Causas;
-			}
-			set
-			{
-				this._Causas.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PAC_Efecto", Storage="_Efectos", ThisKey="Id", OtherKey="PAC_id")]
-		public EntitySet<Efecto> Efectos
-		{
-			get
-			{
-				return this._Efectos;
-			}
-			set
-			{
-				this._Efectos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PAC_PAC_Indicadore", Storage="_PAC_Indicadores", ThisKey="Id", OtherKey="PAC_id")]
-		public EntitySet<PAC_Indicadore> PAC_Indicadores
-		{
-			get
-			{
-				return this._PAC_Indicadores;
-			}
-			set
-			{
-				this._PAC_Indicadores.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PAC_PACS_Medio", Storage="_PACS_Medios", ThisKey="Id", OtherKey="PAC_id")]
-		public EntitySet<PACS_Medio> PACS_Medios
-		{
-			get
-			{
-				return this._PACS_Medios;
-			}
-			set
-			{
-				this._PACS_Medios.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PAC_PACS_Supuesto", Storage="_PACS_Supuestos", ThisKey="Id", OtherKey="PAC_supuesto_id")]
-		public EntitySet<PACS_Supuesto> PACS_Supuestos
-		{
-			get
-			{
-				return this._PACS_Supuestos;
-			}
-			set
-			{
-				this._PACS_Supuestos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PAC_Resultados_PAC", Storage="_Resultados_PACs", ThisKey="Id", OtherKey="PAC_id")]
-		public EntitySet<Resultados_PAC> Resultados_PACs
-		{
-			get
-			{
-				return this._Resultados_PACs;
-			}
-			set
-			{
-				this._Resultados_PACs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Causas(Causa entity)
-		{
-			this.SendPropertyChanging();
-			entity.PAC = this;
-		}
-		
-		private void detach_Causas(Causa entity)
-		{
-			this.SendPropertyChanging();
-			entity.PAC = null;
-		}
-		
-		private void attach_Efectos(Efecto entity)
-		{
-			this.SendPropertyChanging();
-			entity.PAC = this;
-		}
-		
-		private void detach_Efectos(Efecto entity)
-		{
-			this.SendPropertyChanging();
-			entity.PAC = null;
-		}
-		
-		private void attach_PAC_Indicadores(PAC_Indicadore entity)
-		{
-			this.SendPropertyChanging();
-			entity.PAC = this;
-		}
-		
-		private void detach_PAC_Indicadores(PAC_Indicadore entity)
-		{
-			this.SendPropertyChanging();
-			entity.PAC = null;
-		}
-		
-		private void attach_PACS_Medios(PACS_Medio entity)
-		{
-			this.SendPropertyChanging();
-			entity.PAC = this;
-		}
-		
-		private void detach_PACS_Medios(PACS_Medio entity)
-		{
-			this.SendPropertyChanging();
-			entity.PAC = null;
-		}
-		
-		private void attach_PACS_Supuestos(PACS_Supuesto entity)
-		{
-			this.SendPropertyChanging();
-			entity.PAC = this;
-		}
-		
-		private void detach_PACS_Supuestos(PACS_Supuesto entity)
-		{
-			this.SendPropertyChanging();
-			entity.PAC = null;
-		}
-		
-		private void attach_Resultados_PACs(Resultados_PAC entity)
-		{
-			this.SendPropertyChanging();
-			entity.PAC = this;
-		}
-		
-		private void detach_Resultados_PACs(Resultados_PAC entity)
-		{
-			this.SendPropertyChanging();
-			entity.PAC = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PACS_Medios")]
-	public partial class PACS_Medio : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _PAC_id;
-		
-		private System.Nullable<int> _Medios_de_verificacion_id;
-		
-		private EntityRef<Medios_de_verificacion> _Medios_de_verificacion;
-		
-		private EntityRef<PAC> _PAC;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnPAC_idChanging(System.Nullable<int> value);
-    partial void OnPAC_idChanged();
-    partial void OnMedios_de_verificacion_idChanging(System.Nullable<int> value);
-    partial void OnMedios_de_verificacion_idChanged();
-    #endregion
-		
-		public PACS_Medio()
-		{
-			this._Medios_de_verificacion = default(EntityRef<Medios_de_verificacion>);
-			this._PAC = default(EntityRef<PAC>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PAC_id", DbType="Int")]
-		public System.Nullable<int> PAC_id
-		{
-			get
-			{
-				return this._PAC_id;
-			}
-			set
-			{
-				if ((this._PAC_id != value))
-				{
-					if (this._PAC.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPAC_idChanging(value);
-					this.SendPropertyChanging();
-					this._PAC_id = value;
-					this.SendPropertyChanged("PAC_id");
-					this.OnPAC_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Medios_de_verificacion_id", DbType="Int")]
-		public System.Nullable<int> Medios_de_verificacion_id
-		{
-			get
-			{
-				return this._Medios_de_verificacion_id;
-			}
-			set
-			{
-				if ((this._Medios_de_verificacion_id != value))
-				{
-					if (this._Medios_de_verificacion.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMedios_de_verificacion_idChanging(value);
-					this.SendPropertyChanging();
-					this._Medios_de_verificacion_id = value;
-					this.SendPropertyChanged("Medios_de_verificacion_id");
-					this.OnMedios_de_verificacion_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Medios_de_verificacion_PACS_Medio", Storage="_Medios_de_verificacion", ThisKey="Medios_de_verificacion_id", OtherKey="Id", IsForeignKey=true)]
-		public Medios_de_verificacion Medios_de_verificacion
-		{
-			get
-			{
-				return this._Medios_de_verificacion.Entity;
-			}
-			set
-			{
-				Medios_de_verificacion previousValue = this._Medios_de_verificacion.Entity;
-				if (((previousValue != value) 
-							|| (this._Medios_de_verificacion.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Medios_de_verificacion.Entity = null;
-						previousValue.PACS_Medios.Remove(this);
-					}
-					this._Medios_de_verificacion.Entity = value;
-					if ((value != null))
-					{
-						value.PACS_Medios.Add(this);
-						this._Medios_de_verificacion_id = value.Id;
-					}
-					else
-					{
-						this._Medios_de_verificacion_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Medios_de_verificacion");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PAC_PACS_Medio", Storage="_PAC", ThisKey="PAC_id", OtherKey="Id", IsForeignKey=true)]
-		public PAC PAC
-		{
-			get
-			{
-				return this._PAC.Entity;
-			}
-			set
-			{
-				PAC previousValue = this._PAC.Entity;
-				if (((previousValue != value) 
-							|| (this._PAC.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._PAC.Entity = null;
-						previousValue.PACS_Medios.Remove(this);
-					}
-					this._PAC.Entity = value;
-					if ((value != null))
-					{
-						value.PACS_Medios.Add(this);
-						this._PAC_id = value.Id;
-					}
-					else
-					{
-						this._PAC_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("PAC");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PACS_Supuestos")]
-	public partial class PACS_Supuesto : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _PAC_supuesto_id;
-		
-		private System.Nullable<int> _Supuesto_id;
-		
-		private EntityRef<PAC> _PAC;
-		
-		private EntityRef<Supuesto> _Supuesto;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnPAC_supuesto_idChanging(System.Nullable<int> value);
-    partial void OnPAC_supuesto_idChanged();
-    partial void OnSupuesto_idChanging(System.Nullable<int> value);
-    partial void OnSupuesto_idChanged();
-    #endregion
-		
-		public PACS_Supuesto()
-		{
-			this._PAC = default(EntityRef<PAC>);
-			this._Supuesto = default(EntityRef<Supuesto>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PAC_supuesto_id", DbType="Int")]
-		public System.Nullable<int> PAC_supuesto_id
-		{
-			get
-			{
-				return this._PAC_supuesto_id;
-			}
-			set
-			{
-				if ((this._PAC_supuesto_id != value))
-				{
-					if (this._PAC.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPAC_supuesto_idChanging(value);
-					this.SendPropertyChanging();
-					this._PAC_supuesto_id = value;
-					this.SendPropertyChanged("PAC_supuesto_id");
-					this.OnPAC_supuesto_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supuesto_id", DbType="Int")]
-		public System.Nullable<int> Supuesto_id
-		{
-			get
-			{
-				return this._Supuesto_id;
-			}
-			set
-			{
-				if ((this._Supuesto_id != value))
-				{
-					if (this._Supuesto.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSupuesto_idChanging(value);
-					this.SendPropertyChanging();
-					this._Supuesto_id = value;
-					this.SendPropertyChanged("Supuesto_id");
-					this.OnSupuesto_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PAC_PACS_Supuesto", Storage="_PAC", ThisKey="PAC_supuesto_id", OtherKey="Id", IsForeignKey=true)]
-		public PAC PAC
-		{
-			get
-			{
-				return this._PAC.Entity;
-			}
-			set
-			{
-				PAC previousValue = this._PAC.Entity;
-				if (((previousValue != value) 
-							|| (this._PAC.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._PAC.Entity = null;
-						previousValue.PACS_Supuestos.Remove(this);
-					}
-					this._PAC.Entity = value;
-					if ((value != null))
-					{
-						value.PACS_Supuestos.Add(this);
-						this._PAC_supuesto_id = value.Id;
-					}
-					else
-					{
-						this._PAC_supuesto_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("PAC");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supuesto_PACS_Supuesto", Storage="_Supuesto", ThisKey="Supuesto_id", OtherKey="Id", IsForeignKey=true)]
-		public Supuesto Supuesto
-		{
-			get
-			{
-				return this._Supuesto.Entity;
-			}
-			set
-			{
-				Supuesto previousValue = this._Supuesto.Entity;
-				if (((previousValue != value) 
-							|| (this._Supuesto.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Supuesto.Entity = null;
-						previousValue.PACS_Supuestos.Remove(this);
-					}
-					this._Supuesto.Entity = value;
-					if ((value != null))
-					{
-						value.PACS_Supuestos.Add(this);
-						this._Supuesto_id = value.Id;
-					}
-					else
-					{
-						this._Supuesto_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Supuesto");
 				}
 			}
 		}
@@ -14990,6 +14604,622 @@ namespace ESM.Model
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Proyectos")]
+	public partial class Proyecto : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Proyecto1;
+		
+		private string _Problema;
+		
+		private string _Finalidad;
+		
+		private string _Proposito;
+		
+		private System.Nullable<System.DateTime> _Fecha_Creacion;
+		
+		private string _Indicador;
+		
+		private System.Nullable<decimal> _Presupuesto;
+		
+		private EntitySet<Causas_Efecto> _Causas_Efectos;
+		
+		private EntitySet<Proyectos_Supuesto> _Proyectos_Supuestos;
+		
+		private EntitySet<Resultados_Proyecto> _Resultados_Proyectos;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnProyecto1Changing(string value);
+    partial void OnProyecto1Changed();
+    partial void OnProblemaChanging(string value);
+    partial void OnProblemaChanged();
+    partial void OnFinalidadChanging(string value);
+    partial void OnFinalidadChanged();
+    partial void OnPropositoChanging(string value);
+    partial void OnPropositoChanged();
+    partial void OnFecha_CreacionChanging(System.Nullable<System.DateTime> value);
+    partial void OnFecha_CreacionChanged();
+    partial void OnIndicadorChanging(string value);
+    partial void OnIndicadorChanged();
+    partial void OnPresupuestoChanging(System.Nullable<decimal> value);
+    partial void OnPresupuestoChanged();
+    #endregion
+		
+		public Proyecto()
+		{
+			this._Causas_Efectos = new EntitySet<Causas_Efecto>(new Action<Causas_Efecto>(this.attach_Causas_Efectos), new Action<Causas_Efecto>(this.detach_Causas_Efectos));
+			this._Proyectos_Supuestos = new EntitySet<Proyectos_Supuesto>(new Action<Proyectos_Supuesto>(this.attach_Proyectos_Supuestos), new Action<Proyectos_Supuesto>(this.detach_Proyectos_Supuestos));
+			this._Resultados_Proyectos = new EntitySet<Resultados_Proyecto>(new Action<Resultados_Proyecto>(this.attach_Resultados_Proyectos), new Action<Resultados_Proyecto>(this.detach_Resultados_Proyectos));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Proyecto", Storage="_Proyecto1", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Proyecto1
+		{
+			get
+			{
+				return this._Proyecto1;
+			}
+			set
+			{
+				if ((this._Proyecto1 != value))
+				{
+					this.OnProyecto1Changing(value);
+					this.SendPropertyChanging();
+					this._Proyecto1 = value;
+					this.SendPropertyChanged("Proyecto1");
+					this.OnProyecto1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Problema", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Problema
+		{
+			get
+			{
+				return this._Problema;
+			}
+			set
+			{
+				if ((this._Problema != value))
+				{
+					this.OnProblemaChanging(value);
+					this.SendPropertyChanging();
+					this._Problema = value;
+					this.SendPropertyChanged("Problema");
+					this.OnProblemaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Finalidad", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Finalidad
+		{
+			get
+			{
+				return this._Finalidad;
+			}
+			set
+			{
+				if ((this._Finalidad != value))
+				{
+					this.OnFinalidadChanging(value);
+					this.SendPropertyChanging();
+					this._Finalidad = value;
+					this.SendPropertyChanged("Finalidad");
+					this.OnFinalidadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proposito", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Proposito
+		{
+			get
+			{
+				return this._Proposito;
+			}
+			set
+			{
+				if ((this._Proposito != value))
+				{
+					this.OnPropositoChanging(value);
+					this.SendPropertyChanging();
+					this._Proposito = value;
+					this.SendPropertyChanged("Proposito");
+					this.OnPropositoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha_Creacion", DbType="Date")]
+		public System.Nullable<System.DateTime> Fecha_Creacion
+		{
+			get
+			{
+				return this._Fecha_Creacion;
+			}
+			set
+			{
+				if ((this._Fecha_Creacion != value))
+				{
+					this.OnFecha_CreacionChanging(value);
+					this.SendPropertyChanging();
+					this._Fecha_Creacion = value;
+					this.SendPropertyChanged("Fecha_Creacion");
+					this.OnFecha_CreacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador", DbType="NVarChar(2000)")]
+		public string Indicador
+		{
+			get
+			{
+				return this._Indicador;
+			}
+			set
+			{
+				if ((this._Indicador != value))
+				{
+					this.OnIndicadorChanging(value);
+					this.SendPropertyChanging();
+					this._Indicador = value;
+					this.SendPropertyChanged("Indicador");
+					this.OnIndicadorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Presupuesto", DbType="Money")]
+		public System.Nullable<decimal> Presupuesto
+		{
+			get
+			{
+				return this._Presupuesto;
+			}
+			set
+			{
+				if ((this._Presupuesto != value))
+				{
+					this.OnPresupuestoChanging(value);
+					this.SendPropertyChanging();
+					this._Presupuesto = value;
+					this.SendPropertyChanged("Presupuesto");
+					this.OnPresupuestoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Causas_Efecto", Storage="_Causas_Efectos", ThisKey="Id", OtherKey="Proyecto_id")]
+		public EntitySet<Causas_Efecto> Causas_Efectos
+		{
+			get
+			{
+				return this._Causas_Efectos;
+			}
+			set
+			{
+				this._Causas_Efectos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Proyectos_Supuesto", Storage="_Proyectos_Supuestos", ThisKey="Id", OtherKey="Proyecto_supuesto_id")]
+		public EntitySet<Proyectos_Supuesto> Proyectos_Supuestos
+		{
+			get
+			{
+				return this._Proyectos_Supuestos;
+			}
+			set
+			{
+				this._Proyectos_Supuestos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Resultados_Proyecto", Storage="_Resultados_Proyectos", ThisKey="Id", OtherKey="Proyecto_id")]
+		public EntitySet<Resultados_Proyecto> Resultados_Proyectos
+		{
+			get
+			{
+				return this._Resultados_Proyectos;
+			}
+			set
+			{
+				this._Resultados_Proyectos.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Causas_Efectos(Causas_Efecto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = this;
+		}
+		
+		private void detach_Causas_Efectos(Causas_Efecto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = null;
+		}
+		
+		private void attach_Proyectos_Supuestos(Proyectos_Supuesto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = this;
+		}
+		
+		private void detach_Proyectos_Supuestos(Proyectos_Supuesto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = null;
+		}
+		
+		private void attach_Resultados_Proyectos(Resultados_Proyecto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = this;
+		}
+		
+		private void detach_Resultados_Proyectos(Resultados_Proyecto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Proyectos_Medios")]
+	public partial class Proyectos_Medio : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Proyecto_id;
+		
+		private System.Nullable<int> _Medios_de_verificacion_id;
+		
+		private EntityRef<Medios_de_verificacion> _Medios_de_verificacion;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnProyecto_idChanging(System.Nullable<int> value);
+    partial void OnProyecto_idChanged();
+    partial void OnMedios_de_verificacion_idChanging(System.Nullable<int> value);
+    partial void OnMedios_de_verificacion_idChanged();
+    #endregion
+		
+		public Proyectos_Medio()
+		{
+			this._Medios_de_verificacion = default(EntityRef<Medios_de_verificacion>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proyecto_id", DbType="Int")]
+		public System.Nullable<int> Proyecto_id
+		{
+			get
+			{
+				return this._Proyecto_id;
+			}
+			set
+			{
+				if ((this._Proyecto_id != value))
+				{
+					this.OnProyecto_idChanging(value);
+					this.SendPropertyChanging();
+					this._Proyecto_id = value;
+					this.SendPropertyChanged("Proyecto_id");
+					this.OnProyecto_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Medios_de_verificacion_id", DbType="Int")]
+		public System.Nullable<int> Medios_de_verificacion_id
+		{
+			get
+			{
+				return this._Medios_de_verificacion_id;
+			}
+			set
+			{
+				if ((this._Medios_de_verificacion_id != value))
+				{
+					if (this._Medios_de_verificacion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMedios_de_verificacion_idChanging(value);
+					this.SendPropertyChanging();
+					this._Medios_de_verificacion_id = value;
+					this.SendPropertyChanged("Medios_de_verificacion_id");
+					this.OnMedios_de_verificacion_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Medios_de_verificacion_Proyectos_Medio", Storage="_Medios_de_verificacion", ThisKey="Medios_de_verificacion_id", OtherKey="Id", IsForeignKey=true)]
+		public Medios_de_verificacion Medios_de_verificacion
+		{
+			get
+			{
+				return this._Medios_de_verificacion.Entity;
+			}
+			set
+			{
+				Medios_de_verificacion previousValue = this._Medios_de_verificacion.Entity;
+				if (((previousValue != value) 
+							|| (this._Medios_de_verificacion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Medios_de_verificacion.Entity = null;
+						previousValue.Proyectos_Medios.Remove(this);
+					}
+					this._Medios_de_verificacion.Entity = value;
+					if ((value != null))
+					{
+						value.Proyectos_Medios.Add(this);
+						this._Medios_de_verificacion_id = value.Id;
+					}
+					else
+					{
+						this._Medios_de_verificacion_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Medios_de_verificacion");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Proyectos_Supuestos")]
+	public partial class Proyectos_Supuesto : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Proyecto_supuesto_id;
+		
+		private System.Nullable<int> _Supuesto_id;
+		
+		private EntityRef<Proyecto> _Proyecto;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnProyecto_supuesto_idChanging(System.Nullable<int> value);
+    partial void OnProyecto_supuesto_idChanged();
+    partial void OnSupuesto_idChanging(System.Nullable<int> value);
+    partial void OnSupuesto_idChanged();
+    #endregion
+		
+		public Proyectos_Supuesto()
+		{
+			this._Proyecto = default(EntityRef<Proyecto>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proyecto_supuesto_id", DbType="Int")]
+		public System.Nullable<int> Proyecto_supuesto_id
+		{
+			get
+			{
+				return this._Proyecto_supuesto_id;
+			}
+			set
+			{
+				if ((this._Proyecto_supuesto_id != value))
+				{
+					if (this._Proyecto.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProyecto_supuesto_idChanging(value);
+					this.SendPropertyChanging();
+					this._Proyecto_supuesto_id = value;
+					this.SendPropertyChanged("Proyecto_supuesto_id");
+					this.OnProyecto_supuesto_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supuesto_id", DbType="Int")]
+		public System.Nullable<int> Supuesto_id
+		{
+			get
+			{
+				return this._Supuesto_id;
+			}
+			set
+			{
+				if ((this._Supuesto_id != value))
+				{
+					this.OnSupuesto_idChanging(value);
+					this.SendPropertyChanging();
+					this._Supuesto_id = value;
+					this.SendPropertyChanged("Supuesto_id");
+					this.OnSupuesto_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Proyectos_Supuesto", Storage="_Proyecto", ThisKey="Proyecto_supuesto_id", OtherKey="Id", IsForeignKey=true)]
+		public Proyecto Proyecto
+		{
+			get
+			{
+				return this._Proyecto.Entity;
+			}
+			set
+			{
+				Proyecto previousValue = this._Proyecto.Entity;
+				if (((previousValue != value) 
+							|| (this._Proyecto.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Proyecto.Entity = null;
+						previousValue.Proyectos_Supuestos.Remove(this);
+					}
+					this._Proyecto.Entity = value;
+					if ((value != null))
+					{
+						value.Proyectos_Supuestos.Add(this);
+						this._Proyecto_supuesto_id = value.Id;
+					}
+					else
+					{
+						this._Proyecto_supuesto_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Proyecto");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rama")]
 	public partial class Rama : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -15101,6 +15331,336 @@ namespace ESM.Model
 		{
 			this.SendPropertyChanging();
 			entity.Rama = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Responsables")]
+	public partial class Responsable : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Responsable1;
+		
+		private string _Cargo;
+		
+		private EntitySet<Responsables_Resultado> _Responsables_Resultados;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnResponsable1Changing(string value);
+    partial void OnResponsable1Changed();
+    partial void OnCargoChanging(string value);
+    partial void OnCargoChanged();
+    #endregion
+		
+		public Responsable()
+		{
+			this._Responsables_Resultados = new EntitySet<Responsables_Resultado>(new Action<Responsables_Resultado>(this.attach_Responsables_Resultados), new Action<Responsables_Resultado>(this.detach_Responsables_Resultados));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Responsable", Storage="_Responsable1", DbType="NVarChar(100)")]
+		public string Responsable1
+		{
+			get
+			{
+				return this._Responsable1;
+			}
+			set
+			{
+				if ((this._Responsable1 != value))
+				{
+					this.OnResponsable1Changing(value);
+					this.SendPropertyChanging();
+					this._Responsable1 = value;
+					this.SendPropertyChanged("Responsable1");
+					this.OnResponsable1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cargo", DbType="NVarChar(50)")]
+		public string Cargo
+		{
+			get
+			{
+				return this._Cargo;
+			}
+			set
+			{
+				if ((this._Cargo != value))
+				{
+					this.OnCargoChanging(value);
+					this.SendPropertyChanging();
+					this._Cargo = value;
+					this.SendPropertyChanged("Cargo");
+					this.OnCargoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Responsable_Responsables_Resultado", Storage="_Responsables_Resultados", ThisKey="Id", OtherKey="Responsable_id")]
+		public EntitySet<Responsables_Resultado> Responsables_Resultados
+		{
+			get
+			{
+				return this._Responsables_Resultados;
+			}
+			set
+			{
+				this._Responsables_Resultados.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Responsables_Resultados(Responsables_Resultado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Responsable = this;
+		}
+		
+		private void detach_Responsables_Resultados(Responsables_Resultado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Responsable = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Responsables_Resultados")]
+	public partial class Responsables_Resultado : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Actividad_id;
+		
+		private System.Nullable<int> _Responsable_id;
+		
+		private EntityRef<Actividade> _Actividade;
+		
+		private EntityRef<Responsable> _Responsable;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnActividad_idChanging(System.Nullable<int> value);
+    partial void OnActividad_idChanged();
+    partial void OnResponsable_idChanging(System.Nullable<int> value);
+    partial void OnResponsable_idChanged();
+    #endregion
+		
+		public Responsables_Resultado()
+		{
+			this._Actividade = default(EntityRef<Actividade>);
+			this._Responsable = default(EntityRef<Responsable>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Actividad_id", DbType="Int")]
+		public System.Nullable<int> Actividad_id
+		{
+			get
+			{
+				return this._Actividad_id;
+			}
+			set
+			{
+				if ((this._Actividad_id != value))
+				{
+					if (this._Actividade.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnActividad_idChanging(value);
+					this.SendPropertyChanging();
+					this._Actividad_id = value;
+					this.SendPropertyChanged("Actividad_id");
+					this.OnActividad_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Responsable_id", DbType="Int")]
+		public System.Nullable<int> Responsable_id
+		{
+			get
+			{
+				return this._Responsable_id;
+			}
+			set
+			{
+				if ((this._Responsable_id != value))
+				{
+					if (this._Responsable.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnResponsable_idChanging(value);
+					this.SendPropertyChanging();
+					this._Responsable_id = value;
+					this.SendPropertyChanged("Responsable_id");
+					this.OnResponsable_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Responsables_Resultado", Storage="_Actividade", ThisKey="Actividad_id", OtherKey="Id", IsForeignKey=true)]
+		public Actividade Actividade
+		{
+			get
+			{
+				return this._Actividade.Entity;
+			}
+			set
+			{
+				Actividade previousValue = this._Actividade.Entity;
+				if (((previousValue != value) 
+							|| (this._Actividade.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Actividade.Entity = null;
+						previousValue.Responsables_Resultados.Remove(this);
+					}
+					this._Actividade.Entity = value;
+					if ((value != null))
+					{
+						value.Responsables_Resultados.Add(this);
+						this._Actividad_id = value.Id;
+					}
+					else
+					{
+						this._Actividad_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Actividade");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Responsable_Responsables_Resultado", Storage="_Responsable", ThisKey="Responsable_id", OtherKey="Id", IsForeignKey=true)]
+		public Responsable Responsable
+		{
+			get
+			{
+				return this._Responsable.Entity;
+			}
+			set
+			{
+				Responsable previousValue = this._Responsable.Entity;
+				if (((previousValue != value) 
+							|| (this._Responsable.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Responsable.Entity = null;
+						previousValue.Responsables_Resultados.Remove(this);
+					}
+					this._Responsable.Entity = value;
+					if ((value != null))
+					{
+						value.Responsables_Resultados.Add(this);
+						this._Responsable_id = value.Id;
+					}
+					else
+					{
+						this._Responsable_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Responsable");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -15353,8 +15913,6 @@ namespace ESM.Model
 		
 		private EntityRef<Verbo> _Verbo;
 		
-		private EntityRef<Resultados_PAC> _Resultados_PAC;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -15378,7 +15936,6 @@ namespace ESM.Model
 		public Resultados_Indicadore()
 		{
 			this._Verbo = default(EntityRef<Verbo>);
-			this._Resultados_PAC = default(EntityRef<Resultados_PAC>);
 			OnCreated();
 		}
 		
@@ -15413,10 +15970,6 @@ namespace ESM.Model
 			{
 				if ((this._Resultado_id != value))
 				{
-					if (this._Resultados_PAC.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnResultado_idChanging(value);
 					this.SendPropertyChanging();
 					this._Resultado_id = value;
@@ -15564,40 +16117,6 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_PAC_Resultados_Indicadore", Storage="_Resultados_PAC", ThisKey="Resultado_id", OtherKey="Id", IsForeignKey=true)]
-		public Resultados_PAC Resultados_PAC
-		{
-			get
-			{
-				return this._Resultados_PAC.Entity;
-			}
-			set
-			{
-				Resultados_PAC previousValue = this._Resultados_PAC.Entity;
-				if (((previousValue != value) 
-							|| (this._Resultados_PAC.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Resultados_PAC.Entity = null;
-						previousValue.Resultados_Indicadores.Remove(this);
-					}
-					this._Resultados_PAC.Entity = value;
-					if ((value != null))
-					{
-						value.Resultados_Indicadores.Add(this);
-						this._Resultado_id = value.Id;
-					}
-					else
-					{
-						this._Resultado_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Resultados_PAC");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -15633,7 +16152,7 @@ namespace ESM.Model
 		
 		private EntityRef<Medios_de_verificacion> _Medios_de_verificacion;
 		
-		private EntityRef<Resultados_PAC> _Resultados_PAC;
+		private EntityRef<Resultados_Proyecto> _Resultados_Proyecto;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -15650,7 +16169,7 @@ namespace ESM.Model
 		public Resultados_Medio()
 		{
 			this._Medios_de_verificacion = default(EntityRef<Medios_de_verificacion>);
-			this._Resultados_PAC = default(EntityRef<Resultados_PAC>);
+			this._Resultados_Proyecto = default(EntityRef<Resultados_Proyecto>);
 			OnCreated();
 		}
 		
@@ -15685,7 +16204,7 @@ namespace ESM.Model
 			{
 				if ((this._Resultado_id != value))
 				{
-					if (this._Resultados_PAC.HasLoadedOrAssignedValue)
+					if (this._Resultados_Proyecto.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -15756,26 +16275,26 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_PAC_Resultados_Medio", Storage="_Resultados_PAC", ThisKey="Resultado_id", OtherKey="Id", IsForeignKey=true)]
-		public Resultados_PAC Resultados_PAC
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_Proyecto_Resultados_Medio", Storage="_Resultados_Proyecto", ThisKey="Resultado_id", OtherKey="Id", IsForeignKey=true)]
+		public Resultados_Proyecto Resultados_Proyecto
 		{
 			get
 			{
-				return this._Resultados_PAC.Entity;
+				return this._Resultados_Proyecto.Entity;
 			}
 			set
 			{
-				Resultados_PAC previousValue = this._Resultados_PAC.Entity;
+				Resultados_Proyecto previousValue = this._Resultados_Proyecto.Entity;
 				if (((previousValue != value) 
-							|| (this._Resultados_PAC.HasLoadedOrAssignedValue == false)))
+							|| (this._Resultados_Proyecto.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Resultados_PAC.Entity = null;
+						this._Resultados_Proyecto.Entity = null;
 						previousValue.Resultados_Medios.Remove(this);
 					}
-					this._Resultados_PAC.Entity = value;
+					this._Resultados_Proyecto.Entity = value;
 					if ((value != null))
 					{
 						value.Resultados_Medios.Add(this);
@@ -15785,7 +16304,7 @@ namespace ESM.Model
 					{
 						this._Resultado_id = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("Resultados_PAC");
+					this.SendPropertyChanged("Resultados_Proyecto");
 				}
 			}
 		}
@@ -15811,29 +16330,29 @@ namespace ESM.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Resultados_PACS")]
-	public partial class Resultados_PAC : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Resultados_Proyectos")]
+	public partial class Resultados_Proyecto : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _Id;
 		
-		private System.Nullable<int> _PAC_id;
+		private System.Nullable<int> _Proyecto_id;
 		
 		private string _Resultado;
 		
-		private System.Data.Linq.Binary _upsize_ts;
+		private string _Indicador;
+		
+		private System.Nullable<decimal> _Presupuesto;
 		
 		private EntitySet<Actividade> _Actividades;
-		
-		private EntitySet<Resultados_Indicadore> _Resultados_Indicadores;
 		
 		private EntitySet<Resultados_Medio> _Resultados_Medios;
 		
 		private EntitySet<Resultados_Supuesto> _Resultados_Supuestos;
 		
-		private EntityRef<PAC> _PAC;
+		private EntityRef<Proyecto> _Proyecto;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -15841,25 +16360,26 @@ namespace ESM.Model
     partial void OnCreated();
     partial void OnIdChanging(int value);
     partial void OnIdChanged();
-    partial void OnPAC_idChanging(System.Nullable<int> value);
-    partial void OnPAC_idChanged();
+    partial void OnProyecto_idChanging(System.Nullable<int> value);
+    partial void OnProyecto_idChanged();
     partial void OnResultadoChanging(string value);
     partial void OnResultadoChanged();
-    partial void Onupsize_tsChanging(System.Data.Linq.Binary value);
-    partial void Onupsize_tsChanged();
+    partial void OnIndicadorChanging(string value);
+    partial void OnIndicadorChanged();
+    partial void OnPresupuestoChanging(System.Nullable<decimal> value);
+    partial void OnPresupuestoChanged();
     #endregion
 		
-		public Resultados_PAC()
+		public Resultados_Proyecto()
 		{
 			this._Actividades = new EntitySet<Actividade>(new Action<Actividade>(this.attach_Actividades), new Action<Actividade>(this.detach_Actividades));
-			this._Resultados_Indicadores = new EntitySet<Resultados_Indicadore>(new Action<Resultados_Indicadore>(this.attach_Resultados_Indicadores), new Action<Resultados_Indicadore>(this.detach_Resultados_Indicadores));
 			this._Resultados_Medios = new EntitySet<Resultados_Medio>(new Action<Resultados_Medio>(this.attach_Resultados_Medios), new Action<Resultados_Medio>(this.detach_Resultados_Medios));
 			this._Resultados_Supuestos = new EntitySet<Resultados_Supuesto>(new Action<Resultados_Supuesto>(this.attach_Resultados_Supuestos), new Action<Resultados_Supuesto>(this.detach_Resultados_Supuestos));
-			this._PAC = default(EntityRef<PAC>);
+			this._Proyecto = default(EntityRef<Proyecto>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Id
 		{
 			get
@@ -15879,26 +16399,26 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PAC_id", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> PAC_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proyecto_id", DbType="Int")]
+		public System.Nullable<int> Proyecto_id
 		{
 			get
 			{
-				return this._PAC_id;
+				return this._Proyecto_id;
 			}
 			set
 			{
-				if ((this._PAC_id != value))
+				if ((this._Proyecto_id != value))
 				{
-					if (this._PAC.HasLoadedOrAssignedValue)
+					if (this._Proyecto.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnPAC_idChanging(value);
+					this.OnProyecto_idChanging(value);
 					this.SendPropertyChanging();
-					this._PAC_id = value;
-					this.SendPropertyChanged("PAC_id");
-					this.OnPAC_idChanged();
+					this._Proyecto_id = value;
+					this.SendPropertyChanged("Proyecto_id");
+					this.OnProyecto_idChanged();
 				}
 			}
 		}
@@ -15923,27 +16443,47 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_upsize_ts", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary upsize_ts
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador", DbType="NVarChar(2000)")]
+		public string Indicador
 		{
 			get
 			{
-				return this._upsize_ts;
+				return this._Indicador;
 			}
 			set
 			{
-				if ((this._upsize_ts != value))
+				if ((this._Indicador != value))
 				{
-					this.Onupsize_tsChanging(value);
+					this.OnIndicadorChanging(value);
 					this.SendPropertyChanging();
-					this._upsize_ts = value;
-					this.SendPropertyChanged("upsize_ts");
-					this.Onupsize_tsChanged();
+					this._Indicador = value;
+					this.SendPropertyChanged("Indicador");
+					this.OnIndicadorChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_PAC_Actividade", Storage="_Actividades", ThisKey="Id", OtherKey="Resultado_id")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Presupuesto", DbType="Money")]
+		public System.Nullable<decimal> Presupuesto
+		{
+			get
+			{
+				return this._Presupuesto;
+			}
+			set
+			{
+				if ((this._Presupuesto != value))
+				{
+					this.OnPresupuestoChanging(value);
+					this.SendPropertyChanging();
+					this._Presupuesto = value;
+					this.SendPropertyChanged("Presupuesto");
+					this.OnPresupuestoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_Proyecto_Actividade", Storage="_Actividades", ThisKey="Id", OtherKey="Resultado_id")]
 		public EntitySet<Actividade> Actividades
 		{
 			get
@@ -15956,20 +16496,7 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_PAC_Resultados_Indicadore", Storage="_Resultados_Indicadores", ThisKey="Id", OtherKey="Resultado_id")]
-		public EntitySet<Resultados_Indicadore> Resultados_Indicadores
-		{
-			get
-			{
-				return this._Resultados_Indicadores;
-			}
-			set
-			{
-				this._Resultados_Indicadores.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_PAC_Resultados_Medio", Storage="_Resultados_Medios", ThisKey="Id", OtherKey="Resultado_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_Proyecto_Resultados_Medio", Storage="_Resultados_Medios", ThisKey="Id", OtherKey="Resultado_id")]
 		public EntitySet<Resultados_Medio> Resultados_Medios
 		{
 			get
@@ -15982,7 +16509,7 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_PAC_Resultados_Supuesto", Storage="_Resultados_Supuestos", ThisKey="Id", OtherKey="Resultado_id")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_Proyecto_Resultados_Supuesto", Storage="_Resultados_Supuestos", ThisKey="Id", OtherKey="Resultado_id")]
 		public EntitySet<Resultados_Supuesto> Resultados_Supuestos
 		{
 			get
@@ -15995,36 +16522,36 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PAC_Resultados_PAC", Storage="_PAC", ThisKey="PAC_id", OtherKey="Id", IsForeignKey=true)]
-		public PAC PAC
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Resultados_Proyecto", Storage="_Proyecto", ThisKey="Proyecto_id", OtherKey="Id", IsForeignKey=true)]
+		public Proyecto Proyecto
 		{
 			get
 			{
-				return this._PAC.Entity;
+				return this._Proyecto.Entity;
 			}
 			set
 			{
-				PAC previousValue = this._PAC.Entity;
+				Proyecto previousValue = this._Proyecto.Entity;
 				if (((previousValue != value) 
-							|| (this._PAC.HasLoadedOrAssignedValue == false)))
+							|| (this._Proyecto.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._PAC.Entity = null;
-						previousValue.Resultados_PACs.Remove(this);
+						this._Proyecto.Entity = null;
+						previousValue.Resultados_Proyectos.Remove(this);
 					}
-					this._PAC.Entity = value;
+					this._Proyecto.Entity = value;
 					if ((value != null))
 					{
-						value.Resultados_PACs.Add(this);
-						this._PAC_id = value.Id;
+						value.Resultados_Proyectos.Add(this);
+						this._Proyecto_id = value.Id;
 					}
 					else
 					{
-						this._PAC_id = default(Nullable<int>);
+						this._Proyecto_id = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("PAC");
+					this.SendPropertyChanged("Proyecto");
 				}
 			}
 		}
@@ -16052,49 +16579,37 @@ namespace ESM.Model
 		private void attach_Actividades(Actividade entity)
 		{
 			this.SendPropertyChanging();
-			entity.Resultados_PAC = this;
+			entity.Resultados_Proyecto = this;
 		}
 		
 		private void detach_Actividades(Actividade entity)
 		{
 			this.SendPropertyChanging();
-			entity.Resultados_PAC = null;
-		}
-		
-		private void attach_Resultados_Indicadores(Resultados_Indicadore entity)
-		{
-			this.SendPropertyChanging();
-			entity.Resultados_PAC = this;
-		}
-		
-		private void detach_Resultados_Indicadores(Resultados_Indicadore entity)
-		{
-			this.SendPropertyChanging();
-			entity.Resultados_PAC = null;
+			entity.Resultados_Proyecto = null;
 		}
 		
 		private void attach_Resultados_Medios(Resultados_Medio entity)
 		{
 			this.SendPropertyChanging();
-			entity.Resultados_PAC = this;
+			entity.Resultados_Proyecto = this;
 		}
 		
 		private void detach_Resultados_Medios(Resultados_Medio entity)
 		{
 			this.SendPropertyChanging();
-			entity.Resultados_PAC = null;
+			entity.Resultados_Proyecto = null;
 		}
 		
 		private void attach_Resultados_Supuestos(Resultados_Supuesto entity)
 		{
 			this.SendPropertyChanging();
-			entity.Resultados_PAC = this;
+			entity.Resultados_Proyecto = this;
 		}
 		
 		private void detach_Resultados_Supuestos(Resultados_Supuesto entity)
 		{
 			this.SendPropertyChanging();
-			entity.Resultados_PAC = null;
+			entity.Resultados_Proyecto = null;
 		}
 	}
 	
@@ -16110,7 +16625,7 @@ namespace ESM.Model
 		
 		private System.Nullable<int> _Supuesto_id;
 		
-		private EntityRef<Resultados_PAC> _Resultados_PAC;
+		private EntityRef<Resultados_Proyecto> _Resultados_Proyecto;
 		
 		private EntityRef<Supuesto> _Supuesto;
 		
@@ -16128,7 +16643,7 @@ namespace ESM.Model
 		
 		public Resultados_Supuesto()
 		{
-			this._Resultados_PAC = default(EntityRef<Resultados_PAC>);
+			this._Resultados_Proyecto = default(EntityRef<Resultados_Proyecto>);
 			this._Supuesto = default(EntityRef<Supuesto>);
 			OnCreated();
 		}
@@ -16164,7 +16679,7 @@ namespace ESM.Model
 			{
 				if ((this._Resultado_id != value))
 				{
-					if (this._Resultados_PAC.HasLoadedOrAssignedValue)
+					if (this._Resultados_Proyecto.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -16201,26 +16716,26 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_PAC_Resultados_Supuesto", Storage="_Resultados_PAC", ThisKey="Resultado_id", OtherKey="Id", IsForeignKey=true)]
-		public Resultados_PAC Resultados_PAC
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Resultados_Proyecto_Resultados_Supuesto", Storage="_Resultados_Proyecto", ThisKey="Resultado_id", OtherKey="Id", IsForeignKey=true)]
+		public Resultados_Proyecto Resultados_Proyecto
 		{
 			get
 			{
-				return this._Resultados_PAC.Entity;
+				return this._Resultados_Proyecto.Entity;
 			}
 			set
 			{
-				Resultados_PAC previousValue = this._Resultados_PAC.Entity;
+				Resultados_Proyecto previousValue = this._Resultados_Proyecto.Entity;
 				if (((previousValue != value) 
-							|| (this._Resultados_PAC.HasLoadedOrAssignedValue == false)))
+							|| (this._Resultados_Proyecto.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Resultados_PAC.Entity = null;
+						this._Resultados_Proyecto.Entity = null;
 						previousValue.Resultados_Supuestos.Remove(this);
 					}
-					this._Resultados_PAC.Entity = value;
+					this._Resultados_Proyecto.Entity = value;
 					if ((value != null))
 					{
 						value.Resultados_Supuestos.Add(this);
@@ -16230,7 +16745,7 @@ namespace ESM.Model
 					{
 						this._Resultado_id = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("Resultados_PAC");
+					this.SendPropertyChanged("Resultados_Proyecto");
 				}
 			}
 		}
@@ -17897,8 +18412,6 @@ namespace ESM.Model
 		
 		private EntitySet<Actividades_Supuesto> _Actividades_Supuestos;
 		
-		private EntitySet<PACS_Supuesto> _PACS_Supuestos;
-		
 		private EntitySet<Resultados_Supuesto> _Resultados_Supuestos;
 		
     #region Extensibility Method Definitions
@@ -17916,7 +18429,6 @@ namespace ESM.Model
 		public Supuesto()
 		{
 			this._Actividades_Supuestos = new EntitySet<Actividades_Supuesto>(new Action<Actividades_Supuesto>(this.attach_Actividades_Supuestos), new Action<Actividades_Supuesto>(this.detach_Actividades_Supuestos));
-			this._PACS_Supuestos = new EntitySet<PACS_Supuesto>(new Action<PACS_Supuesto>(this.attach_PACS_Supuestos), new Action<PACS_Supuesto>(this.detach_PACS_Supuestos));
 			this._Resultados_Supuestos = new EntitySet<Resultados_Supuesto>(new Action<Resultados_Supuesto>(this.attach_Resultados_Supuestos), new Action<Resultados_Supuesto>(this.detach_Resultados_Supuestos));
 			OnCreated();
 		}
@@ -17994,19 +18506,6 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supuesto_PACS_Supuesto", Storage="_PACS_Supuestos", ThisKey="Id", OtherKey="Supuesto_id")]
-		public EntitySet<PACS_Supuesto> PACS_Supuestos
-		{
-			get
-			{
-				return this._PACS_Supuestos;
-			}
-			set
-			{
-				this._PACS_Supuestos.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supuesto_Resultados_Supuesto", Storage="_Resultados_Supuestos", ThisKey="Id", OtherKey="Supuesto_id")]
 		public EntitySet<Resultados_Supuesto> Resultados_Supuestos
 		{
@@ -18047,18 +18546,6 @@ namespace ESM.Model
 		}
 		
 		private void detach_Actividades_Supuestos(Actividades_Supuesto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Supuesto = null;
-		}
-		
-		private void attach_PACS_Supuestos(PACS_Supuesto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Supuesto = this;
-		}
-		
-		private void detach_PACS_Supuestos(PACS_Supuesto entity)
 		{
 			this.SendPropertyChanging();
 			entity.Supuesto = null;

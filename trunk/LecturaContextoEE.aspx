@@ -15,13 +15,16 @@
         }
     </style>
     <script type="text/javascript">
+        setInterval("Almacenar();", 120000);
+
         $(document).ready(function () {
             $(".numerico").change(function () {
                 var valor = $(this).val();
-                if (isNaN(valor)) {
+                if (isNaN(valor) || valor.trim().length == 0) {
                     alert("El valor ingresado no es del tipo numerico.");
                     $(this).val(0);
                 }
+
             });
 
             $(".sisclass").change(function () {
@@ -56,9 +59,23 @@
                     $("#segundo_porcentaje").css("color", "green");
                 $("#segundo_porcentaje").html(suma + "%");
             });
+
+
+            var result = $("#ContentPlaceHolder1_timer").val();
+            if (result == 1) {
+                $("#a_succes").trigger("click");
+                $("#ContentPlaceHolder1_alerthq").val("-1");
+            }
+            if (result == 0) {
+                $("#a_error").trigger("click");
+                $("#ContentPlaceHolder1_alerthq").val("-1");
+            }
         });
 
-        
+        function Almacenar() {
+            $("#ContentPlaceHolder1_btnAlmacenar").trigger("click");
+        }
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -794,4 +811,5 @@
     <br />
     <br />
     <br />
+    <input id="timer" runat="server" type="hidden" value="-1" />
 </asp:Content>
