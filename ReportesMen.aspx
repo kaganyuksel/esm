@@ -57,9 +57,8 @@
             -
             <asp:LinkButton ID="lknDiliEE" Text="Diligenciamiento EE" runat="server" OnClick="lknDiliEE_Click" />
             <br />
-            -
-            <asp:LinkButton ID="lknDiliRes" Text="Diligenciamiento EE Resumido" runat="server"
-                OnClick="lknDiliRes_Click" />
+            &nbsp;<asp:LinkButton ID="lknDiliRes" Text="Diligenciamiento EE Resumido" runat="server"
+                OnClick="lknDiliRes_Click" Visible="False" />
         </div>
         <div style="width: 80%; float: right;">
             <asp:Label Text="" runat="server" ID="lbltotal" />
@@ -181,9 +180,11 @@
                     </EmptyDataTemplate>
                 </asp:GridView>
             </div>
-            <asp:Panel ID="pnlgveedili" runat="server" ScrollBars="Horizontal" Visible="false">
-                <asp:GridView runat="server" ID="gvDiliEE" AutoGenerateColumns="False" AllowSorting="True"
-                    AllowPaging="True" Width="4000px" Font-Size="14px" OnPageIndexChanging="gvDiliEE_PageIndexChanging">
+            <asp:Panel ID="pnlgveedili" runat="server" ScrollBars="Both" Visible="false">
+                <asp:GridView runat="server" ID="gvDiliEE" AutoGenerateColumns="False" 
+                    AllowSorting="True" Width="4000px" Font-Size="14px" 
+                    OnPageIndexChanging="gvDiliEE_PageIndexChanging" AllowPaging="True" 
+                    Visible="False">
                     <AlternatingRowStyle CssClass="trblanca" />
                     <Columns>
                         <asp:BoundField DataField="Nombre" HeaderText="Nombre SE" HtmlEncode="False"></asp:BoundField>
@@ -306,7 +307,7 @@
                     </EmptyDataTemplate>
                 </asp:GridView>
                 <asp:GridView runat="server" ID="gvcopyDiliEE" AutoGenerateColumns="False" AllowSorting="True"
-                    Visible="false" AllowPaging="false">
+                    Visible="False" AllowPaging="false">
                     <AlternatingRowStyle CssClass="trblanca" />
                     <Columns>
                         <asp:BoundField DataField="Nombre" HeaderText="Nombre SE" HtmlEncode="False"></asp:BoundField>

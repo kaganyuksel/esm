@@ -9,7 +9,8 @@
 
             $(".numerico").change(function () {
 
-                if (isNaN($(this).val()))
+                var valor = $(this).val();
+                if (isNaN(valor) || valor.trim().length == 0)
                     $(this).val("0");
 
             });

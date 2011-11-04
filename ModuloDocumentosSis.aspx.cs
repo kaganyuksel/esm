@@ -73,7 +73,7 @@ namespace ESM
                             }
                             else
                             {
-                                if (objFileUpload.PostedFile.ContentLength <= 2097152)
+                                if (objFileUpload.PostedFile.ContentLength <= 5242880)
                                 {
                                     if (File.Exists(path))
                                         File.Delete(path);

@@ -355,17 +355,24 @@ namespace ESM
             if (Session["lceeidmedicion"] == null)
             {
                 if (objCLecturaContextoEE.Almacenar(idee, idmed))
-                    Response.Write("<script>alert('El proceso de almacenamiento finalizo correctamente.');</script>");
+                {
+                    Session.Add("lceeidmedicion", idmed);
+                    //Response.Write("<script>alert('El proceso de almacenamiento finalizó correctamente.');</script>");
+                    timer.Value = "1";
+                }
                 else
-                    Response.Write("<script>alert('El proceso de almacenamiento finalizo sin exito.');</script>");
+                    //Response.Write("<script>alert('El proceso de almacenamiento finalizó sin éxito.');</script>");
+                    timer.Value = "0";
             }
             else
             {
                 int idmedicion = Convert.ToInt32(Session["lceeidmedicion"]);
                 if (objCLecturaContextoEE.Actualizar(idee, idmedicion))
-                    Response.Write("<script>alert('El proceso de actualización finalizo correctamente.');</script>");
+                    //Response.Write("<script>alert('El proceso de actualización finalizó correctamente.');</script>");
+                    timer.Value = "1";
                 else
-                    Response.Write("<script>alert('El proceso de almacenamiento finalizo sin exito.');</script>");
+                    //Response.Write("<script>alert('El proceso de almacenamiento finalizó sin éxito.');</script>");
+                    timer.Value = "0";
             }
         }
 
