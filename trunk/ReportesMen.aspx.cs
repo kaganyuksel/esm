@@ -241,7 +241,7 @@ namespace ESM
             {
                 gvDiliEE.AllowPaging = false;
                 ReportEE();
-                Export(gvcopyDiliEE, "Diligenciamiento EE");
+                Export(gvDiliEE, "Diligenciamiento EE");
             }
 
             //else if (gvDiliEE.Visible && resumido)
@@ -486,6 +486,7 @@ namespace ESM
                 ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
                 var ee = from eec in db.Establecimiento_Educativos
+                         where eec.Estado == true
                          select new
                          {
                              eec.IdIE,

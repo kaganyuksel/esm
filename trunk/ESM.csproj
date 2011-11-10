@@ -118,6 +118,13 @@
     <Compile Include="AddCita.aspx.designer.cs">
       <DependentUpon>AddCita.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ajax.aspx.cs">
+      <DependentUpon>ajax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ajax.aspx.designer.cs">
+      <DependentUpon>ajax.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Alert.cs" />
     <Compile Include="amChartsnet\amchart.cs" />
     <Compile Include="AmCharts\flash\export.aspx.cs">
@@ -165,6 +172,13 @@
     </Compile>
     <Compile Include="Consolidado.aspx.designer.cs">
       <DependentUpon>Consolidado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetallesMarcoLogico.aspx.cs">
+      <DependentUpon>DetallesMarcoLogico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetallesMarcoLogico.aspx.designer.cs">
+      <DependentUpon>DetallesMarcoLogico.aspx</DependentUpon>
     </Compile>
     <Compile Include="Evaluacion.aspx.cs">
       <DependentUpon>Evaluacion.aspx</DependentUpon>
@@ -276,6 +290,7 @@
     <Content Include="ActaVisitaSistematizacion.aspx" />
     <Content Include="ActaVisitaSistematizacionSE.aspx" />
     <Content Include="AddCita.aspx" />
+    <Content Include="ajax.aspx" />
     <Content Include="AmCharts\flash\amcharts_key.txt" />
     <Content Include="AmCharts\flash\amcolumn.swf" />
     <Content Include="AmCharts\flash\amline.swf" />
@@ -312,6 +327,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Content Include="DetallesMarcoLogico.aspx" />
     <Content Include="Evaluacion.aspx" />
     <Content Include="Global.asax" />
     <Compile Include="Global.asax.cs">

@@ -27,7 +27,7 @@ namespace ESM
 
             if (!Page.IsPostBack)
             {
-                for (int i = 1; i < 11; i++)
+                for (int i = 1; i < 15; i++)
                 {
                     bool exist = false;
                     exist = objCDocumentos.ExisteDocumento(i, idmedicion);
