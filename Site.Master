@@ -35,7 +35,7 @@
             // Initially, hide them all
             hideAllMessages();
 
-            $("#hora").html(new Date().getHours().toString());
+//            $("#hora").html(new Date().getHours().toString());
 
             // Show message
             for (var i = 0; i < myMessages.length; i++) {
