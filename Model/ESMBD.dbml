@@ -378,7 +378,8 @@
       <Column Name="Indicador" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="unidad_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="verbo_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="fecha_indicador_inicial" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="fecha_indicador_final" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Fecha_Creacion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Association Name="Indicadore_Indicadores_Meta" Member="Indicadores_Metas" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Meta" />
       <Association Name="Indicadore_Indicadores_Valor" Member="Indicadores_Valors" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Valor" />
@@ -571,8 +572,7 @@
   <Table Name="dbo.Medios_de_verificacion" Member="Medios_de_verificacions">
     <Type Name="Medios_de_verificacion">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Medio_de_verificacion" Type="System.String" DbType="NText" CanBeNull="true" />
-      <Column Name="upsize_ts" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="Medio_de_verificacion" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Medios_de_verificacion_Actividades_Medio" Member="Actividades_Medios" ThisKey="Id" OtherKey="Medios_de_verificacion_id" Type="Actividades_Medio" />
       <Association Name="Medios_de_verificacion_PAC_Indicadores_Medio" Member="PAC_Indicadores_Medios" ThisKey="Id" OtherKey="Medios_de_verificacion_id" Type="PAC_Indicadores_Medio" />
       <Association Name="Medios_de_verificacion_Proyectos_Medio" Member="Proyectos_Medios" ThisKey="Id" OtherKey="Medios_de_verificacion_id" Type="Proyectos_Medio" />
@@ -666,6 +666,7 @@
       <Column Name="Indicador" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
       <Column Name="Presupuesto" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Association Name="Proyecto_Causas_Efecto" Member="Causas_Efectos" ThisKey="Id" OtherKey="Proyecto_id" Type="Causas_Efecto" />
+      <Association Name="Proyecto_Proyectos_Medio" Member="Proyectos_Medios" ThisKey="Id" OtherKey="Proyecto_id" Type="Proyectos_Medio" />
       <Association Name="Proyecto_Proyectos_Supuesto" Member="Proyectos_Supuestos" ThisKey="Id" OtherKey="Proyecto_supuesto_id" Type="Proyectos_Supuesto" />
     </Type>
   </Table>
@@ -674,6 +675,7 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Proyecto_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Medios_de_verificacion_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Proyecto_Proyectos_Medio" Member="Proyecto" ThisKey="Proyecto_id" OtherKey="Id" Type="Proyecto" IsForeignKey="true" />
       <Association Name="Medios_de_verificacion_Proyectos_Medio" Member="Medios_de_verificacion" ThisKey="Medios_de_verificacion_id" OtherKey="Id" Type="Medios_de_verificacion" IsForeignKey="true" />
     </Type>
   </Table>
@@ -683,6 +685,7 @@
       <Column Name="Proyecto_supuesto_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Supuesto_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Proyecto_Proyectos_Supuesto" Member="Proyecto" ThisKey="Proyecto_supuesto_id" OtherKey="Id" Type="Proyecto" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Supuesto_Proyectos_Supuesto" Member="Supuesto" ThisKey="Supuesto_id" OtherKey="Id" Type="Supuesto" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Rama" Member="Ramas">
@@ -835,9 +838,9 @@
   <Table Name="dbo.Supuestos" Member="Supuestos">
     <Type Name="Supuesto">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="supuesto" Member="supuesto1" Type="System.String" DbType="NText" CanBeNull="true" />
-      <Column Name="upsize_ts" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="supuesto" Member="supuesto1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Supuesto_Actividades_Supuesto" Member="Actividades_Supuestos" ThisKey="Id" OtherKey="Supuesto_id" Type="Actividades_Supuesto" />
+      <Association Name="Supuesto_Proyectos_Supuesto" Member="Proyectos_Supuestos" ThisKey="Id" OtherKey="Supuesto_id" Type="Proyectos_Supuesto" />
       <Association Name="Supuesto_Resultados_Supuesto" Member="Resultados_Supuestos" ThisKey="Id" OtherKey="Supuesto_id" Type="Resultados_Supuesto" />
     </Type>
   </Table>
@@ -866,6 +869,17 @@
       <Association Name="Consultore_Usuario" Member="Consultore" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Consultore" IsForeignKey="true" />
       <Association Name="Operadore_Usuario" Member="Operadore" ThisKey="IdOperador" OtherKey="IdOperador" Type="Operadore" IsForeignKey="true" />
       <Association Name="Role_Usuario" Member="Role" ThisKey="IdRol" OtherKey="IdRol" Type="Role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.gantt" Member="gantts">
+    <Type Name="gantt">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="actividad" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Indicador" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[fecha inicial]" Member="fecha_inicial" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[fecha final]" Member="fecha_final" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="parent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Resultado_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

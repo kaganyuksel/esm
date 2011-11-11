@@ -781,6 +781,14 @@ namespace ESM.Model
 				return this.GetTable<Usuario>();
 			}
 		}
+		
+		public System.Data.Linq.Table<gantt> gantts
+		{
+			get
+			{
+				return this.GetTable<gantt>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ActaVisitaEE")]
@@ -8543,7 +8551,9 @@ namespace ESM.Model
 		
 		private System.Nullable<int> _verbo_id;
 		
-		private System.Nullable<System.DateTime> _Fecha;
+		private System.Nullable<System.DateTime> _fecha_indicador_inicial;
+		
+		private System.Nullable<System.DateTime> _fecha_indicador_final;
 		
 		private System.Nullable<System.DateTime> _Fecha_Creacion;
 		
@@ -8571,8 +8581,10 @@ namespace ESM.Model
     partial void Onunidad_idChanged();
     partial void Onverbo_idChanging(System.Nullable<int> value);
     partial void Onverbo_idChanged();
-    partial void OnFechaChanging(System.Nullable<System.DateTime> value);
-    partial void OnFechaChanged();
+    partial void Onfecha_indicador_inicialChanging(System.Nullable<System.DateTime> value);
+    partial void Onfecha_indicador_inicialChanged();
+    partial void Onfecha_indicador_finalChanging(System.Nullable<System.DateTime> value);
+    partial void Onfecha_indicador_finalChanged();
     partial void OnFecha_CreacionChanging(System.Nullable<System.DateTime> value);
     partial void OnFecha_CreacionChanged();
     #endregion
@@ -8699,22 +8711,42 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="Date")]
-		public System.Nullable<System.DateTime> Fecha
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha_indicador_inicial", DbType="Date")]
+		public System.Nullable<System.DateTime> fecha_indicador_inicial
 		{
 			get
 			{
-				return this._Fecha;
+				return this._fecha_indicador_inicial;
 			}
 			set
 			{
-				if ((this._Fecha != value))
+				if ((this._fecha_indicador_inicial != value))
 				{
-					this.OnFechaChanging(value);
+					this.Onfecha_indicador_inicialChanging(value);
 					this.SendPropertyChanging();
-					this._Fecha = value;
-					this.SendPropertyChanged("Fecha");
-					this.OnFechaChanged();
+					this._fecha_indicador_inicial = value;
+					this.SendPropertyChanged("fecha_indicador_inicial");
+					this.Onfecha_indicador_inicialChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha_indicador_final", DbType="Date")]
+		public System.Nullable<System.DateTime> fecha_indicador_final
+		{
+			get
+			{
+				return this._fecha_indicador_final;
+			}
+			set
+			{
+				if ((this._fecha_indicador_final != value))
+				{
+					this.Onfecha_indicador_finalChanging(value);
+					this.SendPropertyChanging();
+					this._fecha_indicador_final = value;
+					this.SendPropertyChanged("fecha_indicador_final");
+					this.Onfecha_indicador_finalChanged();
 				}
 			}
 		}
@@ -13128,8 +13160,6 @@ namespace ESM.Model
 		
 		private string _Medio_de_verificacion;
 		
-		private System.Data.Linq.Binary _upsize_ts;
-		
 		private EntitySet<Actividades_Medio> _Actividades_Medios;
 		
 		private EntitySet<PAC_Indicadores_Medio> _PAC_Indicadores_Medios;
@@ -13146,8 +13176,6 @@ namespace ESM.Model
     partial void OnIdChanged();
     partial void OnMedio_de_verificacionChanging(string value);
     partial void OnMedio_de_verificacionChanged();
-    partial void Onupsize_tsChanging(System.Data.Linq.Binary value);
-    partial void Onupsize_tsChanged();
     #endregion
 		
 		public Medios_de_verificacion()
@@ -13159,7 +13187,7 @@ namespace ESM.Model
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Id
 		{
 			get
@@ -13195,26 +13223,6 @@ namespace ESM.Model
 					this._Medio_de_verificacion = value;
 					this.SendPropertyChanged("Medio_de_verificacion");
 					this.OnMedio_de_verificacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_upsize_ts", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary upsize_ts
-		{
-			get
-			{
-				return this._upsize_ts;
-			}
-			set
-			{
-				if ((this._upsize_ts != value))
-				{
-					this.Onupsize_tsChanging(value);
-					this.SendPropertyChanging();
-					this._upsize_ts = value;
-					this.SendPropertyChanged("upsize_ts");
-					this.Onupsize_tsChanged();
 				}
 			}
 		}
@@ -14912,6 +14920,8 @@ namespace ESM.Model
 		
 		private EntitySet<Causas_Efecto> _Causas_Efectos;
 		
+		private EntitySet<Proyectos_Medio> _Proyectos_Medios;
+		
 		private EntitySet<Proyectos_Supuesto> _Proyectos_Supuestos;
 		
     #region Extensibility Method Definitions
@@ -14939,6 +14949,7 @@ namespace ESM.Model
 		public Proyecto()
 		{
 			this._Causas_Efectos = new EntitySet<Causas_Efecto>(new Action<Causas_Efecto>(this.attach_Causas_Efectos), new Action<Causas_Efecto>(this.detach_Causas_Efectos));
+			this._Proyectos_Medios = new EntitySet<Proyectos_Medio>(new Action<Proyectos_Medio>(this.attach_Proyectos_Medios), new Action<Proyectos_Medio>(this.detach_Proyectos_Medios));
 			this._Proyectos_Supuestos = new EntitySet<Proyectos_Supuesto>(new Action<Proyectos_Supuesto>(this.attach_Proyectos_Supuestos), new Action<Proyectos_Supuesto>(this.detach_Proyectos_Supuestos));
 			OnCreated();
 		}
@@ -15116,6 +15127,19 @@ namespace ESM.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Proyectos_Medio", Storage="_Proyectos_Medios", ThisKey="Id", OtherKey="Proyecto_id")]
+		public EntitySet<Proyectos_Medio> Proyectos_Medios
+		{
+			get
+			{
+				return this._Proyectos_Medios;
+			}
+			set
+			{
+				this._Proyectos_Medios.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Proyectos_Supuesto", Storage="_Proyectos_Supuestos", ThisKey="Id", OtherKey="Proyecto_supuesto_id")]
 		public EntitySet<Proyectos_Supuesto> Proyectos_Supuestos
 		{
@@ -15161,6 +15185,18 @@ namespace ESM.Model
 			entity.Proyecto = null;
 		}
 		
+		private void attach_Proyectos_Medios(Proyectos_Medio entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = this;
+		}
+		
+		private void detach_Proyectos_Medios(Proyectos_Medio entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = null;
+		}
+		
 		private void attach_Proyectos_Supuestos(Proyectos_Supuesto entity)
 		{
 			this.SendPropertyChanging();
@@ -15186,6 +15222,8 @@ namespace ESM.Model
 		
 		private System.Nullable<int> _Medios_de_verificacion_id;
 		
+		private EntityRef<Proyecto> _Proyecto;
+		
 		private EntityRef<Medios_de_verificacion> _Medios_de_verificacion;
 		
     #region Extensibility Method Definitions
@@ -15202,6 +15240,7 @@ namespace ESM.Model
 		
 		public Proyectos_Medio()
 		{
+			this._Proyecto = default(EntityRef<Proyecto>);
 			this._Medios_de_verificacion = default(EntityRef<Medios_de_verificacion>);
 			OnCreated();
 		}
@@ -15237,6 +15276,10 @@ namespace ESM.Model
 			{
 				if ((this._Proyecto_id != value))
 				{
+					if (this._Proyecto.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnProyecto_idChanging(value);
 					this.SendPropertyChanging();
 					this._Proyecto_id = value;
@@ -15266,6 +15309,40 @@ namespace ESM.Model
 					this._Medios_de_verificacion_id = value;
 					this.SendPropertyChanged("Medios_de_verificacion_id");
 					this.OnMedios_de_verificacion_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Proyectos_Medio", Storage="_Proyecto", ThisKey="Proyecto_id", OtherKey="Id", IsForeignKey=true)]
+		public Proyecto Proyecto
+		{
+			get
+			{
+				return this._Proyecto.Entity;
+			}
+			set
+			{
+				Proyecto previousValue = this._Proyecto.Entity;
+				if (((previousValue != value) 
+							|| (this._Proyecto.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Proyecto.Entity = null;
+						previousValue.Proyectos_Medios.Remove(this);
+					}
+					this._Proyecto.Entity = value;
+					if ((value != null))
+					{
+						value.Proyectos_Medios.Add(this);
+						this._Proyecto_id = value.Id;
+					}
+					else
+					{
+						this._Proyecto_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Proyecto");
 				}
 			}
 		}
@@ -15339,6 +15416,8 @@ namespace ESM.Model
 		
 		private EntityRef<Proyecto> _Proyecto;
 		
+		private EntityRef<Supuesto> _Supuesto;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -15354,6 +15433,7 @@ namespace ESM.Model
 		public Proyectos_Supuesto()
 		{
 			this._Proyecto = default(EntityRef<Proyecto>);
+			this._Supuesto = default(EntityRef<Supuesto>);
 			OnCreated();
 		}
 		
@@ -15412,6 +15492,10 @@ namespace ESM.Model
 			{
 				if ((this._Supuesto_id != value))
 				{
+					if (this._Supuesto.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnSupuesto_idChanging(value);
 					this.SendPropertyChanging();
 					this._Supuesto_id = value;
@@ -15451,6 +15535,40 @@ namespace ESM.Model
 						this._Proyecto_supuesto_id = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Proyecto");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supuesto_Proyectos_Supuesto", Storage="_Supuesto", ThisKey="Supuesto_id", OtherKey="Id", IsForeignKey=true)]
+		public Supuesto Supuesto
+		{
+			get
+			{
+				return this._Supuesto.Entity;
+			}
+			set
+			{
+				Supuesto previousValue = this._Supuesto.Entity;
+				if (((previousValue != value) 
+							|| (this._Supuesto.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Supuesto.Entity = null;
+						previousValue.Proyectos_Supuestos.Remove(this);
+					}
+					this._Supuesto.Entity = value;
+					if ((value != null))
+					{
+						value.Proyectos_Supuestos.Add(this);
+						this._Supuesto_id = value.Id;
+					}
+					else
+					{
+						this._Supuesto_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Supuesto");
 				}
 			}
 		}
@@ -18580,9 +18698,9 @@ namespace ESM.Model
 		
 		private string _supuesto1;
 		
-		private System.Data.Linq.Binary _upsize_ts;
-		
 		private EntitySet<Actividades_Supuesto> _Actividades_Supuestos;
+		
+		private EntitySet<Proyectos_Supuesto> _Proyectos_Supuestos;
 		
 		private EntitySet<Resultados_Supuesto> _Resultados_Supuestos;
 		
@@ -18594,18 +18712,17 @@ namespace ESM.Model
     partial void OnIdChanged();
     partial void Onsupuesto1Changing(string value);
     partial void Onsupuesto1Changed();
-    partial void Onupsize_tsChanging(System.Data.Linq.Binary value);
-    partial void Onupsize_tsChanged();
     #endregion
 		
 		public Supuesto()
 		{
 			this._Actividades_Supuestos = new EntitySet<Actividades_Supuesto>(new Action<Actividades_Supuesto>(this.attach_Actividades_Supuestos), new Action<Actividades_Supuesto>(this.detach_Actividades_Supuestos));
+			this._Proyectos_Supuestos = new EntitySet<Proyectos_Supuesto>(new Action<Proyectos_Supuesto>(this.attach_Proyectos_Supuestos), new Action<Proyectos_Supuesto>(this.detach_Proyectos_Supuestos));
 			this._Resultados_Supuestos = new EntitySet<Resultados_Supuesto>(new Action<Resultados_Supuesto>(this.attach_Resultados_Supuestos), new Action<Resultados_Supuesto>(this.detach_Resultados_Supuestos));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Id
 		{
 			get
@@ -18645,26 +18762,6 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_upsize_ts", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary upsize_ts
-		{
-			get
-			{
-				return this._upsize_ts;
-			}
-			set
-			{
-				if ((this._upsize_ts != value))
-				{
-					this.Onupsize_tsChanging(value);
-					this.SendPropertyChanging();
-					this._upsize_ts = value;
-					this.SendPropertyChanged("upsize_ts");
-					this.Onupsize_tsChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supuesto_Actividades_Supuesto", Storage="_Actividades_Supuestos", ThisKey="Id", OtherKey="Supuesto_id")]
 		public EntitySet<Actividades_Supuesto> Actividades_Supuestos
 		{
@@ -18675,6 +18772,19 @@ namespace ESM.Model
 			set
 			{
 				this._Actividades_Supuestos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supuesto_Proyectos_Supuesto", Storage="_Proyectos_Supuestos", ThisKey="Id", OtherKey="Supuesto_id")]
+		public EntitySet<Proyectos_Supuesto> Proyectos_Supuestos
+		{
+			get
+			{
+				return this._Proyectos_Supuestos;
+			}
+			set
+			{
+				this._Proyectos_Supuestos.Assign(value);
 			}
 		}
 		
@@ -18718,6 +18828,18 @@ namespace ESM.Model
 		}
 		
 		private void detach_Actividades_Supuestos(Actividades_Supuesto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Supuesto = null;
+		}
+		
+		private void attach_Proyectos_Supuestos(Proyectos_Supuesto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Supuesto = this;
+		}
+		
+		private void detach_Proyectos_Supuestos(Proyectos_Supuesto entity)
 		{
 			this.SendPropertyChanging();
 			entity.Supuesto = null;
@@ -19340,6 +19462,141 @@ namespace ESM.Model
 		{
 			this.SendPropertyChanging();
 			entity.Usuario = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.gantt")]
+	public partial class gantt
+	{
+		
+		private int _Id;
+		
+		private string _actividad;
+		
+		private string _Indicador;
+		
+		private System.Nullable<System.DateTime> _fecha_inicial;
+		
+		private System.Nullable<System.DateTime> _fecha_final;
+		
+		private int _parent;
+		
+		private System.Nullable<int> _Resultado_id;
+		
+		public gantt()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL")]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_actividad", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string actividad
+		{
+			get
+			{
+				return this._actividad;
+			}
+			set
+			{
+				if ((this._actividad != value))
+				{
+					this._actividad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Indicador
+		{
+			get
+			{
+				return this._Indicador;
+			}
+			set
+			{
+				if ((this._Indicador != value))
+				{
+					this._Indicador = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[fecha inicial]", Storage="_fecha_inicial", DbType="Date")]
+		public System.Nullable<System.DateTime> fecha_inicial
+		{
+			get
+			{
+				return this._fecha_inicial;
+			}
+			set
+			{
+				if ((this._fecha_inicial != value))
+				{
+					this._fecha_inicial = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[fecha final]", Storage="_fecha_final", DbType="Date")]
+		public System.Nullable<System.DateTime> fecha_final
+		{
+			get
+			{
+				return this._fecha_final;
+			}
+			set
+			{
+				if ((this._fecha_final != value))
+				{
+					this._fecha_final = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_parent", DbType="Int NOT NULL")]
+		public int parent
+		{
+			get
+			{
+				return this._parent;
+			}
+			set
+			{
+				if ((this._parent != value))
+				{
+					this._parent = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Resultado_id", DbType="Int")]
+		public System.Nullable<int> Resultado_id
+		{
+			get
+			{
+				return this._Resultado_id;
+			}
+			set
+			{
+				if ((this._Resultado_id != value))
+				{
+					this._Resultado_id = value;
+				}
+			}
 		}
 	}
 }
