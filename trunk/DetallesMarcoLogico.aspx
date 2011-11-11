@@ -9,6 +9,7 @@
     <script src="Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
     <script src="Scripts/jquery-ui-1.8.15.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jquery.ui.datepicker-es.js" type="text/javascript"></script>
+    <link href="mastercustom.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .detalles
         {
@@ -37,22 +38,55 @@
         }
     </style>
     <script type="text/javascript">
+
+        var medios = null;
+
         $(function () {
             $("ul.droptrue").sortable({
                 connectWith: "ul"
+
             });
 
             $("ul.dropfalse").sortable({
-                connectWith: "ul"
-                //                dropOnEmpty: false
+                connectWith: "ul",
+                update: function (event, ui) {
+                    var id = $(this).attr("id");
+                    if (id == "sortable2") {
+                        $("#mediosinput").val("");
+                        $("#" + id + ">li").each(function () {
+                            $("#mediosinput").val($("#mediosinput").val() + $(this).html() + ",");
+                        });
+                    }
+                    else if (id == "sortable4") {
+                        $("#supuestosinput").val("");
+                        $("#" + id + ">li").each(function () {
+                            $("#supuestosinput").val($("#supuestosinput").val() + $(this).html() + ",");
+                        });
+                    }
+
+
+                }
             });
 
             $("#sortable1, #sortable2").disableSelection();
             $("#sortable3, #sortable4").disableSelection();
         });
+
+        function Medios() {
+
+            alert("Detalles");
+
+
+        };
+
         $(document).ready(function () {
 
+
+
+
             $("#txtFechaIndicador").datepicker({ dateFormat: "yy/mm/dd" });
+            $("#txtFechaFinal").datepicker({ dateFormat: "yy/mm/dd" });
+
 
             $(".droptrue>li").addClass("ui-state-default");
             $(".dropfalse>li").addClass("ui-state-highlight");
@@ -77,6 +111,8 @@
         <asp:SqlDataSource ID="sqldtverbos" runat="server" ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>"
             SelectCommand="SELECT [Id], [Verbo] FROM [Verbos]"></asp:SqlDataSource>
         Fecha:<asp:TextBox ID="txtFechaIndicador" runat="server" />
+        <asp:Label ID="lblFechaFinal" runat="server" Text="Fecha Final:" Visible="False"></asp:Label>
+        <asp:TextBox ID="txtFechaFinal" runat="server" Visible="False"></asp:TextBox>
         Meta:<asp:TextBox ID="Meta" Width="24px" MaxLength="3" runat="server" />
         Unidades:<asp:DropDownList ID="cboUnidades" runat="server" DataSourceID="sqldtUnidades"
             DataTextField="Unidad" DataValueField="Id">
@@ -91,11 +127,69 @@
         <asp:LinkButton Text="<img src='/Icons/1314641093_plus_48.png' width='24px' alt='Agregar' />"
             runat="server" ID="lknAgregarIndicador" OnClick="lknAgregarIndicador_Click" />
         <br />
+        <asp:GridView ID="gvIndicadores_Actividad" runat="server" 
+            AutoGenerateColumns="False" DataKeyNames="Id"
+            DataSourceID="sqlActividadesIndicadores" Width="80%" Visible="False">
+            <AlternatingRowStyle CssClass="trblanca" />
+            <Columns>
+                <asp:CommandField ButtonType="Image" CancelImageUrl="~/Icons/Close.png" CancelText=""
+                    DeleteImageUrl="~/Icons/Bin_Full.png" EditImageUrl="~/Icons/Stationery.png" InsertImageUrl="~/Icons/save-icon.png"
+                    ShowDeleteButton="True" ShowEditButton="True" UpdateImageUrl="~/Icons/save-icon.png">
+                    <ControlStyle Width="24px" />
+                </asp:CommandField>
+                <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True"
+                    SortExpression="Id" Visible="False" />
+                <asp:BoundField DataField="Actividad_id" HeaderText="Identificador" SortExpression="Actividad_id" />
+                <asp:BoundField DataField="Indicador" HeaderText="Indicador" SortExpression="Indicador" />
+                <asp:BoundField DataField="unidad_id" HeaderText="unidad_id" SortExpression="unidad_id"
+                    Visible="False" />
+                <asp:BoundField DataField="verbo_id" HeaderText="verbo_id" SortExpression="verbo_id"
+                    Visible="False" />
+                <asp:BoundField DataField="fecha_indicador_inicial" HeaderText="Fecha Inicial" SortExpression="fecha_indicador_inicial" />
+                <asp:BoundField DataField="fecha_indicador_final" HeaderText="Fecha Final" SortExpression="fecha_indicador_final" />
+                <asp:BoundField DataField="Fecha_Creacion" HeaderText="Fecha de Creación" SortExpression="Fecha_Creacion" />
+            </Columns>
+            <HeaderStyle CssClass="trheader" />
+            <RowStyle CssClass="trgris" />
+        </asp:GridView>
+        <asp:SqlDataSource ID="sqlActividadesIndicadores" runat="server" ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>"
+            DeleteCommand="DELETE FROM [Indicadores] WHERE [Id] = @Id" InsertCommand="INSERT INTO [Indicadores] ([Actividad_id], [Indicador], [unidad_id], [verbo_id], [fecha_indicador_inicial], [fecha_indicador_final], [Fecha_Creacion]) VALUES (@Actividad_id, @Indicador, @unidad_id, @verbo_id, @fecha_indicador_inicial, @fecha_indicador_final, @Fecha_Creacion)"
+            
+            SelectCommand="SELECT * FROM [Indicadores] WHERE ([Actividad_id] = @Actividad_id)" 
+            UpdateCommand="UPDATE [Indicadores] SET [Actividad_id] = @Actividad_id, [Indicador] = @Indicador, [unidad_id] = @unidad_id, [verbo_id] = @verbo_id, [fecha_indicador_inicial] = @fecha_indicador_inicial, [fecha_indicador_final] = @fecha_indicador_final, [Fecha_Creacion] = @Fecha_Creacion WHERE [Id] = @Id">
+            <DeleteParameters>
+                <asp:Parameter Name="Id" Type="Int32" />
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="Actividad_id" Type="Int32" />
+                <asp:Parameter Name="Indicador" Type="String" />
+                <asp:Parameter Name="unidad_id" Type="Int32" />
+                <asp:Parameter Name="verbo_id" Type="Int32" />
+                <asp:Parameter DbType="Date" Name="fecha_indicador_inicial" />
+                <asp:Parameter DbType="Date" Name="fecha_indicador_final" />
+                <asp:Parameter DbType="Date" Name="Fecha_Creacion" />
+            </InsertParameters>
+            <SelectParameters>
+                <asp:QueryStringParameter DefaultValue="0" Name="Actividad_id" 
+                    QueryStringField="idactividad" Type="Int32" />
+            </SelectParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="Actividad_id" Type="Int32" />
+                <asp:Parameter Name="Indicador" Type="String" />
+                <asp:Parameter Name="unidad_id" Type="Int32" />
+                <asp:Parameter Name="verbo_id" Type="Int32" />
+                <asp:Parameter DbType="Date" Name="fecha_indicador_inicial" />
+                <asp:Parameter DbType="Date" Name="fecha_indicador_final" />
+                <asp:Parameter DbType="Date" Name="Fecha_Creacion" />
+                <asp:Parameter Name="Id" Type="Int32" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
+        <br />
         <br />
         <div>
             <asp:BulletedList ID="sortable1" CssClass="droptrue" Width="150px" Height="200px"
-                runat="server" DataSourceID="lqMediosVerificacion" DataTextField="Medio_de_verificacion"
-                DataValueField="Id" AppendDataBoundItems="True">
+                runat="server" DataTextField="Medio_de_verificacion" DataValueField="Id" AppendDataBoundItems="True"
+                ViewStateMode="Enabled">
             </asp:BulletedList>
             <asp:BulletedList ID="sortable2" Height="200px" Width="150px" CssClass="dropfalse"
                 runat="server">
@@ -117,6 +211,8 @@
                 <asp:ListItem Text="Supuestos Asignados" Enabled="false" />
             </asp:BulletedList>
         </div>
+        <input type="hidden" runat="server" id="supuestosinput" value="" />
+        <input type="hidden" runat="server" id="mediosinput" value="" />
     </div>
     </form>
 </body>

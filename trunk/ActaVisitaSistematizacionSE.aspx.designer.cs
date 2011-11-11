@@ -10,52 +10,97 @@
 namespace ESM {
     
     
-    public partial class DetallesMarcoLogico {
+    public partial class ActaVisitaSistematizacionSE {
         
         /// <summary>
-        /// form1 control.
+        /// modEESeleccion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl modEESeleccion;
         
         /// <summary>
-        /// cboverbos control.
+        /// gvResultados control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cboverbos;
+        protected global::System.Web.UI.WebControls.GridView gvResultados;
         
         /// <summary>
-        /// sqldtverbos control.
+        /// ldsies control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqldtverbos;
+        protected global::System.Web.UI.WebControls.LinqDataSource ldsies;
         
         /// <summary>
-        /// txtFechaIndicador control.
+        /// ModMediciones control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaIndicador;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ModMediciones;
         
         /// <summary>
-        /// lblFechaFinal control.
+        /// gvMediciones control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaFinal;
+        protected global::System.Web.UI.WebControls.GridView gvMediciones;
+        
+        /// <summary>
+        /// ModActaVisitaEE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ModActaVisitaEE;
+        
+        /// <summary>
+        /// txtNombreEE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombreEE;
+        
+        /// <summary>
+        /// txtDireccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDireccion;
+        
+        /// <summary>
+        /// txtTelefonoEE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTelefonoEE;
+        
+        /// <summary>
+        /// txtFechaInicial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaInicial;
         
         /// <summary>
         /// txtFechaFinal control.
@@ -67,156 +112,93 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.TextBox txtFechaFinal;
         
         /// <summary>
-        /// Meta control.
+        /// txtNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Meta;
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
         
         /// <summary>
-        /// cboUnidades control.
+        /// txtTelefono control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cboUnidades;
+        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
         
         /// <summary>
-        /// sqldtUnidades control.
+        /// txtCorreo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqldtUnidades;
+        protected global::System.Web.UI.WebControls.TextBox txtCorreo;
         
         /// <summary>
-        /// txtdescripcionI control.
+        /// txtCargo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtdescripcionI;
+        protected global::System.Web.UI.WebControls.TextBox txtCargo;
         
         /// <summary>
-        /// previsualizar control.
+        /// txtinstitucion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton previsualizar;
+        protected global::System.Web.UI.WebControls.TextBox txtinstitucion;
         
         /// <summary>
-        /// txtindicadorg control.
+        /// btnAlmacenar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtindicadorg;
+        protected global::System.Web.UI.WebControls.Button btnAlmacenar;
         
         /// <summary>
-        /// lknAgregarIndicador control.
+        /// documentos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lknAgregarIndicador;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor documentos;
         
         /// <summary>
-        /// gvIndicadores_Actividad control.
+        /// gvIndividuos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvIndicadores_Actividad;
+        protected global::System.Web.UI.WebControls.GridView gvIndividuos;
         
         /// <summary>
-        /// sqlActividadesIndicadores control.
+        /// txtObservacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sqlActividadesIndicadores;
+        protected global::System.Web.UI.WebControls.TextBox txtObservacion;
         
         /// <summary>
-        /// sortable1 control.
+        /// btnAlmacenarActa control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.BulletedList sortable1;
-        
-        /// <summary>
-        /// sortable2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.BulletedList sortable2;
-        
-        /// <summary>
-        /// lqMediosVerificacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinqDataSource lqMediosVerificacion;
-        
-        /// <summary>
-        /// sortable3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.BulletedList sortable3;
-        
-        /// <summary>
-        /// lqsupuestos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinqDataSource lqsupuestos;
-        
-        /// <summary>
-        /// sortable4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.BulletedList sortable4;
-        
-        /// <summary>
-        /// supuestosinput control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden supuestosinput;
-        
-        /// <summary>
-        /// mediosinput control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden mediosinput;
+        protected global::System.Web.UI.WebControls.Button btnAlmacenarActa;
     }
 }

@@ -19,6 +19,8 @@ namespace ESM
                     AlmacenarResultado();
                 else if (Request.QueryString["actividades"] != null && Convert.ToBoolean(Request.QueryString["actividades"]))
                     AlmacenarActividad();
+                else if (Request.QueryString["actividadesu"] != null && Convert.ToBoolean(Request.QueryString["actividadesu"]))
+                    ActualizarActividad();
 
             }
             catch (Exception)
@@ -26,6 +28,18 @@ namespace ESM
 
                 throw;
             }
+        }
+
+        private void ActualizarActividad()
+        {
+            int actividadid = Convert.ToInt32(Request.QueryString["idactividad"]);
+            string actividad = Request.QueryString["actividad"].ToString();
+            decimal presupuesto = Convert.ToInt32(Request.QueryString["presupuesto"]);
+
+            CActividades objCActividades = new CActividades();
+
+            objCActividades.Update(actividadid, actividad, presupuesto);
+
         }
 
         protected void AlmacenarResultado()

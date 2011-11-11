@@ -28,7 +28,7 @@ namespace ESM
             }
             if (!Page.IsPostBack)
             {
-
+                ObtenerResultados(_idproyecto);
             }
         }
 
@@ -196,12 +196,18 @@ namespace ESM
                     detalles.Attributes.Add("href", Request.Url.Scheme + "://" + Request.Url.Authority + "/DetallesMarcoLogico.aspx?idResultado=" + item.Id + "&iframe=true&amp;width=100%&amp;height=100%");
                     detalles.InnerHtml = "<img alt='Detalles' src='/Icons/details.png' width='24px' />";
 
+                    var cronograma = new HtmlAnchor();
+                    cronograma.Attributes.Add("class", "pretty");
+                    cronograma.Attributes.Add("href", Request.Url.Scheme + "://" + Request.Url.Authority + "/DiagramaGant.aspx?idResultado=" + item.Id + "&iframe=true&amp;width=100%&amp;height=100%");
+                    cronograma.InnerHtml = "<img alt='Cronograma' src='/Icons/Calender.png' width='24px' />";
+
                     span.Controls.Add(objlabel);
                     span.Controls.Add(objlabelid);
                     span.Controls.Add(inputtextcausa);
                     span.Controls.Add(inputresultado);
                     span.Controls.Add(almacenarresultado);
                     span.Controls.Add(detalles);
+                    span.Controls.Add(cronograma);
 
                     presultados.Controls.Add(span);
 
@@ -230,7 +236,6 @@ namespace ESM
                     btnalmacenaractividad.Attributes.CssStyle.Add("width", "24px");
                     btnalmacenaractividad.Attributes.Add("onclick", "AlmacenarActividad('" + item.Id.ToString() + "','" + "ContentPlaceHolder1_" + txtactividad.ID + "','" + "ContentPlaceHolder1_" + txtpresupuesto.ID + "');");
 
-                    SqlDataSource objSqlDataSource = new SqlDataSource("", "");
 
                     contenido_acordion.Controls.Add(lblnactividad);
                     contenido_acordion.Controls.Add(txtactividad);
@@ -239,6 +244,73 @@ namespace ESM
                     contenido_acordion.Controls.Add(txtpresupuesto);
                     contenido_acordion.Controls.Add(btnalmacenaractividad);
 
+                    #region Consultar Actividades
+
+                    IQueryable<ESM.Model.Actividade> ac = null;
+
+                    try
+                    {
+                        ac = from a in new ESM.Model.ESMBDDataContext().Actividades
+                             where a.Resultado_id == item.Id
+                             select a;
+                    }
+                    catch (Exception) { }
+
+                    if (ac.Count() != 0)
+                    {
+                        var tituloActividades = new HtmlGenericControl("h3");
+
+                        tituloActividades.InnerHtml = "Actividades Existentes";
+                        tituloActividades.Attributes.CssStyle.Add("color", "#005EA7");
+
+                        contenido_acordion.Controls.Add(br);
+                        contenido_acordion.Controls.Add(br);
+                        contenido_acordion.Controls.Add(tituloActividades);
+                        contenido_acordion.Controls.Add(br);
+                        contenido_acordion.Controls.Add(br);
+
+                        foreach (var actividadbyresult in ac)
+                        {
+                            var lblcactividad = new Label();
+                            lblcactividad.Text = "Nombre Actividad";
+                            var txtcactividad = new TextBox();
+                            txtcactividad.Attributes.CssStyle.Add("width", "20%");
+                            txtcactividad.ID = "txtactividadc" + actividadbyresult.Id.ToString();
+                            txtcactividad.Text = actividadbyresult.Actividad;
+                            var lblcpresupuesto = new Label();
+                            lblpresupuesto.Text = "Presupuesto";
+                            var txtcpresupuesto = new TextBox();
+                            txtcpresupuesto.ID = "txtpresupuestoc" + actividadbyresult.Id.ToString();
+                            txtcpresupuesto.Attributes.CssStyle.Add("width", "20%");
+                            txtcpresupuesto.Text = actividadbyresult.Presupuesto.ToString();
+
+                            var btnactualizaractividad = new ImageButton();
+                            btnactualizaractividad.ImageUrl = "/Icons/save-icon.png";
+                            btnactualizaractividad.Attributes.CssStyle.Add("width", "24px");
+                            btnactualizaractividad.Attributes.Add("onclick", "ActualizarActividad('" + actividadbyresult.Id.ToString() + "','" + "ContentPlaceHolder1_" + txtcactividad.ID + "','" + "ContentPlaceHolder1_" + txtcpresupuesto.ID + "');");
+
+                            contenido_acordion.Controls.Add(lblcactividad);
+                            contenido_acordion.Controls.Add(txtcactividad);
+                            contenido_acordion.Controls.Add(lblcpresupuesto);
+                            contenido_acordion.Controls.Add(txtcpresupuesto);
+                            contenido_acordion.Controls.Add(btnactualizaractividad);
+
+                            var detalles_Actividad = new HtmlAnchor();
+                            detalles_Actividad.Attributes.Add("class", "pretty");
+                            detalles_Actividad.Attributes.Add("href", Request.Url.Scheme + "://" + Request.Url.Authority + "/DetallesMarcoLogico.aspx?idActividad=" + actividadbyresult.Id + "&iframe=true&amp;width=100%&amp;height=100%");
+                            detalles_Actividad.InnerHtml = "<img alt='Detalles' src='/Icons/details.png' width='24px' />";
+
+                            contenido_acordion.Controls.Add(detalles_Actividad);
+
+                            br = new HtmlGenericControl("br");
+
+                            contenido_acordion.Controls.Add(br);
+
+
+                        }
+                    }
+
+                    #endregion
 
                     actividades.Controls.Add(titulo);
                     actividades.Controls.Add(contenido_acordion);

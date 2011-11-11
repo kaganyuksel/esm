@@ -135,11 +135,24 @@
 			    autoHeight: false,
 			    navigation: true,
                 collapsible: true,
-                animated: 'bounceslide'
+                animated: 'bounceslide'               
                  
 		    });
             
 	    });
+
+        function ActualizarActividad(idactividad, actividad, presupuesto) {
+            $.ajax({
+                url: "ajax.aspx?idactividad="+ idactividad +"&actividad="+ $("#"+actividad).val() + "&presupuesto=" + $("#"+presupuesto).val()+"&actividadesu=true",
+                async: false,
+                succes: function (result) {
+                    alert(result);
+                },
+                error: function (result) {
+                    alert("Error:" + result.status + " Estatus: " + result.statusText);
+                }
+            });
+        }
 
         function AlmacenarResultado(idresultado, causa, resultado) {
             $.ajax({
@@ -230,6 +243,24 @@
         <div id="slides" style="display: block; width: 4000px; clear: both; overflow: hidden;">
             <div id="izquierda" style="width: 50%; float: left;" class="demo mover">
                 <div style="width: 1024px;">
+                    <asp:SqlDataSource ID="sqldtActividades" runat="server" ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>"
+                        DeleteCommand="DELETE FROM [Actividades] WHERE [Id] = @Id" InsertCommand="INSERT INTO [Actividades] ([Resultado_id], [Actividad], [Presupuesto]) VALUES (@Resultado_id, @Actividad, @Presupuesto)"
+                        SelectCommand="SELECT * FROM [Actividades]" UpdateCommand="UPDATE [Actividades] SET [Resultado_id] = @Resultado_id, [Actividad] = @Actividad, [Presupuesto] = @Presupuesto WHERE [Id] = @Id">
+                        <DeleteParameters>
+                            <asp:Parameter Name="Id" Type="Int32" />
+                        </DeleteParameters>
+                        <InsertParameters>
+                            <asp:Parameter Name="Resultado_id" Type="Int32" />
+                            <asp:Parameter Name="Actividad" Type="String" />
+                            <asp:Parameter Name="Presupuesto" Type="Decimal" />
+                        </InsertParameters>
+                        <UpdateParameters>
+                            <asp:Parameter Name="Resultado_id" Type="Int32" />
+                            <asp:Parameter Name="Actividad" Type="String" />
+                            <asp:Parameter Name="Presupuesto" Type="Decimal" />
+                            <asp:Parameter Name="Id" Type="Int32" />
+                        </UpdateParameters>
+                    </asp:SqlDataSource>
                     <br />
                     <br />
                     <div>
@@ -397,7 +428,7 @@
                             Proposito</h1>
                         <asp:TextBox ID="txtProposito" runat="server" />
                         <asp:LinkButton ID="lknAlmacenarProposito" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
-                            runat="server" onclick="lknAlmacenarProposito_Click" />
+                            runat="server" OnClick="lknAlmacenarProposito_Click" />
                         <a id="adetalles" href="#">
                             <img src="/Icons/details.png" width="24px" alt="Detalles" /></a>
                         <br />
