@@ -538,6 +538,9 @@
     <Content Include="Scripts\jquery-ui-1.8.15.custom.min.js" />
     <Content Include="Scripts\jquery.ui.datepicker-es.js" />
     <Content Include="Scripts\jsgantt.js" />
+    <Content Include="Scripts\jspdf.js" />
+    <Content Include="Scripts\libs\base64.js" />
+    <Content Include="Scripts\libs\sprintf.js" />
     <Content Include="Scripts\ScrollTo\jquery.scrollTo-min.js" />
     <Content Include="Scripts\ScrollTo\jquery.scrollTo.js" />
     <Content Include="Sistematizacion.aspx" />
