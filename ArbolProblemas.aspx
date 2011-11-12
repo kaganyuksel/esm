@@ -6,6 +6,37 @@
         type="text/css" />
     <script src="/Pretty/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
+        .btnleft
+        {
+            top: 50%;
+            position: absolute;
+            left: 3.5%;
+            width: 50px;
+            height: 50px;
+            float: left;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url('/Icons/back.png');
+            border: 0;
+            background-color: transparent;
+        }
+        .btnleft:hover
+        {
+            background-image: url('/Icons/backhover.png');
+        }
+        .btnright
+        {
+            top: 50%;
+            position: absolute;
+            right: 3.5%;
+            width: 4em;
+            float: right;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url('/Icons/next.png');
+            border: 0;
+            background-color: transparent;
+        }
         body
         {
             overflow-x: hidden;
@@ -130,6 +161,7 @@
     </style>
     <script type="text/javascript">
         
+
 	    $(function() {
 		    $( ".accordion" ).accordion({
 			    autoHeight: false,
@@ -152,6 +184,8 @@
                     alert("Error:" + result.status + " Estatus: " + result.statusText);
                 }
             });
+
+            $("#ContentPlaceHolder1_Bandera").val("1");
         }
 
         function AlmacenarResultado(idresultado, causa, resultado) {
@@ -165,6 +199,8 @@
                     alert("Error:" + result.status + " Estatus: " + result.statusText);
                 }
             });
+
+            $("#ContentPlaceHolder1_Bandera").val("1");
         }
 
         function AlmacenarActividad(idresultado, actividad, presupuesto) {
@@ -178,9 +214,18 @@
                     alert("Error:" + result.status + " Estatus: " + result.statusText);
                 }
             });
+
+            $("#ContentPlaceHolder1_Bandera").val("1");
         }
      
         $(document).ready(function () {
+            
+            if($("#ContentPlaceHolder1_Bandera").val() == "1"){
+            
+            $('#izquierda').addClass('past');
+
+            }
+
             $("#adetalles").click(function () {
                 var idproyecto = $("#hidproyecto").val();
                 $.prettyPhoto.open("/detallesmarcologico.aspx?idproyecto=" + idproyecto + "&iframe=true&width=100%&height=100%");
@@ -394,7 +439,7 @@
                     <br />
                 </div>
             </div>
-            <div id="derecha" style="width: 1024px; float: left;" class="demo mover">
+            <div id="derecha" style="width: 900px; margin: 0 auto; float: left;" class="demo mover">
                 <br />
                 <br />
                 <div>
@@ -440,11 +485,13 @@
                 </div>
             </div>
         </div>
-        <input type="button" value="Siguiente" onclick="$('#izquierda').addClass('past');"
-            class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false" />
-        <input type="button" value="Volver" onclick="$('#izquierda').removeClass('past'); "
-            class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false" />
+        <input type="button" onclick="$('#izquierda').addClass('past');" class="btnright ui-button ui-widget ui-state-default ui-corner-all"
+            role="button" aria-disabled="false" />
+        <input type="button" onclick="$('#izquierda').removeClass('past'); " class="btnleft ui-button ui-widget ui-state-default ui-corner-all"
+            role="button" aria-disabled="false" />
     </div>
     <input type="hidden" runat="server" id="alerthq" value="-1" />
     <input type="hidden" runat="server" id="hidproyecto" value="-1" />
+    <input type="hidden" runat="server" id="Bandera" value="-1" />
+    <a href="http://www.htm2pdf.co.uk">Save as PDF</a>
 </asp:Content>

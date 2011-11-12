@@ -26,9 +26,15 @@ namespace ESM
                 hidproyecto.Value = Session["idproyecto"].ToString();
                 _idproyecto = Convert.ToInt32(Session["idproyecto"]);
             }
-            if (!Page.IsPostBack)
+            if (Bandera.Value == "1")
             {
                 ObtenerResultados(_idproyecto);
+                Bandera.Value = "-1";
+            }
+
+            if (!Page.IsPostBack)
+            {
+
             }
         }
 
