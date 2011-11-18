@@ -32,10 +32,19 @@
         }
         $(document).ready(function () {
 
+            $(".numerico").change(function () {
+
+                if (isNaN($(this).val())) {
+                    $(this).val("0");
+                }
+
+            });
+
+
             // Initially, hide them all
             hideAllMessages();
 
-//            $("#hora").html(new Date().getHours().toString());
+            //            $("#hora").html(new Date().getHours().toString());
 
             // Show message
             for (var i = 0; i < myMessages.length; i++) {
@@ -184,7 +193,7 @@
 <body>
     <div id="subcuerpo" style="height: auto;">
         <form id="form1" runat="server">
-        <header>
+        <header style="z-index: 10;">
             <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
                 <tr>
                     <td>
@@ -208,7 +217,7 @@
             <br />
         </header>
         <div id="nav">
-            <section id="menu_left" style="width: 69%">
+            <section id="menu_left" style="width: 69%; z-index: 10;">
                 <ul>
                     <li onclick="window.location = '/Default.aspx';">Inicio</li>
                     <li onclick="window.location = '/AyudaPreguntas.aspx';">Preguntas</li>
@@ -317,8 +326,7 @@
         <h4>
             Felicidades, lo lograste!</h4>
         <p>
-            El proceso de autoguardado finalizó con éxito. 
-            <span id="hora"></span>
+            El proceso de autoguardado finalizó con éxito. <span id="hora"></span>
         </p>
     </div>
     <a href="#" style="display: none;" id="a_info" class="trigger info-trigger"></a>

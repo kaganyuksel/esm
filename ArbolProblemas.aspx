@@ -5,7 +5,42 @@
     <link href="/Pretty/css/prettyPhoto.css" rel="stylesheet" charset="utf-8" media="screen"
         type="text/css" />
     <script src="/Pretty/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+    <link href="Style/MarcoLogico.css" rel="stylesheet" type="text/css" />
+    <link href="Style/jsgantt.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/jsgantt.js" type="text/javascript"></script>
     <style type="text/css">
+        .txtareacausa
+        {
+            border: 2px solid #357D28;
+            border-radius: 3px 3px 3px 3px;
+            width: 50%;
+            padding-left: 10px;
+            color: #4D4D4D;
+        }
+        .txtareacausa:focus
+        {
+            border: 2px solid #357D28;
+            border-radius: 3px 3px 3px 3px;
+            width: 50%;
+            padding-left: 10px;
+            color: #4D4D4D;
+        }
+        .txtareaefecto
+        {
+            border: 2px solid #00A9B5;
+            border-radius: 3px 3px 3px 3px;
+            width: 50%;
+            padding-left: 10px;
+            color: #4D4D4D;
+        }
+        .txtareaefecto:focus
+        {
+            border: 2px solid #00A9B5;
+            border-radius: 3px 3px 3px 3px;
+            width: 50%;
+            padding-left: 10px;
+            color: #4D4D4D;
+        }
         .btnleft
         {
             top: 50%;
@@ -148,15 +183,194 @@
         }
         .past
         {
-            margin-left: -50%;
+            margin-left: -25%;
         }
-        .future
+        .presente
         {
-            margin-left: 50%;
         }
-        .finalidad
+        .futuro
         {
-            margin-left: 150px;
+            margin-left: 25%;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var d = 300;
+            $('#navigation a').each(function () {
+                $(this).stop().animate({
+                    'marginBottom': '-80px'
+                }, d += 150);
+            });
+
+            $('#navigation > li').hover(
+                function () {
+                    $('a', $(this)).stop().animate({
+                        'marginBottom': '-2px'
+                    }, 200);
+                },
+                function () {
+                    $('a', $(this)).stop().animate({
+                        'marginBottom': '-80px'
+                    }, 200);
+                }
+            );
+        });
+    </script>
+    <script type="text/javascript">
+        $.datepicker.setDefaults({
+            dateFormat: 'dd/mm/yy', currentText: 'Ahora', closeText: 'X', autoSize: true,
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+            firstDay: 1, monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'], nextText: 'Siguiente', prevText: 'Anterior',
+            showAnim: 'slide', yearRange: '1990:2020'
+        });
+        $(function () {
+            //time picker
+            $('.fechaini').datepicker({
+                dateFormat: 'dd/mm/yy', currentText: 'Ahora', closeText: 'Cerrar',
+                onSelect: function (selectedDate) { save_dates(1, selectedDate, $(this).attr("alt"), this); }, showButtonPanel: false
+            });
+            //time picker
+            $('.fechafin').datepicker({
+                dateFormat: 'dd/mm/yy', currentText: 'Ahora', closeText: 'Cerrar',
+                onSelect: function (selectedDate) { save_dates(2, selectedDate, $(this).attr("alt"), this); }, showButtonPanel: false
+            });
+        });
+
+        function load_date_ini(selectedDatefunction, Vid) {
+            $('.fechaini').datepicker("destroy");
+            $('.fechaini').datepicker({
+                dateFormat: 'dd/mm/yy', currentText: 'Ahora', closeText: 'Cerrar',
+                maxDate: selectedDatefunction,
+                onSelect: function (selectedDate) { save_dates(1, selectedDate, $(this).attr("alt"), this, Vid) }, showButtonPanel: false
+            });
+        }
+
+        function load_date_fin(selectedDatefunction, Vid) {
+            $('.fechafin').datepicker("destroy");
+            $('.fechafin').datepicker({
+                dateFormat: 'dd/mm/yy', currentText: 'Ahora', closeText: 'Cerrar',
+                minDate: selectedDatefunction,
+                onSelect: function (selectedDate) { save_dates(2, selectedDate, $(this).attr("alt"), this, Vid) }, showButtonPanel: false
+            });
+        }
+
+        function tempDate(valor, fechaEva, tipo, Vid) {
+            if (tipo == 2)
+                load_date_fin($("#" + fechaEva).val(), Vid);
+            else
+                load_date_ini($("#" + fechaEva).val(), Vid)
+
+            $("#HFTempDate").val($(valor).val());
+        }
+
+        function save_dates(tipo, valor, id, objeto, Vid) {
+            var valorIni = valor;
+            valor = valor.replace("/", "-").replace("/", "-");
+            var fechaini;
+            var fechafin;
+            $.ajax({
+                url: "save_dates.aspx?id=" + id + "&tipo=" + tipo + "&valor=" + valor,
+                async: false,
+                success: function (result) {
+                    if (result == "Fecha actualizada correctamente") {
+                        alert(result);
+                        if (tipo == 1) {
+                            fechaini = valorIni;
+                            fechafin = $("#fecha_fin_id_" + Vid).val();
+                        } else {
+                            fechaini = $("#fecha_ini_id_" + Vid).val();
+                            fechafin = valorIni;
+                        }
+                        retorna_ancho(fechaini, fechafin, Vid, tipo);
+                    } else {
+                        alert(result);
+                        $(objeto).datetimepicker("setDate", $("#HFTempDate").val());
+                    }
+                },
+                error: function (result) {
+                    alert("Error " + result.status + ' ' + result.statusText);
+                }
+            });
+        }
+
+        function retorna_ancho(fechaini, fechafin, Vid, tipo) {
+            var vColWidth = 0;
+            var vColUnit = 0;
+            var vTaskRight;
+            var vTaskLeft;
+            var ancho;
+            var izq;
+            var vMinDate = new Date();
+            var vFormat = $("input[@name='radFormat']:checked").val();
+            //
+            if (vFormat == 'day') {
+                vColWidth = 18;
+                vColUnit = 1;
+            }
+            else if (vFormat == 'week') {
+                vColWidth = 37;
+                vColUnit = 7;
+            }
+            else if (vFormat == 'month') {
+                vColWidth = 37;
+                vColUnit = 30;
+            }
+            else if (vFormat == 'quarter') {
+                vColWidth = 60;
+                vColUnit = 90;
+            }
+            else if (vFormat == 'hour') {
+                vColWidth = 18;
+                vColUnit = 1;
+            }
+            else if (vFormat == 'minute') {
+                vColWidth = 18;
+                vColUnit = 1;
+            }
+            fechaini = JSGantt.parseDateStr(fechaini, 'dd/mm/yyyy');
+            fechafin = JSGantt.parseDateStr(fechafin, 'dd/mm/yyyy');
+            vMinDate = JSGantt.getMinDate(vTaskListGlobal, vFormat);
+
+            //
+            if (vFormat == 'minute') {
+                vTaskRight = (Date.parse(fechafin) - Date.parse(fechaini)) / (60 * 1000) + 1 / vColUnit;
+                vTaskLeft = Math.ceil((Date.parse(fechaini) - Date.parse(vMinDate)) / (60 * 1000));
+            }
+            else if (vFormat == 'hour') {
+                vTaskRight = (Date.parse(fechafin) - Date.parse(fechaini)) / (60 * 60 * 1000) + 1 / vColUnit;
+                vTaskLeft = (Date.parse(fechaini) - Date.parse(vMinDate)) / (60 * 60 * 1000);
+            }
+            else {
+                vTaskRight = (Date.parse(fechafin) - Date.parse(fechaini)) / (24 * 60 * 60 * 1000) + 1 / vColUnit;
+                vTaskLeft = Math.ceil((Date.parse(fechaini) - Date.parse(vMinDate)) / (24 * 60 * 60 * 1000));
+            }
+
+            vDayWidth = (vColWidth / vColUnit) + (1 / vColUnit);
+
+            //left
+            if (tipo == 1) {
+                izq = Math.ceil(vTaskLeft * (vDayWidth) + 1);
+                $("#bardiv_" + Vid).css("left", izq + "px");
+            }
+            //right
+            ancho = Math.ceil((vTaskRight) * (vDayWidth) - 1);
+            $("#bardiv_" + Vid).css("width", ancho + "px");
+            $("#taskbar_" + Vid).css("width", ancho + "px");
+            return true
+        }
+    </script>
+    <style type="text/css">
+        .fechaini, .fechafin
+        {
+            cursor: pointer;
+            width: 80px;
+            font-size: 10px;
+            text-align: center;
+            border: 0px;
+            background-color: Transparent;
+            height: 17px;
         }
     </style>
     <script type="text/javascript">
@@ -217,9 +431,17 @@
 
             $("#ContentPlaceHolder1_Bandera").val("1");
         }
-     
+        
+        function ActivateAcordion()
+        {
+            $( ".accordion" ).accordion({ active: 0 });
+            $("#expandir").focus();
+        }
+
         $(document).ready(function () {
             
+            $( ".accordion" ).accordion({ active: 2 });
+
             if($("#ContentPlaceHolder1_Bandera").val() == "1"){
             
             $('#izquierda').addClass('past');
@@ -230,7 +452,10 @@
                 var idproyecto = $("#hidproyecto").val();
                 $.prettyPhoto.open("/detallesmarcologico.aspx?idproyecto=" + idproyecto + "&iframe=true&width=100%&height=100%");
             });
-
+            $("#Cronograma_Proyecto").click(function () {
+                $.prettyPhoto.open("/DiagramaGant.aspx?&iframe=true&width=100%&height=100%");
+            });
+            
 
             $("a.pretty").prettyPhoto({
                 ie6_fallback: true,
@@ -276,17 +501,75 @@
                 }
             });
 
+
             
         });
 
-        
 
+        function SlideSiguiente()
+        {
+            $(".presente").prev().removeClass("past");
+
+            $(".presente").css("margin-left","-25%");
+            
+            $(".presente").addClass("past");
+            $(".presente").removeClass("presente");
+            $(".presente").removeClass("futuro");
+
+            $(".futuro").addClass("presente");
+            $(".futuro").removeClass("futuro");
+            $(".futuro").removeClass("past");
+
+            $(".presente+div:first").addClass("futuro")
+            $(".presente+div:first").removeClass("presente");
+            $(".presente+div:first").removeClass("past");
+
+            
+
+
+        }
+
+        function SlideVolver()
+        {
+            
+            $(".presente+div:first").removeClass("futuro");
+
+//            alert($(".presente").prev().html());
+            $(".past").css("margin-left","0px");
+            
+            $(".presente").addClass("futuro");
+            $(".presente").removeClass("presente");
+            $(".presente").removeClass("past");
+            
+
+            $(".past").addClass("presente");
+            $(".past").removeClass("past");
+            $(".past").removeClass("futuro");
+
+            
+            $(".presente").prev().addClass("past");
+            $(".presente").prev().removeClass("presente");
+            $(".presente").prev().removeClass("futuro");
+
+            
+
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%--<div style="width: 60%; margin-bottom: 0; margin-right: auto;">
+        <ul id="navigation">
+            <li class="home"><a href=""><span>Arbol Problemas</span></a></li>
+            <li class="about"><a href=""><span>Marco Logico</span></a></li>
+            <li class="search"><a href=""><span>Plan Operativo</span></a></li>
+            <li class="photos"><a href=""><span>Cronograma</span></a></li>
+            <%--<li class="rssfeed"><a href=""><span>Rss Feed</span></a></li>
+            <li class="podcasts"><a href=""><span>Podcasts</span></a></li>
+            <li class="contact"><a href=""><span>Contact</span></a></li>
+    </ul> </div>--%>
     <div class="demo" style="width: 90%; margin: 0 auto;">
-        <div id="slides" style="display: block; width: 4000px; clear: both; overflow: hidden;">
-            <div id="izquierda" style="width: 50%; float: left;" class="demo mover">
+        <div id="slides" style="display: block; width: 6000px; clear: both; overflow: hidden;">
+            <div id="izquierda" style="width: 25%; float: left;" class="demo mover presente">
                 <div style="width: 1024px;">
                     <asp:SqlDataSource ID="sqldtActividades" runat="server" ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>"
                         DeleteCommand="DELETE FROM [Actividades] WHERE [Id] = @Id" InsertCommand="INSERT INTO [Actividades] ([Resultado_id], [Actividad], [Presupuesto]) VALUES (@Resultado_id, @Actividad, @Presupuesto)"
@@ -376,17 +659,17 @@
                         <%--<input class="speech" id="probleman" style="width: 15px; border: 0;" />--%>
                     </div>
                     <div class="efectos" runat="server" id="divefectos" visible="false">
-                        <h2>
+                        <h2 style="color: #0b72bc;">
                             * Causas y Efectos</h2>
                         <br />
-                        <span>
-                            <asp:TextBox ID="txtCausa1" runat="server" placeholder="2. Descripcion de la causa"
+                        <span>Causa:
+                            <asp:TextBox ID="txtCausa1" runat="server" class="txtareacausa" placeholder="2. Descripcion de la causa"
                                 TextMode="MultiLine" Width="40%" />
                         </span>
                         <br />
-                        <span>
+                        <span>Efecto:
                             <asp:TextBox ID="txtEfecto1" runat="server" placeholder="3. Descripcion del efecto"
-                                TextMode="MultiLine" Width="40%" Enabled="False" />
+                                TextMode="MultiLine" Width="40%" Enabled="False" CssClass="txtareaefecto" />
                         </span>
                         <asp:LinkButton Text='<img src="/Icons/save-icon.png" width="24px" alt="save efect" />'
                             runat="server" ID="lknAlmacenarE" OnClick="lknAlmacenarE_Click" />
@@ -402,8 +685,8 @@
                                 </asp:CommandField>
                                 <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True"
                                     SortExpression="Id" />
-                                <asp:BoundField DataField="Efecto" HeaderText="Efecto" SortExpression="Efecto" />
                                 <asp:BoundField DataField="Causa" HeaderText="Causa" SortExpression="Causa" />
+                                <asp:BoundField DataField="Efecto" HeaderText="Efecto" SortExpression="Efecto" />
                             </Columns>
                             <HeaderStyle CssClass="trheader" />
                             <RowStyle CssClass="trgris" />
@@ -439,7 +722,7 @@
                     <br />
                 </div>
             </div>
-            <div id="derecha" style="width: 900px; margin: 0 auto; float: left;" class="demo mover">
+            <div id="derecha" style="width: 25%; margin: 0 auto; float: left;" class="demo mover futuro">
                 <br />
                 <br />
                 <div>
@@ -459,39 +742,105 @@
                         border-radius: 2px; /*ie 7 and 8 do not support border radius*/
 -moz-box-shadow: 0px 0px 3px #000000; -webkit-box-shadow: 0px 0px 3px #000000; box-shadow: 0px 0px 3px #000000;
                         /*ie 7 and 8 do not support blur property of shadows*/ color: #005EA7; font-size: 1em;
-                        height: 30px; line-height: 30px; padding-left: 10px;">
-                        Finalidad:
-                        <asp:TextBox ID="txtfinalidad" CssClass="finalidad" runat="server" />
+                        height: 30px; line-height: 30px; padding-left: 10px; font-size: 1.5em; width: 50%;">
+                        Finalidad
+                        <asp:TextBox ID="txtfinalidad" runat="server" />
+                        <asp:LinkButton ID="lknAlmacenarFinalidad" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
+                            runat="server" OnClick="lknAlmacenarFinalidad_Click" />
                     </div>
                     <br />
                     <div class="problema" style="border: 2px solid #ccc; -moz-border-radius: 2px; -webkit-border-radius: 2px;
                         border-radius: 2px; /*ie 7 and 8 do not support border radius*/
 -moz-box-shadow: 0px 0px 3px #000000; -webkit-box-shadow: 0px 0px 3px #000000; box-shadow: 0px 0px 3px #000000;
                         /*ie 7 and 8 do not support blur property of shadows*/ color: #005EA7; font-size: 1em;
-                        padding-left: 10px;">
+                        padding-left: 10px; width: 50%;">
                         <h1>
-                            Proposito</h1>
+                            Propósito</h1>
                         <asp:TextBox ID="txtProposito" runat="server" />
                         <asp:LinkButton ID="lknAlmacenarProposito" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
                             runat="server" OnClick="lknAlmacenarProposito_Click" />
                         <a id="adetalles" href="#">
-                            <img src="/Icons/details.png" width="24px" alt="Detalles" /></a>
-                        <br />
-                        <br />
+                            <img src="/Icons/details.png" width="24px" alt="Detalles" /></a> <a id="Cronograma_Proyecto"
+                                href="#">
+                                <img src="/Icons/Calender.png" width="24px" alt="Cronograma" /></a>
+                        <input type="button" id="expandir" onclick="ActivateAcordion();" value="Expandir Actividades"
+                            role="button" aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" />
                         <br />
                         <asp:Panel ID="presultados" runat="server">
                         </asp:Panel>
                     </div>
                 </div>
             </div>
+            <div id="derechaSiguiente" style="width: 25%; margin: 0 auto; float: left;" class="demo mover">
+                <br />
+                <br />
+                <div>
+                    <table>
+                        <tr>
+                            <td>
+                                <img src="/Icons/network.png" width="64px" alt="Plan Operativo" />
+                            </td>
+                            <td style="vertical-align: middle; font-size: 13px; text-align: left;">
+                                <h1 style="color: #0b72bc;">
+                                    Plan Operativo</h1>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="problema" style="border: 2px solid #ccc; -moz-border-radius: 2px; -webkit-border-radius: 2px;
+                        border-radius: 2px; /*ie 7 and 8 do not support border radius*/
+-moz-box-shadow: 0px 0px 3px #000000; -webkit-box-shadow: 0px 0px 3px #000000; box-shadow: 0px 0px 3px #000000;
+                        /*ie 7 and 8 do not support blur property of shadows*/ color: #005EA7; font-size: 1em;
+                        padding-left: 10px; width: 50%;">
+                        <h1>
+                            Plan Operativo</h1>
+                        <a id="a1" href="#">
+                            <img src="/Icons/details.png" width="24px" alt="Detalles" /></a> <a id="A2" href="#">
+                                <img src="/Icons/Calender.png" width="24px" alt="Cronograma" /></a>
+                        <br />
+                        <asp:Panel ID="pnlActividades" runat="server">
+                        </asp:Panel>
+                    </div>
+                </div>
+            </div>
+            <div id="Cronograma" style="width: 25%; margin: 0 auto; float: left;" class="demo mover">
+                <br />
+                <br />
+                <div>
+                    <table>
+                        <tr>
+                            <td>
+                                <img src="/Icons/network.png" width="64px" alt="Plan Operativo" />
+                            </td>
+                            <td style="vertical-align: middle; font-size: 13px; text-align: left;">
+                                <h1 style="color: #0b72bc; width: 50%;">
+                                    Cronograma</h1>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="problema" style="border: 2px solid #ccc; -moz-border-radius: 2px; -webkit-border-radius: 2px;
+                        border-radius: 2px; /*ie 7 and 8 do not support border radius*/
+-moz-box-shadow: 0px 0px 3px #000000; -webkit-box-shadow: 0px 0px 3px #000000; box-shadow: 0px 0px 3px #000000;
+                        /*ie 7 and 8 do not support blur property of shadows*/ color: #005EA7; font-size: 1em;
+                        padding-left: 10px; width: 80%;">
+                        <h1>
+                            Cronograma general de actividades</h1>
+                        <br />
+                        <asp:HiddenField ID="HFTempDate" runat="server" />
+                        <div style="position: relative;" class="gantt" id="GanttChartDIV">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
         </div>
-        <input type="button" onclick="$('#izquierda').addClass('past');" class="btnright ui-button ui-widget ui-state-default ui-corner-all"
+        <input type="button" onclick="SlideSiguiente();" class="btnright ui-button ui-widget ui-state-default ui-corner-all"
             role="button" aria-disabled="false" />
-        <input type="button" onclick="$('#izquierda').removeClass('past'); " class="btnleft ui-button ui-widget ui-state-default ui-corner-all"
+        <input type="button" onclick="SlideVolver();" class="btnleft ui-button ui-widget ui-state-default ui-corner-all"
             role="button" aria-disabled="false" />
     </div>
     <input type="hidden" runat="server" id="alerthq" value="-1" />
     <input type="hidden" runat="server" id="hidproyecto" value="-1" />
     <input type="hidden" runat="server" id="Bandera" value="-1" />
-    <a href="http://www.htm2pdf.co.uk">Save as PDF</a>
 </asp:Content>

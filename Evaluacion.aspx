@@ -55,7 +55,7 @@
 
         $(function () {
             $("#tabs").tabs().find(".ui-tabs-nav").sortable({ axis: "x" });
-        });
+        }); 
 
     </script>
     <script type="text/javascript">
@@ -135,6 +135,35 @@
         }
     </style>
     <script type="text/javascript">
+        $(document).ready(function(){
+            
+//            $("#ContentPlaceHolder1_cboActores").change(function(){
+//            
+//            if($(this).val() != "No Asignado")
+//                setInterval($('#ContentPlaceHolder1_btnalmacenarparcial').trigger("click"),10000);
+//            });
+
+            $("#divMenError").ajaxStart(function(){
+                $('#dialog-modal').dialog('open');
+            });
+
+            $("#divMenError").ajaxStop(function(){
+                $('#dialog-modal').dialog('close');
+            });
+
+            $("#dialog-modal").dialog({
+                autoOpen: false,
+                    height: 140,
+                     height: 80,
+                     closeText: false,
+                     dialogClass: 'no-close',
+                     hide: 'explode',
+                    modal: true
+            });
+
+
+        });
+
         function buscar() {
             $.ajax({
                 url: "Evaluacion.aspx?text=" + $("#ContentPlaceHolder1_txtFiltro").val(),
@@ -181,6 +210,8 @@
                     },
                     selected: $("#hidLastTab").val()
                 });
+
+
     </script>
     <style type="text/css">
         .demo h1, h3, h4
@@ -683,4 +714,9 @@ filter: alpha(opacity=95); /*inner elements must not break this elements boundar
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
+    <div id="divMenError">
+    </div>
+    <div id="dialog-modal" title="Auto Guardando">
+        <img src="/Icons/progres.gif" alt="Alternate Text" />
+    </div>
 </asp:Content>

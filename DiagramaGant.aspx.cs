@@ -12,13 +12,21 @@ namespace ESM
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!Page.IsPostBack)
             {
+
                 if (Request.QueryString["idResultado"] != null)
                 {
                     int idresultado = Convert.ToInt32(Request.QueryString["idResultado"]);
                     JsGantt Gantt = new JsGantt();
                     Gantt.genera_gantt("GanttChartDIV", idresultado, Page);
+                }
+                else if (Session["idproyecto"] != null)
+                {
+                    int idproyecto = Convert.ToInt32(Session["idproyecto"]);
+                    JsGantt Gantt = new JsGantt();
+                    Gantt.genera_gantt("GanttChartDIV", idproyecto, Page, true);
                 }
             }
         }
@@ -36,7 +44,7 @@ namespace ESM
             return color;
         }
 
-        public bool genera_gantt(string DivId, int Resultado_id, Page pagina)
+        public bool genera_gantt(string DivId, int Resultado_id, Page pagina, bool esProyecto = false)
         {
             try
             {
@@ -48,10 +56,21 @@ namespace ESM
                 int j = 0;
                 string ColorTemp;
                 ESM.Model.ESMBDDataContext db = new ESM.Model.ESMBDDataContext();
-                var results = from c in db.gantts
+                IQueryable<ESM.Model.gantt> results = null;
+                if (!esProyecto)
+                {
+                    results = from c in db.gantts
                               where c.Resultado_id == Resultado_id
                               orderby c.Resultado_id
                               select c;
+                }
+                else
+                {
+                    results = from c in db.gantts
+                              where c.Proyecto_id == Resultado_id
+                              orderby c.Resultado_id
+                              select c;
+                }
 
                 sb.AppendLine("var g = new JSGantt.GanttChart('g', document.getElementById('" + DivId + "'), 'day');");
                 sb.AppendLine("g.setShowRes(0); // Show/Hide Responsible (0/1)");
@@ -69,7 +88,7 @@ namespace ESM
                     if (Band != x.parent)
                     {
                         ColorTemp = GetRandomColor();
-                        sb.AppendLine("g.AddTaskItem(new JSGantt.TaskItem(" + i + ", '" + x.actividad + "', '', '', '" + ColorTemp + "', '', 0, '', 100, 1, 0, 1,'','',0));");
+                        sb.AppendLine("g.AddTaskItem(new JSGantt.TaskItem(" + i + ", '" + x.Actividad + "', '', '', '" + ColorTemp + "', '', 0, '', 100, 1, 0, 1,'','',0));");
                         j = i;
                         i = i + 1;
                     }

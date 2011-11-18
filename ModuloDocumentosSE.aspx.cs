@@ -119,7 +119,7 @@ namespace ESM
                                 else
                                 {
                                     Response.Write("<script>Alert('Para cargar un archivo se debe tener en cuenta que el tamaño sea menor o igual a 2MB');</script>");
-                                    lblMensaje.Text = "Para cargar un archivo se debe tener en cuenta que el tamaño sea menor o igual a 2MB";
+                                    lblMensaje.Text = "Para cargar un archivo se debe tener en cuenta que el tamaño sea menor o igual a 5MB";
                                 }
                             }
                         }

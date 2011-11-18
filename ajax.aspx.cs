@@ -34,7 +34,7 @@ namespace ESM
         {
             int actividadid = Convert.ToInt32(Request.QueryString["idactividad"]);
             string actividad = Request.QueryString["actividad"].ToString();
-            decimal presupuesto = Convert.ToInt32(Request.QueryString["presupuesto"]);
+            float presupuesto = Convert.ToInt64(Request.QueryString["presupuesto"]);
 
             CActividades objCActividades = new CActividades();
 
@@ -60,7 +60,7 @@ namespace ESM
 
                 int idResultado = Convert.ToInt32(Request.QueryString["idresultado"]);
                 string actividad = Request.QueryString["actividad"].ToString();
-                decimal presupuesto = Convert.ToInt32(Request.QueryString["presupuesto"]);
+                float presupuesto = Convert.ToInt64(Request.QueryString["presupuesto"]);
 
                 CActividades objCActividades = new CActividades();
 
