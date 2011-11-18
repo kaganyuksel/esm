@@ -49,6 +49,8 @@ namespace ESM.Evaluacion
                             if (objsi.Checked == false && objno.Checked == false)
                             {
                                 valid = false;
+                                if (!valid)
+                                    break;
                             }
                         }
                     }
@@ -112,7 +114,13 @@ namespace ESM.Evaluacion
                             string fecha = DateTime.Now.AddHours(2).ToShortTimeString();
                             //string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Actualizada con exito. <br />Estado: Parcial. Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
                             //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
-                            lbloki.InnerHtml = String.Format("Evaluación Actualizada con exito. <br />Estado: Parcial. Hora:{0}", fecha);
+                            lbloki.InnerHtml = String.Format("Evaluación Actualizada con éxito. <br />Estado: Terminada. Hora:{0}", fecha);
+                            gvAmb1.Enabled = false;
+                            gvAmb2.Enabled = false;
+                            gvAmb3.Enabled = false;
+                            gvAmb4.Enabled = false;
+                            gvAmb5.Enabled = false;
+                            TopEvaluaciones(Convert.ToInt32(Session["idmedicion"]));
                             FinalizarProcesoEvaluacionEstado();
                         }
                         else
@@ -120,7 +128,7 @@ namespace ESM.Evaluacion
                             //string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Actualizada sin exito. <br /> Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
                             //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
                             string fecha = DateTime.Now.AddHours(2).ToShortTimeString();
-                            lbloki.InnerHtml = String.Format("Evaluación Actualizada sin exito. <br />Estado: Parcial. Hora:{0}", fecha);
+                            lbloki.InnerHtml = String.Format("Evaluación Actualizada sin éxito. Hora:{0}", fecha);
                             FinalizarProcesoEvaluacionEstado();
                         }
 
@@ -131,7 +139,7 @@ namespace ESM.Evaluacion
                         //string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Actualización fallo. <br /> Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
                         //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
                         string fecha = DateTime.Now.AddHours(2).ToShortTimeString();
-                        lbloki.InnerHtml = String.Format("Actualización fallo. <br />Estado: Parcial. Hora:{0}", 2);
+                        lbloki.InnerHtml = "No se puede bloquear la evaluación, existen preguntas sin responder";
                         FinalizarProcesoEvaluacionEstado();
                     }
                 }
@@ -274,7 +282,15 @@ namespace ESM.Evaluacion
                         if (estado)
                             mensaje = String.Format("Evaluación Almacenada. <br />Estado: Parcial. Hora:{0})", fecha);
                         else
+                        {
                             mensaje = String.Format("Evaluación Almacenada. <br />Estado: Terminada. Hora:{0})", fecha);
+                            gvAmb1.Enabled = false;
+                            gvAmb2.Enabled = false;
+                            gvAmb3.Enabled = false;
+                            gvAmb4.Enabled = false;
+                            gvAmb5.Enabled = false;
+                            TopEvaluaciones(Convert.ToInt32(Session["idmedicion"]));
+                        }
 
                         //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
                         lbloki.InnerHtml = mensaje;
@@ -284,7 +300,7 @@ namespace ESM.Evaluacion
                     }
                     else
                     {
-                        lbloki.InnerHtml = "Guardado Fallido.";
+                        lbloki.InnerHtml = "No se pudo completar el proceso de almacenamiento. Faltan preguntas por responder.";
                         lbloki.Visible = true;
                         //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), "$('#dtimer').dialog('open');", true);
                         FinalizarProcesoEvaluacionEstado();
@@ -292,7 +308,7 @@ namespace ESM.Evaluacion
                 }
                 else
                 {
-                    Alert.Show(udpnlFiltro, "No se pudo completar el proceso de almacenamiento. <br /> Faltan preguntas por responder.");
+                    Alert.Show(udpnlFiltro, "No se pudo completar el proceso de almacenamiento. Faltan preguntas por responder.");
                 }
             }
             else
@@ -1230,7 +1246,6 @@ namespace ESM.Evaluacion
             catch (Exception) { Response.Write("<script>alert('Ocurrio un error inesperado.');</script>"); }
         }
 
-
         protected bool Filtro(string texto, int idconsultor)
         {
             try
@@ -1539,7 +1554,7 @@ namespace ESM.Evaluacion
 
         protected void objtimer_Tick(object sender, EventArgs e)
         {
-            if (cboActores.SelectedItem.Text != "No Asignado" && ModEvaluacion.Visible == true)
+            if (cboActores.SelectedItem.Text != "No Asignado" && ModEvaluacion.Visible == true && gvAmb1.Rows.Count != 0 && gvAmb2.Rows.Count != 0 && gvAmb3.Rows.Count != 0 && gvAmb4.Rows.Count != 0 && gvAmb5.Rows.Count != 0)
             {
                 bool exist = false;
                 if (Session["ideval"] != null)

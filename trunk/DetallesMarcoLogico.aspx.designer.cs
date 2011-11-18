@@ -130,6 +130,42 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.LinkButton lknAgregarIndicador;
         
         /// <summary>
+        /// gvresultados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvresultados;
+        
+        /// <summary>
+        /// sqlResultados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlResultados;
+        
+        /// <summary>
+        /// gvproyecto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvproyecto;
+        
+        /// <summary>
+        /// sqlProyecto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlProyecto;
+        
+        /// <summary>
         /// gvIndicadores_Actividad control.
         /// </summary>
         /// <remarks>
@@ -184,15 +220,6 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.BulletedList sortable3;
         
         /// <summary>
-        /// lqsupuestos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinqDataSource lqsupuestos;
-        
-        /// <summary>
         /// sortable4 control.
         /// </summary>
         /// <remarks>
@@ -200,6 +227,15 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.BulletedList sortable4;
+        
+        /// <summary>
+        /// lqsupuestos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinqDataSource lqsupuestos;
         
         /// <summary>
         /// supuestosinput control.
@@ -218,5 +254,41 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden mediosinput;
+        
+        /// <summary>
+        /// txtmedio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtmedio;
+        
+        /// <summary>
+        /// btnAlmacenaMedio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnAlmacenaMedio;
+        
+        /// <summary>
+        /// txtsupuesto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtsupuesto;
+        
+        /// <summary>
+        /// btnAlmacenaSupuesto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnAlmacenaSupuesto;
     }
 }

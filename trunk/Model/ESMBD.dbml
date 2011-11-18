@@ -55,7 +55,7 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Resultado_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Actividad" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Presupuesto" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Presupuesto" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Association Name="Actividade_Actividades_Medio" Member="Actividades_Medios" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Medio" />
       <Association Name="Actividade_Actividades_Supuesto" Member="Actividades_Supuestos" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Supuesto" />
       <Association Name="Actividade_Indicadore" Member="Indicadores" ThisKey="Id" OtherKey="Actividad_id" Type="Indicadore" />
@@ -874,12 +874,31 @@
   <Table Name="dbo.gantt" Member="gantts">
     <Type Name="gantt">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="actividad" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Actividad" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Indicador" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="[fecha inicial]" Member="fecha_inicial" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="[fecha final]" Member="fecha_final" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="parent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Resultado_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Proyecto_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Report_Macro_Logico" Member="Report_Macro_Logicos">
+    <Type Name="Report_Macro_Logico">
+      <Column Name="Proyecto_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Resultado" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Indicador_Resultado" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="[Medios de Verificacion]" Member="Medios_de_Verificacion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Supuestos" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Report_Marco_Logico_Propositos" Member="Report_Marco_Logico_Propositos">
+    <Type Name="Report_Marco_Logico_Proposito">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Proposito" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Indicador" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="[Medios de Verificacion]" Member="Medios_de_Verificacion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Supuestos" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

@@ -789,6 +789,22 @@ namespace ESM.Model
 				return this.GetTable<gantt>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Report_Macro_Logico> Report_Macro_Logicos
+		{
+			get
+			{
+				return this.GetTable<Report_Macro_Logico>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Report_Marco_Logico_Proposito> Report_Marco_Logico_Propositos
+		{
+			get
+			{
+				return this.GetTable<Report_Marco_Logico_Proposito>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ActaVisitaEE")]
@@ -1965,7 +1981,7 @@ namespace ESM.Model
 		
 		private string _Actividad;
 		
-		private System.Nullable<decimal> _Presupuesto;
+		private System.Nullable<double> _Presupuesto;
 		
 		private EntitySet<Actividades_Medio> _Actividades_Medios;
 		
@@ -1987,7 +2003,7 @@ namespace ESM.Model
     partial void OnResultado_idChanged();
     partial void OnActividadChanging(string value);
     partial void OnActividadChanged();
-    partial void OnPresupuestoChanging(System.Nullable<decimal> value);
+    partial void OnPresupuestoChanging(System.Nullable<double> value);
     partial void OnPresupuestoChanged();
     #endregion
 		
@@ -2065,8 +2081,8 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Presupuesto", DbType="Money")]
-		public System.Nullable<decimal> Presupuesto
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Presupuesto", DbType="Float")]
+		public System.Nullable<double> Presupuesto
 		{
 			get
 			{
@@ -19471,7 +19487,7 @@ namespace ESM.Model
 		
 		private int _Id;
 		
-		private string _actividad;
+		private string _Actividad;
 		
 		private string _Indicador;
 		
@@ -19482,6 +19498,8 @@ namespace ESM.Model
 		private int _parent;
 		
 		private System.Nullable<int> _Resultado_id;
+		
+		private System.Nullable<int> _Proyecto_id;
 		
 		public gantt()
 		{
@@ -19503,18 +19521,18 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_actividad", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string actividad
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Actividad", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Actividad
 		{
 			get
 			{
-				return this._actividad;
+				return this._Actividad;
 			}
 			set
 			{
-				if ((this._actividad != value))
+				if ((this._Actividad != value))
 				{
-					this._actividad = value;
+					this._Actividad = value;
 				}
 			}
 		}
@@ -19595,6 +19613,220 @@ namespace ESM.Model
 				if ((this._Resultado_id != value))
 				{
 					this._Resultado_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proyecto_id", DbType="Int")]
+		public System.Nullable<int> Proyecto_id
+		{
+			get
+			{
+				return this._Proyecto_id;
+			}
+			set
+			{
+				if ((this._Proyecto_id != value))
+				{
+					this._Proyecto_id = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Report_Macro_Logico")]
+	public partial class Report_Macro_Logico
+	{
+		
+		private System.Nullable<int> _Proyecto_id;
+		
+		private string _Resultado;
+		
+		private string _Indicador_Resultado;
+		
+		private string _Medios_de_Verificacion;
+		
+		private string _Supuestos;
+		
+		public Report_Macro_Logico()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proyecto_id", DbType="Int")]
+		public System.Nullable<int> Proyecto_id
+		{
+			get
+			{
+				return this._Proyecto_id;
+			}
+			set
+			{
+				if ((this._Proyecto_id != value))
+				{
+					this._Proyecto_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Resultado", DbType="NVarChar(2000)")]
+		public string Resultado
+		{
+			get
+			{
+				return this._Resultado;
+			}
+			set
+			{
+				if ((this._Resultado != value))
+				{
+					this._Resultado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador_Resultado", DbType="NVarChar(2000)")]
+		public string Indicador_Resultado
+		{
+			get
+			{
+				return this._Indicador_Resultado;
+			}
+			set
+			{
+				if ((this._Indicador_Resultado != value))
+				{
+					this._Indicador_Resultado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Medios de Verificacion]", Storage="_Medios_de_Verificacion", DbType="VarChar(MAX)")]
+		public string Medios_de_Verificacion
+		{
+			get
+			{
+				return this._Medios_de_Verificacion;
+			}
+			set
+			{
+				if ((this._Medios_de_Verificacion != value))
+				{
+					this._Medios_de_Verificacion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supuestos", DbType="VarChar(MAX)")]
+		public string Supuestos
+		{
+			get
+			{
+				return this._Supuestos;
+			}
+			set
+			{
+				if ((this._Supuestos != value))
+				{
+					this._Supuestos = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Report_Marco_Logico_Propositos")]
+	public partial class Report_Marco_Logico_Proposito
+	{
+		
+		private int _Id;
+		
+		private string _Proposito;
+		
+		private string _Indicador;
+		
+		private string _Medios_de_Verificacion;
+		
+		private string _Supuestos;
+		
+		public Report_Marco_Logico_Proposito()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proposito", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Proposito
+		{
+			get
+			{
+				return this._Proposito;
+			}
+			set
+			{
+				if ((this._Proposito != value))
+				{
+					this._Proposito = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador", DbType="NVarChar(2000)")]
+		public string Indicador
+		{
+			get
+			{
+				return this._Indicador;
+			}
+			set
+			{
+				if ((this._Indicador != value))
+				{
+					this._Indicador = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Medios de Verificacion]", Storage="_Medios_de_Verificacion", DbType="VarChar(MAX)")]
+		public string Medios_de_Verificacion
+		{
+			get
+			{
+				return this._Medios_de_Verificacion;
+			}
+			set
+			{
+				if ((this._Medios_de_Verificacion != value))
+				{
+					this._Medios_de_Verificacion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supuestos", DbType="VarChar(MAX)")]
+		public string Supuestos
+		{
+			get
+			{
+				return this._Supuestos;
+			}
+			set
+			{
+				if ((this._Supuestos != value))
+				{
+					this._Supuestos = value;
 				}
 			}
 		}

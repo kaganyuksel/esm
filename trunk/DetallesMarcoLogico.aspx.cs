@@ -26,15 +26,12 @@ namespace ESM
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["idproyecto"] != null)
-            {
-                esProyecto = true;
-                idproyecto = Convert.ToInt32(Request.QueryString["idproyecto"]);
-            }
-            else if (Request.QueryString["idResultado"] != null)
+
+            if (Request.QueryString["idResultado"] != null)
             {
                 esResultado = true;
                 idresultado = Convert.ToInt32(Request.QueryString["idResultado"]);
+                gvresultados.Visible = true;
             }
             else if (Request.QueryString["idActividad"] != null)
             {
@@ -44,6 +41,12 @@ namespace ESM
                 txtFechaFinal.Visible = true;
                 gvIndicadores_Actividad.Visible = true;
 
+            }
+            else if (Session["idproyecto"] != null)
+            {
+                esProyecto = true;
+                idproyecto = Convert.ToInt32(Session["idproyecto"]);
+                gvproyecto.Visible = true;
             }
             if (!Page.IsPostBack)
             {
@@ -216,6 +219,31 @@ namespace ESM
             }
             catch (Exception) { /*TODO: JCMM: Controlador Exception*/ }
 
+        }
+
+        protected void btnAlmacenaSupuesto_Click(object sender, ImageClickEventArgs e)
+        {
+            Csupuestos objCsupuestos = new Csupuestos();
+
+            bool crea_supuesto = objCsupuestos.AddSupuesto(txtsupuesto.Text);
+
+            if (crea_supuesto)
+                sortable3.DataBind();
+
+            txtsupuesto.Text = "";
+
+        }
+
+        protected void btnAlmacenaMedio_Click(object sender, ImageClickEventArgs e)
+        {
+            CMedios objCMedios = new CMedios();
+
+            bool crea_medio = objCMedios.AddMedios(txtmedio.Text);
+
+            if (crea_medio)
+                sortable1.DataBind();
+
+            txtmedio.Text = "";
         }
     }
 }

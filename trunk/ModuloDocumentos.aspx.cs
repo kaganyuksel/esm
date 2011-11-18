@@ -27,7 +27,7 @@ namespace ESM
 
             if (!Page.IsPostBack)
             {
-                for (int i = 1; i < 11; i++)
+                for (int i = 1; i < 15; i++)
                 {
                     bool exist = false;
                     exist = objCDocumentos.ExisteDocumento(i, idmedicion);
@@ -228,14 +228,14 @@ namespace ESM
 
                                 string strextencion = extencion.ToString();
 
-                                if (strextencion != "pdf" && strextencion != "zip" && strextencion != "rar" && strextencion != "doc")
+                                if (strextencion != "pdf" && strextencion != "zip" && strextencion != "rar" && strextencion != "doc" && strextencion != "docx")
                                 {
                                     Response.Write("<script>alert('Error el archivo no pudo ser cargado, revise el tipo de documento que intenta cargar. \n\nFormatos compatibles:pdf,doc,zip,rar.');</script>");
                                     lblMensaje.Text = "Error el archivo no pudo ser cargado, revise el tipo de documento que intenta cargar. \n\nFormatos compatibles:pdf,doc,zip,rar.";
                                 }
                                 else
                                 {
-                                    if (objFileUpload.PostedFile.ContentLength <= 2097152)
+                                    if (objFileUpload.PostedFile.ContentLength <= 5242880)
                                     {
                                         if (File.Exists(path))
                                             File.Delete(path);
@@ -253,7 +253,7 @@ namespace ESM
                                     else
                                     {
                                         Response.Write("<script>Alert('Para cargar un archivo se debe tener en cuenta que el tamaño sea menor o igual a 2MB');</script>");
-                                        lblMensaje.Text = "Para cargar un archivo se debe tener en cuenta que el tamaño sea menor o igual a 2MB";
+                                        lblMensaje.Text = "Para cargar un archivo se debe tener en cuenta que el tamaño sea menor o igual a 5MB";
                                     }
                                 }
                             }
