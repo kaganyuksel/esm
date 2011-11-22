@@ -33,9 +33,9 @@ namespace ESM.Model
     partial void InsertActaVisitaEE(ActaVisitaEE instance);
     partial void UpdateActaVisitaEE(ActaVisitaEE instance);
     partial void DeleteActaVisitaEE(ActaVisitaEE instance);
-    partial void InsertVerbo(Verbo instance);
-    partial void UpdateVerbo(Verbo instance);
-    partial void DeleteVerbo(Verbo instance);
+    partial void InsertUsuario(Usuario instance);
+    partial void UpdateUsuario(Usuario instance);
+    partial void DeleteUsuario(Usuario instance);
     partial void InsertActaVisitaSE(ActaVisitaSE instance);
     partial void UpdateActaVisitaSE(ActaVisitaSE instance);
     partial void DeleteActaVisitaSE(ActaVisitaSE instance);
@@ -219,9 +219,9 @@ namespace ESM.Model
     partial void InsertUnidade(Unidade instance);
     partial void UpdateUnidade(Unidade instance);
     partial void DeleteUnidade(Unidade instance);
-    partial void InsertUsuario(Usuario instance);
-    partial void UpdateUsuario(Usuario instance);
-    partial void DeleteUsuario(Usuario instance);
+    partial void InsertVerbo(Verbo instance);
+    partial void UpdateVerbo(Verbo instance);
+    partial void DeleteVerbo(Verbo instance);
     #endregion
 		
 		public ESMBDDataContext() : 
@@ -262,11 +262,11 @@ namespace ESM.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<Verbo> Verbos
+		public System.Data.Linq.Table<Usuario> Usuarios
 		{
 			get
 			{
-				return this.GetTable<Verbo>();
+				return this.GetTable<Usuario>();
 			}
 		}
 		
@@ -774,11 +774,11 @@ namespace ESM.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<Usuario> Usuarios
+		public System.Data.Linq.Table<Verbo> Verbos
 		{
 			get
 			{
-				return this.GetTable<Usuario>();
+				return this.GetTable<Verbo>();
 			}
 		}
 		
@@ -805,6 +805,14 @@ namespace ESM.Model
 				return this.GetTable<Report_Marco_Logico_Proposito>();
 			}
 		}
+		
+		public System.Data.Linq.Table<actividad_indicador_mc> actividad_indicador_mcs
+		{
+			get
+			{
+				return this.GetTable<actividad_indicador_mc>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ActaVisitaEE")]
@@ -825,11 +833,11 @@ namespace ESM.Model
 		
 		private EntitySet<AsociadosActaVisitaEE> _AsociadosActaVisitaEEs;
 		
+		private EntityRef<Usuario> _Usuario;
+		
 		private EntityRef<Establecimiento_Educativo> _Establecimiento_Educativo;
 		
 		private EntityRef<Medicione> _Medicione;
-		
-		private EntityRef<Usuario> _Usuario;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -850,9 +858,9 @@ namespace ESM.Model
 		public ActaVisitaEE()
 		{
 			this._AsociadosActaVisitaEEs = new EntitySet<AsociadosActaVisitaEE>(new Action<AsociadosActaVisitaEE>(this.attach_AsociadosActaVisitaEEs), new Action<AsociadosActaVisitaEE>(this.detach_AsociadosActaVisitaEEs));
+			this._Usuario = default(EntityRef<Usuario>);
 			this._Establecimiento_Educativo = default(EntityRef<Establecimiento_Educativo>);
 			this._Medicione = default(EntityRef<Medicione>);
-			this._Usuario = default(EntityRef<Usuario>);
 			OnCreated();
 		}
 		
@@ -981,6 +989,40 @@ namespace ESM.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaEE", Storage="_Usuario", ThisKey="IdUsuario", OtherKey="IdUsuario", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.ActaVisitaEEs.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.ActaVisitaEEs.Add(this);
+						this._IdUsuario = value.IdUsuario;
+					}
+					else
+					{
+						this._IdUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Establecimiento_Educativo_ActaVisitaEE", Storage="_Establecimiento_Educativo", ThisKey="IdEE", OtherKey="IdIE", IsForeignKey=true)]
 		public Establecimiento_Educativo Establecimiento_Educativo
 		{
@@ -1049,40 +1091,6 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaEE", Storage="_Usuario", ThisKey="IdUsuario", OtherKey="IdUsuario", IsForeignKey=true)]
-		public Usuario Usuario
-		{
-			get
-			{
-				return this._Usuario.Entity;
-			}
-			set
-			{
-				Usuario previousValue = this._Usuario.Entity;
-				if (((previousValue != value) 
-							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Usuario.Entity = null;
-						previousValue.ActaVisitaEEs.Remove(this);
-					}
-					this._Usuario.Entity = value;
-					if ((value != null))
-					{
-						value.ActaVisitaEEs.Add(this);
-						this._IdUsuario = value.IdUsuario;
-					}
-					else
-					{
-						this._IdUsuario = default(int);
-					}
-					this.SendPropertyChanged("Usuario");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1116,116 +1124,415 @@ namespace ESM.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Verbos")]
-	public partial class Verbo : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Usuarios")]
+	public partial class Usuario : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id;
+		private int _IdUsuario;
 		
-		private string _Verbo1;
+		private int _IdRol;
 		
-		private EntitySet<Indicadore> _Indicadores;
+		private int _IdConsultor;
 		
-		private EntitySet<PAC_Indicadore> _PAC_Indicadores;
+		private string _Usuario1;
 		
-		private EntitySet<Resultados_Indicadore> _Resultados_Indicadores;
+		private string _Contrasena;
+		
+		private string _Nombre;
+		
+		private System.Nullable<int> _IdOperador;
+		
+		private string _Email;
+		
+		private EntitySet<ActaVisitaEE> _ActaVisitaEEs;
+		
+		private EntitySet<ActaVisitaSE> _ActaVisitaSEs;
+		
+		private EntitySet<ActaVisitaSistematizacion> _ActaVisitaSistematizacions;
+		
+		private EntitySet<Evaluacion> _Evaluacions;
+		
+		private EntitySet<LLamada> _LLamadas;
+		
+		private EntityRef<Consultore> _Consultore;
+		
+		private EntityRef<Operadore> _Operadore;
+		
+		private EntityRef<Role> _Role;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnVerbo1Changing(string value);
-    partial void OnVerbo1Changed();
+    partial void OnIdUsuarioChanging(int value);
+    partial void OnIdUsuarioChanged();
+    partial void OnIdRolChanging(int value);
+    partial void OnIdRolChanged();
+    partial void OnIdConsultorChanging(int value);
+    partial void OnIdConsultorChanged();
+    partial void OnUsuario1Changing(string value);
+    partial void OnUsuario1Changed();
+    partial void OnContrasenaChanging(string value);
+    partial void OnContrasenaChanged();
+    partial void OnNombreChanging(string value);
+    partial void OnNombreChanged();
+    partial void OnIdOperadorChanging(System.Nullable<int> value);
+    partial void OnIdOperadorChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
     #endregion
 		
-		public Verbo()
+		public Usuario()
 		{
-			this._Indicadores = new EntitySet<Indicadore>(new Action<Indicadore>(this.attach_Indicadores), new Action<Indicadore>(this.detach_Indicadores));
-			this._PAC_Indicadores = new EntitySet<PAC_Indicadore>(new Action<PAC_Indicadore>(this.attach_PAC_Indicadores), new Action<PAC_Indicadore>(this.detach_PAC_Indicadores));
-			this._Resultados_Indicadores = new EntitySet<Resultados_Indicadore>(new Action<Resultados_Indicadore>(this.attach_Resultados_Indicadores), new Action<Resultados_Indicadore>(this.detach_Resultados_Indicadores));
+			this._ActaVisitaEEs = new EntitySet<ActaVisitaEE>(new Action<ActaVisitaEE>(this.attach_ActaVisitaEEs), new Action<ActaVisitaEE>(this.detach_ActaVisitaEEs));
+			this._ActaVisitaSEs = new EntitySet<ActaVisitaSE>(new Action<ActaVisitaSE>(this.attach_ActaVisitaSEs), new Action<ActaVisitaSE>(this.detach_ActaVisitaSEs));
+			this._ActaVisitaSistematizacions = new EntitySet<ActaVisitaSistematizacion>(new Action<ActaVisitaSistematizacion>(this.attach_ActaVisitaSistematizacions), new Action<ActaVisitaSistematizacion>(this.detach_ActaVisitaSistematizacions));
+			this._Evaluacions = new EntitySet<Evaluacion>(new Action<Evaluacion>(this.attach_Evaluacions), new Action<Evaluacion>(this.detach_Evaluacions));
+			this._LLamadas = new EntitySet<LLamada>(new Action<LLamada>(this.attach_LLamadas), new Action<LLamada>(this.detach_LLamadas));
+			this._Consultore = default(EntityRef<Consultore>);
+			this._Operadore = default(EntityRef<Operadore>);
+			this._Role = default(EntityRef<Role>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUsuario", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdUsuario
 		{
 			get
 			{
-				return this._Id;
+				return this._IdUsuario;
 			}
 			set
 			{
-				if ((this._Id != value))
+				if ((this._IdUsuario != value))
 				{
-					this.OnIdChanging(value);
+					this.OnIdUsuarioChanging(value);
 					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
+					this._IdUsuario = value;
+					this.SendPropertyChanged("IdUsuario");
+					this.OnIdUsuarioChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Verbo", Storage="_Verbo1", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string Verbo1
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdRol", DbType="Int NOT NULL")]
+		public int IdRol
 		{
 			get
 			{
-				return this._Verbo1;
+				return this._IdRol;
 			}
 			set
 			{
-				if ((this._Verbo1 != value))
+				if ((this._IdRol != value))
 				{
-					this.OnVerbo1Changing(value);
+					if (this._Role.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdRolChanging(value);
 					this.SendPropertyChanging();
-					this._Verbo1 = value;
-					this.SendPropertyChanged("Verbo1");
-					this.OnVerbo1Changed();
+					this._IdRol = value;
+					this.SendPropertyChanged("IdRol");
+					this.OnIdRolChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_Indicadore", Storage="_Indicadores", ThisKey="Id", OtherKey="verbo_id")]
-		public EntitySet<Indicadore> Indicadores
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdConsultor", DbType="Int NOT NULL")]
+		public int IdConsultor
 		{
 			get
 			{
-				return this._Indicadores;
+				return this._IdConsultor;
 			}
 			set
 			{
-				this._Indicadores.Assign(value);
+				if ((this._IdConsultor != value))
+				{
+					if (this._Consultore.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdConsultorChanging(value);
+					this.SendPropertyChanging();
+					this._IdConsultor = value;
+					this.SendPropertyChanged("IdConsultor");
+					this.OnIdConsultorChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_PAC_Indicadore", Storage="_PAC_Indicadores", ThisKey="Id", OtherKey="verbo_id")]
-		public EntitySet<PAC_Indicadore> PAC_Indicadores
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Usuario", Storage="_Usuario1", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string Usuario1
 		{
 			get
 			{
-				return this._PAC_Indicadores;
+				return this._Usuario1;
 			}
 			set
 			{
-				this._PAC_Indicadores.Assign(value);
+				if ((this._Usuario1 != value))
+				{
+					this.OnUsuario1Changing(value);
+					this.SendPropertyChanging();
+					this._Usuario1 = value;
+					this.SendPropertyChanged("Usuario1");
+					this.OnUsuario1Changed();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_Resultados_Indicadore", Storage="_Resultados_Indicadores", ThisKey="Id", OtherKey="verbo_id")]
-		public EntitySet<Resultados_Indicadore> Resultados_Indicadores
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contrasena", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Contrasena
 		{
 			get
 			{
-				return this._Resultados_Indicadores;
+				return this._Contrasena;
 			}
 			set
 			{
-				this._Resultados_Indicadores.Assign(value);
+				if ((this._Contrasena != value))
+				{
+					this.OnContrasenaChanging(value);
+					this.SendPropertyChanging();
+					this._Contrasena = value;
+					this.SendPropertyChanged("Contrasena");
+					this.OnContrasenaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this.OnNombreChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre = value;
+					this.SendPropertyChanged("Nombre");
+					this.OnNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdOperador", DbType="Int")]
+		public System.Nullable<int> IdOperador
+		{
+			get
+			{
+				return this._IdOperador;
+			}
+			set
+			{
+				if ((this._IdOperador != value))
+				{
+					if (this._Operadore.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdOperadorChanging(value);
+					this.SendPropertyChanging();
+					this._IdOperador = value;
+					this.SendPropertyChanged("IdOperador");
+					this.OnIdOperadorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaEE", Storage="_ActaVisitaEEs", ThisKey="IdUsuario", OtherKey="IdUsuario")]
+		public EntitySet<ActaVisitaEE> ActaVisitaEEs
+		{
+			get
+			{
+				return this._ActaVisitaEEs;
+			}
+			set
+			{
+				this._ActaVisitaEEs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaSE", Storage="_ActaVisitaSEs", ThisKey="IdUsuario", OtherKey="IdUsuario")]
+		public EntitySet<ActaVisitaSE> ActaVisitaSEs
+		{
+			get
+			{
+				return this._ActaVisitaSEs;
+			}
+			set
+			{
+				this._ActaVisitaSEs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaSistematizacion", Storage="_ActaVisitaSistematizacions", ThisKey="IdUsuario", OtherKey="IdUsuario")]
+		public EntitySet<ActaVisitaSistematizacion> ActaVisitaSistematizacions
+		{
+			get
+			{
+				return this._ActaVisitaSistematizacions;
+			}
+			set
+			{
+				this._ActaVisitaSistematizacions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Evaluacion", Storage="_Evaluacions", ThisKey="IdUsuario", OtherKey="IdUsuario")]
+		public EntitySet<Evaluacion> Evaluacions
+		{
+			get
+			{
+				return this._Evaluacions;
+			}
+			set
+			{
+				this._Evaluacions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_LLamada", Storage="_LLamadas", ThisKey="IdUsuario", OtherKey="IdUsuario")]
+		public EntitySet<LLamada> LLamadas
+		{
+			get
+			{
+				return this._LLamadas;
+			}
+			set
+			{
+				this._LLamadas.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Consultore_Usuario", Storage="_Consultore", ThisKey="IdConsultor", OtherKey="IdConsultor", IsForeignKey=true)]
+		public Consultore Consultore
+		{
+			get
+			{
+				return this._Consultore.Entity;
+			}
+			set
+			{
+				Consultore previousValue = this._Consultore.Entity;
+				if (((previousValue != value) 
+							|| (this._Consultore.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Consultore.Entity = null;
+						previousValue.Usuarios.Remove(this);
+					}
+					this._Consultore.Entity = value;
+					if ((value != null))
+					{
+						value.Usuarios.Add(this);
+						this._IdConsultor = value.IdConsultor;
+					}
+					else
+					{
+						this._IdConsultor = default(int);
+					}
+					this.SendPropertyChanged("Consultore");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Operadore_Usuario", Storage="_Operadore", ThisKey="IdOperador", OtherKey="IdOperador", IsForeignKey=true)]
+		public Operadore Operadore
+		{
+			get
+			{
+				return this._Operadore.Entity;
+			}
+			set
+			{
+				Operadore previousValue = this._Operadore.Entity;
+				if (((previousValue != value) 
+							|| (this._Operadore.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Operadore.Entity = null;
+						previousValue.Usuarios.Remove(this);
+					}
+					this._Operadore.Entity = value;
+					if ((value != null))
+					{
+						value.Usuarios.Add(this);
+						this._IdOperador = value.IdOperador;
+					}
+					else
+					{
+						this._IdOperador = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Operadore");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_Usuario", Storage="_Role", ThisKey="IdRol", OtherKey="IdRol", IsForeignKey=true)]
+		public Role Role
+		{
+			get
+			{
+				return this._Role.Entity;
+			}
+			set
+			{
+				Role previousValue = this._Role.Entity;
+				if (((previousValue != value) 
+							|| (this._Role.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Role.Entity = null;
+						previousValue.Usuarios.Remove(this);
+					}
+					this._Role.Entity = value;
+					if ((value != null))
+					{
+						value.Usuarios.Add(this);
+						this._IdRol = value.IdRol;
+					}
+					else
+					{
+						this._IdRol = default(int);
+					}
+					this.SendPropertyChanged("Role");
+				}
 			}
 		}
 		
@@ -1249,40 +1556,64 @@ namespace ESM.Model
 			}
 		}
 		
-		private void attach_Indicadores(Indicadore entity)
+		private void attach_ActaVisitaEEs(ActaVisitaEE entity)
 		{
 			this.SendPropertyChanging();
-			entity.Verbo = this;
+			entity.Usuario = this;
 		}
 		
-		private void detach_Indicadores(Indicadore entity)
+		private void detach_ActaVisitaEEs(ActaVisitaEE entity)
 		{
 			this.SendPropertyChanging();
-			entity.Verbo = null;
+			entity.Usuario = null;
 		}
 		
-		private void attach_PAC_Indicadores(PAC_Indicadore entity)
+		private void attach_ActaVisitaSEs(ActaVisitaSE entity)
 		{
 			this.SendPropertyChanging();
-			entity.Verbo = this;
+			entity.Usuario = this;
 		}
 		
-		private void detach_PAC_Indicadores(PAC_Indicadore entity)
+		private void detach_ActaVisitaSEs(ActaVisitaSE entity)
 		{
 			this.SendPropertyChanging();
-			entity.Verbo = null;
+			entity.Usuario = null;
 		}
 		
-		private void attach_Resultados_Indicadores(Resultados_Indicadore entity)
+		private void attach_ActaVisitaSistematizacions(ActaVisitaSistematizacion entity)
 		{
 			this.SendPropertyChanging();
-			entity.Verbo = this;
+			entity.Usuario = this;
 		}
 		
-		private void detach_Resultados_Indicadores(Resultados_Indicadore entity)
+		private void detach_ActaVisitaSistematizacions(ActaVisitaSistematizacion entity)
 		{
 			this.SendPropertyChanging();
-			entity.Verbo = null;
+			entity.Usuario = null;
+		}
+		
+		private void attach_Evaluacions(Evaluacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_Evaluacions(Evaluacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
+		}
+		
+		private void attach_LLamadas(LLamada entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = this;
+		}
+		
+		private void detach_LLamadas(LLamada entity)
+		{
+			this.SendPropertyChanging();
+			entity.Usuario = null;
 		}
 	}
 	
@@ -1304,11 +1635,11 @@ namespace ESM.Model
 		
 		private EntitySet<AsociadoActaVisitaSE> _AsociadoActaVisitaSEs;
 		
+		private EntityRef<Usuario> _Usuario;
+		
 		private EntityRef<Medicione> _Medicione;
 		
 		private EntityRef<Secretaria_Educacion> _Secretaria_Educacion;
-		
-		private EntityRef<Usuario> _Usuario;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1329,9 +1660,9 @@ namespace ESM.Model
 		public ActaVisitaSE()
 		{
 			this._AsociadoActaVisitaSEs = new EntitySet<AsociadoActaVisitaSE>(new Action<AsociadoActaVisitaSE>(this.attach_AsociadoActaVisitaSEs), new Action<AsociadoActaVisitaSE>(this.detach_AsociadoActaVisitaSEs));
+			this._Usuario = default(EntityRef<Usuario>);
 			this._Medicione = default(EntityRef<Medicione>);
 			this._Secretaria_Educacion = default(EntityRef<Secretaria_Educacion>);
-			this._Usuario = default(EntityRef<Usuario>);
 			OnCreated();
 		}
 		
@@ -1460,6 +1791,40 @@ namespace ESM.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaSE", Storage="_Usuario", ThisKey="IdUsuario", OtherKey="IdUsuario", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.ActaVisitaSEs.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.ActaVisitaSEs.Add(this);
+						this._IdUsuario = value.IdUsuario;
+					}
+					else
+					{
+						this._IdUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Medicione_ActaVisitaSE", Storage="_Medicione", ThisKey="IdMedicion", OtherKey="IdMedicion", IsForeignKey=true)]
 		public Medicione Medicione
 		{
@@ -1528,40 +1893,6 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaSE", Storage="_Usuario", ThisKey="IdUsuario", OtherKey="IdUsuario", IsForeignKey=true)]
-		public Usuario Usuario
-		{
-			get
-			{
-				return this._Usuario.Entity;
-			}
-			set
-			{
-				Usuario previousValue = this._Usuario.Entity;
-				if (((previousValue != value) 
-							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Usuario.Entity = null;
-						previousValue.ActaVisitaSEs.Remove(this);
-					}
-					this._Usuario.Entity = value;
-					if ((value != null))
-					{
-						value.ActaVisitaSEs.Add(this);
-						this._IdUsuario = value.IdUsuario;
-					}
-					else
-					{
-						this._IdUsuario = default(int);
-					}
-					this.SendPropertyChanged("Usuario");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1615,13 +1946,13 @@ namespace ESM.Model
 		
 		private EntitySet<AsociadoActaVisitaSistematizacion> _AsociadoActaVisitaSistematizacions;
 		
+		private EntityRef<Usuario> _Usuario;
+		
 		private EntityRef<Establecimiento_Educativo> _Establecimiento_Educativo;
 		
 		private EntityRef<Medicione> _Medicione;
 		
 		private EntityRef<Secretaria_Educacion> _Secretaria_Educacion;
-		
-		private EntityRef<Usuario> _Usuario;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1644,10 +1975,10 @@ namespace ESM.Model
 		public ActaVisitaSistematizacion()
 		{
 			this._AsociadoActaVisitaSistematizacions = new EntitySet<AsociadoActaVisitaSistematizacion>(new Action<AsociadoActaVisitaSistematizacion>(this.attach_AsociadoActaVisitaSistematizacions), new Action<AsociadoActaVisitaSistematizacion>(this.detach_AsociadoActaVisitaSistematizacions));
+			this._Usuario = default(EntityRef<Usuario>);
 			this._Establecimiento_Educativo = default(EntityRef<Establecimiento_Educativo>);
 			this._Medicione = default(EntityRef<Medicione>);
 			this._Secretaria_Educacion = default(EntityRef<Secretaria_Educacion>);
-			this._Usuario = default(EntityRef<Usuario>);
 			OnCreated();
 		}
 		
@@ -1800,6 +2131,40 @@ namespace ESM.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaSistematizacion", Storage="_Usuario", ThisKey="IdUsuario", OtherKey="IdUsuario", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.ActaVisitaSistematizacions.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.ActaVisitaSistematizacions.Add(this);
+						this._IdUsuario = value.IdUsuario;
+					}
+					else
+					{
+						this._IdUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Establecimiento_Educativo_ActaVisitaSistematizacion", Storage="_Establecimiento_Educativo", ThisKey="IdEE", OtherKey="IdIE", IsForeignKey=true)]
 		public Establecimiento_Educativo Establecimiento_Educativo
 		{
@@ -1898,40 +2263,6 @@ namespace ESM.Model
 						this._IdSE = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Secretaria_Educacion");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaSistematizacion", Storage="_Usuario", ThisKey="IdUsuario", OtherKey="IdUsuario", IsForeignKey=true)]
-		public Usuario Usuario
-		{
-			get
-			{
-				return this._Usuario.Entity;
-			}
-			set
-			{
-				Usuario previousValue = this._Usuario.Entity;
-				if (((previousValue != value) 
-							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Usuario.Entity = null;
-						previousValue.ActaVisitaSistematizacions.Remove(this);
-					}
-					this._Usuario.Entity = value;
-					if ((value != null))
-					{
-						value.ActaVisitaSistematizacions.Add(this);
-						this._IdUsuario = value.IdUsuario;
-					}
-					else
-					{
-						this._IdUsuario = default(int);
-					}
-					this.SendPropertyChanged("Usuario");
 				}
 			}
 		}
@@ -6760,9 +7091,9 @@ namespace ESM.Model
 		
 		private string _CorreoElectronico;
 		
-		private EntitySet<Secretaria_Educacion> _Secretaria_Educacions;
-		
 		private EntitySet<Usuario> _Usuarios;
+		
+		private EntitySet<Secretaria_Educacion> _Secretaria_Educacions;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -6788,8 +7119,8 @@ namespace ESM.Model
 		
 		public Consultore()
 		{
-			this._Secretaria_Educacions = new EntitySet<Secretaria_Educacion>(new Action<Secretaria_Educacion>(this.attach_Secretaria_Educacions), new Action<Secretaria_Educacion>(this.detach_Secretaria_Educacions));
 			this._Usuarios = new EntitySet<Usuario>(new Action<Usuario>(this.attach_Usuarios), new Action<Usuario>(this.detach_Usuarios));
+			this._Secretaria_Educacions = new EntitySet<Secretaria_Educacion>(new Action<Secretaria_Educacion>(this.attach_Secretaria_Educacions), new Action<Secretaria_Educacion>(this.detach_Secretaria_Educacions));
 			OnCreated();
 		}
 		
@@ -6953,19 +7284,6 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Consultore_Secretaria_Educacion", Storage="_Secretaria_Educacions", ThisKey="IdConsultor", OtherKey="IdConsultor")]
-		public EntitySet<Secretaria_Educacion> Secretaria_Educacions
-		{
-			get
-			{
-				return this._Secretaria_Educacions;
-			}
-			set
-			{
-				this._Secretaria_Educacions.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Consultore_Usuario", Storage="_Usuarios", ThisKey="IdConsultor", OtherKey="IdConsultor")]
 		public EntitySet<Usuario> Usuarios
 		{
@@ -6976,6 +7294,19 @@ namespace ESM.Model
 			set
 			{
 				this._Usuarios.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Consultore_Secretaria_Educacion", Storage="_Secretaria_Educacions", ThisKey="IdConsultor", OtherKey="IdConsultor")]
+		public EntitySet<Secretaria_Educacion> Secretaria_Educacions
+		{
+			get
+			{
+				return this._Secretaria_Educacions;
+			}
+			set
+			{
+				this._Secretaria_Educacions.Assign(value);
 			}
 		}
 		
@@ -6999,18 +7330,6 @@ namespace ESM.Model
 			}
 		}
 		
-		private void attach_Secretaria_Educacions(Secretaria_Educacion entity)
-		{
-			this.SendPropertyChanging();
-			entity.Consultore = this;
-		}
-		
-		private void detach_Secretaria_Educacions(Secretaria_Educacion entity)
-		{
-			this.SendPropertyChanging();
-			entity.Consultore = null;
-		}
-		
 		private void attach_Usuarios(Usuario entity)
 		{
 			this.SendPropertyChanging();
@@ -7018,6 +7337,18 @@ namespace ESM.Model
 		}
 		
 		private void detach_Usuarios(Usuario entity)
+		{
+			this.SendPropertyChanging();
+			entity.Consultore = null;
+		}
+		
+		private void attach_Secretaria_Educacions(Secretaria_Educacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Consultore = this;
+		}
+		
+		private void detach_Secretaria_Educacions(Secretaria_Educacion entity)
 		{
 			this.SendPropertyChanging();
 			entity.Consultore = null;
@@ -8077,11 +8408,11 @@ namespace ESM.Model
 		
 		private EntityRef<Establecimiento_Educativo> _Establecimiento_Educativo;
 		
+		private EntityRef<Usuario> _Usuario;
+		
 		private EntityRef<Medicione> _Medicione;
 		
 		private EntityRef<Secretaria_Educacion> _Secretaria_Educacion;
-		
-		private EntityRef<Usuario> _Usuario;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -8111,9 +8442,9 @@ namespace ESM.Model
 			this._Actore = default(EntityRef<Actore>);
 			this._EstadoEvaluacion = default(EntityRef<EstadoEvaluacion>);
 			this._Establecimiento_Educativo = default(EntityRef<Establecimiento_Educativo>);
+			this._Usuario = default(EntityRef<Usuario>);
 			this._Medicione = default(EntityRef<Medicione>);
 			this._Secretaria_Educacion = default(EntityRef<Secretaria_Educacion>);
-			this._Usuario = default(EntityRef<Usuario>);
 			OnCreated();
 		}
 		
@@ -8416,6 +8747,40 @@ namespace ESM.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Evaluacion", Storage="_Usuario", ThisKey="IdUsuario", OtherKey="IdUsuario", IsForeignKey=true)]
+		public Usuario Usuario
+		{
+			get
+			{
+				return this._Usuario.Entity;
+			}
+			set
+			{
+				Usuario previousValue = this._Usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Usuario.Entity = null;
+						previousValue.Evaluacions.Remove(this);
+					}
+					this._Usuario.Entity = value;
+					if ((value != null))
+					{
+						value.Evaluacions.Add(this);
+						this._IdUsuario = value.IdUsuario;
+					}
+					else
+					{
+						this._IdUsuario = default(int);
+					}
+					this.SendPropertyChanged("Usuario");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Medicione_Evaluacion", Storage="_Medicione", ThisKey="IdMedicion", OtherKey="IdMedicion", IsForeignKey=true)]
 		public Medicione Medicione
 		{
@@ -8484,40 +8849,6 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Evaluacion", Storage="_Usuario", ThisKey="IdUsuario", OtherKey="IdUsuario", IsForeignKey=true)]
-		public Usuario Usuario
-		{
-			get
-			{
-				return this._Usuario.Entity;
-			}
-			set
-			{
-				Usuario previousValue = this._Usuario.Entity;
-				if (((previousValue != value) 
-							|| (this._Usuario.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Usuario.Entity = null;
-						previousValue.Evaluacions.Remove(this);
-					}
-					this._Usuario.Entity = value;
-					if ((value != null))
-					{
-						value.Evaluacions.Add(this);
-						this._IdUsuario = value.IdUsuario;
-					}
-					else
-					{
-						this._IdUsuario = default(int);
-					}
-					this.SendPropertyChanged("Usuario");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -8573,15 +8904,17 @@ namespace ESM.Model
 		
 		private System.Nullable<System.DateTime> _Fecha_Creacion;
 		
+		private System.Nullable<bool> _SSP;
+		
 		private EntitySet<Indicadores_Meta> _Indicadores_Metas;
 		
 		private EntitySet<Indicadores_Valor> _Indicadores_Valors;
 		
 		private EntityRef<Actividade> _Actividade;
 		
-		private EntityRef<Verbo> _Verbo;
-		
 		private EntityRef<Unidade> _Unidade;
+		
+		private EntityRef<Verbo> _Verbo;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -8603,6 +8936,8 @@ namespace ESM.Model
     partial void Onfecha_indicador_finalChanged();
     partial void OnFecha_CreacionChanging(System.Nullable<System.DateTime> value);
     partial void OnFecha_CreacionChanged();
+    partial void OnSSPChanging(System.Nullable<bool> value);
+    partial void OnSSPChanged();
     #endregion
 		
 		public Indicadore()
@@ -8610,8 +8945,8 @@ namespace ESM.Model
 			this._Indicadores_Metas = new EntitySet<Indicadores_Meta>(new Action<Indicadores_Meta>(this.attach_Indicadores_Metas), new Action<Indicadores_Meta>(this.detach_Indicadores_Metas));
 			this._Indicadores_Valors = new EntitySet<Indicadores_Valor>(new Action<Indicadores_Valor>(this.attach_Indicadores_Valors), new Action<Indicadores_Valor>(this.detach_Indicadores_Valors));
 			this._Actividade = default(EntityRef<Actividade>);
-			this._Verbo = default(EntityRef<Verbo>);
 			this._Unidade = default(EntityRef<Unidade>);
+			this._Verbo = default(EntityRef<Verbo>);
 			OnCreated();
 		}
 		
@@ -8787,6 +9122,26 @@ namespace ESM.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SSP", DbType="Bit")]
+		public System.Nullable<bool> SSP
+		{
+			get
+			{
+				return this._SSP;
+			}
+			set
+			{
+				if ((this._SSP != value))
+				{
+					this.OnSSPChanging(value);
+					this.SendPropertyChanging();
+					this._SSP = value;
+					this.SendPropertyChanged("SSP");
+					this.OnSSPChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Indicadore_Indicadores_Meta", Storage="_Indicadores_Metas", ThisKey="Id", OtherKey="Indicador_id")]
 		public EntitySet<Indicadores_Meta> Indicadores_Metas
 		{
@@ -8847,40 +9202,6 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_Indicadore", Storage="_Verbo", ThisKey="verbo_id", OtherKey="Id", IsForeignKey=true)]
-		public Verbo Verbo
-		{
-			get
-			{
-				return this._Verbo.Entity;
-			}
-			set
-			{
-				Verbo previousValue = this._Verbo.Entity;
-				if (((previousValue != value) 
-							|| (this._Verbo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Verbo.Entity = null;
-						previousValue.Indicadores.Remove(this);
-					}
-					this._Verbo.Entity = value;
-					if ((value != null))
-					{
-						value.Indicadores.Add(this);
-						this._verbo_id = value.Id;
-					}
-					else
-					{
-						this._verbo_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Verbo");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Unidade_Indicadore", Storage="_Unidade", ThisKey="unidad_id", OtherKey="Id", IsForeignKey=true)]
 		public Unidade Unidade
 		{
@@ -8911,6 +9232,40 @@ namespace ESM.Model
 						this._unidad_id = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Unidade");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_Indicadore", Storage="_Verbo", ThisKey="verbo_id", OtherKey="Id", IsForeignKey=true)]
+		public Verbo Verbo
+		{
+			get
+			{
+				return this._Verbo.Entity;
+			}
+			set
+			{
+				Verbo previousValue = this._Verbo.Entity;
+				if (((previousValue != value) 
+							|| (this._Verbo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Verbo.Entity = null;
+						previousValue.Indicadores.Remove(this);
+					}
+					this._Verbo.Entity = value;
+					if ((value != null))
+					{
+						value.Indicadores.Add(this);
+						this._verbo_id = value.Id;
+					}
+					else
+					{
+						this._verbo_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Verbo");
 				}
 			}
 		}
@@ -12454,9 +12809,9 @@ namespace ESM.Model
 		
 		private EntityRef<EstadoLLamada> _EstadoLLamada;
 		
-		private EntityRef<Secretaria_Educacion> _Secretaria_Educacion;
-		
 		private EntityRef<Usuario> _Usuario;
+		
+		private EntityRef<Secretaria_Educacion> _Secretaria_Educacion;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -12482,8 +12837,8 @@ namespace ESM.Model
 		{
 			this._Establecimiento_Educativo = default(EntityRef<Establecimiento_Educativo>);
 			this._EstadoLLamada = default(EntityRef<EstadoLLamada>);
-			this._Secretaria_Educacion = default(EntityRef<Secretaria_Educacion>);
 			this._Usuario = default(EntityRef<Usuario>);
+			this._Secretaria_Educacion = default(EntityRef<Secretaria_Educacion>);
 			OnCreated();
 		}
 		
@@ -12711,40 +13066,6 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Secretaria_Educacion_LLamada", Storage="_Secretaria_Educacion", ThisKey="IdSE", OtherKey="IdSecretaria", IsForeignKey=true)]
-		public Secretaria_Educacion Secretaria_Educacion
-		{
-			get
-			{
-				return this._Secretaria_Educacion.Entity;
-			}
-			set
-			{
-				Secretaria_Educacion previousValue = this._Secretaria_Educacion.Entity;
-				if (((previousValue != value) 
-							|| (this._Secretaria_Educacion.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Secretaria_Educacion.Entity = null;
-						previousValue.LLamadas.Remove(this);
-					}
-					this._Secretaria_Educacion.Entity = value;
-					if ((value != null))
-					{
-						value.LLamadas.Add(this);
-						this._IdSE = value.IdSecretaria;
-					}
-					else
-					{
-						this._IdSE = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Secretaria_Educacion");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_LLamada", Storage="_Usuario", ThisKey="IdUsuario", OtherKey="IdUsuario", IsForeignKey=true)]
 		public Usuario Usuario
 		{
@@ -12775,6 +13096,40 @@ namespace ESM.Model
 						this._IdUsuario = default(int);
 					}
 					this.SendPropertyChanged("Usuario");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Secretaria_Educacion_LLamada", Storage="_Secretaria_Educacion", ThisKey="IdSE", OtherKey="IdSecretaria", IsForeignKey=true)]
+		public Secretaria_Educacion Secretaria_Educacion
+		{
+			get
+			{
+				return this._Secretaria_Educacion.Entity;
+			}
+			set
+			{
+				Secretaria_Educacion previousValue = this._Secretaria_Educacion.Entity;
+				if (((previousValue != value) 
+							|| (this._Secretaria_Educacion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Secretaria_Educacion.Entity = null;
+						previousValue.LLamadas.Remove(this);
+					}
+					this._Secretaria_Educacion.Entity = value;
+					if ((value != null))
+					{
+						value.LLamadas.Add(this);
+						this._IdSE = value.IdSecretaria;
+					}
+					else
+					{
+						this._IdSE = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Secretaria_Educacion");
 				}
 			}
 		}
@@ -18988,415 +19343,116 @@ namespace ESM.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Usuarios")]
-	public partial class Usuario : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Verbos")]
+	public partial class Verbo : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _IdUsuario;
+		private int _Id;
 		
-		private int _IdRol;
+		private string _Verbo1;
 		
-		private int _IdConsultor;
+		private EntitySet<Indicadore> _Indicadores;
 		
-		private string _Usuario1;
+		private EntitySet<PAC_Indicadore> _PAC_Indicadores;
 		
-		private string _Contrasena;
-		
-		private string _Nombre;
-		
-		private System.Nullable<int> _IdOperador;
-		
-		private string _Email;
-		
-		private EntitySet<ActaVisitaEE> _ActaVisitaEEs;
-		
-		private EntitySet<ActaVisitaSE> _ActaVisitaSEs;
-		
-		private EntitySet<ActaVisitaSistematizacion> _ActaVisitaSistematizacions;
-		
-		private EntitySet<Evaluacion> _Evaluacions;
-		
-		private EntitySet<LLamada> _LLamadas;
-		
-		private EntityRef<Consultore> _Consultore;
-		
-		private EntityRef<Operadore> _Operadore;
-		
-		private EntityRef<Role> _Role;
+		private EntitySet<Resultados_Indicadore> _Resultados_Indicadores;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdUsuarioChanging(int value);
-    partial void OnIdUsuarioChanged();
-    partial void OnIdRolChanging(int value);
-    partial void OnIdRolChanged();
-    partial void OnIdConsultorChanging(int value);
-    partial void OnIdConsultorChanged();
-    partial void OnUsuario1Changing(string value);
-    partial void OnUsuario1Changed();
-    partial void OnContrasenaChanging(string value);
-    partial void OnContrasenaChanged();
-    partial void OnNombreChanging(string value);
-    partial void OnNombreChanged();
-    partial void OnIdOperadorChanging(System.Nullable<int> value);
-    partial void OnIdOperadorChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnVerbo1Changing(string value);
+    partial void OnVerbo1Changed();
     #endregion
 		
-		public Usuario()
+		public Verbo()
 		{
-			this._ActaVisitaEEs = new EntitySet<ActaVisitaEE>(new Action<ActaVisitaEE>(this.attach_ActaVisitaEEs), new Action<ActaVisitaEE>(this.detach_ActaVisitaEEs));
-			this._ActaVisitaSEs = new EntitySet<ActaVisitaSE>(new Action<ActaVisitaSE>(this.attach_ActaVisitaSEs), new Action<ActaVisitaSE>(this.detach_ActaVisitaSEs));
-			this._ActaVisitaSistematizacions = new EntitySet<ActaVisitaSistematizacion>(new Action<ActaVisitaSistematizacion>(this.attach_ActaVisitaSistematizacions), new Action<ActaVisitaSistematizacion>(this.detach_ActaVisitaSistematizacions));
-			this._Evaluacions = new EntitySet<Evaluacion>(new Action<Evaluacion>(this.attach_Evaluacions), new Action<Evaluacion>(this.detach_Evaluacions));
-			this._LLamadas = new EntitySet<LLamada>(new Action<LLamada>(this.attach_LLamadas), new Action<LLamada>(this.detach_LLamadas));
-			this._Consultore = default(EntityRef<Consultore>);
-			this._Operadore = default(EntityRef<Operadore>);
-			this._Role = default(EntityRef<Role>);
+			this._Indicadores = new EntitySet<Indicadore>(new Action<Indicadore>(this.attach_Indicadores), new Action<Indicadore>(this.detach_Indicadores));
+			this._PAC_Indicadores = new EntitySet<PAC_Indicadore>(new Action<PAC_Indicadore>(this.attach_PAC_Indicadores), new Action<PAC_Indicadore>(this.detach_PAC_Indicadores));
+			this._Resultados_Indicadores = new EntitySet<Resultados_Indicadore>(new Action<Resultados_Indicadore>(this.attach_Resultados_Indicadores), new Action<Resultados_Indicadore>(this.detach_Resultados_Indicadores));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUsuario", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IdUsuario
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
 		{
 			get
 			{
-				return this._IdUsuario;
+				return this._Id;
 			}
 			set
 			{
-				if ((this._IdUsuario != value))
+				if ((this._Id != value))
 				{
-					this.OnIdUsuarioChanging(value);
+					this.OnIdChanging(value);
 					this.SendPropertyChanging();
-					this._IdUsuario = value;
-					this.SendPropertyChanged("IdUsuario");
-					this.OnIdUsuarioChanged();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdRol", DbType="Int NOT NULL")]
-		public int IdRol
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Verbo", Storage="_Verbo1", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Verbo1
 		{
 			get
 			{
-				return this._IdRol;
+				return this._Verbo1;
 			}
 			set
 			{
-				if ((this._IdRol != value))
+				if ((this._Verbo1 != value))
 				{
-					if (this._Role.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdRolChanging(value);
+					this.OnVerbo1Changing(value);
 					this.SendPropertyChanging();
-					this._IdRol = value;
-					this.SendPropertyChanged("IdRol");
-					this.OnIdRolChanged();
+					this._Verbo1 = value;
+					this.SendPropertyChanged("Verbo1");
+					this.OnVerbo1Changed();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdConsultor", DbType="Int NOT NULL")]
-		public int IdConsultor
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_Indicadore", Storage="_Indicadores", ThisKey="Id", OtherKey="verbo_id")]
+		public EntitySet<Indicadore> Indicadores
 		{
 			get
 			{
-				return this._IdConsultor;
+				return this._Indicadores;
 			}
 			set
 			{
-				if ((this._IdConsultor != value))
-				{
-					if (this._Consultore.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdConsultorChanging(value);
-					this.SendPropertyChanging();
-					this._IdConsultor = value;
-					this.SendPropertyChanged("IdConsultor");
-					this.OnIdConsultorChanged();
-				}
+				this._Indicadores.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Usuario", Storage="_Usuario1", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string Usuario1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_PAC_Indicadore", Storage="_PAC_Indicadores", ThisKey="Id", OtherKey="verbo_id")]
+		public EntitySet<PAC_Indicadore> PAC_Indicadores
 		{
 			get
 			{
-				return this._Usuario1;
+				return this._PAC_Indicadores;
 			}
 			set
 			{
-				if ((this._Usuario1 != value))
-				{
-					this.OnUsuario1Changing(value);
-					this.SendPropertyChanging();
-					this._Usuario1 = value;
-					this.SendPropertyChanged("Usuario1");
-					this.OnUsuario1Changed();
-				}
+				this._PAC_Indicadores.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contrasena", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string Contrasena
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_Resultados_Indicadore", Storage="_Resultados_Indicadores", ThisKey="Id", OtherKey="verbo_id")]
+		public EntitySet<Resultados_Indicadore> Resultados_Indicadores
 		{
 			get
 			{
-				return this._Contrasena;
+				return this._Resultados_Indicadores;
 			}
 			set
 			{
-				if ((this._Contrasena != value))
-				{
-					this.OnContrasenaChanging(value);
-					this.SendPropertyChanging();
-					this._Contrasena = value;
-					this.SendPropertyChanged("Contrasena");
-					this.OnContrasenaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string Nombre
-		{
-			get
-			{
-				return this._Nombre;
-			}
-			set
-			{
-				if ((this._Nombre != value))
-				{
-					this.OnNombreChanging(value);
-					this.SendPropertyChanging();
-					this._Nombre = value;
-					this.SendPropertyChanged("Nombre");
-					this.OnNombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdOperador", DbType="Int")]
-		public System.Nullable<int> IdOperador
-		{
-			get
-			{
-				return this._IdOperador;
-			}
-			set
-			{
-				if ((this._IdOperador != value))
-				{
-					if (this._Operadore.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdOperadorChanging(value);
-					this.SendPropertyChanging();
-					this._IdOperador = value;
-					this.SendPropertyChanged("IdOperador");
-					this.OnIdOperadorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaEE", Storage="_ActaVisitaEEs", ThisKey="IdUsuario", OtherKey="IdUsuario")]
-		public EntitySet<ActaVisitaEE> ActaVisitaEEs
-		{
-			get
-			{
-				return this._ActaVisitaEEs;
-			}
-			set
-			{
-				this._ActaVisitaEEs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaSE", Storage="_ActaVisitaSEs", ThisKey="IdUsuario", OtherKey="IdUsuario")]
-		public EntitySet<ActaVisitaSE> ActaVisitaSEs
-		{
-			get
-			{
-				return this._ActaVisitaSEs;
-			}
-			set
-			{
-				this._ActaVisitaSEs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_ActaVisitaSistematizacion", Storage="_ActaVisitaSistematizacions", ThisKey="IdUsuario", OtherKey="IdUsuario")]
-		public EntitySet<ActaVisitaSistematizacion> ActaVisitaSistematizacions
-		{
-			get
-			{
-				return this._ActaVisitaSistematizacions;
-			}
-			set
-			{
-				this._ActaVisitaSistematizacions.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_Evaluacion", Storage="_Evaluacions", ThisKey="IdUsuario", OtherKey="IdUsuario")]
-		public EntitySet<Evaluacion> Evaluacions
-		{
-			get
-			{
-				return this._Evaluacions;
-			}
-			set
-			{
-				this._Evaluacions.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Usuario_LLamada", Storage="_LLamadas", ThisKey="IdUsuario", OtherKey="IdUsuario")]
-		public EntitySet<LLamada> LLamadas
-		{
-			get
-			{
-				return this._LLamadas;
-			}
-			set
-			{
-				this._LLamadas.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Consultore_Usuario", Storage="_Consultore", ThisKey="IdConsultor", OtherKey="IdConsultor", IsForeignKey=true)]
-		public Consultore Consultore
-		{
-			get
-			{
-				return this._Consultore.Entity;
-			}
-			set
-			{
-				Consultore previousValue = this._Consultore.Entity;
-				if (((previousValue != value) 
-							|| (this._Consultore.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Consultore.Entity = null;
-						previousValue.Usuarios.Remove(this);
-					}
-					this._Consultore.Entity = value;
-					if ((value != null))
-					{
-						value.Usuarios.Add(this);
-						this._IdConsultor = value.IdConsultor;
-					}
-					else
-					{
-						this._IdConsultor = default(int);
-					}
-					this.SendPropertyChanged("Consultore");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Operadore_Usuario", Storage="_Operadore", ThisKey="IdOperador", OtherKey="IdOperador", IsForeignKey=true)]
-		public Operadore Operadore
-		{
-			get
-			{
-				return this._Operadore.Entity;
-			}
-			set
-			{
-				Operadore previousValue = this._Operadore.Entity;
-				if (((previousValue != value) 
-							|| (this._Operadore.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Operadore.Entity = null;
-						previousValue.Usuarios.Remove(this);
-					}
-					this._Operadore.Entity = value;
-					if ((value != null))
-					{
-						value.Usuarios.Add(this);
-						this._IdOperador = value.IdOperador;
-					}
-					else
-					{
-						this._IdOperador = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Operadore");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_Usuario", Storage="_Role", ThisKey="IdRol", OtherKey="IdRol", IsForeignKey=true)]
-		public Role Role
-		{
-			get
-			{
-				return this._Role.Entity;
-			}
-			set
-			{
-				Role previousValue = this._Role.Entity;
-				if (((previousValue != value) 
-							|| (this._Role.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Role.Entity = null;
-						previousValue.Usuarios.Remove(this);
-					}
-					this._Role.Entity = value;
-					if ((value != null))
-					{
-						value.Usuarios.Add(this);
-						this._IdRol = value.IdRol;
-					}
-					else
-					{
-						this._IdRol = default(int);
-					}
-					this.SendPropertyChanged("Role");
-				}
+				this._Resultados_Indicadores.Assign(value);
 			}
 		}
 		
@@ -19420,64 +19476,40 @@ namespace ESM.Model
 			}
 		}
 		
-		private void attach_ActaVisitaEEs(ActaVisitaEE entity)
+		private void attach_Indicadores(Indicadore entity)
 		{
 			this.SendPropertyChanging();
-			entity.Usuario = this;
+			entity.Verbo = this;
 		}
 		
-		private void detach_ActaVisitaEEs(ActaVisitaEE entity)
+		private void detach_Indicadores(Indicadore entity)
 		{
 			this.SendPropertyChanging();
-			entity.Usuario = null;
+			entity.Verbo = null;
 		}
 		
-		private void attach_ActaVisitaSEs(ActaVisitaSE entity)
+		private void attach_PAC_Indicadores(PAC_Indicadore entity)
 		{
 			this.SendPropertyChanging();
-			entity.Usuario = this;
+			entity.Verbo = this;
 		}
 		
-		private void detach_ActaVisitaSEs(ActaVisitaSE entity)
+		private void detach_PAC_Indicadores(PAC_Indicadore entity)
 		{
 			this.SendPropertyChanging();
-			entity.Usuario = null;
+			entity.Verbo = null;
 		}
 		
-		private void attach_ActaVisitaSistematizacions(ActaVisitaSistematizacion entity)
+		private void attach_Resultados_Indicadores(Resultados_Indicadore entity)
 		{
 			this.SendPropertyChanging();
-			entity.Usuario = this;
+			entity.Verbo = this;
 		}
 		
-		private void detach_ActaVisitaSistematizacions(ActaVisitaSistematizacion entity)
+		private void detach_Resultados_Indicadores(Resultados_Indicadore entity)
 		{
 			this.SendPropertyChanging();
-			entity.Usuario = null;
-		}
-		
-		private void attach_Evaluacions(Evaluacion entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = this;
-		}
-		
-		private void detach_Evaluacions(Evaluacion entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = null;
-		}
-		
-		private void attach_LLamadas(LLamada entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = this;
-		}
-		
-		private void detach_LLamadas(LLamada entity)
-		{
-			this.SendPropertyChanging();
-			entity.Usuario = null;
+			entity.Verbo = null;
 		}
 	}
 	
@@ -19827,6 +19859,123 @@ namespace ESM.Model
 				if ((this._Supuestos != value))
 				{
 					this._Supuestos = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.actividad_indicador_mc")]
+	public partial class actividad_indicador_mc
+	{
+		
+		private string _Indicador;
+		
+		private System.Nullable<bool> _SSP;
+		
+		private System.Nullable<System.DateTime> _Fecha_Creacion;
+		
+		private System.Nullable<System.DateTime> _fecha_indicador_inicial;
+		
+		private System.Nullable<System.DateTime> _fecha_indicador_final;
+		
+		private System.Nullable<int> _Actividad_id;
+		
+		public actividad_indicador_mc()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Indicador
+		{
+			get
+			{
+				return this._Indicador;
+			}
+			set
+			{
+				if ((this._Indicador != value))
+				{
+					this._Indicador = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SSP", DbType="Bit")]
+		public System.Nullable<bool> SSP
+		{
+			get
+			{
+				return this._SSP;
+			}
+			set
+			{
+				if ((this._SSP != value))
+				{
+					this._SSP = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha_Creacion", DbType="Date")]
+		public System.Nullable<System.DateTime> Fecha_Creacion
+		{
+			get
+			{
+				return this._Fecha_Creacion;
+			}
+			set
+			{
+				if ((this._Fecha_Creacion != value))
+				{
+					this._Fecha_Creacion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha_indicador_inicial", DbType="Date")]
+		public System.Nullable<System.DateTime> fecha_indicador_inicial
+		{
+			get
+			{
+				return this._fecha_indicador_inicial;
+			}
+			set
+			{
+				if ((this._fecha_indicador_inicial != value))
+				{
+					this._fecha_indicador_inicial = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha_indicador_final", DbType="Date")]
+		public System.Nullable<System.DateTime> fecha_indicador_final
+		{
+			get
+			{
+				return this._fecha_indicador_final;
+			}
+			set
+			{
+				if ((this._fecha_indicador_final != value))
+				{
+					this._fecha_indicador_final = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Actividad_id", DbType="Int")]
+		public System.Nullable<int> Actividad_id
+		{
+			get
+			{
+				return this._Actividad_id;
+			}
+			set
+			{
+				if ((this._Actividad_id != value))
+				{
+					this._Actividad_id = value;
 				}
 			}
 		}

@@ -8,18 +8,29 @@
       <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Observaciones" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="ActaVisitaEE_AsociadosActaVisitaEE" Member="AsociadosActaVisitaEEs" ThisKey="IdActaVisita" OtherKey="IdActaVisita" Type="AsociadosActaVisitaEE" />
+      <Association Name="Usuario_ActaVisitaEE" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
       <Association Name="Establecimiento_Educativo_ActaVisitaEE" Member="Establecimiento_Educativo" ThisKey="IdEE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
       <Association Name="Medicione_ActaVisitaEE" Member="Medicione" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Medicione" IsForeignKey="true" />
-      <Association Name="Usuario_ActaVisitaEE" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Verbos" Member="Verbos">
-    <Type Name="Verbo">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Verbo" Member="Verbo1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Verbo_Indicadore" Member="Indicadores" ThisKey="Id" OtherKey="verbo_id" Type="Indicadore" />
-      <Association Name="Verbo_PAC_Indicadore" Member="PAC_Indicadores" ThisKey="Id" OtherKey="verbo_id" Type="PAC_Indicadore" />
-      <Association Name="Verbo_Resultados_Indicadore" Member="Resultados_Indicadores" ThisKey="Id" OtherKey="verbo_id" Type="Resultados_Indicadore" />
+  <Table Name="dbo.Usuarios" Member="Usuarios">
+    <Type Name="Usuario">
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdRol" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdConsultor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Usuario" Member="Usuario1" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Contrasena" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="IdOperador" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Association Name="Usuario_ActaVisitaEE" Member="ActaVisitaEEs" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="ActaVisitaEE" />
+      <Association Name="Usuario_ActaVisitaSE" Member="ActaVisitaSEs" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="ActaVisitaSE" />
+      <Association Name="Usuario_ActaVisitaSistematizacion" Member="ActaVisitaSistematizacions" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="ActaVisitaSistematizacion" />
+      <Association Name="Usuario_Evaluacion" Member="Evaluacions" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Evaluacion" />
+      <Association Name="Usuario_LLamada" Member="LLamadas" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="LLamada" />
+      <Association Name="Consultore_Usuario" Member="Consultore" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Consultore" IsForeignKey="true" />
+      <Association Name="Operadore_Usuario" Member="Operadore" ThisKey="IdOperador" OtherKey="IdOperador" Type="Operadore" IsForeignKey="true" />
+      <Association Name="Role_Usuario" Member="Role" ThisKey="IdRol" OtherKey="IdRol" Type="Role" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ActaVisitaSE" Member="ActaVisitaSEs">
@@ -30,9 +41,9 @@
       <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Observaciones" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="ActaVisitaSE_AsociadoActaVisitaSE" Member="AsociadoActaVisitaSEs" ThisKey="IdActaVisita" OtherKey="IdActaVisita" Type="AsociadoActaVisitaSE" />
+      <Association Name="Usuario_ActaVisitaSE" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
       <Association Name="Medicione_ActaVisitaSE" Member="Medicione" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Medicione" IsForeignKey="true" />
       <Association Name="Secretaria_Educacion_ActaVisitaSE" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="Usuario_ActaVisitaSE" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ActaVisitaSistematizacion" Member="ActaVisitaSistematizacions">
@@ -44,10 +55,10 @@
       <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Observaciones" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="ActaVisitaSistematizacion_AsociadoActaVisitaSistematizacion" Member="AsociadoActaVisitaSistematizacions" ThisKey="IdActaVisita" OtherKey="IdActaVisita" Type="AsociadoActaVisitaSistematizacion" />
+      <Association Name="Usuario_ActaVisitaSistematizacion" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
       <Association Name="Establecimiento_Educativo_ActaVisitaSistematizacion" Member="Establecimiento_Educativo" ThisKey="IdEE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
       <Association Name="Medicione_ActaVisitaSistematizacion" Member="Medicione" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Medicione" IsForeignKey="true" />
       <Association Name="Secretaria_Educacion_ActaVisitaSistematizacion" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
-      <Association Name="Usuario_ActaVisitaSistematizacion" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Actividades" Member="Actividades">
@@ -296,8 +307,8 @@
       <Column Name="TelefonoMovil1" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
       <Column Name="TelefonoMovil2" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
       <Column Name="CorreoElectronico" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Association Name="Consultore_Secretaria_Educacion" Member="Secretaria_Educacions" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Secretaria_Educacion" />
       <Association Name="Consultore_Usuario" Member="Usuarios" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Usuario" />
+      <Association Name="Consultore_Secretaria_Educacion" Member="Secretaria_Educacions" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Secretaria_Educacion" />
     </Type>
   </Table>
   <Table Name="dbo.Documentos" Member="Documentos">
@@ -366,9 +377,9 @@
       <Association Name="Actore_Evaluacion" Member="Actore" ThisKey="IdActor" OtherKey="IdActor" Type="Actore" IsForeignKey="true" />
       <Association Name="EstadoEvaluacion_Evaluacion" Member="EstadoEvaluacion" ThisKey="IdEstado" OtherKey="IdEstado" Type="EstadoEvaluacion" IsForeignKey="true" />
       <Association Name="Establecimiento_Educativo_Evaluacion" Member="Establecimiento_Educativo" ThisKey="IdIE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
+      <Association Name="Usuario_Evaluacion" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
       <Association Name="Medicione_Evaluacion" Member="Medicione" ThisKey="IdMedicion" OtherKey="IdMedicion" Type="Medicione" IsForeignKey="true" />
       <Association Name="Secretaria_Educacion_Evaluacion" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
-      <Association Name="Usuario_Evaluacion" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Indicadores" Member="Indicadores">
@@ -381,11 +392,12 @@
       <Column Name="fecha_indicador_inicial" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="fecha_indicador_final" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Fecha_Creacion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SSP" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Indicadore_Indicadores_Meta" Member="Indicadores_Metas" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Meta" />
       <Association Name="Indicadore_Indicadores_Valor" Member="Indicadores_Valors" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Valor" />
       <Association Name="Actividade_Indicadore" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" />
-      <Association Name="Verbo_Indicadore" Member="Verbo" ThisKey="verbo_id" OtherKey="Id" Type="Verbo" IsForeignKey="true" />
       <Association Name="Unidade_Indicadore" Member="Unidade" ThisKey="unidad_id" OtherKey="Id" Type="Unidade" IsForeignKey="true" />
+      <Association Name="Verbo_Indicadore" Member="Verbo" ThisKey="verbo_id" OtherKey="Id" Type="Verbo" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Indicadores_Metas" Member="Indicadores_Metas">
@@ -549,8 +561,8 @@
       <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="Establecimiento_Educativo_LLamada" Member="Establecimiento_Educativo" ThisKey="IdEE" OtherKey="IdIE" Type="Establecimiento_Educativo" IsForeignKey="true" />
       <Association Name="EstadoLLamada_LLamada" Member="EstadoLLamada" ThisKey="IdEstadoLLamada" OtherKey="IdEstadoLLamada" Type="EstadoLLamada" IsForeignKey="true" />
-      <Association Name="Secretaria_Educacion_LLamada" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
       <Association Name="Usuario_LLamada" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Secretaria_Educacion_LLamada" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Mediciones" Member="Mediciones">
@@ -851,24 +863,13 @@
       <Association Name="Unidade_Indicadore" Member="Indicadores" ThisKey="Id" OtherKey="unidad_id" Type="Indicadore" />
     </Type>
   </Table>
-  <Table Name="dbo.Usuarios" Member="Usuarios">
-    <Type Name="Usuario">
-      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IdRol" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IdConsultor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Usuario" Member="Usuario1" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="Contrasena" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="IdOperador" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Association Name="Usuario_ActaVisitaEE" Member="ActaVisitaEEs" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="ActaVisitaEE" />
-      <Association Name="Usuario_ActaVisitaSE" Member="ActaVisitaSEs" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="ActaVisitaSE" />
-      <Association Name="Usuario_ActaVisitaSistematizacion" Member="ActaVisitaSistematizacions" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="ActaVisitaSistematizacion" />
-      <Association Name="Usuario_Evaluacion" Member="Evaluacions" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Evaluacion" />
-      <Association Name="Usuario_LLamada" Member="LLamadas" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="LLamada" />
-      <Association Name="Consultore_Usuario" Member="Consultore" ThisKey="IdConsultor" OtherKey="IdConsultor" Type="Consultore" IsForeignKey="true" />
-      <Association Name="Operadore_Usuario" Member="Operadore" ThisKey="IdOperador" OtherKey="IdOperador" Type="Operadore" IsForeignKey="true" />
-      <Association Name="Role_Usuario" Member="Role" ThisKey="IdRol" OtherKey="IdRol" Type="Role" IsForeignKey="true" />
+  <Table Name="dbo.Verbos" Member="Verbos">
+    <Type Name="Verbo">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Verbo" Member="Verbo1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Verbo_Indicadore" Member="Indicadores" ThisKey="Id" OtherKey="verbo_id" Type="Indicadore" />
+      <Association Name="Verbo_PAC_Indicadore" Member="PAC_Indicadores" ThisKey="Id" OtherKey="verbo_id" Type="PAC_Indicadore" />
+      <Association Name="Verbo_Resultados_Indicadore" Member="Resultados_Indicadores" ThisKey="Id" OtherKey="verbo_id" Type="Resultados_Indicadore" />
     </Type>
   </Table>
   <Table Name="dbo.gantt" Member="gantts">
@@ -899,6 +900,16 @@
       <Column Name="Indicador" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
       <Column Name="[Medios de Verificacion]" Member="Medios_de_Verificacion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Supuestos" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.actividad_indicador_mc" Member="actividad_indicador_mcs">
+    <Type Name="actividad_indicador_mc">
+      <Column Name="Indicador" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SSP" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Fecha_Creacion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="fecha_indicador_inicial" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="fecha_indicador_final" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Actividad_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

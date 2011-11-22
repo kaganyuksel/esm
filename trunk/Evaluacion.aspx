@@ -11,21 +11,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $("#ContentPlaceHolder1_gvResultados_GridViewPagergvresults_DropDownListPageSize").css("display", "none");
-            $("#ContentPlaceHolder1_gvResultados_GridViewPagergvresults_LabelRows").css("display", "none");
 
-            $("#dialog:ui-dialog").dialog("destroy");
-
-            $("#dtimer").dialog({
-                height: 140,
-                modal: true,
-                autoOpen: false,
-                buttons: {
-                    Ok: function () {
-                        $(this).dialog("close");
-                    }
-                }
-            });
 
         });
 
@@ -57,25 +43,6 @@
             $("#tabs").tabs().find(".ui-tabs-nav").sortable({ axis: "x" });
         }); 
 
-    </script>
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-
-            $(".sesiones").change(function () {
-                var text = $(this).val();
-
-                if (!isNaN(text)) {
-                    $(this).val() = "";
-                }
-
-            });
-        });
-
-        $(document).ready(function () {
-            $("#contenteval").scrollTop(600);
-        });
-        
     </script>
     <style type="text/css">
         #format
@@ -135,13 +102,208 @@
         }
     </style>
     <script type="text/javascript">
-        $(document).ready(function(){
+        
+        var timer = null;
+        function LimpiarOrigenDatos(origen)
+        {
+            var arreglo = origen.split('&');
             
-//            $("#ContentPlaceHolder1_cboActores").change(function(){
-//            
-//            if($(this).val() != "No Asignado")
-//                setInterval($('#ContentPlaceHolder1_btnalmacenarparcial').trigger("click"),10000);
-//            });
+            for(x in arreglo)
+            {
+                  
+                var restar = arreglo[x].toString().length;
+                if(restar == 55)
+                    arreglo[x] = arreglo[x].substring(restar-8);
+                else if(restar == 56)
+                    arreglo[x] = arreglo[x].substring(restar-9);
+                else if(restar < 58)
+                    arreglo[x] = arreglo[x].substring(restar-10);
+//                else if(restar == 58)
+//                    arreglo[x] = arreglo[x].substring(restar-12);
+                else if(restar == 59)
+                    arreglo[x] = arreglo[x].substring(restar-12);
+                else if(restar == 60)
+                    arreglo[x] = arreglo[x].substring(restar-13);
+                else if(restar == 61)
+                    arreglo[x] = arreglo[x].substring(restar-14);
+                else if(restar == 62)
+                    arreglo[x] = arreglo[x].substring(restar-15);
+                else if(restar == 63)
+                    arreglo[x] = arreglo[x].substring(restar-16); 
+                else if(restar > 63)
+                    arreglo[x] = arreglo[x].substring(restar-17); 
+            }
+
+            return arreglo;
+            
+        }
+        
+        function evaluacion_terminada()
+        {
+            var eval_terminada = true; 
+            for(x in 4)
+            {
+                $("#ContentPlaceHolder1_gvAmb" + x + 1 + " input:radio").each(function(){         
+                    if($(this).attr("disabled", true))
+                    {
+                     eval_terminada = false;
+                     return eval_terminada;       
+                    }
+                });
+            }
+
+            return eval_terminada;
+        }
+
+        function evaluacion_completa()
+        {
+            var eval_full = true; 
+            for(x in 4)
+            {
+                $("#ContentPlaceHolder1_gvAmb" + x + 1 + " input:radio").each(function(){         
+                    if($(this).attr("checked", false))
+                    {
+                     eval_full = false;
+                     return eval_full;        
+                    }
+                });
+            }
+
+            return eval_full;
+        }
+
+
+        function fnEnviar(estado) {
+            
+            var estado_almacenar = false;
+
+            if(estado == "Terminada")
+                estado_almacenar = true;
+            
+            var parametros = $("#form1").serialize();
+            var origenDatos = parametros.search("&ctl00");
+            if(origenDatos > 0){
+                parametros = parametros.substring(origenDatos);
+            }else {
+            alert("error " + origenDatos);
+            return false;
+            }
+
+            var origen_datos = LimpiarOrigenDatos(parametros);
+            var parametros_finales = origen_datos.toString().replace(/,/gi, "&");
+            parametros_finales = parametros_finales.replace(/rbtnNo/gi, "false");
+            parametros_finales = parametros_finales.replace(/rbtnSi/gi, "true");
+//            alert(parametros_finales);
+//            return false;
+            
+            var evaluacion_c = evaluacion_completa();
+            var evaluacion_t = evaluacion_terminada();
+
+            if(estado_almacenar && evaluacion_terminada)
+            {
+                alert('La evaluación seleccionada ya ha sido terminada.');
+                return false;
+            }
+            else if(estado_almacenar && !evaluacion_completa)
+            {
+                alert('No se puede almacenar en estado terminada.\nExisten preguntas sin responder.');
+                return false;
+            }
+            else if(!estado_almacenar && evaluacion_terminada)
+            {
+                alert('La evaluación seleccionada ya ha sido terminada.');
+                return false;
+            }
+
+            $.ajax({
+                url: "ajax.aspx?serial=ok&estado=" + estado_almacenar + "&actor_id="+ $("#ContentPlaceHolder1_cboActores").val() + "&datos=" + origen_datos,
+                async: false,
+                data: parametros_finales,
+                success: function (result) {
+                    var hora = new Date().getHours("HH:mm");
+
+                    if(result == "true,terminado")
+                    {
+
+                        $("#ContentPlaceHolder1_gvAmb1 input").each(function(){
+                            $(this).attr("disabled", true);
+                        });
+
+                        $("#ContentPlaceHolder1_gvAmb2 input").each(function(){
+                            $(this).attr("disabled", true);
+                        });
+
+                        $("#ContentPlaceHolder1_gvAmb3 input").each(function(){
+                            $(this).attr("disabled", true);
+                        });
+
+                        $("#ContentPlaceHolder1_gvAmb4 input").each(function(){
+                            $(this).attr("disabled", true);
+                        });
+
+                        $("#ContentPlaceHolder1_gvAmb5 input").each(function(){
+                            $(this).attr("disabled", true);
+                        });
+
+                        $("#btnalmacenarparcial").attr("disabled", true);
+
+                        $(".success").html("Almacenamiento éxitoso.<br/>Estado: Terminada a las: "+ hora);
+                        $("#a_succes").trigger("click");
+                    }
+                    if(result == "true,parcial")
+                    {
+                            $(".success").html("Almacenamiento éxitoso.<br/>Estado: Parcial a las: "+ hora);
+                            $("#a_succes").trigger("click");
+                    }
+                },
+                error: function (result) {
+                    alert("Error:" + result.status + " Estatus: " + result.statusText);
+                }
+            });
+        }
+        
+        setInterval(CrearTimer, 2000);
+
+        function CrearTimer() {
+            alert("aca estoy");
+
+            if($("#ContentPlaceHolder1_activa_timer").val() == "1")
+            {
+                var estado_eval_timer = evaluacion_terminada();
+
+                if(!estado_eval_timer)
+                    $('#btnalmacenarparcial').trigger('click');
+            }
+        }
+        $(document).ready(function(){
+
+            
+
+            $("#btnalmacenarparcial").attr("disabled", false);
+            $("#ContentPlaceHolder1_gvResultados_GridViewPagergvresults_DropDownListPageSize").css("display", "none");
+            $("#ContentPlaceHolder1_gvResultados_GridViewPagergvresults_LabelRows").css("display", "none");
+
+            $("#dialog:ui-dialog").dialog("destroy");
+
+            $("#dtimer").dialog({
+                height: 140,
+                modal: true,
+                autoOpen: false,
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+            $(".sesiones").change(function () {
+                var text = $(this).val();
+
+                if (!isNaN(text)) {
+                    $(this).val() = "";
+                }
+
+            });
 
             $("#divMenError").ajaxStart(function(){
                 $('#dialog-modal').dialog('open');
@@ -164,6 +326,7 @@
 
         });
 
+        
         function buscar() {
             $.ajax({
                 url: "Evaluacion.aspx?text=" + $("#ContentPlaceHolder1_txtFiltro").val(),
@@ -236,32 +399,26 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id="contenteval" class="demo" style="width: 90%; margin: 50px auto;">
-        <section>
-        
-            <table border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td>
-                        <img src="/Icons/Edit.png" alt="Evaluacion" />
-                    </td>
-                    <td style="vertical-align: middle; font-size: 13px; text-align: left;">
-                        <h1 style="color: #0b72bc;">
-                            Formulario de Evaluación</h1>
-                        Administra la configuración para la evaluación a presentar.
-                    </td>
-                </tr>
-            </table>
-        </section>
-        <br />
-        <br />
-        <input type="hidden" id="hidLastTab" value="0" />
-        <asp:UpdatePanel ID="udpnlFiltro" runat="server">
-            <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="objtimer" />
-                <asp:PostBackTrigger ControlID="gvResultados" />
-            </Triggers>
-            <ContentTemplate>
-                <asp:Timer ID="objtimer" runat="server" Interval="120000" OnTick="objtimer_Tick">
-                </asp:Timer>
+        <div id="divPrueba">
+            <asp:Panel ID="pnlEvaluacion" runat="server">
+                <form id="frmEvaluacion">
+                <div>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <img src="/Icons/Edit.png" alt="Evaluacion" />
+                            </td>
+                            <td style="vertical-align: middle; font-size: 13px; text-align: left;">
+                                <h1 style="color: #0b72bc;">
+                                    Formulario de Evaluación</h1>
+                                Administra la configuración para la evaluación a presentar.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br />
+                <br />
+                <input type="hidden" id="hidLastTab" value="0" />
                 <div id="modSEseleccion" runat="server" visible="false">
                     <h3>
                         * Seleccione la Secretaría de Educacion a Evaluar.
@@ -385,11 +542,13 @@
                     <h3>
                         * Listado de las últimas evaluaciones realizadas para el establecimiento educativo.</h3>
                     <br />
-                    <asp:GridView ID="gvTopEval" CssClass="gvTopEval" runat="server" AutoGenerateColumns="false"
+                    <asp:GridView ID="gvTopEval" CssClass="gvTopEval" runat="server" AutoGenerateColumns="False"
                         Width="100%" OnSelectedIndexChanged="gvTopEval_SelectedIndexChanged">
                         <Columns>
                             <asp:CommandField ButtonType="Link" SelectText="<img  width='24px' src='/Icons/Paste.png' alt='Seleccionar Medicion'>"
-                                ShowSelectButton="True" />
+                                ShowSelectButton="True">
+                                <ControlStyle CssClass="timer_class" />
+                            </asp:CommandField>
                             <asp:BoundField DataField="No_Evaluacion" HeaderText="No. Evaluación" />
                             <asp:BoundField DataField="No_Actor" HeaderText="No. Actor" />
                             <asp:BoundField DataField="Actor" HeaderText="Actor" />
@@ -458,10 +617,10 @@
                                                 <asp:Label ID="lblidorden" runat="server" Text='<%# Eval("IdOrden") %>' Visible="true"></asp:Label>
                                                 <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("IdPregunta") %>' Visible="false"></asp:Label>
                                                 <asp:RadioButton ID="rbtnSi" onclick='sesionenable(this)' class="radiosi" alt='<%# Eval("IdPregunta") %>'
-                                                    GroupName="gpregunta" Text="Si" runat="server" />
-                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName="gpregunta"
+                                                    GroupName='<%# Eval("IdPregunta") %>' Text="Si" runat="server" />
+                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName='<%# Eval("IdPregunta") %>'
                                                     alt='<%# Eval("IdPregunta") %>' Text="No" runat="server" />
-                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName="gpregunta"
+                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName='<%# Eval("IdPregunta") %>'
                                                     Text="No Aplica" runat="server" />
                                                 <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
                                             </ItemTemplate>
@@ -470,7 +629,7 @@
                                         <asp:TemplateField HeaderText="Sesiones">
                                             <ItemStyle CssClass="aditionals" />
                                             <ItemTemplate>
-                                                <asp:TextBox ID="txtsesion" CssClass="sesiones" runat="server" Width="30px" Height="30px"
+                                                <asp:TextBox ID='txtsesion' CssClass="sesiones" runat="server" Width="30px" Height="30px"
                                                     Visible="false" MaxLength="3"></asp:TextBox>
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -499,10 +658,10 @@
                                                 <asp:Label ID="lblidorden" runat="server" Text='<%# Eval("IdOrden") %>' Visible="true"></asp:Label>
                                                 <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("IdPregunta") %>' Visible="false"></asp:Label>
                                                 <asp:RadioButton ID="rbtnSi" onclick='sesionenable(this)' class="radiosi" alt='<%# Eval("IdPregunta") %>'
-                                                    GroupName="gpregunta" Text="Si" runat="server" />
-                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName="gpregunta"
+                                                    GroupName='<%# Eval("IdPregunta") %>' Text="Si" runat="server" />
+                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName='<%# Eval("IdPregunta") %>'
                                                     alt='<%# Eval("IdPregunta") %>' Text="No" runat="server" />
-                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName="gpregunta"
+                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName='<%# Eval("IdPregunta") %>'
                                                     Text="No Aplica" runat="server" />
                                                 <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
                                             </ItemTemplate>
@@ -540,10 +699,10 @@
                                                 <asp:Label ID="lblidorden" runat="server" Text='<%# Eval("IdOrden") %>' Visible="true"></asp:Label>
                                                 <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("IdPregunta") %>' Visible="false"></asp:Label>
                                                 <asp:RadioButton ID="rbtnSi" onclick='sesionenable(this)' class="radiosi" alt='<%# Eval("IdPregunta") %>'
-                                                    GroupName="gpregunta" Text="Si" runat="server" />
-                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName="gpregunta"
+                                                    GroupName='<%# Eval("IdPregunta") %>' Text="Si" runat="server" />
+                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName='<%# Eval("IdPregunta") %>'
                                                     alt='<%# Eval("IdPregunta") %>' Text="No" runat="server" />
-                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName="gpregunta"
+                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName='<%# Eval("IdPregunta") %>'
                                                     Text="No Aplica" runat="server" />
                                                 <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
                                             </ItemTemplate>
@@ -581,10 +740,10 @@
                                                 <asp:Label ID="lblidorden" runat="server" Text='<%# Eval("IdOrden") %>' Visible="true"></asp:Label>
                                                 <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("IdPregunta") %>' Visible="false"></asp:Label>
                                                 <asp:RadioButton ID="rbtnSi" onclick='sesionenable(this)' class="radiosi" alt='<%# Eval("IdPregunta") %>'
-                                                    GroupName="gpregunta" Text="Si" runat="server" />
-                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName="gpregunta"
+                                                    GroupName='<%# Eval("IdPregunta") %>' Text="Si" runat="server" />
+                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName='<%# Eval("IdPregunta") %>'
                                                     alt='<%# Eval("IdPregunta") %>' Text="No" runat="server" />
-                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName="gpregunta"
+                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName='<%# Eval("IdPregunta") %>'
                                                     Text="No Aplica" runat="server" />
                                                 <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
                                             </ItemTemplate>
@@ -622,10 +781,10 @@
                                                 <asp:Label ID="lblidorden" runat="server" Text='<%# Eval("IdOrden") %>' Visible="true"></asp:Label>
                                                 <asp:Label ID="lblIdPregunta" runat="server" Text='<%# Eval("IdPregunta") %>' Visible="false"></asp:Label>
                                                 <asp:RadioButton ID="rbtnSi" onclick='sesionenable(this)' class="radiosi" alt='<%# Eval("IdPregunta") %>'
-                                                    GroupName="gpregunta" Text="Si" runat="server" />
-                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName="gpregunta"
+                                                    GroupName='<%# Eval("IdPregunta") %>' Text="Si" runat="server" />
+                                                <asp:RadioButton ID="rbtnNo" onclick="sesiondisabled(this)" GroupName='<%# Eval("IdPregunta") %>'
                                                     alt='<%# Eval("IdPregunta") %>' Text="No" runat="server" />
-                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName="gpregunta"
+                                                <asp:RadioButton Visible="false" ID="rbtnNoAplica" class="radiono" GroupName='<%# Eval("IdPregunta") %>'
                                                     Text="No Aplica" runat="server" />
                                                 <br />
                                                 <asp:CheckBox ID="chxPendiente" Visible="false" Text="Pendiente" runat="server" />
@@ -658,11 +817,13 @@
                         </div>
                         <br />
                     </div>
-                    <asp:Button Text="Guardar" runat="server" ID="btnalmacenarparcial" OnClick="btnalmacenarparcial_Click"
-                        Visible="false" />
-                    <asp:Button Text="Guardar y Bloquear" runat="server" ID="btnDefinitiva" Visible="false"
-                        OnClick="btnDefinitiva_Click" />
-                    <asp:Button Text="Volver" Visible="false" runat="server" ID="btnVolverEE" OnClick="btnVolver_Click" />
+                    <input type="hidden" runat="server" value="-1" id="activa_timer" />
+                    <input value="Guardar" id="btnalmacenarparcial" class="ui-button ui-widget ui-state-default ui-corner-all"
+                        role="button" aria-disabled="false" type="button" onclick="fnEnviar('Parcial');" />
+                    <input value="Guardar y Bloquear" id="btnbloquear" type="button" onclick="fnEnviar('Terminada');"
+                        class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false" />
+                    <input type="button" value="Volver" onclick="window.location = '/Evaluacion.aspx?idrama=2'"
+                        class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false" />
                     <style type="text/css">
                         .labelok
                         {
@@ -688,11 +849,11 @@ filter: alpha(opacity=95); /*inner elements must not break this elements boundar
                     <label class="labelok" runat="server" id="lbloki">
                     </label>
                 </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+                </form>
+            </asp:Panel>
+        </div>
     </div>
-    <asp:UpdateProgress ID="udpgss" runat="server" AssociatedUpdatePanelID="udpnlFiltro"
-        DisplayAfter="0">
+    <asp:UpdateProgress ID="udpgss" runat="server" DisplayAfter="0">
         <ProgressTemplate>
             <div style="z-index: 301; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
                 /*ie 7 and 8 do not support border radius*/
@@ -714,7 +875,7 @@ filter: alpha(opacity=95); /*inner elements must not break this elements boundar
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-    <div id="divMenError">
+    <div id="divMenError" style="display: block;">
     </div>
     <div id="dialog-modal" title="Auto Guardando">
         <img src="/Icons/progres.gif" alt="Alternate Text" />
