@@ -40,6 +40,7 @@ namespace ESM
                 lblFechaFinal.Visible = true;
                 txtFechaFinal.Visible = true;
                 gvIndicadores_Actividad.Visible = true;
+                chxSSP.Visible = true;
 
             }
             else if (Session["idproyecto"] != null)
@@ -83,8 +84,13 @@ namespace ESM
                 AlmacenarProyecto();
             if (esResultado)
                 AlmacenarResultado();
-            if (esActividad)
+            if (esActividad && actualizaActividad.Value == "-1")
                 AlmacenarActividad();
+            else if (esActividad && actualizaActividad.Value == "1")
+            {
+                ActualizarActividad();
+                actualizaActividad.Value = "-1";
+            }
         }
 
         private void AlmacenarActividad()
@@ -99,7 +105,57 @@ namespace ESM
                 DateTime fecha_final = Convert.ToDateTime(txtFechaFinal.Text);
                 int meta = Convert.ToInt32(Meta.Text);
 
-                objActividades.AddIndicador(idactividad, txtindicadorg.Text, verboid, unidadid, fecha_inicial.Date, fecha_final, meta);
+                objActividades.AddIndicador(idactividad, txtindicadorg.Text, verboid, unidadid, fecha_inicial.Date, fecha_final, meta, chxSSP.Checked);
+
+                bool mediosvacios = objActividades.RemoveMedios(idresultado);
+
+                if (mediosvacios)
+                {
+                    string[] medios_html = mediosinput.Value.Trim(',').Split(',');
+
+                    for (int i = 0; i < medios_html.Length; i++)
+                    {
+                        int medioid = new CMedios().getMedioid(medios_html[i]);
+
+                        if (medioid != 0)
+                            objActividades.AddMedios(idactividad, medioid);
+                    }
+                }
+
+                bool supuestos = objActividades.RemoveSupuestos(idresultado);
+
+                if (supuestos)
+                {
+                    string[] supuestos_html = supuestosinput.Value.Trim(',').Split(',');
+
+                    for (int i = 0; i < supuestos_html.Length; i++)
+                    {
+                        int supuestoid = new Csupuestos().getSupuesto_id(supuestos_html[i]);
+
+                        if (supuestoid != 0)
+                            objActividades.AddSupuestos(idactividad, supuestoid);
+                    }
+                }
+            }
+            catch (Exception) { }
+
+        }
+
+        private void ActualizarActividad()
+        {
+            try
+            {
+                CActividades objActividades = new CActividades();
+
+                int verboid = Convert.ToInt32(cboverbos.SelectedValue);
+                int unidadid = Convert.ToInt32(cboUnidades.SelectedValue);
+                DateTime fecha_inicial = Convert.ToDateTime(txtFechaIndicador.Text);
+                DateTime fecha_final = Convert.ToDateTime(txtFechaFinal.Text);
+                int meta = Convert.ToInt32(Meta.Text);
+                int indicador_id = Convert.ToInt32(Session["idindicador_actividad"]);
+                objActividades.UpdateIndicador(indicador_id, txtindicadorg.Text, verboid, unidadid, fecha_inicial.Date, fecha_final, meta, chxSSP.Checked);
+
+                Session.Remove("idindicador_actividad");
 
                 bool mediosvacios = objActividades.RemoveMedios(idresultado);
 
@@ -243,7 +299,18 @@ namespace ESM
             if (crea_medio)
                 sortable1.DataBind();
 
+
             txtmedio.Text = "";
         }
+
+        protected void gvIndicadores_Actividad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow objrow = gvIndicadores_Actividad.SelectedRow;
+            txtindicadorg.Text = objrow.Cells[3].Text;
+            Session.Add("idindicador_actividad", objrow.Cells[1].Text);
+            actualizaActividad.Value = "1";
+        }
+
+
     }
 }

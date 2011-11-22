@@ -13,22 +13,13 @@ namespace ESM.Evaluacion {
     public partial class Evaluacion {
         
         /// <summary>
-        /// udpnlFiltro control.
+        /// pnlEvaluacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udpnlFiltro;
-        
-        /// <summary>
-        /// objtimer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.Timer objtimer;
+        protected global::System.Web.UI.WebControls.Panel pnlEvaluacion;
         
         /// <summary>
         /// modSEseleccion control.
@@ -310,31 +301,13 @@ namespace ESM.Evaluacion {
         protected global::System.Web.UI.WebControls.GridView gvAmb5;
         
         /// <summary>
-        /// btnalmacenarparcial control.
+        /// activa_timer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnalmacenarparcial;
-        
-        /// <summary>
-        /// btnDefinitiva control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDefinitiva;
-        
-        /// <summary>
-        /// btnVolverEE control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVolverEE;
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden activa_timer;
         
         /// <summary>
         /// informacionuno control.

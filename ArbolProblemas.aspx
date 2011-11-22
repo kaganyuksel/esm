@@ -440,6 +440,19 @@
 
         $(document).ready(function () {
             
+            var problema_text = $("#ContentPlaceHolder1_txtproblema").val().toString();
+
+            if($.trim(problema_text).length == 0){
+                $("#ContentPlaceHolder1_lknAlmacenarE").css("display","none");
+                $("#ContentPlaceHolder1_txtCausa1").attr("disabled",true);
+                $("#ContentPlaceHolder1_txtEfecto1").attr("disabled",true);
+            }
+            else{
+                $("#ContentPlaceHolder1_lknAlmacenarE").css("display","block");
+                $("#ContentPlaceHolder1_txtCausa1").attr("disabled",false);
+                $("#ContentPlaceHolder1_txtEfecto1").attr("disabled",false);
+            }
+
             $( ".accordion" ).accordion({ active: 2 });
 
             if($("#ContentPlaceHolder1_Bandera").val() == "1"){
@@ -557,16 +570,6 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <%--<div style="width: 60%; margin-bottom: 0; margin-right: auto;">
-        <ul id="navigation">
-            <li class="home"><a href=""><span>Arbol Problemas</span></a></li>
-            <li class="about"><a href=""><span>Marco Logico</span></a></li>
-            <li class="search"><a href=""><span>Plan Operativo</span></a></li>
-            <li class="photos"><a href=""><span>Cronograma</span></a></li>
-            <%--<li class="rssfeed"><a href=""><span>Rss Feed</span></a></li>
-            <li class="podcasts"><a href=""><span>Podcasts</span></a></li>
-            <li class="contact"><a href=""><span>Contact</span></a></li>
-    </ul> </div>--%>
     <div class="demo" style="width: 90%; margin: 0 auto;">
         <div id="slides" style="display: block; width: 6000px; clear: both; overflow: hidden;">
             <div id="izquierda" style="width: 25%; float: left;" class="demo mover presente">
@@ -659,18 +662,34 @@
                         <%--<input class="speech" id="probleman" style="width: 15px; border: 0;" />--%>
                     </div>
                     <div class="efectos" runat="server" id="divefectos" visible="false">
-                        <h2 style="color: #0b72bc;">
-                            * Causas y Efectos</h2>
+                        <table border="0" cellpadding="0" cellspacing="0" width="80%">
+                            <tr>
+                                <td>
+                                    <h2 style="color: #0b72bc;">
+                                        * Causas y Efectos</h2>
+                                    <br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Causa:
+                                </td>
+                                <td>
+                                    Efecto:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%;">
+                                    <asp:TextBox ID="txtCausa1" runat="server" class="txtareacausa" placeholder="1. Descripcion de la causa"
+                                        TextMode="MultiLine" Width="100%" />
+                                </td>
+                                <td style="width: 50%;">
+                                    <asp:TextBox ID="txtEfecto1" runat="server" class="txtareaefecto" placeholder="2. Descripcion del efecto"
+                                        TextMode="MultiLine" Width="100%" />
+                                </td>
+                            </tr>
+                        </table>
                         <br />
-                        <span>Causa:
-                            <asp:TextBox ID="txtCausa1" runat="server" class="txtareacausa" placeholder="2. Descripcion de la causa"
-                                TextMode="MultiLine" Width="40%" />
-                        </span>
-                        <br />
-                        <span>Efecto:
-                            <asp:TextBox ID="txtEfecto1" runat="server" placeholder="3. Descripcion del efecto"
-                                TextMode="MultiLine" Width="40%" Enabled="False" CssClass="txtareaefecto" />
-                        </span>
                         <asp:LinkButton Text='<img src="/Icons/save-icon.png" width="24px" alt="save efect" />'
                             runat="server" ID="lknAlmacenarE" OnClick="lknAlmacenarE_Click" />
                         <br />
@@ -680,7 +699,9 @@
                             <AlternatingRowStyle CssClass="trblanca" />
                             <Columns>
                                 <asp:CommandField ButtonType="Image" DeleteImageUrl="~/Icons/Bin_Full.png" DeleteText=""
-                                    EditImageUrl="~/Icons/Stationery.png" EditText="" ShowDeleteButton="True" ShowEditButton="True">
+                                    EditImageUrl="~/Icons/Stationery.png" EditText="" ShowDeleteButton="True" 
+                                    ShowEditButton="True" CancelImageUrl="~/Icons/cancel.png" 
+                                    UpdateImageUrl="~/Icons/save-icon.png">
                                     <ControlStyle Width="24px" />
                                 </asp:CommandField>
                                 <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True"
@@ -733,7 +754,7 @@
                             </td>
                             <td style="vertical-align: middle; font-size: 13px; text-align: left;">
                                 <h1 style="color: #0b72bc;">
-                                    Árbol de Objetivos</h1>
+                                    Marco Logico</h1>
                             </td>
                         </tr>
                     </table>
