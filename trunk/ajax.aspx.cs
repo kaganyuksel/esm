@@ -140,9 +140,9 @@ namespace ESM
                         almaceno = objCEvaluacion.ActualizarEvaluacion(CollectionResultados, ideval, estado_evaluacion);
                     }
                     if (almaceno && estado_evaluacion)
-                        Response.Write("true,terminado");
-                    else if (almaceno && !estado_evaluacion)
                         Response.Write("true,parcial");
+                    else if (almaceno && !estado_evaluacion)
+                        Response.Write("true,terminado");
                     else if (!almaceno)
                         Response.Write("false");
                 }
