@@ -141,32 +141,27 @@
         function evaluacion_terminada()
         {
             var eval_terminada = true; 
-            for(x in 4)
-            {
-                $("#ContentPlaceHolder1_gvAmb" + x + 1 + " input:radio").each(function(){         
-                    if($(this).attr("disabled", true))
-                    {
-                     eval_terminada = false;
-                     return eval_terminada;       
-                    }
-                });
-            }
+            $("#ContentPlaceHolder1_gvAmb1 input:radio").each(function(){
+                if($(this).attr("disabled") == undefined)
+                {
+                    eval_terminada = false;
+                    return eval_terminada;       
+                }
+            });
 
             return eval_terminada;
         }
 
         function evaluacion_completa()
         {
-            var eval_full = true; 
-            for(x in 4)
+            var eval_full = true;
+            for (var i = 0; i < 4; i++)
             {
-                $("#ContentPlaceHolder1_gvAmb" + x + 1 + " input:radio").each(function(){         
-                    if($(this).attr("checked", false))
-                    {
-                     eval_full = false;
-                     return eval_full;        
-                    }
-                });
+                if($("#ContentPlaceHolder1_gvAmb" + (i + 1).toString() + " input:radio").length != ($("#ContentPlaceHolder1_gvAmb" + (i + 1).toString() + " input:radio:checked").length)*2)
+                {
+                    eval_full = false;
+                    return eval_full; 
+                }
             }
 
             return eval_full;
@@ -178,8 +173,10 @@
             var estado_almacenar = false;
 
             if(estado == "Terminada")
+                estado_almacenar = false;
+            else if(estado == "Parcial")
                 estado_almacenar = true;
-            
+
             var parametros = $("#form1").serialize();
             var origenDatos = parametros.search("&ctl00");
             if(origenDatos > 0){
@@ -199,28 +196,32 @@
             var evaluacion_c = evaluacion_completa();
             var evaluacion_t = evaluacion_terminada();
 
-            if(estado_almacenar && evaluacion_terminada)
+
+            if(!estado_almacenar && evaluacion_t)
             {
                 alert('La evaluación seleccionada ya ha sido terminada.');
                 return false;
             }
-            else if(estado_almacenar && !evaluacion_completa)
+            else if(!estado_almacenar && !evaluacion_c)
             {
                 alert('No se puede almacenar en estado terminada.\nExisten preguntas sin responder.');
                 return false;
             }
-            else if(!estado_almacenar && evaluacion_terminada)
+            else if(estado_almacenar && evaluacion_t)
             {
                 alert('La evaluación seleccionada ya ha sido terminada.');
                 return false;
             }
-
+            
             $.ajax({
-                url: "ajax.aspx?serial=ok&estado=" + estado_almacenar + "&actor_id="+ $("#ContentPlaceHolder1_cboActores").val() + "&datos=" + origen_datos,
+                url: "/ajax.aspx?serial=ok&estado=" + estado_almacenar + "&actor_id="+ $("#ContentPlaceHolder1_cboActores").val() + "&datos=" + origen_datos,
                 async: false,
                 data: parametros_finales,
                 success: function (result) {
-                    var hora = new Date().getHours("HH:mm");
+                    var gethora = new Date().getHours(); 
+                    var getminutos = new Date().getMinutes();
+                    
+                    var hora = gethora + ":" + getminutos;
 
                     if(result == "true,terminado")
                     {
@@ -247,12 +248,12 @@
 
                         $("#btnalmacenarparcial").attr("disabled", true);
 
-                        $(".success").html("Almacenamiento éxitoso.<br/>Estado: Terminada a las: "+ hora);
+                        $(".success").html("Almacenamiento éxitoso a las: " + hora + "<br/>Estado: Terminada ");
                         $("#a_succes").trigger("click");
                     }
                     if(result == "true,parcial")
                     {
-                            $(".success").html("Almacenamiento éxitoso.<br/>Estado: Parcial a las: "+ hora);
+                            $(".success").html("Almacenamiento éxitoso a las: " + hora + " <br/>Estado: Parcial");
                             $("#a_succes").trigger("click");
                     }
                 },
@@ -262,11 +263,9 @@
             });
         }
         
-        setInterval(CrearTimer, 2000);
+        setInterval(CrearTimer, 120000);
 
         function CrearTimer() {
-            alert("aca estoy");
-
             if($("#ContentPlaceHolder1_activa_timer").val() == "1")
             {
                 var estado_eval_timer = evaluacion_terminada();

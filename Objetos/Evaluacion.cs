@@ -1525,9 +1525,9 @@ namespace EvaluationSettings
                             where ev.IdEvaluacion == ideval
                             select ev).Single();
                 if (estado)
-                    eval.IdEstado = 1;
-                else
                     eval.IdEstado = 2;
+                else
+                    eval.IdEstado = 1;
 
                 db.SubmitChanges();
                 return true;
