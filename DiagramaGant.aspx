@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DiagramaGant.aspx.cs" Inherits="ESM.DiagramaGant" Culture="es-CO"  %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DiagramaGant.aspx.cs" Inherits="ESM.DiagramaGant"
+    Culture="es-CO" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -170,8 +171,18 @@
 <body>
     <form id="form1" runat="server">
     <h2>
-        DIAGRAMA GANTT
-    </h2>
+        <table>
+            <tr>
+                <td>
+                    <img alt="Plan Operativo" src="Icons/Calender.png" width="48px" />
+                </td>
+                <td style="vertical-align: middle; font-size: 13px; text-align: left;">
+                    <h1 id="titulo_diagrama" runat="server" style="color: #0b72bc; width: 50%;">
+                        Cronograma General</h1>
+                </td>
+            </tr>
+        </table>
+        &nbsp;</h2>
     <asp:HiddenField ID="HFTempDate" runat="server" />
     <div style="position: relative;" class="gantt" id="GanttChartDIV">
     </div>

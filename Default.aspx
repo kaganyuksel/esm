@@ -11,6 +11,10 @@
                 window.location = url;
             });
 
+            if ($("#ContentPlaceHolder1_alerta_indicador").val() == "1") {
+
+            }
+
         });
     </script>
 </asp:Content>
@@ -28,6 +32,23 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    <br />
+    <table class="menuprincipalbyconfiguracion" runat="server" id="ModNotificacion" visible="true"
+        cellspacing="10">
+        <tr class="th">
+            <td style="width: 64px; height: 64px;">
+                <img alt="Módulo de Acceso a ESM" src="Icons/notificaciones.png" width="64px" />
+            </td>
+            <td colspan="3">
+                <h1>
+                    Listado de Notificaciones</h1>
+            </td>
+        </tr>
+        <tr>
+            <td runat="server" id="t_notificaciones" class="td" colspan="4">
+            </td>
+        </tr>
+    </table>
     <table class="menuprincipalbyconfiguracion" runat="server" id="AdministracionUsuario"
         visible="false" cellspacing="10">
         <tr class="th">
@@ -63,7 +84,6 @@
             </td>
         </tr>
     </table>
-    <br />
     <br />
     <table class="menuprincipalbyconfiguracion" id="AdministracionConfiguracion" runat="server"
         visible="false" cellspacing="10">
@@ -149,7 +169,6 @@
         </tr>
     </table>
     <br />
-    <br />
     <table id="ModEval" runat="server" class="menuprincipalbyconfiguracion" cellspacing="10">
         <tr class="th">
             <td>
@@ -199,6 +218,7 @@
             </td>
         </tr>
     </table>
+    <br />
     <table id="MEN" runat="server" visible="false" class="menuprincipalbyconfiguracion"
         cellspacing="10">
         <tr class="th">
@@ -233,10 +253,46 @@
                 Visualiza las consultas generadas de acuerdo a la información almacenada.
             </td>
         </tr>
+    </table>
+    <br />
+    <table id="ModMonitoreo" runat="server" visible="false" class="menuprincipalbyconfiguracion"
+        cellspacing="10">
+        <tr class="th">
+            <td>
+                <img src="/Icons/network.png" alt="Módulo de Administración y Configuración">
+            </td>
+            <td colspan="3">
+                <h1>
+                    Módulo Monitoreo</h1>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 48px;">
+                <a href="/ArbolProblemas.aspx">
+                    <img height="48px" src="Icons/Template.png" alt="AyudaPreguntas" /></a>
+            </td>
+            <td>
+                <h3 onclick="window.location='/ArbolProblemas.aspx'">
+                    Proyectos</h3>
+                <br />
+                Administra la información para el monitoreo de los proyectos existentes.
+            </td>
+            <td style="width: 48px;">
+                <%--<a href="/ReportesMEN.aspx">
+                    <img height="48px" src="/Icons/Stats.png" alt="ReportesMEN" /></a>--%>
+            </td>
+            <td>
+                <%--<h3 onclick="window.location='/ReportesMEN.aspx'">
+                    Reportes Consolidados</h3>
+                <br />
+                Visualiza las consultas generadas de acuerdo a la información almacenada.--%>
+            </td>
+        </tr>
         <tr>
         </tr>
     </table>
     <br />
     <br />
     <br />
+    <input type="hidden" runat="server" value="-1" id="alerta_indicador" />
 </asp:Content>

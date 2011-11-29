@@ -8,7 +8,6 @@
     font-family: inherit;
     vertical-align: baseline;
     font-family: "Lucida Grande" , "Lucida Sans Unicode" , Helvetica, Arial, Verdana, sans-serif;
-    
 }
 body
 {
@@ -233,13 +232,58 @@ body
 }
 .txt input[type="text"]
 {
-    background-color:#ffffff;
-    border-width:1px;
-    border-color:#8d8d8d;
-    -moz-border-radius:2px;
-    -webkit-border-radius:2px;
-    border-radius:2px;
-    /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    background-color: #ffffff;
+    border-width: 1px;
+    border-color: #8d8d8d;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+}
 
+.notificaciones
+{
+    border: dashed 2px #9f0606;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+}
+.notificaciones tr
+{
+    border: dashed 1px #9f0606;
+}
+.notificaciones td
+{
+    padding: 10px;
+}
+.notificaciones th
+{
+    text-align: center;
+    font-size: 1.5em;
+    color: #9f0606;
+    height: 40px;
+    line-height: 40px;
+}
 
+.notificaciones_p
+{
+    border: dashed 2px #dd9e16;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+}
+.notificaciones_p tr
+{
+    border: dashed 1px #dd9e16;
+}
+.notificaciones_p td
+{
+    padding: 10px;
+}
+.notificaciones_p th
+{
+    text-align: center;
+    font-size: 1.5em;
+    color: #dd9e16;
+    height: 40px;
+    line-height: 40px;
 }
