@@ -31,6 +31,24 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.GridView Menu1;
         
         /// <summary>
+        /// ModNotificacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable ModNotificacion;
+        
+        /// <summary>
+        /// t_notificaciones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell t_notificaciones;
+        
+        /// <summary>
         /// AdministracionUsuario control.
         /// </summary>
         /// <remarks>
@@ -83,5 +101,23 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable MEN;
+        
+        /// <summary>
+        /// ModMonitoreo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable ModMonitoreo;
+        
+        /// <summary>
+        /// alerta_indicador control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden alerta_indicador;
     }
 }

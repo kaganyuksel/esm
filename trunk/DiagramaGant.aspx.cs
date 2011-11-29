@@ -21,6 +21,8 @@ namespace ESM
                     int idresultado = Convert.ToInt32(Request.QueryString["idResultado"]);
                     JsGantt Gantt = new JsGantt();
                     Gantt.genera_gantt("GanttChartDIV", idresultado, Page);
+
+                    titulo_diagrama.InnerHtml = "Cronograma Resultado";
                 }
                 else if (Session["idproyecto"] != null)
                 {

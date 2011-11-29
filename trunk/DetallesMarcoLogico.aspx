@@ -179,7 +179,7 @@
             padding: 10 10 10 10;
         }
         
-        #sortable1, #sortable2, #sortable3, #sortable4
+        #sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6
         {
             list-style-type: none;
             margin: 0;
@@ -190,8 +190,9 @@
             padding: 5px;
             width: 143px;
             border: 2px dashed #ccc;
+            min-height: 200px;
         }
-        #sortable1 li, #sortable2 li, #sortable3 li, #sortable4 li
+        #sortable1 li, #sortable2 li, #sortable3 li, #sortable4 li, #sortable5 li, #sortable6 li
         {
             margin: 5px;
             padding: 5px;
@@ -217,6 +218,9 @@
     </style>
     <script type="text/javascript">
 
+        $(function() {
+		    $( "#tabs" ).tabs();
+	    });
         var medios = null;
 
         $(function () {
@@ -239,6 +243,12 @@
                         $("#supuestosinput").val("");
                         $("#" + id + ">li").each(function () {
                             $("#supuestosinput").val($("#supuestosinput").val() + $(this).html() + ",");
+                        });
+                    }
+                    else if (id == "sortable6") {
+                        $("#responsablesinput").val("");
+                        $("#" + id + ">li").each(function () {
+                            $("#responsablesinput").val($("#responsablesinput").val() + $(this).html() + ",");
                         });
                     }
                 },
@@ -266,13 +276,18 @@
                             $("#supuestosinput").val($("#supuestosinput").val() + $(this).html() + ",");
                         });
                     }
-
+                    else if (id == "sortable6") {
+                        $("#responsablesinput").val("");
+                        $("#" + id + ">li").each(function () {
+                            $("#responsablesinput").val($("#responsablesinput").val() + $(this).html() + ",");
+                        });
+                    }
 
                 }
             });
 
-            $("#sortable1, #sortable2").disableSelection();
-            $("#sortable3, #sortable4").disableSelection();
+            $("#sortable1, #sortable3, #sortable5").disableSelection();
+            $("#sortable2, #sortable4, #sortable6").disableSelection();
         });
 
         function Medios() {
@@ -422,43 +437,14 @@
                 <img src="/Icons/details.png" width="48px" alt="Evaluacion" />
             </td>
             <td style="vertical-align: middle; font-size: 13px; text-align: left;">
-                <h1 style="color: #0b72bc;">
+                <h1 style="color: #0b72bc;" id="titulo_detalles" runat="server">
                     Detalles</h1>
                 Administra los componentes tales como indicadores, medios de verificación y supuestos
             </td>
         </tr>
     </table>
     <div style="margin-left: 30px; font-size: 13px;">
-        <br />
-        <b style="color: #0b72bc;">Parametros para generar indicadores </b>
-        <br />
         <div class="demo" style="width: 100%;">
-            Verbo:<asp:DropDownList ID="cboverbos" runat="server" DataSourceID="sqldtverbos"
-                DataTextField="Verbo" DataValueField="Id">
-            </asp:DropDownList>
-            <asp:SqlDataSource ID="sqldtverbos" runat="server" ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>"
-                SelectCommand="SELECT [Id], [Verbo] FROM [Verbos]"></asp:SqlDataSource>
-            Fecha:<asp:TextBox ID="txtFechaIndicador" runat="server" />
-            <asp:Label ID="lblFechaFinal" runat="server" Text="Fecha Final:" Visible="False"></asp:Label>
-            <asp:TextBox ID="txtFechaFinal" runat="server" Visible="False"></asp:TextBox>
-            Meta:<asp:TextBox ID="Meta" Width="24px" MaxLength="3" runat="server">0</asp:TextBox>
-            Unidades:<asp:DropDownList ID="cboUnidades" runat="server" DataSourceID="sqldtUnidades"
-                DataTextField="Unidad" DataValueField="Id">
-            </asp:DropDownList>
-            &nbsp;<asp:CheckBox ID="chxSSP" runat="server" Text="SSP" TextAlign="Left" Visible="False" />
-            <asp:SqlDataSource ID="sqldtUnidades" runat="server" ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>"
-                SelectCommand="SELECT [Id], [Unidad] FROM [Unidades]"></asp:SqlDataSource>
-            Descripcion:<asp:TextBox ID="txtdescripcionI" runat="server" />
-            <asp:ImageButton ID="previsualizar" runat="server" ImageUrl="~/Icons/Search.png"
-                Width="24px" />
-            <br />
-            <br />
-            <b style="color: #0b72bc;">Previsualización de indicador</b>
-            <br />
-            <asp:TextBox ID="txtindicadorg" Width="80%" runat="server"></asp:TextBox>
-            <asp:LinkButton Text="&lt;img src='/Icons/save-icon.png' width='24px' alt='Agregar' /&gt;"
-                runat="server" ID="lknAgregarIndicador" OnClick="lknAgregarIndicador_Click" />
-            <br />
             <asp:GridView ID="gvresultados" runat="server" AutoGenerateColumns="False" DataKeyNames="Id"
                 DataSourceID="sqlResultados" Visible="False" Width="80%">
                 <AlternatingRowStyle CssClass="trblanca" />
@@ -567,18 +553,12 @@
                     <asp:CommandField ButtonType="Image" CancelImageUrl="~/Icons/Close.png" CancelText=""
                         DeleteImageUrl="~/Icons/Bin_Full.png" EditImageUrl="~/Icons/Stationery.png" InsertImageUrl="~/Icons/save-icon.png"
                         ShowDeleteButton="True" UpdateImageUrl="~/Icons/save-icon.png" SelectImageUrl="~/Icons/Paste.png"
-                        ShowSelectButton="True">
+                        ShowEditButton="True">
                         <ControlStyle Width="24px" />
                     </asp:CommandField>
                     <asp:BoundField DataField="Id" HeaderText="Identificador" InsertVisible="False" ReadOnly="True"
                         SortExpression="Id" />
-                    <asp:BoundField DataField="Actividad_id" HeaderText="Identificador" 
-                        SortExpression="Actividad_id" Visible="False" />
                     <asp:BoundField DataField="Indicador" HeaderText="Indicador" SortExpression="Indicador" />
-                    <asp:BoundField DataField="unidad_id" HeaderText="unidad_id" SortExpression="unidad_id"
-                        Visible="False" />
-                    <asp:BoundField DataField="verbo_id" HeaderText="verbo_id" SortExpression="verbo_id"
-                        Visible="False" />
                     <asp:BoundField DataField="fecha_indicador_inicial" HeaderText="Fecha Inicial" SortExpression="fecha_indicador_inicial" />
                     <asp:BoundField DataField="fecha_indicador_final" HeaderText="Fecha Final" SortExpression="fecha_indicador_final" />
                     <asp:BoundField DataField="Fecha_Creacion" HeaderText="Fecha de Creación" SortExpression="Fecha_Creacion" />
@@ -588,110 +568,180 @@
                 <RowStyle CssClass="trgris" />
             </asp:GridView>
             <asp:SqlDataSource ID="sqlActividadesIndicadores" runat="server" ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>"
-                DeleteCommand="DELETE FROM [Indicadores] WHERE [Id] = @Id" InsertCommand="INSERT INTO [Indicadores] ([Actividad_id], [Indicador], [unidad_id], [verbo_id], [fecha_indicador_inicial], [fecha_indicador_final], [Fecha_Creacion]) VALUES (@Actividad_id, @Indicador, @unidad_id, @verbo_id, @fecha_indicador_inicial, @fecha_indicador_final, @Fecha_Creacion)"
-                SelectCommand="SELECT * FROM [Indicadores] WHERE ([Actividad_id] = @Actividad_id)"
-                UpdateCommand="UPDATE [Indicadores] SET [Actividad_id] = @Actividad_id, [Indicador] = @Indicador, [unidad_id] = @unidad_id, [verbo_id] = @verbo_id, [fecha_indicador_inicial] = @fecha_indicador_inicial, [fecha_indicador_final] = @fecha_indicador_final, [Fecha_Creacion] = @Fecha_Creacion WHERE [Id] = @Id">
+                DeleteCommand="DELETE FROM [Indicadores] WHERE [Id] = @Id" InsertCommand="INSERT INTO [Indicadores] ([Indicador], [SSP], [fecha_indicador_inicial], [fecha_indicador_final], [Fecha_Creacion]) VALUES (@Indicador, @SSP, @fecha_indicador_inicial, @fecha_indicador_final, @Fecha_Creacion)"
+                SelectCommand="SELECT [Id], [Indicador], [SSP], [fecha_indicador_inicial], [fecha_indicador_final], [Fecha_Creacion] FROM [Indicadores] WHERE ([Actividad_id] = @Actividad_id)"
+                UpdateCommand="UPDATE [Indicadores] SET [Indicador] = @Indicador, [SSP] = @SSP, [fecha_indicador_inicial] = @fecha_indicador_inicial, [fecha_indicador_final] = @fecha_indicador_final, [Fecha_Creacion] = @Fecha_Creacion WHERE [Id] = @Id">
                 <DeleteParameters>
                     <asp:Parameter Name="Id" Type="Int32" />
                 </DeleteParameters>
                 <InsertParameters>
-                    <asp:Parameter Name="Actividad_id" Type="Int32" />
                     <asp:Parameter Name="Indicador" Type="String" />
-                    <asp:Parameter Name="unidad_id" Type="Int32" />
-                    <asp:Parameter Name="verbo_id" Type="Int32" />
-                    <asp:Parameter DbType="Date" Name="fecha_indicador_inicial" />
-                    <asp:Parameter DbType="Date" Name="fecha_indicador_final" />
+                    <asp:Parameter Name="SSP" Type="Boolean" />
+                    <asp:Parameter Name="fecha_indicador_inicial" DbType="Date" />
+                    <asp:Parameter Name="fecha_indicador_final" DbType="Date" />
                     <asp:Parameter DbType="Date" Name="Fecha_Creacion" />
                 </InsertParameters>
                 <SelectParameters>
-                    <asp:QueryStringParameter DefaultValue="0" Name="Actividad_id" QueryStringField="idactividad"
+                    <asp:QueryStringParameter DefaultValue="0" Name="Actividad_id" QueryStringField="idActividad"
                         Type="Int32" />
                 </SelectParameters>
                 <UpdateParameters>
-                    <asp:Parameter Name="Actividad_id" Type="Int32" />
                     <asp:Parameter Name="Indicador" Type="String" />
-                    <asp:Parameter Name="unidad_id" Type="Int32" />
-                    <asp:Parameter Name="verbo_id" Type="Int32" />
-                    <asp:Parameter DbType="Date" Name="fecha_indicador_inicial" />
-                    <asp:Parameter DbType="Date" Name="fecha_indicador_final" />
+                    <asp:Parameter Name="SSP" Type="Boolean" />
+                    <asp:Parameter Name="fecha_indicador_inicial" DbType="Date" />
+                    <asp:Parameter Name="fecha_indicador_final" DbType="Date" />
                     <asp:Parameter DbType="Date" Name="Fecha_Creacion" />
                     <asp:Parameter Name="Id" Type="Int32" />
                 </UpdateParameters>
             </asp:SqlDataSource>
             <br />
-            <div style="clear: both;">
-                <div style="float: left;">
+            <b style="color: #0b72bc;">Parametros para generar indicadores </b>
+            <br />
+            Verbo:<asp:DropDownList ID="cboverbos" runat="server" DataSourceID="sqldtverbos"
+                DataTextField="Verbo" DataValueField="Id">
+            </asp:DropDownList>
+            <asp:SqlDataSource ID="sqldtverbos" runat="server" ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>"
+                SelectCommand="SELECT [Id], [Verbo] FROM [Verbos]"></asp:SqlDataSource>
+            Fecha:<asp:TextBox ID="txtFechaIndicador" runat="server" />
+            <asp:Label ID="lblFechaFinal" runat="server" Text="Fecha Final:" Visible="False"></asp:Label>
+            <asp:TextBox ID="txtFechaFinal" runat="server" Visible="False"></asp:TextBox>
+            Meta:<asp:TextBox ID="Meta" Width="24px" MaxLength="3" runat="server">0</asp:TextBox>
+            Unidades:<asp:DropDownList ID="cboUnidades" runat="server" DataSourceID="sqldtUnidades"
+                DataTextField="Unidad" DataValueField="Id" ToolTip="Unidades">
+            </asp:DropDownList>
+            &nbsp;<asp:CheckBox ID="chxSSP" runat="server" Text="SSP" TextAlign="Left" Visible="False" />
+            <asp:SqlDataSource ID="sqldtUnidades" runat="server" ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>"
+                SelectCommand="SELECT [Id], [Unidad] FROM [Unidades]"></asp:SqlDataSource>
+            Descripcion:<asp:TextBox ID="txtdescripcionI" runat="server" ToolTip="Descripción de Indicador" />
+            <asp:ImageButton ID="previsualizar" runat="server" ImageUrl="~/Icons/Search.png"
+                Width="24px" />
+            <br />
+            <br />
+            <b style="color: #0b72bc;">Previsualización de indicador</b>
+            <br />
+            <asp:TextBox ID="txtindicadorg" Width="80%" runat="server"></asp:TextBox>
+            <asp:LinkButton Text="&lt;img src='/Icons/added.png' width='24px' alt='Agregar' /&gt;"
+                runat="server" ID="lknAgregarIndicador" OnClick="lknAgregarIndicador_Click" ToolTip="Agregar Indicador" />
+            <br />
+            <br />
+            <div id="tabs">
+                <ul>
+                    <li><a href="#tabs-1">Medios de Verificación</a></li>
+                    <li><a href="#tabs-2">Supuestos</a></li>
+                    <li id="pest_responsable" runat="server" visible="false"><a href="#tabs_res">Responsables</a></li>
+                </ul>
+                <div id="tabs-1">
+                    <div style="clear: both;">
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td colspan="2">
+                                    <h3 style="color: #0b72bc;">
+                                        Medios de Verificación</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: top;">
+                                    <asp:BulletedList ID="sortable1" CssClass="droptrue" Width="150px" runat="server"
+                                        DataTextField="Medio_de_verificacion" DataValueField="Id" AppendDataBoundItems="True"
+                                        ViewStateMode="Enabled">
+                                    </asp:BulletedList>
+                                </td>
+                                <td style="vertical-align: top;">
+                                    <asp:BulletedList ID="sortable2" Width="150px" CssClass="dropfalse" runat="server">
+                                        <asp:ListItem ID="ItemMedioMarca" Text="Medios de Verificación" class="marcaagua" />
+                                    </asp:BulletedList>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: center;">
+                                    <asp:LinqDataSource ID="lqMediosVerificacion" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
+                                        EntityTypeName="" Select="new (Medio_de_verificacion, Id)" TableName="Medios_de_verificacions">
+                                    </asp:LinqDataSource>
+                                    Nuevo Medio de Verificación:<br />
+                                    <asp:TextBox ID="txtmedio" runat="server" />
+                                    <asp:ImageButton ID="btnAlmacenaMedio" Width="24px" ImageUrl="/Icons/save-icon.png"
+                                        runat="server" OnClick="btnAlmacenaMedio_Click" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="tabs-2">
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td colspan="2">
                                 <h3 style="color: #0b72bc;">
-                                    Medios de Verificación</h3>
+                                    Supuestos
+                                </h3>
                             </td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top;">
-                                <asp:BulletedList ID="sortable1" CssClass="droptrue" Width="150px" runat="server"
-                                    DataTextField="Medio_de_verificacion" DataValueField="Id" AppendDataBoundItems="True"
-                                    ViewStateMode="Enabled">
+                                <asp:BulletedList ID="sortable3" CssClass="droptwotrue" Width="150px" runat="server"
+                                    DataSourceID="lqsupuestos" DataTextField="supuesto1" DataValueField="Id">
                                 </asp:BulletedList>
                             </td>
                             <td style="vertical-align: top;">
-                                <asp:BulletedList ID="sortable2" Width="150px" CssClass="dropfalse" runat="server">
-                                    <asp:ListItem ID="ItemMedioMarca" Text="Medios de Verificación" class="marcaagua"
-                                        Enabled="false" />
+                                <asp:BulletedList ID="sortable4" Width="150px" CssClass="droptwofalse" runat="server">
+                                    <asp:ListItem Text="Supuestos Asignados" class="marcaagua" />
                                 </asp:BulletedList>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2" style="text-align: center;">
-                                <asp:LinqDataSource ID="lqMediosVerificacion" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
-                                    EntityTypeName="" Select="new (Medio_de_verificacion, Id)" TableName="Medios_de_verificacions">
+                                <asp:LinqDataSource ID="lqsupuestos" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
+                                    EntityTypeName="" Select="new (supuesto1, Id)" TableName="Supuestos">
                                 </asp:LinqDataSource>
-                                Nuevo Medio de Verificación:<br />
-                                <asp:TextBox ID="txtmedio" runat="server" />
-                                <asp:ImageButton ID="btnAlmacenaMedio" Width="24px" ImageUrl="/Icons/save-icon.png"
-                                    runat="server" OnClick="btnAlmacenaMedio_Click" />
+                                Nuevo Supuesto:<br />
+                                <asp:TextBox ID="txtsupuesto" runat="server" />
+                                <asp:ImageButton ID="btnAlmacenaSupuesto" Width="24px" ImageUrl="/Icons/save-icon.png"
+                                    runat="server" OnClick="btnAlmacenaSupuesto_Click" />
                             </td>
                         </tr>
                     </table>
                 </div>
-            </div>
-            <div style="float: left;">
-                <table border="0" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td colspan="2">
-                            <h3 style="color: #0b72bc;">
-                                Supuestos
-                            </h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="vertical-align: top;">
-                            <asp:BulletedList ID="sortable3" CssClass="droptwotrue" Width="150px" runat="server"
-                                DataSourceID="lqsupuestos" DataTextField="supuesto1" DataValueField="Id">
-                            </asp:BulletedList>
-                        </td>
-                        <td style="vertical-align: top;">
-                            <asp:BulletedList ID="sortable4" Width="150px" CssClass="droptwofalse" runat="server">
-                                <asp:ListItem Text="Supuestos Asignados" class="marcaagua" Enabled="false" />
-                            </asp:BulletedList>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: center;">
-                            <asp:LinqDataSource ID="lqsupuestos" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
-                                EntityTypeName="" Select="new (supuesto1, Id)" TableName="Supuestos">
-                            </asp:LinqDataSource>
-                            Nuevo Supuesto:<br />
-                            <asp:TextBox ID="txtsupuesto" runat="server" />
-                            <asp:ImageButton ID="btnAlmacenaSupuesto" Width="24px" ImageUrl="/Icons/save-icon.png"
-                                runat="server" OnClick="btnAlmacenaSupuesto_Click" />
-                        </td>
-                    </tr>
-                </table>
+                <div id="tabs_res" runat="server" visible="false">
+                    <div id="ModResponsables" visible="false" runat="server">
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td colspan="2">
+                                    <h3 style="color: #0b72bc;">
+                                        Responsables
+                                    </h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: top;">
+                                    <asp:BulletedList ID="sortable5" CssClass="droptwotrue" Width="150px" 
+                                        runat="server" DataSourceID="lqResponsables" DataTextField="Nombre" 
+                                        DataValueField="IdUsuario">
+                                        
+                                    </asp:BulletedList>
+                                </td>
+                                <td style="vertical-align: top;">
+                                    <asp:BulletedList ID="sortable6" Width="150px" CssClass="droptwofalse" runat="server">
+                                        <asp:ListItem Text="Responsables asignados" class="marcaagua" />
+                                    </asp:BulletedList>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: center;">
+                                    <asp:LinqDataSource ID="lqResponsables" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
+                                        EntityTypeName="" Select="new (IdUsuario, Nombre)" TableName="Usuarios">
+                                    </asp:LinqDataSource>
+                                    Nuevo Resposable:<br />
+                                    <asp:TextBox ID="txtresponsable" runat="server" />
+                                    <asp:ImageButton ID="lknAlmacenarResponsable" Width="24px" ImageUrl="/Icons/save-icon.png"
+                                        runat="server" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
             <input type="hidden" runat="server" id="supuestosinput" value="" />
             <input type="hidden" runat="server" id="mediosinput" value="" />
+            <input type="hidden" runat="server" id="responsablesinput" value="" />
             <input type="hidden" runat="server" value="-1" id="actualizaActividad" />
             <div style="clear: both; width: 100%; height: 10px;">
             </div>

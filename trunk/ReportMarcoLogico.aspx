@@ -18,13 +18,18 @@
     <table width="100%">
         <tr>
             <td>
-                <img src="/Icons/details.png" width="48px" alt="Evaluacion" />
+                <img src="/Icons/plan_operativo.png" width="48px" alt="Evaluacion" />
             </td>
             <td style="vertical-align: middle; font-size: 13px; text-align: left;">
                 <h1 style="color: #0b72bc;">
-                    Linea Base Competencias Ciudadanas</h1>
+                    Línea Base Competencias Ciudadanas</h1>
             </td>
             <td>
+                <asp:RadioButton ID="rbtnresumen" runat="server" AutoPostBack="True" GroupName="groupreport"
+                    OnCheckedChanged="rbtnresumen_CheckedChanged" Text="Marco Lógico" />
+                <asp:RadioButton ID="rbtndetalle" runat="server" AutoPostBack="True" GroupName="groupreport"
+                    OnCheckedChanged="rbtndetalle_CheckedChanged" Text="Plan Operativo" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:LinkButton Text="Export to Excel" runat="server" ID="lknExport" OnClick="lknExport_Click" />
             </td>
         </tr>
@@ -37,13 +42,13 @@
                     <b>Descripción</b>
                 </td>
                 <td width="10%">
-                    <b>Indicador</b>
+                    &nbsp;
                 </td>
                 <td width="20%">
-                    <b>Medios de Verificación</b>
+                    &nbsp;
                 </td>
                 <td width="20%">
-                    <b>Supuestos</b>
+                    &nbsp;
                 </td>
             </tr>
             <tr class="trgris">
@@ -101,7 +106,7 @@
             </SelectParameters>
         </asp:SqlDataSource>
         <asp:GridView ID="gvresultados" runat="server" AutoGenerateColumns="False" DataSourceID="sqlReportMarcoLogico"
-            Width="100%">
+            Width="100%" Visible="False">
             <AlternatingRowStyle CssClass="trblanca" />
             <Columns>
                 <asp:BoundField DataField="Resultado" HeaderText="Resultados" SortExpression="Resultado">
@@ -126,6 +131,42 @@
             SelectCommand="SELECT [Resultado], [Indicador_Resultado], [Medios de Verificacion] AS Medios_de_Verificacion, [Supuestos] FROM [Report_Macro_Logico] WHERE ([Proyecto_id] = @Proyecto_id)">
             <SelectParameters>
                 <asp:QueryStringParameter DefaultValue="0" Name="Proyecto_id" QueryStringField="idproyecto"
+                    Type="Int32" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        <asp:GridView ID="gvDetalleActividades" runat="server" AutoGenerateColumns="False"
+            DataSourceID="sqlreportfull" Visible="False" Width="100%">
+            <AlternatingRowStyle CssClass="trblanca" />
+            <Columns>
+                <asp:BoundField DataField="Actividad" HeaderText="Actividad" SortExpression="Actividad">
+                    <ControlStyle Width="30%" />
+                </asp:BoundField>
+                <asp:BoundField DataField="Presupuesto" HeaderText="Presupuesto" SortExpression="Presupuesto">
+                    <ControlStyle Width="10%" />
+                </asp:BoundField>
+                <asp:BoundField DataField="Medios_de_Verificacion" HeaderText="Medios de Verificación"
+                    ReadOnly="True" SortExpression="Medios_de_Verificacion">
+                    <ControlStyle Width="10%" />
+                </asp:BoundField>
+                <asp:BoundField DataField="Indicadores" HeaderText="Indicadores" ReadOnly="True"
+                    SortExpression="Indicadores">
+                    <ControlStyle Width="20%" />
+                </asp:BoundField>
+                <asp:BoundField DataField="Resultado" HeaderText="Resultado" SortExpression="Resultado">
+                    <ControlStyle Width="0px" />
+                </asp:BoundField>
+            </Columns>
+            <HeaderStyle CssClass="trheader" />
+            <RowStyle CssClass="trgris" />
+        </asp:GridView>
+        <asp:LinqDataSource ID="lqRepourtFull" runat="server" ContextTypeName="ESM.Model.ESMBDDataContext"
+            EntityTypeName="" GroupBy="Resultado_id" OrderGroupsBy="key" Select="new (key as Resultado_id, it as Actividades, Min(Actividad) as Min_Actividad, Min(Indicadores) as Min_Indicadores, Min(Actividades_Medios) as Min_Actividades_Medios, Min(Actividades_Responsables) as Min_Actividades_Responsables, Min(Actividades_Supuestos) as Min_Actividades_Supuestos)"
+            TableName="Actividades">
+        </asp:LinqDataSource>
+        <asp:SqlDataSource ID="sqlreportfull" runat="server" ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>"
+            SelectCommand="SELECT [Actividad], [Presupuesto], [Medios de Verificacion] AS Medios_de_Verificacion, [Indicadores], [Resultado] FROM [Report_Full_Actividades] WHERE ([proyecto_id] = @proyecto_id)">
+            <SelectParameters>
+                <asp:SessionParameter DefaultValue="0" Name="proyecto_id" SessionField="idproyecto"
                     Type="Int32" />
             </SelectParameters>
         </asp:SqlDataSource>

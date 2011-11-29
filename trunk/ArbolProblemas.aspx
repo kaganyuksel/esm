@@ -8,6 +8,8 @@
     <link href="Style/MarcoLogico.css" rel="stylesheet" type="text/css" />
     <link href="Style/jsgantt.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/jsgantt.js" type="text/javascript"></script>
+    <link href="Style/menu_arbol.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/iColorPicker.js" type="text/javascript"></script>
     <style type="text/css">
         .txtareacausa
         {
@@ -43,9 +45,9 @@
         }
         .btnleft
         {
-            top: 50%;
+            /*top: 50%;
             position: absolute;
-            left: 3.5%;
+            left: 3.5%;*/
             width: 50px;
             height: 50px;
             float: left;
@@ -61,10 +63,11 @@
         }
         .btnright
         {
-            top: 50%;
+            /*top: 50%;
             position: absolute;
-            right: 3.5%;
-            width: 4em;
+            right: 3.5%;*/
+            width: 50px;
+            height: 50px;
             float: right;
             background-repeat: no-repeat;
             background-position: center;
@@ -192,31 +195,53 @@
         {
             margin-left: 25%;
         }
+        
+        a.back
+        {
+            width: 256px;
+            height: 73px;
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            background: #fff url(codrops_back.png) no-repeat top left;
+        }
     </style>
     <script type="text/javascript">
-        $(function () {
-            var d = 300;
-            $('#navigation a').each(function () {
-                $(this).stop().animate({
-                    'marginBottom': '-80px'
-                }, d += 150);
-            });
+        //        $(function () {
+        //            var d = 300;
+        //            $('#navigation a').each(function () {
+        //                $(this).stop().animate({
+        //                    'marginBottom': '-80px'
+        //                }, d += 150);
+        //            });
 
-            $('#navigation > li').hover(
-                function () {
-                    $('a', $(this)).stop().animate({
-                        'marginBottom': '-2px'
-                    }, 200);
-                },
-                function () {
-                    $('a', $(this)).stop().animate({
-                        'marginBottom': '-80px'
-                    }, 200);
-                }
-            );
-        });
+        //            $('#navigation > li').hover(
+        //                function () {
+        //                    $('a', $(this)).stop().animate({
+        //                        'marginBottom': '-2px'
+        //                    }, 200);
+        //                },
+        //                function () {
+        //                    $('a', $(this)).stop().animate({
+        //                        'marginBottom': '-80px'
+        //                    }, 200);
+        //                }
+        //            );
+        //        });
     </script>
     <script type="text/javascript">
+        $(function () {
+            $('#menu_arbol a').stop().animate({ 'marginright': '-165px' }, 1000);
+
+            $('#menu_arbol > li').hover(
+                    function () {
+                        $('a', $(this)).stop().animate({ 'marginright': '-2px' }, 200);
+                    },
+                    function () {
+                        $('a', $(this)).stop().animate({ 'marginright': '-165px' }, 200);
+                    }
+                );
+        });
         $.datepicker.setDefaults({
             dateFormat: 'dd/mm/yy', currentText: 'Ahora', closeText: 'X', autoSize: true,
             dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
@@ -372,24 +397,27 @@
             background-color: Transparent;
             height: 17px;
         }
+        .style1
+        {
+            font-size: 13px;
+        }
     </style>
     <script type="text/javascript">
-        
 
-	    $(function() {
-		    $( ".accordion" ).accordion({
-			    autoHeight: false,
-			    navigation: true,
+        $(function () {
+            $(".accordion").accordion({
+                autoHeight: false,
+                navigation: true,
                 collapsible: true,
-                animated: 'bounceslide'               
-                 
-		    });
-            
-	    });
+                animated: 'bounceslide'
+
+            });
+
+        });
 
         function ActualizarActividad(idactividad, actividad, presupuesto) {
             $.ajax({
-                url: "ajax.aspx?idactividad="+ idactividad +"&actividad="+ $("#"+actividad).val() + "&presupuesto=" + $("#"+presupuesto).val()+"&actividadesu=true",
+                url: "ajax.aspx?idactividad=" + idactividad + "&actividad=" + $("#" + actividad).val() + "&presupuesto=" + $("#" + presupuesto).val() + "&actividadesu=true",
                 async: false,
                 succes: function (result) {
                     alert(result);
@@ -404,7 +432,7 @@
 
         function AlmacenarResultado(idresultado, causa, resultado) {
             $.ajax({
-                url: "ajax.aspx?idResultado="+ idresultado +"&causa="+ $("#"+causa).val() + "&resultado=" + $("#"+resultado).val()+"&resultados=true",
+                url: "ajax.aspx?idResultado=" + idresultado + "&causa=" + $("#" + causa).val() + "&resultado=" + $("#" + resultado).val() + "&resultados=true",
                 async: false,
                 succes: function (result) {
                     alert(result);
@@ -419,7 +447,7 @@
 
         function AlmacenarActividad(idresultado, actividad, presupuesto) {
             $.ajax({
-                url: "ajax.aspx?idResultado="+ idresultado +"&actividad="+ $("#"+actividad).val() + "&presupuesto=" + $("#"+presupuesto).val()+"&actividades=true",
+                url: "ajax.aspx?idResultado=" + idresultado + "&actividad=" + $("#" + actividad).val() + "&presupuesto=" + $("#" + presupuesto).val() + "&actividades=true",
                 async: false,
                 succes: function (result) {
                     alert(result);
@@ -431,49 +459,83 @@
 
             $("#ContentPlaceHolder1_Bandera").val("1");
         }
-        
-        function ActivateAcordion()
-        {
-            $( ".accordion" ).accordion({ active: 0 });
+
+        function ActivateAcordion() {
+            $(".accordion").accordion({ active: 0 });
             $("#expandir").focus();
         }
 
         $(document).ready(function () {
-            
+
+            $(this).scroll(function () {
+                //                alert(window.scrollY);
+
+                var distancia = window.scrollY
+                if (distancia >= 110) {
+                    $("#menu_proyecto").css("top", "0px");
+                }
+                else if (distancia == 0) {
+                    $("#menu_proyecto").css("top", "");
+                }
+
+
+            });
+
+            $("#ContentPlaceHolder1_mycolor").blur(function () {
+
+                alert($("#ContentPlaceHolder1_mycolor").val());
+
+                $("#ContentPlaceHolder1_txtCausa1").css("background", $("#ContentPlaceHolder1_mycolor").val());
+                $("#ContentPlaceHolder1_txtEfecto1").css("background", $("#ContentPlaceHolder1_mycolor").val());
+
+            });
+
+            $(".reload").click(function () {
+                $("#ContentPlaceHolder1_Bandera").val("1");
+            });
+
             var problema_text = $("#ContentPlaceHolder1_txtproblema").val().toString();
 
-            if($.trim(problema_text).length == 0){
-                $("#ContentPlaceHolder1_lknAlmacenarE").css("display","none");
-                $("#ContentPlaceHolder1_txtCausa1").attr("disabled",true);
-                $("#ContentPlaceHolder1_txtEfecto1").attr("disabled",true);
+            if ($.trim(problema_text).length == 0) {
+                $("#ContentPlaceHolder1_lknAlmacenarE").css("display", "none");
+                $("#ContentPlaceHolder1_txtCausa1").attr("disabled", true);
+                $("#ContentPlaceHolder1_txtEfecto1").attr("disabled", true);
             }
-            else{
-                $("#ContentPlaceHolder1_lknAlmacenarE").css("display","block");
-                $("#ContentPlaceHolder1_txtCausa1").attr("disabled",false);
-                $("#ContentPlaceHolder1_txtEfecto1").attr("disabled",false);
-            }
-
-            $( ".accordion" ).accordion({ active: 2 });
-
-            if($("#ContentPlaceHolder1_Bandera").val() == "1"){
-            
-            $('#izquierda').addClass('past');
-
+            else {
+                $("#ContentPlaceHolder1_lknAlmacenarE").css("display", "block");
+                $("#ContentPlaceHolder1_txtCausa1").attr("disabled", false);
+                $("#ContentPlaceHolder1_txtEfecto1").attr("disabled", false);
             }
 
+            $(".accordion").accordion({ active: 2 });
+
+            if ($("#ContentPlaceHolder1_Bandera").val() == "1") {
+
+                $('#izquierda').addClass('past');
+
+            }
+            var idproyecto = $("#ContentPlaceHolder1_hidproyecto").val();
             $("#adetalles").click(function () {
-                var idproyecto = $("#hidproyecto").val();
+
                 $.prettyPhoto.open("/detallesmarcologico.aspx?idproyecto=" + idproyecto + "&iframe=true&width=100%&height=100%");
             });
             $("#Cronograma_Proyecto").click(function () {
                 $.prettyPhoto.open("/DiagramaGant.aspx?&iframe=true&width=100%&height=100%");
             });
-            
+            $("#Visualizar_Matriz").click(function () {
+
+                $.prettyPhoto.open("/ReportMarcoLogico.aspx?idproyecto=" + idproyecto + "&marcologico=true&iframe=true&width=100%&height=100%");
+            });
+            $("#PlanOperativo_a").click(function () {
+
+                $.prettyPhoto.open("/ReportMarcoLogico.aspx?idproyecto=" + idproyecto + "&planoperativo=true&iframe=true&width=100%&height=100%");
+
+            });
 
             $("a.pretty").prettyPhoto({
                 ie6_fallback: true,
                 modal: true,
-                social_tools: false,
+                social_tools: false
             });
 
             $("#ContentPlaceHolder1_cbovervos").val();
@@ -487,6 +549,7 @@
             }
 
             $("#ContentPlaceHolder1_txtEfecto1").val("");
+            $("#ContentPlaceHolder1_txtEfecto1").attr("disabled", true);
             $("#ContentPlaceHolder1_txtCausa1").val("");
 
             $(".speech").each(function () {
@@ -515,16 +578,15 @@
             });
 
 
-            
+
         });
 
 
-        function SlideSiguiente()
-        {
+        function SlideSiguiente() {
             $(".presente").prev().removeClass("past");
 
-            $(".presente").css("margin-left","-25%");
-            
+            $(".presente").css("margin-left", "-25%");
+
             $(".presente").addClass("past");
             $(".presente").removeClass("presente");
             $(".presente").removeClass("futuro");
@@ -537,40 +599,162 @@
             $(".presente+div:first").removeClass("presente");
             $(".presente+div:first").removeClass("past");
 
-            
+            //            alert($(".presente").attr("id"));
+
+            if ($(".presente").attr("id") == "derecha") {
+                $("#li_marco_logico").css("border", "dashed 2px #fff");
+                $("#li_arbol_problemas").css("border", "none");
+                $("#li_plan_operativo").css("border", "none");
+                $("#li_cronograma").css("border", "none");
+
+                $("#li_plan_operativo").css("background", "#007cb6");
+                $("#li_marco_logico").css("background", "#004464");
+                $("#li_arbol_problemas").css("background", "#007cb6");
+                $("#li_cronograma").css("background", "#007cb6");
+            }
+            else if ($(".presente").attr("id") == "izquierda") {
+                $("#li_arbol_problemas").css("border", "dashed 2px #fff");
+                $("#li_marco_logico").css("border", "none");
+                $("#li_plan_operativo").css("border", "none");
+                $("#li_cronograma").css("border", "none");
+
+                $("#li_plan_operativo").css("background", "#007cb6");
+                $("#li_marco_logico").css("background", "#007cb6");
+                $("#li_arbol_problemas").css("background", "#004464");
+                $("#li_cronograma").css("background", "#007cb6");
+            }
+            else if ($(".presente").attr("id") == "derechaSiguiente") {
+                $("#li_arbol_problemas").css("border", "none");
+                $("#li_marco_logico").css("border", "none");
+                $("#li_plan_operativo").css("border", "dashed 2px #fff");
+                $("#li_cronograma").css("border", "none");
+
+                $("#li_plan_operativo").css("background", "#004464");
+                $("#li_marco_logico").css("background", "#007cb6");
+                $("#li_arbol_problemas").css("background", "#007cb6");
+                $("#li_cronograma").css("background", "#007cb6");
+            }
+            else if ($(".presente").attr("id") == "Cronograma") {
+                $("#li_arbol_problemas").css("border", "none");
+                $("#li_marco_logico").css("border", "none");
+                $("#li_plan_operativo").css("border", "none");
+
+                $("#li_plan_operativo").css("background", "#007cb6");
+                $("#li_marco_logico").css("background", "#007cb6");
+                $("#li_arbol_problemas").css("background", "#007cb6");
+                $("#li_cronograma").css("background", "#004464");
+
+                $("#li_cronograma").css("border", "dashed 2px #fff");
+
+
+            }
 
 
         }
 
-        function SlideVolver()
-        {
-            
+        function SlideVolver() {
+
             $(".presente+div:first").removeClass("futuro");
 
-//            alert($(".presente").prev().html());
-            $(".past").css("margin-left","0px");
-            
+            //            alert($(".presente").prev().html());
+            $(".past").css("margin-left", "0px");
+
             $(".presente").addClass("futuro");
             $(".presente").removeClass("presente");
             $(".presente").removeClass("past");
-            
+
 
             $(".past").addClass("presente");
             $(".past").removeClass("past");
             $(".past").removeClass("futuro");
 
-            
+
             $(".presente").prev().addClass("past");
             $(".presente").prev().removeClass("presente");
             $(".presente").prev().removeClass("futuro");
 
-            
+            if ($(".presente").attr("id") == "derecha") {
+                $("#li_marco_logico").css("border", "dashed 2px #fff");
+                $("#li_arbol_problemas").css("border", "none");
+                $("#li_plan_operativo").css("border", "none");
+                $("#li_cronograma").css("border", "none");
+
+                $("#li_plan_operativo").css("background", "#007cb6");
+                $("#li_marco_logico").css("background", "#004464");
+                $("#li_arbol_problemas").css("background", "#007cb6");
+                $("#li_cronograma").css("background", "#007cb6");
+            }
+            else if ($(".presente").attr("id") == "izquierda") {
+                $("#li_arbol_problemas").css("border", "dashed 2px #fff");
+                $("#li_marco_logico").css("border", "none");
+                $("#li_plan_operativo").css("border", "none");
+                $("#li_cronograma").css("border", "none");
+
+                $("#li_plan_operativo").css("background", "#007cb6");
+                $("#li_marco_logico").css("background", "#007cb6");
+                $("#li_arbol_problemas").css("background", "#004464");
+                $("#li_cronograma").css("background", "#007cb6");
+            }
+            else if ($(".presente").attr("id") == "derechaSiguiente") {
+                $("#li_arbol_problemas").css("border", "none");
+                $("#li_marco_logico").css("border", "none");
+                $("#li_plan_operativo").css("border", "dashed 2px #fff");
+                $("#li_cronograma").css("border", "none");
+
+                $("#li_plan_operativo").css("background", "#004464");
+                $("#li_marco_logico").css("background", "#007cb6");
+                $("#li_arbol_problemas").css("background", "#007cb6");
+                $("#li_cronograma").css("background", "#007cb6");
+            }
+            else if ($(".presente").attr("id") == "Cronograma") {
+                $("#li_arbol_problemas").css("border", "none");
+                $("#li_marco_logico").css("border", "none");
+                $("#li_plan_operativo").css("border", "none");
+
+                $("#li_plan_operativo").css("background", "#007cb6");
+                $("#li_marco_logico").css("background", "#007cb6");
+                $("#li_arbol_problemas").css("background", "#007cb6");
+                $("#li_cronograma").css("background", "#004464");
+
+                $("#li_cronograma").css("border", "dashed 2px #fff");
+
+
+            }
 
         }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="demo" style="width: 90%; margin: 0 auto;">
+    <div id="menu_proyecto" style="margin-left: 25%; width: 90%; position: fixed;">
+        <ul style="list-style-type: none; display: inline; top: 0; width: 800px; margin-left: 10%;">
+            <li style="width: 50px; float: left; vertical-align: middle;">
+                <input type="button" onclick="SlideVolver();" class="btnleft ui-button ui-widget ui-state-default ui-corner-all"
+                    role="button" aria-disabled="false" />
+            </li>
+            <li id="li_arbol_problemas" style="width: 150px; float: left; vertical-align: middle;
+                border: dashed 2px #ccc; background: #004464; color: #fff; font-size: 0.8em;
+                height: 50px; text-align: center; line-height: 50px; -moz-border-radius: 5px 0px 0px 5px;
+                -webkit-border-radius: 5px 0px 0px 5px; border-radius: 5px 0px 0px 5px; /*ie 7 and 8 do not support border radius*/">
+                Árbol Problemas</li>
+            <li id="li_marco_logico" style="width: 100px; float: left; vertical-align: middle;
+                background: #007cb6; color: #fff; font-size: 0.8em; height: 50px; text-align: center;
+                line-height: 50px;">Marco Lógico</li>
+            <li id="li_plan_operativo" style="width: 100px; float: left; vertical-align: middle;
+                background: #007cb6; color: #fff; font-size: 0.8em; height: 50px; text-align: center;
+                line-height: 50px;">Plan Operativo</li>
+            <li id="li_cronograma" style="width: 100px; float: left; vertical-align: middle;
+                background: #007cb6; color: #fff; font-size: 0.8em; height: 50px; text-align: center;
+                line-height: 50px; -moz-border-radius: 0px 5px 5px 0px; -webkit-border-radius: 0px 5px 5px 0px;
+                border-radius: 0px 5px 5px 0px; /*ie 7 and 8 do not support border radius*/">Cronograma</li>
+            <li style="width: 50px; float: left; vertical-align: middle;">
+                <input type="button" onclick="SlideSiguiente();" class="btnright ui-button ui-widget ui-state-default ui-corner-all"
+                    role="button" aria-disabled="false" />
+            </li>
+        </ul>
+    </div>
+    <br />
+    <br />
+    <div class="demo" style="width: 90%; margin: 0 auto; clear: both;">
         <div id="slides" style="display: block; width: 6000px; clear: both; overflow: hidden;">
             <div id="izquierda" style="width: 25%; float: left;" class="demo mover presente">
                 <div style="width: 1024px;">
@@ -593,22 +777,20 @@
                         </UpdateParameters>
                     </asp:SqlDataSource>
                     <br />
-                    <br />
                     <div>
                         <table>
                             <tr>
                                 <td>
-                                    <img src="/Icons/network.png" width="64px" alt="Evaluacion" />
+                                    <img src="/Icons/network.png" width="48px" alt="Evaluacion" />
                                 </td>
                                 <td style="vertical-align: middle; font-size: 13px; text-align: left;">
                                     <h1 style="color: #0b72bc;">
                                         Árbol de Problemas</h1>
+                                    Paso No. 1 de 4
                                 </td>
                             </tr>
                         </table>
                     </div>
-                    <br />
-                    <br />
                     <br />
                     <div id="divseleccion" runat="server">
                         <h2 style="color: #005EA7;">
@@ -619,7 +801,7 @@
                     </div>
                     <div class="problema" runat="server" id="divproyectos" visible="false">
                         <h2>
-                            Proyectos Existentes:</h2>
+                            * Proyectos Existentes:</h2>
                         <br />
                         <asp:GridView ID="gvProyectos" runat="server" AllowPaging="True" AutoGenerateColumns="False"
                             Width="80%" DataSourceID="lnqProyectos" OnSelectedIndexChanged="gvProyectos_SelectedIndexChanged">
@@ -642,31 +824,43 @@
                         </asp:LinqDataSource>
                     </div>
                     <div id="divNuevo" runat="server" visible="false">
-                        <h1>
+                        <%--<h1>
                             <img width="24px" src="/Icons/System.png" alt="Administración" />
-                            Nuevo Proyecto</h1>
+                            Nuevo Proyecto</h1>--%>
                     </div>
                     <div id="divCargado" runat="server" visible="false">
-                        <h1>
+                        <%--<h1>
                             <img width="24px" src="/Icons/System.png" alt="Administración" />
-                            Administración del Proyecto</h1>
+                            Administración del Proyecto</h1>--%>
                     </div>
                     <br />
-                    <div class="problema" runat="server" id="divproblema" visible="false">
-                        <h2>
-                            * Problema Central</h2>
+                    <div class="problema" runat="server" id="divproblema" visible="false" style="border: dashed 2px #005EA7;
+                        -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; padding-left: 50px;">
+                        <br />
+                        <span style="font-size: 22px; color: #005EA7;">Problema Central </span><span style="color: #6E6E6E;"
+                            class="style1">&gt; Proposito</span>
                         <br />
                         <asp:TextBox ID="txtproblema" runat="server" TextMode="MultiLine" placeholder="1. Descripcion del Problema" />
                         <asp:LinkButton Text="<img src='/Icons/save-icon.png' width='24px' alt='save project' />"
                             runat="server" ID="lknAlmacenarP" OnClick="lknAlmacenarP_Click" />
+                        <br />
+                        <p style="font-style: italic;">
+                            * Descripción del problema central para el proyecto actual.</p>
                         <%--<input class="speech" id="probleman" style="width: 15px; border: 0;" />--%>
+                        <br />
                     </div>
-                    <div class="efectos" runat="server" id="divefectos" visible="false">
+                    <br />
+                    <div class="efectos" runat="server" id="divefectos" visible="false" style="border: dashed 2px #0091B2;
+                        -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; padding-left: 50px;">
                         <table border="0" cellpadding="0" cellspacing="0" width="80%">
                             <tr>
                                 <td>
-                                    <h2 style="color: #0b72bc;">
-                                        * Causas y Efectos</h2>
+                                    <br />
+                                    <h2 style="color: #0091B2;">
+                                        Causas <span class="style1" style="color: #6E6E6E;">&gt; Resultados</span> y
+                                    </h2>
+                                    <h2 style="color: #0091B2;">
+                                        Efectos <span class="style1" style="color: #6E6E6E;">&gt; Finalidad</span></h2>
                                     <br />
                                 </td>
                             </tr>
@@ -687,44 +881,64 @@
                                     <asp:TextBox ID="txtEfecto1" runat="server" class="txtareaefecto" placeholder="2. Descripcion del efecto"
                                         TextMode="MultiLine" Width="100%" />
                                 </td>
+                                <td>
+                                    <input class="iColorPicker" type="text" style="width: 60px;" id="mycolor" runat="server"
+                                        value="#ffffff" />
+                                </td>
+                                <td style="text-align: center;">
+                                    <asp:LinkButton Text='<img src="/Icons/save-icon.png" width="24px" alt="save efect" />'
+                                        runat="server" ID="lknAlmacenarE" OnClick="lknAlmacenarE_Click" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p style="font-style: italic;">
+                                        * 1. Describa en un minimo de 3 palabras la causa que desea almacenar.</p>
+                                </td>
+                                <td>
+                                    <p style="font-style: italic;">
+                                        * 2. Describa el efecto corresponsiete a la causa anterior.</p>
+                                </td>
+                                <td>
+                                    <p style="font-style: italic;">
+                                        * 3. Seleccione un color.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p style="font-style: italic;">
+                                        * 4. Almacenar.</p>
+                                </td>
                             </tr>
                         </table>
-                        <br />
-                        <asp:LinkButton Text='<img src="/Icons/save-icon.png" width="24px" alt="save efect" />'
-                            runat="server" ID="lknAlmacenarE" OnClick="lknAlmacenarE_Click" />
-                        <br />
                         <br />
                         <asp:GridView ID="gvEfectos" runat="server" AllowPaging="True" AutoGenerateColumns="False"
                             DataKeyNames="Id" DataSourceID="sqlefectos" PageSize="15" Width="80%" AllowSorting="True">
                             <AlternatingRowStyle CssClass="trblanca" />
                             <Columns>
-                                <asp:CommandField ButtonType="Image" DeleteImageUrl="~/Icons/Bin_Full.png" DeleteText=""
-                                    EditImageUrl="~/Icons/Stationery.png" EditText="" ShowDeleteButton="True" 
-                                    ShowEditButton="True" CancelImageUrl="~/Icons/cancel.png" 
-                                    UpdateImageUrl="~/Icons/save-icon.png">
-                                    <ControlStyle Width="24px" />
-                                </asp:CommandField>
                                 <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True"
                                     SortExpression="Id" />
                                 <asp:BoundField DataField="Causa" HeaderText="Causa" SortExpression="Causa" />
                                 <asp:BoundField DataField="Efecto" HeaderText="Efecto" SortExpression="Efecto" />
+                                <asp:CommandField ButtonType="Image" CancelImageUrl="~/Icons/cancel.png" DeleteImageUrl="~/Icons/Bin_Full.png"
+                                    EditImageUrl="~/Icons/Stationery.png" ShowDeleteButton="True" ShowEditButton="True"
+                                    UpdateImageUrl="~/Icons/save-icon.png">
+                                    <ControlStyle Width="24px" CssClass="reload" />
+                                </asp:CommandField>
                             </Columns>
                             <HeaderStyle CssClass="trheader" />
                             <RowStyle CssClass="trgris" />
                         </asp:GridView>
-                        <asp:SqlDataSource ID="sqlefectos" runat="server" ConflictDetection="CompareAllValues"
-                            ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>" DeleteCommand="DELETE FROM [Causas_Efectos] WHERE [Id] = @original_Id AND (([Efecto] = @original_Efecto) OR ([Efecto] IS NULL AND @original_Efecto IS NULL)) AND (([Causa] = @original_Causa) OR ([Causa] IS NULL AND @original_Causa IS NULL))"
-                            InsertCommand="INSERT INTO [Causas_Efectos] ([Efecto], [Causa]) VALUES (@Efecto, @Causa)"
-                            OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [Id], [Efecto], [Causa] FROM [Causas_Efectos] WHERE ([Proyecto_id] = @Proyecto_id)"
-                            UpdateCommand="UPDATE [Causas_Efectos] SET [Efecto] = @Efecto, [Causa] = @Causa WHERE [Id] = @original_Id AND (([Efecto] = @original_Efecto) OR ([Efecto] IS NULL AND @original_Efecto IS NULL)) AND (([Causa] = @original_Causa) OR ([Causa] IS NULL AND @original_Causa IS NULL))">
+                        <asp:SqlDataSource ID="sqlefectos" runat="server" ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>"
+                            DeleteCommand="DELETE FROM [Causas_Efectos] WHERE [Id] = @original_Id" InsertCommand="INSERT INTO [Causas_Efectos] ([Efecto], [Causa], [Color]) VALUES (@Efecto, @Causa, @Color)"
+                            OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [Efecto], [Causa], [Color], [Id] FROM [Causas_Efectos] WHERE ([Proyecto_id] = @Proyecto_id)"
+                            UpdateCommand="UPDATE [Causas_Efectos] SET [Efecto] = @Efecto, [Causa] = @Causa, [Color] = @Color WHERE [Id] = @original_Id">
                             <DeleteParameters>
                                 <asp:Parameter Name="original_Id" Type="Int32" />
-                                <asp:Parameter Name="original_Efecto" Type="String" />
-                                <asp:Parameter Name="original_Causa" Type="String" />
                             </DeleteParameters>
                             <InsertParameters>
                                 <asp:Parameter Name="Efecto" Type="String" />
                                 <asp:Parameter Name="Causa" Type="String" />
+                                <asp:Parameter Name="Color" Type="String" />
                             </InsertParameters>
                             <SelectParameters>
                                 <asp:SessionParameter DefaultValue="0" Name="Proyecto_id" SessionField="idproyecto"
@@ -733,64 +947,87 @@
                             <UpdateParameters>
                                 <asp:Parameter Name="Efecto" Type="String" />
                                 <asp:Parameter Name="Causa" Type="String" />
+                                <asp:Parameter Name="Color" Type="String" />
                                 <asp:Parameter Name="original_Id" Type="Int32" />
-                                <asp:Parameter Name="original_Efecto" Type="String" />
-                                <asp:Parameter Name="original_Causa" Type="String" />
                             </UpdateParameters>
                         </asp:SqlDataSource>
+                        <asp:Button Text="Volver" runat="server" ID="btnvolver" OnClick="btnvolver_Click" />
                     </div>
                     <br />
                     <br />
                 </div>
             </div>
-            <div id="derecha" style="width: 25%; margin: 0 auto; float: left;" class="demo mover futuro">
-                <br />
+            <div id="derecha" style="width: 25%; margin: 0 auto; float: left; color: #005EA7;"
+                class="demo mover futuro">
                 <br />
                 <div>
                     <table>
                         <tr>
                             <td>
-                                <img src="/Icons/network.png" width="64px" alt="Evaluacion" />
+                                <img src="/Icons/marco_logico.png" width="48px" alt="Evaluacion" />
                             </td>
                             <td style="vertical-align: middle; font-size: 13px; text-align: left;">
                                 <h1 style="color: #0b72bc;">
-                                    Marco Logico</h1>
+                                    Marco Lógico</h1>
+                                Paso No. 2 de 4
                             </td>
                         </tr>
                     </table>
                     <br />
-                    <div class="problema" style="border: 2px solid #ccc; -moz-border-radius: 2px; -webkit-border-radius: 2px;
-                        border-radius: 2px; /*ie 7 and 8 do not support border radius*/
--moz-box-shadow: 0px 0px 3px #000000; -webkit-box-shadow: 0px 0px 3px #000000; box-shadow: 0px 0px 3px #000000;
-                        /*ie 7 and 8 do not support blur property of shadows*/ color: #005EA7; font-size: 1em;
-                        height: 30px; line-height: 30px; padding-left: 10px; font-size: 1.5em; width: 50%;">
-                        Finalidad
-                        <asp:TextBox ID="txtfinalidad" runat="server" />
-                        <asp:LinkButton ID="lknAlmacenarFinalidad" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
-                            runat="server" OnClick="lknAlmacenarFinalidad_Click" />
-                    </div>
-                    <br />
-                    <div class="problema" style="border: 2px solid #ccc; -moz-border-radius: 2px; -webkit-border-radius: 2px;
-                        border-radius: 2px; /*ie 7 and 8 do not support border radius*/
--moz-box-shadow: 0px 0px 3px #000000; -webkit-box-shadow: 0px 0px 3px #000000; box-shadow: 0px 0px 3px #000000;
-                        /*ie 7 and 8 do not support blur property of shadows*/ color: #005EA7; font-size: 1em;
-                        padding-left: 10px; width: 50%;">
-                        <h1>
-                            Propósito</h1>
-                        <asp:TextBox ID="txtProposito" runat="server" />
-                        <asp:LinkButton ID="lknAlmacenarProposito" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
-                            runat="server" OnClick="lknAlmacenarProposito_Click" />
-                        <a id="adetalles" href="#">
-                            <img src="/Icons/details.png" width="24px" alt="Detalles" /></a> <a id="Cronograma_Proyecto"
-                                href="#">
-                                <img src="/Icons/Calender.png" width="24px" alt="Cronograma" /></a>
-                        <input type="button" id="expandir" onclick="ActivateAcordion();" value="Expandir Actividades"
-                            role="button" aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" />
+                    <div class="problema" style="color: #005EA7; font-size: 1em; width: 50%; -moz-border-radius: 3px;
+                        -webkit-border-radius: 3px; border-radius: 3px;">
+                        <div style="border: dashed 2px #005EA7; padding-left: 50px;">
+                            <br />
+                            <h1>
+                                <span style="color: #6E6E6E;" class="style1">Problema Central &gt;</span> Propósito</h1>
+                            <asp:TextBox ID="txtProposito" runat="server" TextMode="MultiLine" /><asp:LinkButton
+                                ID="lknAlmacenarProposito" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
+                                runat="server" OnClick="lknAlmacenarProposito_Click" /><br />
+                            <p style="font-style: italic; color: #000;">
+                                * Descripción del propósito para el proyecto actual.</p>
+                            <br />
+                        </div>
                         <br />
-                        <asp:Panel ID="presultados" runat="server">
+                        <div class="problema" style="border: dashed 2px #00A9B5; -moz-border-radius: 3px;
+                            -webkit-border-radius: 3px; border-radius: 3px; padding-left: 50px;">
+                            <br />
+                            <h1 style="color: #00A9B5;">
+                                <span style="color: #6E6E6E;" class="style1">Efectos &gt;</span> Finalidad</h1>
+                            <asp:TextBox ID="txtfinalidad" runat="server" TextMode="MultiLine" Width="80%" Style="margin: 0 auto;
+                                border: solid 2px #00A9B5;" />
+                            <asp:LinkButton ID="lknAlmacenarFinalidad" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
+                                runat="server" OnClick="lknAlmacenarFinalidad_Click" />
+                            <br />
+                            <p style="font-style: italic; color: #000;">
+                                * Descripción de la finalidad para el proyecto actual.</p>
+                            <br />
+                            <a id="Visualizar_Matriz" style="color: #000; font-style: italic; text-decoration: none;"
+                                href="#">
+                                <img src="/Icons/Search.png" width="24px" alt="Matriz" />
+                                Visualizar Matriz</a>
+                            <br />
+                            <br />
+                            <a id="adetalles" style="color: #000; font-style: italic; text-decoration: none;"
+                                href="#">
+                                <img src="/Icons/details.png" width="24px" alt="Detalles" />
+                                Administración de Indicadores, Medios de verificación y supuestos.</a><br />
+                            <br />
+                            <a id="Cronograma_Proyecto" style="color: #000; font-style: italic; text-decoration: none;"
+                                href="#cronogramageneral">
+                                <img src="/Icons/Calender.png" width="24px" alt="Cronograma" />
+                                Cronograma general para el proyecto actual.</a><br />
+                            <br />
+                        </div>
+                        <br />
+                        <asp:Panel ID="presultados" runat="server" Style="border: dashed 2px #357D28; -moz-border-radius: 3px;
+                            -webkit-border-radius: 3px; border-radius: 3px; padding-left: 50px;">
                         </asp:Panel>
                     </div>
+                    <br />
                 </div>
+                <br />
+                <br />
+                <br />
             </div>
             <div id="derechaSiguiente" style="width: 25%; margin: 0 auto; float: left;" class="demo mover">
                 <br />
@@ -799,24 +1036,61 @@
                     <table>
                         <tr>
                             <td>
-                                <img src="/Icons/network.png" width="64px" alt="Plan Operativo" />
+                                <img src="/Icons/plan_operativo.png" width="48px" alt="Plan Operativo" />
                             </td>
                             <td style="vertical-align: middle; font-size: 13px; text-align: left;">
                                 <h1 style="color: #0b72bc;">
                                     Plan Operativo</h1>
+                                Paso No. 3 de 4
                             </td>
                         </tr>
                     </table>
-                    <div class="problema" style="border: 2px solid #ccc; -moz-border-radius: 2px; -webkit-border-radius: 2px;
-                        border-radius: 2px; /*ie 7 and 8 do not support border radius*/
--moz-box-shadow: 0px 0px 3px #000000; -webkit-box-shadow: 0px 0px 3px #000000; box-shadow: 0px 0px 3px #000000;
-                        /*ie 7 and 8 do not support blur property of shadows*/ color: #005EA7; font-size: 1em;
-                        padding-left: 10px; width: 50%;">
+                    <div class="problema" style="border: dashed 2px #005EA7; padding-left: 50px; width: 50%;">
+                        <br />
+                        <h1 style="color: #005EA7;">
+                            <span style="color: #6E6E6E;" class="style1">Problema Central &gt;</span> Propósito</h1>
+                        <asp:TextBox ID="txtproposito_po" runat="server" TextMode="MultiLine" /><br />
+                        <p style="font-style: italic; color: #000;">
+                            * Descripción del propósito para el proyecto actual.</p>
+                        <br />
+                    </div>
+                    <br />
+                    <div class="problema" style="border: dashed 2px #00A9B5; -moz-border-radius: 3px;
+                        -webkit-border-radius: 3px; border-radius: 3px; padding-left: 50px; width: 50%;">
+                        <br />
+                        <h1 style="color: #00A9B5;">
+                            <span style="color: #6E6E6E;" class="style1">Efectos &gt;</span> Finalidad</h1>
+                        <asp:TextBox ID="txtfinalidad_po" runat="server" TextMode="MultiLine" Width="80%"
+                            Style="margin: 0 auto; border: solid 2px #00A9B5;" />
+                        <br />
+                        <p style="font-style: italic; color: #000;">
+                            * Descripción de la finalidad para el proyecto actual.</p>
+                        <br />
+                        <a id="PlanOperativo_a" style="color: #000; font-style: italic; text-decoration: none;"
+                            href="#">
+                            <img src="/Icons/Search.png" width="24px" alt="Matriz" />
+                            Visualizar Matriz</a>
+                        <br />
+                        <br />
+                    </div>
+                    <br />
+                    <div class="problema" style="border: dashed 2px #357D28; -moz-border-radius: 3px;
+                        -webkit-border-radius: 3px; border-radius: 3px; padding-left: 50px; width: 50%;">
+                        <br />
                         <h1>
-                            Plan Operativo</h1>
-                        <a id="a1" href="#">
-                            <img src="/Icons/details.png" width="24px" alt="Detalles" /></a> <a id="A2" href="#">
-                                <img src="/Icons/Calender.png" width="24px" alt="Cronograma" /></a>
+                            * Actividades</h1>
+                        <br />
+                        <p style="font-style: italic; color: #000;">
+                            * En la parte inferior de cada uno de los resultados se encuentra un modulo
+                            <br />
+                            que contiene las actividades correspondientes para el mismo.
+                            <br />
+                            <br />
+                            <input type="button" id="Button1" onclick="ActivateAcordion();" value="Expandir Actividades"
+                                role="button" aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" />
+                            <b>Nota:</b> para visualizar todas las actividades al mismo tiempo basta con dar
+                            click en el boton "Expandir Actividades".</p>
+                        <br />
                         <br />
                         <asp:Panel ID="pnlActividades" runat="server">
                         </asp:Panel>
@@ -830,36 +1104,29 @@
                     <table>
                         <tr>
                             <td>
-                                <img src="/Icons/network.png" width="64px" alt="Plan Operativo" />
+                                <img src="/Icons/Calender.png" width="48px" alt="Plan Operativo" />
                             </td>
                             <td style="vertical-align: middle; font-size: 13px; text-align: left;">
                                 <h1 style="color: #0b72bc; width: 50%;">
-                                    Cronograma</h1>
+                                    Cronograma General</h1>
+                                Paso No. 4 de 4
                             </td>
                         </tr>
                     </table>
-                    <div class="problema" style="border: 2px solid #ccc; -moz-border-radius: 2px; -webkit-border-radius: 2px;
-                        border-radius: 2px; /*ie 7 and 8 do not support border radius*/
--moz-box-shadow: 0px 0px 3px #000000; -webkit-box-shadow: 0px 0px 3px #000000; box-shadow: 0px 0px 3px #000000;
-                        /*ie 7 and 8 do not support blur property of shadows*/ color: #005EA7; font-size: 1em;
-                        padding-left: 10px; width: 80%;">
-                        <h1>
-                            Cronograma general de actividades</h1>
+                    <div class="problema" style="border: 2px solid #ccc; color: #005EA7; width: 80%;">
                         <br />
                         <asp:HiddenField ID="HFTempDate" runat="server" />
-                        <div style="position: relative;" class="gantt" id="GanttChartDIV">
+                        <div style="position: relative; width: 100%;" class="gantt" id="GanttChartDIV">
                         </div>
                     </div>
+                    <%--<asp:LinkButton Text="Export to Excel" runat="server" id="lknexport_gantt" 
+                        onclick="lknexport_gantt_Click"/>--%>
                 </div>
             </div>
             <br />
             <br />
             <br />
         </div>
-        <input type="button" onclick="SlideSiguiente();" class="btnright ui-button ui-widget ui-state-default ui-corner-all"
-            role="button" aria-disabled="false" />
-        <input type="button" onclick="SlideVolver();" class="btnleft ui-button ui-widget ui-state-default ui-corner-all"
-            role="button" aria-disabled="false" />
     </div>
     <input type="hidden" runat="server" id="alerthq" value="-1" />
     <input type="hidden" runat="server" id="hidproyecto" value="-1" />

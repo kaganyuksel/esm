@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ESM.Model;
+using System.Collections;
 
 namespace ESM.Objetos
 {
@@ -30,7 +31,7 @@ namespace ESM.Objetos
 
         }
 
-        public bool Add(string efecto, string causa, int idproyecto)
+        public bool Add(string efecto, string causa, int idproyecto, string color)
         {
             try
             {
@@ -39,6 +40,7 @@ namespace ESM.Objetos
 
                     Efecto = efecto,
                     Causa = causa,
+                    Color = color,
                     Proyecto_id = idproyecto
 
                 };
@@ -182,7 +184,7 @@ namespace ESM.Objetos
 
 
 
-                if (finalidad_proyecto.Trim().Length == 0 || finalidad_proyecto == null)
+                if (finalidad_proyecto == null || finalidad_proyecto.Trim().Length == 0)
                 {
 
                     string finalidad = "";
@@ -249,6 +251,49 @@ namespace ESM.Objetos
 
         }
 
+        public IQueryable<Medios_de_verificacion> getMediosProyecto(int proyecto_id)
+        {
+            try
+            {
+                var m_p = from mp in _db.Proyectos_Medios
+                          where mp.Proyecto_id == proyecto_id
+                          select mp.Medios_de_verificacion;
+
+                return m_p;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable<Medios_de_verificacion> getMediosResultado(int resultado_id)
+        {
+            try
+            {
+                var m_r = from mr in _db.Resultados_Medios
+                          where mr.Resultado_id == resultado_id
+                          select mr.Medios_de_verificacion;
+
+                return m_r;
+
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable<Medios_de_verificacion> getMediosActividad(int actividad_id)
+        {
+            try
+            {
+                var m_a = from ma in _db.Actividades_Medios
+                          where ma.Actividad_id == actividad_id
+                          select ma.Medios_de_verificacion;
+
+                return m_a;
+            }
+            catch (Exception) { return null; }
+
+        }
+
     }
 
     public class Csupuestos
@@ -288,6 +333,104 @@ namespace ESM.Objetos
                 return true;
             }
             catch (Exception) { return false; }
+
+        }
+
+        public IQueryable<Supuesto> getSupuestosProyecto(int proyecto_id)
+        {
+            try
+            {
+                var s_p = from sp in _db.Proyectos_Supuestos
+                          where sp.Proyecto_supuesto_id == proyecto_id
+                          select sp.Supuesto;
+
+                return s_p;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable<Supuesto> getSupuestosResultado(int resultado_id)
+        {
+            try
+            {
+                var s_r = from sr in _db.Resultados_Supuestos
+                          where sr.Resultado_id == resultado_id
+                          select sr.Supuesto;
+
+                return s_r;
+
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable<Supuesto> getSupuestosActividad(int actividad_id)
+        {
+            try
+            {
+                var s_a = from sa in _db.Actividades_Supuestos
+                          where sa.Actividad_id == actividad_id
+                          select sa.Supuesto;
+
+                return s_a;
+            }
+            catch (Exception) { return null; }
+
+        }
+    }
+
+    public class Cresponsables
+    {
+        #region Propiedades Privadas y Publicas
+
+        protected ESMBDDataContext _db = new ESMBDDataContext();
+
+        #endregion
+
+        public int getResponsable_id(string responsable)
+        {
+            try
+            {
+                var responsableid = (from s in _db.Usuarios
+                                     where s.Nombre.Contains(responsable)
+                                     select s.IdUsuario).Single();
+
+                return responsableid;
+            }
+            catch (Exception) { return 0; }
+
+        }
+
+        public bool AddResponsable(string responsable)
+        {
+            try
+            {
+                Responsable objresponsable = new Responsable
+                {
+                    Responsable1 = responsable
+                };
+
+                _db.Responsables.InsertOnSubmit(objresponsable);
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public IQueryable<Usuario> getResponsablesActividad(int actividad_id)
+        {
+            try
+            {
+                var s_a = from sa in _db.Actividades_Responsables
+                          where sa.Actividad_id == actividad_id
+                          select sa.Usuario;
+
+                return s_a;
+            }
+            catch (Exception) { return null; }
 
         }
     }
@@ -374,7 +517,7 @@ namespace ESM.Objetos
                 {
                     _db.Proyectos_Medios.DeleteOnSubmit(item);
                 }
-
+                _db.SubmitChanges();
                 return true;
             }
             catch (Exception) { return false; }
@@ -393,7 +536,7 @@ namespace ESM.Objetos
                 {
                     _db.Proyectos_Supuestos.DeleteOnSubmit(item);
                 }
-
+                _db.SubmitChanges();
                 return true;
             }
             catch (Exception) { return false; }
@@ -441,6 +584,83 @@ namespace ESM.Objetos
         protected ESMBDDataContext _db = new ESMBDDataContext();
 
         #endregion
+
+        public List<object[,]> getIndicadoresVencidos(int usuario_id)
+        {
+            try
+            {
+                List<object[,]> objList = new List<object[,]>();
+
+                var actividades_usuario = (from u in _db.Actividades_Responsables
+                                           where u.Usuario_id == usuario_id
+                                           select u).Distinct();
+
+                foreach (var item in actividades_usuario)
+                {
+                    var indicadores_vencidos = from ind in _db.Indicadores
+                                               where ind.Actividad_id == item.Actividad_id && ind.fecha_indicador_final < DateTime.Now
+                                               select ind;
+
+                    object[,] caracteristicas_indicador = new object[indicadores_vencidos.Count(), 4];
+                    int indicador_actual = 0;
+
+                    foreach (var item_indicadores in indicadores_vencidos)
+                    {
+                        caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Causas_Efecto.Proyecto.Problema;
+                        caracteristicas_indicador[indicador_actual, 1] = item_indicadores.Actividade.Actividad;
+                        caracteristicas_indicador[indicador_actual, 2] = item_indicadores.Indicador;
+                        caracteristicas_indicador[indicador_actual, 3] = item_indicadores.Fecha_Creacion;
+
+                        indicador_actual++;
+                    }
+
+                    objList.Add(caracteristicas_indicador);
+                }
+
+                return objList;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public List<object[,]> getIndicadoresVencidosPorVencer(int usuario_id)
+        {
+            try
+            {
+                List<object[,]> objList = new List<object[,]>();
+
+                var actividades_usuario = (from u in _db.Actividades_Responsables
+                                           where u.Usuario_id == usuario_id
+                                           select u).Distinct();
+
+                foreach (var item in actividades_usuario)
+                {
+                    var indicadores_vencidos = from ind in _db.Indicadores
+                                               where ind.Actividad_id == item.Actividad_id && ind.fecha_indicador_final >= DateTime.Now && ind.fecha_indicador_final <= DateTime.Now.AddDays(5)
+                                               select ind;
+
+                    object[,] caracteristicas_indicador = new object[indicadores_vencidos.Count(), 4];
+                    int indicador_actual = 0;
+
+                    foreach (var item_indicadores in indicadores_vencidos)
+                    {
+                        caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Causas_Efecto.Proyecto.Problema;
+                        caracteristicas_indicador[indicador_actual, 1] = item_indicadores.Actividade.Actividad;
+                        caracteristicas_indicador[indicador_actual, 2] = item_indicadores.Indicador;
+                        caracteristicas_indicador[indicador_actual, 3] = item_indicadores.Fecha_Creacion;
+
+                        indicador_actual++;
+                    }
+
+                    objList.Add(caracteristicas_indicador);
+                }
+
+                return objList;
+            }
+            catch (Exception) { return null; }
+
+        }
+
 
         public int Add(int idresultado, string actividad, float presupuesto)
         {
@@ -566,7 +786,7 @@ namespace ESM.Objetos
                 {
                     _db.Actividades_Medios.DeleteOnSubmit(item);
                 }
-
+                _db.SubmitChanges();
                 return true;
             }
             catch (Exception) { return false; }
@@ -586,6 +806,29 @@ namespace ESM.Objetos
                     _db.Actividades_Supuestos.DeleteOnSubmit(item);
                 }
 
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public bool RemoveResponsables(int resultadoid)
+        {
+            try
+            {
+                var responsables = from a_s in _db.Actividades_Responsables
+                                   where a_s.Actividad_id == resultadoid
+                                   select a_s;
+
+                foreach (var item in responsables)
+                {
+                    _db.Actividades_Responsables.DeleteOnSubmit(item);
+                }
+
+                _db.SubmitChanges();
+
                 return true;
             }
             catch (Exception) { return false; }
@@ -603,6 +846,25 @@ namespace ESM.Objetos
                 };
 
                 _db.Actividades_Supuestos.InsertOnSubmit(objActividades_Supuesto);
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public bool AddResponsables(int actividadid, int responsableid)
+        {
+            try
+            {
+                Actividades_Responsable objActividades_Responsable = new Actividades_Responsable
+                {
+                    Usuario_id = responsableid,
+                    Actividad_id = actividadid
+                };
+
+                _db.Actividades_Responsables.InsertOnSubmit(objActividades_Responsable);
                 _db.SubmitChanges();
 
                 return true;

@@ -9,11 +9,7 @@
         type="text/css" />
     <script src="/Pretty/js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
 
-
-
-        });
 
         $(function () {
             $(".checkclass").buttonset();
@@ -214,7 +210,7 @@
             }
             
             $.ajax({
-                url: "/ajax.aspx?serial=ok&estado=" + estado_almacenar + "&actor_id="+ $("#ContentPlaceHolder1_cboActores").val() + "&datos=" + origen_datos,
+                url: "/ajax.aspx?serial=ok&estado=" + estado_almacenar + "&actor_id="+ $("#ContentPlaceHolder1_cboActores").val(),
                 async: false,
                 data: parametros_finales,
                 success: function (result) {

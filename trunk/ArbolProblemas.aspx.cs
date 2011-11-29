@@ -22,18 +22,19 @@ namespace ESM
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (Session["idproyecto"] != null)
+            //Session.Add("Cant_Load", 0);
+            if (Session["idproyecto"] != null && Convert.ToInt32(Session["Cant_Load"]) == 0)
             {
                 hidproyecto.Value = Session["idproyecto"].ToString();
                 _idproyecto = Convert.ToInt32(Session["idproyecto"]);
+                //ObtenerResultados(_idproyecto);
+                //Session["Cant_Load"] = 1;
             }
             if (Bandera.Value == "1")
             {
                 ObtenerResultados(_idproyecto);
                 Bandera.Value = "-1";
             }
-
             if (!Page.IsPostBack)
             {
 
@@ -55,6 +56,8 @@ namespace ESM
 
             #endregion
 
+            ObtenerResultados(_idproyecto);
+
         }
 
         protected void lknAlmacenarE_Click(object sender, EventArgs e)
@@ -62,7 +65,7 @@ namespace ESM
             #region Insercion de Efecto
 
             int idproyecto = Convert.ToInt32(Session["idproyecto"]);
-            bool agroefecto = objCEfectos.Add(txtEfecto1.Text, txtCausa1.Text, idproyecto);
+            bool agroefecto = objCEfectos.Add(txtEfecto1.Text, txtCausa1.Text, idproyecto, mycolor.Value);
 
             if (agroefecto)
                 alerthq.Value = "1";
@@ -72,23 +75,9 @@ namespace ESM
             gvEfectos.DataBind();
             #endregion
 
+            ObtenerResultados(_idproyecto);
+
         }
-
-        //protected void lknAlmacenarC_Click(object sender, EventArgs e)
-        //{
-        //    #region Insercion Causa
-        //    int idefecto = Convert.ToInt32(cboefectos.SelectedItem.Value);
-        //    bool actualizo_causa = objCEfectos.Update(idefecto, txtCausa1.Text);
-
-        //    if (actualizo_causa)
-        //        alerthq.Value = "1";
-        //    else
-        //        alerthq.Value = "0";
-
-        //    gvCausas.DataBind();
-        //    #endregion
-
-        //}
 
         protected void gvProyectos_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -125,9 +114,15 @@ namespace ESM
                 string proposito = Cproyecto.CargarProposito(_idproyecto);
 
                 if (proposito != null)
+                {
                     txtProposito.Text = proposito;
+                    txtproposito_po.Text = proposito;
+                }
                 else
+                {
                     txtProposito.Text = problema;
+                    txtproposito_po.Text = problema;
+                }
 
                 CargarFinalidad();
             }
@@ -163,9 +158,12 @@ namespace ESM
                 IQueryable<ESM.Model.Causas_Efecto> objCausas_Efecto = new CEfectos().getCount(idproyecto);
 
                 int contador = 0;
+
                 int ancho_textbox = 30;
 
                 HtmlGenericControl titulo_resultados = new HtmlGenericControl("h2");
+                titulo_resultados.Attributes.CssStyle.Add("float", "left");
+                titulo_resultados.Attributes.CssStyle.Add("margin-left", "10px");
                 titulo_resultados.InnerHtml = "Resultados";
 
                 HtmlGenericControl br_resultados = new HtmlGenericControl("br");
@@ -174,17 +172,26 @@ namespace ESM
                 var visualizar_report = new HtmlAnchor();
                 visualizar_report.HRef = Request.Url.Scheme + "://" + Request.Url.Authority + "/ReportMarcoLogico.aspx?idproyecto=" + Session["idproyecto"].ToString() + "&iframe=true&amp;width=100%&amp;height=100%";
                 visualizar_report.Title = "Marco Logico";
-                visualizar_report.Attributes.CssStyle.Add("float", "left");
                 visualizar_report.Attributes.CssStyle.Add("text-decoration", "none");
-                visualizar_report.Attributes.CssStyle.Add("font-size", "14px");
+                visualizar_report.Attributes.CssStyle.Add("font-style", "italic");
                 visualizar_report.Attributes.CssStyle.Add("color", "#005EA7");
-                visualizar_report.InnerHtml = "<img alt='Detalles' src='/Icons/Search.png' width='24px' /> Vista Previa";
+                visualizar_report.InnerHtml = "<img alt='Detalles' src='/Icons/Search.png' width='24px' /> Visualizar Matriz";
                 visualizar_report.Attributes.Add("class", "pretty");
 
-                presultados.Controls.Add(visualizar_report);
+                var visualizar_report_actividades = new HtmlAnchor();
+                visualizar_report_actividades.HRef = Request.Url.Scheme + "://" + Request.Url.Authority + "/ReportMarcoLogico.aspx?idproyecto=" + Session["idproyecto"].ToString() + "&iframe=true&amp;width=100%&amp;height=100%";
+                visualizar_report_actividades.Title = "Marco Logico";
+                visualizar_report_actividades.Attributes.CssStyle.Add("text-decoration", "none");
+                visualizar_report_actividades.Attributes.CssStyle.Add("font-style", "italic");
+                visualizar_report_actividades.Attributes.CssStyle.Add("color", "#005EA7");
+                visualizar_report_actividades.InnerHtml = "<img alt='Detalles' src='/Icons/Search.png' width='24px' /> Visualizar Matriz";
+                visualizar_report_actividades.Attributes.Add("class", "pretty");
+
+                //presultados.Controls.Add(visualizar_report);
                 presultados.Controls.Add(br_vita_previa);
                 presultados.Controls.Add(titulo_resultados);
-                presultados.Controls.Add(br_resultados);
+                //pnlActividades.Controls.Add(visualizar_report_actividades);
+                //pnlActividades.Controls.Add(br_resultados);
 
                 foreach (var item in objCausas_Efecto)
                 {
@@ -198,7 +205,7 @@ namespace ESM
                     objlabel.Text = (contador + 1).ToString() + ". ";
 
                     Label objNombreResultado = new Label();
-                    objNombreResultado.Text = "Nombre";
+                    objNombreResultado.Text = "Resultado";
 
                     Label objDetalleResultado = new Label();
                     objDetalleResultado.Text = "Detalle";
@@ -208,18 +215,28 @@ namespace ESM
                     objlabelid.Visible = false;
 
                     var inputtextcausa = new TextBox();
-                    inputtextcausa.ID = "txtcausaR" + item.Id.ToString();
+                    inputtextcausa.ID = "txtcausaR" + (item.Id + 2000).ToString();
                     inputtextcausa.Text = item.Causa.ToString();
+                    inputtextcausa.Attributes.Add("class", "txtareacausa");
                     inputtextcausa.Attributes.Add("float", "left");
                     inputtextcausa.Attributes.CssStyle.Add("width", ancho_textbox.ToString() + "%");
+                    inputtextcausa.TextMode = TextBoxMode.MultiLine;
+                    inputtextcausa.Attributes.CssStyle.Add("border", "solid 2px #ccc");
+                    if (item.Color != null && item.Color != "")
+                        inputtextcausa.Attributes.CssStyle.Add("background", item.Color);
+                    else
+                        inputtextcausa.Attributes.CssStyle.Add("background", "#fff");
 
                     var inputresultado = new TextBox();
-                    inputresultado.ID = "txtresultado" + item.Id.ToString();
+                    inputresultado.ID = "txtresultadoplan" + item.Id.ToString();
                     if (item.Resultado != null)
                         inputresultado.Text = item.Resultado.ToString();
                     inputresultado.Attributes.Add("float", "left");
+                    //inputresultado.Attributes.Add("class", "txtareacausa");
                     inputresultado.Attributes.Add("placeholder", "Resultado numero" + (contador + 1).ToString());
                     inputresultado.Attributes.CssStyle.Add("width", ancho_textbox.ToString() + "%");
+                    inputresultado.TextMode = TextBoxMode.MultiLine;
+
 
                     var almacenarresultado = new ImageButton();
                     almacenarresultado.ID = "btnAlmacenar" + contador.ToString();
@@ -245,7 +262,7 @@ namespace ESM
 
                     HtmlGenericControl br_resul = new HtmlGenericControl("br");
 
-                    spanresul.Controls.Add(br_resul);
+                    //spanresul.Controls.Add(br_resul);
                     spanresul.Controls.Add(objlabel);
                     spanresul.Controls.Add(objlabelid);
                     spanresul.Controls.Add(objNombreResultado);
@@ -260,33 +277,48 @@ namespace ESM
                     HtmlGenericControl br_resul_po = new HtmlGenericControl("br");
 
                     span.Attributes.Add("width", "100%");
+                    span.Attributes.CssStyle.Add("height", "40px");
+                    span.Attributes.CssStyle.Add("line-height", "40px");
 
                     objlabel = new Label();
                     objlabel.Text = (contador + 1).ToString() + ". ";
 
                     objNombreResultado = new Label();
-                    objNombreResultado.Text = "Nombre";
+                    objNombreResultado.Text = "Resultado&nbsp";
 
                     objDetalleResultado = new Label();
-                    objDetalleResultado.Text = "Detalle";
+                    objDetalleResultado.Text = "Detalle&nbsp";
 
                     objlabelid = new Label();
                     objlabelid.Text = item.Id.ToString();
                     objlabelid.Visible = false;
 
                     inputtextcausa = new TextBox();
-                    inputtextcausa.ID = "txtcausaR" + contador.ToString();
+                    inputtextcausa.ID = "txtcausaR" + (contador + 8000).ToString();
                     inputtextcausa.Text = item.Causa.ToString();
+                    inputtextcausa.Attributes.Add("class", "txtareacausa");
+                    inputtextcausa.Attributes.CssStyle.Add("font-size", "15px");
+                    inputtextcausa.Attributes.CssStyle.Add("height", "40px");
+                    inputtextcausa.Attributes.CssStyle.Add("border", "solid 2px #ccc");
+                    if (item.Color != null && item.Color != "")
+                        inputtextcausa.Attributes.CssStyle.Add("background", item.Color);
+                    else
+                        inputtextcausa.Attributes.CssStyle.Add("background", "#fff");
+                    inputtextcausa.Attributes.CssStyle.Add("border-radius", "3px 3px 3px 3px");
                     inputtextcausa.Attributes.Add("float", "left");
                     inputtextcausa.Attributes.CssStyle.Add("width", ancho_textbox.ToString() + "%");
+                    inputtextcausa.TextMode = TextBoxMode.MultiLine;
 
                     inputresultado = new TextBox();
-                    inputresultado.ID = "txtresultado" + contador.ToString();
+                    inputresultado.ID = "txtresultadomarco" + contador.ToString();
                     if (item.Resultado != null)
                         inputresultado.Text = item.Resultado.ToString();
                     inputresultado.Attributes.Add("float", "left");
+                    inputresultado.Attributes.CssStyle.Add("font-size", "15px");
+                    inputresultado.Attributes.CssStyle.Add("height", "40px");
                     inputresultado.Attributes.Add("placeholder", "Resultado numero" + (contador + 1).ToString());
                     inputresultado.Attributes.CssStyle.Add("width", ancho_textbox.ToString() + "%");
+                    inputresultado.TextMode = TextBoxMode.MultiLine;
 
                     almacenarresultado = new ImageButton();
                     almacenarresultado.ID = "btnAlmacenar" + contador.ToString();
@@ -324,7 +356,7 @@ namespace ESM
                     #region Consultar Actividades
 
                     getPlanOperativo(item.Id, contador);
-                    getActividades(item.Id, contador);
+                    //getActividades(item.Id, contador);
 
 
                     #endregion
@@ -347,6 +379,8 @@ namespace ESM
             int idproyecto = Convert.ToInt32(hidproyecto.Value);
             objCproyecto.Update(idproyecto, null, txtProposito.Text);
 
+            ObtenerResultados(_idproyecto);
+
         }
 
         protected void CargarFinalidad()
@@ -354,6 +388,7 @@ namespace ESM
             try
             {
                 txtfinalidad.Text = objCEfectos.getEfectos(_idproyecto);
+                txtfinalidad_po.Text = txtfinalidad.Text;
             }
             catch (Exception) { /*TODO: JCMM: Controlador Exception*/ }
 
@@ -362,6 +397,8 @@ namespace ESM
         protected void lknAlmacenarFinalidad_Click(object sender, EventArgs e)
         {
             objCpoyecto.Update(_idproyecto, null, null, txtfinalidad.Text);
+
+            ObtenerResultados(_idproyecto);
         }
 
         protected void getPlanOperativo(int idresultado, int consecutivo)
@@ -386,18 +423,19 @@ namespace ESM
                 var txtactividad = new TextBox();
 
                 txtactividad.Attributes.CssStyle.Add("width", "20%");
-                txtactividad.ID = "txtactividadn" + idresultado.ToString();
+                txtactividad.ID = "txtactividadnr" + idresultado.ToString();
+                txtactividad.TextMode = TextBoxMode.MultiLine;
 
                 var lblpresupuesto = new Label();
                 lblpresupuesto.Text = "Presupuesto";
 
                 var txtpresupuesto = new TextBox();
-                txtpresupuesto.ID = "txtpresupuesto" + idresultado.ToString();
+                txtpresupuesto.ID = "txtpresupuestor" + idresultado.ToString();
                 txtpresupuesto.Attributes.Add("class", "numerico");
                 txtpresupuesto.Attributes.CssStyle.Add("width", "20%");
 
                 var btnalmacenaractividad = new ImageButton();
-                btnalmacenaractividad.ID = "btnAlmacenarActividad" + idresultado.ToString();
+                btnalmacenaractividad.ID = "btnAlmacenarActividadr" + idresultado.ToString();
                 btnalmacenaractividad.ImageUrl = "/Icons/1314641093_plus_48.png";
                 btnalmacenaractividad.Attributes.CssStyle.Add("width", "24px");
                 btnalmacenaractividad.Attributes.Add("onclick", "AlmacenarActividad('" + idresultado.ToString() + "','" + "ContentPlaceHolder1_" + txtactividad.ID + "','" + "ContentPlaceHolder1_" + txtpresupuesto.ID + "');");
@@ -439,12 +477,13 @@ namespace ESM
                         lblcactividad.Text = "Nombre Actividad";
                         var txtcactividad = new TextBox();
                         txtcactividad.Attributes.CssStyle.Add("width", "20%");
-                        txtcactividad.ID = "txtactividadc" + actividadbyresult.Id.ToString() + consecutivo.ToString();
+                        txtcactividad.ID = "txtactividadcrb" + actividadbyresult.Id.ToString() + consecutivo.ToString();
                         txtcactividad.Text = actividadbyresult.Actividad;
+                        txtcactividad.TextMode = TextBoxMode.MultiLine;
                         var lblcpresupuesto = new Label();
                         lblcpresupuesto.Text = "Presupuesto";
                         var txtcpresupuesto = new TextBox();
-                        txtcpresupuesto.ID = "txtpresupuestoc" + actividadbyresult.Id.ToString() + consecutivo.ToString();
+                        txtcpresupuesto.ID = "txtpresupuestocrb" + actividadbyresult.Id.ToString() + consecutivo.ToString();
                         txtcpresupuesto.Attributes.CssStyle.Add("width", "20%");
                         txtcpresupuesto.Text = actividadbyresult.Presupuesto.ToString();
 
@@ -474,9 +513,9 @@ namespace ESM
 
                         contenido_acordion.Controls.Add(detalles_Actividad);
 
-                        br = new HtmlGenericControl("br");
+                        //br = new HtmlGenericControl("br");
 
-                        contenido_acordion.Controls.Add(br);
+                        //contenido_acordion.Controls.Add(br);
 
 
                         int consecutivo_indicador = 0;
@@ -553,13 +592,13 @@ namespace ESM
                 var txtactividad = new TextBox();
 
                 txtactividad.Attributes.CssStyle.Add("width", "20%");
-                txtactividad.ID = "txtactividadn" + idresultado.ToString() + consecutivo.ToString();
+                txtactividad.ID = "txtactividadna" + idresultado.ToString() + consecutivo.ToString();
 
                 var lblpresupuesto = new Label();
                 lblpresupuesto.Text = "Presupuesto";
 
                 var txtpresupuesto = new TextBox();
-                txtpresupuesto.ID = "txtpresupuesto" + idresultado.ToString() + consecutivo.ToString();
+                txtpresupuesto.ID = "txtpresupuestoa" + idresultado.ToString() + consecutivo.ToString();
                 txtpresupuesto.Attributes.Add("class", "numerico");
                 txtpresupuesto.Attributes.CssStyle.Add("width", "20%");
 
@@ -607,7 +646,7 @@ namespace ESM
 
                         var txtcactividad = new TextBox();
                         txtcactividad.Attributes.CssStyle.Add("width", "20%");
-                        txtcactividad.ID = "txtactividadc" + actividadbyresult.Id.ToString();
+                        txtcactividad.ID = "txtactividadcac" + actividadbyresult.Id.ToString();
                         txtcactividad.Text = actividadbyresult.Actividad;
                         txtcactividad.ReadOnly = true;
 
@@ -615,7 +654,7 @@ namespace ESM
                         lblcpresupuesto.Text = "Presupuesto";
 
                         var txtcpresupuesto = new TextBox();
-                        txtcpresupuesto.ID = "txtpresupuestoc" + actividadbyresult.Id.ToString();
+                        txtcpresupuesto.ID = "txtpresupuestocac" + actividadbyresult.Id.ToString();
                         txtcpresupuesto.Attributes.CssStyle.Add("width", "20%");
                         txtcpresupuesto.ReadOnly = true;
                         txtcpresupuesto.Text = actividadbyresult.Presupuesto.ToString();
@@ -645,13 +684,13 @@ namespace ESM
 
                         br = new HtmlGenericControl("br");
 
-                        contenido_acordion.Controls.Add(br);
+                        //contenido_acordion.Controls.Add(br);
 
                         actividades.Controls.Add(titulo);
                         actividades.Controls.Add(contenido_acordion);
 
                         presultados.Controls.Add(actividades);
-                        presultados.Controls.Add(br);
+                        //presultados.Controls.Add(br);
                     }
                 }
 
@@ -672,6 +711,46 @@ namespace ESM
             }
             catch (Exception) { /*TODO: JCMM: Controlador Exception*/ }
 
+        }
+
+        protected void btnvolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/ArbolProblemas.aspx");
+        }
+
+
+        protected bool Export(HtmlTable table)
+        {
+            try
+            {
+
+                StringBuilder objsb = new StringBuilder();
+                System.IO.StringWriter sw = new System.IO.StringWriter(objsb);
+                HtmlTextWriter htw = new HtmlTextWriter(sw);
+                System.Web.UI.Page pagina = new System.Web.UI.Page();
+                var form = new HtmlForm();
+                pagina.EnableEventValidation = false;
+                pagina.DesignerInitialize();
+                pagina.Controls.Add(form);
+                form.Controls.Add(table);
+                pagina.RenderControl(htw);
+                Response.Clear();
+                Response.Buffer = true;
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.AddHeader("Content-Disposition", "attachment;filename=MarcoLogico.xls");
+                Response.Charset = "UTF-8";
+                Response.ContentEncoding = Encoding.Default;
+                Response.Write(objsb.ToString());
+                Response.End();
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        protected void lknexport_gantt_Click(object sender, EventArgs e)
+        {
+            Export((HtmlTable)this.Page.Form.FindControl("theTable"));
         }
 
     }

@@ -59,6 +59,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>Office\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -258,6 +261,11 @@
     <Compile Include="Objetos\CReportes.cs" />
     <Compile Include="Objetos\ExcelDocument.cs" />
     <Compile Include="Objetos\GridViewExportUtil.cs" />
+    <Compile Include="Objetos\GridViewGroup.cs" />
+    <Compile Include="Objetos\GridViewGroupList.cs" />
+    <Compile Include="Objetos\GridViewHelper.cs" />
+    <Compile Include="Objetos\GridViewSummary.cs" />
+    <Compile Include="Objetos\GridViewSummaryList.cs" />
     <Compile Include="Objetos\LecturaContextoSE.cs" />
     <Compile Include="Objetos\CSistematizacion.cs" />
     <Compile Include="Objetos\MarcoLogico.cs" />
@@ -363,12 +371,14 @@
     <Content Include="Icons\Alert.png" />
     <Content Include="Icons\Announcement.png" />
     <Content Include="Icons\Back.png" />
+    <Content Include="Icons\Backhover.png" />
     <Content Include="Icons\Bin_Empty.png" />
     <Content Include="Icons\Bin_Full.png" />
     <Content Include="Icons\bonsai.png" />
     <Content Include="Icons\Box.png" />
     <Content Include="Icons\Burn.png" />
     <Content Include="Icons\Calender.png" />
+    <Content Include="Icons\camera.png" />
     <Content Include="Icons\cancel.png" />
     <Content Include="Icons\CD.png" />
     <Content Include="Icons\certificate.png" />
@@ -376,12 +386,16 @@
     <Content Include="Icons\clip_image002.jpg" />
     <Content Include="Icons\Clock.png" />
     <Content Include="Icons\Close.png" />
+    <Content Include="Icons\color.png" />
     <Content Include="Icons\Computer.png" />
     <Content Include="Icons\Contact.png" />
     <Content Include="Icons\crispy-new-tree.png" />
     <Content Include="Icons\Database.png" />
     <Content Include="Icons\Delete.png" />
     <Content Include="Icons\details.png" />
+    <Content Include="Icons\dock-l.png" />
+    <Content Include="Icons\dock-m.png" />
+    <Content Include="Icons\dock-r.png" />
     <Content Include="Icons\Down.png" />
     <Content Include="Icons\Edit.png" />
     <Content Include="Icons\EducalidadFooter.png" />
@@ -390,29 +404,44 @@
     <Content Include="Icons\Favorite.png" />
     <Content Include="Icons\Flag.png" />
     <Content Include="Icons\Floppy.png" />
+    <Content Include="Icons\flujo-arbol.png" />
     <Content Include="Icons\Folder.png" />
     <Content Include="Icons\Folder_Open.png" />
     <Content Include="Icons\Forward.png" />
     <Content Include="Icons\google-maps-icon.gif" />
     <Content Include="Icons\Help.png" />
+    <Content Include="Icons\history.jpg" />
     <Content Include="Icons\Home.png" />
+    <Content Include="Icons\icon-addressbook.png" />
+    <Content Include="Icons\icon-ical.png" />
+    <Content Include="Icons\icon-idisk.png" />
+    <Content Include="Icons\icon-iphoto.png" />
+    <Content Include="Icons\icon-mail.png" />
+    <Content Include="Icons\id_card.png" />
     <Content Include="Icons\Info.png" />
+    <Content Include="Icons\ipod.png" />
     <Content Include="Icons\Key.png" />
     <Content Include="Icons\Lock.png" />
     <Content Include="Icons\LOGO CISP.png" />
     <Content Include="Icons\Mail.png" />
     <Content Include="Icons\Mail_Read.png" />
+    <Content Include="Icons\marco_logico.png" />
     <Content Include="Icons\MENFooter.png" />
     <Content Include="Icons\MENHeader.png" />
     <Content Include="Icons\Music.png" />
     <Content Include="Icons\nav.png" />
     <Content Include="Icons\network.png" />
+    <Content Include="Icons\news.jpg" />
+    <Content Include="Icons\next.png" />
+    <Content Include="Icons\notificaciones.png" />
     <Content Include="Icons\ok.png" />
     <Content Include="Icons\Options.png" />
     <Content Include="Icons\Paste.png" />
     <Content Include="Icons\Pictures.png" />
+    <Content Include="Icons\plan_operativo.png" />
     <Content Include="Icons\poll.png" />
     <Content Include="Icons\Portfolio.png" />
+    <Content Include="Icons\products.jpg" />
     <Content Include="Icons\progres.gif" />
     <Content Include="Icons\ProsperidadTodosFooter.png" />
     <Content Include="Icons\Redo.png" />
@@ -436,6 +465,7 @@
     <Content Include="Icons\unicef.png" />
     <Content Include="Icons\Up.png" />
     <Content Include="Icons\upload.png" />
+    <Content Include="Icons\urideas.jpg" />
     <Content Include="Icons\User.png" />
     <Content Include="Icons\Web.png" />
     <Content Include="Icons\Window.png" />
@@ -536,21 +566,26 @@
     <Content Include="ReportesMen.aspx" />
     <Content Include="ReportMarcoLogico.aspx" />
     <Content Include="save_dates.aspx" />
+    <Content Include="Scripts\colorpicker.js" />
+    <Content Include="Scripts\eye.js" />
     <Content Include="Scripts\full_calendar\fullcalendar.css" />
     <Content Include="Scripts\full_calendar\fullcalendar.js" />
     <Content Include="Scripts\full_calendar\fullcalendar.min.js" />
     <Content Include="Scripts\full_calendar\fullcalendar.print.css" />
     <Content Include="Scripts\full_calendar\gcal.js" />
+    <Content Include="Scripts\iColorPicker.js" />
     <Content Include="Scripts\jquery-1.6.2.min.js" />
     <Content Include="Scripts\jquery-1.6.3-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.15.custom.min.js" />
     <Content Include="Scripts\jquery.ui.datepicker-es.js" />
     <Content Include="Scripts\jsgantt.js" />
     <Content Include="Scripts\jspdf.js" />
+    <Content Include="Scripts\layout.js" />
     <Content Include="Scripts\libs\base64.js" />
     <Content Include="Scripts\libs\sprintf.js" />
     <Content Include="Scripts\ScrollTo\jquery.scrollTo-min.js" />
     <Content Include="Scripts\ScrollTo\jquery.scrollTo.js" />
+    <Content Include="Scripts\utils.js" />
     <Content Include="Sistematizacion.aspx" />
     <Content Include="SistematizacionSE.aspx" />
     <Content Include="Site.css" />
@@ -571,6 +606,33 @@
       <DependentUpon>AyudaPreguntas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Security\SecuritySesion.cs" />
+    <Content Include="Style\colorpicker.css" />
+    <Content Include="Style\images\blank.gif" />
+    <Content Include="Style\images\colorpicker_background.png" />
+    <Content Include="Style\images\colorpicker_hex.png" />
+    <Content Include="Style\images\colorpicker_hsb_b.png" />
+    <Content Include="Style\images\colorpicker_hsb_h.png" />
+    <Content Include="Style\images\colorpicker_hsb_s.png" />
+    <Content Include="Style\images\colorpicker_indic.gif" />
+    <Content Include="Style\images\colorpicker_overlay.png" />
+    <Content Include="Style\images\colorpicker_rgb_b.png" />
+    <Content Include="Style\images\colorpicker_rgb_g.png" />
+    <Content Include="Style\images\colorpicker_rgb_r.png" />
+    <Content Include="Style\images\colorpicker_select.gif" />
+    <Content Include="Style\images\colorpicker_submit.png" />
+    <Content Include="Style\images\custom_background.png" />
+    <Content Include="Style\images\custom_hex.png" />
+    <Content Include="Style\images\custom_hsb_b.png" />
+    <Content Include="Style\images\custom_hsb_h.png" />
+    <Content Include="Style\images\custom_hsb_s.png" />
+    <Content Include="Style\images\custom_indic.gif" />
+    <Content Include="Style\images\custom_rgb_b.png" />
+    <Content Include="Style\images\custom_rgb_g.png" />
+    <Content Include="Style\images\custom_rgb_r.png" />
+    <Content Include="Style\images\custom_submit.png" />
+    <Content Include="Style\images\select.png" />
+    <Content Include="Style\images\select2.png" />
+    <Content Include="Style\images\slider.png" />
     <Content Include="Style\images\ui-bg_diagonals-small_0_0790c5_40x40.png" />
     <Content Include="Style\images\ui-bg_diagonals-small_25_72a03b_40x40.png" />
     <Content Include="Style\images\ui-bg_diagonals-small_50_0790c5_40x40.png" />
@@ -857,7 +919,9 @@
     <None Include="Pretty\images\.DS_Store" />
     <None Include="Pretty\images\fullscreen\.DS_Store" />
     <Content Include="Style\jsgantt.css" />
+    <Content Include="Style\layout.css" />
     <Content Include="Style\MarcoLogico.css" />
+    <Content Include="Style\menu_arbol.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

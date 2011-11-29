@@ -148,6 +148,15 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.TextBox txtEfecto1;
         
         /// <summary>
+        /// mycolor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText mycolor;
+        
+        /// <summary>
         /// lknAlmacenarE control.
         /// </summary>
         /// <remarks>
@@ -175,22 +184,13 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.SqlDataSource sqlefectos;
         
         /// <summary>
-        /// txtfinalidad control.
+        /// btnvolver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtfinalidad;
-        
-        /// <summary>
-        /// lknAlmacenarFinalidad control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lknAlmacenarFinalidad;
+        protected global::System.Web.UI.WebControls.Button btnvolver;
         
         /// <summary>
         /// txtProposito control.
@@ -211,6 +211,24 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.LinkButton lknAlmacenarProposito;
         
         /// <summary>
+        /// txtfinalidad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtfinalidad;
+        
+        /// <summary>
+        /// lknAlmacenarFinalidad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lknAlmacenarFinalidad;
+        
+        /// <summary>
         /// presultados control.
         /// </summary>
         /// <remarks>
@@ -218,6 +236,24 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel presultados;
+        
+        /// <summary>
+        /// txtproposito_po control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtproposito_po;
+        
+        /// <summary>
+        /// txtfinalidad_po control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtfinalidad_po;
         
         /// <summary>
         /// pnlActividades control.
