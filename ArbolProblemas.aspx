@@ -49,7 +49,7 @@
             position: absolute;
             left: 3.5%;*/
             width: 50px;
-            height: 50px;
+            height: 30px;
             float: left;
             background-repeat: no-repeat;
             background-position: center;
@@ -67,7 +67,7 @@
             position: absolute;
             right: 3.5%;*/
             width: 50px;
-            height: 50px;
+            height: 30px;
             float: right;
             background-repeat: no-repeat;
             background-position: center;
@@ -725,7 +725,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="menu_proyecto" style="margin-left: 25%; width: 90%; position: fixed;">
+    <div id="menu_proyecto" style="margin-left: 25%; width: 90%; position: fixed; z-index: 999999;">
         <ul style="list-style-type: none; display: inline; top: 0; width: 800px; margin-left: 10%;">
             <li style="width: 50px; float: left; vertical-align: middle;">
                 <input type="button" onclick="SlideVolver();" class="btnleft ui-button ui-widget ui-state-default ui-corner-all"
@@ -733,20 +733,20 @@
             </li>
             <li id="li_arbol_problemas" style="width: 150px; float: left; vertical-align: middle;
                 border: dashed 2px #ccc; background: #004464; color: #fff; font-size: 0.8em;
-                height: 50px; text-align: center; line-height: 50px; -moz-border-radius: 5px 0px 0px 5px;
+                height: 30px; text-align: center; line-height: 30px; -moz-border-radius: 5px 0px 0px 5px;
                 -webkit-border-radius: 5px 0px 0px 5px; border-radius: 5px 0px 0px 5px; /*ie 7 and 8 do not support border radius*/">
                 Árbol Problemas</li>
             <li id="li_marco_logico" style="width: 100px; float: left; vertical-align: middle;
-                background: #007cb6; color: #fff; font-size: 0.8em; height: 50px; text-align: center;
-                line-height: 50px;">Marco Lógico</li>
+                background: #007cb6; color: #fff; font-size: 0.8em; height: 30px; text-align: center;
+                line-height: 30px;">Marco Lógico</li>
             <li id="li_plan_operativo" style="width: 100px; float: left; vertical-align: middle;
-                background: #007cb6; color: #fff; font-size: 0.8em; height: 50px; text-align: center;
-                line-height: 50px;">Plan Operativo</li>
+                background: #007cb6; color: #fff; font-size: 0.8em; height: 30px; text-align: center;
+                line-height: 30px;">Plan Operativo</li>
             <li id="li_cronograma" style="width: 100px; float: left; vertical-align: middle;
-                background: #007cb6; color: #fff; font-size: 0.8em; height: 50px; text-align: center;
-                line-height: 50px; -moz-border-radius: 0px 5px 5px 0px; -webkit-border-radius: 0px 5px 5px 0px;
+                background: #007cb6; color: #fff; font-size: 0.8em; height: 30px; text-align: center;
+                line-height: 30px; -moz-border-radius: 0px 5px 5px 0px; -webkit-border-radius: 0px 5px 5px 0px;
                 border-radius: 0px 5px 5px 0px; /*ie 7 and 8 do not support border radius*/">Cronograma</li>
-            <li style="width: 50px; float: left; vertical-align: middle;">
+            <li style="width: 50px; float: left; vertical-align: middle; height: 30px;">
                 <input type="button" onclick="SlideSiguiente();" class="btnright ui-button ui-widget ui-state-default ui-corner-all"
                     role="button" aria-disabled="false" />
             </li>
@@ -757,7 +757,7 @@
     <div class="demo" style="width: 90%; margin: 0 auto; clear: both;">
         <div id="slides" style="display: block; width: 6000px; clear: both; overflow: hidden;">
             <div id="izquierda" style="width: 25%; float: left;" class="demo mover presente">
-                <div style="width: 1024px;">
+                <div style="width: 50%;">
                     <asp:SqlDataSource ID="sqldtActividades" runat="server" ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>"
                         DeleteCommand="DELETE FROM [Actividades] WHERE [Id] = @Id" InsertCommand="INSERT INTO [Actividades] ([Resultado_id], [Actividad], [Presupuesto]) VALUES (@Resultado_id, @Actividad, @Presupuesto)"
                         SelectCommand="SELECT * FROM [Actividades]" UpdateCommand="UPDATE [Actividades] SET [Resultado_id] = @Resultado_id, [Actividad] = @Actividad, [Presupuesto] = @Presupuesto WHERE [Id] = @Id">
@@ -1113,7 +1113,7 @@
                             </td>
                         </tr>
                     </table>
-                    <div class="problema" style="border: 2px solid #ccc; color: #005EA7; width: 80%;">
+                    <div class="problema" style="border: 2px solid #ccc; color: #005EA7; width: 50%;">
                         <br />
                         <asp:HiddenField ID="HFTempDate" runat="server" />
                         <div style="position: relative; width: 100%;" class="gantt" id="GanttChartDIV">
