@@ -52,7 +52,7 @@ namespace ESM.Objetos
             catch (Exception) { return false; }
         }
 
-        public bool Update(int id, string causa = null, string resultado = null, string indicador = null)
+        public bool Update(int id, string causa = null, string proceso = null, string indicador = null)
         {
             try
             {
@@ -63,8 +63,8 @@ namespace ESM.Objetos
                 if (causa != null)
                     efecto.Causa = causa;
 
-                if (resultado != null)
-                    efecto.Resultado = resultado;
+                if (proceso != null)
+                    efecto.Proceso = proceso;
 
                 if (indicador != null)
                     efecto.Indicador_Resultado = indicador;
@@ -174,8 +174,6 @@ namespace ESM.Objetos
             {
                 try
                 {
-
-
                     finalidad_proyecto = (from p in _db.Proyectos
                                           where p.Id == proyecto_id
                                           select p.Finalidad).Single();
@@ -606,7 +604,7 @@ namespace ESM.Objetos
 
                     foreach (var item_indicadores in indicadores_vencidos)
                     {
-                        caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Causas_Efecto.Proyecto.Problema;
+                        //caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Causas_Efecto.Proyecto.Problema;
                         caracteristicas_indicador[indicador_actual, 1] = item_indicadores.Actividade.Actividad;
                         caracteristicas_indicador[indicador_actual, 2] = item_indicadores.Indicador;
                         caracteristicas_indicador[indicador_actual, 3] = item_indicadores.Fecha_Creacion;
@@ -644,7 +642,7 @@ namespace ESM.Objetos
 
                     foreach (var item_indicadores in indicadores_vencidos)
                     {
-                        caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Causas_Efecto.Proyecto.Problema;
+                        //caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Causas_Efecto.Proyecto.Problema;
                         caracteristicas_indicador[indicador_actual, 1] = item_indicadores.Actividade.Actividad;
                         caracteristicas_indicador[indicador_actual, 2] = item_indicadores.Indicador;
                         caracteristicas_indicador[indicador_actual, 3] = item_indicadores.Fecha_Creacion;
@@ -888,6 +886,320 @@ namespace ESM.Objetos
         }
     }
 
+    public class CSubprocesos
+    {
+        #region Propiedades Publicas y Privadas
 
+        protected ESMBDDataContext _db = new ESMBDDataContext();
+
+        #endregion
+
+        public int Add(int idproceso, string subproceso, string indicador = null)
+        {
+            try
+            {
+                Subproceso objSubproceso = new Subproceso
+                {
+                    Proceso_id = idproceso,
+                    Subproceso1 = subproceso,
+                    Indicador = indicador
+                };
+
+                _db.Subprocesos.InsertOnSubmit(objSubproceso);
+                _db.SubmitChanges();
+
+                return objSubproceso.Id;
+            }
+            catch (Exception) { return 0; }
+
+        }
+
+        public bool Update(int subprocesoid, string subproceso = null, string indicador = null)
+        {
+            try
+            {
+                var subproceso_consulta = (from a in _db.Subprocesos
+                                           where a.Id == subprocesoid
+                                           select a).Single();
+
+                if (subproceso != null)
+                    subproceso_consulta.Subproceso1 = subproceso;
+
+                if (indicador != null)
+                    subproceso_consulta.Indicador = indicador;
+
+
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public bool AddMedios(int subprocesoid, int medioid)
+        {
+            try
+            {
+                Subprocesos_Medios_Verificacion objSubprocesos_Medios_Verificacion = new Subprocesos_Medios_Verificacion
+                {
+                    Medio_Verificacion_id = medioid,
+                    Subproceso_id = subprocesoid
+                };
+
+                _db.Subprocesos_Medios_Verificacions.InsertOnSubmit(objSubprocesos_Medios_Verificacion);
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public bool RemoveMedios(int subprocesoid)
+        {
+            try
+            {
+                var medios = from a_m in _db.Subprocesos_Medios_Verificacions
+                             where a_m.Subproceso_id == subprocesoid
+                             select a_m;
+
+                foreach (var item in medios)
+                {
+                    _db.Subprocesos_Medios_Verificacions.DeleteOnSubmit(item);
+                }
+                _db.SubmitChanges();
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public bool RemoveSupuestos(int subprocesoid)
+        {
+            try
+            {
+                var supuestos = from a_s in _db.Subprocesos_Medios_Verificacions
+                                where a_s.Subproceso_id == subprocesoid
+                                select a_s;
+
+                foreach (var item in supuestos)
+                {
+                    _db.Subprocesos_Medios_Verificacions.DeleteOnSubmit(item);
+                }
+
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public bool AddSupuestos(int subprocesoid, int supuestoid)
+        {
+            try
+            {
+                Subprocesos_Supuesto objSubprocesos_Supuestos = new Subprocesos_Supuesto
+                {
+                    Supuestos_id = supuestoid,
+                    Subproceso_id = subprocesoid
+                };
+
+                _db.Subprocesos_Supuestos.InsertOnSubmit(objSubprocesos_Supuestos);
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public IQueryable<Subproceso> LoadSubprocesos(int proceso_id)
+        {
+            try
+            {
+                var subprocesos = from s in _db.Subprocesos
+                                  where s.Proceso_id == proceso_id
+                                  select s;
+
+                return subprocesos;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable<Causas_Efecto> getProcesos(int proyecto_id)
+        {
+            try
+            {
+                var procesos = (from p in _db.Causas_Efectos
+                                where p.Proyecto_id == proyecto_id
+                                select p).Distinct();
+
+                return procesos;
+            }
+            catch (Exception) { return null; }
+
+        }
+    }
+
+
+    public class CResultados_proyecto
+    {
+        #region Propiedades Publicas y Privadas
+
+        protected ESMBDDataContext _db = new ESMBDDataContext();
+
+        #endregion
+
+        public int Add(int idsubproceso, string resultado, string indicador = null)
+        {
+            try
+            {
+                Resultados_Proyecto objResultados_Proyecto = new Resultados_Proyecto
+                {
+                    Subproceso_id = idsubproceso,
+                    Resultado = resultado,
+                    Indicador = indicador
+                };
+
+                _db.Resultados_Proyectos.InsertOnSubmit(objResultados_Proyecto);
+                _db.SubmitChanges();
+
+                return objResultados_Proyecto.Id;
+            }
+            catch (Exception) { return 0; }
+
+        }
+
+        public bool Update(int resultado_id, string resultado = null, string indicador = null)
+        {
+            try
+            {
+                var resultado_consulta = (from a in _db.Resultados_Proyectos
+                                          where a.Id == resultado_id
+                                          select a).Single();
+
+                if (resultado != null)
+                    resultado_consulta.Resultado = resultado;
+
+                if (indicador != null)
+                    resultado_consulta.Indicador = indicador;
+
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public bool AddMedios(int resultado_id, int medioid)
+        {
+            try
+            {
+                Resultados_Medio objResultados_Medio = new Resultados_Medio
+                {
+                    Medios_de_verificacion_id = medioid,
+                    Resultado_id = resultado_id
+                };
+
+                _db.Resultados_Medios.InsertOnSubmit(objResultados_Medio);
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public bool RemoveMedios(int resultadoid)
+        {
+            try
+            {
+                var medios = from a_m in _db.Resultados_Medios
+                             where a_m.Resultado_id == resultadoid
+                             select a_m;
+
+                foreach (var item in medios)
+                {
+                    _db.Resultados_Medios.DeleteOnSubmit(item);
+                }
+                _db.SubmitChanges();
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public bool RemoveSupuestos(int resultado_id)
+        {
+            try
+            {
+                var supuestos = from a_s in _db.Resultados_Supuestos
+                                where a_s.Resultado_id == resultado_id
+                                select a_s;
+
+                foreach (var item in supuestos)
+                {
+                    _db.Resultados_Supuestos.DeleteOnSubmit(item);
+                }
+
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public bool AddSupuestos(int resultado_id, int supuestoid)
+        {
+            try
+            {
+                Resultados_Supuesto objResultados_Supuesto = new Resultados_Supuesto
+                {
+                    Supuesto_id = supuestoid,
+                    Resultado_id = resultado_id
+                };
+
+                _db.Resultados_Supuestos.InsertOnSubmit(objResultados_Supuesto);
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public IQueryable<Resultados_Proyecto> LoadResultados(int subproceso_id)
+        {
+            try
+            {
+                var resultados = from s in _db.Resultados_Proyectos
+                                 where s.Subproceso_id == subproceso_id
+                                 select s;
+
+                return resultados;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable<Subproceso> getSubprocesos(int proceso_id)
+        {
+            try
+            {
+                var subprocesos = (from p in _db.Subprocesos
+                                   where p.Proceso_id == proceso_id
+                                   select p).Distinct();
+
+                return subprocesos;
+            }
+            catch (Exception) { return null; }
+
+        }
+    }
 
 }

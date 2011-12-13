@@ -12,6 +12,7 @@
     <script src="/Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
     <script src="/Scripts/jquery-ui-1.8.15.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jquery.ui.datepicker-es.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>
     <script type="text/javascript">
 
         var _gaq = _gaq || [];
@@ -347,5 +348,23 @@
     <a href="#" style="display: none;" id="a_warning" class="trigger warning-trigger">
     </a><a href="#" style="display: none;" id="a_succes" class="trigger success-trigger">
     </a>
+    <div class="qtip qtip-stylename">
+        <div class="qtip-tip" rel="cornerValue">
+        </div>
+        <div class="qtip-wrapper">
+            <div class="qtip-borderTop">
+            </div>
+            <div class="qtip-contentWrapper">
+                <div class="qtip-title">
+                    <div class="qtip-button">
+                    </div>
+                </div>
+                <div class="qtip-content">
+                </div>
+            </div>
+            <div class="qtip-borderBottom">
+            </div>
+        </div>
+    </div>
 </body>
 </html>

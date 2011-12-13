@@ -577,15 +577,12 @@
     <Content Include="Scripts\jquery-1.6.2.min.js" />
     <Content Include="Scripts\jquery-1.6.3-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.15.custom.min.js" />
+    <Content Include="Scripts\jquery.qtip-1.0.0-rc3.min.js" />
     <Content Include="Scripts\jquery.ui.datepicker-es.js" />
     <Content Include="Scripts\jsgantt.js" />
-    <Content Include="Scripts\jspdf.js" />
-    <Content Include="Scripts\layout.js" />
     <Content Include="Scripts\libs\base64.js" />
     <Content Include="Scripts\libs\sprintf.js" />
-    <Content Include="Scripts\ScrollTo\jquery.scrollTo-min.js" />
-    <Content Include="Scripts\ScrollTo\jquery.scrollTo.js" />
-    <Content Include="Scripts\utils.js" />
+    <Content Include="Scripts\Proyectos.js" />
     <Content Include="Sistematizacion.aspx" />
     <Content Include="SistematizacionSE.aspx" />
     <Content Include="Site.css" />
@@ -606,7 +603,6 @@
       <DependentUpon>AyudaPreguntas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Security\SecuritySesion.cs" />
-    <Content Include="Style\colorpicker.css" />
     <Content Include="Style\images\blank.gif" />
     <Content Include="Style\images\colorpicker_background.png" />
     <Content Include="Style\images\colorpicker_hex.png" />
@@ -890,9 +886,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
     </Compile>
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Login.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -919,9 +912,9 @@
     <None Include="Pretty\images\.DS_Store" />
     <None Include="Pretty\images\fullscreen\.DS_Store" />
     <Content Include="Style\jsgantt.css" />
-    <Content Include="Style\layout.css" />
     <Content Include="Style\MarcoLogico.css" />
     <Content Include="Style\menu_arbol.css" />
+    <Content Include="Style\Proyecto.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

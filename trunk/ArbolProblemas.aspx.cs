@@ -16,23 +16,22 @@ namespace ESM
 
         protected Cproyecto objCpoyecto = new Cproyecto();
         protected CEfectos objCEfectos = new CEfectos();
+        protected CSubprocesos objCSubprocesos = new CSubprocesos();
         protected CActividades objCActividades = new CActividades();
         int _idproyecto = 0;
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Session.Add("Cant_Load", 0);
             if (Session["idproyecto"] != null && Convert.ToInt32(Session["Cant_Load"]) == 0)
             {
                 hidproyecto.Value = Session["idproyecto"].ToString();
                 _idproyecto = Convert.ToInt32(Session["idproyecto"]);
-                //ObtenerResultados(_idproyecto);
-                //Session["Cant_Load"] = 1;
+
             }
             if (Bandera.Value == "1")
             {
-                ObtenerResultados(_idproyecto);
+                //ObtenerResultados(_idproyecto);
                 Bandera.Value = "-1";
             }
             if (!Page.IsPostBack)
@@ -56,7 +55,7 @@ namespace ESM
 
             #endregion
 
-            ObtenerResultados(_idproyecto);
+            //ObtenerResultados(_idproyecto);
 
         }
 
@@ -75,7 +74,7 @@ namespace ESM
             gvEfectos.DataBind();
             #endregion
 
-            ObtenerResultados(_idproyecto);
+            //ObtenerResultados(_idproyecto);
 
         }
 
@@ -92,7 +91,10 @@ namespace ESM
             txtproblema.ReadOnly = true;
 
             CargarProposito(txtproblema.Text);
+            load_procesos();
             getCronograma();
+            load_subprocesos();
+            Load_resultados();
             lknAlmacenarP.Enabled = false;
 
             divefectos.Visible = true;
@@ -104,7 +106,7 @@ namespace ESM
 
             lknAlmacenarP.Enabled = false;
 
-            ObtenerResultados(idproyecto);
+            //ObtenerResultados(idproyecto);
         }
 
         protected void CargarProposito(string problema)
@@ -164,7 +166,7 @@ namespace ESM
                 HtmlGenericControl titulo_resultados = new HtmlGenericControl("h2");
                 titulo_resultados.Attributes.CssStyle.Add("float", "left");
                 titulo_resultados.Attributes.CssStyle.Add("margin-left", "10px");
-                titulo_resultados.InnerHtml = "Resultados";
+                titulo_resultados.InnerHtml = "Estategias";
 
                 HtmlGenericControl br_resultados = new HtmlGenericControl("br");
                 HtmlGenericControl br_vita_previa = new HtmlGenericControl("br");
@@ -187,11 +189,8 @@ namespace ESM
                 visualizar_report_actividades.InnerHtml = "<img alt='Detalles' src='/Icons/Search.png' width='24px' /> Visualizar Matriz";
                 visualizar_report_actividades.Attributes.Add("class", "pretty");
 
-                //presultados.Controls.Add(visualizar_report);
                 presultados.Controls.Add(br_vita_previa);
                 presultados.Controls.Add(titulo_resultados);
-                //pnlActividades.Controls.Add(visualizar_report_actividades);
-                //pnlActividades.Controls.Add(br_resultados);
 
                 foreach (var item in objCausas_Efecto)
                 {
@@ -229,8 +228,8 @@ namespace ESM
 
                     var inputresultado = new TextBox();
                     inputresultado.ID = "txtresultadoplan" + item.Id.ToString();
-                    if (item.Resultado != null)
-                        inputresultado.Text = item.Resultado.ToString();
+                    //if (item.Resultado != null)
+                    //    inputresultado.Text = item.Resultado.ToString();
                     inputresultado.Attributes.Add("float", "left");
                     //inputresultado.Attributes.Add("class", "txtareacausa");
                     inputresultado.Attributes.Add("placeholder", "Resultado numero" + (contador + 1).ToString());
@@ -311,9 +310,8 @@ namespace ESM
 
                     inputresultado = new TextBox();
                     inputresultado.ID = "txtresultadomarco" + contador.ToString();
-                    if (item.Resultado != null)
-                        inputresultado.Text = item.Resultado.ToString();
-                    inputresultado.Attributes.Add("float", "left");
+                    //if (item.Resultado != null)
+                    //    inputresultado.Text = item.Resultado.ToString();
                     inputresultado.Attributes.CssStyle.Add("font-size", "15px");
                     inputresultado.Attributes.CssStyle.Add("height", "40px");
                     inputresultado.Attributes.Add("placeholder", "Resultado numero" + (contador + 1).ToString());
@@ -356,8 +354,6 @@ namespace ESM
                     #region Consultar Actividades
 
                     getPlanOperativo(item.Id, contador);
-                    //getActividades(item.Id, contador);
-
 
                     #endregion
 
@@ -379,7 +375,7 @@ namespace ESM
             int idproyecto = Convert.ToInt32(hidproyecto.Value);
             objCproyecto.Update(idproyecto, null, txtProposito.Text);
 
-            ObtenerResultados(_idproyecto);
+            //ObtenerResultados(_idproyecto);
 
         }
 
@@ -397,8 +393,7 @@ namespace ESM
         protected void lknAlmacenarFinalidad_Click(object sender, EventArgs e)
         {
             objCpoyecto.Update(_idproyecto, null, null, txtfinalidad.Text);
-
-            ObtenerResultados(_idproyecto);
+            //ObtenerResultados(_idproyecto);
         }
 
         protected void getPlanOperativo(int idresultado, int consecutivo)
@@ -441,8 +436,6 @@ namespace ESM
                 btnalmacenaractividad.Attributes.Add("onclick", "AlmacenarActividad('" + idresultado.ToString() + "','" + "ContentPlaceHolder1_" + txtactividad.ID + "','" + "ContentPlaceHolder1_" + txtpresupuesto.ID + "');");
 
                 br = new HtmlGenericControl("br");
-
-                //contenido_acordion.Controls.Add(br);
 
                 contenido_acordion.Controls.Add(lblnactividad);
                 contenido_acordion.Controls.Add(txtactividad);
@@ -512,11 +505,6 @@ namespace ESM
                         detalles_Actividad.InnerHtml = "<img alt='Detalles' src='/Icons/details.png' width='24px' />";
 
                         contenido_acordion.Controls.Add(detalles_Actividad);
-
-                        //br = new HtmlGenericControl("br");
-
-                        //contenido_acordion.Controls.Add(br);
-
 
                         int consecutivo_indicador = 0;
 
@@ -607,16 +595,6 @@ namespace ESM
                 btnalmacenaractividad.ImageUrl = "/Icons/1314641093_plus_48.png";
                 btnalmacenaractividad.Attributes.CssStyle.Add("width", "24px");
                 btnalmacenaractividad.Attributes.Add("onclick", "AlmacenarActividad('" + idresultado.ToString() + "','" + "ContentPlaceHolder1_" + txtactividad.ID + "','" + "ContentPlaceHolder1_" + txtpresupuesto.ID + "');");
-
-
-                //contenido_acordion.Controls.Add(lblnactividad);
-                //contenido_acordion.Controls.Add(txtactividad);
-                //contenido_acordion.Controls.Add(br);
-                //contenido_acordion.Controls.Add(lblpresupuesto);
-                //contenido_acordion.Controls.Add(txtpresupuesto);
-                //contenido_acordion.Controls.Add(btnalmacenaractividad);
-
-
 
                 IQueryable<ESM.Model.Actividade> ac = null;
 
@@ -718,7 +696,6 @@ namespace ESM
             Response.Redirect("/ArbolProblemas.aspx");
         }
 
-
         protected bool Export(HtmlTable table)
         {
             try
@@ -750,10 +727,313 @@ namespace ESM
 
         protected void lknexport_gantt_Click(object sender, EventArgs e)
         {
-            Export((HtmlTable)this.Page.Form.FindControl("theTable"));
+            buildgantt();
         }
 
-    }
+        protected void buildgantt()
+        {
+            var gantt = (from g in new ESM.Model.ESMBDDataContext().gantts
+                         where g.Proyecto_id == _idproyecto
+                         select g);
 
+            StringBuilder objStringBuilder = new StringBuilder();
+
+            //objStringBuilder.Append("<table> ");
+
+            objStringBuilder.Append("<tr> ");
+            objStringBuilder.Append("<th> ");
+            objStringBuilder.Append("Actividad ");
+            objStringBuilder.Append("</th> ");
+            objStringBuilder.Append("</tr> ");
+            objStringBuilder.Append("<tr> ");
+            objStringBuilder.Append("<th> ");
+            objStringBuilder.Append("Indicador ");
+            objStringBuilder.Append("</th> ");
+            objStringBuilder.Append("<tr> ");
+            objStringBuilder.Append("<th> ");
+            objStringBuilder.Append("Fecha Inicial ");
+            objStringBuilder.Append("</th> ");
+            objStringBuilder.Append("</tr> ");
+            objStringBuilder.Append("<tr> ");
+            objStringBuilder.Append("<th> ");
+            objStringBuilder.Append("Fecha Final ");
+            objStringBuilder.Append("</th> ");
+            objStringBuilder.Append("</tr> ");
+
+            foreach (var item in gantt)
+            {
+                objStringBuilder.Append("<tr> ");
+                objStringBuilder.Append("<td> ");
+                objStringBuilder.Append(item.Actividad.ToString());
+                objStringBuilder.Append("</td> ");
+                objStringBuilder.Append("<td> ");
+                objStringBuilder.Append(item.Indicador.ToString());
+                objStringBuilder.Append("</td> ");
+                objStringBuilder.Append("<td>");
+                objStringBuilder.Append(item.fecha_inicial.ToString());
+                objStringBuilder.Append("</td> ");
+                objStringBuilder.Append("<td>");
+                objStringBuilder.Append(item.fecha_final.ToString());
+                objStringBuilder.Append("</td> ");
+                objStringBuilder.Append("</tr> ");
+            }
+
+            //objStringBuilder.Append("</table> ");
+
+            t_gantt.InnerHtml = objStringBuilder.ToString();
+
+            Export(t_gantt);
+
+        }
+
+        /// <summary>
+        /// Consulta y realiza el proceso de carga de procesos para el marco logico
+        /// asociado a un proyecto
+        /// </summary>
+        protected void load_procesos()
+        {
+            try
+            {
+                IQueryable<Model.Causas_Efecto> objCausas_Efectos = objCEfectos.getCount(_idproyecto);
+                int enumeracion = 1;
+                foreach (var item in objCausas_Efectos)
+                {
+                    HtmlTable objHtmlTable = new HtmlTable();
+
+                    objHtmlTable.Width = "80%";
+
+                    HtmlTableRow objRow_Causa = new HtmlTableRow();
+
+                    HtmlTableCell objCell_Causa = new HtmlTableCell();
+                    objCell_Causa.InnerHtml = "<label style='color:#000;'>Causa No." + enumeracion.ToString() + ": " + item.Causa + "</label>";
+
+                    objRow_Causa.Cells.Add(objCell_Causa);
+
+                    HtmlTableRow objRow_Proceso = new HtmlTableRow();
+
+                    HtmlTableCell objCell_Proceso = new HtmlTableCell();
+                    objCell_Proceso.InnerHtml = "<h3>Proceso</h3><textarea id='txt_area_proceso_id_" + item.Id + "' placeholder='Ingrese el texto para proceso correspondiente.'>" + item.Proceso + "</textarea> ";
+
+
+                    HtmlInputButton objAlmacenar_proceso = new HtmlInputButton();
+                    objAlmacenar_proceso.ID = "btn_proceso_almacenar_id" + item.Id.ToString();
+                    objAlmacenar_proceso.Attributes.Add("onclick", String.Format("AlmacenarProceso('{0}','{1}','{2}');", item.Id, item.Causa, "txt_area_proceso_id_" + item.Id));
+                    //objAlmacenar_proceso.Src = "/Icons/save-icon.png";
+                    objAlmacenar_proceso.Value = "Almacenar proceso";
+                    //objAlmacenar_proceso.Attributes.CssStyle.Add("width", "24px");
+
+                    objCell_Proceso.Controls.Add(objAlmacenar_proceso);
+                    objRow_Proceso.Cells.Add(objCell_Proceso);
+
+                    objHtmlTable.Rows.Add(objRow_Causa);
+                    objHtmlTable.Rows.Add(objRow_Proceso);
+
+                    pnl_procesos.Controls.Add(objHtmlTable);
+
+                    HtmlGenericControl salto_linea = new HtmlGenericControl("br");
+
+                    pnl_procesos.Controls.Add(salto_linea);
+
+                    enumeracion++;
+                }
+            }
+            catch (Exception) { /*TODO: JCMM: Controlador Exception*/ }
+
+        }
+
+        protected void load_subprocesos()
+        {
+            try
+            {
+                IQueryable<Model.Causas_Efecto> objCausas_Efecto = objCSubprocesos.getProcesos(_idproyecto);
+                int enumeracion = 1;
+                foreach (var item in objCausas_Efecto)
+                {
+                    HtmlTable objHtmlTable = new HtmlTable();
+
+                    objHtmlTable.Width = "80%";
+
+                    HtmlTableRow objRow_Proceso = new HtmlTableRow();
+
+                    HtmlTableCell objCell_Proceso = new HtmlTableCell();
+                    objCell_Proceso.InnerHtml = "<label style='color:#000;'>Proceso No. " + enumeracion.ToString() + ": " + item.Proceso + "</label>";
+
+                    objRow_Proceso.Cells.Add(objCell_Proceso);
+
+                    HtmlTableRow objRow_SubProceso = new HtmlTableRow();
+
+                    HtmlTableCell objCell_SubProceso = new HtmlTableCell();
+                    objCell_SubProceso.InnerHtml = "<h3>Crear Subproceso</h3><textarea id='txt_area_subproceso_id_" + item.Id + "' placeholder='Ingrese el texto para subproceso correspondiente correspondiente.'></textarea> ";
+
+                    HtmlInputButton objAlmacenar_proceso = new HtmlInputButton();
+                    objAlmacenar_proceso.ID = "btn_subproceso_almacenar_id" + item.Id.ToString();
+                    objAlmacenar_proceso.Attributes.Add("onclick", String.Format("AlmacenarSubProceso('{0}','{1}');", item.Id, "txt_area_subproceso_id_" + item.Id));
+                    //objAlmacenar_proceso.Src = "/Icons/save-icon.png";
+                    objAlmacenar_proceso.Value = "Almacenar Subproceso";
+                    //objAlmacenar_proceso.Attributes.CssStyle.Add("width", "24px");
+
+                    objCell_SubProceso.Controls.Add(objAlmacenar_proceso);
+                    objRow_SubProceso.Cells.Add(objCell_SubProceso);
+
+                    objHtmlTable.Rows.Add(objRow_Proceso);
+                    objHtmlTable.Rows.Add(objRow_SubProceso);
+
+                    StringBuilder objsb = new StringBuilder();
+
+                    objsb.Append("<div class='accordion'><h3><a href='#'>Subprocesos</a></h3>");
+                    objsb.Append("<div>");
+
+                    IQueryable<Model.Subproceso> objSubprocesos = objCSubprocesos.LoadSubprocesos(item.Id);
+
+                    int enumeracion_subprocesos = 1;
+                    objsb.Append("<table style='width:100%;'> ");
+                    foreach (var item_subroceso in objSubprocesos)
+                    {
+
+                        objsb.Append("<tr>");
+                        objsb.Append("<td> <label style='color:#000;'> Subproceso No. " + enumeracion_subprocesos.ToString() + "<label>");
+                        objsb.Append(" </td> ");
+                        objsb.Append("</tr> ");
+                        objsb.Append("<tr>");
+                        string parametros = "'" + item_subroceso.Id.ToString() + "','txt_area_subproceso_up_" + item_subroceso.Id + "'";
+                        objsb.Append("<td> <textarea id='txt_area_subproceso_up_" + item_subroceso.Id + "' placeholder='Texto correspondiente a Subproceso'>" + item_subroceso.Subproceso1 + "</textarea>");
+                        objsb.Append(" <input type='button' value='Actualizar Subproceso' onclick=\"ActualizarSubProceso(" + parametros + ");\" /> ");
+                        objsb.Append("</td> ");
+                        objsb.Append("</tr> ");
+
+
+                        enumeracion_subprocesos++;
+                    }
+                    objsb.Append("</table><br/>");
+                    objsb.Append("</div></div>");
+
+                    HtmlTableRow objRow_Collection = new HtmlTableRow();
+
+                    HtmlTableCell objCell_Collection = new HtmlTableCell();
+                    objCell_Collection.InnerHtml = objsb.ToString();
+
+                    objRow_Collection.Cells.Add(objCell_Collection);
+
+                    objHtmlTable.Rows.Add(objRow_Collection);
+
+                    pnl_Subprocesos.Controls.Add(objHtmlTable);
+
+                    HtmlGenericControl salto_linea = new HtmlGenericControl("br");
+
+                    pnl_procesos.Controls.Add(salto_linea);
+
+                    enumeracion++;
+                }
+            }
+            catch (Exception) { /*TODO: JCMM: Controlador Exception*/ }
+
+        }
+
+        protected void Load_resultados()
+        {
+            try
+            {
+                IQueryable<Model.Causas_Efecto> objCausas_Efecto = objCSubprocesos.getProcesos(_idproyecto);
+                int enumeracion = 1;
+                foreach (var item in objCausas_Efecto)
+                {
+                    HtmlTable objHtmlTable = new HtmlTable();
+
+                    objHtmlTable.Width = "80%";
+
+                    HtmlTableRow objRow_Proceso = new HtmlTableRow();
+
+                    HtmlTableCell objCell_Proceso = new HtmlTableCell();
+                    objCell_Proceso.InnerHtml = "<label style='color:#000;'>Proceso No. " + enumeracion.ToString() + ": " + item.Proceso + "</label>";
+
+                    objRow_Proceso.Cells.Add(objCell_Proceso);
+
+                    objHtmlTable.Rows.Add(objRow_Proceso);
+
+                    IQueryable<Model.Subproceso> objSubprocesos = objCSubprocesos.LoadSubprocesos(item.Id);
+
+                    int enumeracion_Subproceso = 1;
+                    foreach (var item_subroceso in objSubprocesos)
+                    {
+                        HtmlTableRow objRow_SubProceso = new HtmlTableRow();
+
+                        HtmlTableCell objCell_SubProceso = new HtmlTableCell();
+                        objCell_SubProceso.InnerHtml = "<label style='color:#000;'>Subproceso No. " + enumeracion_Subproceso.ToString() + ": " + item_subroceso.Subproceso1 + "</label>";
+
+                        objRow_SubProceso.Cells.Add(objCell_SubProceso);
+
+                        objHtmlTable.Rows.Add(objRow_SubProceso);
+
+                        HtmlTableRow objRow_Estrategias = new HtmlTableRow();
+
+                        HtmlTableCell objCell_Estrategias = new HtmlTableCell();
+                        objCell_Estrategias.InnerHtml = "<h3>Crear Estrategia</h3><textarea id='txt_area_estrategia_id_" + item_subroceso.Id + "' placeholder='Ingrese el texto para estrategia correspondiente.'></textarea> ";
+
+                        HtmlInputButton objAlmacenar_estrategia = new HtmlInputButton();
+                        objAlmacenar_estrategia.ID = "btn_estrategia_almacenar_id" + item.Id.ToString();
+                        objAlmacenar_estrategia.Attributes.Add("onclick", String.Format("AlmacenarEstrategia('{0}','{1}');", item_subroceso.Id, "txt_area_estrategia_id_" + item_subroceso.Id));
+                        objAlmacenar_estrategia.Value = "Almacenar Estrategia";
+
+                        objCell_Estrategias.Controls.Add(objAlmacenar_estrategia);
+                        objRow_Estrategias.Cells.Add(objCell_Estrategias);
+
+                        objHtmlTable.Rows.Add(objRow_Estrategias);
+
+                        IQueryable<Model.Resultados_Proyecto> objEstrategias = new CResultados_proyecto().LoadResultados(item_subroceso.Id);
+
+                        StringBuilder objsb = new StringBuilder();
+
+                        objsb.Append("<div class='accordion'><h3><a href='#'>Estrategias</a></h3>");
+                        objsb.Append("<div>");
+
+                        var detalles = new HtmlAnchor();
+                        var cronograma = new HtmlAnchor();
+
+                        int enumeracion_Estrategias = 1;
+                        objsb.Append("<table style='width:100%;'> ");
+                        foreach (var item_estrategias in objEstrategias)
+                        {
+                            
+                            objsb.Append("<tr>");
+                            objsb.Append("<td> <label style='color:#000;'> Estrategia No. " + enumeracion_Estrategias.ToString() + "<label>");
+                            objsb.Append(" </td> ");
+                            objsb.Append("</tr> ");
+                            objsb.Append("<tr>");
+                            string parametros = "'" + item_estrategias.Id.ToString() + "','txt_area_estrategias_up_" + item_estrategias.Id + "'";
+                            objsb.Append("<td> <textarea id='txt_area_estrategias_up_" + item_estrategias.Id + "' placeholder='Texto correspondiente a estrategia'>" + item_estrategias.Resultado + "</textarea>");
+                            objsb.Append(" <input type='button' value='Actualizar Estrategia' onclick=\"ActualizarEstrategia(" + parametros + ");\" /> ");
+                            objsb.Append(" <a title=\"Detalles para Resultado No." + enumeracion_Estrategias.ToString() + "\" class='pretty' href=\"" + Request.Url.Scheme + "://" + Request.Url.Authority + "/DetallesMarcoLogico.aspx?idResultado=" + item_estrategias.Id + "&iframe=true&amp;width=100%&amp;height=100%\"\"><img alt='Detalles' src='/Icons/details.png' width='24px' /></a>");
+                            objsb.Append(" <a title=\"Cronograma Resultado No." + enumeracion_Estrategias.ToString() + "\" class='pretty' href=\""+ Request.Url.Scheme + "://" + Request.Url.Authority + "/DiagramaGant.aspx?idResultado=" + item_estrategias.Id + "&iframe=true&amp;width=100%&amp;height=100%\"\"><img alt='Cronograma' src='/Icons/Calender.png' width='24px' /></a>");
+                            objsb.Append("</td> ");
+                            objsb.Append("</tr> ");
+
+                            enumeracion_Estrategias++;
+                        }
+                        objsb.Append("</table><br/>");
+                        objsb.Append("</div></div>");
+                        HtmlTableRow objRow_Collection_estrategias = new HtmlTableRow();
+
+                        HtmlTableCell objCell_Collection_estrategias = new HtmlTableCell();
+                        objCell_Collection_estrategias.InnerHtml = objsb.ToString();
+
+                        objRow_Collection_estrategias.Cells.Add(objCell_Collection_estrategias);
+
+                        objHtmlTable.Rows.Add(objRow_Collection_estrategias);
+                        enumeracion_Subproceso++;
+                    }
+
+                    presultados.Controls.Add(objHtmlTable);
+
+                    HtmlGenericControl salto_linea = new HtmlGenericControl("br");
+
+                    presultados.Controls.Add(salto_linea);
+
+                    enumeracion++;
+                }
+            }
+            catch (Exception) { /*TODO: JCMM: Controlador Exception*/ }
+
+        }
+    }
 
 }

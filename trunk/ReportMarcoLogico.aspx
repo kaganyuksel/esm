@@ -26,9 +26,11 @@
             </td>
             <td>
                 <asp:RadioButton ID="rbtnresumen" runat="server" AutoPostBack="True" GroupName="groupreport"
-                    OnCheckedChanged="rbtnresumen_CheckedChanged" Text="Marco Lógico" />
+                    OnCheckedChanged="rbtnresumen_CheckedChanged" Text="Marco Lógico" 
+                    Visible="False" />
                 <asp:RadioButton ID="rbtndetalle" runat="server" AutoPostBack="True" GroupName="groupreport"
-                    OnCheckedChanged="rbtndetalle_CheckedChanged" Text="Plan Operativo" />
+                    OnCheckedChanged="rbtndetalle_CheckedChanged" Text="Plan Operativo" 
+                    Visible="False" />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:LinkButton Text="Export to Excel" runat="server" ID="lknExport" OnClick="lknExport_Click" />
             </td>

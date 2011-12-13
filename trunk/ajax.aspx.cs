@@ -149,8 +149,16 @@ namespace ESM
 
                 #endregion
 
-                if (Request.QueryString["resultados"] != null && Convert.ToBoolean(Request.QueryString["resultados"]))
-                    AlmacenarResultado();
+                if (Request.QueryString["estrategias"] != null && Convert.ToBoolean(Request.QueryString["estrategias"]))
+                    AlmacenarEstrategia();
+                if (Request.QueryString["estrategia_up"] != null && Convert.ToBoolean(Request.QueryString["estrategia_up"]))
+                    ActualizarEstrategia();
+                else if (Request.QueryString["procesos"] != null && Convert.ToBoolean(Request.QueryString["procesos"]))
+                    AlmacenarProceso();
+                else if (Request.QueryString["subprocesos"] != null && Convert.ToBoolean(Request.QueryString["subprocesos"]))
+                    AlmacenarSubProceso();
+                else if (Request.QueryString["subprocesos_up"] != null && Convert.ToBoolean(Request.QueryString["subprocesos_up"]))
+                    ActualizarSubproceso();
                 else if (Request.QueryString["actividades"] != null && Convert.ToBoolean(Request.QueryString["actividades"]))
                     AlmacenarActividad();
                 else if (Request.QueryString["actividadesu"] != null && Convert.ToBoolean(Request.QueryString["actividadesu"]))
@@ -176,15 +184,93 @@ namespace ESM
 
         }
 
-        protected void AlmacenarResultado()
+        private void ActualizarSubproceso()
         {
-            int idResultado = Convert.ToInt32(Request.QueryString["idresultado"]);
-            string causa = Request.QueryString["causa"].ToString();
-            string resultado = Request.QueryString["resultado"].ToString();
+            try
+            {
 
-            CEfectos objCEfectos = new CEfectos();
+                int subprocesoid = Convert.ToInt32(Request.QueryString["idsubproceso"]);
+                string subproceso = Request.QueryString["subproceso"].ToString();
 
-            objCEfectos.Update(idResultado, causa, resultado);
+                CSubprocesos objCSubprocesos = new CSubprocesos();
+
+                objCSubprocesos.Update(subprocesoid, subproceso);
+
+                Response.Write("ok");
+            }
+            catch (Exception) { Response.Write("Transacción Falló"); }
+
+
+        }
+
+        private void ActualizarEstrategia()
+        {
+            try
+            {
+
+                int idestrategia = Convert.ToInt32(Request.QueryString["idestrategia"]);
+                string estrategia = Request.QueryString["estrategia"].ToString();
+
+                CResultados_proyecto objCResultados_proyecto = new CResultados_proyecto();
+
+                objCResultados_proyecto.Update(idestrategia, estrategia);
+
+                Response.Write("ok");
+            }
+            catch (Exception) { Response.Write("Transacción Falló"); }
+
+
+        }
+
+
+
+        protected void AlmacenarProceso()
+        {
+            try
+            {
+                int idResultado = Convert.ToInt32(Request.QueryString["idproceso"]);
+                string causa = Request.QueryString["causa"].ToString();
+                string resultado = Request.QueryString["proceso"].ToString();
+
+                CEfectos objCEfectos = new CEfectos();
+
+                objCEfectos.Update(idResultado, causa, resultado);
+                Response.Write("ok");
+            }
+            catch (Exception) { Response.Write("Transacción Falló"); }
+
+        }
+
+        protected void AlmacenarSubProceso()
+        {
+            try
+            {
+                int idProceso = Convert.ToInt32(Request.QueryString["idproceso"]);
+                string subproceso = Request.QueryString["subproceso"].ToString();
+
+                CSubprocesos objCSubprocesos = new CSubprocesos();
+
+                objCSubprocesos.Add(idProceso, subproceso);
+                Response.Write("ok");
+            }
+            catch (Exception) { Response.Write("Transacción Falló"); }
+
+        }
+
+        protected void AlmacenarEstrategia()
+        {
+            try
+            {
+                int idsubproceso = Convert.ToInt32(Request.QueryString["subproceso_id"]);
+                string estrategia = Request.QueryString["estrategia"].ToString();
+
+                CResultados_proyecto objCResultados = new CResultados_proyecto();
+
+                objCResultados.Add(idsubproceso, estrategia);
+                Response.Write("ok");
+            }
+            catch (Exception) { Response.Write("Transacción Falló"); }
+
         }
 
         protected void AlmacenarActividad()

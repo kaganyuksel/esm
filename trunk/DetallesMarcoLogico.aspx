@@ -1,7 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DetallesMarcoLogico.aspx.cs"
     Inherits="ESM.DetallesMarcoLogico" %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!--  HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd" -->
+<!DOCTYPE>
 <html>
 <head runat="server">
     <title>Detalles</title>
@@ -712,10 +713,8 @@
                             </tr>
                             <tr>
                                 <td style="vertical-align: top;">
-                                    <asp:BulletedList ID="sortable5" CssClass="droptwotrue" Width="150px" 
-                                        runat="server" DataSourceID="lqResponsables" DataTextField="Nombre" 
-                                        DataValueField="IdUsuario">
-                                        
+                                    <asp:BulletedList ID="sortable5" CssClass="droptwotrue" Width="150px" runat="server"
+                                        DataSourceID="lqResponsables" DataTextField="Nombre" DataValueField="IdUsuario">
                                     </asp:BulletedList>
                                 </td>
                                 <td style="vertical-align: top;">
