@@ -302,25 +302,30 @@ namespace ESM
                     HtmlTableRow objRow_Causa = new HtmlTableRow();
 
                     HtmlTableCell objCell_Causa = new HtmlTableCell();
-                    objCell_Causa.InnerHtml = "<label style='color:#000;'>Causa No." + enumeracion.ToString() + ": " + item.Causa + "</label>";
+                    objCell_Causa.InnerHtml = "<label style='color:" + item.Color + ";'>Causa No." + enumeracion.ToString() + ": " + item.Causa + "</label>";
 
+                    objCell_Causa.Attributes.CssStyle.Add("padding-left", "8px");
                     objRow_Causa.Cells.Add(objCell_Causa);
+                    objRow_Causa.Attributes.Add("class", "trheader");
+                    objCell_Causa.Attributes.CssStyle.Add("-moz-border-radius", "3px");
+                    objCell_Causa.Attributes.CssStyle.Add("-webkit-border-radius", "3px");
+                    objCell_Causa.Attributes.CssStyle.Add("border-radius", "3px");
 
                     HtmlTableRow objRow_Proceso = new HtmlTableRow();
 
                     HtmlTableCell objCell_Proceso = new HtmlTableCell();
-                    objCell_Proceso.InnerHtml = "<h3>Proceso</h3><textarea id='txt_area_proceso_id_" + item.Id + "' placeholder='Ingrese el texto para proceso correspondiente.'>" + item.Proceso + "</textarea> ";
+                    objCell_Proceso.InnerHtml = "<h3>Proceso</h3><textarea id='txt_area_proceso_id_" + item.Id + "' placeholder='Ingrese el texto para proceso correspondiente.'>" + item.Proceso + "</textarea><br/>";
 
 
                     HtmlInputButton objAlmacenar_proceso = new HtmlInputButton();
                     objAlmacenar_proceso.ID = "btn_proceso_almacenar_id" + item.Id.ToString();
                     objAlmacenar_proceso.Attributes.Add("onclick", String.Format("AlmacenarProceso('{0}','{1}','{2}');", item.Id, item.Causa, "txt_area_proceso_id_" + item.Id));
-                    //objAlmacenar_proceso.Src = "/Icons/save-icon.png";
                     objAlmacenar_proceso.Value = "Almacenar proceso";
-                    //objAlmacenar_proceso.Attributes.CssStyle.Add("width", "24px");
 
                     objCell_Proceso.Controls.Add(objAlmacenar_proceso);
                     objRow_Proceso.Cells.Add(objCell_Proceso);
+
+                    objRow_Proceso.Attributes.Add("class", "trgris");
 
                     objHtmlTable.Rows.Add(objRow_Causa);
                     objHtmlTable.Rows.Add(objRow_Proceso);
@@ -353,9 +358,14 @@ namespace ESM
                     HtmlTableRow objRow_Proceso = new HtmlTableRow();
 
                     HtmlTableCell objCell_Proceso = new HtmlTableCell();
-                    objCell_Proceso.InnerHtml = "<label style='color:#000;'>Proceso No. " + enumeracion.ToString() + ": " + item.Proceso + "</label>";
+                    objCell_Proceso.InnerHtml = "<label style='color:" + item.Color + ";'>Proceso No. " + enumeracion.ToString() + ": " + item.Proceso + "</label>";
 
+                    objCell_Proceso.Attributes.CssStyle.Add("padding-left", "8px");
                     objRow_Proceso.Cells.Add(objCell_Proceso);
+                    objRow_Proceso.Attributes.Add("class", "trheader");
+                    objCell_Proceso.Attributes.CssStyle.Add("-moz-border-radius", "3px");
+                    objCell_Proceso.Attributes.CssStyle.Add("-webkit-border-radius", "3px");
+                    objCell_Proceso.Attributes.CssStyle.Add("border-radius", "3px");
 
                     HtmlTableRow objRow_SubProceso = new HtmlTableRow();
 
@@ -365,11 +375,18 @@ namespace ESM
                     HtmlInputButton objAlmacenar_proceso = new HtmlInputButton();
                     objAlmacenar_proceso.ID = "btn_subproceso_almacenar_id" + item.Id.ToString();
                     objAlmacenar_proceso.Attributes.Add("onclick", String.Format("AlmacenarSubProceso('{0}','{1}');", item.Id, "txt_area_subproceso_id_" + item.Id));
-                    //objAlmacenar_proceso.Src = "/Icons/save-icon.png";
+                    
                     objAlmacenar_proceso.Value = "Almacenar Subproceso";
-                    //objAlmacenar_proceso.Attributes.CssStyle.Add("width", "24px");
+
+                    objCell_SubProceso.Attributes.CssStyle.Add("padding-left", "20px");
+                    objRow_SubProceso.Cells.Add(objCell_SubProceso);
+                    objRow_SubProceso.Attributes.Add("class", "trgris");
+                    objCell_SubProceso.Attributes.CssStyle.Add("-moz-border-radius", "3px");
+                    objCell_SubProceso.Attributes.CssStyle.Add("-webkit-border-radius", "3px");
+                    objCell_SubProceso.Attributes.CssStyle.Add("border-radius", "3px");
 
                     objCell_SubProceso.Controls.Add(objAlmacenar_proceso);
+
                     objRow_SubProceso.Cells.Add(objCell_SubProceso);
 
                     objHtmlTable.Rows.Add(objRow_Proceso);
@@ -441,9 +458,14 @@ namespace ESM
                     HtmlTableRow objRow_Proceso = new HtmlTableRow();
 
                     HtmlTableCell objCell_Proceso = new HtmlTableCell();
-                    objCell_Proceso.InnerHtml = "<label style='color:#000;'>Proceso No. " + enumeracion.ToString() + ": " + item.Proceso + "</label>";
+                    objCell_Proceso.InnerHtml = "<label style='color:" + item.Color + ";'>Proceso No. " + enumeracion.ToString() + ": " + item.Proceso + "</label>";
 
+                    objCell_Proceso.Attributes.CssStyle.Add("padding-left", "8px");
                     objRow_Proceso.Cells.Add(objCell_Proceso);
+                    objRow_Proceso.Attributes.Add("class", "trheader");
+                    objCell_Proceso.Attributes.CssStyle.Add("-moz-border-radius", "3px");
+                    objCell_Proceso.Attributes.CssStyle.Add("-webkit-border-radius", "3px");
+                    objCell_Proceso.Attributes.CssStyle.Add("border-radius", "3px");
 
                     objHtmlTable.Rows.Add(objRow_Proceso);
 
@@ -457,7 +479,12 @@ namespace ESM
                         HtmlTableCell objCell_SubProceso = new HtmlTableCell();
                         objCell_SubProceso.InnerHtml = "<label style='color:#000;'>Subproceso No. " + enumeracion_Subproceso.ToString() + ": " + item_subroceso.Subproceso1 + "</label>";
 
+                        objCell_SubProceso.Attributes.CssStyle.Add("padding-left", "20px");
                         objRow_SubProceso.Cells.Add(objCell_SubProceso);
+                        objRow_SubProceso.Attributes.Add("class", "trgris");
+                        objCell_SubProceso.Attributes.CssStyle.Add("-moz-border-radius", "3px");
+                        objCell_SubProceso.Attributes.CssStyle.Add("-webkit-border-radius", "3px");
+                        objCell_SubProceso.Attributes.CssStyle.Add("border-radius", "3px");
 
                         objHtmlTable.Rows.Add(objRow_SubProceso);
 
@@ -472,6 +499,10 @@ namespace ESM
                         objAlmacenar_estrategia.Value = "Almacenar Estrategia";
 
                         objCell_Estrategias.Controls.Add(objAlmacenar_estrategia);
+                        objCell_Estrategias.Attributes.Add("class", "trgris");
+                        objCell_Estrategias.Attributes.CssStyle.Add("-moz-border-radius", "3px");
+                        objCell_Estrategias.Attributes.CssStyle.Add("-webkit-border-radius", "3px");
+                        objCell_Estrategias.Attributes.CssStyle.Add("border-radius", "3px");
                         objRow_Estrategias.Cells.Add(objCell_Estrategias);
 
                         objHtmlTable.Rows.Add(objRow_Estrategias);
@@ -608,6 +639,9 @@ namespace ESM
                             objAlmacenar_actividades.Value = "Almacenar Actividad";
 
                             objCell_actividades.Controls.Add(objAlmacenar_actividades);
+                            objCell_actividades.Attributes.CssStyle.Add("-moz-border-radius", "3px");
+                            objCell_actividades.Attributes.CssStyle.Add("-webkit-border-radius", "3px");
+                            objCell_actividades.Attributes.CssStyle.Add("border-radius", "3px");
                             objRow_actividades.Cells.Add(objCell_actividades);
                             objRow_actividades.Attributes.Add("class", "trgris");
                             objRow_actividades.Attributes.CssStyle.Add("color", "#007CB6");

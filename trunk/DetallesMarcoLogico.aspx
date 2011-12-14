@@ -451,50 +451,20 @@
                 <AlternatingRowStyle CssClass="trblanca" />
                 <Columns>
                     <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True"
-                        SortExpression="Id" Visible="False" />
-                    <asp:BoundField DataField="Proyecto_id" HeaderText="Proyecto_id" SortExpression="Proyecto_id"
-                        Visible="False" />
-                    <asp:BoundField DataField="Causa" HeaderText="Causa" SortExpression="Causa" Visible="False" />
-                    <asp:BoundField DataField="Efecto" HeaderText="Efecto" SortExpression="Efecto" />
+                        SortExpression="Id" />
                     <asp:BoundField DataField="Resultado" HeaderText="Resultado" SortExpression="Resultado" />
-                    <asp:BoundField DataField="Resultado_Detalle" HeaderText="Resultado_Detalle" SortExpression="Resultado_Detalle"
-                        Visible="False" />
-                    <asp:BoundField DataField="Indicador_Resultado" HeaderText="Indicador" SortExpression="Indicador_Resultado" />
-                    <asp:BoundField DataField="Presupuesto" HeaderText="Presupuesto" SortExpression="Presupuesto"
-                        Visible="False" />
+                    <asp:BoundField DataField="Indicador" HeaderText="Indicador" 
+                        SortExpression="Indicador" />
                 </Columns>
                 <HeaderStyle CssClass="trheader" />
                 <RowStyle CssClass="trgris" />
             </asp:GridView>
             <asp:SqlDataSource ID="sqlResultados" runat="server" ConnectionString="<%$ ConnectionStrings:esmConnectionString2 %>"
-                DeleteCommand="DELETE FROM [Causas_Efectos] WHERE [Id] = @Id" InsertCommand="INSERT INTO [Causas_Efectos] ([Proyecto_id], [Causa], [Efecto], [Resultado], [Resultado_Detalle], [Indicador_Resultado], [Presupuesto]) VALUES (@Proyecto_id, @Causa, @Efecto, @Resultado, @Resultado_Detalle, @Indicador_Resultado, @Presupuesto)"
-                SelectCommand="SELECT * FROM [Causas_Efectos] WHERE ([Id] = @Id)" UpdateCommand="UPDATE [Causas_Efectos] SET [Proyecto_id] = @Proyecto_id, [Causa] = @Causa, [Efecto] = @Efecto, [Resultado] = @Resultado, [Resultado_Detalle] = @Resultado_Detalle, [Indicador_Resultado] = @Indicador_Resultado, [Presupuesto] = @Presupuesto WHERE [Id] = @Id">
-                <DeleteParameters>
-                    <asp:Parameter Name="Id" Type="Int32" />
-                </DeleteParameters>
-                <InsertParameters>
-                    <asp:Parameter Name="Proyecto_id" Type="Int32" />
-                    <asp:Parameter Name="Causa" Type="String" />
-                    <asp:Parameter Name="Efecto" Type="String" />
-                    <asp:Parameter Name="Resultado" Type="String" />
-                    <asp:Parameter Name="Resultado_Detalle" Type="String" />
-                    <asp:Parameter Name="Indicador_Resultado" Type="String" />
-                    <asp:Parameter Name="Presupuesto" Type="Int32" />
-                </InsertParameters>
+                SelectCommand="SELECT * FROM [Resultados_Proyectos] WHERE ([Id] = @Id)">
                 <SelectParameters>
-                    <asp:QueryStringParameter DefaultValue="0" Name="Id" QueryStringField="idresultado"
-                        Type="Int32" />
+                    <asp:QueryStringParameter DefaultValue="0" Name="Id" 
+                        QueryStringField="idresultado" Type="Int32" />
                 </SelectParameters>
-                <UpdateParameters>
-                    <asp:Parameter Name="Proyecto_id" Type="Int32" />
-                    <asp:Parameter Name="Causa" Type="String" />
-                    <asp:Parameter Name="Efecto" Type="String" />
-                    <asp:Parameter Name="Resultado" Type="String" />
-                    <asp:Parameter Name="Resultado_Detalle" Type="String" />
-                    <asp:Parameter Name="Indicador_Resultado" Type="String" />
-                    <asp:Parameter Name="Presupuesto" Type="Int32" />
-                    <asp:Parameter Name="Id" Type="Int32" />
-                </UpdateParameters>
             </asp:SqlDataSource>
             <asp:GridView ID="gvproyecto" runat="server" AutoGenerateColumns="False" DataKeyNames="Id"
                 DataSourceID="sqlProyecto" Visible="False" Width="80%">
