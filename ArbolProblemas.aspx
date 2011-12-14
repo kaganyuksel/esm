@@ -14,8 +14,8 @@
     <script src="Scripts/Proyectos.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="menu_proyecto" style="margin-left: 25%; width: 90%; position: fixed; z-index: 999999;">
-        <ul style="list-style-type: none; display: inline; top: 0; width: 800px; margin-left: 10%;">
+    <div id="menu_proyecto" style="margin-left: 10%; width: 90%; position: fixed; z-index: 999999;">
+        <ul style="list-style-type: none; display: inline; top: 0; width: 800px;">
             <li style="width: 50px; float: left; vertical-align: middle;">
                 <input type="button" onclick="SlideVolver();" class="btnleft ui-button ui-widget ui-state-default ui-corner-all"
                     role="button" aria-disabled="false" />
@@ -25,10 +25,10 @@
                 height: 30px; text-align: center; line-height: 30px; -moz-border-radius: 5px 0px 0px 5px;
                 -webkit-border-radius: 5px 0px 0px 5px; border-radius: 5px 0px 0px 5px; /*ie 7 and 8 do not support border radius*/">
                 Árbol Problemas</li>
-                <li id="li_procesos" style="width: 100px; float: left; vertical-align: middle;
-                background: #007cb6; color: #fff; font-size: 0.8em; height: 30px; text-align: center;
-                line-height: 30px;">Procesos</li>
-                <li id="li_Subprocesos" style="width: 100px; float: left; vertical-align: middle;
+            <li id="li_procesos" style="width: 100px; float: left; vertical-align: middle; background: #007cb6;
+                color: #fff; font-size: 0.8em; height: 30px; text-align: center; line-height: 30px;">
+                Procesos</li>
+            <li id="li_Subprocesos" style="width: 100px; float: left; vertical-align: middle;
                 background: #007cb6; color: #fff; font-size: 0.8em; height: 30px; text-align: center;
                 line-height: 30px;">Subprocesos</li>
             <li id="li_marco_logico" style="width: 100px; float: left; vertical-align: middle;
@@ -326,7 +326,7 @@
                 <br />
             </div>
             <div id="Mod_Subprocesos" style="width: 25%; margin: 0 auto; float: left; color: #005EA7;"
-                class="demo mover futuro">
+                class="demo mover">
                 <br />
                 <div>
                     <table>
@@ -469,7 +469,8 @@
                 <br />
                 <br />
             </div>
-            <div id="derechaSiguiente" style="width: 25%; margin: 0 auto; float: left;" class="demo mover">
+            <div id="derechaSiguiente" style="width: 24%; margin: 0 auto; float: left;"
+                class="demo mover">
                 <br />
                 <br />
                 <div>
@@ -537,7 +538,7 @@
                     </div>
                 </div>
             </div>
-            <div id="Cronograma" style="width: 25%; margin: 0 auto; float: left;" class="demo mover">
+            <div id="Cronograma" style="width: 25%; float: left; " class="demo mover">
                 <br />
                 <br />
                 <div>
