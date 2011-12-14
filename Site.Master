@@ -78,8 +78,7 @@
             $("textarea").each(function () {
                 var pixels = parseInt($(this).css("width")) - 30;
                 $(this).css("width", pixels + "px");
-                $(this).parent().append("<input type='text' x-webkit-speech = 'x-webkit-speech' style='width: 15px; border: 0;' onwebkitspeechchange=\"textarea_change($(this),'" + $(this).attr("id") + "');\"/>");
-
+                $(this).parent().append("<input type='text' x-webkit-speech = 'x-webkit-speech' style='width: 15px; background: transparent; border: 0;' onwebkitspeechchange=\"textarea_change($(this),'" + $(this).attr("id") + "');\"/>");
             });
 
             $("#ContentPlaceHolder1_gvResultados_GridViewPager1_TextBoxPage").removeAttr("x-webkit-speech");

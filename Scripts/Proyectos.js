@@ -163,21 +163,6 @@ $(function () {
 
 });
 
-function ActualizarActividad(idactividad, actividad, presupuesto) {
-    $.ajax({
-        url: "ajax.aspx?idactividad=" + idactividad + "&actividad=" + $("#" + actividad).val() + "&presupuesto=" + $("#" + presupuesto).val() + "&actividadesu=true",
-        async: false,
-        succes: function (result) {
-            alert(result);
-        },
-        error: function (result) {
-            alert("Error:" + result.status + " Estatus: " + result.statusText);
-        }
-    });
-
-    $("#ContentPlaceHolder1_Bandera").val("1");
-}
-
 function AlmacenarProceso(idproceso, causa, proceso) {
     $.ajax({
         url: "ajax.aspx?idproceso=" + idproceso + "&causa=" + causa + "&proceso=" + $("#" + proceso).val() + "&procesos=true",
@@ -245,7 +230,7 @@ function ActualizarEstrategia(idestrategia, estrategia) {
 
 
 function ActualizarSubProceso(idsubproceso, subproceso) {
-    
+
     $.ajax({
         url: "ajax.aspx?idsubproceso=" + idsubproceso + "&subproceso=" + $("#" + subproceso).val() + "&subprocesos_up=true",
         async: false,
@@ -265,8 +250,26 @@ function AlmacenarActividad(idresultado, actividad, presupuesto) {
     $.ajax({
         url: "ajax.aspx?idResultado=" + idresultado + "&actividad=" + $("#" + actividad).val() + "&presupuesto=" + $("#" + presupuesto).val() + "&actividades=true",
         async: false,
-        succes: function (result) {
-            alert(result);
+        success: function (result) {
+            $(".success").html("Actividad almacenada correctamente.");
+            $("#a_succes").trigger("click");
+        },
+        error: function (result) {
+            $(".error").html("Upps... ocurrio un error inesperado");
+            $("#a_error").trigger("click");
+        }
+    });
+
+    $("#ContentPlaceHolder1_Bandera").val("1");
+}
+
+function ActualizarActividad(idactividad, actividad, presupuesto) {
+    $.ajax({
+        url: "ajax.aspx?idactividad=" + idactividad + "&actividad=" + $("#" + actividad).val() + "&presupuesto=" + $("#" + presupuesto).val() + "&actividadesu=true",
+        async: false,
+        success: function (result) {
+            $(".success").html("Actividad actualizada correctamente.");
+            $("#a_succes").trigger("click");
         },
         error: function (result) {
             alert("Error:" + result.status + " Estatus: " + result.statusText);
@@ -275,7 +278,6 @@ function AlmacenarActividad(idresultado, actividad, presupuesto) {
 
     $("#ContentPlaceHolder1_Bandera").val("1");
 }
-
 function ActivateAcordion() {
     $(".accordion").accordion({ active: 0 });
     $("#expandir").focus();
