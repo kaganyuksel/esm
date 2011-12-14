@@ -884,6 +884,20 @@ namespace ESM.Objetos
             catch (Exception) { return null; }
 
         }
+
+        public IQueryable<Actividade> getActividades(int resultado_id)
+        {
+            try
+            {
+                var actividades_consulta = from a in new ESM.Model.ESMBDDataContext().Actividades
+                                           where a.Resultado_id == resultado_id
+                                           select a;
+
+                return actividades_consulta;
+            }
+            catch (Exception) { return null; }
+
+        }
     }
 
     public class CSubprocesos
