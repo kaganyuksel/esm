@@ -313,9 +313,9 @@ namespace ESM
         {
             try
             {
-                CEfectos objCresultado = new CEfectos();
+                CResultados_proyecto objCresultado = new CResultados_proyecto();
 
-                objCresultado.Update(idresultado, null, null, txtindicadorg.Text);
+                objCresultado.Update(idresultado, null, txtindicadorg.Text);
 
                 bool mediosvacios = objCresultado.RemoveMedios(idresultado);
 
