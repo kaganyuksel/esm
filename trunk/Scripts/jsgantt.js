@@ -442,8 +442,7 @@ this.Draw = function(){
 		 if(vShowEndDate!=1) vNameWidth+=vStatusWidth;
         
 		   // DRAW the Left-side of the chart (names, resources, comp%)
-           //TODO: JCMM vLeftTable = '<div class="scroll" id="leftside" style="width:' + vLeftWidth + 'px"><table id="t_Cronograma" runat="server" Visible="false" cellSpacing="0" cellPadding="0" border="0"><tbody>' +
-         vLeftTable = '<div class="scroll" id="leftside" style="width: 80%;"><table id="t_Cronograma" runat="server" Visible="false" cellSpacing="0" cellPadding="0" border="0"><tbody>' +
+         vLeftTable = '<div class="scroll" id="leftside" style="width:' + vLeftWidth + 'px"><table cellSpacing="0" cellPadding="0" border="0"><tbody>' +
             '<tr style="height: 36px"><td style="width:15px;"></td><td style="width: ' + vNameWidth + 'px;"><NOBR></NOBR></td>'; 
 
          if(vShowRes ==1) vLeftTable += ' <td style="width: ' + vStatusWidth + 'px; "></td>';
@@ -483,8 +482,7 @@ this.Draw = function(){
 
 			      vLeftTable += 
                   '  <td class="rowsgantt" style="width: 15px; border-top: #efefef 1px solid; font-size: 12px; border-left: #efefef 1px solid;">&nbsp;</td>' +
-                  '  <td class="gname" style="width: 70%; border-top: #efefef 1px solid; font-size: 12px;" nowrap><NOBR><span style="color: #aaaaaa; width: 70%;">';
-                  //JMMC '  <td class="gname" style="width: ' + vNameWidth + 'px; border-top: #efefef 1px solid; font-size: 12px;" nowrap><NOBR><span style="color: #aaaaaa">';
+                  '  <td class="gname" style="width: ' + vNameWidth + 'px; border-top: #efefef 1px solid; font-size: 12px;" nowrap><NOBR><span style="color: #aaaaaa">';
 
                for(j=1; j<vTaskList[i].getLevel(); j++) {
                   vLeftTable += '&nbsp&nbsp&nbsp&nbsp';
@@ -502,7 +500,7 @@ this.Draw = function(){
                   vLeftTable += '<span style="color: #000000; font-weight:bold; font-size: 12px;">&nbsp&nbsp&nbsp</span>';
                }
 
-               vLeftTable += '<span onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '",300,200); style="cursor:pointer; width:10%; text-align: justify;" title="' + vTaskList[i].getName() + '"> ' + vTaskList[i].getName().substring(0,50) + '</span></NOBR></td>' ;
+               vLeftTable += '<span onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '",300,200); style="cursor:pointer"> ' + vTaskList[i].getName() + '</span></NOBR></td>' ;
 
                var deshabilitado = '';
                if (vTaskList[i].getpIdBase() == 0 )

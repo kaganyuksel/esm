@@ -441,12 +441,26 @@ namespace ESM.Objetos
 
         #endregion
 
-        public int Add(string problema)
+        public string getname(int proyecto_id)
+        {
+            try
+            {
+                string name = (from p in _db.Proyectos
+                            where p.Id == proyecto_id
+                            select p.Proyecto1).Single();
+                return name;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public int Add(string problema, string nombre_proyecto)
         {
             try
             {
                 Proyecto objProyecto = new Proyecto
                 {
+                    Proyecto1 = nombre_proyecto,
                     Problema = problema
                 };
 

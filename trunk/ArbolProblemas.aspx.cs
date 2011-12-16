@@ -43,7 +43,7 @@ namespace ESM
         {
             #region Insercion de Proyecto
 
-            int idproyecto = objCpoyecto.Add(txtproblema.Text);
+            int idproyecto = objCpoyecto.Add(txtproblema.Text, txtname_project.Text);
             if (idproyecto != 0)
             {
                 Session.Add("idproyecto", idproyecto);
@@ -69,6 +69,8 @@ namespace ESM
                 alerthq.Value = "0";
 
             gvEfectos.DataBind();
+
+            Load_Project();
             #endregion
 
         }
@@ -78,29 +80,57 @@ namespace ESM
             Session.Remove("idproyecto");
 
             GridViewRow objRow = gvProyectos.SelectedRow;
+
             int idproyecto = Convert.ToInt32(objRow.Cells[1].Text);
             Session.Add("idproyecto", idproyecto);
-            _idproyecto = idproyecto;
+
             txtproblema.Text = objRow.Cells[2].Text;
             txtProposito.Text = objRow.Cells[2].Text;
             txtproblema.ReadOnly = true;
 
-            CargarProposito(txtproblema.Text);
-            load_procesos();
-            getCronograma();
-            load_subprocesos();
-            Load_resultados();
-            Load_estrategias();
+            txtname_project.Text = objCpoyecto.getname(idproyecto);
+            txtname_project.ReadOnly = true;
+            txtname_project_pro.Text = txtname_project.Text;
+            txtname_project_pro.ReadOnly = true;
+            txtname_project_estra.Text = txtname_project.Text;
+            txtname_project_estra.ReadOnly = true;
+            txtnameproject_activ.Text = txtname_project.Text;
+            txtnameproject_activ.ReadOnly = true;
+            txtname_project_sub.Text = txtname_project.Text;
+            txtname_project_sub.ReadOnly = true;
+
+            Load_Project();
+
             lknAlmacenarP.Enabled = false;
 
             divefectos.Visible = true;
             divproblema.Visible = true;
+            Mod_Name_Project.Visible = true;
             lknAlmacenarP.Enabled = true;
             divNuevo.Visible = false;
             divCargado.Visible = true;
             divproyectos.Visible = false;
 
             lknAlmacenarP.Enabled = false;
+        }
+
+        protected void Load_Project()
+        {
+            try
+            {
+                int idproyecto = Convert.ToInt32(Session["idproyecto"]); ;
+
+                _idproyecto = idproyecto;
+
+                CargarProposito(txtproblema.Text);
+                load_procesos();
+                getCronograma();
+                load_subprocesos();
+                Load_resultados();
+                Load_estrategias();
+            }
+            catch (Exception) { /*TODO: JCMM: Controlador Exception*/ }
+
         }
 
         protected void CargarProposito(string problema)
@@ -113,6 +143,9 @@ namespace ESM
                 {
                     txtProposito.Text = proposito;
                     txtproposito_po.Text = proposito;
+                    txtProposito_sub.Text = proposito;
+                    txtProposito_Estra.Text = proposito;
+
                 }
                 else
                 {
@@ -133,6 +166,7 @@ namespace ESM
             divproblema.Visible = true;
             divproyectos.Visible = false;
             lknAlmacenarP.Enabled = true;
+            Mod_Name_Project.Visible = true;
             txtproblema.Text = "";
             txtCausa1.Text = "";
             txtEfecto1.Text = "";
@@ -164,8 +198,10 @@ namespace ESM
         {
             try
             {
-                txtfinalidad.Text = objCEfectos.getEfectos(_idproyecto);
-                txtfinalidad_po.Text = txtfinalidad.Text;
+                txtFinalidad.Text = objCEfectos.getEfectos(_idproyecto);
+                txtfinalidad_po.Text = txtFinalidad.Text;
+                txtFinalidad_Sub.Text = txtFinalidad.Text;
+                txtfinalidad_estra.Text = txtFinalidad.Text;
             }
             catch (Exception) { /*TODO: JCMM: Controlador Exception*/ }
 
@@ -173,7 +209,7 @@ namespace ESM
 
         protected void lknAlmacenarFinalidad_Click(object sender, EventArgs e)
         {
-            objCpoyecto.Update(_idproyecto, null, null, txtfinalidad.Text);
+            objCpoyecto.Update(_idproyecto, null, null, txtFinalidad.Text);
         }
 
         protected void getCronograma()
@@ -375,7 +411,7 @@ namespace ESM
                     HtmlInputButton objAlmacenar_proceso = new HtmlInputButton();
                     objAlmacenar_proceso.ID = "btn_subproceso_almacenar_id" + item.Id.ToString();
                     objAlmacenar_proceso.Attributes.Add("onclick", String.Format("AlmacenarSubProceso('{0}','{1}');", item.Id, "txt_area_subproceso_id_" + item.Id));
-                    
+
                     objAlmacenar_proceso.Value = "Almacenar Subproceso";
 
                     objCell_SubProceso.Attributes.CssStyle.Add("padding-left", "20px");
@@ -395,7 +431,7 @@ namespace ESM
                     StringBuilder objsb = new StringBuilder();
 
                     objsb.Append("<div class='accordion'><h3><a href='#'>Subprocesos</a></h3>");
-                    objsb.Append("<div>");
+                    objsb.Append("<div id='col_subprocesos_" + item.Id + "'>");
 
                     IQueryable<Model.Subproceso> objSubprocesos = objCSubprocesos.LoadSubprocesos(item.Id);
 
@@ -512,7 +548,7 @@ namespace ESM
                         StringBuilder objsb = new StringBuilder();
 
                         objsb.Append("<div class='accordion'><h3><a href='#'>Estrategias</a></h3>");
-                        objsb.Append("<div>");
+                        objsb.Append("<div id='col_estrategias_" + item_subroceso.Id + "'>");
 
                         var detalles = new HtmlAnchor();
                         var cronograma = new HtmlAnchor();
@@ -653,7 +689,7 @@ namespace ESM
                             StringBuilder objsb_actividades = new StringBuilder();
 
                             objsb_actividades.Append("<div class='accordion'><h3><a href='#'>Actividades</a></h3>");
-                            objsb_actividades.Append("<div>");
+                            objsb_actividades.Append("<div id='col_actividades_" + item_estrategias.Id + "'>");
 
                             var detalles_Actividades = new HtmlAnchor();
                             var cronograma_Cronograma = new HtmlAnchor();
