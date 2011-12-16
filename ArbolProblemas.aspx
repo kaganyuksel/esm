@@ -129,6 +129,18 @@
                             Administración del Proyecto</h1>--%>
                     </div>
                     <br />
+                    <div class="problema" runat="server" id="Mod_Name_Project" visible="false" style="border: dashed 2px #005EA7;
+                        -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; padding-left: 50px;">
+                        <br />
+                        <span style="font-size: 22px; color: #005EA7;">Nombre de Proyecto</span>
+                        <br />
+                        <asp:TextBox ID="txtname_project" runat="server" TextMode="MultiLine" placeholder="Nombre de Proyecto" />
+                        <br />
+                        <p style="font-style: italic;">
+                            * Nombre de proyecto.</p>
+                        <br />
+                    </div>
+                    <br />
                     <div class="problema" runat="server" id="divproblema" visible="false" style="border: dashed 2px #005EA7;
                         -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; padding-left: 50px;">
                         <br />
@@ -271,12 +283,24 @@
                     <br />
                     <div class="problema" style="color: #005EA7; font-size: 1em; width: 50%; -moz-border-radius: 3px;
                         -webkit-border-radius: 3px; border-radius: 3px;">
+                        <div class="problema" runat="server" style="border: dashed 2px #005EA7; -moz-border-radius: 3px;
+                            -webkit-border-radius: 3px; border-radius: 3px; padding-left: 50px;">
+                            <br />
+                            <span style="font-size: 22px; color: #005EA7;">Nombre de Proyecto</span>
+                            <br />
+                            <asp:TextBox ID="txtname_project_pro" runat="server" TextMode="MultiLine" placeholder="Nombre de Proyecto" />
+                            <br />
+                            <p style="font-style: italic;">
+                                * Nombre de proyecto.</p>
+                            <br />
+                        </div>
+                        <br />
                         <div style="border: dashed 2px #005EA7; padding-left: 50px;">
                             <br />
                             <h1>
                                 <span style="color: #6E6E6E;" class="style1">Problema Central &gt;</span> Propósito</h1>
-                            <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine" /><asp:LinkButton
-                                ID="LinkButton1" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
+                            <asp:TextBox ID="txtProposito" runat="server" TextMode="MultiLine" /><asp:LinkButton
+                                ID="lknAlmacenarProposito" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
                                 runat="server" OnClick="lknAlmacenarProposito_Click" /><br />
                             <p style="font-style: italic; color: #000;">
                                 * Descripción del propósito para el proyecto actual.</p>
@@ -288,9 +312,9 @@
                             <br />
                             <h1 style="color: #00A9B5;">
                                 <span style="color: #6E6E6E;" class="style1">Efectos &gt;</span> Finalidad</h1>
-                            <asp:TextBox ID="TextBox2" runat="server" TextMode="MultiLine" Width="80%" Style="margin: 0 auto;
+                            <asp:TextBox ID="txtFinalidad" runat="server" TextMode="MultiLine" Width="80%" Style="margin: 0 auto;
                                 border: solid 2px #00A9B5;" />
-                            <asp:LinkButton ID="LinkButton2" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
+                            <asp:LinkButton ID="lknAlmacenarFinalidad" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
                                 runat="server" OnClick="lknAlmacenarFinalidad_Click" />
                             <br />
                             <p style="font-style: italic; color: #000;">
@@ -344,13 +368,23 @@
                     <br />
                     <div class="problema" style="color: #005EA7; font-size: 1em; width: 50%; -moz-border-radius: 3px;
                         -webkit-border-radius: 3px; border-radius: 3px;">
+                        <div class="problema" runat="server" style="border: dashed 2px #005EA7; -moz-border-radius: 3px;
+                            -webkit-border-radius: 3px; border-radius: 3px; padding-left: 50px;">
+                            <br />
+                            <span style="font-size: 22px; color: #005EA7;">Nombre de Proyecto</span>
+                            <br />
+                            <asp:TextBox ID="txtname_project_sub" runat="server" TextMode="MultiLine" placeholder="Nombre de Proyecto" />
+                            <br />
+                            <p style="font-style: italic;">
+                                * Nombre de proyecto.</p>
+                            <br />
+                        </div>
+                        <br />
                         <div style="border: dashed 2px #005EA7; padding-left: 50px;">
                             <br />
                             <h1>
                                 <span style="color: #6E6E6E;" class="style1">Problema Central &gt;</span> Propósito</h1>
-                            <asp:TextBox ID="TextBox3" runat="server" TextMode="MultiLine" /><asp:LinkButton
-                                ID="LinkButton3" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
-                                runat="server" OnClick="lknAlmacenarProposito_Click" /><br />
+                            <asp:TextBox ID="txtProposito_sub" runat="server" TextMode="MultiLine" /><br />
                             <p style="font-style: italic; color: #000;">
                                 * Descripción del propósito para el proyecto actual.</p>
                             <br />
@@ -361,10 +395,8 @@
                             <br />
                             <h1 style="color: #00A9B5;">
                                 <span style="color: #6E6E6E;" class="style1">Efectos &gt;</span> Finalidad</h1>
-                            <asp:TextBox ID="TextBox4" runat="server" TextMode="MultiLine" Width="80%" Style="margin: 0 auto;
-                                border: solid 2px #00A9B5;" />
-                            <asp:LinkButton ID="LinkButton4" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
-                                runat="server" OnClick="lknAlmacenarFinalidad_Click" />
+                            <asp:TextBox ID="txtFinalidad_Sub" runat="server" TextMode="MultiLine" Width="80%"
+                                Style="margin: 0 auto; border: solid 2px #00A9B5;" />
                             <br />
                             <p style="font-style: italic; color: #000;">
                                 * Descripción de la finalidad para el proyecto actual.</p>
@@ -416,13 +448,23 @@
                     <br />
                     <div class="problema" style="color: #005EA7; font-size: 1em; width: 50%; -moz-border-radius: 3px;
                         -webkit-border-radius: 3px; border-radius: 3px;">
+                        <div class="problema" runat="server" style="border: dashed 2px #005EA7; -moz-border-radius: 3px;
+                            -webkit-border-radius: 3px; border-radius: 3px; padding-left: 50px;">
+                            <br />
+                            <span style="font-size: 22px; color: #005EA7;">Nombre de Proyecto</span>
+                            <br />
+                            <asp:TextBox ID="txtname_project_estra" runat="server" TextMode="MultiLine" placeholder="Nombre de Proyecto" />
+                            <br />
+                            <p style="font-style: italic;">
+                                * Nombre de proyecto.</p>
+                            <br />
+                        </div>
+                        <br />
                         <div style="border: dashed 2px #005EA7; padding-left: 50px;">
                             <br />
                             <h1>
                                 <span style="color: #6E6E6E;" class="style1">Problema Central &gt;</span> Propósito</h1>
-                            <asp:TextBox ID="txtProposito" runat="server" TextMode="MultiLine" /><asp:LinkButton
-                                ID="lknAlmacenarProposito" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
-                                runat="server" OnClick="lknAlmacenarProposito_Click" /><br />
+                            <asp:TextBox ID="txtProposito_Estra" runat="server" TextMode="MultiLine" /><br />
                             <p style="font-style: italic; color: #000;">
                                 * Descripción del propósito para el proyecto actual.</p>
                             <br />
@@ -433,10 +475,8 @@
                             <br />
                             <h1 style="color: #00A9B5;">
                                 <span style="color: #6E6E6E;" class="style1">Efectos &gt;</span> Finalidad</h1>
-                            <asp:TextBox ID="txtfinalidad" runat="server" TextMode="MultiLine" Width="80%" Style="margin: 0 auto;
-                                border: solid 2px #00A9B5;" />
-                            <asp:LinkButton ID="lknAlmacenarFinalidad" Text="<img Width='24px' src='/Icons/save-icon.png' alt='Almacenar Proposito' />"
-                                runat="server" OnClick="lknAlmacenarFinalidad_Click" />
+                            <asp:TextBox ID="txtfinalidad_estra" runat="server" TextMode="MultiLine" Width="80%"
+                                Style="margin: 0 auto; border: solid 2px #00A9B5;" />
                             <br />
                             <p style="font-style: italic; color: #000;">
                                 * Descripción de la finalidad para el proyecto actual.</p>
@@ -469,8 +509,7 @@
                 <br />
                 <br />
             </div>
-            <div id="derechaSiguiente" style="width: 24%; margin: 0 auto; float: left;"
-                class="demo mover">
+            <div id="derechaSiguiente" style="width: 24%; margin: 0 auto; float: left;" class="demo mover">
                 <br />
                 <br />
                 <div>
@@ -486,6 +525,18 @@
                             </td>
                         </tr>
                     </table>
+                    <div class="problema" runat="server" style="border: dashed 2px #005EA7; -moz-border-radius: 3px;
+                        -webkit-border-radius: 3px; border-radius: 3px; padding-left: 50px; width: 50%;">
+                        <br />
+                        <span style="font-size: 22px; color: #005EA7;">Nombre de Proyecto</span>
+                        <br />
+                        <asp:TextBox ID="txtnameproject_activ" runat="server" TextMode="MultiLine" placeholder="Nombre de Proyecto" />
+                        <br />
+                        <p style="font-style: italic;">
+                            * Nombre de proyecto.</p>
+                        <br />
+                    </div>
+                    <br />
                     <div class="problema" style="border: dashed 2px #005EA7; padding-left: 50px; width: 50%;">
                         <br />
                         <h1 style="color: #005EA7;">
@@ -538,7 +589,7 @@
                     </div>
                 </div>
             </div>
-            <div id="Cronograma" style="width: 25%; float: left; " class="demo mover">
+            <div id="Cronograma" style="width: 25%; float: left;" class="demo mover">
                 <br />
                 <br />
                 <div>

@@ -26,11 +26,9 @@
             </td>
             <td>
                 <asp:RadioButton ID="rbtnresumen" runat="server" AutoPostBack="True" GroupName="groupreport"
-                    OnCheckedChanged="rbtnresumen_CheckedChanged" Text="Marco Lógico" 
-                    Visible="False" />
+                    OnCheckedChanged="rbtnresumen_CheckedChanged" Text="Marco Lógico" Visible="False" />
                 <asp:RadioButton ID="rbtndetalle" runat="server" AutoPostBack="True" GroupName="groupreport"
-                    OnCheckedChanged="rbtndetalle_CheckedChanged" Text="Plan Operativo" 
-                    Visible="False" />
+                    OnCheckedChanged="rbtndetalle_CheckedChanged" Text="Plan Operativo" Visible="False" />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:LinkButton Text="Export to Excel" runat="server" ID="lknExport" OnClick="lknExport_Click" />
             </td>
@@ -172,7 +170,10 @@
                     Type="Int32" />
             </SelectParameters>
         </asp:SqlDataSource>
+        <br />
     </div>
+    <asp:Panel ID="matriz" runat="server">
+    </asp:Panel>
     </form>
 </body>
 </html>

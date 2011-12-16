@@ -184,6 +184,15 @@ function AlmacenarSubProceso(idproceso, subproceso) {
         url: "ajax.aspx?idproceso=" + idproceso + "&subproceso=" + $("#" + subproceso).val() + "&subprocesos=true",
         async: false,
         success: function (result) {
+
+            $("#col_subprocesos_" + idproceso).hide(500, function () {
+                $("#col_subprocesos_" + idproceso).html(result);
+            });
+
+            $("#col_subprocesos_" + idproceso).show(500);
+
+            $("#" + subproceso).val("");
+
             $(".success").html("Subproceso almacenado correctamente.");
             $("#a_succes").trigger("click");
         },
@@ -200,6 +209,15 @@ function AlmacenarEstrategia(idsubproceso, estrategia) {
         url: "ajax.aspx?subproceso_id=" + idsubproceso + "&estrategia=" + $("#" + estrategia).val() + "&estrategias=true",
         async: false,
         success: function (result) {
+
+            $("#col_estrategias_" + idsubproceso).hide(500, function () {
+                $("#col_estrategias_" + idsubproceso).html(result);
+            });
+
+            $("#col_estrategias_" + idsubproceso).show(500);
+
+            $("#" + estrategia).val("");
+
             $(".success").html("Estrategia almacenada correctamente.");
             $("#a_succes").trigger("click");
         },
@@ -217,6 +235,8 @@ function ActualizarEstrategia(idestrategia, estrategia) {
         url: "ajax.aspx?idestrategia=" + idestrategia + "&estrategia=" + $("#" + estrategia).val() + "&estrategia_up=true",
         async: false,
         success: function (result) {
+
+
             $(".success").html("Estrategia actualizada correctamente.");
             $("#a_succes").trigger("click");
         },
@@ -251,8 +271,20 @@ function AlmacenarActividad(idresultado, actividad, presupuesto) {
         url: "ajax.aspx?idResultado=" + idresultado + "&actividad=" + $("#" + actividad).val() + "&presupuesto=" + $("#" + presupuesto).val() + "&actividades=true",
         async: false,
         success: function (result) {
+
+            $("#col_actividades_" + idresultado).hide(500, function () {
+                $("#col_actividades_" + idresultado).html(result);
+            });
+
+            $("#col_actividades_" + idresultado).show(500);
+
+            $("#" + actividad).val("");
+            $("#" + presupuesto).val("0");
+
             $(".success").html("Actividad almacenada correctamente.");
             $("#a_succes").trigger("click");
+
+
         },
         error: function (result) {
             $(".error").html("Upps... ocurrio un error inesperado");
@@ -351,7 +383,7 @@ $(document).ready(function () {
 
     });
 
-    $("a.pretty").prettyPhoto({
+    $(".pretty").prettyPhoto({
         ie6_fallback: true,
         modal: true,
         social_tools: false
