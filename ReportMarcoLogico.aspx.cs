@@ -16,31 +16,6 @@ namespace ESM
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Convert.ToBoolean(Request.QueryString["planoperativo"]))
-            //{
-            //    rbtndetalle.Checked = true;
-
-            //    gvDetalleActividades.Visible = true;
-            //    gvresultados.Visible = false;
-            //}
-            //else
-            //{
-            //    rbtnresumen.Checked = true;
-
-            //    gvDetalleActividades.Visible = false;
-            //    gvresultados.Visible = true;
-            //}
-
-            //CEfectos objCEfectos = new CEfectos();
-
-            //lblfinalidad.Text = objCEfectos.getEfectos(Convert.ToInt32(Request.QueryString["idproyecto"]));
-
-            //GridViewHelper helper = new GridViewHelper(this.gvDetalleActividades);
-            //helper.RegisterGroup("Resultado", true, true);
-            ////helper.RegisterSummary("Actividad", SummaryOperation.Sum, "Resultado");
-            //helper.GroupHeader += new GroupEvent(helper_GroupHeader);
-            //helper.ApplyGroupSort();
-
             int idproyecto = Convert.ToInt32(Session["idproyecto"]);
 
             getNew_Plan_Operativo(idproyecto);
@@ -57,10 +32,11 @@ namespace ESM
             }
         }
 
-        protected bool Export(HtmlTable table, GridView gvpro_Table, GridView gvresul_Table, GridView gvAct_Table)
+        protected bool Export()
         {
             try
             {
+                HtmlTable objTable = (HtmlTable)Session["p_c"];
 
                 StringBuilder objsb = new StringBuilder();
                 System.IO.StringWriter sw = new System.IO.StringWriter(objsb);
@@ -70,21 +46,13 @@ namespace ESM
                 pagina.EnableEventValidation = false;
                 pagina.DesignerInitialize();
                 pagina.Controls.Add(form);
-                form.Controls.Add(table);
-                form.Controls.Add(gvpro_Table);
-                if (rbtndetalle.Checked)
-                    form.Controls.Add(gvAct_Table);
-                else if (rbtnresumen.Checked)
-                    form.Controls.Add(gvresul_Table);
+                form.Controls.Add(objTable);
                 pagina.RenderControl(htw);
                 Response.Clear();
                 Response.Buffer = true;
                 Response.ContentType = "application/vnd.ms-excel";
 
-                if (rbtndetalle.Checked)
-                    Response.AddHeader("Content-Disposition", "attachment;filename=Plan_Operativo.xls");
-                else if (rbtnresumen.Checked)
-                    Response.AddHeader("Content-Disposition", "attachment;filename=MarcoLogico.xls");
+                Response.AddHeader("Content-Disposition", "attachment;filename=Plan_Operativo.xls");
 
                 Response.Charset = "UTF-8";
                 Response.ContentEncoding = Encoding.Default;
@@ -98,7 +66,7 @@ namespace ESM
 
         protected void lknExport_Click(object sender, EventArgs e)
         {
-            Export(tbFinalidad, gvproposito, gvresultados, gvDetalleActividades);
+            Export();
         }
 
         protected void rbtndetalle_CheckedChanged(object sender, EventArgs e)
@@ -123,9 +91,77 @@ namespace ESM
 
                 HtmlTable objtable = new HtmlTable();
 
+                objtable.Attributes.CssStyle.Add("border", "dashed 2px #222");
+                objtable.Attributes.CssStyle.Add("width", "95%");
+
+                HtmlTableRow objrowtitle = new HtmlTableRow();
+
+                HtmlTableCell cell_Proceso = new HtmlTableCell();
+                HtmlTableCell cell_Subproceso = new HtmlTableCell();
+                HtmlTableCell cell_Estrategia = new HtmlTableCell();
+                HtmlTableCell cell_Actividad = new HtmlTableCell();
+                HtmlTableCell cell_Indicador = new HtmlTableCell();
+                HtmlTableCell cell_Medios_Verificacion = new HtmlTableCell();
+                HtmlTableCell cell_Supuestos = new HtmlTableCell();
+                HtmlTableCell cell_Responsables = new HtmlTableCell();
+
+                cell_Proceso.InnerHtml = "Proceso";
+                cell_Subproceso.InnerHtml = "SubProceso";
+                cell_Estrategia.InnerHtml = "Estrategia";
+                cell_Actividad.InnerHtml = "Actividad";
+                cell_Indicador.InnerHtml = "Indicador";
+                cell_Medios_Verificacion.InnerHtml = "Medios de Verificación";
+                cell_Supuestos.InnerHtml = "Supuestos";
+                cell_Responsables.InnerHtml = "Responsables";
+
+                objrowtitle.Cells.Add(cell_Proceso);
+                objrowtitle.Cells.Add(cell_Subproceso);
+                objrowtitle.Cells.Add(cell_Estrategia);
+                objrowtitle.Cells.Add(cell_Actividad);
+                objrowtitle.Cells.Add(cell_Indicador);
+                objrowtitle.Cells.Add(cell_Medios_Verificacion);
+                objrowtitle.Cells.Add(cell_Supuestos);
+                objrowtitle.Cells.Add(cell_Responsables);
+
+                cell_Proceso.Attributes.CssStyle.Add("border", "dashed 1px #000");
+                cell_Proceso.Attributes.CssStyle.Add("vertical-align", "middle");
+                cell_Proceso.Attributes.CssStyle.Add("text-align", "center");
+
+                cell_Subproceso.Attributes.CssStyle.Add("border", "dashed 1px #000");
+                cell_Subproceso.Attributes.CssStyle.Add("vertical-align", "middle");
+                cell_Subproceso.Attributes.CssStyle.Add("text-align", "center");
+
+                cell_Estrategia.Attributes.CssStyle.Add("border", "dashed 1px #000");
+                cell_Estrategia.Attributes.CssStyle.Add("vertical-align", "middle");
+                cell_Estrategia.Attributes.CssStyle.Add("text-align", "center");
+
+                cell_Actividad.Attributes.CssStyle.Add("border", "dashed 1px #000");
+                cell_Actividad.Attributes.CssStyle.Add("vertical-align", "middle");
+                cell_Actividad.Attributes.CssStyle.Add("text-align", "center");
+
+                cell_Indicador.Attributes.CssStyle.Add("border", "dashed 1px #000");
+                cell_Indicador.Attributes.CssStyle.Add("vertical-align", "middle");
+                cell_Indicador.Attributes.CssStyle.Add("text-align", "center");
+
+                cell_Medios_Verificacion.Attributes.CssStyle.Add("border", "dashed 1px #000");
+                cell_Medios_Verificacion.Attributes.CssStyle.Add("vertical-align", "middle");
+                cell_Medios_Verificacion.Attributes.CssStyle.Add("text-align", "center");
+
+                cell_Supuestos.Attributes.CssStyle.Add("border", "dashed 1px #000");
+                cell_Supuestos.Attributes.CssStyle.Add("vertical-align", "middle");
+                cell_Supuestos.Attributes.CssStyle.Add("text-align", "center");
+
+                cell_Responsables.Attributes.CssStyle.Add("border", "dashed 1px #000");
+                cell_Responsables.Attributes.CssStyle.Add("vertical-align", "middle");
+                cell_Responsables.Attributes.CssStyle.Add("text-align", "center");
+
+                objtable.Rows.Add(objrowtitle);
+
                 IQueryable<Model.Causas_Efecto> col_procesos = objCProcesos.getCount(idproyecto);
+
                 int rowspan_proceso = 1;
                 int contador_filas = 0;
+
                 foreach (var item_procesos in col_procesos)
                 {
                     bool tiene_subprocesos = true;
@@ -134,6 +170,13 @@ namespace ESM
 
                     HtmlTableCell objcell_name_proceso = new HtmlTableCell();
                     objcell_name_proceso.InnerHtml = item_procesos.Proceso;
+
+                    objcell_name_proceso.Attributes.CssStyle.Add("border", "dashed 2px " + item_procesos.Color);
+                    objcell_name_proceso.Attributes.CssStyle.Add("background", "#ccc");
+                    objcell_name_proceso.Attributes.CssStyle.Add("vertical-align", "middle");
+                    objcell_name_proceso.Attributes.CssStyle.Add("text-align", "center");
+                    objcell_name_proceso.Attributes.CssStyle.Add("color", "#005EA7");
+                    objcell_name_proceso.Attributes.CssStyle.Add("font-weight", "bold");
 
                     IQueryable<Model.Subproceso> col_subprocesos = new CSubprocesos().LoadSubprocesos(item_procesos.Id);
 
@@ -166,8 +209,6 @@ namespace ESM
 
                         objcell_name_subproceso.InnerHtml = item_subprocesos.Subproceso1;
 
-                        //objrow_subprocesos.Cells.Add(objcell_name_proceso_null);
-
                         IQueryable<Model.Resultados_Proyecto> col_estrategias = new CResultados_proyecto().LoadResultados(item_subprocesos.Id);
 
                         int rowspan_subproceso = 1;
@@ -186,14 +227,14 @@ namespace ESM
                         {
                             objrow_subprocesos.Cells.Add(objcell_name_subproceso);
                             HtmlTableCell objcell_name_estrategia_null_null = new HtmlTableCell();
-                            //objrow_subprocesos.Cells.Add(objcell_name_estrategia_null_null);
                         }
                         else
                             objrow_subprocesos.Cells.Add(objcell_name_subproceso);
 
-                        objcell_name_subproceso.Attributes.CssStyle.Add("background", item_procesos.Color);
+                        objcell_name_subproceso.Attributes.CssStyle.Add("border", "dashed 1px " + item_procesos.Color);
                         objcell_name_subproceso.Attributes.CssStyle.Add("vertical-align", "middle");
                         objcell_name_subproceso.Attributes.CssStyle.Add("text-align", "center");
+
 
 
                         objtable.Rows.Add(objrow_subprocesos);
@@ -214,7 +255,7 @@ namespace ESM
 
                             IQueryable<Model.Actividade> col_actividades = new CActividades().getActividades(item_estrategias.Id);
 
-                            objcell_name_estrategia.Attributes.CssStyle.Add("background", item_procesos.Color);
+                            objcell_name_estrategia.Attributes.CssStyle.Add("border", " dashed 1px " + item_procesos.Color);
                             objcell_name_estrategia.Attributes.CssStyle.Add("vertical-align", "middle");
                             objcell_name_estrategia.Attributes.CssStyle.Add("text-align", "center");
 
@@ -225,14 +266,11 @@ namespace ESM
 
                             if (!tiene_actividades)
                             {
-                                //HtmlTableCell objcell_name_estrategia_null_null_null = new HtmlTableCell();
-                                //objrow_estrategias.Cells.Add(objcell_name_estrategia_null_null_null);
                                 objrow_estrategias.Cells.Add(objcell_name_estrategia);
                             }
                             else
                             {
                                 HtmlTableCell objcell_name_estrategia_null_null_null = new HtmlTableCell();
-                                //objrow_estrategias.Cells.Add(objcell_name_estrategia_null_null_null);
                                 objrow_estrategias.Cells.Add(objcell_name_estrategia);
                             }
 
@@ -249,11 +287,78 @@ namespace ESM
 
                                 objcell_name_actividad.InnerHtml = item_actividades.Actividad;
 
-                                //objrow_actividades.Cells.Add(objcell_name_proceso_null_null_null);
-                                //objrow_actividades.Cells.Add(objcell_name_subproceso_null_null);
-                                //objrow_actividades.Cells.Add(objcell_name_estrategia_null);
+                                objcell_name_actividad.Attributes.CssStyle.Add("border", " dashed 1px " + item_procesos.Color);
+                                objcell_name_actividad.Attributes.CssStyle.Add("vertical-align", "middle");
+                                objcell_name_actividad.Attributes.CssStyle.Add("text-align", "center");
 
                                 objrow_actividades.Cells.Add(objcell_name_actividad);
+
+                                HtmlTableCell objcell_Indicadores = new HtmlTableCell();
+                                HtmlTableCell objcell_medios_verificacion = new HtmlTableCell();
+                                HtmlTableCell objcell_supuestos = new HtmlTableCell();
+                                HtmlTableCell objcell_responsables = new HtmlTableCell();
+
+                                string medios_verificacion = "";
+                                string supuestos = "";
+                                string responsables = "";
+                                string indicadores = "";
+
+                                foreach (var item_medios in item_actividades.Actividades_Medios)
+                                {
+                                    medios_verificacion = medios_verificacion + ", " + item_medios.Medios_de_verificacion.Medio_de_verificacion;
+                                }
+
+                                foreach (var item_supuestos in item_actividades.Actividades_Supuestos)
+                                {
+                                    supuestos = supuestos + ", " + item_supuestos.Supuesto.supuesto1;
+                                }
+
+                                foreach (var item_responsables in item_actividades.Actividades_Responsables)
+                                {
+                                    responsables = responsables + ", " + item_responsables.Usuario.Nombre;
+                                }
+
+                                foreach (var item_indicadores in item_actividades.Indicadores)
+                                {
+                                    indicadores = indicadores + ", " + item_indicadores.Indicador;
+                                }
+
+                                if (supuestos.Length != 0)
+                                    supuestos = supuestos.Trim(',');
+
+                                if (medios_verificacion.Length != 0)
+                                    medios_verificacion = medios_verificacion.Trim(',');
+
+                                if (responsables.Length != 0)
+                                    responsables = responsables.Trim(',');
+
+                                if (indicadores.Length != 0)
+                                    indicadores = indicadores.Trim(',');
+
+                                objcell_Indicadores.InnerHtml = indicadores;
+                                objcell_Indicadores.Attributes.CssStyle.Add("border", " dashed 1px " + item_procesos.Color);
+                                objcell_Indicadores.Attributes.CssStyle.Add("vertical-align", "middle");
+                                objcell_Indicadores.Attributes.CssStyle.Add("text-align", "center");
+
+                                objcell_medios_verificacion.InnerHtml = medios_verificacion;
+                                objcell_medios_verificacion.Attributes.CssStyle.Add("border", " dashed 1px " + item_procesos.Color);
+                                objcell_medios_verificacion.Attributes.CssStyle.Add("vertical-align", "middle");
+                                objcell_medios_verificacion.Attributes.CssStyle.Add("text-align", "center");
+
+                                objcell_supuestos.InnerHtml = supuestos;
+                                objcell_supuestos.Attributes.CssStyle.Add("border", " dashed 1px " + item_procesos.Color);
+                                objcell_supuestos.Attributes.CssStyle.Add("vertical-align", "middle");
+                                objcell_supuestos.Attributes.CssStyle.Add("text-align", "center");
+
+                                objcell_responsables.InnerHtml = responsables;
+                                objcell_responsables.Attributes.CssStyle.Add("border", " dashed 1px " + item_procesos.Color);
+                                objcell_responsables.Attributes.CssStyle.Add("vertical-align", "middle");
+                                objcell_responsables.Attributes.CssStyle.Add("text-align", "center");
+
+                                objrow_actividades.Cells.Add(objcell_Indicadores);
+                                objrow_actividades.Cells.Add(objcell_medios_verificacion);
+                                objrow_actividades.Cells.Add(objcell_supuestos);
+                                objrow_actividades.Cells.Add(objcell_responsables);
 
                                 objtable.Rows.Add(objrow_actividades);
 
@@ -263,18 +368,20 @@ namespace ESM
 
                     }
 
-                    objtable.Rows[contador_filas].Cells[0].Attributes.Add("rowspan", (rowspan_proceso + 1).ToString());
-                    objtable.Rows[contador_filas].Cells[0].Attributes.CssStyle.Add("background", item_procesos.Color);
-                    objtable.Rows[contador_filas].Cells[0].Attributes.CssStyle.Add("vertical-align", "middle");
-                    objtable.Rows[contador_filas].Cells[0].Attributes.CssStyle.Add("text-align", "center");
+                    objtable.Rows[contador_filas + 1].Cells[0].Attributes.Add("rowspan", (rowspan_proceso + 1).ToString());
                 }
 
                 matriz.Controls.Add(objtable);
+
+                Session.Add("p_c", objtable);
             }
-            catch (Exception) { /*TODO: JCMM: Controlador Exception*/ }
+            catch (Exception) { }
 
         }
 
-
+        ~ReportMarcoLogico()
+        {
+            Session.Remove("p_c");
+        }
     }
 }

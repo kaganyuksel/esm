@@ -3,15 +3,26 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head>
     <title></title>
     <link href="mastercustom.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
+    <%--<script src="Scripts/jquery-1.6.3-vsdoc.js" type="text/javascript"></script>--%>
     <style type="text/css">
         body
         {
             background: #fff;
         }
     </style>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+//            alert($(".pp_pic_holder", top.document).length);
+            $(".pp_pic_holder", top.document).css("top", "0px");
+
+        });
+    
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -34,9 +45,9 @@
             </td>
         </tr>
     </table>
-    <div style="width: 95%; margin: 0 auto; border: 1px solid #ccc;">
+    <div style="width: 95%; margin: 0 auto; border: 1px solid #ccc;" runat="server" visible="false">
         <table id="tbFinalidad" runat="server" border="1" cellpadding="0" cellspacing="0"
-            width="100%">
+            width="100%" visible="false">
             <tr class="trheader">
                 <td width="50%">
                     <b>Descripción</b>

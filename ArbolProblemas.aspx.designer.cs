@@ -382,15 +382,6 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.HiddenField HFTempDate;
         
         /// <summary>
-        /// lknexport_gantt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lknexport_gantt;
-        
-        /// <summary>
         /// t_gantt control.
         /// </summary>
         /// <remarks>

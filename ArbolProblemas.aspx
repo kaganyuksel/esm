@@ -14,7 +14,7 @@
     <script src="Scripts/Proyectos.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div id="menu_proyecto" style="margin-left: 10%; width: 90%; position: fixed; z-index: 999999;">
+    <div id="menu_proyecto" style="margin-left: 10%; width: 90%; position: fixed; z-index: 8000;">
         <ul style="list-style-type: none; display: inline; top: 0; width: 800px;">
             <li style="width: 50px; float: left; vertical-align: middle;">
                 <input type="button" onclick="SlideVolver();" class="btnleft ui-button ui-widget ui-state-default ui-corner-all"
@@ -320,7 +320,8 @@
                             <p style="font-style: italic; color: #000;">
                                 * Descripción de la finalidad para el proyecto actual.</p>
                             <br />
-                            <a id="A1" style="color: #000; font-style: italic; text-decoration: none;" href="#">
+                            <a id="A1" class="Visualizar_Matriz" style="color: #000; font-style: italic; text-decoration: none;"
+                                href="#">
                                 <img src="/Icons/Search.png" width="24px" alt="Matriz" />
                                 Visualizar Matriz</a>
                             <br />
@@ -401,7 +402,8 @@
                             <p style="font-style: italic; color: #000;">
                                 * Descripción de la finalidad para el proyecto actual.</p>
                             <br />
-                            <a id="A4" style="color: #000; font-style: italic; text-decoration: none;" href="#">
+                            <a class="Visualizar_Matriz" style="color: #000; font-style: italic; text-decoration: none;"
+                                href="#" class="Visualizar_Matriz">
                                 <img src="/Icons/Search.png" width="24px" alt="Matriz" />
                                 Visualizar Matriz</a>
                             <br />
@@ -481,8 +483,8 @@
                             <p style="font-style: italic; color: #000;">
                                 * Descripción de la finalidad para el proyecto actual.</p>
                             <br />
-                            <a id="Visualizar_Matriz" style="color: #000; font-style: italic; text-decoration: none;"
-                                href="#">
+                            <a id="Visualizar_Matriz" class="Visualizar_Matriz" style="color: #000; font-style: italic;
+                                text-decoration: none;" href="#">
                                 <img src="/Icons/Search.png" width="24px" alt="Matriz" />
                                 Visualizar Matriz</a>
                             <br />
@@ -559,7 +561,7 @@
                             * Descripción de la finalidad para el proyecto actual.</p>
                         <br />
                         <a id="PlanOperativo_a" style="color: #000; font-style: italic; text-decoration: none;"
-                            href="#">
+                            href="#" class="Visualizar_Matriz">
                             <img src="/Icons/Search.png" width="24px" alt="Matriz" />
                             Visualizar Matriz</a>
                         <br />
@@ -611,7 +613,7 @@
                         <div style="position: relative; width: 100%;" class="gantt" id="GanttChartDIV">
                         </div>
                     </div>
-                    <asp:LinkButton Text="Export to Excel" runat="server" ID="lknexport_gantt" OnClick="lknexport_gantt_Click" />
+                    <%--<asp:LinkButton Text="Export to Excel" runat="server" ID="lknexport_gantt" OnClick="lknexport_gantt_Click" />--%>
                     <table id="t_gantt" visible="false" runat="server" border="0" cellpadding="0" cellspacing="0">
                     </table>
                 </div>
