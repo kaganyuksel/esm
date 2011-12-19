@@ -714,6 +714,7 @@ namespace ESM
                                 objsb_actividades.Append(" <input type='button' value='Actualizar Actividad' onclick=\"ActualizarActividad(" + parametros + ");\" /> ");
                                 objsb_actividades.Append(" <a title=\"Detalles para Actividad No." + enumeracion_Actividades.ToString() + "\" class='pretty' href=\"" + Request.Url.Scheme + "://" + Request.Url.Authority + "/DetallesMarcoLogico.aspx?idActividad=" + item_actividades.Id + "&iframe=true&amp;width=100%&amp;height=100%\"\"><img alt='Detalles' src='/Icons/details.png' width='24px' /></a>");
                                 objsb_actividades.Append(" <a title=\"Cronograma Actividad No." + enumeracion_Actividades.ToString() + "\" class='pretty' href=\"" + Request.Url.Scheme + "://" + Request.Url.Authority + "/DiagramaGant.aspx?idActividad=" + item_actividades.Id + "&iframe=true&amp;width=100%&amp;height=100%\"\"><img alt='Cronograma' src='/Icons/Calender.png' width='24px' /></a>");
+                                objsb_actividades.Append(" <a title=\"Valores para Actividad No." + enumeracion_Actividades.ToString() + "\" class='pretty' href=\"" + Request.Url.Scheme + "://" + Request.Url.Authority + "/Valores_actividad.aspx?idActividad=" + item_actividades.Id + "&iframe=true&amp;width=100%&amp;height=100%\"\"><img alt='Valores' src='/Icons/Stationery.png' width='24px' /></a>");
                                 objsb_actividades.Append("</td> ");
                                 objsb_actividades.Append("</tr> ");
 

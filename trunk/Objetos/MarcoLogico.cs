@@ -597,6 +597,48 @@ namespace ESM.Objetos
 
         #endregion
 
+        public IQueryable getMed_Indicador(int indicador_id)
+        {
+            try
+            {
+                var mediciones_indicador = from m in _db.Indicadores_Valors
+                                           where m.Indicador_id == indicador_id
+                                           select new { Fecha = m.Fecha_Valor, m.Valor };
+                return mediciones_indicador;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public bool AddMeta_Valor(int indicador_id, DateTime fecha, int meta, int valor)
+        {
+            try
+            {
+                Indicadores_Meta objMeta = new Indicadores_Meta
+                {
+                    Indicador_id = indicador_id,
+                    Fecha_Meta = fecha,
+                    Meta = meta
+                };
+
+                Indicadores_Valor objValor = new Indicadores_Valor
+                {
+                    Indicador_id = indicador_id,
+                    Fecha_Valor = fecha,
+                    Valor = valor
+                };
+
+                _db.Indicadores_Metas.InsertOnSubmit(objMeta);
+                _db.Indicadores_Valors.InsertOnSubmit(objValor);
+
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
         public List<object[,]> getIndicadoresVencidos(int usuario_id)
         {
             try

@@ -51,7 +51,7 @@ namespace ESM
                     lblTelefono.Text = telefono;
                     lblDirección.Text = direccion;
                     lblmunicipio.Text = municipio;
-                    string address = lblDirección.Text.Replace("KR", "Carrera") + ", " + municipio + ", Coplombia";
+                    string address = lblDirección.Text.Replace("KR", "Carrera") + ", " + municipio + ", Colombia";
                     GoogleMap1.Address = address;
                     Artem.Web.UI.Controls.GoogleMarker objGoogleMarker = new Artem.Web.UI.Controls.GoogleMarker(address);
                     objGoogleMarker.Text = "Fecha/Hora: " + cita.FechaInicio.ToString() + " - " + cita.FechaFin.ToString();
