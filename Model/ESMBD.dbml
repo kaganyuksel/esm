@@ -389,21 +389,12 @@
       <Column Name="fecha_indicador_final" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Fecha_Creacion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="SSP" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="Indicadore_Indicadores_Meta" Member="Indicadores_Metas" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Meta" />
       <Association Name="Indicadore_Indicadores_Responsable" Member="Indicadores_Responsables" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Responsable" />
+      <Association Name="Indicadore_Indicadores_Meta" Member="Indicadores_Metas" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Meta" />
       <Association Name="Indicadore_Indicadores_Valor" Member="Indicadores_Valors" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Valor" />
       <Association Name="Actividade_Indicadore" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Verbo_Indicadore" Member="Verbo" ThisKey="verbo_id" OtherKey="Id" Type="Verbo" IsForeignKey="true" />
       <Association Name="Unidade_Indicadore" Member="Unidade" ThisKey="unidad_id" OtherKey="Id" Type="Unidade" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Indicadores_Metas" Member="Indicadores_Metas">
-    <Type Name="Indicadores_Meta">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Indicador_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Meta" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Fecha_Meta" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Association Name="Indicadore_Indicadores_Meta" Member="Indicadore" ThisKey="Indicador_id" OtherKey="Id" Type="Indicadore" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Indicadores_Responsables" Member="Indicadores_Responsables">
@@ -413,15 +404,6 @@
       <Column Name="Indicador_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Indicadore_Indicadores_Responsable" Member="Indicadore" ThisKey="Indicador_id" OtherKey="Id" Type="Indicadore" IsForeignKey="true" />
       <Association Name="Usuario_Indicadores_Responsable" Member="Usuario" ThisKey="Usuario_id" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Indicadores_Valor" Member="Indicadores_Valors">
-    <Type Name="Indicadores_Valor">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Indicador_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Valor" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Fecha_Valor" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Association Name="Indicadore_Indicadores_Valor" Member="Indicadore" ThisKey="Indicador_id" OtherKey="Id" Type="Indicadore" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.LecturaContextoEE" Member="LecturaContextoEEs">
@@ -951,6 +933,24 @@
       <Column Name="Indicador" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
       <Column Name="[Medios de Verificacion]" Member="Medios_de_Verificacion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Supuestos" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Indicadores_Metas" Member="Indicadores_Metas">
+    <Type Name="Indicadores_Meta">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Indicador_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Meta" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Fecha_Meta" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Indicadore_Indicadores_Meta" Member="Indicadore" ThisKey="Indicador_id" OtherKey="Id" Type="Indicadore" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Indicadores_Valor" Member="Indicadores_Valors">
+    <Type Name="Indicadores_Valor">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Indicador_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Valor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Fecha_Valor" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Indicadore_Indicadores_Valor" Member="Indicadore" ThisKey="Indicador_id" OtherKey="Id" Type="Indicadore" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

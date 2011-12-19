@@ -314,6 +314,13 @@
     <Compile Include="Model\ESMBD.cs">
       <DependentUpon>ESMBD.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Valores_actividad.aspx.cs">
+      <DependentUpon>Valores_actividad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Valores_actividad.aspx.designer.cs">
+      <DependentUpon>Valores_actividad.aspx</DependentUpon>
+    </Compile>
     <Content Include="ActaVisitaEE.aspx" />
     <Content Include="ActaVisitaSE.aspx" />
     <Content Include="ActaVisitaSistematizacion.aspx" />
@@ -916,6 +923,7 @@
     <Content Include="Style\MarcoLogico.css" />
     <Content Include="Style\menu_arbol.css" />
     <Content Include="Style\Proyecto.css" />
+    <Content Include="Valores_actividad.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

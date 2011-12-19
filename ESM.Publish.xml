@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <publishData>
-  <publishProfile publishUrl="E:\Publicacion de Proyectos\ESM Beta 19122011" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Juan Camilo Martinez MG" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+  <publishProfile publishUrl="E:\Publicacion de Proyectos\ESM Beta 19122011 V2" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Juan Camilo Martinez MG" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
     <file relUrl="Style/images/colorpicker_select.gif" publishTime="11/28/2011 09:04:34" />
     <file relUrl="Pretty/images/prettyPhoto/default/sprite_prev.png" publishTime="10/10/2011 14:27:38" />
     <file relUrl="Icons/Music.png" publishTime="10/10/2011 14:27:20" />
@@ -173,6 +173,7 @@
     <file relUrl="Cita.aspx" publishTime="11/02/2011 20:36:54" />
     <file relUrl="Icons/Folder_Open.png" publishTime="10/10/2011 14:27:20" />
     <file relUrl="Scripts/colorpicker.js" publishTime="11/28/2011 09:05:33" />
+    <file relUrl="Valores_actividad.aspx" publishTime="12/19/2011 16:25:02" />
     <file relUrl="ActaVisitaSistematizacion.aspx" publishTime="10/25/2011 12:12:28" />
     <file relUrl="Style/images/ui-icons_72a03b_256x240.png" publishTime="10/10/2011 14:27:33" />
     <file relUrl="AmCharts/flash/expressInstall.swf" publishTime="10/10/2011 14:27:21" />
@@ -183,7 +184,7 @@
     <file relUrl="Scripts/full_calendar/fullcalendar.print.css" publishTime="10/10/2011 14:27:38" />
     <file relUrl="DynamicData/FieldTemplates/Integer_Edit.ascx" publishTime="10/10/2011 14:27:36" />
     <file relUrl="Citas.aspx" publishTime="10/13/2011 14:34:20" />
-    <file relUrl="bin/ESM.dll" publishTime="12/19/2011 11:37:58" />
+    <file relUrl="bin/ESM.dll" publishTime="12/19/2011 16:25:35" />
     <file relUrl="AmCharts/flash/ampie.swf" publishTime="10/10/2011 14:27:21" />
     <file relUrl="Style/images/blank.gif" publishTime="11/28/2011 09:04:34" />
     <file relUrl="ModuloDocumentosSis.aspx" publishTime="10/26/2011 16:29:23" />
@@ -226,7 +227,7 @@
     <file relUrl="Icons/Close.png" publishTime="10/10/2011 14:27:20" />
     <file relUrl="Icons/Delete.png" publishTime="10/10/2011 14:27:20" />
     <file relUrl="Pretty/images/prettyPhoto/default/sprite.png" publishTime="10/10/2011 14:27:38" />
-    <file relUrl="bin/ESM.pdb" publishTime="12/19/2011 11:37:58" />
+    <file relUrl="bin/ESM.pdb" publishTime="12/19/2011 16:25:35" />
     <file relUrl="AmCharts/flash/amradar.swf" publishTime="10/10/2011 14:27:21" />
     <file relUrl="plupload/js/plupload.silverlight.js" publishTime="10/10/2011 14:27:37" />
     <file relUrl="Icons/Back.png" publishTime="11/12/2011 09:37:16" />
