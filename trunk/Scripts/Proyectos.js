@@ -373,7 +373,7 @@ $(document).ready(function () {
     $("#Cronograma_Proyecto").click(function () {
         $.prettyPhoto.open("/DiagramaGant.aspx?&iframe=true&width=100%&height=100%");
     });
-    $("#Visualizar_Matriz").click(function () {
+    $(".Visualizar_Matriz").click(function () {
 
         $.prettyPhoto.open("/ReportMarcoLogico.aspx?idproyecto=" + idproyecto + "&marcologico=true&iframe=true&width=100%&height=100%");
     });
