@@ -446,8 +446,8 @@ namespace ESM.Objetos
             try
             {
                 string name = (from p in _db.Proyectos
-                            where p.Id == proyecto_id
-                            select p.Proyecto1).Single();
+                               where p.Id == proyecto_id
+                               select p.Proyecto1).Single();
                 return name;
             }
             catch (Exception) { return null; }
@@ -618,7 +618,7 @@ namespace ESM.Objetos
 
                     foreach (var item_indicadores in indicadores_vencidos)
                     {
-                        //caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Causas_Efecto.Proyecto.Problema;
+                        caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Resultados_Proyecto.Subproceso.Causas_Efecto.Proyecto.Problema;
                         caracteristicas_indicador[indicador_actual, 1] = item_indicadores.Actividade.Actividad;
                         caracteristicas_indicador[indicador_actual, 2] = item_indicadores.Indicador;
                         caracteristicas_indicador[indicador_actual, 3] = item_indicadores.Fecha_Creacion;
@@ -656,7 +656,7 @@ namespace ESM.Objetos
 
                     foreach (var item_indicadores in indicadores_vencidos)
                     {
-                        //caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Causas_Efecto.Proyecto.Problema;
+                        caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Resultados_Proyecto.Subproceso.Causas_Efecto.Proyecto.Problema;
                         caracteristicas_indicador[indicador_actual, 1] = item_indicadores.Actividade.Actividad;
                         caracteristicas_indicador[indicador_actual, 2] = item_indicadores.Indicador;
                         caracteristicas_indicador[indicador_actual, 3] = item_indicadores.Fecha_Creacion;

@@ -17,7 +17,6 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-//            alert($(".pp_pic_holder", top.document).length);
             $(".pp_pic_holder", top.document).css("top", "0px");
 
         });

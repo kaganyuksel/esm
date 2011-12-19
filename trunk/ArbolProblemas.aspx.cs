@@ -23,20 +23,26 @@ namespace ESM
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["idproyecto"] != null && Convert.ToInt32(Session["Cant_Load"]) == 0)
+            if (Request.IsAuthenticated)
             {
-                hidproyecto.Value = Session["idproyecto"].ToString();
-                _idproyecto = Convert.ToInt32(Session["idproyecto"]);
+                if (Session["idproyecto"] != null && Convert.ToInt32(Session["Cant_Load"]) == 0)
+                {
+                    hidproyecto.Value = Session["idproyecto"].ToString();
+                    _idproyecto = Convert.ToInt32(Session["idproyecto"]);
 
-            }
-            if (Bandera.Value == "1")
-            {
-                Bandera.Value = "-1";
-            }
-            if (!Page.IsPostBack)
-            {
+                }
+                if (Bandera.Value == "1")
+                {
+                    Bandera.Value = "-1";
+                }
+                if (!Page.IsPostBack)
+                {
 
+                }
             }
+            else
+                Response.Redirect("Login.aspx");
+
         }
 
         protected void lknAlmacenarP_Click(object sender, EventArgs e)

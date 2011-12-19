@@ -155,6 +155,14 @@
             return true
         }
     </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".pp_pic_holder", top.document).css("top", "0px");
+
+        });
+    
+    </script>
     <style type="text/css">
         .fechaini, .fechafin
         {
