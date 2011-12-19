@@ -317,6 +317,7 @@ function ActivateAcordion() {
 
 $(document).ready(function () {
 
+    $(".problema textarea").css("width", "80%");
     $('span[title]').qtip({ style: { name: 'blue', tip: true} });
 
     $(this).scroll(function () {
@@ -366,11 +367,11 @@ $(document).ready(function () {
 
     }
     var idproyecto = $("#ContentPlaceHolder1_hidproyecto").val();
-    $("#adetalles").click(function () {
+    $(".adetalles").click(function () {
 
         $.prettyPhoto.open("/detallesmarcologico.aspx?idproyecto=" + idproyecto + "&iframe=true&width=100%&height=100%");
     });
-    $("#Cronograma_Proyecto").click(function () {
+    $(".Cronograma_Proyecto").click(function () {
         $.prettyPhoto.open("/DiagramaGant.aspx?&iframe=true&width=100%&height=100%");
     });
     $(".Visualizar_Matriz").click(function () {
@@ -403,9 +404,9 @@ $(document).ready(function () {
     $("#ContentPlaceHolder1_txtEfecto1").attr("disabled", true);
     $("#ContentPlaceHolder1_txtCausa1").val("");
 
-    $(".speech").each(function () {
-        $(this).attr("onwebkitspeechchange", "textarea_change(this)");
-    });
+    //    $(".speech").each(function () {
+    //        $(this).attr("onwebkitspeechchange", "textarea_change(this)");
+    //    });
 
 
     var result = $("#ContentPlaceHolder1_alerthq").val();
@@ -515,6 +516,8 @@ function SlideSiguiente() {
         $("#li_cronograma").css("background", "#004464");
 
         $("#li_cronograma").css("border", "dashed 2px #fff");
+
+        $(".presente").css("display", "block");
     }
     else if ($(".presente").attr("id") == "Mod_Procesos") {
         $("#li_arbol_problemas").css("border", "none");
@@ -640,6 +643,8 @@ function SlideVolver() {
         $("#li_cronograma").css("background", "#004464");
 
         $("#li_cronograma").css("border", "dashed 2px #fff");
+
+        $(".presente").css("display", "block");
     }
     else if ($(".presente").attr("id") == "Mod_Procesos") {
         $("#li_arbol_problemas").css("border", "none");

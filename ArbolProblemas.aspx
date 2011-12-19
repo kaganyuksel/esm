@@ -320,17 +320,18 @@
                             <p style="font-style: italic; color: #000;">
                                 * Descripción de la finalidad para el proyecto actual.</p>
                             <br />
-                            <a id="A1" class="Visualizar_Matriz" style="color: #000; font-style: italic; text-decoration: none;"
+                            <a class="Visualizar_Matriz" style="color: #000; font-style: italic; text-decoration: none;"
                                 href="#">
                                 <img src="/Icons/Search.png" width="24px" alt="Matriz" />
-                                Visualizar Matriz</a>
+                                Visualizar Matriz</a><br />
                             <br />
-                            <br />
-                            <a id="a2" style="color: #000; font-style: italic; text-decoration: none;" href="#">
+                            <a class="adetalles" style="color: #000; font-style: italic; text-decoration: none;"
+                                href="#">
                                 <img src="/Icons/details.png" width="24px" alt="Detalles" />
                                 Administración de Indicadores, Medios de verificación y supuestos.</a><br />
                             <br />
-                            <a id="A3" style="color: #000; font-style: italic; text-decoration: none;" href="#cronogramageneral">
+                            <a class="Cronograma_Proyecto" style="color: #000; font-style: italic; text-decoration: none;"
+                                href="#">
                                 <img src="/Icons/Calender.png" width="24px" alt="Cronograma" />
                                 Cronograma general para el proyecto actual.</a><br />
                             <br />
@@ -408,11 +409,13 @@
                                 Visualizar Matriz</a>
                             <br />
                             <br />
-                            <a id="a5" style="color: #000; font-style: italic; text-decoration: none;" href="#">
+                            <a class="adetalles" style="color: #000; font-style: italic; text-decoration: none;"
+                                href="#">
                                 <img src="/Icons/details.png" width="24px" alt="Detalles" />
                                 Administración de Indicadores, Medios de verificación y supuestos.</a><br />
                             <br />
-                            <a id="A6" style="color: #000; font-style: italic; text-decoration: none;" href="#cronogramageneral">
+                            <a class="Cronograma_Proyecto" style="color: #000; font-style: italic; text-decoration: none;"
+                                href="#cronogramageneral">
                                 <img src="/Icons/Calender.png" width="24px" alt="Cronograma" />
                                 Cronograma general para el proyecto actual.</a><br />
                             <br />
@@ -491,11 +494,11 @@
                             <br />
                             <a id="adetalles" style="color: #000; font-style: italic; text-decoration: none;"
                                 href="#">
-                                <img src="/Icons/details.png" width="24px" alt="Detalles" />
+                                <img class="adetalles" src="/Icons/details.png" width="24px" alt="Detalles" />
                                 Administración de Indicadores, Medios de verificación y supuestos.</a><br />
                             <br />
-                            <a id="Cronograma_Proyecto" style="color: #000; font-style: italic; text-decoration: none;"
-                                href="#cronogramageneral">
+                            <a id="Cronograma_Proyecto" class="Cronograma_Proyecto" style="color: #000; font-style: italic;
+                                text-decoration: none;" href="#cronogramageneral">
                                 <img src="/Icons/Calender.png" width="24px" alt="Cronograma" />
                                 Cronograma general para el proyecto actual.</a><br />
                             <br />
@@ -580,8 +583,8 @@
                             que contiene las actividades correspondientes para el mismo.
                             <br />
                             <br />
-                            <input type="button" id="Button1" onclick="ActivateAcordion();" value="Expandir Actividades"
-                                role="button" aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" />
+                            <input type="button" onclick="ActivateAcordion();" value="Expandir Actividades" role="button"
+                                aria-disabled="false" class="ui-button ui-widget ui-state-default ui-corner-all" />
                             <b>Nota:</b> para visualizar todas las actividades al mismo tiempo basta con dar
                             click en el boton "Expandir Actividades".</p>
                         <br />
@@ -591,7 +594,7 @@
                     </div>
                 </div>
             </div>
-            <div id="Cronograma" style="width: 25%; float: left;" class="demo mover">
+            <div id="Cronograma" style="width: 25%; float: left; display: none;" class="demo mover">
                 <br />
                 <br />
                 <div>

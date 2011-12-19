@@ -105,14 +105,14 @@ namespace ESM
                 HtmlTableCell cell_Supuestos = new HtmlTableCell();
                 HtmlTableCell cell_Responsables = new HtmlTableCell();
 
-                cell_Proceso.InnerHtml = "Proceso";
-                cell_Subproceso.InnerHtml = "SubProceso";
-                cell_Estrategia.InnerHtml = "Estrategia";
-                cell_Actividad.InnerHtml = "Actividad";
-                cell_Indicador.InnerHtml = "Indicador";
-                cell_Medios_Verificacion.InnerHtml = "Medios de Verificación";
-                cell_Supuestos.InnerHtml = "Supuestos";
-                cell_Responsables.InnerHtml = "Responsables";
+                cell_Proceso.InnerHtml = "PROCESO";
+                cell_Subproceso.InnerHtml = "SUBPROCESO";
+                cell_Estrategia.InnerHtml = "ESTRATEGIA";
+                cell_Actividad.InnerHtml = "ACTIVIDAD";
+                cell_Indicador.InnerHtml = "INDICADOR";
+                cell_Medios_Verificacion.InnerHtml = "MEDIOS DE VERIFICACIÓN";
+                cell_Supuestos.InnerHtml = "SUPUESTOS";
+                cell_Responsables.InnerHtml = "RESPONSABLES";
 
                 objrowtitle.Cells.Add(cell_Proceso);
                 objrowtitle.Cells.Add(cell_Subproceso);
