@@ -31,7 +31,7 @@ namespace ESM
                 CRoles objCRoles = new CRoles();
                 int idusuario = Convert.ToInt32(Session["idusuario"]);
                 string rol = objCRoles.ObtenerRol(idusuario);
-                if (rol == "Administrador" || rol == "MEN")
+                if (rol == "Administrador" || rol == "MEN" || rol == "Revisor")
                 {
 
                 }

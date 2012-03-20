@@ -39,7 +39,7 @@ namespace ESM
                             gvResultados.DataSource = se;
                             gvResultados.DataBind();
                         }
-                        else if (rol == "Consultor" || rol == "MEN")
+                        else if (rol == "Consultor" || rol == "MEN" || rol == "Revisor")
                         {
                             ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
                             var se = from s in db.Secretaria_Educacions
@@ -292,7 +292,7 @@ namespace ESM
                         gvResultados.DataBind();
 
                     }
-                    else if (rol == "Consultor" || rol == "MEN")
+                    else if (rol == "Consultor" || rol == "MEN" || rol == "Revisor")
                     {
                         Session.Add("idcon", _objCRoles.IdConsultor);
                         gvResultados.DataSource = CEE.ObtenerEEs(_objCRoles.IdConsultor);

@@ -4,7 +4,7 @@
 <html>
 <head id="Head1" runat="server">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Sistema de evaluación de competencias ciudadanas</title>
+    <title>SISTEMA DE VALORACIÓN DEL DESARROLLO DE COMPETENCIAS CIUDADANAS</title>
     <link href="Site.css" rel="stylesheet" type="text/css" />
     <link href="mastercustom.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/jquery-1.6.3-vsdoc.js" type="text/javascript"></script>
@@ -216,7 +216,7 @@
                         font-family: 'Cabin Sketch' , cursive; text-align: left;">
                         <hgroup>
                             <h1>
-                                Sistema de evaluación de competencias ciudadanas</h1>
+                                Sistema de valoración del desarrollo de competencias ciudadanas</h1>
                         </hgroup>
                     </td>
                     <td style="width: 30%; height: 100px; text-align: right;">

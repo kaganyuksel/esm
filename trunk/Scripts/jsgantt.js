@@ -442,7 +442,7 @@ this.Draw = function(){
 		 if(vShowEndDate!=1) vNameWidth+=vStatusWidth;
         
 		   // DRAW the Left-side of the chart (names, resources, comp%)
-         vLeftTable = '<div class="scroll" id="leftside" style="width:' + vLeftWidth + 'px"><table cellSpacing="0" cellPadding="0" border="0"><tbody>' +
+         vLeftTable = '<div class="scroll" id="leftside" style="width:' + vLeftWidth + 'px"><table id="t_export" cellSpacing="0" cellPadding="0" border="0"><tbody>' +
             '<tr style="height: 36px"><td style="width:15px;"></td><td style="width: ' + vNameWidth + 'px;"><NOBR></NOBR></td>'; 
 
          if(vShowRes ==1) vLeftTable += ' <td style="width: ' + vStatusWidth + 'px; "></td>';

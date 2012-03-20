@@ -37,7 +37,7 @@ namespace ESM
                             gvSE.DataSource = se;
                             gvSE.DataBind();
                         }
-                        else if (rol == "Consultor" || rol == "MEN")
+                        else if (rol == "Consultor" || rol == "MEN" || rol == "Revisor")
                         {
                             ESM.Model.ESMBDDataContext db = new Model.ESMBDDataContext();
                             var se = from s in db.Secretaria_Educacions

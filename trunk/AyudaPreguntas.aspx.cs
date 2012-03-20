@@ -76,10 +76,14 @@ namespace ESM.Preguntas
 
                     }
                 }
+                //Consultor_r = Consultor con restricciones
+                else if (rol == "Revisor")
+                {
+                    Response.Write("<script>alert('Acceso Denegado!'); window.location = '/Default.aspx';</script>");
+                }
                 else
                 {
-                    Response.Write("<script>alert('Acceso Denegado!');</script>");
-                    Response.Redirect("Login.aspx");
+                    Response.Write("<script>alert('Acceso Denegado!'); window.location = '/Default.aspx';</script>");
                 }
             }
             else
