@@ -33,7 +33,7 @@ namespace ESM
                         gvResultados.DataSourceID = "ldsies";
                         gvResultados.DataBind();
                     }
-                    else if (rol == "Consultor" || rol == "MEN")
+                    else if (rol == "Consultor" || rol == "MEN" || rol == "Revisor")
                     {
                         gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
                         gvResultados.DataBind();
@@ -713,7 +713,7 @@ namespace ESM
                     /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
                     gvResultados.DataSourceID = "ldsies";
                 }
-                else if (rol == "Consultor" || rol == "MEN")
+                else if (rol == "Consultor" || rol == "MEN" || rol == "Revisor")
                 {
                     gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor);
                     gvResultados.DataBind();

@@ -248,9 +248,21 @@
             </td>
             <td>
                 <h3 onclick="window.location='/ReportesMEN.aspx'">
-                    Reportes Consolidados</h3>
+                    Reportes seguimiento a diligenciamiento</h3>
                 <br />
                 Visualiza las consultas generadas de acuerdo a la información almacenada.
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 48px;">
+                <a href="http://mggroupltda.com/esm_report/">
+                    <img height="48px" src="/Icons/Stats.png" alt="Reportes Evaluacion" /></a>
+            </td>
+            <td>
+                <h3 onclick="window.location='http://mggroupltda.com/esm_report/'">
+                    Reportes Evaluación</h3>
+                <br />
+                Visualiza las consultas para el modulo de reportes evaluación
             </td>
         </tr>
     </table>

@@ -11,6 +11,9 @@
     <link href="Style/jsgantt.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/jsgantt.js" type="text/javascript"></script>
     <script type="text/javascript">
+
+
+
         $.datepicker.setDefaults({
             dateFormat: 'dd/mm/yy', currentText: 'Ahora', closeText: 'X', autoSize: true,
             dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
@@ -159,7 +162,19 @@
 
         $(document).ready(function () {
             $(".pp_pic_holder", top.document).css("top", "0px");
+            $(".excel").click(function () {
 
+                var table = $("#theTable").html();
+
+                var html = table.replace(/>/gi, "!1!");
+                var html = html.replace(/</gi, "!2!");
+                var html = html.replace(/=/gi, "!3!");
+                var html = html.replace(/#/gi, "!4!");
+                var html = html.replace(/&/gi, "!5!");
+
+                $("#txtgantt_html").val(html);
+
+            });
         });
     
     </script>
@@ -192,8 +207,12 @@
         </table>
         &nbsp;</h2>
     <asp:HiddenField ID="HFTempDate" runat="server" />
-    <div style="position: relative;" class="gantt" id="GanttChartDIV">
+    <div runat="server" style="position: relative; top: 0px; left: 1px;" class="gantt"
+        id="GanttChartDIV">
     </div>
+    <input type="hidden" id="txtgantt_html" runat="server" />
+    <asp:TextBox runat="server" ID="txtgantt" TextMode="MultiLine" Visible="false" />
+    <asp:LinkButton Text="Export" CssClass="excel" runat="server" ID="lknExport" OnClick="lknExport_Click" />
     </form>
 </body>
 </html>

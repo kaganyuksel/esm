@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
+using System.Web.UI.HtmlControls;
 
 namespace ESM
 {
@@ -32,6 +33,54 @@ namespace ESM
                 }
             }
         }
+
+        protected bool Export()
+        {
+            try
+            {
+                string html = txtgantt_html.Value;
+
+                html = html.Replace("!1!", ">");
+                html = html.Replace("!2!", "<");
+                html = html.Replace("!3!", "=");
+                html = html.Replace("!4!", "#");
+                html = html.Replace("!5!", "&");
+
+                HtmlGenericControl objTable = new HtmlGenericControl("table");
+
+                objTable.InnerHtml = html;
+
+                StringBuilder objsb = new StringBuilder();
+                System.IO.StringWriter sw = new System.IO.StringWriter(objsb);
+                HtmlTextWriter htw = new HtmlTextWriter(sw);
+                System.Web.UI.Page pagina = new System.Web.UI.Page();
+                var form = new HtmlForm();
+                pagina.EnableEventValidation = false;
+                pagina.DesignerInitialize();
+                pagina.Controls.Add(form);
+                form.Controls.Add(objTable);
+                pagina.RenderControl(htw);
+                Response.Clear();
+                Response.Buffer = true;
+                Response.ContentType = "application/vnd.ms-excel";
+
+                Response.AddHeader("Content-Disposition", "attachment;filename=Cronograma.xls");
+
+                Response.Charset = "UTF-8";
+                Response.ContentEncoding = Encoding.Default;
+                Response.Write(objsb.ToString());
+                Response.End();
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        protected void lknExport_Click(object sender, EventArgs e)
+        {
+            Export();
+        }
+
     }
 
     public class JsGantt

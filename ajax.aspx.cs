@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using ESM.Objetos;
 using EvaluationSettings;
 using System.Text;
+using System.Web.UI.HtmlControls;
 
 namespace ESM
 {
@@ -14,6 +15,13 @@ namespace ESM
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.QueryString["export"] != null && Convert.ToBoolean(Request.QueryString["export"]))
+            {
+                string html = Request.QueryString["html"].ToString();
+
+                Session.Add("html_gantt", html);
+            }
+
             try
             {
                 Response.Clear();

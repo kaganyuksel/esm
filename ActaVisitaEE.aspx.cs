@@ -36,7 +36,7 @@ namespace ESM
                             ObtenerTema(gvResultados);
 
                         }
-                        else if (rol == "Consultor" || rol == "MEN")
+                        else if (rol == "Consultor" || rol == "MEN" || rol == "Revisor")
                         {
                             Session.Add("idcon", _objCRoles.IdConsultor);
                             gvResultados.DataSource = CEE.ObtenerEEs(_objCRoles.IdConsultor);
@@ -511,7 +511,7 @@ namespace ESM
                         ObtenerTema(gvResultados);
 
                     }
-                    else if (rol == "Consultor" || rol == "MEN")
+                    else if (rol == "Consultor" || rol == "MEN" || rol == "Revisor")
                     {
                         Session.Add("idcon", _objCRoles.IdConsultor);
                         gvResultados.DataSource = CEE.ObtenerEEs(_objCRoles.IdConsultor);

@@ -35,7 +35,7 @@ namespace ESM
                         gvResultados.DataSourceID = "ldsies";
                         gvResultados.DataBind();
                     }
-                    else if (rol == "Consultor" || rol == "MEN")
+                    else if (rol == "Consultor" || rol == "MEN" || rol == "Revisor")
                     {
                         gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor, true);
                         gvResultados.DataBind();
@@ -291,7 +291,7 @@ namespace ESM
                         gvResultados.DataBind();
 
                     }
-                    else if (rol == "Consultor" || rol == "MEN")
+                    else if (rol == "Consultor" || rol == "MEN" || rol == "Revisor")
                     {
                         Session.Add("idcon", _objCRoles.IdConsultor);
                         gvResultados.DataSource = CEE.ObtenerEEs(_objCRoles.IdConsultor);
