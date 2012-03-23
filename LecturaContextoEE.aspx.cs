@@ -107,14 +107,14 @@ namespace ESM
 
             if (mediciones.Count() != 0 && mediciones != null)
             {
-                var med = (from m in mediciones
-                           select new { IdMedicion = m.IdMedicion, Fecha = m.Medicione.FechaMedicion }).Take(1);
+                var med = from m in mediciones
+                          select new { IdMedicion = m.IdMedicion, Fecha = m.Medicione.FechaMedicion };
 
                 gvMediciones.DataSource = med;
                 gvMediciones.DataBind();
                 gvMediciones.Visible = true;
                 ObtenerTema(gvMediciones);
-                btnRegistrar.Visible = false;
+                btnRegistrar.Visible = true;
             }
             else
                 btnRegistrar.Visible = true;

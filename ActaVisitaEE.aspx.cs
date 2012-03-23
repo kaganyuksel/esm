@@ -143,13 +143,13 @@ namespace ESM
                 gvMediciones.Visible = true;
                 modEESeleccion.Visible = false;
 
-                for (int i = 0; i < gvMediciones.Rows.Count; i++)
-                {
-                    if (i == gvMediciones.Rows.Count - 1)
-                        gvMediciones.Rows[i].Visible = true;
-                    else
-                        gvMediciones.Rows[i].Visible = false;
-                }
+                //for (int i = 0; i < gvMediciones.Rows.Count; i++)
+                //{
+                //    if (i == gvMediciones.Rows.Count - 1)
+                //        gvMediciones.Rows[i].Visible = true;
+                //    else
+                //        gvMediciones.Rows[i].Visible = false;
+                //}
                 #endregion
             }
             else

@@ -61,9 +61,9 @@ namespace ESM.Objetos
         {
             try
             {
-                var med = (from m in _db.LecturaContextoEEs
-                           where m.IdIE == idee
-                           select m).Take(1);
+                var med = from m in _db.LecturaContextoEEs
+                          where m.IdIE == idee
+                          select m;
 
                 return med;
             }
@@ -91,7 +91,7 @@ namespace ESM.Objetos
             {
                 var csistematizacion = (from m in _db.SistematizacionSEs
                                         where m.IdSE == idse
-                                        select m).Take(1);
+                                        select m).Distinct();
 
                 return csistematizacion;
 

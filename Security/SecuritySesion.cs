@@ -6,7 +6,7 @@ using System.Data.Linq;
 using System.Web.Security;
 using System.Data;
 using ESM.Model;
-
+using Encrypt_and_decrypt;
 
 
 public static class SecuritySesion
@@ -20,14 +20,15 @@ public static class SecuritySesion
         set { _idoperadort = value; }
     }
 
-
     #endregion
     public static string AutenticacionUsuario(string usuario, string contrasena)
     {
+        
         try
         {
+            CCryptography objCCryptography = new CCryptography();
             usuario = usuario.Trim();
-            contrasena = contrasena.Trim();
+            contrasena = objCCryptography.Encrypt(contrasena,"{MD5/MGGROUP@Security}");
 
             using (ESM.Model.ESMBDDataContext db = new ESM.Model.ESMBDDataContext())
             {
