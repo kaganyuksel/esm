@@ -349,8 +349,8 @@ namespace ESM
             ModMediciones.Visible = true;
             ModseleccionSE.Visible = false;
 
-            if (gvMediciones.Rows.Count != 0)
-                btnRegistrar.Visible = false;
+            //if (gvMediciones.Rows.Count != 0)
+            //    btnRegistrar.Visible = false;
         }
 
         protected void btnRegistrar_Click(object sender, EventArgs e)

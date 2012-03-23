@@ -783,13 +783,15 @@ namespace ESM.Evaluacion
                 gvMediciones.Visible = true;
                 modEESeleccion.Visible = false;
 
-                for (int i = 0; i < gvMediciones.Rows.Count; i++)
-                {
-                    if (i == gvMediciones.Rows.Count - 1)
-                        gvMediciones.Rows[i].Visible = true;
-                    else
-                        gvMediciones.Rows[i].Visible = false;
-                }
+                btnMedicion.Visible = true;
+
+                //for (int i = 0; i < gvMediciones.Rows.Count; i++)
+                //{
+                //    if (i == gvMediciones.Rows.Count - 1)
+                //        gvMediciones.Rows[i].Visible = true;
+                //    else
+                //        gvMediciones.Rows[i].Visible = false;
+                //}
                 #endregion
 
 
@@ -807,6 +809,7 @@ namespace ESM.Evaluacion
                 btnMedicion.Visible = true;
                 gvMediciones.Visible = true;
                 modEESeleccion.Visible = false;
+
                 #endregion
 
 

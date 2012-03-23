@@ -50,6 +50,9 @@
     <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="Encrypt and decrypt">
+      <HintPath>..\..\..\..\Disco Juan Camilo\Xogost Desarrollo\Librerias\Encrypt and decrypt\Encrypt and decrypt\bin\Debug\Encrypt and decrypt.dll</HintPath>
+    </Reference>
     <Reference Include="ExcelPackage">
       <HintPath>..\Complementos\ExcelPackageBinary\ExcelPackage.dll</HintPath>
     </Reference>

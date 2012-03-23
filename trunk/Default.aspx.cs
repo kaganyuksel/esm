@@ -56,6 +56,16 @@ namespace ESM
                     MEN.Visible = true;
                     ModEval.Visible = true;
                 }
+                else if (rol == "Revisor")
+                {
+                    ModEval.Visible = false;
+                    AdministracionConfiguracion.Visible = false;
+                    AdministracionUsuario.Visible = false;
+                    AdministracionConfiguracion.Visible = false;
+                    AdministracionUsuario.Visible = false;
+                    MEN.Visible = true;
+                    ModEval.Visible = true;
+                }
             }
 
             if (Request.IsAuthenticated)
