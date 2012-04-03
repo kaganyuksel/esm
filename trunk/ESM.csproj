@@ -193,6 +193,11 @@
     <Compile Include="DiagramaGant.aspx.designer.cs">
       <DependentUpon>DiagramaGant.aspx</DependentUpon>
     </Compile>
+    <Compile Include="esmDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>esmDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Evaluacion.aspx.cs">
       <DependentUpon>Evaluacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -227,6 +232,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manuales.aspx.cs">
+      <DependentUpon>Manuales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manuales.aspx.designer.cs">
+      <DependentUpon>Manuales.aspx</DependentUpon>
     </Compile>
     <Compile Include="MenuEvaluacion.aspx.cs">
       <DependentUpon>MenuEvaluacion.aspx</DependentUpon>
@@ -269,15 +281,30 @@
     <Compile Include="Objetos\GridViewHelper.cs" />
     <Compile Include="Objetos\GridViewSummary.cs" />
     <Compile Include="Objetos\GridViewSummaryList.cs" />
+    <Compile Include="Objetos\Indicadores_Valors.cs" />
     <Compile Include="Objetos\LecturaContextoSE.cs" />
     <Compile Include="Objetos\CSistematizacion.cs" />
     <Compile Include="Objetos\MarcoLogico.cs" />
+    <Compile Include="ReporteIndicadores.aspx.cs">
+      <DependentUpon>ReporteIndicadores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteIndicadores.aspx.designer.cs">
+      <DependentUpon>ReporteIndicadores.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReportesMen.aspx.cs">
       <DependentUpon>ReportesMen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ReportesMen.aspx.designer.cs">
       <DependentUpon>ReportesMen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="reportindicadores.aspx.cs">
+      <DependentUpon>reportindicadores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="reportindicadores.aspx.designer.cs">
+      <DependentUpon>reportindicadores.aspx</DependentUpon>
     </Compile>
     <Compile Include="ReportMarcoLogico.aspx.cs">
       <DependentUpon>ReportMarcoLogico.aspx</DependentUpon>
@@ -484,6 +511,7 @@
     <Content Include="json.aspx" />
     <Content Include="LecturaContextoEE.aspx" />
     <Content Include="LecturaContextoSE.aspx" />
+    <Content Include="Manuales.aspx" />
     <Content Include="mastercustom.css" />
     <Content Include="AyudaPreguntas.aspx" />
     <Content Include="MenuEvaluacion.aspx" />
@@ -573,7 +601,9 @@
     <Content Include="Pretty\js\jquery-1.4.4.min.js" />
     <Content Include="Pretty\js\jquery-1.6.1.min.js" />
     <Content Include="Pretty\js\jquery.prettyPhoto.js" />
+    <Content Include="ReporteIndicadores.aspx" />
     <Content Include="ReportesMen.aspx" />
+    <Content Include="reportindicadores.aspx" />
     <Content Include="ReportMarcoLogico.aspx" />
     <Content Include="save_dates.aspx" />
     <Content Include="Scripts\colorpicker.js" />
@@ -915,6 +945,17 @@
     <None Include="AmCharts\flash\patterns\horizontal.fla" />
     <None Include="AmCharts\flash\patterns\vertical.fla" />
     <Content Include="Site.Master" />
+    <None Include="esmDataSet.xsc">
+      <DependentUpon>esmDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="esmDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>esmDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="esmDataSet.xss">
+      <DependentUpon>esmDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Model\ESMBD.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>ESMBD.designer.cs</LastGenOutput>
@@ -944,6 +985,10 @@
     <None Include="Model\ESMBD.dbml.layout">
       <DependentUpon>ESMBD.dbml</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Indicadores_Valores_PlanOperativo.rdlc" />
+    <EmbeddedResource Include="Indicadores_PlanOperativo.rdlc" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

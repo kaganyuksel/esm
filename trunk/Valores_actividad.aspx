@@ -33,8 +33,8 @@
     <form id="form1" runat="server">
     <div style="width: 80%; margin: 0 auto;">
         <h2 style="margin-top: 50px; color: #005EA7">
-            <img src="/Icons/Stationery.png" width="48px" alt="Valores" />Valores para indicadores
-            de actividad</h2>
+            <img src="/Icons/Stationery.png" width="48px" alt="Valores" />Metas intermedias
+            para indicadores de actividad</h2>
         <span style="font-size: 12px;">Administra los valores asignados a las metas propuestas
             por el indicador seleccionado.</span>
         <br />
@@ -69,27 +69,40 @@
         <br />
         <div style="clear: both; width: 100%;">
             <span style="display: block;">Indicador</span>
-            <asp:TextBox ID="txtindicador" Width="50%" runat="server" ReadOnly="True" />
-            <asp:GridView ID="gvMediciones_Indicador" runat="server" Width="50%">
+            <asp:TextBox ID="txtindicador" Width="50%" runat="server" ReadOnly="True" /><a id="a_Reporte"
+                runat="server" target="_blank"><img src="/Icons/details.png" width="24px" /></a>
+            <br />
+            <br />
+            <div style="clear: both;">
+                <ol style="display: inline;">
+                    <li style="float: left;"><span style="display: block;">Fecha</span>
+                        <asp:TextBox ID="txtFecha" placeholder="Fecha de Medición" runat="server"></asp:TextBox></li>
+                    <li style="float: left;"><span style="display: block;">Meta</span>
+                        <asp:TextBox ID="txtmeta_indicador" runat="server" CssClass="numerico" placeholder="Meta propuesta"
+                            Text="0"></asp:TextBox></li>
+                    <li id="li_valor_meta" visible="false" runat="server" style="float: left;"><span
+                        style="display: block;">Ejecutado</span>
+                        <asp:TextBox ID="txtValor" runat="server" CssClass="numerico" placeholder="Valor"
+                            Text="0"></asp:TextBox></li>
+                    <li style="float: left;"><span style="display: block;">Almacenar</span>
+                        <asp:LinkButton ID="lknAlmacenar" Text="<img src='/Icons/save-icon.png' width='24px' alt='Almacenar'/>"
+                            runat="server" OnClick="lknAlmacenar_Click" /></li>
+                </ol>
+                <input type="hidden" id="idmeta" runat="server" name="name" value="" />
+            </div>
+            <br />
+            <br />
+            <asp:GridView ID="gvMediciones_Indicador" Style="margin-left: 0px; clear: both" runat="server"
+                Width="50%" OnSelectedIndexChanged="gvMediciones_Indicador_SelectedIndexChanged">
                 <AlternatingRowStyle CssClass="trblanca" />
+                <Columns>
+                    <asp:CommandField ButtonType="Image" SelectImageUrl="~/Icons/Stationery.png" ShowSelectButton="True">
+                        <ControlStyle Width="24px" />
+                    </asp:CommandField>
+                </Columns>
                 <HeaderStyle CssClass="trheader" />
                 <RowStyle CssClass="trgris" />
             </asp:GridView>
-        </div>
-        <div style="clear: both; margin-left: 20px;">
-            <ol style="display: inline; margin-left: 50px;">
-                <li style="float: left;"><span style="display: block;">Fecha</span>
-                    <asp:TextBox ID="txtFecha" placeholder="Fecha de Medición" runat="server"></asp:TextBox></li>
-                <li style="float: left;"><span style="display: block;">Meta</span>
-                    <asp:TextBox ID="txtmeta" runat="server" CssClass="numerico" placeholder="Meta propuesta"
-                        Text="0"></asp:TextBox></li>
-                <li style="float: left;"><span style="display: block;">Valor</span>
-                    <asp:TextBox ID="txtValor" runat="server" CssClass="numerico" placeholder="Valor alcanzado"
-                        Text="0"></asp:TextBox></li>
-                <li style="float: left;"><span style="display: block;">Almacenar</span>
-                    <asp:LinkButton ID="lknAlmacenar" Text="<img src='/Icons/save-icon.png' width='24px' alt='Almacenar'/>"
-                        runat="server" OnClick="lknAlmacenar_Click" /></li>
-            </ol>
         </div>
     </div>
     </form>
