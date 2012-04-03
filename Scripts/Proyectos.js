@@ -1,4 +1,14 @@
 ﻿$(function () {
+    $("#accordion").accordion({
+        autoHeight: false,
+        navigation: true,
+        collapsible: true
+    });
+
+    $("#accordion").accordion("activate", 0)
+});
+
+$(function () {
     $('#menu_arbol a').stop().animate({ 'marginright': '-165px' }, 1000);
 
     $('#menu_arbol > li').hover(
@@ -317,6 +327,7 @@ function ActivateAcordion() {
 
 $(document).ready(function () {
 
+    $("#accordion").accordion();
     $(".problema textarea").css("width", "80%");
     $('span[title]').qtip({ style: { name: 'blue', tip: true} });
 
@@ -463,7 +474,9 @@ function SlideSiguiente() {
         $("#li_cronograma").css("background", "#007cb6");
         $("#li_procesos").css("background", "#007cb6");
         $("#li_procesos").css("border", "none");
-
+        //$('#ayuda').fadeOut('fast');
+        //$("#ayuda").html("<img src='/Icons/marco_logico.png' style='float:left;' width='48px'/> <h3 style='float:right; line-height:48px; color:#007CB6;'>Estrategias</h3> <p style=' margin-top:50px; margin-left: 5px; text-align:justify; clear:both;'><br/>El primero es la fonación y el segundo la articulación. <br/><br/> La fonación consiste en la producción de voz por las cuerdas vocales y la articulación consiste en la producción de puntos y modos de articulación para los fonemas de la lengua en que se expresa el hablante.</p>");
+        //$('#ayuda').fadeIn('slow');
     }
     else if ($(".presente").attr("id") == "izquierda") {
         $("#li_arbol_problemas").css("border", "dashed 2px #fff");
@@ -481,6 +494,9 @@ function SlideSiguiente() {
         $("#li_procesos").css("background", "#007cb6");
         $("#li_procesos").css("border", "none");
 
+        //$('#ayuda').fadeOut('fast');
+        //$("#ayuda").html("<img src='/Icons/marco_logico.png' style='float:left;' width='48px'/> <h3 style='float:right; line-height:48px; color:#007CB6;'>Estrategias</h3> <p style=' margin-top:50px; margin-left: 5px; text-align:justify; clear:both;'><br/>El primero es la fonación y el segundo la articulación. <br/><br/> La fonación consiste en la producción de voz por las cuerdas vocales y la articulación consiste en la producción de puntos y modos de articulación para los fonemas de la lengua en que se expresa el hablante.</p>");
+        //$('#ayuda').fadeIn('slow');
     }
     else if ($(".presente").attr("id") == "derechaSiguiente") {
         $("#li_arbol_problemas").css("border", "none");
@@ -498,6 +514,9 @@ function SlideSiguiente() {
         $("#li_procesos").css("background", "#007cb6");
         $("#li_procesos").css("border", "none");
 
+        //$('#ayuda').fadeOut('fast');
+        //$("#ayuda").html("<img src='/Icons/plan_operativo.png' style='float:left;' width='48px'/> <h3 style='float:right; line-height:48px; color:#007CB6;'>Actividades</h3> <p style=' margin-top:50px; margin-left: 5px; text-align:justify; clear:both;'><br/>El primero es la fonación y el segundo la articulación. <br/><br/> La fonación consiste en la producción de voz por las cuerdas vocales y la articulación consiste en la producción de puntos y modos de articulación para los fonemas de la lengua en que se expresa el hablante.</p>");
+        //$('#ayuda').fadeIn('slow');
     }
     else if ($(".presente").attr("id") == "Cronograma") {
         $("#li_arbol_problemas").css("border", "none");
@@ -518,6 +537,12 @@ function SlideSiguiente() {
         $("#li_cronograma").css("border", "dashed 2px #fff");
 
         $(".presente").css("display", "block");
+
+        //$('#ayuda').fadeOut('fast');
+        //$("#ayuda").html("<img src='/Icons/calender.png' style='float:left;' width='48px'/> <h3 style='float:right; line-height:48px; color:#007CB6;'>Cronograma</h3> <p style=' margin-top:50px; margin-left: 5px; text-align:justify; clear:both;'><br/>El primero es la fonación y el segundo la articulación. <br/><br/> La fonación consiste en la producción de voz por las cuerdas vocales y la articulación consiste en la producción de puntos y modos de articulación para los fonemas de la lengua en que se expresa el hablante.</p>");
+        //$('#ayuda').fadeIn('slow');
+
+        $("#btnsiguiente").attr("disabled", "true");
     }
     else if ($(".presente").attr("id") == "Mod_Procesos") {
         $("#li_arbol_problemas").css("border", "none");
@@ -535,6 +560,11 @@ function SlideSiguiente() {
 
         $("#li_procesos").css("background", "#004464");
         $("#li_procesos").css("border", "dashed 2px #fff");
+
+        //$('#ayuda').fadeOut('fast');
+        //$("#ayuda").html("<img src='/Icons/marco_logico.png' style='float:left;' width='48px'/> <h3 style='float:right; line-height:48px; color:#007CB6;'>Procesos</h3> <p style=' margin-top:50px; margin-left: 5px; text-align:justify; clear:both;'><br/>El primero es la fonación y el segundo la articulación. <br/><br/> La fonación consiste en la producción de voz por las cuerdas vocales y la articulación consiste en la producción de puntos y modos de articulación para los fonemas de la lengua en que se expresa el hablante.</p>");
+        //$('#ayuda').fadeIn('slow');
+        $("#btnvolver").removeAttr("Disabled");
     }
     else if ($(".presente").attr("id") == "Mod_Subprocesos") {
         $("#li_arbol_problemas").css("border", "none");
@@ -552,6 +582,12 @@ function SlideSiguiente() {
 
         $("#li_Subprocesos").css("background", "#004464");
         $("#li_Subprocesos").css("border", "dashed 2px #fff");
+
+        //$('#ayuda').fadeOut('fast');
+
+        //$('#ayuda').html("<img src='/Icons/marco_logico.png' style='float:left;' width='48px'/> <h3 style='float:right; line-height:48px; color:#007CB6;'>Subprocesos</h3> <p style=' margin-top:50px; margin-left: 5px; text-align:justify; clear:both;'><br/>El primero es la fonación y el segundo la articulación. <br/><br/> La fonación consiste en la producción de voz por las cuerdas vocales y la articulación consiste en la producción de puntos y modos de articulación para los fonemas de la lengua en que se expresa el hablante.</p>");
+
+        //$('#ayuda').fadeIn('slow');
     }
 }
 
@@ -590,7 +626,9 @@ function SlideVolver() {
         $("#li_cronograma").css("background", "#007cb6");
         $("#li_procesos").css("background", "#007cb6");
         $("#li_procesos").css("border", "none");
-
+        //$('#ayuda').fadeOut('fast');
+        //$("#ayuda").html("<img src='/Icons/marco_logico.png' style='float:left;' width='48px'/> <h3 style='float:right; line-height:48px; color:#007CB6;'>Estrategias</h3> <p style=' margin-top:50px; margin-left: 5px; text-align:justify; clear:both;'><br/>El primero es la fonación y el segundo la articulación. <br/><br/> La fonación consiste en la producción de voz por las cuerdas vocales y la articulación consiste en la producción de puntos y modos de articulación para los fonemas de la lengua en que se expresa el hablante.</p>");
+        //$('#ayuda').fadeIn('slow');
     }
     else if ($(".presente").attr("id") == "izquierda") {
         $("#li_arbol_problemas").css("border", "dashed 2px #fff");
@@ -607,7 +645,11 @@ function SlideVolver() {
         $("#li_cronograma").css("background", "#007cb6");
         $("#li_procesos").css("background", "#007cb6");
         $("#li_procesos").css("border", "none");
+        //$('#ayuda').fadeOut('fast');
+        //$("#ayuda").html("<img src='/Icons/network.png' style='float:left;' width='48px'/> <h5 style='float:right; line-height:48px; color:#007CB6; text-align:justify;'>Árbol de Problemas</h5> <p style=' margin-top:50px; margin-left: 5px; text-align:justify; clear:both;'><br/>El primero es la fonación y el segundo la articulación. <br/><br/> La fonación consiste en la producción de voz por las cuerdas vocales y la articulación consiste en la producción de puntos y modos de articulación para los fonemas de la lengua en que se expresa el hablante.</p>");
+        //$('#ayuda').fadeIn('slow');
 
+        $("#btnvolver").attr("Disabled", "true");
     }
     else if ($(".presente").attr("id") == "derechaSiguiente") {
         $("#li_arbol_problemas").css("border", "none");
@@ -625,6 +667,11 @@ function SlideVolver() {
         $("#li_procesos").css("background", "#007cb6");
         $("#li_procesos").css("border", "none");
 
+        //$('#ayuda').fadeOut('fast');
+        //$("#ayuda").html("<img src='/Icons/plan_operativo.png' style='float:left;' width='48px'/> <h3 style='float:right; line-height:48px; color:#007CB6;'>Actividades</h3> <p style=' margin-top:50px; margin-left: 5px; text-align:justify; clear:both;'><br/>El primero es la fonación y el segundo la articulación. <br/><br/> La fonación consiste en la producción de voz por las cuerdas vocales y la articulación consiste en la producción de puntos y modos de articulación para los fonemas de la lengua en que se expresa el hablante.</p>");
+        //$('#ayuda').fadeIn('slow');
+
+        $("#btnsiguiente").removeAttr("Disabled");
     }
     else if ($(".presente").attr("id") == "Cronograma") {
         $("#li_arbol_problemas").css("border", "none");
@@ -645,6 +692,11 @@ function SlideVolver() {
         $("#li_cronograma").css("border", "dashed 2px #fff");
 
         $(".presente").css("display", "block");
+
+        //$('#ayuda').fadeOut('fast');
+        //$("#ayuda").html("<img src='/Icons/calender.png' style='float:left;' width='48px'/> <h3 style='float:right; line-height:48px; color:#007CB6;'>Cronograma</h3> <p style=' margin-top:50px; margin-left: 5px; text-align:justify; clear:both;'><br/>El primero es la fonación y el segundo la articulación. <br/><br/> La fonación consiste en la producción de voz por las cuerdas vocales y la articulación consiste en la producción de puntos y modos de articulación para los fonemas de la lengua en que se expresa el hablante.</p>");
+        //$('#ayuda').fadeIn('slow');
+
     }
     else if ($(".presente").attr("id") == "Mod_Procesos") {
         $("#li_arbol_problemas").css("border", "none");
@@ -662,6 +714,10 @@ function SlideVolver() {
 
         $("#li_procesos").css("background", "#004464");
         $("#li_procesos").css("border", "dashed 2px #fff");
+
+        //$('#ayuda').fadeOut('fast');
+        //$("#ayuda").html("<img src='/Icons/marco_logico.png' style='float:left;' width='48px'/> <h3 style='float:right; line-height:48px; color:#007CB6;'>Procesos</h3> <p style=' margin-top:50px; margin-left: 5px; text-align:justify; clear:both;'><br/>El primero es la fonación y el segundo la articulación. <br/><br/> La fonación consiste en la producción de voz por las cuerdas vocales y la articulación consiste en la producción de puntos y modos de articulación para los fonemas de la lengua en que se expresa el hablante.</p>");
+        //$('#ayuda').fadeIn('slow');
     }
     else if ($(".presente").attr("id") == "Mod_Subprocesos") {
         $("#li_arbol_problemas").css("border", "none");
@@ -679,5 +735,9 @@ function SlideVolver() {
 
         $("#li_Subprocesos").css("background", "#004464");
         $("#li_Subprocesos").css("border", "dashed 2px #fff");
+
+        //$('#ayuda').fadeOut('fast');
+        //$("#ayuda").html("<img src='/Icons/marco_logico.png' style='float:left;' width='48px'/> <h3 style='float:right; line-height:48px; color:#007CB6;'>Subprocesos</h3> <p style=' margin-top:50px; margin-left: 5px; text-align:justify; clear:both;'><br/>El primero es la fonación y el segundo la articulación. <br/><br/> La fonación consiste en la producción de voz por las cuerdas vocales y la articulación consiste en la producción de puntos y modos de articulación para los fonemas de la lengua en que se expresa el hablante.</p>");
+        //$('#ayuda').fadeIn('slow');
     }
 }

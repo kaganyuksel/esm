@@ -255,11 +255,11 @@
         </tr>
         <tr>
             <td style="width: 48px;">
-                <a href="http://mggroupltda.com/esm_report/">
-                    <img height="48px" src="/Icons/Stats.png" alt="Reportes Evaluacion" /></a>
+                <a href="http://mggroupltda.com/esm_report/MenuReportes.aspx">
+                    <img height="48px" src="/Icons/statsv2.png" alt="Reportes Evaluacion" /></a>
             </td>
             <td>
-                <h3 onclick="window.location='http://mggroupltda.com/esm_report/'">
+                <h3 onclick="window.location='http://mggroupltda.com/esm_report/MenuReportes.aspx'">
                     Reportes Evaluación</h3>
                 <br />
                 Visualiza las consultas para el modulo de reportes evaluación

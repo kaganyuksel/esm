@@ -601,16 +601,18 @@ namespace ESM.Objetos
         {
             try
             {
-                var mediciones_indicador = from m in _db.Indicadores_Valors
+                var mediciones_indicador = from m in _db.Indicadores_Metas
                                            where m.Indicador_id == indicador_id
-                                           select new { Fecha = m.Fecha_Valor, m.Valor };
+                                           select new { m.Id, Fecha = m.Fecha_Meta, Meta = m.Meta, Valor = m.Ejecutado == null ? 0 : m.Ejecutado };
+
+
                 return mediciones_indicador;
             }
             catch (Exception) { return null; }
 
         }
 
-        public bool AddMeta_Valor(int indicador_id, DateTime fecha, int meta, int valor)
+        public bool AddMeta_Valor(int indicador_id, DateTime fecha, int meta)//, int valor
         {
             try
             {
@@ -621,15 +623,10 @@ namespace ESM.Objetos
                     Meta = meta
                 };
 
-                Indicadores_Valor objValor = new Indicadores_Valor
-                {
-                    Indicador_id = indicador_id,
-                    Fecha_Valor = fecha,
-                    Valor = valor
-                };
+
 
                 _db.Indicadores_Metas.InsertOnSubmit(objMeta);
-                _db.Indicadores_Valors.InsertOnSubmit(objValor);
+                //_db.Indicadores_Valors.InsertOnSubmit(objValor);
 
                 _db.SubmitChanges();
 
@@ -637,6 +634,46 @@ namespace ESM.Objetos
             }
             catch (Exception) { return false; }
 
+        }
+
+        public bool UpdateMeta(object idmeta, int indicador_id, int valor, DateTime fecha)
+        {
+            try
+            {
+
+                var metas_valores = from m in _db.Indicadores_Metas
+                                    where m.Id == Convert.ToInt32(idmeta)
+                                    select m;
+
+                if (metas_valores.Count() == 0)
+                {
+                    Indicadores_Meta objValor = new Indicadores_Meta
+                    {
+                        Indicador_id = indicador_id,
+                        Fecha_Meta = fecha,
+                        Ejecutado = valor,
+                    };
+
+                    _db.Indicadores_Metas.InsertOnSubmit(objValor);
+                }
+                else
+                {
+
+                    Indicadores_Meta _objvalor = (from m in _db.Indicadores_Metas
+                                                  where m.Id == Convert.ToInt32(idmeta)
+                                                  select m).Single();
+
+                    _objvalor.Ejecutado = valor;
+
+                }
+
+                _db.SubmitChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public List<object[,]> getIndicadoresVencidos(int usuario_id)

@@ -49,13 +49,13 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.TextBox txtindicador;
         
         /// <summary>
-        /// gvMediciones_Indicador control.
+        /// a_Reporte control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvMediciones_Indicador;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor a_Reporte;
         
         /// <summary>
         /// txtFecha control.
@@ -67,13 +67,22 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.TextBox txtFecha;
         
         /// <summary>
-        /// txtmeta control.
+        /// txtmeta_indicador control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtmeta;
+        protected global::System.Web.UI.WebControls.TextBox txtmeta_indicador;
+        
+        /// <summary>
+        /// li_valor_meta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li_valor_meta;
         
         /// <summary>
         /// txtValor control.
@@ -92,5 +101,23 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lknAlmacenar;
+        
+        /// <summary>
+        /// idmeta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden idmeta;
+        
+        /// <summary>
+        /// gvMediciones_Indicador control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvMediciones_Indicador;
     }
 }

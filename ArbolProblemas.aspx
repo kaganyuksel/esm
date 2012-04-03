@@ -12,12 +12,39 @@
     <link href="Style/Proyecto.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/iColorPicker.js" type="text/javascript"></script>
     <script src="Scripts/Proyectos.js" type="text/javascript"></script>
+    <style type="text/css">
+        .ayuda_marco
+        {
+            position: absolute;
+            width: 20%;
+            height: 700px;
+            border: 3px solid #F7F7F7;
+            background: #F2F2F2;
+            top: 140px;
+            right: 5%;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border-radius: 4px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+            -moz-box-shadow: 0px 0px 3px #8b8b8b;
+            -webkit-box-shadow: 0px 0px 3px #8b8b8b;
+            box-shadow: 0px 0px 3px #8b8b8b; /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+            overflow-y: scroll;
+        }
+        .ayuda_marco p
+        {
+            width: 100%;
+        }
+        #accordion
+        {
+            text-align: justify;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id="menu_proyecto" style="margin-left: 10%; width: 90%; position: fixed; z-index: 8000;">
         <ul style="list-style-type: none; display: inline; top: 0; width: 800px;">
             <li style="width: 50px; float: left; vertical-align: middle;">
-                <input type="button" onclick="SlideVolver();" class="btnleft ui-button ui-widget ui-state-default ui-corner-all"
+                <input id="btnvolver" type="button" onclick="SlideVolver();" class="btnleft ui-button ui-widget ui-state-default ui-corner-all"
                     role="button" aria-disabled="false" />
             </li>
             <li id="li_arbol_problemas" style="width: 150px; float: left; vertical-align: middle;
@@ -42,7 +69,7 @@
                 line-height: 30px; -moz-border-radius: 0px 5px 5px 0px; -webkit-border-radius: 0px 5px 5px 0px;
                 border-radius: 0px 5px 5px 0px; /*ie 7 and 8 do not support border radius*/">Cronograma</li>
             <li style="width: 50px; float: left; vertical-align: middle; height: 30px;">
-                <input type="button" onclick="SlideSiguiente();" class="btnright ui-button ui-widget ui-state-default ui-corner-all"
+                <input id="btnsiguiente" type="button" onclick="SlideSiguiente();" class="btnright ui-button ui-widget ui-state-default ui-corner-all"
                     role="button" aria-disabled="false" />
             </li>
         </ul>
@@ -626,6 +653,122 @@
             <br />
         </div>
     </div>
+    <div id="ayuda" class="ayuda_marco">
+        <div id="accordion">
+            <h3>
+                <a href="#">Introducción</a></h3>
+            <div>
+                El proyecto es la unidad operacional de la planeación del desarrollo que vincula
+                recursos, actividades y productos durante un periodo determinado y con una ubicación
+                definida para la resolución de problemas o necesidades sentidas de la población.
+                Un proyecto supone la búsqueda de una alternativa viable al planteamiento de un
+                objetivo que está concebido para resolver un problema o necesidad y que para ello
+                requiere la producción de bienes o servicios, de tal suerte que, una vez tomada
+                la decisión de llevar a cabo un proyecto, sea necesaria la realización de una serie
+                de actividades previstas que conllevarán al logro de los objetivos propuestos para
+                el proyecto (www.dnp.gov.co) Para tal efecto y de conformidad con los ejercicios
+                adelantados previamente con los grupos de trabajo del Programa de Competencias del
+                Ministerio de Educación Nacional se describen los pasos adelantados para el cumplimento
+                de los objetivos del programa así como de cada una de sus líneas de acción.
+                <br />
+                <br />
+                <ol>
+                    <li>IDENTIFICACIÓN </li>
+                    <li>DISEÑO Y FORMULACIÓN</li>
+                    <li>EJECUCIÓN Y SEGUIMIENTO</li>
+                    <li>EVALUACIÓN POSTERIOR</li>
+                </ol>
+            </div>
+            <h3>
+                <a href="#">Ciclo del Proyecto</a></h3>
+            <div>
+                El proyecto es la unidad operacional de la planeación del desarrollo que vincula
+                recursos, actividades y productos durante un periodo determinado y con una ubicación
+                definida para la resolución de problemas o necesidades sentidas de la población.
+                Un proyecto supone la búsqueda de una alternativa viable al planteamiento de un
+                objetivo que está concebido para resolver un problema o necesidad y que para ello
+                requiere la producción de bienes o servicios , de tal suerte que, una vez tomada
+                la decisión de llevar a cabo un proyecto, sea necesaria la realización de una serie
+                de actividades previstas que conllevarán al logro de los objetivos propuestos para
+                el proyecto (www.dnp.gov.co)
+                <br />
+                <br />
+                <a href="/Icons/cicloproyecto.png">
+                    <img src="/Icons/cicloproyecto.png" width="100%" /></a>
+            </div>
+            <h3>
+                <a href="#">Identificación</a></h3>
+            <div>
+                También conocida como pre inversión, comporta la primera etapa de formulación del
+                proyecto y tiene por objetivo el acopio y preparación de información suficiente
+                y pertinente (en ocasiones organizada en estudios técnicos, económicos, financieros,
+                legales y de mercado) para determinar de forma preliminar la posibilidad real de
+                resolver un problema o satisfacer una necesidad así como reducir la incertidumbre
+                en el logro de los objetivos de dicha empresa. ANÁLISIS DE ACTORES PARTICIPANTES
+                Consiste en identificar las personas, grupos, entidades o instituciones públicas
+                o privadas que de alguna forma se relacionan con el proyecto. Debe incorporar los
+                intereses, expectativas representaciones y demás de dichos actores y que pueden
+                resultar de importancia para el proyecto: ¿Cómo elaborar el análisis de la participación?
+                Identifique todos aquellos actores relacionados con el proyecto y que se pudieran
+                verse beneficiados o incluso afectados por la ejecución del mismo. Puede categorizarlos
+                según su nivel o ámbito (Nacional, regional, local etc.) Puede categorizarlos también
+                según sean afectados, beneficiados, cooperantes, oponentes, o perjudicados. De las
+                anteriores categorizaciones proceda a determinar cómo pueden ser incorporados en
+                el desarrollo del proyecto. Matriz de actores participantes.
+            </div>
+            <h3>
+                <a href="#">- Análisis de actores</a></h3>
+            <div>
+                Identificación del problema o necesidad: Como ya se había expuesto, un proyecto
+                supone la búsqueda de una alternativa viable al planteamiento de un objetivo que
+                está concebido para resolver un problema o necesidad y que para ello requiere la
+                producción de bienes o servicios , de tal suerte que, una vez tomada la decisión
+                de llevar a cabo un proyecto, sea necesaria la realización de una serie de actividades
+                previstas que conllevarán al logro de los objetivos propuestos para el proyecto
+                Es un conjunto de técnicas para:
+                <br />
+                <br />
+                <ul>
+                    <li>Analizar la situación en relación con un problema</li>
+                    <li>Identificar los problemas principales de este contexto</li>
+                    <li>Visualizar las relaciones de causa efecto en el árbol de problemas • Definir el
+                        problema central de la situación</li>
+                </ul>
+                <br />
+                <br />
+                EL ÁRBOL DE PROBLEMAS Es una técnica que se emplea para identificar una situación
+                problemática la cual se intenta solucionar mediante la intervención del proyecto
+                utilizando una relación de tipo causa-efecto. El identificar de forma clara la situación
+                problemática no siempre es un ejercicio fácil, suele pasar que, al identificar un
+                problema emergen muchos otros asociados algunos de los cuáles se nos pueden presentar
+                como causas, o efectos del mismo o incluso hacer dudar sobre si, el problema inicialmente
+                considerado esta correctamente formulado.
+                <br />
+                <br />
+                ¿Cómo realizar un árbol de problemas? Se recomienda realizar las siguientes tareas
+                <ol>
+                    <li>Convoque a los miembros de su grupo de trabajo o personas de la comunidad interesadas.</li>
+                    <li>Describa de forma general el objetivo del proceso y subraye en la necesidad de identificar
+                        de forma concertada el problema a resolver </li>
+                    <li>Entregue a cada uno de ellos un paquete de tarjetas y solicite que escriban en ellas
+                        los problemas de su comunidad, entidad y organización solicite guardar especial
+                        cuidado de: a. Formular el problema como una situación negativa. b. Utilizar una
+                        oración corta con palabras que sean, claras, simples y concretas. c. Identificar
+                        únicamente los problemas existentes. Descarte los posibles o potenciales. </li>
+                    <li>¿Cómo elaborar el árbol?: Dibuje el tronco de un árbol para representar su problema
+                        central. Añada raíces y radículas para representar las causas directas e indirectas,
+                        y ramas y ramitas para representar los efectos (o implicaciones) directos e indirectos
+                        de su problema central (ver gráfico 03) </li>
+                    <li>Con la ayuda de un facilitador, así como de todos los participantes ubique las tarjetas
+                        comience según sean causas directas, indirectas, efectos directos o indirectos
+                    </li>
+                    <li>En este nivel puede hacer uso de una matriz de Vester para la calificación de los
+                        diferentes causas</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <!-- / -->
     <input type="hidden" runat="server" id="alerthq" value="-1" />
     <input type="hidden" runat="server" id="hidproyecto" value="-1" />
     <input type="hidden" runat="server" id="Bandera" value="-1" />

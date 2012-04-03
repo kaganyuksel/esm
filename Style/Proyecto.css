@@ -162,23 +162,38 @@ body
     -moz-transition: display 0.5s linear;
     -webkit-transition: opacity 0.5s linear;
     -o-transition: opacity 0.5s linear;
-    -moz-transition: margin 0.25s ease-in-out;
-    -webkit-transition: margin 0.25s ease-in-out;
-    -o-transition: margin 0.25s ease-in-out;
-    transition: margin 0.25s ease-in-out;
+    -moz-transition: margin 0.5s ease-in-out;
+    -webkit-transition: margin 0.5s ease-in-out;
+    -o-transition: margin 0.5s ease-in-out;
+    transition: margin 0.5s ease-in-out;
 }
 .past
 {
-    margin-left: -25%;
-    display: none;
+    transition: All 0.5s linear;
+    -moz-transition: All 0.5s linear; /* Firefox 4 */
+    -webkit-transition: All 0.5s linear; /* Safari and Chrome */
+    -o-transition: All 0.5s linear; /* Opera */
+    
+    margin-left: -1166px;
+    display: none linear;
 }
 .presente
 {
+    transition: All 0.5s linear;
+    -moz-transition: All 0.5s linear; /* Firefox 4 */
+    -webkit-transition: All 0.5s linear; /* Safari and Chrome */
+    -o-transition: All 0.5s linear; /* Opera */
+    
     display: block;
 }
 .futuro
 {
-    margin-left: 25%;
+    transition: All 0.5s linear;
+    -moz-transition: All 0.5s linear; /* Firefox 4 */
+    -webkit-transition: All 0.5s linear; /* Safari and Chrome */
+    -o-transition: All 0.5s linear; /* Opera */
+    
+    margin-left: 1166px;
     display: none;
 }
 .opacidad

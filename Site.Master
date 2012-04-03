@@ -210,7 +210,7 @@
             <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
                 <tr>
                     <td>
-                        <img height="80px" src="/Icons/clip_image002.jpg" alt="Ministerio de Educación" />
+                        &nbsp;
                     </td>
                     <td style="width: 40%; height: 100px; vertical-align: middle; line-height: 100px;
                         font-family: 'Cabin Sketch' , cursive; text-align: left;">
@@ -221,6 +221,9 @@
                     </td>
                     <td style="width: 30%; height: 100px; text-align: right;">
                         <img height="80" src="/Icons/EducalidadHeader.png" alt="Educacion de Calidad" />
+                    </td>
+                    <td style="width: 20%; height: 100px; text-align: center;">
+                        <img src="/Icons/ProsperidadTodosFooter.png" height="80px" alt="Prosperidad para Todos" />
                     </td>
                     <td style="width: 30%; height: 100px; text-align: right;">
                         <img height="90" src="/Icons/MENHeader.png" alt="Ministerio de Educación" />
@@ -235,7 +238,7 @@
                     <li onclick="window.location = '/Default.aspx';">Inicio</li>
                     <li onclick="window.location = '/AyudaPreguntas.aspx';">Preguntas</li>
                     <li onclick="window.location = '/MenuEvaluacion.aspx';">Recursos</li>
-                    <%--<li>Consolidado</li>--%>
+                    <li onclick="window.location = '/Manuales.aspx';">Manuales</li>
                 </ul>
             </section>
             Usuario:
@@ -285,34 +288,16 @@
             </div>
         </section>
         </form>
-        <div class="footer" style="border: 1px solid #dddddd; clear: both;">
-            <table cellpadding="80" cellspacing="30" style="margin: 0 auto; width: 100px;">
+        <div class="footer" style="border: 1px solid #dddddd; clear: both; text-align: center;">
+            <table cellpadding="80" cellspacing="30" style="margin: 0 auto; width: 100px; margin: 0 auto;">
                 <tr style="text-align: center;">
-                    <td colspan="5">
-                        <a href="http://www.mggroup.com.co" target="_blank" style="text-decoration: none;
-                            color: #000000; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
-                            <p style="font-size: 9px;">
-                                <b>Desarrollado por <span style="color: #ED9200; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
-                                    MGGroup Ltda</span></b></p>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="/Icons/EducalidadFooter.png" height="80px" alt="Educacion de Calidad" />
-                    </td>
-                    <td>
-                        <img src="/Icons/ProsperidadTodosFooter.png" height="80px" alt="Prosperidad para Todos" />
-                    </td>
-                    <td>
-                        <img src="/Icons/MENFooter.png" alt="Ministerio de Educacion" height="80px" />
-                    </td>
-                    <td>
-                        <img src="/Icons/LOGO%20CISP.png" alt="CISP" height="50px" />
-                    </td>
-                    <td>
-                        <img src="/Icons/unicef.png" alt="Unicef" height="40px" />
-                    </td>
+                    <br />
+                    <a href="http://www.alianzaterra.org" target="_blank" style="text-decoration: none;
+                        color: #000000; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
+                        <p style="font-size: 9px;">
+                            <b>Desarrollado por MG Group Ltda para <span style="color: #ED9200; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
+                                Corporación Alianza Terra</span></b></p>
+                    </a></td>
                 </tr>
             </table>
         </div>
