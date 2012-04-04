@@ -603,7 +603,7 @@ namespace ESM.Objetos
             {
                 var mediciones_indicador = from m in _db.Indicadores_Metas
                                            where m.Indicador_id == indicador_id
-                                           select new { m.Id, Fecha = m.Fecha_Meta, Meta = m.Meta, Valor = m.Ejecutado == null ? 0 : m.Ejecutado };
+                                           select new { m.Id, Fecha = m.Fecha_Meta, Meta = m.Meta, Ejecutado = m.Ejecutado == null ? 0 : m.Ejecutado };
 
 
                 return mediciones_indicador;
@@ -796,7 +796,7 @@ namespace ESM.Objetos
 
         }
 
-        public bool AddIndicador(int idactividad, string indicador, int verboid, int unidadid, DateTime fecha_inicial, DateTime fecha_final, int meta, bool esSSP)
+        public bool AddIndicador(int idactividad, string indicador, int verboid, int unidadid, DateTime fecha_inicial, DateTime fecha_final, int meta_numero, bool esSSP)
         {
             try
             {
@@ -807,6 +807,7 @@ namespace ESM.Objetos
                     fecha_indicador_inicial = fecha_inicial,
                     fecha_indicador_final = fecha_final,
                     Fecha_Creacion = DateTime.Now.Date,
+                    meta = meta_numero,
                     verbo_id = verboid,
                     unidad_id = unidadid,
                     SSP = esSSP

@@ -11,5 +11,14 @@ namespace ESM {
     
     
     public partial class ReporteIndicadores {
+        
+        /// <summary>
+        /// iframe_reporte control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl iframe_reporte;
     }
 }

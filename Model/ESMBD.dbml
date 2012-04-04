@@ -916,6 +916,16 @@
       <Column Name="Supuestos" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Indicadores_Metas" Member="Indicadores_Metas">
+    <Type Name="Indicadores_Meta">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Indicador_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Meta" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Fecha_Meta" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Ejecutado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Indicadore_Indicadores_Meta" Member="Indicadore" ThisKey="Indicador_id" OtherKey="Id" Type="Indicadore" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Indicadores" Member="Indicadores">
     <Type Name="Indicadore">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -927,21 +937,12 @@
       <Column Name="fecha_indicador_final" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Fecha_Creacion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="SSP" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="meta" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Indicadore_Indicadores_Responsable" Member="Indicadores_Responsables" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Responsable" />
       <Association Name="Indicadore_Indicadores_Meta" Member="Indicadores_Metas" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Meta" />
       <Association Name="Actividade_Indicadore" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Verbo_Indicadore" Member="Verbo" ThisKey="verbo_id" OtherKey="Id" Type="Verbo" IsForeignKey="true" />
       <Association Name="Unidade_Indicadore" Member="Unidade" ThisKey="unidad_id" OtherKey="Id" Type="Unidade" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Indicadores_Metas" Member="Indicadores_Metas">
-    <Type Name="Indicadores_Meta">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Indicador_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Meta" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Fecha_Meta" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Ejecutado" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Indicadore_Indicadores_Meta" Member="Indicadore" ThisKey="Indicador_id" OtherKey="Id" Type="Indicadore" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -6,5 +6,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <iframe src="reportindicadores.aspx" width="100%" style="height: 1000px;"></iframe>
+    <iframe id="iframe_reporte" src="" runat="server" width="100%" style="height: 1000px;">
+    </iframe>
 </asp:Content>
