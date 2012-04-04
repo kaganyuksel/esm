@@ -14,7 +14,7 @@ namespace ESM
         {
             if (!this.Page.IsPostBack)
             {
-
+                iframe_reporte.Attributes.Add("src", "reportindicadores.aspx?id=" + Request.QueryString["id"].ToString());
             }
         }
 

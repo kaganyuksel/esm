@@ -6,6 +6,7 @@
     });
 
     $("#accordion").accordion("activate", 0)
+    
 });
 
 $(function () {

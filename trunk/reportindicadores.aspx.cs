@@ -14,13 +14,20 @@ namespace ESM
         {
             if (!Page.IsPostBack)
             {
+                string indicadorid = Request.QueryString["id"].ToString();
+
                 ReportDataSource rds = new ReportDataSource();
                 rptIndicadores.LocalReport.DataSources.Clear();
 
                 rptIndicadores.LocalReport.ReportPath = "Indicadores_Valores_PlanOperativo.rdlc";
                 rds.Name = "DataSet1";
 
-                rptIndicadores.LocalReport.SetParameters(new ReportParameter("indicador", "Al 2012/04/11 Construir 989"));
+                var indicador = (from i in new Model.ESMBDDataContext().Indicadores
+                                 where i.Id == Convert.ToInt32(indicadorid)
+                                 select i).Single();
+
+                rptIndicadores.LocalReport.SetParameters(new ReportParameter("indicador", indicador.Indicador));
+                rptIndicadores.LocalReport.SetParameters(new ReportParameter("meta", indicador.meta.ToString()));
 
                 rds.DataSourceId = "odsIndicadoresMetas";
 

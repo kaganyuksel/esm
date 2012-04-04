@@ -222,12 +222,12 @@ namespace ESM.Model
     partial void InsertUsuario(Usuario instance);
     partial void UpdateUsuario(Usuario instance);
     partial void DeleteUsuario(Usuario instance);
-    partial void InsertIndicadore(Indicadore instance);
-    partial void UpdateIndicadore(Indicadore instance);
-    partial void DeleteIndicadore(Indicadore instance);
     partial void InsertIndicadores_Meta(Indicadores_Meta instance);
     partial void UpdateIndicadores_Meta(Indicadores_Meta instance);
     partial void DeleteIndicadores_Meta(Indicadores_Meta instance);
+    partial void InsertIndicadore(Indicadore instance);
+    partial void UpdateIndicadore(Indicadore instance);
+    partial void DeleteIndicadore(Indicadore instance);
     #endregion
 		
 		public ESMBDDataContext() : 
@@ -828,19 +828,19 @@ namespace ESM.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<Indicadore> Indicadores
-		{
-			get
-			{
-				return this.GetTable<Indicadore>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Indicadores_Meta> Indicadores_Metas
 		{
 			get
 			{
 				return this.GetTable<Indicadores_Meta>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Indicadore> Indicadores
+		{
+			get
+			{
+				return this.GetTable<Indicadore>();
 			}
 		}
 	}
@@ -19980,6 +19980,205 @@ namespace ESM.Model
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Indicadores_Metas")]
+	public partial class Indicadores_Meta : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Indicador_id;
+		
+		private System.Nullable<int> _Meta;
+		
+		private System.Nullable<System.DateTime> _Fecha_Meta;
+		
+		private System.Nullable<int> _Ejecutado;
+		
+		private EntityRef<Indicadore> _Indicadore;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnIndicador_idChanging(System.Nullable<int> value);
+    partial void OnIndicador_idChanged();
+    partial void OnMetaChanging(System.Nullable<int> value);
+    partial void OnMetaChanged();
+    partial void OnFecha_MetaChanging(System.Nullable<System.DateTime> value);
+    partial void OnFecha_MetaChanged();
+    partial void OnEjecutadoChanging(System.Nullable<int> value);
+    partial void OnEjecutadoChanged();
+    #endregion
+		
+		public Indicadores_Meta()
+		{
+			this._Indicadore = default(EntityRef<Indicadore>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador_id", DbType="Int")]
+		public System.Nullable<int> Indicador_id
+		{
+			get
+			{
+				return this._Indicador_id;
+			}
+			set
+			{
+				if ((this._Indicador_id != value))
+				{
+					if (this._Indicadore.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIndicador_idChanging(value);
+					this.SendPropertyChanging();
+					this._Indicador_id = value;
+					this.SendPropertyChanged("Indicador_id");
+					this.OnIndicador_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Meta", DbType="Int")]
+		public System.Nullable<int> Meta
+		{
+			get
+			{
+				return this._Meta;
+			}
+			set
+			{
+				if ((this._Meta != value))
+				{
+					this.OnMetaChanging(value);
+					this.SendPropertyChanging();
+					this._Meta = value;
+					this.SendPropertyChanged("Meta");
+					this.OnMetaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha_Meta", DbType="Date")]
+		public System.Nullable<System.DateTime> Fecha_Meta
+		{
+			get
+			{
+				return this._Fecha_Meta;
+			}
+			set
+			{
+				if ((this._Fecha_Meta != value))
+				{
+					this.OnFecha_MetaChanging(value);
+					this.SendPropertyChanging();
+					this._Fecha_Meta = value;
+					this.SendPropertyChanged("Fecha_Meta");
+					this.OnFecha_MetaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ejecutado", DbType="Int")]
+		public System.Nullable<int> Ejecutado
+		{
+			get
+			{
+				return this._Ejecutado;
+			}
+			set
+			{
+				if ((this._Ejecutado != value))
+				{
+					this.OnEjecutadoChanging(value);
+					this.SendPropertyChanging();
+					this._Ejecutado = value;
+					this.SendPropertyChanged("Ejecutado");
+					this.OnEjecutadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Indicadore_Indicadores_Meta", Storage="_Indicadore", ThisKey="Indicador_id", OtherKey="Id", IsForeignKey=true)]
+		public Indicadore Indicadore
+		{
+			get
+			{
+				return this._Indicadore.Entity;
+			}
+			set
+			{
+				Indicadore previousValue = this._Indicadore.Entity;
+				if (((previousValue != value) 
+							|| (this._Indicadore.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Indicadore.Entity = null;
+						previousValue.Indicadores_Metas.Remove(this);
+					}
+					this._Indicadore.Entity = value;
+					if ((value != null))
+					{
+						value.Indicadores_Metas.Add(this);
+						this._Indicador_id = value.Id;
+					}
+					else
+					{
+						this._Indicador_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Indicadore");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Indicadores")]
 	public partial class Indicadore : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -20003,6 +20202,8 @@ namespace ESM.Model
 		private System.Nullable<System.DateTime> _Fecha_Creacion;
 		
 		private System.Nullable<bool> _SSP;
+		
+		private System.Nullable<int> _meta;
 		
 		private EntitySet<Indicadores_Responsable> _Indicadores_Responsables;
 		
@@ -20036,6 +20237,8 @@ namespace ESM.Model
     partial void OnFecha_CreacionChanged();
     partial void OnSSPChanging(System.Nullable<bool> value);
     partial void OnSSPChanged();
+    partial void OnmetaChanging(System.Nullable<int> value);
+    partial void OnmetaChanged();
     #endregion
 		
 		public Indicadore()
@@ -20240,6 +20443,26 @@ namespace ESM.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_meta", DbType="Int")]
+		public System.Nullable<int> meta
+		{
+			get
+			{
+				return this._meta;
+			}
+			set
+			{
+				if ((this._meta != value))
+				{
+					this.OnmetaChanging(value);
+					this.SendPropertyChanging();
+					this._meta = value;
+					this.SendPropertyChanged("meta");
+					this.OnmetaChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Indicadore_Indicadores_Responsable", Storage="_Indicadores_Responsables", ThisKey="Id", OtherKey="Indicador_id")]
 		public EntitySet<Indicadores_Responsable> Indicadores_Responsables
 		{
@@ -20410,205 +20633,6 @@ namespace ESM.Model
 		{
 			this.SendPropertyChanging();
 			entity.Indicadore = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Indicadores_Metas")]
-	public partial class Indicadores_Meta : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _Indicador_id;
-		
-		private System.Nullable<int> _Meta;
-		
-		private System.Nullable<System.DateTime> _Fecha_Meta;
-		
-		private System.Nullable<int> _Ejecutado;
-		
-		private EntityRef<Indicadore> _Indicadore;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnIndicador_idChanging(System.Nullable<int> value);
-    partial void OnIndicador_idChanged();
-    partial void OnMetaChanging(System.Nullable<int> value);
-    partial void OnMetaChanged();
-    partial void OnFecha_MetaChanging(System.Nullable<System.DateTime> value);
-    partial void OnFecha_MetaChanged();
-    partial void OnEjecutadoChanging(System.Nullable<int> value);
-    partial void OnEjecutadoChanged();
-    #endregion
-		
-		public Indicadores_Meta()
-		{
-			this._Indicadore = default(EntityRef<Indicadore>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador_id", DbType="Int")]
-		public System.Nullable<int> Indicador_id
-		{
-			get
-			{
-				return this._Indicador_id;
-			}
-			set
-			{
-				if ((this._Indicador_id != value))
-				{
-					if (this._Indicadore.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIndicador_idChanging(value);
-					this.SendPropertyChanging();
-					this._Indicador_id = value;
-					this.SendPropertyChanged("Indicador_id");
-					this.OnIndicador_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Meta", DbType="Int")]
-		public System.Nullable<int> Meta
-		{
-			get
-			{
-				return this._Meta;
-			}
-			set
-			{
-				if ((this._Meta != value))
-				{
-					this.OnMetaChanging(value);
-					this.SendPropertyChanging();
-					this._Meta = value;
-					this.SendPropertyChanged("Meta");
-					this.OnMetaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha_Meta", DbType="Date")]
-		public System.Nullable<System.DateTime> Fecha_Meta
-		{
-			get
-			{
-				return this._Fecha_Meta;
-			}
-			set
-			{
-				if ((this._Fecha_Meta != value))
-				{
-					this.OnFecha_MetaChanging(value);
-					this.SendPropertyChanging();
-					this._Fecha_Meta = value;
-					this.SendPropertyChanged("Fecha_Meta");
-					this.OnFecha_MetaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ejecutado", DbType="Int")]
-		public System.Nullable<int> Ejecutado
-		{
-			get
-			{
-				return this._Ejecutado;
-			}
-			set
-			{
-				if ((this._Ejecutado != value))
-				{
-					this.OnEjecutadoChanging(value);
-					this.SendPropertyChanging();
-					this._Ejecutado = value;
-					this.SendPropertyChanged("Ejecutado");
-					this.OnEjecutadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Indicadore_Indicadores_Meta", Storage="_Indicadore", ThisKey="Indicador_id", OtherKey="Id", IsForeignKey=true)]
-		public Indicadore Indicadore
-		{
-			get
-			{
-				return this._Indicadore.Entity;
-			}
-			set
-			{
-				Indicadore previousValue = this._Indicadore.Entity;
-				if (((previousValue != value) 
-							|| (this._Indicadore.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Indicadore.Entity = null;
-						previousValue.Indicadores_Metas.Remove(this);
-					}
-					this._Indicadore.Entity = value;
-					if ((value != null))
-					{
-						value.Indicadores_Metas.Add(this);
-						this._Indicador_id = value.Id;
-					}
-					else
-					{
-						this._Indicador_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Indicadore");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }
