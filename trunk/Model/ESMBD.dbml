@@ -49,27 +49,13 @@
       <Association Name="Usuario_ActaVisitaSistematizacion" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Actividades" Member="Actividades">
-    <Type Name="Actividade">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Resultado_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Actividad" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
-      <Column Name="Presupuesto" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Association Name="Actividade_Actividades_Medio" Member="Actividades_Medios" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Medio" />
-      <Association Name="Actividade_Actividades_Responsable" Member="Actividades_Responsables" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Responsable" />
-      <Association Name="Actividade_Actividades_Supuesto" Member="Actividades_Supuestos" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Supuesto" />
-      <Association Name="Actividade_Responsables_Resultado" Member="Responsables_Resultados" ThisKey="Id" OtherKey="Actividad_id" Type="Responsables_Resultado" />
-      <Association Name="Actividade_Indicadore" Member="Indicadores" ThisKey="Id" OtherKey="Actividad_id" Type="Indicadore" />
-      <Association Name="Resultados_Proyecto_Actividade" Member="Resultados_Proyecto" ThisKey="Resultado_id" OtherKey="Id" Type="Resultados_Proyecto" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Actividades_Medios" Member="Actividades_Medios">
     <Type Name="Actividades_Medio">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Actividad_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Medios_de_verificacion_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Actividade_Actividades_Medio" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" />
       <Association Name="Medios_de_verificacion_Actividades_Medio" Member="Medios_de_verificacion" ThisKey="Medios_de_verificacion_id" OtherKey="Id" Type="Medios_de_verificacion" IsForeignKey="true" />
+      <Association Name="Actividade_Actividades_Medio" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Actividades_Responsables" Member="Actividades_Responsables">
@@ -77,8 +63,8 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Usuario_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Actividad_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Actividade_Actividades_Responsable" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" />
       <Association Name="Usuario_Actividades_Responsable" Member="Usuario" ThisKey="Usuario_id" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
+      <Association Name="Actividade_Actividades_Responsable" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Actividades_Supuestos" Member="Actividades_Supuestos">
@@ -86,8 +72,8 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Actividad_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Supuesto_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Actividade_Actividades_Supuesto" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" />
       <Association Name="Supuesto_Actividades_Supuesto" Member="Supuesto" ThisKey="Supuesto_id" OtherKey="Id" Type="Supuesto" IsForeignKey="true" />
+      <Association Name="Actividade_Actividades_Supuesto" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Actores" Member="Actores">
@@ -708,9 +694,9 @@
       <Column Name="Subproceso_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Resultado" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Indicador" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
-      <Association Name="Resultados_Proyecto_Actividade" Member="Actividades" ThisKey="Id" OtherKey="Resultado_id" Type="Actividade" />
       <Association Name="Resultados_Proyecto_Resultados_Medio" Member="Resultados_Medios" ThisKey="Id" OtherKey="Resultado_id" Type="Resultados_Medio" />
       <Association Name="Resultados_Proyecto_Resultados_Supuesto" Member="Resultados_Supuestos" ThisKey="Id" OtherKey="Resultado_id" Type="Resultados_Supuesto" />
+      <Association Name="Resultados_Proyecto_Actividade" Member="Actividades" ThisKey="Id" OtherKey="Resultado_id" Type="Actividade" />
       <Association Name="Subproceso_Resultados_Proyecto" Member="Subproceso" ThisKey="Subproceso_id" OtherKey="Id" Type="Subproceso" IsForeignKey="true" />
     </Type>
   </Table>
@@ -940,9 +926,35 @@
       <Column Name="meta" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Indicadore_Indicadores_Responsable" Member="Indicadores_Responsables" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Responsable" />
       <Association Name="Indicadore_Indicadores_Meta" Member="Indicadores_Metas" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Meta" />
-      <Association Name="Actividade_Indicadore" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Verbo_Indicadore" Member="Verbo" ThisKey="verbo_id" OtherKey="Id" Type="Verbo" IsForeignKey="true" />
       <Association Name="Unidade_Indicadore" Member="Unidade" ThisKey="unidad_id" OtherKey="Id" Type="Unidade" IsForeignKey="true" />
+      <Association Name="Actividade_Indicadore" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.actividades_presupuesto" Member="actividades_presupuestos">
+    <Type Name="actividades_presupuesto">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="actividad_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="meta" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="ejecutado" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="Actividade_actividades_presupuesto" Member="Actividade" ThisKey="actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Actividades" Member="Actividades">
+    <Type Name="Actividade">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Resultado_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Actividad" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Presupuesto" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Actividade_Actividades_Medio" Member="Actividades_Medios" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Medio" />
+      <Association Name="Actividade_Actividades_Responsable" Member="Actividades_Responsables" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Responsable" />
+      <Association Name="Actividade_Actividades_Supuesto" Member="Actividades_Supuestos" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Supuesto" />
+      <Association Name="Actividade_Responsables_Resultado" Member="Responsables_Resultados" ThisKey="Id" OtherKey="Actividad_id" Type="Responsables_Resultado" />
+      <Association Name="Actividade_Indicadore" Member="Indicadores" ThisKey="Id" OtherKey="Actividad_id" Type="Indicadore" />
+      <Association Name="Actividade_actividades_presupuesto" Member="actividades_presupuestos" ThisKey="Id" OtherKey="actividad_id" Type="actividades_presupuesto" />
+      <Association Name="Resultados_Proyecto_Actividade" Member="Resultados_Proyecto" ThisKey="Resultado_id" OtherKey="Id" Type="Resultados_Proyecto" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

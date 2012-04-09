@@ -6,7 +6,7 @@
     });
 
     $("#accordion").accordion("activate", 0)
-    
+
 });
 
 $(function () {
@@ -328,6 +328,11 @@ function ActivateAcordion() {
 
 $(document).ready(function () {
 
+    $(".datepiker").each(function () {
+
+        $(this).datepicker({ showAnim: 'bounce' });
+
+    });
     $("#accordion").accordion();
     $(".problema textarea").css("width", "80%");
     $('span[title]').qtip({ style: { name: 'blue', tip: true} });

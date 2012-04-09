@@ -612,7 +612,37 @@ namespace ESM.Objetos
 
         }
 
-        public bool AddMeta_Valor(int indicador_id, DateTime fecha, int meta)//, int valor
+        public string getActividad_name(int Actividad_id)
+        {
+            try
+            {
+                var mediciones_presupuesto = (from m in _db.Actividades
+                                              where m.Id == Actividad_id
+                                              select m.Actividad).Single();
+
+
+                return mediciones_presupuesto;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable getMed_presupuesto(int Actividad_id)
+        {
+            try
+            {
+                var mediciones_presupuesto = from m in _db.actividades_presupuestos
+                                             where m.actividad_id == Actividad_id
+                                             select new { m.Id, Fecha = m.fecha, Meta = m.meta, Ejecutado = m.ejecutado == null ? 0 : m.ejecutado };
+
+
+                return mediciones_presupuesto;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public bool AddMeta_Valor(int indicador_id, DateTime fecha, int meta)
         {
             try
             {
@@ -635,6 +665,68 @@ namespace ESM.Objetos
             catch (Exception) { return false; }
 
         }
+
+        public bool AddMeta_presupuesto(int Actividad_id, DateTime Fecha, decimal Meta)
+        {
+            try
+            {
+                actividades_presupuesto objMeta = new actividades_presupuesto
+                {
+                    actividad_id = Actividad_id,
+                    fecha = Fecha,
+                    meta = Meta
+                };
+
+                _db.actividades_presupuestos.InsertOnSubmit(objMeta);
+
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+
+        }
+
+        public bool UpdateMeta_presupuesto(object idpresupuesto, int Actividad_id, Decimal valor, DateTime fecha)
+        {
+            try
+            {
+
+                var metas_valores = from m in _db.actividades_presupuestos
+                                    where m.Id == Convert.ToInt32(idpresupuesto)
+                                    select m;
+
+                if (metas_valores.Count() == 0)
+                {
+                    actividades_presupuesto objValor = new actividades_presupuesto
+                    {
+                        actividad_id = Actividad_id,
+                        fecha = fecha,
+                        ejecutado = valor,
+                    };
+
+                    _db.actividades_presupuestos.InsertOnSubmit(objValor);
+                }
+                else
+                {
+
+                    actividades_presupuesto _objvalor = (from m in _db.actividades_presupuestos
+                                                         where m.Id == Convert.ToInt32(idpresupuesto)
+                                                         select m).Single();
+
+                    _objvalor.ejecutado = valor;
+
+                }
+
+                _db.SubmitChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
 
         public bool UpdateMeta(object idmeta, int indicador_id, int valor, DateTime fecha)
         {
