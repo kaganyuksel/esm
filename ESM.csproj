@@ -185,6 +185,20 @@
     <Compile Include="Consolidado.aspx.designer.cs">
       <DependentUpon>Consolidado.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReporteActividades.aspx.cs">
+      <DependentUpon>ReporteActividades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteActividades.aspx.designer.cs">
+      <DependentUpon>ReporteActividades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="reportactividades.aspx.cs">
+      <DependentUpon>reportactividades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="reportactividades.aspx.designer.cs">
+      <DependentUpon>reportactividades.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DetallesMarcoLogico.aspx.cs">
       <DependentUpon>DetallesMarcoLogico.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -291,6 +305,13 @@
     <Compile Include="Objetos\LecturaContextoSE.cs" />
     <Compile Include="Objetos\CSistematizacion.cs" />
     <Compile Include="Objetos\MarcoLogico.cs" />
+    <Compile Include="Presupuesto_actividad.aspx.cs">
+      <DependentUpon>Presupuesto_actividad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Presupuesto_actividad.aspx.designer.cs">
+      <DependentUpon>Presupuesto_actividad.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReporteIndicadores.aspx.cs">
       <DependentUpon>ReporteIndicadores.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -391,6 +412,8 @@
     <Content Include="Cita.aspx" />
     <Content Include="Citas.aspx" />
     <Content Include="Consolidado.aspx" />
+    <Content Include="ReporteActividades.aspx" />
+    <Content Include="reportactividades.aspx" />
     <Content Include="Default.aspx" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -439,6 +462,7 @@
     <Content Include="Icons\dock-l.png" />
     <Content Include="Icons\dock-m.png" />
     <Content Include="Icons\dock-r.png" />
+    <Content Include="Icons\dollar.png" />
     <Content Include="Icons\Down.png" />
     <Content Include="Icons\Edit.png" />
     <Content Include="Icons\EducalidadFooter.png" />
@@ -497,6 +521,7 @@
     <Content Include="Icons\Speaker.png" />
     <Content Include="Icons\Stationery.png" />
     <Content Include="Icons\Stats.png" />
+    <Content Include="Icons\statsv2.png" />
     <Content Include="Icons\Stop.png" />
     <Content Include="Icons\System.png" />
     <Content Include="Icons\Tag.png" />
@@ -548,6 +573,7 @@
     <Content Include="plupload\js\plupload.js" />
     <Content Include="plupload\js\plupload.silverlight.js" />
     <Content Include="plupload\js\plupload.silverlight.xap" />
+    <Content Include="Presupuesto_actividad.aspx" />
     <Content Include="Pretty\css\prettyPhoto.css" />
     <Content Include="Pretty\images\fullscreen\1.jpg" />
     <Content Include="Pretty\images\fullscreen\2.jpg" />
@@ -993,6 +1019,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Actividades_Valores_PlanOperativo.rdlc" />
     <EmbeddedResource Include="Indicadores_Valores_PlanOperativo.rdlc" />
     <EmbeddedResource Include="Indicadores_PlanOperativo.rdlc" />
   </ItemGroup>
