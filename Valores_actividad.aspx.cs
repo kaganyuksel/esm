@@ -19,7 +19,7 @@ namespace ESM
         {
             GridViewRow objrow = gvIndicadores.SelectedRow;
 
-            Session.Add("indicador_id", objrow.Cells[1].Text);
+            Session.Add("indicadores_id", objrow.Cells[1].Text);
 
             txtindicador.Text = objrow.Cells[2].Text;
 
@@ -33,7 +33,7 @@ namespace ESM
         {
             try
             {
-                int indicador_id = Convert.ToInt32(Session["indicador_id"]);
+                int indicador_id = Convert.ToInt32(Session["indicadores_id"]);
                 bool almaceno_correctamente = false;
                 if (li_valor_meta.Visible != true)
                 {

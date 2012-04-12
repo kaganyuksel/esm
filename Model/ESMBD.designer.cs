@@ -231,6 +231,15 @@ namespace ESM.Model
     partial void InsertActividade(Actividade instance);
     partial void UpdateActividade(Actividade instance);
     partial void DeleteActividade(Actividade instance);
+    partial void InsertRegistro_Proyecto(Registro_Proyecto instance);
+    partial void UpdateRegistro_Proyecto(Registro_Proyecto instance);
+    partial void DeleteRegistro_Proyecto(Registro_Proyecto instance);
+    partial void InsertFuentes_Financiacion(Fuentes_Financiacion instance);
+    partial void UpdateFuentes_Financiacion(Fuentes_Financiacion instance);
+    partial void DeleteFuentes_Financiacion(Fuentes_Financiacion instance);
+    partial void InsertMatriz_Actore(Matriz_Actore instance);
+    partial void UpdateMatriz_Actore(Matriz_Actore instance);
+    partial void DeleteMatriz_Actore(Matriz_Actore instance);
     #endregion
 		
 		public ESMBDDataContext() : 
@@ -852,6 +861,30 @@ namespace ESM.Model
 			get
 			{
 				return this.GetTable<Actividade>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Registro_Proyecto> Registro_Proyectos
+		{
+			get
+			{
+				return this.GetTable<Registro_Proyecto>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Fuentes_Financiacion> Fuentes_Financiacions
+		{
+			get
+			{
+				return this.GetTable<Fuentes_Financiacion>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Matriz_Actore> Matriz_Actores
+		{
+			get
+			{
+				return this.GetTable<Matriz_Actore>();
 			}
 		}
 	}
@@ -4680,7 +4713,7 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_upsize_ts", AutoSync=AutoSync.Always, DbType="rowversion", CanBeNull=true, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_upsize_ts", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary upsize_ts
 		{
 			get
@@ -13772,6 +13805,12 @@ namespace ESM.Model
 		
 		private EntitySet<Proyectos_Supuesto> _Proyectos_Supuestos;
 		
+		private EntitySet<Registro_Proyecto> _Registro_Proyectos;
+		
+		private EntitySet<Fuentes_Financiacion> _Fuentes_Financiacions;
+		
+		private EntitySet<Matriz_Actore> _Matriz_Actores;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -13799,6 +13838,9 @@ namespace ESM.Model
 			this._Causas_Efectos = new EntitySet<Causas_Efecto>(new Action<Causas_Efecto>(this.attach_Causas_Efectos), new Action<Causas_Efecto>(this.detach_Causas_Efectos));
 			this._Proyectos_Medios = new EntitySet<Proyectos_Medio>(new Action<Proyectos_Medio>(this.attach_Proyectos_Medios), new Action<Proyectos_Medio>(this.detach_Proyectos_Medios));
 			this._Proyectos_Supuestos = new EntitySet<Proyectos_Supuesto>(new Action<Proyectos_Supuesto>(this.attach_Proyectos_Supuestos), new Action<Proyectos_Supuesto>(this.detach_Proyectos_Supuestos));
+			this._Registro_Proyectos = new EntitySet<Registro_Proyecto>(new Action<Registro_Proyecto>(this.attach_Registro_Proyectos), new Action<Registro_Proyecto>(this.detach_Registro_Proyectos));
+			this._Fuentes_Financiacions = new EntitySet<Fuentes_Financiacion>(new Action<Fuentes_Financiacion>(this.attach_Fuentes_Financiacions), new Action<Fuentes_Financiacion>(this.detach_Fuentes_Financiacions));
+			this._Matriz_Actores = new EntitySet<Matriz_Actore>(new Action<Matriz_Actore>(this.attach_Matriz_Actores), new Action<Matriz_Actore>(this.detach_Matriz_Actores));
 			OnCreated();
 		}
 		
@@ -14001,6 +14043,45 @@ namespace ESM.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Registro_Proyecto", Storage="_Registro_Proyectos", ThisKey="Id", OtherKey="proyecto_id")]
+		public EntitySet<Registro_Proyecto> Registro_Proyectos
+		{
+			get
+			{
+				return this._Registro_Proyectos;
+			}
+			set
+			{
+				this._Registro_Proyectos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Fuentes_Financiacion", Storage="_Fuentes_Financiacions", ThisKey="Id", OtherKey="proyecto_id")]
+		public EntitySet<Fuentes_Financiacion> Fuentes_Financiacions
+		{
+			get
+			{
+				return this._Fuentes_Financiacions;
+			}
+			set
+			{
+				this._Fuentes_Financiacions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Matriz_Actore", Storage="_Matriz_Actores", ThisKey="Id", OtherKey="proyecto_id")]
+		public EntitySet<Matriz_Actore> Matriz_Actores
+		{
+			get
+			{
+				return this._Matriz_Actores;
+			}
+			set
+			{
+				this._Matriz_Actores.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -14052,6 +14133,42 @@ namespace ESM.Model
 		}
 		
 		private void detach_Proyectos_Supuestos(Proyectos_Supuesto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = null;
+		}
+		
+		private void attach_Registro_Proyectos(Registro_Proyecto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = this;
+		}
+		
+		private void detach_Registro_Proyectos(Registro_Proyecto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = null;
+		}
+		
+		private void attach_Fuentes_Financiacions(Fuentes_Financiacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = this;
+		}
+		
+		private void detach_Fuentes_Financiacions(Fuentes_Financiacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = null;
+		}
+		
+		private void attach_Matriz_Actores(Matriz_Actore entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = this;
+		}
+		
+		private void detach_Matriz_Actores(Matriz_Actore entity)
 		{
 			this.SendPropertyChanging();
 			entity.Proyecto = null;
@@ -15240,7 +15357,7 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_upsize_ts", AutoSync=AutoSync.Always, DbType="rowversion", CanBeNull=true, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_upsize_ts", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary upsize_ts
 		{
 			get
@@ -20895,6 +21012,723 @@ namespace ESM.Model
 		{
 			this.SendPropertyChanging();
 			entity.Actividade = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Registro_Proyectos")]
+	public partial class Registro_Proyecto : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Dependencia;
+		
+		private string _Cargo;
+		
+		private System.Nullable<System.DateTime> _Fecha;
+		
+		private string _Mpp_1;
+		
+		private string _Mpp_2;
+		
+		private string _Mpp_3;
+		
+		private string _Justificacion;
+		
+		private System.Nullable<int> _proyecto_id;
+		
+		private EntityRef<Proyecto> _Proyecto;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnDependenciaChanging(string value);
+    partial void OnDependenciaChanged();
+    partial void OnCargoChanging(string value);
+    partial void OnCargoChanged();
+    partial void OnFechaChanging(System.Nullable<System.DateTime> value);
+    partial void OnFechaChanged();
+    partial void OnMpp_1Changing(string value);
+    partial void OnMpp_1Changed();
+    partial void OnMpp_2Changing(string value);
+    partial void OnMpp_2Changed();
+    partial void OnMpp_3Changing(string value);
+    partial void OnMpp_3Changed();
+    partial void OnJustificacionChanging(string value);
+    partial void OnJustificacionChanged();
+    partial void Onproyecto_idChanging(System.Nullable<int> value);
+    partial void Onproyecto_idChanged();
+    #endregion
+		
+		public Registro_Proyecto()
+		{
+			this._Proyecto = default(EntityRef<Proyecto>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dependencia", DbType="NVarChar(255)")]
+		public string Dependencia
+		{
+			get
+			{
+				return this._Dependencia;
+			}
+			set
+			{
+				if ((this._Dependencia != value))
+				{
+					this.OnDependenciaChanging(value);
+					this.SendPropertyChanging();
+					this._Dependencia = value;
+					this.SendPropertyChanged("Dependencia");
+					this.OnDependenciaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cargo", DbType="NVarChar(255)")]
+		public string Cargo
+		{
+			get
+			{
+				return this._Cargo;
+			}
+			set
+			{
+				if ((this._Cargo != value))
+				{
+					this.OnCargoChanging(value);
+					this.SendPropertyChanging();
+					this._Cargo = value;
+					this.SendPropertyChanged("Cargo");
+					this.OnCargoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Fecha
+		{
+			get
+			{
+				return this._Fecha;
+			}
+			set
+			{
+				if ((this._Fecha != value))
+				{
+					this.OnFechaChanging(value);
+					this.SendPropertyChanging();
+					this._Fecha = value;
+					this.SendPropertyChanged("Fecha");
+					this.OnFechaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mpp_1", DbType="NVarChar(255)")]
+		public string Mpp_1
+		{
+			get
+			{
+				return this._Mpp_1;
+			}
+			set
+			{
+				if ((this._Mpp_1 != value))
+				{
+					this.OnMpp_1Changing(value);
+					this.SendPropertyChanging();
+					this._Mpp_1 = value;
+					this.SendPropertyChanged("Mpp_1");
+					this.OnMpp_1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mpp_2", DbType="NVarChar(255)")]
+		public string Mpp_2
+		{
+			get
+			{
+				return this._Mpp_2;
+			}
+			set
+			{
+				if ((this._Mpp_2 != value))
+				{
+					this.OnMpp_2Changing(value);
+					this.SendPropertyChanging();
+					this._Mpp_2 = value;
+					this.SendPropertyChanged("Mpp_2");
+					this.OnMpp_2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mpp_3", DbType="NVarChar(255)")]
+		public string Mpp_3
+		{
+			get
+			{
+				return this._Mpp_3;
+			}
+			set
+			{
+				if ((this._Mpp_3 != value))
+				{
+					this.OnMpp_3Changing(value);
+					this.SendPropertyChanging();
+					this._Mpp_3 = value;
+					this.SendPropertyChanged("Mpp_3");
+					this.OnMpp_3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Justificacion", DbType="NVarChar(255)")]
+		public string Justificacion
+		{
+			get
+			{
+				return this._Justificacion;
+			}
+			set
+			{
+				if ((this._Justificacion != value))
+				{
+					this.OnJustificacionChanging(value);
+					this.SendPropertyChanging();
+					this._Justificacion = value;
+					this.SendPropertyChanged("Justificacion");
+					this.OnJustificacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_proyecto_id", DbType="Int")]
+		public System.Nullable<int> proyecto_id
+		{
+			get
+			{
+				return this._proyecto_id;
+			}
+			set
+			{
+				if ((this._proyecto_id != value))
+				{
+					if (this._Proyecto.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onproyecto_idChanging(value);
+					this.SendPropertyChanging();
+					this._proyecto_id = value;
+					this.SendPropertyChanged("proyecto_id");
+					this.Onproyecto_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Registro_Proyecto", Storage="_Proyecto", ThisKey="proyecto_id", OtherKey="Id", IsForeignKey=true)]
+		public Proyecto Proyecto
+		{
+			get
+			{
+				return this._Proyecto.Entity;
+			}
+			set
+			{
+				Proyecto previousValue = this._Proyecto.Entity;
+				if (((previousValue != value) 
+							|| (this._Proyecto.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Proyecto.Entity = null;
+						previousValue.Registro_Proyectos.Remove(this);
+					}
+					this._Proyecto.Entity = value;
+					if ((value != null))
+					{
+						value.Registro_Proyectos.Add(this);
+						this._proyecto_id = value.Id;
+					}
+					else
+					{
+						this._proyecto_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Proyecto");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Fuentes_Financiacion")]
+	public partial class Fuentes_Financiacion : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Tipo_Entidad;
+		
+		private string _Entidad;
+		
+		private string _Tipo_Recurso;
+		
+		private System.Nullable<int> _proyecto_id;
+		
+		private EntityRef<Proyecto> _Proyecto;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnTipo_EntidadChanging(string value);
+    partial void OnTipo_EntidadChanged();
+    partial void OnEntidadChanging(string value);
+    partial void OnEntidadChanged();
+    partial void OnTipo_RecursoChanging(string value);
+    partial void OnTipo_RecursoChanged();
+    partial void Onproyecto_idChanging(System.Nullable<int> value);
+    partial void Onproyecto_idChanged();
+    #endregion
+		
+		public Fuentes_Financiacion()
+		{
+			this._Proyecto = default(EntityRef<Proyecto>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tipo_Entidad", DbType="NVarChar(255)")]
+		public string Tipo_Entidad
+		{
+			get
+			{
+				return this._Tipo_Entidad;
+			}
+			set
+			{
+				if ((this._Tipo_Entidad != value))
+				{
+					this.OnTipo_EntidadChanging(value);
+					this.SendPropertyChanging();
+					this._Tipo_Entidad = value;
+					this.SendPropertyChanged("Tipo_Entidad");
+					this.OnTipo_EntidadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Entidad", DbType="NVarChar(255)")]
+		public string Entidad
+		{
+			get
+			{
+				return this._Entidad;
+			}
+			set
+			{
+				if ((this._Entidad != value))
+				{
+					this.OnEntidadChanging(value);
+					this.SendPropertyChanging();
+					this._Entidad = value;
+					this.SendPropertyChanged("Entidad");
+					this.OnEntidadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tipo_Recurso", DbType="NVarChar(255)")]
+		public string Tipo_Recurso
+		{
+			get
+			{
+				return this._Tipo_Recurso;
+			}
+			set
+			{
+				if ((this._Tipo_Recurso != value))
+				{
+					this.OnTipo_RecursoChanging(value);
+					this.SendPropertyChanging();
+					this._Tipo_Recurso = value;
+					this.SendPropertyChanged("Tipo_Recurso");
+					this.OnTipo_RecursoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_proyecto_id", DbType="Int")]
+		public System.Nullable<int> proyecto_id
+		{
+			get
+			{
+				return this._proyecto_id;
+			}
+			set
+			{
+				if ((this._proyecto_id != value))
+				{
+					if (this._Proyecto.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onproyecto_idChanging(value);
+					this.SendPropertyChanging();
+					this._proyecto_id = value;
+					this.SendPropertyChanged("proyecto_id");
+					this.Onproyecto_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Fuentes_Financiacion", Storage="_Proyecto", ThisKey="proyecto_id", OtherKey="Id", IsForeignKey=true)]
+		public Proyecto Proyecto
+		{
+			get
+			{
+				return this._Proyecto.Entity;
+			}
+			set
+			{
+				Proyecto previousValue = this._Proyecto.Entity;
+				if (((previousValue != value) 
+							|| (this._Proyecto.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Proyecto.Entity = null;
+						previousValue.Fuentes_Financiacions.Remove(this);
+					}
+					this._Proyecto.Entity = value;
+					if ((value != null))
+					{
+						value.Fuentes_Financiacions.Add(this);
+						this._proyecto_id = value.Id;
+					}
+					else
+					{
+						this._proyecto_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Proyecto");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Matriz_Actores")]
+	public partial class Matriz_Actore : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Grupos;
+		
+		private string _Interes;
+		
+		private string _Problema_Percibido;
+		
+		private string _Recursos_Mandatos;
+		
+		private System.Nullable<int> _proyecto_id;
+		
+		private EntityRef<Proyecto> _Proyecto;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnGruposChanging(string value);
+    partial void OnGruposChanged();
+    partial void OnInteresChanging(string value);
+    partial void OnInteresChanged();
+    partial void OnProblema_PercibidoChanging(string value);
+    partial void OnProblema_PercibidoChanged();
+    partial void OnRecursos_MandatosChanging(string value);
+    partial void OnRecursos_MandatosChanged();
+    partial void Onproyecto_idChanging(System.Nullable<int> value);
+    partial void Onproyecto_idChanged();
+    #endregion
+		
+		public Matriz_Actore()
+		{
+			this._Proyecto = default(EntityRef<Proyecto>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Grupos", DbType="NVarChar(255)")]
+		public string Grupos
+		{
+			get
+			{
+				return this._Grupos;
+			}
+			set
+			{
+				if ((this._Grupos != value))
+				{
+					this.OnGruposChanging(value);
+					this.SendPropertyChanging();
+					this._Grupos = value;
+					this.SendPropertyChanged("Grupos");
+					this.OnGruposChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Interes", DbType="NVarChar(255)")]
+		public string Interes
+		{
+			get
+			{
+				return this._Interes;
+			}
+			set
+			{
+				if ((this._Interes != value))
+				{
+					this.OnInteresChanging(value);
+					this.SendPropertyChanging();
+					this._Interes = value;
+					this.SendPropertyChanged("Interes");
+					this.OnInteresChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Problema_Percibido", DbType="NVarChar(255)")]
+		public string Problema_Percibido
+		{
+			get
+			{
+				return this._Problema_Percibido;
+			}
+			set
+			{
+				if ((this._Problema_Percibido != value))
+				{
+					this.OnProblema_PercibidoChanging(value);
+					this.SendPropertyChanging();
+					this._Problema_Percibido = value;
+					this.SendPropertyChanged("Problema_Percibido");
+					this.OnProblema_PercibidoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Recursos_Mandatos", DbType="NVarChar(255)")]
+		public string Recursos_Mandatos
+		{
+			get
+			{
+				return this._Recursos_Mandatos;
+			}
+			set
+			{
+				if ((this._Recursos_Mandatos != value))
+				{
+					this.OnRecursos_MandatosChanging(value);
+					this.SendPropertyChanging();
+					this._Recursos_Mandatos = value;
+					this.SendPropertyChanged("Recursos_Mandatos");
+					this.OnRecursos_MandatosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_proyecto_id", DbType="Int")]
+		public System.Nullable<int> proyecto_id
+		{
+			get
+			{
+				return this._proyecto_id;
+			}
+			set
+			{
+				if ((this._proyecto_id != value))
+				{
+					if (this._Proyecto.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onproyecto_idChanging(value);
+					this.SendPropertyChanging();
+					this._proyecto_id = value;
+					this.SendPropertyChanged("proyecto_id");
+					this.Onproyecto_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Matriz_Actore", Storage="_Proyecto", ThisKey="proyecto_id", OtherKey="Id", IsForeignKey=true)]
+		public Proyecto Proyecto
+		{
+			get
+			{
+				return this._Proyecto.Entity;
+			}
+			set
+			{
+				Proyecto previousValue = this._Proyecto.Entity;
+				if (((previousValue != value) 
+							|| (this._Proyecto.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Proyecto.Entity = null;
+						previousValue.Matriz_Actores.Remove(this);
+					}
+					this._Proyecto.Entity = value;
+					if ((value != null))
+					{
+						value.Matriz_Actores.Add(this);
+						this._proyecto_id = value.Id;
+					}
+					else
+					{
+						this._proyecto_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Proyecto");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

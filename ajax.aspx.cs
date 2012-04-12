@@ -186,10 +186,11 @@ namespace ESM
             int actividadid = Convert.ToInt32(Request.QueryString["idactividad"]);
             string actividad = Request.QueryString["actividad"].ToString();
             float presupuesto = Convert.ToInt64(Request.QueryString["presupuesto"]);
+            string fecha = Request.QueryString["fecha"].ToString();
 
             CActividades objCActividades = new CActividades();
 
-            objCActividades.Update(actividadid, actividad, presupuesto);
+            objCActividades.Update(actividadid, actividad, presupuesto, fecha);
 
         }
 
@@ -341,10 +342,11 @@ namespace ESM
                 int idResultado = Convert.ToInt32(Request.QueryString["idresultado"]);
                 string actividad = Request.QueryString["actividad"].ToString();
                 float presupuesto = Convert.ToInt64(Request.QueryString["presupuesto"]);
+                string fecha = Request.QueryString["fecha"].ToString();
 
                 CActividades objCActividades = new CActividades();
 
-                objCActividades.Add(idResultado, actividad, presupuesto);
+                objCActividades.Add(idResultado, actividad, presupuesto, fecha);
 
                 IQueryable<Model.Actividade> objActividades = new CActividades().getActividades(idResultado);
 
@@ -359,11 +361,13 @@ namespace ESM
                     objsb_actividades.Append(" </td> ");
                     objsb_actividades.Append("</tr> ");
                     objsb_actividades.Append("<tr>");
-                    string parametros = "'" + item_actividades.Id.ToString() + "','txt_area_actividades_up_" + item_actividades.Id + "','txt_actividad_presupuesto_up" + idResultado + "'";
-                    objsb_actividades.Append("<td> <textarea id='txt_area_actividades_up_" + item_actividades.Id + "' placeholder='Texto correspondiente a actividades'>" + item_actividades.Actividad + "</textarea><br/>Presupuesto<br/><input type='text' placeholder='Campo exclusivamente numerico' class='numerico' style='width:80%;' value=" + item_actividades.Presupuesto + "  id='txt_actividad_presupuesto_up" + idResultado + "'> <br/>");
+                    string parametros = "'" + item_actividades.Id.ToString() + "','txt_area_actividades_up_" + item_actividades.Id + "','txt_actividad_presupuesto_up" + item_actividades.Id + "','txt_actividad_fecha_pre_up" + item_actividades.Id + "'";
+                    objsb_actividades.Append("<td> <textarea id='txt_area_actividades_up_" + item_actividades.Id + "' placeholder='Texto correspondiente a actividades'>" + item_actividades.Actividad + "</textarea><br/>Presupuesto<br/><input type='text' placeholder='Campo exclusivamente numerico' class='numerico' style='width:80%;' value=" + item_actividades.Presupuesto + "  id='txt_actividad_presupuesto_up" + item_actividades.Id + "' Fecha <br/><input type='text' placeholder='Campo exclusivamente numerico' class='datepiker' style='width:80%;' value=" + item_actividades.fecha + "  id='txt_actividad_fecha_pre_up" + item_actividades.Id + "'> <br/>");
                     objsb_actividades.Append(" <input type='button' value='Actualizar Actividad' onclick=\"ActualizarActividad(" + parametros + ");\" /> ");
                     objsb_actividades.Append(" <a title=\"Detalles para Actividad No." + enumeracion_Actividades.ToString() + "\" class='pretty' href=\"" + Request.Url.Scheme + "://" + Request.Url.Authority + "/DetallesMarcoLogico.aspx?idActividad=" + item_actividades.Id + "&iframe=true&amp;width=100%&amp;height=100%\"\"><img alt='Detalles' src='/Icons/details.png' width='24px' /></a>");
                     objsb_actividades.Append(" <a title=\"Cronograma Actividad No." + enumeracion_Actividades.ToString() + "\" class='pretty' href=\"" + Request.Url.Scheme + "://" + Request.Url.Authority + "/DiagramaGant.aspx?idActividad=" + item_actividades.Id + "&iframe=true&amp;width=100%&amp;height=100%\"\"><img alt='Cronograma' src='/Icons/Calender.png' width='24px' /></a>");
+                    objsb_actividades.Append(" <a title=\"Valores para Actividad No." + enumeracion_Actividades.ToString() + "\" class='pretty' href=\"" + Request.Url.Scheme + "://" + Request.Url.Authority + "/Valores_actividad.aspx?idActividad=" + item_actividades.Id + "&iframe=true&amp;width=100%&amp;height=100%\"\"><img alt='Valores' src='/Icons/Stationery.png' width='24px' /></a>");
+                    objsb_actividades.Append(" <a title=\"Presupuesto para Actividad No." + enumeracion_Actividades.ToString() + "\" class='pretty' href=\"" + Request.Url.Scheme + "://" + Request.Url.Authority + "/Presupuesto_actividad.aspx?idActividad=" + item_actividades.Id + "&iframe=true&amp;width=100%&amp;height=100%\"\"><img alt='Presupuesto' src='/Icons/dollar.png' width='24px' /></a>");
                     objsb_actividades.Append("</td> ");
                     objsb_actividades.Append("</tr> ");
 
