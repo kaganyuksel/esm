@@ -845,7 +845,7 @@ namespace ESM.Objetos
         }
 
 
-        public int Add(int idresultado, string actividad, float presupuesto)
+        public int Add(int idresultado, string actividad, float presupuesto, string Fecha = "")
         {
             try
             {
@@ -853,7 +853,8 @@ namespace ESM.Objetos
                 {
                     Resultado_id = idresultado,
                     Actividad = actividad,
-                    Presupuesto = presupuesto
+                    Presupuesto = presupuesto,
+                    fecha = Fecha == "" ? DateTime.Now : Convert.ToDateTime(Fecha)
                 };
 
                 _db.Actividades.InsertOnSubmit(objActividade);
@@ -865,7 +866,7 @@ namespace ESM.Objetos
 
         }
 
-        public bool Update(int actividadid, string actividad = null, float presupuesto = 0)
+        public bool Update(int actividadid, string actividad = null, float presupuesto = 0, string fecha = "")
         {
             try
             {
@@ -878,6 +879,9 @@ namespace ESM.Objetos
 
                 if (presupuesto != 0)
                     actividad_consulta.Presupuesto = presupuesto;
+
+                if (fecha != null && fecha != "")
+                    actividad_consulta.fecha = Convert.ToDateTime(fecha);
 
 
                 _db.SubmitChanges();
@@ -1402,4 +1406,199 @@ namespace ESM.Objetos
         }
     }
 
+    public class CMatriz_Actores
+    {
+
+        #region Propiedades Publicas y Privadas
+
+        protected ESMBDDataContext _db = new ESMBDDataContext();
+
+        #endregion
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public CMatriz_Actores()
+        {
+
+        }
+
+        public bool AddItem(string grupos, string interes, string problema_percibido, string recursos_mandatos, int proyecto_id)
+        {
+            try
+            {
+                Matriz_Actore objMatriz_Actores = new Matriz_Actore()
+                {
+                    Grupos = grupos,
+                    Interes = interes,
+                    Problema_Percibido = problema_percibido,
+                    Recursos_Mandatos = recursos_mandatos,
+                    proyecto_id = proyecto_id
+                };
+
+                _db.Matriz_Actores.InsertOnSubmit(objMatriz_Actores);
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
+        public bool UpdateItem(int matriz_id, string grupos, string interes, string problema_percibido, string recursos_mandatos)
+        {
+            try
+            {
+                var element_return = (from m_a in _db.Matriz_Actores
+                                      where m_a.Id == matriz_id
+                                      select m_a).Single();
+                element_return.Grupos = grupos;
+                element_return.Interes = interes;
+                element_return.Problema_Percibido = problema_percibido;
+                element_return.Recursos_Mandatos = recursos_mandatos;
+
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
+
+
+    }
+
+    public class CFuentes_Financiacion
+    {
+
+        #region Propiedades Publicas y Privadas
+
+        protected ESMBDDataContext _db = new ESMBDDataContext();
+
+        #endregion
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public CFuentes_Financiacion()
+        {
+
+        }
+
+        public bool AddItem(string entidad, string tipo_entidad, string tipo_recurso, int proyecto_id)
+        {
+            try
+            {
+                Fuentes_Financiacion objFuentes_Financiacion = new Fuentes_Financiacion()
+                {
+                    Entidad = entidad,
+                    Tipo_Entidad = tipo_entidad,
+                    Tipo_Recurso = tipo_recurso,
+                    proyecto_id = proyecto_id
+                };
+
+                _db.Fuentes_Financiacions.InsertOnSubmit(objFuentes_Financiacion);
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
+        public bool UpdateItem(int fuentes_id, string entidad, string tipo_entidad, string tipo_recurso, int proyecto_id)
+        {
+            try
+            {
+                var element_return = (from f_f in _db.Fuentes_Financiacions
+                                      where f_f.Id == fuentes_id
+                                      select f_f).Single();
+
+                element_return.Entidad = entidad;
+                element_return.Tipo_Recurso = tipo_entidad;
+                element_return.Tipo_Recurso = tipo_recurso;
+
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
+
+
+    }
+
+    public class CRegistro_Proyectos
+    {
+
+        #region Propiedades Publicas y Privadas
+
+        protected ESMBDDataContext _db = new ESMBDDataContext();
+
+        #endregion
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public CRegistro_Proyectos()
+        {
+
+        }
+
+        public bool AddItem(string cargo, string dependencia, DateTime fecha, string justificacion, string mpp_1, string mpp_2, string mpp_3, int proyecto_id)
+        {
+            try
+            {
+                Registro_Proyecto objRegistro_Proyectos = new Registro_Proyecto()
+                {
+                    //Registro de Proyecto
+                    Cargo = cargo,
+                    Dependencia = dependencia,
+                    Fecha = fecha,
+                    //Justificación
+                    Justificacion = justificacion,
+                    //Marco de Política Publica
+                    Mpp_1 = mpp_1,
+                    Mpp_2 = mpp_2,
+                    Mpp_3 = mpp_3,
+
+                    proyecto_id = proyecto_id
+                };
+
+                _db.Registro_Proyectos.InsertOnSubmit(objRegistro_Proyectos);
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
+        public bool UpdateItem(int registro_id, string cargo, string dependencia, DateTime fecha, string justificacion, string mpp_1, string mpp_2, string mpp_3)
+        {
+            try
+            {
+                var element_return = (from r_p in _db.Registro_Proyectos
+                                      where r_p.Id == registro_id
+                                      select r_p).Single();
+
+                //Registro de Proyecto
+                element_return.Cargo = cargo;
+                element_return.Dependencia = dependencia;
+                element_return.Fecha = fecha;
+                //Justificación
+                element_return.Justificacion = justificacion;
+                //Marco Política Publica
+                element_return.Mpp_1 = mpp_1;
+                element_return.Mpp_2 = mpp_2;
+                element_return.Mpp_3 = mpp_3;
+
+                _db.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
+
+
+    }
 }

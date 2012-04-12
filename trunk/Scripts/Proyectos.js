@@ -277,9 +277,9 @@ function ActualizarSubProceso(idsubproceso, subproceso) {
     $("#ContentPlaceHolder1_Bandera").val("1");
 }
 
-function AlmacenarActividad(idresultado, actividad, presupuesto) {
+function AlmacenarActividad(idresultado, actividad, presupuesto, fecha) {
     $.ajax({
-        url: "ajax.aspx?idResultado=" + idresultado + "&actividad=" + $("#" + actividad).val() + "&presupuesto=" + $("#" + presupuesto).val() + "&actividades=true",
+        url: "ajax.aspx?idResultado=" + idresultado + "&actividad=" + $("#" + actividad).val() + "&presupuesto=" + $("#" + presupuesto).val() + "&fecha=" + $("#" + fecha).val() + "&actividades=true",
         async: false,
         success: function (result) {
 
@@ -306,9 +306,9 @@ function AlmacenarActividad(idresultado, actividad, presupuesto) {
     $("#ContentPlaceHolder1_Bandera").val("1");
 }
 
-function ActualizarActividad(idactividad, actividad, presupuesto) {
+function ActualizarActividad(idactividad, actividad, presupuesto, fecha) {
     $.ajax({
-        url: "ajax.aspx?idactividad=" + idactividad + "&actividad=" + $("#" + actividad).val() + "&presupuesto=" + $("#" + presupuesto).val() + "&actividadesu=true",
+        url: "ajax.aspx?idactividad=" + idactividad + "&actividad=" + $("#" + actividad).val() + "&presupuesto=" + $("#" + presupuesto).val() + "&fecha=" + $("#" + fecha).val() + "&actividadesu=true",
         async: false,
         success: function (result) {
             $(".success").html("Actividad actualizada correctamente.");
@@ -329,10 +329,10 @@ function ActivateAcordion() {
 $(document).ready(function () {
 
     $(".datepiker").each(function () {
-
-        $(this).datepicker({ showAnim: 'bounce' });
-
+        var control_id = $(this).attr("id");
+        $("#" + control_id).datepicker({ showAnim: 'bounce' });
     });
+
     $("#accordion").accordion();
     $(".problema textarea").css("width", "80%");
     $('span[title]').qtip({ style: { name: 'blue', tip: true} });
