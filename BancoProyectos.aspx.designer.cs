@@ -13,15 +13,6 @@ namespace ESM {
     public partial class BancoProyectos {
         
         /// <summary>
-        /// btnActualizarProyecto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnActualizarProyecto;
-        
-        /// <summary>
         /// btnExportarProyecto control.
         /// </summary>
         /// <remarks>
@@ -31,13 +22,31 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.Button btnExportarProyecto;
         
         /// <summary>
-        /// nombreproblema control.
+        /// txtnombreproyecto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText nombreproblema;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtnombreproyecto;
+        
+        /// <summary>
+        /// txtproblema control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtproblema;
+        
+        /// <summary>
+        /// btnalmacenarproyecto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnalmacenarproyecto;
         
         /// <summary>
         /// FileUpload1 control.
@@ -56,5 +65,32 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnalmacenarregistro;
+        
+        /// <summary>
+        /// ban_proyecto_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden ban_proyecto_id;
+        
+        /// <summary>
+        /// cmbproyectos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbproyectos;
+        
+        /// <summary>
+        /// btncargarproyecto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btncargarproyecto;
     }
 }

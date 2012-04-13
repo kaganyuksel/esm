@@ -441,6 +441,34 @@ namespace ESM.Objetos
 
         #endregion
 
+        public IQueryable<Proyecto> GetProyectos()
+        {
+            try
+            {
+                var proyectos_coleccion = from p in _db.Proyectos
+                                          select p;
+                return proyectos_coleccion;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public Proyecto GetProyecto(int proyecto_id)
+        {
+            try
+            {
+                var proyecto_consulta = (from p in _db.Proyectos
+                                         where p.Id == proyecto_id
+                                         select p).Single();
+
+                return proyecto_consulta;
+            }
+            catch (Exception) { return null; }
+
+        }
+
         public string getname(int proyecto_id)
         {
             try
