@@ -82,6 +82,9 @@
             }
             return 1;
         }
+
+
+
         var j = jQuery.noConflict();
         j(document).ready(function () {
 
@@ -92,9 +95,23 @@
                 collapsible: true
             });
 
-
-            //$('#magazine').turn('next');
+            j("#btnalmacenarproyecto").click(function () {
+                if (j("#ContentPlaceHolder1_txtnombreproyecto").val() == "" && j("#ContentPlaceHolder1_txtproblema").val() == "")
+                    return false;
+            });
         });
+
+        function Actualizar() {
+            j("#dialog_proyectos").css("display", "block");
+            j("#dialog_proyectos").dialog({
+                open: true,
+                height: 300,
+                modal: true,
+                close: function () { j("#dialog_proyectos").css("display", "none"); }
+            });
+            return false;
+
+        }
 
     </script>
 </asp:Content>
@@ -125,7 +142,9 @@
             </hgroup>
             <section style="margin: 0 auto; width: 60%; border: 1px solid #005EA7; text-align: center;">
                 <a href="#" onclick="$('#magazine').turn('next');">Nuevo Proyecto</a>
-                <asp:Button ID="btnActualizarProyecto" Width="70%" Text="Actualizar Proyecto" runat="server" />
+                <br />
+                <a id="btnActualizar" href="#" onclick="Actualizar();">Actualizar Proyecto</a>
+                </button>
                 <asp:Button ID="btnExportarProyecto" Width="70%" Text="Exportar Proyecto" runat="server" />
             </section>
             <p style="width: 100%; text-align: center;">
@@ -135,10 +154,12 @@
             <h1>
                 Información Básica del Proyecto</h1>
             Nombre de Proyecto:
-            <input type="text" style="display: block;" runat="server" name="nombreproblema" id="nombreproblema"
-                value="" />
+            <input type="text" style="display: block; width: 80%;" runat="server" name="nombreproblema"
+                id="txtnombreproyecto" value="" />
             Problema Central
-            <textarea id="txtnombreproblema" style="display: block;"></textarea>
+            <textarea cols="20" rows="50" id="txtproblema" runat="server" style="display: block;
+                width: 80%;"></textarea>
+            <asp:Button Text="Almacenar Proyecto" ID="btnalmacenarproyecto" runat="server" OnClick="btnalmacenarproyecto_Click" />
         </div>
         <div>
             <h1 style="color: #005EA7; margin: 50px auto; width: 80%; text-align: center;">
@@ -503,5 +524,12 @@
             <h1>
                 REFERENCIAS BIBLIOGRAFICAS</h1>
         </div>
+    </div>
+    <input type="hidden" name="proyecto_id" value=" " id="ban_proyecto_id" runat="server" />
+    <div id="dialog_proyectos" style="dysplay: none;">
+        <asp:DropDownList ID="cmbproyectos" Style="width: 90%;" runat="server">
+        </asp:DropDownList>
+        <asp:Button Text="Cargar" runat="server" ID="btncargarproyecto" 
+            onclick="btncargarproyecto_Click" />
     </div>
 </asp:Content>

@@ -16,7 +16,6 @@ E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\Documen
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\Encrypt and decrypt.dll
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\DocumentFormat.OpenXml.xml
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\Encrypt and decrypt.pdb
-E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\ExcelPackage.pdb
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Debug\ResolveAssemblyReference.cache
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Debug\RdlCompile.cache
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Debug\RdlCompile.compiled
