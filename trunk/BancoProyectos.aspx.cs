@@ -13,11 +13,17 @@ namespace ESM
         #region Propiedades publicas y privadas
 
         protected Objetos.Cproyecto _objProyecto = new Objetos.Cproyecto();
-
+        int proyecto_id = 0;
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (ban_proyecto_id.Value != " ")
+            {
+                proyecto_id = Convert.ToInt32(ban_proyecto_id.Value);
+                ban_proyecto_id.Value = ban_proyecto_id.Value;
+            }
+
             if (!Page.IsPostBack)
             {
                 CargarColeccionProyectos();
@@ -81,6 +87,28 @@ namespace ESM
         {
             ActualziarProyecto(Convert.ToInt32(cmbproyectos.SelectedValue));
             Response.Write("$('#magazine').turn('next');");
+        }
+
+        protected void btncargar_proyecto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnalmacenarregistro_Click(object sender, EventArgs e)
+        {
+            Almacenar_Registro();
+        }
+
+        public void Almacenar_Registro()
+        {
+            try
+            {
+                Objetos.CRegistro_Proyectos _objCRegistro_Proyectos = new Objetos.CRegistro_Proyectos();
+
+                _objCRegistro_Proyectos.AddItem(txtcargo.Value, txtdependencia.Value, Convert.ToDateTime(txtfechaelaboracion.Value), txtjustificacion.Value, txtmpp1.Value, txtmpp2.Value, txtmpp3.Value, proyecto_id);
+
+            }
+            catch (Exception) { }
         }
 
     }

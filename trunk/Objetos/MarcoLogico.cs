@@ -1451,6 +1451,19 @@ namespace ESM.Objetos
 
         }
 
+        public IQueryable<Matriz_Actore> GetForProject(int proyecto_id)
+        {
+            try
+            {
+                var m_a = from ma in _db.Matriz_Actores
+                          where ma.proyecto_id == proyecto_id
+                          select ma;
+
+                return m_a;
+            }
+            catch (Exception) { return null; }
+        }
+
         public bool AddItem(string grupos, string interes, string problema_percibido, string recursos_mandatos, int proyecto_id)
         {
             try
@@ -1512,6 +1525,19 @@ namespace ESM.Objetos
 
         }
 
+        public IQueryable<Fuentes_Financiacion> GetFuentesFinanciacion(int proyecto_id)
+        {
+            try
+            {
+                var f_f = from ff in _db.Fuentes_Financiacions
+                          where ff.proyecto_id == proyecto_id
+                          select ff;
+
+                return f_f;
+            }
+            catch (Exception) { return null; }
+        }
+
         public bool AddItem(string entidad, string tipo_entidad, string tipo_recurso, int proyecto_id)
         {
             try
@@ -1541,7 +1567,7 @@ namespace ESM.Objetos
                                       select f_f).Single();
 
                 element_return.Entidad = entidad;
-                element_return.Tipo_Recurso = tipo_entidad;
+                element_return.Tipo_Entidad = tipo_entidad;
                 element_return.Tipo_Recurso = tipo_recurso;
 
                 _db.SubmitChanges();
@@ -1626,7 +1652,22 @@ namespace ESM.Objetos
             catch (Exception) { return false; }
         }
 
+    }
 
+    public class PropiedadesProyecto
+    {
+        public string Id { get; set; }
+        public string Nombre { get; set; }
+        public string Problema { get; set; }
+        public string Proposito { get; set; }
 
+    }
+
+    public class PropiedadesFuentesFinanciacion
+    {
+        public string id { get; set; }
+        public string tipoentidad { get; set; }
+        public string entidad { get; set; }
+        public string tiporecurso { get; set; }
     }
 }

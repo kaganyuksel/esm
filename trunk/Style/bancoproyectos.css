@@ -1,0 +1,52 @@
+﻿.ayuda_marco
+{
+    width: 95%;
+    height: 700px;
+    border: 3px solid #F7F7F7;
+    background: #F2F2F2;
+    top: 140px;
+    right: 5%;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    -moz-box-shadow: 0px 0px 3px #8b8b8b;
+    -webkit-box-shadow: 0px 0px 3px #8b8b8b;
+    box-shadow: 0px 0px 3px #8b8b8b; /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+    overflow-y: scroll;
+}
+.ayuda_marco p
+{
+    width: 100%;
+}
+#accordion
+{
+    text-align: justify;
+}
+#magazine
+{
+    width: 90%;
+    height: 1500px;
+    margin: 50px auto;
+}
+#magazine .turn-page
+{
+    width: 400px;
+    height: 400px;
+    background-color: #fff;
+}
+#page1
+{
+    border: 3px solid #D6D6D6;
+    padding: 5 5 5 5; /*background-image: url('/Icons/fondo_banco_proyectos.png');             background-repeat: no-repeat;             background-position: right;*/
+}
+#responsables
+{
+}
+#responsables li
+{
+    text-align: justify;
+}
+#responsables input[type="text"]
+{
+    right: 50%;
+}
