@@ -2,90 +2,9 @@
     CodeBehind="BancoProyectos.aspx.cs" Inherits="ESM.BancoProyectos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style type="text/css">
-        .ayuda_marco
-        {
-            width: 95%;
-            height: 700px;
-            border: 3px solid #F7F7F7;
-            background: #F2F2F2;
-            top: 140px;
-            right: 5%;
-            -moz-border-radius: 4px;
-            -webkit-border-radius: 4px;
-            border-radius: 4px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
-            -moz-box-shadow: 0px 0px 3px #8b8b8b;
-            -webkit-box-shadow: 0px 0px 3px #8b8b8b;
-            box-shadow: 0px 0px 3px #8b8b8b; /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
-            overflow-y: scroll;
-        }
-        .ayuda_marco p
-        {
-            width: 100%;
-        }
-        #accordion
-        {
-            text-align: justify;
-        }
-        #magazine
-        {
-            width: 90%;
-            height: 1500px;
-            margin: 50px auto;
-        }
-        #magazine .turn-page
-        {
-            width: 400px;
-            height: 400px;
-            background-color: #fff;
-        }
-        #page1
-        {
-            border: 3px solid #D6D6D6;
-            padding: 5 5 5 5; /*background-image: url('/Icons/fondo_banco_proyectos.png');
-            background-repeat: no-repeat;
-            background-position: right;*/
-        }
-        #responsables
-        {
-        }
-        #responsables li
-        {
-            text-align: justify;
-        }
-        #responsables input[type="text"]
-        {
-            right: 50%;
-        }
-    </style>
     <script type="text/javascript">
-
-        window.pages = ["portada", "proyecto", "registro", "introduccion", "identificacion_info", "identificacion", "diseño_info", "diseño", "ejecucion_info", "ejecucion"];
-
-        function getUrl() {
-            return window.location.href.split("#").shift();
-        }
-
-        function getHash() {
-            return window.location.hash.slice(1);
-        }
-
-        function checkHash(hash) {
-            var hash = getHash(), k;
-            if ((k = jQuery.inArray(hash, pages)) != -1) {
-                $('nav').children().each(
-                    function (index, value) {
-                        if ($(value).attr('href').indexOf(hash) != -1) $(value).addClass('on');
-                        else $(value).removeClass('on');
-                    });
-                return k + 1;
-            }
-            return 1;
-        }
-
-
-
         var j = jQuery.noConflict();
+
         j(document).ready(function () {
 
             $('#magazine').turn({ gradients: true, acceleration: true });
@@ -95,29 +14,74 @@
                 collapsible: true
             });
 
+            j("#ContentPlaceHolder1_txtfechaelaboracion").datepicker({ showAnim: "bounce" });
+
             j("#btnalmacenarproyecto").click(function () {
                 if (j("#ContentPlaceHolder1_txtnombreproyecto").val() == "" && j("#ContentPlaceHolder1_txtproblema").val() == "")
                     return false;
             });
+
+            $("#jqgrid_table").jqGrid({
+                url: 'ajaxBancoProyectos.aspx?modulo=fuentes_financiacion',
+                datatype: "json",
+                colNames: ['No.', 'Tipo Entidad', 'Entidad', 'Tipo Recurso'],
+                colModel: [
+   		                    { name: 'id', index: 'id', width: 55 },
+   		                    { name: 'tipoentidad', index: 'tipoentidad', width: 90, editable: true, edittype: "select", editoptions: { value: "Nacional:Nacional;Departamental:Departamental;Municipal:Municipal;Organismo Multilateral:Organismo Multilateral;Otro:Otro"} },
+   		                    { name: 'entidad', index: 'entidad', width: 100, editable: true },
+   		                    { name: 'tiporecurso', index: 'tiporecurso', width: 80, align: "right", editable: true }
+   	            ],
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                pager: '#jqgrid_div',
+                sortname: 'id',
+                mytype: "POST",
+                postData: { tabla: "f_f", proyecto_id: function () { return j("#ContentPlaceHolder1_ban_proyecto_id").val(); } },
+                viewrecords: true,
+                sortorder: "desc",
+                editurl: "ajaxBancoProyectos.aspx",
+                caption: "Fuentes de Financiación"
+            });
+            $("#jqgrid_table").jqGrid('navGrid', "#jqgrid_div", { edit: true, add: true, del: false });
+            $("#jqgrid_table").jqGrid('inlineNav', "#jqgrid_div");
+
+            $("#jqgrid_matriz_identificacion_t").jqGrid({
+                url: 'ajaxBancoProyectos.aspx?modulo=identificacion',
+                datatype: "json",
+                colNames: ['NO.', 'GRUPOS', 'INTERES', 'PROBLEMA RECIBIDO', 'RECURSOS Y MANDATOS'],
+                colModel: [
+   		                    { name: 'id', index: 'id', width: 55 },
+   		                    { name: 'grupos', index: 'grupos', width: 90, editable: true },
+   		                    { name: 'interes', index: 'interes', width: 100, editable: true },
+   		                    { name: 'problemarecibido', index: 'problemarecibido', width: 80, align: "right", editable: true },
+                            { name: 'recursosymandatos', index: 'recursosymandatos', width: 80, align: "right", editable: true }
+   	            ],
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                pager: '#jqgrid_matriz_identificacion_d',
+                sortname: 'id',
+                mytype: "POST",
+                postData: { tabla: "i", proyecto_id: function () { return j("#ContentPlaceHolder1_ban_proyecto_id").val(); } },
+                viewrecords: true,
+                sortorder: "desc",
+                editurl: "ajaxBancoProyectos.aspx",
+                caption: "Fuentes de Financiación"
+            });
+            $("#jqgrid_matriz_identificacion_t").jqGrid('navGrid', "#jqgrid_matriz_identificacion_d", { edit: true, add: true, del: false });
+            $("#jqgrid_matriz_identificacion_t").jqGrid('inlineNav', "#jqgrid_matriz_identificacion_d");
+
         });
 
-        function Actualizar() {
-            j("#dialog_proyectos").css("display", "block");
-            j("#dialog_proyectos").dialog({
-                open: true,
-                height: 300,
-                modal: true,
-                close: function () { j("#dialog_proyectos").css("display", "none"); }
-            });
-            return false;
 
-        }
 
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="Scripts/turn.js" type="text/javascript"></script>
+    <script src="Scripts/bancoproyectos.js" type="text/javascript"></script>
+    <link href="Style/bancoproyectos.css" rel="stylesheet" type="text/css" />
+    <link href="Style/jqgrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
     <div id='magazine'>
         <div id="page1">
             <img src="/Icons/ProsperidadTodosFooter.png" width="150px" style="position: absolute;
@@ -173,7 +137,7 @@
                             Dependencia:
                         </td>
                         <td>
-                            <input type="text" name="name" value=" " />
+                            <input type="text" id="txtdependencia" runat="server" name="name" value="" />
                         </td>
                     </tr>
                     <tr>
@@ -181,7 +145,7 @@
                             Responsable (Nombre y Apellido):
                         </td>
                         <td>
-                            <input type="text" name="name" value=" " />
+                            <input type="text" name="name" id="txtresponsable" runat="server" value=" " />
                         </td>
                     </tr>
                     <tr>
@@ -189,7 +153,7 @@
                             Cargo:
                         </td>
                         <td>
-                            <input type="text" name="name" value=" " />
+                            <input type="text" name="name" runat="server" id="txtcargo" value=" " />
                         </td>
                     </tr>
                     <tr>
@@ -197,7 +161,7 @@
                             Fecha Elaboración del proyecto:
                         </td>
                         <td>
-                            <input type="text" name="name" value=" " />
+                            <input type="text" name="name" id="txtfechaelaboracion" runat="server" value=" " />
                         </td>
                     </tr>
                 </table>
@@ -212,14 +176,14 @@
                     <li>Estrategia o programa del Plan Nacional de Desarrollo con la que se relaciona el
                         proyecto:
                         <br />
-                        <input type="text" style="width: 100%;" name="name" value=" " /></li>
+                        <input type="text" id="txtmpp1" runat="server" style="width: 100%;" name="name" value=" " /></li>
                     <li>Estrategia o programa del Plan Sectorial de Educación con la que se relaciona el
                         proyecto:
                         <br />
-                        <input type="text" style="width: 100%;" name="name" value=" " /></li>
+                        <input type="text" id="txtmpp2" runat="server" style="width: 100%;" name="name" value=" " /></li>
                     <li>Objetivo Misional de la Subdirección con el que se relaciona el proyecto:
                         <br />
-                        <input type="text" style="width: 100%;" name="name" value=" " /></li>
+                        <input type="text" id="txtmpp3" runat="server" style="width: 100%;" name="name" value=" " /></li>
                 </ul>
                 <br />
             </section>
@@ -228,13 +192,19 @@
                 font-size: 14px;">
                 <h1 style="color: #005EA7; margin: 50px auto; width: 80%; text-align: center;">
                     Justifique brevemente la necesidad del proyecto</h1>
-                <textarea style="width: 500px; height: 100px;"></textarea>
+                <textarea id="txtjustificacion" runat="server" style="width: 500px; height: 100px;"></textarea>
             </section>
             <br />
             <section style="margin: 0 auto; width: 90%; border: 1px solid #005EA7; text-align: center;
                 font-size: 14px;">
                 <h1 style="color: #005EA7; margin: 50px auto; width: 80%; text-align: center;">
                     Fuentes de Financiación</h1>
+                <br />
+                <table id="jqgrid_table">
+                </table>
+                <div id="jqgrid_div">
+                </div>
+                <br />
             </section>
             <br />
             <section style="margin: 0 auto; width: 90%; border: 1px solid #005EA7; text-align: center;
@@ -245,7 +215,8 @@
                     <asp:FileUpload ID="FileUpload1" runat="server" />
                 </p>
             </section>
-            <asp:Button ID="btnalmacenarregistro" Text="Almacenar información" runat="server" />
+            <asp:Button ID="btnalmacenarregistro" Text="Almacenar información" runat="server"
+                OnClick="btnalmacenarregistro_Click" />
         </div>
         <div>
             <div id="accordion">
@@ -412,6 +383,10 @@
                     </td>
                 </tr>
             </table>
+            <table id="jqgrid_matriz_identificacion_t">
+            </table>
+            <div id="jqgrid_matriz_identificacion_d">
+            </div>
         </div>
         <div>
             <h1>
@@ -529,7 +504,9 @@
     <div id="dialog_proyectos" style="dysplay: none;">
         <asp:DropDownList ID="cmbproyectos" Style="width: 90%;" runat="server">
         </asp:DropDownList>
-        <asp:Button Text="Cargar" runat="server" ID="btncargarproyecto" 
-            onclick="btncargarproyecto_Click" />
+        <a href="#" onclick="CargarProyecto($('#ContentPlaceHolder1_cmbproyectos option:selected').val(), 'true');">
+            Cargar</a>
     </div>
+    <script src="Scripts/jqgrid/grid.locale-es.js" type="text/javascript"></script>
+    <script src="/Scripts/jqgrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 </asp:Content>

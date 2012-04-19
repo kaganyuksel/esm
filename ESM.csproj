@@ -137,6 +137,13 @@
     <Compile Include="ajax.aspx.designer.cs">
       <DependentUpon>ajax.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ajaxBancoProyectos.aspx.cs">
+      <DependentUpon>ajaxBancoProyectos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ajaxBancoProyectos.aspx.designer.cs">
+      <DependentUpon>ajaxBancoProyectos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Alert.cs" />
     <Compile Include="amChartsnet\amchart.cs" />
     <Compile Include="AmCharts\flash\export.aspx.cs">
@@ -391,6 +398,7 @@
     <Content Include="ActaVisitaSistematizacionSE.aspx" />
     <Content Include="AddCita.aspx" />
     <Content Include="ajax.aspx" />
+    <Content Include="ajaxBancoProyectos.aspx" />
     <Content Include="AmCharts\flash\amcharts_key.txt" />
     <Content Include="AmCharts\flash\amcolumn.swf" />
     <Content Include="AmCharts\flash\amline.swf" />
@@ -648,6 +656,7 @@
     <Content Include="reportindicadores.aspx" />
     <Content Include="ReportMarcoLogico.aspx" />
     <Content Include="save_dates.aspx" />
+    <Content Include="Scripts\bancoproyectos.js" />
     <Content Include="Scripts\colorpicker.js" />
     <Content Include="Scripts\eye.js" />
     <Content Include="Scripts\freddy.js" />
@@ -657,6 +666,50 @@
     <Content Include="Scripts\full_calendar\fullcalendar.print.css" />
     <Content Include="Scripts\full_calendar\gcal.js" />
     <Content Include="Scripts\iColorPicker.js" />
+    <Content Include="Scripts\jqgrid\grid.locale-es.js" />
+    <Content Include="Scripts\jqgrid\js\Changes.txt" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ar.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-bg.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-bg1251.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-cat.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-cn.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-cs.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-da.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-de.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-el.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-en.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-es.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-fa.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-fi.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-fr.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-gl.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-he.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-hr.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-hr1250.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-hu.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-is.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-it.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ja.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-lt.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-mne.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-nl.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-no.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-pl.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-pt-br.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-pt.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ro.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ru.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-sk.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-sr-latin.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-sr.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-sv.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-th.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-tr.js" />
+    <Content Include="Scripts\jqgrid\js\i18n\grid.locale-ua.js" />
+    <Content Include="Scripts\jqgrid\js\install.txt" />
+    <Content Include="Scripts\jqgrid\js\jquery-1.7.2.min.js" />
+    <Content Include="Scripts\jqgrid\js\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\jqgrid\js\jquery.jqGrid.src.js" />
     <Content Include="Scripts\jquery-1.6.2.min.js" />
     <Content Include="Scripts\jquery-1.6.3-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.15.custom.min.js" />
@@ -687,6 +740,7 @@
       <DependentUpon>AyudaPreguntas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Security\SecuritySesion.cs" />
+    <Content Include="Style\bancoproyectos.css" />
     <Content Include="Style\images\blank.gif" />
     <Content Include="Style\images\colorpicker_background.png" />
     <Content Include="Style\images\colorpicker_hex.png" />
@@ -727,6 +781,8 @@
     <Content Include="Style\images\ui-icons_72a03b_256x240.png" />
     <Content Include="Style\images\ui-icons_ff0084_256x240.png" />
     <Content Include="Style\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Style\jqgrid\css\ellipsis-xbl.xml" />
+    <Content Include="Style\jqgrid\css\ui.jqgrid.css" />
     <Content Include="Style\jquery-ui-1.8.15.custom.css" />
     <Content Include="DynamicData\web.config" />
     <Content Include="DynamicData\Content\GridViewPager.ascx" />
