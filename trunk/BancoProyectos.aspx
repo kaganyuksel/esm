@@ -2,12 +2,26 @@
     CodeBehind="BancoProyectos.aspx.cs" Inherits="ESM.BancoProyectos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    
+    <link href="/Style/bancoproyectos.css" rel="stylesheet" type="text/css" />
+    <link href="Style/jquery.jOrgChart.css" rel="stylesheet" type="text/css" />
+    <link href="/Style/jqgrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+
+    <script src="/Scripts/bancoproyectos.js" type="text/javascript"></script>
+    <script src="/Scripts/turn.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.jOrgChart.js" type="text/javascript"></script>
+    
     <script type="text/javascript">
         var j = jQuery.noConflict();
 
         j(document).ready(function () {
 
-            $('#magazine').turn({ gradients: true, acceleration: true });
+            j("#org").jOrgChart({
+                chartElement: '#chart'
+            });
+
+            j('#magazine').turn({ gradients: true, acceleration: true });
 
             j('#accordion').accordion({ autoHeight: false,
                 navigation: true,
@@ -21,7 +35,7 @@
                     return false;
             });
 
-            $("#jqgrid_table").jqGrid({
+            j("#jqgrid_table").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=fuentes_financiacion',
                 datatype: "json",
                 colNames: ['No.', 'Tipo Entidad', 'Entidad', 'Tipo Recurso'],
@@ -42,10 +56,12 @@
                 editurl: "ajaxBancoProyectos.aspx",
                 caption: "Fuentes de Financiación"
             });
-            $("#jqgrid_table").jqGrid('navGrid', "#jqgrid_div", { edit: true, add: true, del: false });
-            $("#jqgrid_table").jqGrid('inlineNav', "#jqgrid_div");
+            j("#jqgrid_table").jqGrid('navGrid', "#jqgrid_div", { edit: true, add: true, del: false });
+            j("#jqgrid_table").jqGrid('inlineNav', "#jqgrid_div");
 
-            $("#jqgrid_matriz_identificacion_t").jqGrid({
+
+
+            j("#jqgrid_matriz_identificacion_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=identificacion',
                 datatype: "json",
                 colNames: ['NO.', 'GRUPOS', 'INTERES', 'PROBLEMA RECIBIDO', 'RECURSOS Y MANDATOS'],
@@ -67,21 +83,64 @@
                 editurl: "ajaxBancoProyectos.aspx",
                 caption: "Fuentes de Financiación"
             });
-            $("#jqgrid_matriz_identificacion_t").jqGrid('navGrid', "#jqgrid_matriz_identificacion_d", { edit: true, add: true, del: false });
-            $("#jqgrid_matriz_identificacion_t").jqGrid('inlineNav', "#jqgrid_matriz_identificacion_d");
+            j("#jqgrid_matriz_identificacion_t").jqGrid('navGrid', "#jqgrid_matriz_identificacion_d", { edit: true, add: true, del: false });
+            j("#jqgrid_matriz_identificacion_t").jqGrid('inlineNav', "#jqgrid_matriz_identificacion_d");
+
+            j("#jqgrid_c_e_t").jqGrid({
+                url: 'ajaxBancoProyectos.aspx?modulo=causas_efectos',
+                datatype: "json",
+                colNames: ['No.', 'Causa', 'Efecto', 'Beneficio'],
+                colModel: [
+   		                    { name: 'id', index: 'id', width: 55 },
+   		                    { name: 'causa', index: 'causa', width: 90, editable: true },
+   		                    { name: 'efecto', index: 'efecto', width: 100, editable: true },
+                            { name: 'beneficio', index: 'beneficio', width: 100, editable: true }
+   	            ],
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                pager: '#jqgrid_c_e_d',
+                sortname: 'id',
+                mytype: "POST",
+                postData: { tabla: "c_e", proyecto_id: function () { return j("#ContentPlaceHolder1_ban_proyecto_id").val(); } },
+                viewrecords: true,
+                sortorder: "desc",
+                editurl: "ajaxBancoProyectos.aspx",
+                caption: "Causas Efectos"
+            });
+            j("#jqgrid_c_e_t").jqGrid('navGrid', "#jqgrid_c_e_d", { edit: true, add: true, del: false });
+            j("#jqgrid_c_e_t").jqGrid('inlineNav', "#jqgrid_c_e_d");
 
         });
 
-
-
+        function causasefectos() {
+            j("#jqgrid_c_e_t").jqGrid({
+                url: 'ajaxBancoProyectos.aspx?modulo=causas_efectos',
+                datatype: "json",
+                colNames: ['No.', 'Causa', 'Efecto', 'Beneficio'],
+                colModel: [
+   		                    { name: 'id', index: 'id', width: 55 },
+   		                    { name: 'causa', index: 'causa', width: 90, editable: true },
+   		                    { name: 'efecto', index: 'efecto', width: 100, editable: true },
+                            { name: 'beneficio', index: 'beneficio', width: 100, editable: true }
+   	            ],
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                pager: '#jqgrid_c_e_d',
+                sortname: 'id',
+                mytype: "POST",
+                postData: { tabla: "c_e", proyecto_id: function () { return j("#ContentPlaceHolder1_ban_proyecto_id").val(); } },
+                viewrecords: true,
+                sortorder: "desc",
+                editurl: "ajaxBancoProyectos.aspx",
+                caption: "Causas Efectos"
+            });
+            j("#jqgrid_c_e_t").jqGrid('navGrid', "#jqgrid_c_e_d", { edit: true, add: true, del: false });
+            j("#jqgrid_c_e_t").jqGrid('inlineNav', "#jqgrid_c_e_d");
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script src="Scripts/turn.js" type="text/javascript"></script>
-    <script src="Scripts/bancoproyectos.js" type="text/javascript"></script>
-    <link href="Style/bancoproyectos.css" rel="stylesheet" type="text/css" />
-    <link href="Style/jqgrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>--%>
     <div id='magazine'>
         <div id="page1">
             <img src="/Icons/ProsperidadTodosFooter.png" width="150px" style="position: absolute;
@@ -482,10 +541,59 @@
                     alt="ayuda arbol problemas" /></a>
         </div>
         <div>
+            <table id="jqgrid_c_e_t">
+            </table>
+            <div id="jqgrid_c_e_d">
+            </div>
+        </div>
+        <div>
             <h1>
                 DISEÑO Y FORMULACIÓN</h1>
             <h1>
                 ARBOL DE PROBLEMAS</h1>
+            <br />
+            <br />
+            <ul id="org" style="display: none;">
+                <li>Proyectos
+                    <ul>
+                        <li id="beer">Causas</li>
+                        <li>Efectos <a href="http://wesnolte.com" target="_blank">Click me</a>
+                            <ul>
+                                <li>Pumpkin</li>
+                                <li><a href="http://tquila.com" target="_blank">Aubergine</a>
+                                    <p>
+                                        A link and paragraph is all we need.</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fruit">Beneficios
+                            <ul>
+                                <li>Apple
+                                    <ul>
+                                        <li>Granny Smith</li>
+                                    </ul>
+                                </li>
+                                <li>Berries
+                                    <ul>
+                                        <li>Blueberry</li>
+                                        <li></li>
+                                        <li>Cucumber</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Bread</li>
+                        <li>Chocolate
+                            <ul>
+                                <li>Topdeck</li>
+                                <li>Reese's Cups</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div id="chart" class="jOrgChart">
+            </div>
         </div>
         <div>
             <h1>
