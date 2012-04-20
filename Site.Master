@@ -7,7 +7,7 @@
     <title>SISTEMA DE VALORACIÓN DEL DESARROLLO DE COMPETENCIAS CIUDADANAS</title>
     <link href="Site.css" rel="stylesheet" type="text/css" />
     <link href="mastercustom.css" rel="stylesheet" type="text/css" />
-    <script src="/Scripts/jquery-1.6.3-vsdoc.js" type="text/javascript"></script>
+    <%--<script src="/Scripts/jquery-1.6.3-vsdoc.js" type="text/javascript"></script>--%>
     <link href="Style/jquery-ui-1.8.15.custom.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
     <script src="/Scripts/jquery-ui-1.8.15.custom.min.js" type="text/javascript"></script>
@@ -45,45 +45,45 @@
             });
         }
         $(document).ready(function () {
+            if (j == undefined) {
+                $(".numerico").change(function () {
 
-            $(".numerico").change(function () {
+                    if (isNaN($(this).val())) {
+                        $(this).val("0");
+                    }
 
-                if (isNaN($(this).val())) {
-                    $(this).val("0");
+                });
+
+
+                // Initially, hide them all
+                hideAllMessages();
+
+                //            $("#hora").html(new Date().getHours().toString());
+
+                // Show message
+                for (var i = 0; i < myMessages.length; i++) {
+                    showMessage(myMessages[i]);
                 }
 
-            });
+                // When message is clicked, hide it
+                $('.message').click(function () {
+                    $(this).animate({ bottom: -$(this).outerHeight() }, 500);
+                });
 
+                var alto = screen.height;
+                var contenido = alto - 130;
+                $("#content").css("min-height", contenido);
 
-            // Initially, hide them all
-            hideAllMessages();
+                $("input:text, input:password").attr("x-webkit-speech", "x-webkit-speech");
+                $("textarea").each(function () {
+                    var pixels = parseInt($(this).css("width")) - 30;
+                    $(this).css("width", pixels + "px");
+                    $(this).parent().append("<input type='text' x-webkit-speech = 'x-webkit-speech' style='width: 15px; background: transparent; border: 0;' onwebkitspeechchange=\"textarea_change($(this),'" + $(this).attr("id") + "');\"/>");
+                });
 
-            //            $("#hora").html(new Date().getHours().toString());
-
-            // Show message
-            for (var i = 0; i < myMessages.length; i++) {
-                showMessage(myMessages[i]);
+                $("#ContentPlaceHolder1_gvResultados_GridViewPager1_TextBoxPage").removeAttr("x-webkit-speech");
+                $("#ContentPlaceHolder1_gvResultados_GridViewPagergvresults_TextBoxPage").removeAttr("x-webkit-speech");
             }
-
-            // When message is clicked, hide it
-            $('.message').click(function () {
-                $(this).animate({ bottom: -$(this).outerHeight() }, 500);
-            });
-
-            var alto = screen.height;
-            var contenido = alto - 130;
-            $("#content").css("min-height", contenido);
-
-            $("input:text, input:password").attr("x-webkit-speech", "x-webkit-speech");
-            $("textarea").each(function () {
-                var pixels = parseInt($(this).css("width")) - 30;
-                $(this).css("width", pixels + "px");
-                $(this).parent().append("<input type='text' x-webkit-speech = 'x-webkit-speech' style='width: 15px; background: transparent; border: 0;' onwebkitspeechchange=\"textarea_change($(this),'" + $(this).attr("id") + "');\"/>");
-            });
-
-            $("#ContentPlaceHolder1_gvResultados_GridViewPager1_TextBoxPage").removeAttr("x-webkit-speech");
-            $("#ContentPlaceHolder1_gvResultados_GridViewPagergvresults_TextBoxPage").removeAttr("x-webkit-speech");
-
         });
         function textarea_change(valor, control) {
             if (!$(control).attr("readonly", true) || !$(control).attr("disabled", false)) {
@@ -203,7 +203,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body onload="if(j != undefined){causasefectos();}">
     <div id="subcuerpo" style="height: auto;">
         <form id="form1" runat="server">
         <header style="z-index: 10;">
@@ -254,33 +254,35 @@
                 </asp:ScriptManager>
                 <script type="text/javascript">
                     Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function (evt, args) {
-                        $("#accordionie").accordion();
-                        $("#accordionactor").accordion();
-                        $("#dialog:ui-dialog").dialog();
-                        $("#dialog-message").dialog();
-                        $("input:submit", ".demo").button();
-                        $(".checkclass").buttonset();
-                        $("a.pretty").prettyPhoto({
-                            callback: function () { //window.location.reload() 
-                            }, /* Called when prettyPhoto is closed */
-                            ie6_fallback: true,
-                            modal: true,
-                            social_tools: false
-                        });
-                        $("input:file", ".demo").button();
+                        if (j == undefined) {
+                            $("#accordionie").accordion();
+                            $("#accordionactor").accordion();
+                            $("#dialog:ui-dialog").dialog();
+                            $("#dialog-message").dialog();
+                            $("input:submit", ".demo").button();
+                            $(".checkclass").buttonset();
+                            $("a.pretty").prettyPhoto({
+                                callback: function () { //window.location.reload() 
+                                }, /* Called when prettyPhoto is closed */
+                                ie6_fallback: true,
+                                modal: true,
+                                social_tools: false
+                            });
+                            $("input:file", ".demo").button();
 
 
-                        $("#tabs").tabs().find(".ui-tabs-nav").sortable({ axis: "x" });
+                            $("#tabs").tabs().find(".ui-tabs-nav").sortable({ axis: "x" });
 
-                        $("#tabs").tabs({
-                            remote: true, cache: true,
-                            show: function (event, ui) {
-                                var sel = $('#tabs').tabs('option', 'selected');
-                                sel = sel + 1;
-                                $("#hidLastTab").val(sel);
-                            },
-                            selected: $("#hidLastTab").val()
-                        });
+                            $("#tabs").tabs({
+                                remote: true, cache: true,
+                                show: function (event, ui) {
+                                    var sel = $('#tabs').tabs('option', 'selected');
+                                    sel = sel + 1;
+                                    $("#hidLastTab").val(sel);
+                                },
+                                selected: $("#hidLastTab").val()
+                            });
+                        }
                     });
                 </script>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
