@@ -67,16 +67,16 @@ namespace ESM
             #region Insercion de Efecto
 
             int idproyecto = Convert.ToInt32(Session["idproyecto"]);
-            bool agroefecto = objCEfectos.Add(txtEfecto1.Text, txtCausa1.Text, idproyecto, mycolor.Value);
+            //bool agroefecto = objCEfectos.Add(txtEfecto1.Text, txtCausa1.Text, idproyecto, mycolor.Value);
 
-            if (agroefecto)
-                alerthq.Value = "1";
-            else
-                alerthq.Value = "0";
+            //if (agroefecto)
+            //    alerthq.Value = "1";
+            //else
+            //    alerthq.Value = "0";
 
-            gvEfectos.DataBind();
+            //gvEfectos.DataBind();
 
-            Load_Project();
+            //Load_Project();
             #endregion
 
         }

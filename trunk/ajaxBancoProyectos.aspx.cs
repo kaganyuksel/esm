@@ -19,6 +19,7 @@ namespace ESM
         Objetos.Cproyecto _objCproyecto = new Objetos.Cproyecto();
         CFuentes_Financiacion objCFuentes_Financiacion = new CFuentes_Financiacion();
         CMatriz_Actores objCMatriz = new CMatriz_Actores();
+        CEfectos objCCausas_Efecto = new CEfectos();
         int proyecto_id = 0;
 
         #endregion
@@ -50,10 +51,20 @@ namespace ESM
                             else if (operacion == "edit")
                                 EditarMatriz();
                         }
+                        else if (Request.QueryString["tabla"].ToString() == "c_e" && proyecto_id != 0)
+                        {
+                            string operacion = Session["operacion"] == null ? "" : Session["operacion"].ToString();
+                            if (operacion == "add")
+                                AgregarCausasEfectos();
+                            else if (operacion == "edit")
+                                EditarCausasEfectos();
+                        }
 
                         if (Request.QueryString["modulo"].ToString() == "fuentes_financiacion")
                             CargarFuentesFinanciacion();
                         else if (Request.QueryString["modulo"].ToString() == "identificacion")
+                            CargarIdentificacion();
+                        else if (Request.QueryString["modulo"].ToString() == "causas_efectos")
                             CargarIdentificacion();
 
                     }
@@ -82,6 +93,13 @@ namespace ESM
                         Session.Add("problemarecibido", Request.Form["problemarecibido"]);
                         Session.Add("recursosymandatos", Request.Form["recursosymandatos"]);
                         Session.Add("operacion", Request.Form["oper"]);
+                    }
+                    else if (Request.Form["causa"] != null)
+                    {
+                        Session.Add("c_e_id", Request.Form["id"]);
+                        Session.Add("causa", Request.Form["causa"]);
+                        Session.Add("efecto", Request.Form["efecto"]);
+                        Session.Add("beneficio", Request.Form["beneficio"]);
                     }
                 }
             }
@@ -152,6 +170,24 @@ namespace ESM
 
         }
 
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        protected void CargarCausasEfectos()
+        {
+            IQueryable<Causas_Efecto> causas_efectos_col = new CEfectos().getCausas_Efectos(proyecto_id);
+
+            string json_to_return = "{\"page\":\"1\",\"total\":1,\"records\":\"1\",\"rows\": [";
+
+            foreach (var item in causas_efectos_col)
+            {
+                json_to_return = json_to_return + "{\"id\":\"" + item.Id.ToString() + "\",\"cell\":[\"" + item.Id + "\",\"" + item.Causa + "\", \"" + item.Efecto + "\", \"" + item.Beneficios + "\"]} ,";
+            }
+            json_to_return = json_to_return.Trim(',');
+            json_to_return = json_to_return + "]}";
+
+            Response.Write(json_to_return);
+
+        }
+
         protected void AgregarMatrizActores()
         {
             string group = Session["grupos"].ToString();
@@ -182,6 +218,37 @@ namespace ESM
                 Session.Remove("operacion");
             }
         }
+
+        protected void AgregarCausasEfectos()
+        {
+            string causa = Session["causa"].ToString();
+            string efecto = Session["efecto"].ToString();
+            string beneficio = Session["beneficio"].ToString();
+
+            if (objCCausas_Efecto.Add(efecto, causa, beneficio, proyecto_id, "fff"))
+            {
+                Session.Remove("causa");
+                Session.Remove("efecto");
+                Session.Remove("beneficio");
+            }
+        }
+
+        protected void EditarCausasEfectos()
+        {
+            int c_e_id = Convert.ToInt32(Session["c_e_id"].ToString());
+            string causa = Session["causa"].ToString();
+            string efecto = Session["efecto"].ToString();
+            string beneficio = Session["beneficio"].ToString();
+
+            if (objCCausas_Efecto.Update(c_e_id, causa, efecto, beneficio))
+            {
+                Session.Remove("c_e_id");
+                Session.Remove("causa");
+                Session.Remove("efecto");
+                Session.Remove("beneficio");
+            }
+        }
+
         protected void EditarFuentesFinanciacion()
         {
             int ff_id = Convert.ToInt32(Session["f_f_id"].ToString());

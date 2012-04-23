@@ -75,9 +75,6 @@ namespace ESM.Model
     partial void InsertCausa(Causa instance);
     partial void UpdateCausa(Causa instance);
     partial void DeleteCausa(Causa instance);
-    partial void InsertCausas_Efecto(Causas_Efecto instance);
-    partial void UpdateCausas_Efecto(Causas_Efecto instance);
-    partial void DeleteCausas_Efecto(Causas_Efecto instance);
     partial void InsertCita(Cita instance);
     partial void UpdateCita(Cita instance);
     partial void DeleteCita(Cita instance);
@@ -240,6 +237,9 @@ namespace ESM.Model
     partial void InsertMatriz_Actore(Matriz_Actore instance);
     partial void UpdateMatriz_Actore(Matriz_Actore instance);
     partial void DeleteMatriz_Actore(Matriz_Actore instance);
+    partial void InsertCausas_Efecto(Causas_Efecto instance);
+    partial void UpdateCausas_Efecto(Causas_Efecto instance);
+    partial void DeleteCausas_Efecto(Causas_Efecto instance);
     #endregion
 		
 		public ESMBDDataContext() : 
@@ -405,14 +405,6 @@ namespace ESM.Model
 			get
 			{
 				return this.GetTable<Causa>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Causas_Efecto> Causas_Efectos
-		{
-			get
-			{
-				return this.GetTable<Causas_Efecto>();
 			}
 		}
 		
@@ -885,6 +877,14 @@ namespace ESM.Model
 			get
 			{
 				return this.GetTable<Matriz_Actore>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Causas_Efecto> Causas_Efectos
+		{
+			get
+			{
+				return this.GetTable<Causas_Efecto>();
 			}
 		}
 	}
@@ -4751,329 +4751,6 @@ namespace ESM.Model
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Causas_Efectos")]
-	public partial class Causas_Efecto : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _Proyecto_id;
-		
-		private string _Causa;
-		
-		private string _Efecto;
-		
-		private string _Proceso;
-		
-		private string _Proceso_Detalle;
-		
-		private string _Indicador_Resultado;
-		
-		private System.Nullable<int> _Presupuesto;
-		
-		private string _Color;
-		
-		private EntitySet<Subproceso> _Subprocesos;
-		
-		private EntityRef<Proyecto> _Proyecto;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnProyecto_idChanging(System.Nullable<int> value);
-    partial void OnProyecto_idChanged();
-    partial void OnCausaChanging(string value);
-    partial void OnCausaChanged();
-    partial void OnEfectoChanging(string value);
-    partial void OnEfectoChanged();
-    partial void OnProcesoChanging(string value);
-    partial void OnProcesoChanged();
-    partial void OnProceso_DetalleChanging(string value);
-    partial void OnProceso_DetalleChanged();
-    partial void OnIndicador_ResultadoChanging(string value);
-    partial void OnIndicador_ResultadoChanged();
-    partial void OnPresupuestoChanging(System.Nullable<int> value);
-    partial void OnPresupuestoChanged();
-    partial void OnColorChanging(string value);
-    partial void OnColorChanged();
-    #endregion
-		
-		public Causas_Efecto()
-		{
-			this._Subprocesos = new EntitySet<Subproceso>(new Action<Subproceso>(this.attach_Subprocesos), new Action<Subproceso>(this.detach_Subprocesos));
-			this._Proyecto = default(EntityRef<Proyecto>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proyecto_id", DbType="Int")]
-		public System.Nullable<int> Proyecto_id
-		{
-			get
-			{
-				return this._Proyecto_id;
-			}
-			set
-			{
-				if ((this._Proyecto_id != value))
-				{
-					if (this._Proyecto.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnProyecto_idChanging(value);
-					this.SendPropertyChanging();
-					this._Proyecto_id = value;
-					this.SendPropertyChanged("Proyecto_id");
-					this.OnProyecto_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Causa", DbType="NVarChar(2000)")]
-		public string Causa
-		{
-			get
-			{
-				return this._Causa;
-			}
-			set
-			{
-				if ((this._Causa != value))
-				{
-					this.OnCausaChanging(value);
-					this.SendPropertyChanging();
-					this._Causa = value;
-					this.SendPropertyChanged("Causa");
-					this.OnCausaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Efecto", DbType="NVarChar(2000)")]
-		public string Efecto
-		{
-			get
-			{
-				return this._Efecto;
-			}
-			set
-			{
-				if ((this._Efecto != value))
-				{
-					this.OnEfectoChanging(value);
-					this.SendPropertyChanging();
-					this._Efecto = value;
-					this.SendPropertyChanged("Efecto");
-					this.OnEfectoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proceso", DbType="NVarChar(2000)")]
-		public string Proceso
-		{
-			get
-			{
-				return this._Proceso;
-			}
-			set
-			{
-				if ((this._Proceso != value))
-				{
-					this.OnProcesoChanging(value);
-					this.SendPropertyChanging();
-					this._Proceso = value;
-					this.SendPropertyChanged("Proceso");
-					this.OnProcesoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proceso_Detalle", DbType="NVarChar(2000)")]
-		public string Proceso_Detalle
-		{
-			get
-			{
-				return this._Proceso_Detalle;
-			}
-			set
-			{
-				if ((this._Proceso_Detalle != value))
-				{
-					this.OnProceso_DetalleChanging(value);
-					this.SendPropertyChanging();
-					this._Proceso_Detalle = value;
-					this.SendPropertyChanged("Proceso_Detalle");
-					this.OnProceso_DetalleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador_Resultado", DbType="NVarChar(2000)")]
-		public string Indicador_Resultado
-		{
-			get
-			{
-				return this._Indicador_Resultado;
-			}
-			set
-			{
-				if ((this._Indicador_Resultado != value))
-				{
-					this.OnIndicador_ResultadoChanging(value);
-					this.SendPropertyChanging();
-					this._Indicador_Resultado = value;
-					this.SendPropertyChanged("Indicador_Resultado");
-					this.OnIndicador_ResultadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Presupuesto", DbType="Int")]
-		public System.Nullable<int> Presupuesto
-		{
-			get
-			{
-				return this._Presupuesto;
-			}
-			set
-			{
-				if ((this._Presupuesto != value))
-				{
-					this.OnPresupuestoChanging(value);
-					this.SendPropertyChanging();
-					this._Presupuesto = value;
-					this.SendPropertyChanged("Presupuesto");
-					this.OnPresupuestoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="VarChar(20)")]
-		public string Color
-		{
-			get
-			{
-				return this._Color;
-			}
-			set
-			{
-				if ((this._Color != value))
-				{
-					this.OnColorChanging(value);
-					this.SendPropertyChanging();
-					this._Color = value;
-					this.SendPropertyChanged("Color");
-					this.OnColorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Causas_Efecto_Subproceso", Storage="_Subprocesos", ThisKey="Id", OtherKey="Proceso_id")]
-		public EntitySet<Subproceso> Subprocesos
-		{
-			get
-			{
-				return this._Subprocesos;
-			}
-			set
-			{
-				this._Subprocesos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Causas_Efecto", Storage="_Proyecto", ThisKey="Proyecto_id", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Proyecto Proyecto
-		{
-			get
-			{
-				return this._Proyecto.Entity;
-			}
-			set
-			{
-				Proyecto previousValue = this._Proyecto.Entity;
-				if (((previousValue != value) 
-							|| (this._Proyecto.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Proyecto.Entity = null;
-						previousValue.Causas_Efectos.Remove(this);
-					}
-					this._Proyecto.Entity = value;
-					if ((value != null))
-					{
-						value.Causas_Efectos.Add(this);
-						this._Proyecto_id = value.Id;
-					}
-					else
-					{
-						this._Proyecto_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Proyecto");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Subprocesos(Subproceso entity)
-		{
-			this.SendPropertyChanging();
-			entity.Causas_Efecto = this;
-		}
-		
-		private void detach_Subprocesos(Subproceso entity)
-		{
-			this.SendPropertyChanging();
-			entity.Causas_Efecto = null;
 		}
 	}
 	
@@ -13799,8 +13476,6 @@ namespace ESM.Model
 		
 		private System.Nullable<decimal> _Presupuesto;
 		
-		private EntitySet<Causas_Efecto> _Causas_Efectos;
-		
 		private EntitySet<Proyectos_Medio> _Proyectos_Medios;
 		
 		private EntitySet<Proyectos_Supuesto> _Proyectos_Supuestos;
@@ -13810,6 +13485,8 @@ namespace ESM.Model
 		private EntitySet<Fuentes_Financiacion> _Fuentes_Financiacions;
 		
 		private EntitySet<Matriz_Actore> _Matriz_Actores;
+		
+		private EntitySet<Causas_Efecto> _Causas_Efectos;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -13835,12 +13512,12 @@ namespace ESM.Model
 		
 		public Proyecto()
 		{
-			this._Causas_Efectos = new EntitySet<Causas_Efecto>(new Action<Causas_Efecto>(this.attach_Causas_Efectos), new Action<Causas_Efecto>(this.detach_Causas_Efectos));
 			this._Proyectos_Medios = new EntitySet<Proyectos_Medio>(new Action<Proyectos_Medio>(this.attach_Proyectos_Medios), new Action<Proyectos_Medio>(this.detach_Proyectos_Medios));
 			this._Proyectos_Supuestos = new EntitySet<Proyectos_Supuesto>(new Action<Proyectos_Supuesto>(this.attach_Proyectos_Supuestos), new Action<Proyectos_Supuesto>(this.detach_Proyectos_Supuestos));
 			this._Registro_Proyectos = new EntitySet<Registro_Proyecto>(new Action<Registro_Proyecto>(this.attach_Registro_Proyectos), new Action<Registro_Proyecto>(this.detach_Registro_Proyectos));
 			this._Fuentes_Financiacions = new EntitySet<Fuentes_Financiacion>(new Action<Fuentes_Financiacion>(this.attach_Fuentes_Financiacions), new Action<Fuentes_Financiacion>(this.detach_Fuentes_Financiacions));
 			this._Matriz_Actores = new EntitySet<Matriz_Actore>(new Action<Matriz_Actore>(this.attach_Matriz_Actores), new Action<Matriz_Actore>(this.detach_Matriz_Actores));
+			this._Causas_Efectos = new EntitySet<Causas_Efecto>(new Action<Causas_Efecto>(this.attach_Causas_Efectos), new Action<Causas_Efecto>(this.detach_Causas_Efectos));
 			OnCreated();
 		}
 		
@@ -14004,19 +13681,6 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Causas_Efecto", Storage="_Causas_Efectos", ThisKey="Id", OtherKey="Proyecto_id")]
-		public EntitySet<Causas_Efecto> Causas_Efectos
-		{
-			get
-			{
-				return this._Causas_Efectos;
-			}
-			set
-			{
-				this._Causas_Efectos.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Proyectos_Medio", Storage="_Proyectos_Medios", ThisKey="Id", OtherKey="Proyecto_id")]
 		public EntitySet<Proyectos_Medio> Proyectos_Medios
 		{
@@ -14082,6 +13746,19 @@ namespace ESM.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Causas_Efecto", Storage="_Causas_Efectos", ThisKey="Id", OtherKey="Proyecto_id")]
+		public EntitySet<Causas_Efecto> Causas_Efectos
+		{
+			get
+			{
+				return this._Causas_Efectos;
+			}
+			set
+			{
+				this._Causas_Efectos.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -14100,18 +13777,6 @@ namespace ESM.Model
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Causas_Efectos(Causas_Efecto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Proyecto = this;
-		}
-		
-		private void detach_Causas_Efectos(Causas_Efecto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Proyecto = null;
 		}
 		
 		private void attach_Proyectos_Medios(Proyectos_Medio entity)
@@ -14169,6 +13834,18 @@ namespace ESM.Model
 		}
 		
 		private void detach_Matriz_Actores(Matriz_Actore entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = null;
+		}
+		
+		private void attach_Causas_Efectos(Causas_Efecto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = this;
+		}
+		
+		private void detach_Causas_Efectos(Causas_Efecto entity)
 		{
 			this.SendPropertyChanging();
 			entity.Proyecto = null;
@@ -21729,6 +21406,353 @@ namespace ESM.Model
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Causas_Efectos")]
+	public partial class Causas_Efecto : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Proyecto_id;
+		
+		private string _Causa;
+		
+		private string _Efecto;
+		
+		private string _Proceso;
+		
+		private string _Proceso_Detalle;
+		
+		private string _Indicador_Resultado;
+		
+		private System.Nullable<int> _Presupuesto;
+		
+		private string _Color;
+		
+		private string _Beneficios;
+		
+		private EntitySet<Subproceso> _Subprocesos;
+		
+		private EntityRef<Proyecto> _Proyecto;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnProyecto_idChanging(System.Nullable<int> value);
+    partial void OnProyecto_idChanged();
+    partial void OnCausaChanging(string value);
+    partial void OnCausaChanged();
+    partial void OnEfectoChanging(string value);
+    partial void OnEfectoChanged();
+    partial void OnProcesoChanging(string value);
+    partial void OnProcesoChanged();
+    partial void OnProceso_DetalleChanging(string value);
+    partial void OnProceso_DetalleChanged();
+    partial void OnIndicador_ResultadoChanging(string value);
+    partial void OnIndicador_ResultadoChanged();
+    partial void OnPresupuestoChanging(System.Nullable<int> value);
+    partial void OnPresupuestoChanged();
+    partial void OnColorChanging(string value);
+    partial void OnColorChanged();
+    partial void OnBeneficiosChanging(string value);
+    partial void OnBeneficiosChanged();
+    #endregion
+		
+		public Causas_Efecto()
+		{
+			this._Subprocesos = new EntitySet<Subproceso>(new Action<Subproceso>(this.attach_Subprocesos), new Action<Subproceso>(this.detach_Subprocesos));
+			this._Proyecto = default(EntityRef<Proyecto>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proyecto_id", DbType="Int")]
+		public System.Nullable<int> Proyecto_id
+		{
+			get
+			{
+				return this._Proyecto_id;
+			}
+			set
+			{
+				if ((this._Proyecto_id != value))
+				{
+					if (this._Proyecto.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProyecto_idChanging(value);
+					this.SendPropertyChanging();
+					this._Proyecto_id = value;
+					this.SendPropertyChanged("Proyecto_id");
+					this.OnProyecto_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Causa", DbType="NVarChar(2000)")]
+		public string Causa
+		{
+			get
+			{
+				return this._Causa;
+			}
+			set
+			{
+				if ((this._Causa != value))
+				{
+					this.OnCausaChanging(value);
+					this.SendPropertyChanging();
+					this._Causa = value;
+					this.SendPropertyChanged("Causa");
+					this.OnCausaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Efecto", DbType="NVarChar(2000)")]
+		public string Efecto
+		{
+			get
+			{
+				return this._Efecto;
+			}
+			set
+			{
+				if ((this._Efecto != value))
+				{
+					this.OnEfectoChanging(value);
+					this.SendPropertyChanging();
+					this._Efecto = value;
+					this.SendPropertyChanged("Efecto");
+					this.OnEfectoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proceso", DbType="NVarChar(2000)")]
+		public string Proceso
+		{
+			get
+			{
+				return this._Proceso;
+			}
+			set
+			{
+				if ((this._Proceso != value))
+				{
+					this.OnProcesoChanging(value);
+					this.SendPropertyChanging();
+					this._Proceso = value;
+					this.SendPropertyChanged("Proceso");
+					this.OnProcesoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Proceso_Detalle", DbType="NVarChar(2000)")]
+		public string Proceso_Detalle
+		{
+			get
+			{
+				return this._Proceso_Detalle;
+			}
+			set
+			{
+				if ((this._Proceso_Detalle != value))
+				{
+					this.OnProceso_DetalleChanging(value);
+					this.SendPropertyChanging();
+					this._Proceso_Detalle = value;
+					this.SendPropertyChanged("Proceso_Detalle");
+					this.OnProceso_DetalleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador_Resultado", DbType="NVarChar(2000)")]
+		public string Indicador_Resultado
+		{
+			get
+			{
+				return this._Indicador_Resultado;
+			}
+			set
+			{
+				if ((this._Indicador_Resultado != value))
+				{
+					this.OnIndicador_ResultadoChanging(value);
+					this.SendPropertyChanging();
+					this._Indicador_Resultado = value;
+					this.SendPropertyChanged("Indicador_Resultado");
+					this.OnIndicador_ResultadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Presupuesto", DbType="Int")]
+		public System.Nullable<int> Presupuesto
+		{
+			get
+			{
+				return this._Presupuesto;
+			}
+			set
+			{
+				if ((this._Presupuesto != value))
+				{
+					this.OnPresupuestoChanging(value);
+					this.SendPropertyChanging();
+					this._Presupuesto = value;
+					this.SendPropertyChanged("Presupuesto");
+					this.OnPresupuestoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="VarChar(20)")]
+		public string Color
+		{
+			get
+			{
+				return this._Color;
+			}
+			set
+			{
+				if ((this._Color != value))
+				{
+					this.OnColorChanging(value);
+					this.SendPropertyChanging();
+					this._Color = value;
+					this.SendPropertyChanged("Color");
+					this.OnColorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Beneficios", DbType="NVarChar(2000)")]
+		public string Beneficios
+		{
+			get
+			{
+				return this._Beneficios;
+			}
+			set
+			{
+				if ((this._Beneficios != value))
+				{
+					this.OnBeneficiosChanging(value);
+					this.SendPropertyChanging();
+					this._Beneficios = value;
+					this.SendPropertyChanged("Beneficios");
+					this.OnBeneficiosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Causas_Efecto_Subproceso", Storage="_Subprocesos", ThisKey="Id", OtherKey="Proceso_id")]
+		public EntitySet<Subproceso> Subprocesos
+		{
+			get
+			{
+				return this._Subprocesos;
+			}
+			set
+			{
+				this._Subprocesos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Causas_Efecto", Storage="_Proyecto", ThisKey="Proyecto_id", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
+		public Proyecto Proyecto
+		{
+			get
+			{
+				return this._Proyecto.Entity;
+			}
+			set
+			{
+				Proyecto previousValue = this._Proyecto.Entity;
+				if (((previousValue != value) 
+							|| (this._Proyecto.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Proyecto.Entity = null;
+						previousValue.Causas_Efectos.Remove(this);
+					}
+					this._Proyecto.Entity = value;
+					if ((value != null))
+					{
+						value.Causas_Efectos.Add(this);
+						this._Proyecto_id = value.Id;
+					}
+					else
+					{
+						this._Proyecto_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Proyecto");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Subprocesos(Subproceso entity)
+		{
+			this.SendPropertyChanging();
+			entity.Causas_Efecto = this;
+		}
+		
+		private void detach_Subprocesos(Subproceso entity)
+		{
+			this.SendPropertyChanging();
+			entity.Causas_Efecto = null;
 		}
 	}
 }

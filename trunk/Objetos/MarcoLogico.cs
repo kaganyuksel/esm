@@ -31,7 +31,7 @@ namespace ESM.Objetos
 
         }
 
-        public bool Add(string efecto, string causa, int idproyecto, string color)
+        public bool Add(string efecto, string causa, string beneficio, int idproyecto, string color)
         {
             try
             {
@@ -40,6 +40,7 @@ namespace ESM.Objetos
 
                     Efecto = efecto,
                     Causa = causa,
+                    Beneficios = beneficio,
                     Color = color,
                     Proyecto_id = idproyecto
 
@@ -52,7 +53,7 @@ namespace ESM.Objetos
             catch (Exception) { return false; }
         }
 
-        public bool Update(int id, string causa = null, string proceso = null, string indicador = null)
+        public bool Update(int id, string causa = null, string proceso = null, string beneficio = null, string indicador = null)
         {
             try
             {
@@ -65,6 +66,9 @@ namespace ESM.Objetos
 
                 if (proceso != null)
                     efecto.Proceso = proceso;
+
+                if (beneficio != null)
+                    efecto.Beneficios = beneficio;
 
                 if (indicador != null)
                     efecto.Indicador_Resultado = indicador;
@@ -164,6 +168,20 @@ namespace ESM.Objetos
                 return true;
             }
             catch (Exception) { return false; }
+
+        }
+
+        public IQueryable<Causas_Efecto> getCausas_Efectos(int proyecto_id)
+        {
+            try
+            {
+                var col_c_e = from c_e in _db.Causas_Efectos
+                              where c_e.Proyecto_id == proyecto_id
+                              select c_e;
+
+                return col_c_e;
+            }
+            catch (Exception) { return null; }
 
         }
 
