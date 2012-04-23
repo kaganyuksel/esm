@@ -3,15 +3,14 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    
     <link href="/Style/bancoproyectos.css" rel="stylesheet" type="text/css" />
     <link href="Style/jquery.jOrgChart.css" rel="stylesheet" type="text/css" />
     <link href="/Style/jqgrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
-
-    <script src="/Scripts/bancoproyectos.js" type="text/javascript"></script>
     <script src="/Scripts/turn.js" type="text/javascript"></script>
     <script src="/Scripts/jquery.jOrgChart.js" type="text/javascript"></script>
-    
+    <script src="Scripts/jqgrid/grid.locale-es.js" type="text/javascript"></script>
+    <script src="/Scripts/jqgrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+    <script src="/Scripts/bancoproyectos.js" type="text/javascript"></script>
     <script type="text/javascript">
         var j = jQuery.noConflict();
 
@@ -22,18 +21,6 @@
             });
 
             j('#magazine').turn({ gradients: true, acceleration: true });
-
-            j('#accordion').accordion({ autoHeight: false,
-                navigation: true,
-                collapsible: true
-            });
-
-            j("#ContentPlaceHolder1_txtfechaelaboracion").datepicker({ showAnim: "bounce" });
-
-            j("#btnalmacenarproyecto").click(function () {
-                if (j("#ContentPlaceHolder1_txtnombreproyecto").val() == "" && j("#ContentPlaceHolder1_txtproblema").val() == "")
-                    return false;
-            });
 
             j("#jqgrid_table").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=fuentes_financiacion',
@@ -86,8 +73,10 @@
             j("#jqgrid_matriz_identificacion_t").jqGrid('navGrid', "#jqgrid_matriz_identificacion_d", { edit: true, add: true, del: false });
             j("#jqgrid_matriz_identificacion_t").jqGrid('inlineNav', "#jqgrid_matriz_identificacion_d");
 
-            j("#jqgrid_c_e_t").jqGrid({
-                url: 'ajaxBancoProyectos.aspx?modulo=causas_efectos',
+
+
+            j("#jqgrid_objetivos_t").jqGrid({
+                url: 'ajaxBancoProyectos.aspx?modulo=objetivos',
                 datatype: "json",
                 colNames: ['No.', 'Causa', 'Efecto', 'Beneficio'],
                 colModel: [
@@ -98,49 +87,36 @@
    	            ],
                 rowNum: 10,
                 rowList: [10, 20, 30],
-                pager: '#jqgrid_c_e_d',
+                pager: '#jqgrid_objetivos_d',
                 sortname: 'id',
-                mytype: "POST",
-                postData: { tabla: "c_e", proyecto_id: function () { return j("#ContentPlaceHolder1_ban_proyecto_id").val(); } },
+                //                mytype: "POST",
+                postData: { tabla: "objetivos", proyecto_id: function () { return j("#ContentPlaceHolder1_ban_proyecto_id").val(); } },
                 viewrecords: true,
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
-                caption: "Causas Efectos"
+                caption: "Arbol Objetivos"
             });
-            j("#jqgrid_c_e_t").jqGrid('navGrid', "#jqgrid_c_e_d", { edit: true, add: true, del: false });
-            j("#jqgrid_c_e_t").jqGrid('inlineNav', "#jqgrid_c_e_d");
+            j("#jqgrid_objetivos_t").jqGrid('navGrid', "#jqgrid_objetivos_d", { edit: true, add: true, del: false });
+            j("#jqgrid_objetivos_t").jqGrid('inlineNav', "#jqgrid_objetivos_d");
+
+            j('#accordion').accordion({ autoHeight: false,
+                navigation: true,
+                collapsible: true
+            });
+
+            j("#ContentPlaceHolder1_txtfechaelaboracion").datepicker({ showAnim: "bounce" });
+
+            j("#btnalmacenarproyecto").click(function () {
+                if (j("#ContentPlaceHolder1_txtnombreproyecto").val() == "" && j("#ContentPlaceHolder1_txtproblema").val() == "")
+                    return false;
+            });
 
         });
 
-        function causasefectos() {
-            j("#jqgrid_c_e_t").jqGrid({
-                url: 'ajaxBancoProyectos.aspx?modulo=causas_efectos',
-                datatype: "json",
-                colNames: ['No.', 'Causa', 'Efecto', 'Beneficio'],
-                colModel: [
-   		                    { name: 'id', index: 'id', width: 55 },
-   		                    { name: 'causa', index: 'causa', width: 90, editable: true },
-   		                    { name: 'efecto', index: 'efecto', width: 100, editable: true },
-                            { name: 'beneficio', index: 'beneficio', width: 100, editable: true }
-   	            ],
-                rowNum: 10,
-                rowList: [10, 20, 30],
-                pager: '#jqgrid_c_e_d',
-                sortname: 'id',
-                mytype: "POST",
-                postData: { tabla: "c_e", proyecto_id: function () { return j("#ContentPlaceHolder1_ban_proyecto_id").val(); } },
-                viewrecords: true,
-                sortorder: "desc",
-                editurl: "ajaxBancoProyectos.aspx",
-                caption: "Causas Efectos"
-            });
-            j("#jqgrid_c_e_t").jqGrid('navGrid', "#jqgrid_c_e_d", { edit: true, add: true, del: false });
-            j("#jqgrid_c_e_t").jqGrid('inlineNav', "#jqgrid_c_e_d");
-        }
+        
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>--%>
     <div id='magazine'>
         <div id="page1">
             <img src="/Icons/ProsperidadTodosFooter.png" width="150px" style="position: absolute;
@@ -164,7 +140,7 @@
                     Bienvenidos al Banco de Proyectos de la Subdirección de Fomento y Competencias</h1>
             </hgroup>
             <section style="margin: 0 auto; width: 60%; border: 1px solid #005EA7; text-align: center;">
-                <a href="#" onclick="$('#magazine').turn('next');">Nuevo Proyecto</a>
+                <a href="#" onclick="j('#magazine').turn('next');">Nuevo Proyecto</a>
                 <br />
                 <a id="btnActualizar" href="#" onclick="Actualizar();">Actualizar Proyecto</a>
                 </button>
@@ -475,9 +451,13 @@
                 </tr>
             </table>
             <!-- Hasta n registros de la tabla actores_participantes -->
+            <table id="jqgrid_objetivos_t">
+            </table>
+            <div id="jqgrid_objetivos_d">
+            </div>
         </div>
         <div>
-            <h1>
+            <!--<h1>
                 DISEÑO Y FORMULACIÓN</h1>
             <p>
                 Identificación del problema o necesidad:<br />
@@ -515,11 +495,13 @@
                 <li>Entregue a cada uno de ellos un paquete de tarjetas y solicite que escriban en ellas
                     los problemas de su comunidad, entidad y organización solicite guardar especial
                     cuidado de:</li>
-                <ul>
-                    <li>Formular el problema como una situación negativa.</li>
-                    <li>Utilizar una oración corta con palabras que sean, claras, simples y concretas.</li>
-                    <li>Identificar únicamente los problemas existentes. Descarte los posibles o potenciales.</li>
-                </ul>
+                <li>
+                    <ul>
+                        <li>Formular el problema como una situación negativa.</li>
+                        <li>Utilizar una oración corta con palabras que sean, claras, simples y concretas.</li>
+                        <li>Identificar únicamente los problemas existentes. Descarte los posibles o potenciales.</li>
+                    </ul>
+                </li>
                 <li>¿Cómo elaborar el árbol?: </li>
             </ul>
             <p>
@@ -537,14 +519,8 @@
             utilizar la matriz de vester)
             <br />
             <a href="/Icons/arbol_problemas_ayuda.png" target="_blank">
-                <img src="/Icons/arbol_problemas_ayuda.png" style="left: 50px; clear: both;" width="50%"
-                    alt="ayuda arbol problemas" /></a>
-        </div>
-        <div>
-            <table id="jqgrid_c_e_t">
-            </table>
-            <div id="jqgrid_c_e_d">
-            </div>
+            <img src="/Icons/arbol_problemas_ayuda.png" style="left: 50px; clear: both;" width="50%"
+                alt="ayuda arbol problemas" /></a>-->
         </div>
         <div>
             <h1>
@@ -553,7 +529,8 @@
                 ARBOL DE PROBLEMAS</h1>
             <br />
             <br />
-            <ul id="org" style="display: none;">
+            <iframe id="if_c_e" width="100%" height="500px"></iframe>
+            <%--<ul id="org" style="display: none;">
                 <li>Proyectos
                     <ul>
                         <li id="beer">Causas</li>
@@ -593,7 +570,7 @@
                 </li>
             </ul>
             <div id="chart" class="jOrgChart">
-            </div>
+            </div>--%>
         </div>
         <div>
             <h1>
@@ -607,14 +584,16 @@
             <h1>
                 REFERENCIAS BIBLIOGRAFICAS</h1>
         </div>
+        <div>
+        </div>
     </div>
     <input type="hidden" name="proyecto_id" value=" " id="ban_proyecto_id" runat="server" />
     <div id="dialog_proyectos" style="dysplay: none;">
         <asp:DropDownList ID="cmbproyectos" Style="width: 90%;" runat="server">
         </asp:DropDownList>
-        <a href="#" onclick="CargarProyecto($('#ContentPlaceHolder1_cmbproyectos option:selected').val(), 'true');">
+        <a href="#" onclick="CargarProyecto(j('#ContentPlaceHolder1_cmbproyectos option:selected').val(), 'true');">
             Cargar</a>
     </div>
-    <script src="Scripts/jqgrid/grid.locale-es.js" type="text/javascript"></script>
-    <script src="/Scripts/jqgrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+    <%--<script src="Scripts/jqgrid/grid.locale-es.js" type="text/javascript"></script>
+    <script src="/Scripts/jqgrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>--%>
 </asp:Content>
