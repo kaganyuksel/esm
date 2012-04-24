@@ -65,14 +65,20 @@ namespace ESM
                         else if (Request.QueryString["modulo"].ToString() == "identificacion")
                             CargarIdentificacion();
                         else if (Request.QueryString["modulo"].ToString() == "causas_efectos")
-                            CargarIdentificacion();
+                            CargarCausasEfectos();
 
                     }
-
-                    if (Request.QueryString["actualizarproyecto"] != null && Convert.ToBoolean(Request.QueryString["actualizarproyecto"]))
+                    else if (Request.QueryString["actualizarproyecto"] != null && Convert.ToBoolean(Request.QueryString["actualizarproyecto"]))
                     {
-                        proyecto_id = Convert.ToInt32(Request.QueryString["proyecto_id"]);
                         ActualziarProyecto(proyecto_id);
+                    }
+                    else if (Request.QueryString["actualizararbolproblemas"] != null && Convert.ToBoolean(Request.QueryString["actualizararbolproblemas"]))
+                    {
+                        UpdateHTMLArbolProblemas();
+                    }
+                    else if (Request.QueryString["actualizararbolobjetivos"] != null && Convert.ToBoolean(Request.QueryString["actualizararbolobjetivos"]))
+                    {
+                        UpdateHTMLArbolObjetivos();
                     }
                 }
                 else
@@ -100,9 +106,64 @@ namespace ESM
                         Session.Add("causa", Request.Form["causa"]);
                         Session.Add("efecto", Request.Form["efecto"]);
                         Session.Add("beneficio", Request.Form["beneficio"]);
+                        Session.Add("operacion", Request.Form["oper"]);
                     }
                 }
             }
+        }
+
+        protected void UpdateHTMLArbolProblemas()
+        {
+            try
+            {
+                var features_project = _objCproyecto.GetProyecto(proyecto_id);
+                var coleccion_causas_efectos = objCCausas_Efecto.getCausas_Efectos(proyecto_id);
+
+                string html = "<li>" + features_project.Problema + "<ul>";
+                string causas_html = "<li>Causas<ul>";
+                string efectos_html = "<li>Efectos<ul>";
+
+                foreach (var item in coleccion_causas_efectos)
+                {
+                    causas_html = causas_html + "<li>" + item.Causa + "</li>";
+                    efectos_html = efectos_html + "<li>" + item.Efecto + "</li>";
+                }
+                causas_html = causas_html + "</ul></li>";
+                efectos_html = efectos_html + "</ul></li>";
+
+                html = html + causas_html + efectos_html + "</ul></li>";
+
+                Response.Write(html);
+            }
+            catch (Exception) { Response.Write("null"); }
+
+        }
+
+        protected void UpdateHTMLArbolObjetivos()
+        {
+            try
+            {
+                var features_project = _objCproyecto.GetProyecto(proyecto_id);
+                var coleccion_causas_efectos = objCCausas_Efecto.getCausas_Efectos(proyecto_id);
+
+                string html = "<li>" + features_project.Problema + "<ul>";
+                string beneficios_html = "<li>Beneficios<ul>";
+                string objetivos_html = "<li>Objetivos<ul>";
+
+                foreach (var item in coleccion_causas_efectos)
+                {
+                    beneficios_html = beneficios_html + "<li>" + item.Beneficios + "</li>";
+                    objetivos_html = objetivos_html + "<li>" + item.Causa + "</li>";
+                }
+                beneficios_html = beneficios_html + "</ul></li>";
+                objetivos_html = objetivos_html + "</ul></li>";
+
+                html = html + beneficios_html + objetivos_html + "</ul></li>";
+
+                Response.Write(html);
+            }
+            catch (Exception) { Response.Write("null"); }
+
         }
 
         protected void ActualziarProyecto(int proyecto_id)
@@ -230,6 +291,7 @@ namespace ESM
                 Session.Remove("causa");
                 Session.Remove("efecto");
                 Session.Remove("beneficio");
+                Session.Remove("operacion");
             }
         }
 
@@ -246,6 +308,7 @@ namespace ESM
                 Session.Remove("causa");
                 Session.Remove("efecto");
                 Session.Remove("beneficio");
+                Session.Remove("operacion");
             }
         }
 

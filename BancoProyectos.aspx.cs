@@ -111,5 +111,10 @@ namespace ESM
             catch (Exception) { }
         }
 
+        protected void btncargar_Click(object sender, EventArgs e)
+        {
+            ban_proyecto_id.Value = cmbproyectos.SelectedValue;
+            if_c_e.Attributes.Add("src", "/jqgrid_causas_efectos.aspx?proyecto_id=" + ban_proyecto_id.Value);
+        }
     }
 }
