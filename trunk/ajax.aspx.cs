@@ -204,7 +204,7 @@ namespace ESM
 
                 CSubprocesos objCSubprocesos = new CSubprocesos();
 
-                objCSubprocesos.Update(subprocesoid, subproceso);
+                //objCSubprocesos.Update(subprocesoid, subproceso);
 
                 Response.Write("ok");
             }
@@ -260,7 +260,7 @@ namespace ESM
 
                 CSubprocesos objCSubprocesos = new CSubprocesos();
 
-                objCSubprocesos.Add(idProceso, subproceso);
+                //objCSubprocesos.Add(idProceso, subproceso);
 
                 IQueryable<Model.Subproceso> objSubprocesos = objCSubprocesos.LoadSubprocesos(idProceso);
                 StringBuilder objsb = new StringBuilder();

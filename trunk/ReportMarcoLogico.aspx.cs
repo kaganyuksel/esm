@@ -305,7 +305,7 @@ namespace ESM
                         //Realizo un preconteo de la cantidad de estrategias asignadas al subproceso actual
                         foreach (var item_contador in col_estrategias)
                         {
-                            rowspan_subproceso = rowspan_subproceso + item_contador.Actividades.Count();
+                            //rowspan_subproceso = rowspan_subproceso + item_contador.Count();
                         }
 
                         if (col_estrategias.Count() != 0)

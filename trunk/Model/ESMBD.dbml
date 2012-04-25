@@ -684,8 +684,6 @@
       <Column Name="Indicador" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
       <Association Name="Resultados_Proyecto_Resultados_Medio" Member="Resultados_Medios" ThisKey="Id" OtherKey="Resultado_id" Type="Resultados_Medio" />
       <Association Name="Resultados_Proyecto_Resultados_Supuesto" Member="Resultados_Supuestos" ThisKey="Id" OtherKey="Resultado_id" Type="Resultados_Supuesto" />
-      <Association Name="Resultados_Proyecto_Actividade" Member="Actividades" ThisKey="Id" OtherKey="Resultado_id" Type="Actividade" />
-      <Association Name="Subproceso_Resultados_Proyecto" Member="Subproceso" ThisKey="Subproceso_id" OtherKey="Id" Type="Subproceso" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Resultados_Supuestos" Member="Resultados_Supuestos">
@@ -769,18 +767,6 @@
       <Association Name="Secretaria_Educacion_SistematizacionSE" Member="Secretaria_Educacion" ThisKey="IdSE" OtherKey="IdSecretaria" Type="Secretaria_Educacion" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Subprocesos" Member="Subprocesos">
-    <Type Name="Subproceso">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Proceso_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Subproceso" Member="Subproceso1" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
-      <Column Name="Indicador" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
-      <Association Name="Subproceso_Resultados_Proyecto" Member="Resultados_Proyectos" ThisKey="Id" OtherKey="Subproceso_id" Type="Resultados_Proyecto" />
-      <Association Name="Subproceso_Subprocesos_Medios_Verificacion" Member="Subprocesos_Medios_Verificacions" ThisKey="Id" OtherKey="Subproceso_id" Type="Subprocesos_Medios_Verificacion" />
-      <Association Name="Subproceso_Subprocesos_Supuesto" Member="Subprocesos_Supuestos" ThisKey="Id" OtherKey="Subproceso_id" Type="Subprocesos_Supuesto" />
-      <Association Name="Causas_Efecto_Subproceso" Member="Causas_Efecto" ThisKey="Proceso_id" OtherKey="Id" Type="Causas_Efecto" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Subprocesos_Medios_Verificacion" Member="Subprocesos_Medios_Verificacions">
     <Type Name="Subprocesos_Medios_Verificacion">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -795,8 +781,8 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Subproceso_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Supuestos_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Subproceso_Subprocesos_Supuesto" Member="Subproceso" ThisKey="Subproceso_id" OtherKey="Id" Type="Subproceso" IsForeignKey="true" />
       <Association Name="Supuesto_Subprocesos_Supuesto" Member="Supuesto" ThisKey="Supuestos_id" OtherKey="Id" Type="Supuesto" IsForeignKey="true" />
+      <Association Name="Subproceso_Subprocesos_Supuesto" Member="Subproceso" ThisKey="Subproceso_id" OtherKey="Id" Type="Subproceso" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Supuestos" Member="Supuestos">
@@ -929,22 +915,6 @@
       <Association Name="Actividade_actividades_presupuesto" Member="Actividade" ThisKey="actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Actividades" Member="Actividades">
-    <Type Name="Actividade">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Resultado_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Actividad" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
-      <Column Name="Presupuesto" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Association Name="Actividade_Actividades_Medio" Member="Actividades_Medios" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Medio" />
-      <Association Name="Actividade_Actividades_Responsable" Member="Actividades_Responsables" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Responsable" />
-      <Association Name="Actividade_Actividades_Supuesto" Member="Actividades_Supuestos" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Supuesto" />
-      <Association Name="Actividade_Responsables_Resultado" Member="Responsables_Resultados" ThisKey="Id" OtherKey="Actividad_id" Type="Responsables_Resultado" />
-      <Association Name="Actividade_Indicadore" Member="Indicadores" ThisKey="Id" OtherKey="Actividad_id" Type="Indicadore" />
-      <Association Name="Actividade_actividades_presupuesto" Member="actividades_presupuestos" ThisKey="Id" OtherKey="actividad_id" Type="actividades_presupuesto" />
-      <Association Name="Resultados_Proyecto_Actividade" Member="Resultados_Proyecto" ThisKey="Resultado_id" OtherKey="Id" Type="Resultados_Proyecto" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Registro_Proyectos" Member="Registro_Proyectos">
     <Type Name="Registro_Proyecto">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -994,6 +964,36 @@
       <Column Name="Beneficios" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
       <Association Name="Causas_Efecto_Subproceso" Member="Subprocesos" ThisKey="Id" OtherKey="Proceso_id" Type="Subproceso" />
       <Association Name="Proyecto_Causas_Efecto" Member="Proyecto" ThisKey="Proyecto_id" OtherKey="Id" Type="Proyecto" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Subprocesos" Member="Subprocesos">
+    <Type Name="Subproceso">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Proceso_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Subproceso" Member="Subproceso1" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Indicador" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Medios" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Supuestos" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Subproceso_Subprocesos_Medios_Verificacion" Member="Subprocesos_Medios_Verificacions" ThisKey="Id" OtherKey="Subproceso_id" Type="Subprocesos_Medios_Verificacion" />
+      <Association Name="Subproceso_Subprocesos_Supuesto" Member="Subprocesos_Supuestos" ThisKey="Id" OtherKey="Subproceso_id" Type="Subprocesos_Supuesto" />
+      <Association Name="Subproceso_Actividade" Member="Actividades" ThisKey="Id" OtherKey="Subproceso_id" Type="Actividade" />
+      <Association Name="Causas_Efecto_Subproceso" Member="Causas_Efecto" ThisKey="Proceso_id" OtherKey="Id" Type="Causas_Efecto" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Actividades" Member="Actividades">
+    <Type Name="Actividade">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Subproceso_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Actividad" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Presupuesto" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Actividade_Actividades_Medio" Member="Actividades_Medios" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Medio" />
+      <Association Name="Actividade_Actividades_Responsable" Member="Actividades_Responsables" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Responsable" />
+      <Association Name="Actividade_Actividades_Supuesto" Member="Actividades_Supuestos" ThisKey="Id" OtherKey="Actividad_id" Type="Actividades_Supuesto" />
+      <Association Name="Actividade_Responsables_Resultado" Member="Responsables_Resultados" ThisKey="Id" OtherKey="Actividad_id" Type="Responsables_Resultado" />
+      <Association Name="Actividade_Indicadore" Member="Indicadores" ThisKey="Id" OtherKey="Actividad_id" Type="Indicadore" />
+      <Association Name="Actividade_actividades_presupuesto" Member="actividades_presupuestos" ThisKey="Id" OtherKey="actividad_id" Type="actividades_presupuesto" />
+      <Association Name="Subproceso_Actividade" Member="Subproceso" ThisKey="Subproceso_id" OtherKey="Id" Type="Subproceso" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

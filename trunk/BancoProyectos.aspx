@@ -622,7 +622,7 @@
             <div id="jqgrid_objetivos_d">
             </div>
             <ul id="org_objetivos" style="display: none;">
-                <li>Proyectos
+                <%--<li>Proyectos
                     <ul>
                         <li id="Li1">Causas</li>
                         <li>Efectos <a href="http://wesnolte.com" target="_blank">Click me</a>
@@ -658,7 +658,7 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li>--%>
             </ul>
             <div id="chart_objetivos" class="jOrgChart">
             </div>
@@ -666,6 +666,7 @@
         <div>
             <h1>
                 EVALUACIÓN (POSTERIOR)</h1>
+            <iframe id="if_marco_logico" runat="server" width="100%" height="800px"></iframe>
         </div>
         <div>
             <h1>

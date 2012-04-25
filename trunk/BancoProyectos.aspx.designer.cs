@@ -166,6 +166,15 @@ namespace ESM {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl if_c_e;
         
         /// <summary>
+        /// if_marco_logico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl if_marco_logico;
+        
+        /// <summary>
         /// ban_proyecto_id control.
         /// </summary>
         /// <remarks>
