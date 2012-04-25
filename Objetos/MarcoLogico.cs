@@ -835,7 +835,7 @@ namespace ESM.Objetos
 
                     foreach (var item_indicadores in indicadores_vencidos)
                     {
-                        caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Resultados_Proyecto.Subproceso.Causas_Efecto.Proyecto.Problema;
+                        //caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Resultados_Proyecto.Subproceso.Causas_Efecto.Proyecto.Problema;
                         caracteristicas_indicador[indicador_actual, 1] = item_indicadores.Actividade.Actividad;
                         caracteristicas_indicador[indicador_actual, 2] = item_indicadores.Indicador;
                         caracteristicas_indicador[indicador_actual, 3] = item_indicadores.Fecha_Creacion;
@@ -873,7 +873,7 @@ namespace ESM.Objetos
 
                     foreach (var item_indicadores in indicadores_vencidos)
                     {
-                        caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Resultados_Proyecto.Subproceso.Causas_Efecto.Proyecto.Problema;
+                        //caracteristicas_indicador[indicador_actual, 0] = item_indicadores.Actividade.Resultados_Proyecto.Subproceso.Causas_Efecto.Proyecto.Problema;
                         caracteristicas_indicador[indicador_actual, 1] = item_indicadores.Actividade.Actividad;
                         caracteristicas_indicador[indicador_actual, 2] = item_indicadores.Indicador;
                         caracteristicas_indicador[indicador_actual, 3] = item_indicadores.Fecha_Creacion;
@@ -891,13 +891,13 @@ namespace ESM.Objetos
         }
 
 
-        public int Add(int idresultado, string actividad, float presupuesto, string Fecha = "")
+        public bool Add(int idresultado, string actividad, float presupuesto, string Fecha = "")
         {
             try
             {
                 Actividade objActividade = new Actividade
                 {
-                    Resultado_id = idresultado,
+                    Subproceso_id = idresultado,
                     Actividad = actividad,
                     Presupuesto = presupuesto,
                     fecha = Fecha == "" ? DateTime.Now : Convert.ToDateTime(Fecha)
@@ -906,9 +906,9 @@ namespace ESM.Objetos
                 _db.Actividades.InsertOnSubmit(objActividade);
                 _db.SubmitChanges();
 
-                return objActividade.Id;
+                return true;
             }
-            catch (Exception) { return 0; }
+            catch (Exception) { return false; }
 
         }
 
@@ -1121,12 +1121,25 @@ namespace ESM.Objetos
 
         }
 
-        public IQueryable<Actividade> getActividades(int resultado_id)
+        public IQueryable<Actividade> getActividadesProyecto(int resultado_id)
         {
             try
             {
                 var actividades_consulta = from a in new ESM.Model.ESMBDDataContext().Actividades
-                                           where a.Resultado_id == resultado_id
+                                           where a.Subproceso.Causas_Efecto.Proyecto_id == resultado_id
+                                           select a;
+
+                return actividades_consulta;
+            }
+            catch (Exception) { return null; }
+
+        }
+        public IQueryable<Actividade> getActividades(int proyecto_id)
+        {
+            try
+            {
+                var actividades_consulta = from a in new ESM.Model.ESMBDDataContext().Actividades
+                                           where a.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id
                                            select a;
 
                 return actividades_consulta;
@@ -1144,7 +1157,7 @@ namespace ESM.Objetos
 
         #endregion
 
-        public int Add(int idproceso, string subproceso, string indicador = null)
+        public bool Add(int idproceso, string subproceso, string indicador, string medios, string supuestos)
         {
             try
             {
@@ -1152,19 +1165,22 @@ namespace ESM.Objetos
                 {
                     Proceso_id = idproceso,
                     Subproceso1 = subproceso,
-                    Indicador = indicador
+                    Indicador = indicador,
+                    Supuestos = supuestos,
+                    Medios = medios
                 };
 
                 _db.Subprocesos.InsertOnSubmit(objSubproceso);
                 _db.SubmitChanges();
 
-                return objSubproceso.Id;
+                //return objSubproceso.Id;
+                return true;
             }
-            catch (Exception) { return 0; }
+            catch (Exception) { return false; }
 
         }
 
-        public bool Update(int subprocesoid, string subproceso = null, string indicador = null)
+        public bool Update(int subprocesoid, string subproceso, string indicador, string medios, string supuestos)
         {
             try
             {
@@ -1178,6 +1194,8 @@ namespace ESM.Objetos
                 if (indicador != null)
                     subproceso_consulta.Indicador = indicador;
 
+                subproceso_consulta.Medios = medios;
+                subproceso_consulta.Supuestos = supuestos;
 
                 _db.SubmitChanges();
 
@@ -1288,6 +1306,20 @@ namespace ESM.Objetos
                                 select p).Distinct();
 
                 return procesos;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable<Subproceso> getSubprocesos(int proyecto_id)
+        {
+            try
+            {
+                var subprocesos = (from p in _db.Subprocesos
+                                   where p.Causas_Efecto.Proyecto_id == proyecto_id
+                                   select p).Distinct();
+
+                return subprocesos;
             }
             catch (Exception) { return null; }
 

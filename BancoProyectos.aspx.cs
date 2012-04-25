@@ -115,6 +115,7 @@ namespace ESM
         {
             ban_proyecto_id.Value = cmbproyectos.SelectedValue;
             if_c_e.Attributes.Add("src", "/jqgrid_causas_efectos.aspx?proyecto_id=" + ban_proyecto_id.Value);
+            if_marco_logico.Attributes.Add("src", "/jqgrid_marco_logico.aspx?proyecto_id=" + ban_proyecto_id.Value);
         }
     }
 }

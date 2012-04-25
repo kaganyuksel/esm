@@ -199,6 +199,13 @@
     <Compile Include="Consolidado.aspx.designer.cs">
       <DependentUpon>Consolidado.aspx</DependentUpon>
     </Compile>
+    <Compile Include="jqgrid_marco_logico.aspx.cs">
+      <DependentUpon>jqgrid_marco_logico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="jqgrid_marco_logico.aspx.designer.cs">
+      <DependentUpon>jqgrid_marco_logico.aspx</DependentUpon>
+    </Compile>
     <Compile Include="jqgrid_causas_efectos.aspx.cs">
       <DependentUpon>jqgrid_causas_efectos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -435,6 +442,7 @@
     <Content Include="Cita.aspx" />
     <Content Include="Citas.aspx" />
     <Content Include="Consolidado.aspx" />
+    <Content Include="jqgrid_marco_logico.aspx" />
     <Content Include="Icons\cicloproyecto.png" />
     <Content Include="Icons\fondo_banco_proyectos.png" />
     <Content Include="jqgrid_causas_efectos.aspx" />
