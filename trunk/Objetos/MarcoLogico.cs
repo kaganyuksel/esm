@@ -1648,7 +1648,7 @@ namespace ESM.Objetos
 
         }
 
-        public bool AddItem(string cargo, string dependencia, DateTime fecha, string justificacion, string mpp_1, string mpp_2, string mpp_3, int proyecto_id)
+        public bool AddItem(string cargo, string dependencia, DateTime fecha, string justificacion, string mpp_1, string mpp_2, string mpp_3, int proyecto_id, string responsable)
         {
             try
             {
@@ -1658,6 +1658,7 @@ namespace ESM.Objetos
                     Cargo = cargo,
                     Dependencia = dependencia,
                     Fecha = fecha,
+                    responsable = responsable,
                     //Justificación
                     Justificacion = justificacion,
                     //Marco de Política Publica
@@ -1676,7 +1677,7 @@ namespace ESM.Objetos
             catch (Exception) { return false; }
         }
 
-        public bool UpdateItem(int registro_id, string cargo, string dependencia, DateTime fecha, string justificacion, string mpp_1, string mpp_2, string mpp_3)
+        public bool UpdateItem(int registro_id, string cargo, string dependencia, DateTime fecha, string justificacion, string mpp_1, string mpp_2, string mpp_3, string responsable)
         {
             try
             {
@@ -1688,6 +1689,7 @@ namespace ESM.Objetos
                 element_return.Cargo = cargo;
                 element_return.Dependencia = dependencia;
                 element_return.Fecha = fecha;
+                element_return.responsable = responsable;
                 //Justificación
                 element_return.Justificacion = justificacion;
                 //Marco Política Publica

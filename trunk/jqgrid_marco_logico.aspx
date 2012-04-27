@@ -82,7 +82,7 @@
                             { name: 'verbo', index: 'verbo', width: 90, editable: true, edittype: "select", editoptions: { value: j("#ban_options_verbos").val()} },
                             { name: 'meta', index: 'meta', width: 90, editable: true },
                             { name: 'unidad', index: 'unidad', width: 90, editable: true, edittype: "select", editoptions: { value: j("#ban_options_unidades").val()} },
-                            { name: 'ssp', index: 'ssp', width: 90, editable: true },
+                            { name: 'ssp', index: 'ssp', width: 90, editable: true, edittype: "checkbox" },
                             { name: 'fechainicial', index: 'fechainicial', width: 90, editable: true },
                             { name: 'fechafinal', index: 'fechafinal', width: 90, editable: true },
                             { name: 'indicador', index: 'indicador', width: 90, editable: false },
@@ -108,6 +108,7 @@
             });
             j("#jqgrid_m_t").jqGrid('navGrid', "#jqgrid_m_l_d", { edit: true, add: true, del: false });
             j("#jqgrid_m_t").jqGrid('inlineNav', "#jqgrid_m_l_d");
+
         });
     </script>
 </head>
