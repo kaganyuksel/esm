@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+Ôªø<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="BancoProyectos.aspx.cs" Inherits="ESM.BancoProyectos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -6,19 +6,27 @@
     <link href="/Style/bancoproyectos.css" rel="stylesheet" type="text/css" />
     <link href="Style/jquery.jOrgChart.css" rel="stylesheet" type="text/css" />
     <link href="/Style/jqgrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+    <link href="fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/turn.js" type="text/javascript"></script>
     <script src="/Scripts/jquery.jOrgChart.js" type="text/javascript"></script>
     <script src="Scripts/jqgrid/grid.locale-es.js" type="text/javascript"></script>
     <script src="/Scripts/jqgrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
     <script src="/Scripts/bancoproyectos.js" type="text/javascript"></script>
+    <script src="fancybox/jquery.fancybox-1.3.4.js" type="text/javascript"></script>
+    <script src="fancybox/jquery.easing-1.3.pack.js" type="text/javascript"></script>
+    <%--<script src="fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>--%>
+    <%--<script src="fancybox/jquery.mousewheel-3.0.4.pack.js" type="text/javascript"></script>--%>
     <script type="text/javascript">
         var j = jQuery.noConflict();
 
         j(document).ready(function () {
 
+            j(".iframe").fancybox();
+
             j("#org").jOrgChart({
                 chartElement: '#chart'
             });
+
             j("#org_objetivos").jOrgChart({
                 chartElement: '#chart_objetivos'
             });
@@ -30,9 +38,9 @@
                 colNames: ['No.', 'Tipo Entidad', 'Entidad', 'Tipo Recurso'],
                 colModel: [
    		                    { name: 'id', index: 'id', width: 55 },
-   		                    { name: 'tipoentidad', index: 'tipoentidad', width: 90, editable: true, edittype: "select", editoptions: { value: "Nacional:Nacional;Departamental:Departamental;Municipal:Municipal;Organismo Multilateral:Organismo Multilateral;Otro:Otro"} },
-   		                    { name: 'entidad', index: 'entidad', width: 100, editable: true },
-   		                    { name: 'tiporecurso', index: 'tiporecurso', width: 80, align: "right", editable: true }
+   		                    { name: 'tipoentidad', index: 'tipoentidad', width: 100, editable: true, edittype: "select", editoptions: { value: "Nacional:Nacional;Departamental:Departamental;Municipal:Municipal;Organismo Multilateral:Organismo Multilateral;Otro:Otro"} },
+   		                    { name: 'entidad', index: 'entidad', width: 200, editable: true },
+   		                    { name: 'tiporecurso', index: 'tiporecurso', width: 200, align: "right", editable: true }
    	            ],
                 rowNum: 10,
                 rowList: [10, 20, 30],
@@ -43,7 +51,8 @@
                 viewrecords: true,
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
-                caption: "Fuentes de FinanciaciÛn"
+                caption: "Fuentes de Financiaci√≥n",
+                autowidth: true
             });
             j("#jqgrid_table").jqGrid('navGrid', "#jqgrid_div", { edit: true, add: true, del: false });
             j("#jqgrid_table").jqGrid('inlineNav', "#jqgrid_div");
@@ -56,10 +65,10 @@
                 colNames: ['NO.', 'GRUPOS', 'INTERES', 'PROBLEMA RECIBIDO', 'RECURSOS Y MANDATOS'],
                 colModel: [
    		                    { name: 'id', index: 'id', width: 55 },
-   		                    { name: 'grupos', index: 'grupos', width: 90, editable: true },
-   		                    { name: 'interes', index: 'interes', width: 100, editable: true },
-   		                    { name: 'problemarecibido', index: 'problemarecibido', width: 80, align: "right", editable: true },
-                            { name: 'recursosymandatos', index: 'recursosymandatos', width: 80, align: "right", editable: true }
+   		                    { name: 'grupos', index: 'grupos', width: 120, editable: true },
+   		                    { name: 'interes', index: 'interes', width: 120, editable: true },
+   		                    { name: 'problemarecibido', index: 'problemarecibido', width: 120, align: "right", editable: true },
+                            { name: 'recursosymandatos', index: 'recursosymandatos', width: 120, align: "right", editable: true }
    	            ],
                 rowNum: 10,
                 rowList: [10, 20, 30],
@@ -70,7 +79,7 @@
                 viewrecords: true,
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
-                caption: "Fuentes de FinanciaciÛn"
+                caption: "Fuentes de Financiaci√≥n"
             });
             j("#jqgrid_matriz_identificacion_t").jqGrid('navGrid', "#jqgrid_matriz_identificacion_d", { edit: true, add: true, del: false });
             j("#jqgrid_matriz_identificacion_t").jqGrid('inlineNav', "#jqgrid_matriz_identificacion_d");
@@ -164,29 +173,31 @@
                 margin-top: 50px;" alt="Alternate Text" />
             <hgroup style="text-align: center; font-weight: bold; margin-top: 100px;">
                 <h4>
-                    REP⁄BLICA DE COLOMBIA</h4>
+                    REP√öBLICA DE COLOMBIA</h4>
                 <h4>
-                    MINISTERIO DE EDUCACI”N NACIONAL</h4>
+                    MINISTERIO DE EDUCACI√ìN NACIONAL</h4>
                 <h5 style="margin-top: 30px;">
-                    Vice ministerio de educaciÛn preescolar b·sica y media</h5>
+                    Vice ministerio de educaci√≥n preescolar b√°sica y media</h5>
                 <h5>
-                    DirecciÛn de calidad para la educaciÛn preescolar, b·sica y media</h5>
+                    Direcci√≥n de calidad para la educaci√≥n preescolar, b√°sica y media</h5>
                 <h5>
-                    SubdirecciÛn fomento de competencias</h5>
+                    Subdirecci√≥n fomento de competencias</h5>
                 <h5>
                     Programa de competencias ciudadanas</h5>
                 <h1 style="color: #005EA7; margin: 50px auto; width: 80%; text-align: center;">
-                    Bienvenidos al Banco de Proyectos de la SubdirecciÛn de Fomento y Competencias</h1>
+                    Bienvenidos al Banco de Proyectos de la Subdirecci√≥n de Fomento y Competencias</h1>
             </hgroup>
             <section style="margin: 0 auto; width: 60%; border: 1px solid #005EA7; text-align: center;">
                 <a href="#" onclick="j('#magazine').turn('next');">Nuevo Proyecto</a>
                 <br />
                 <asp:DropDownList ID="cmbproyectos" Style="width: 90%;" runat="server">
                 </asp:DropDownList>
-        <a href="#" onclick="CargarProyecto(j('#ContentPlaceHolder1_cmbproyectos option:selected').val(), 'true'); j('ContentPlaceHolder1_btncargar').trigger('click');">
-            Cargar</a>
-            <asp:Button Text="Cargar" ID="btncargar" OnClick="btncargar_Click" runat="server" />
-                <a id="btnActualizar" href="#" onclick="Actualizar();">Actualizar Proyecto</a>
+        <%--<a href="#" style="display: none;" onclick="CargarProyecto(j('#ContentPlaceHolder1_cmbproyectos option:selected').val(), 'true'); j('ContentPlaceHolder1_btncargar').trigger('click');">--%>
+           <%-- Cargar</a>--%>
+            <asp:Button Text="Actualizar Proyecto" ID="btncargar" Width="70%" OnClick="btncargar_Click"
+                runat="server" />
+                <%--<a id="btnActualizar" style="display: none;" href="#" onclick="Actualizar();">Actualizar
+                    Proyecto</a>--%>
                 </button>
                 <asp:Button ID="btnExportarProyecto" Width="70%" Text="Exportar Proyecto" runat="server" />
             </section>
@@ -195,145 +206,134 @@
         </div>
         <div id="basicaproyecto">
             <h1>
-                InformaciÛn B·sica del Proyecto</h1>
-            Nombre de Proyecto:
+                INFORMACI√ìN BASICA DEL PROYECTO</h1>
+            <br />
+            <a id="if_google" class="iframe" href="/bancoproyectos.aspx">This goes to iframe</a>
+            * Nombre de Proyecto:
             <input type="text" style="display: block; width: 80%;" runat="server" name="nombreproblema"
                 id="txtnombreproyecto" value="" />
+            <br />
             Problema Central
             <textarea cols="20" rows="50" id="txtproblema" runat="server" style="display: block;
-                width: 80%;"></textarea>
+                width: 80%; height: 100px;"></textarea>
             <asp:Button Text="Almacenar Proyecto" ID="btnalmacenarproyecto" runat="server" OnClick="btnalmacenarproyecto_Click" />
-        </div>
-        <div>
-            <h1 style="color: #005EA7; margin: 50px auto; width: 80%; text-align: center;">
-                REGISTRO DE PROYECTO</h1>
-            <section style="margin: 0 auto; width: 90%; border: 1px solid #005EA7;">
-                <h1 style="color: #005EA7; margin: 50px auto; width: 80%; text-align: center;">
-                    Responsable Funcional</h1>
-                <table border="0" cellpadding="0" cellspacing="0" style="width: 80%; margin: 0 auto;">
-                    <tr>
-                        <td>
-                            Dependencia:
-                        </td>
-                        <td>
-                            <input type="text" id="txtdependencia" runat="server" name="name" value="" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Responsable (Nombre y Apellido):
-                        </td>
-                        <td>
-                            <input type="text" name="name" id="txtresponsable" runat="server" value=" " />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Cargo:
-                        </td>
-                        <td>
-                            <input type="text" name="name" runat="server" id="txtcargo" value=" " />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Fecha ElaboraciÛn del proyecto:
-                        </td>
-                        <td>
-                            <input type="text" name="name" id="txtfechaelaboracion" runat="server" value=" " />
-                        </td>
-                    </tr>
-                </table>
-                <br />
-            </section>
+            <h3 style="color: #005EA7; width: 80%;">
+                Registro de Proyecto</h3>
             <br />
-            <section style="margin: 0 auto; width: 90%; border: 1px solid #005EA7; text-align: justify;
-                font-size: 14px;">
-                <h1 style="color: #005EA7; margin: 50px auto; width: 80%; text-align: center;">
-                    Marco de PolÌtica Publica</h1>
-                <ul id="" style="list-style: none; width: 80%; margin: 0 auto;">
-                    <li>Estrategia o programa del Plan Nacional de Desarrollo con la que se relaciona el
-                        proyecto:
-                        <br />
-                        <input type="text" id="txtmpp1" runat="server" style="width: 100%;" name="name" value=" " /></li>
-                    <li>Estrategia o programa del Plan Sectorial de EducaciÛn con la que se relaciona el
-                        proyecto:
-                        <br />
-                        <input type="text" id="txtmpp2" runat="server" style="width: 100%;" name="name" value=" " /></li>
-                    <li>Objetivo Misional de la SubdirecciÛn con el que se relaciona el proyecto:
-                        <br />
-                        <input type="text" id="txtmpp3" runat="server" style="width: 100%;" name="name" value=" " /></li>
-                </ul>
-                <br />
-            </section>
+            *Responsable Funcional:
+            <table border="0" cellpadding="0" cellspacing="0" style="width: 80%; margin: 0 auto;">
+                <tr>
+                    <td>
+                        Dependencia:
+                    </td>
+                    <td>
+                        <input type="text" id="txtdependencia" runat="server" name="name" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Responsable (Nombre y Apellido):
+                    </td>
+                    <td>
+                        <input type="text" name="name" id="txtresponsable" runat="server" value=" " />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Cargo:
+                    </td>
+                    <td>
+                        <input type="text" name="name" runat="server" id="txtcargo" value=" " />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Fecha Elaboraci√≥n del proyecto:
+                    </td>
+                    <td>
+                        <input type="text" name="name" id="txtfechaelaboracion" runat="server" value=" " />
+                    </td>
+                </tr>
+            </table>
             <br />
-            <section style="margin: 0 auto; width: 90%; border: 1px solid #005EA7; text-align: center;
-                font-size: 14px;">
-                <h1 style="color: #005EA7; margin: 50px auto; width: 80%; text-align: center;">
-                    Justifique brevemente la necesidad del proyecto</h1>
-                <textarea id="txtjustificacion" runat="server" style="width: 500px; height: 100px;"></textarea>
-            </section>
+            <h3>
+                * Marco de Pol√≠tica Publica:</h3>
             <br />
-            <section style="margin: 0 auto; width: 90%; border: 1px solid #005EA7; text-align: center;
-                font-size: 14px;">
-                <h1 style="color: #005EA7; margin: 50px auto; width: 80%; text-align: center;">
-                    Fuentes de FinanciaciÛn</h1>
-                <br />
-                <table id="jqgrid_table">
-                </table>
-                <div id="jqgrid_div">
-                </div>
-                <br />
-            </section>
+            <ul id="" style="list-style: none; width: 80%; margin: 0 auto;">
+                <li>Estrategia o programa del Plan Nacional de Desarrollo con la que se relaciona el
+                    proyecto:
+                    <br />
+                    <input type="text" id="txtmpp1" runat="server" style="width: 100%;" name="name" value=" " /></li>
+                <li>Estrategia o programa del Plan Sectorial de Educaci√≥n con la que se relaciona el
+                    proyecto:
+                    <br />
+                    <input type="text" id="txtmpp2" runat="server" style="width: 100%;" name="name" value=" " /></li>
+                <li>Objetivo Misional de la Subdirecci√≥n con el que se relaciona el proyecto:
+                    <br />
+                    <input type="text" id="txtmpp3" runat="server" style="width: 100%;" name="name" value=" " /></li>
+            </ul>
             <br />
-            <section style="margin: 0 auto; width: 90%; border: 1px solid #005EA7; text-align: center;
-                font-size: 14px;">
-                <h1 style="color: #005EA7; margin: 50px auto; width: 80%; text-align: center;">
-                    InformaciÛn de Referencia (Anexos)</h1>
-                <p style="color: #005EA7; margin: 50px auto; width: 80%; text-align: center;">
-                    <asp:FileUpload ID="FileUpload1" runat="server" />
-                </p>
-            </section>
-            <asp:Button ID="btnalmacenarregistro" Text="Almacenar informaciÛn" runat="server"
+            *Justifique brevemente la necesidad del proyecto:
+            <br />
+            <ul style="list-style: none; width: 80%; margin: 0 auto;">
+                <li>
+                    <textarea id="txtjustificacion" runat="server" style="width: 500px; height: 100px;"></textarea>
+                </li>
+            </ul>
+            <br />
+            <h3 style="color: #005EA7; width: 80%;">
+                * Fuentes de Financiaci√≥n</h3>
+            <br />
+            <table id="jqgrid_table" style="width: 100%;">
+            </table>
+            <div id="jqgrid_div" style="width: 100%;">
+            </div>
+            <br />
+            * Informaci√≥n de Referencia (Anexos)
+            <br />
+            <div>
+                <input type="text" name="txtfile" value="txtfile" /><asp:FileUpload ID="FileUpload1"
+                    runat="server" /></div>
+            <asp:Button ID="btnalmacenarregistro" Text="Almacenar informaci√≥n" runat="server"
                 OnClick="btnalmacenarregistro_Click" />
         </div>
         <div>
             <div id="accordion">
                 <h3>
-                    <a href="#">IntroducciÛn</a></h3>
+                    <a href="#">Introducci√≥n</a></h3>
                 <div>
-                    El proyecto es la unidad operacional de la planeaciÛn del desarrollo que vincula
-                    recursos, actividades y productos durante un periodo determinado y con una ubicaciÛn
-                    definida para la resoluciÛn de problemas o necesidades sentidas de la poblaciÛn.
-                    Un proyecto supone la b˙squeda de una alternativa viable al planteamiento de un
-                    objetivo que est· concebido para resolver un problema o necesidad y que para ello
-                    requiere la producciÛn de bienes o servicios, de tal suerte que, una vez tomada
-                    la decisiÛn de llevar a cabo un proyecto, sea necesaria la realizaciÛn de una serie
-                    de actividades previstas que conllevar·n al logro de los objetivos propuestos para
+                    El proyecto es la unidad operacional de la planeaci√≥n del desarrollo que vincula
+                    recursos, actividades y productos durante un periodo determinado y con una ubicaci√≥n
+                    definida para la resoluci√≥n de problemas o necesidades sentidas de la poblaci√≥n.
+                    Un proyecto supone la b√∫squeda de una alternativa viable al planteamiento de un
+                    objetivo que est√° concebido para resolver un problema o necesidad y que para ello
+                    requiere la producci√≥n de bienes o servicios, de tal suerte que, una vez tomada
+                    la decisi√≥n de llevar a cabo un proyecto, sea necesaria la realizaci√≥n de una serie
+                    de actividades previstas que conllevar√°n al logro de los objetivos propuestos para
                     el proyecto (www.dnp.gov.co) Para tal efecto y de conformidad con los ejercicios
                     adelantados previamente con los grupos de trabajo del Programa de Competencias del
-                    Ministerio de EducaciÛn Nacional se describen los pasos adelantados para el cumplimento
-                    de los objetivos del programa asÌ como de cada una de sus lÌneas de acciÛn.
+                    Ministerio de Educaci√≥n Nacional se describen los pasos adelantados para el cumplimento
+                    de los objetivos del programa as√≠ como de cada una de sus l√≠neas de acci√≥n.
                     <br />
                     <br />
                     <ol>
-                        <li>IDENTIFICACI”N </li>
-                        <li>DISE—O Y FORMULACI”N</li>
-                        <li>EJECUCI”N Y SEGUIMIENTO</li>
-                        <li>EVALUACI”N POSTERIOR</li>
+                        <li>IDENTIFICACI√ìN </li>
+                        <li>DISE√ëO Y FORMULACI√ìN</li>
+                        <li>EJECUCI√ìN Y SEGUIMIENTO</li>
+                        <li>EVALUACI√ìN POSTERIOR</li>
                     </ol>
                 </div>
                 <h3>
                     <a href="#">Ciclo del Proyecto</a></h3>
                 <div>
-                    El proyecto es la unidad operacional de la planeaciÛn del desarrollo que vincula
-                    recursos, actividades y productos durante un periodo determinado y con una ubicaciÛn
-                    definida para la resoluciÛn de problemas o necesidades sentidas de la poblaciÛn.
-                    Un proyecto supone la b˙squeda de una alternativa viable al planteamiento de un
-                    objetivo que est· concebido para resolver un problema o necesidad y que para ello
-                    requiere la producciÛn de bienes o servicios , de tal suerte que, una vez tomada
-                    la decisiÛn de llevar a cabo un proyecto, sea necesaria la realizaciÛn de una serie
-                    de actividades previstas que conllevar·n al logro de los objetivos propuestos para
+                    El proyecto es la unidad operacional de la planeaci√≥n del desarrollo que vincula
+                    recursos, actividades y productos durante un periodo determinado y con una ubicaci√≥n
+                    definida para la resoluci√≥n de problemas o necesidades sentidas de la poblaci√≥n.
+                    Un proyecto supone la b√∫squeda de una alternativa viable al planteamiento de un
+                    objetivo que est√° concebido para resolver un problema o necesidad y que para ello
+                    requiere la producci√≥n de bienes o servicios , de tal suerte que, una vez tomada
+                    la decisi√≥n de llevar a cabo un proyecto, sea necesaria la realizaci√≥n de una serie
+                    de actividades previstas que conllevar√°n al logro de los objetivos propuestos para
                     el proyecto (www.dnp.gov.co)
                     <br />
                     <br />
@@ -341,72 +341,78 @@
                         <img src="/Icons/cicloproyecto.png" width="100%" /></a>
                 </div>
                 <h3>
-                    <a href="#">IdentificaciÛn</a></h3>
+                    <a href="#">Identificaci√≥n</a></h3>
                 <div>
-                    TambiÈn conocida como pre inversiÛn, comporta la primera etapa de formulaciÛn del
-                    proyecto y tiene por objetivo el acopio y preparaciÛn de informaciÛn suficiente
-                    y pertinente (en ocasiones organizada en estudios tÈcnicos, econÛmicos, financieros,
+                    Tambi√©n conocida como pre inversi√≥n, comporta la primera etapa de formulaci√≥n del
+                    proyecto y tiene por objetivo el acopio y preparaci√≥n de informaci√≥n suficiente
+                    y pertinente (en ocasiones organizada en estudios t√©cnicos, econ√≥micos, financieros,
                     legales y de mercado) para determinar de forma preliminar la posibilidad real de
-                    resolver un problema o satisfacer una necesidad asÌ como reducir la incertidumbre
-                    en el logro de los objetivos de dicha empresa. AN¡LISIS DE ACTORES PARTICIPANTES
-                    Consiste en identificar las personas, grupos, entidades o instituciones p˙blicas
+                    resolver un problema o satisfacer una necesidad as√≠ como reducir la incertidumbre
+                    en el logro de los objetivos de dicha empresa. AN√ÅLISIS DE ACTORES PARTICIPANTES
+                    Consiste en identificar las personas, grupos, entidades o instituciones p√∫blicas
                     o privadas que de alguna forma se relacionan con el proyecto. Debe incorporar los
-                    intereses, expectativas representaciones y dem·s de dichos actores y que pueden
-                    resultar de importancia para el proyecto: øCÛmo elaborar el an·lisis de la participaciÛn?
+                    intereses, expectativas representaciones y dem√°s de dichos actores y que pueden
+                    resultar de importancia para el proyecto: ¬øC√≥mo elaborar el an√°lisis de la participaci√≥n?
                     Identifique todos aquellos actores relacionados con el proyecto y que se pudieran
-                    verse beneficiados o incluso afectados por la ejecuciÛn del mismo. Puede categorizarlos
-                    seg˙n su nivel o ·mbito (Nacional, regional, local etc.) Puede categorizarlos tambiÈn
-                    seg˙n sean afectados, beneficiados, cooperantes, oponentes, o perjudicados. De las
-                    anteriores categorizaciones proceda a determinar cÛmo pueden ser incorporados en
+                    verse beneficiados o incluso afectados por la ejecuci√≥n del mismo. Puede categorizarlos
+                    seg√∫n su nivel o √°mbito (Nacional, regional, local etc.) Puede categorizarlos tambi√©n
+                    seg√∫n sean afectados, beneficiados, cooperantes, oponentes, o perjudicados. De las
+                    anteriores categorizaciones proceda a determinar c√≥mo pueden ser incorporados en
                     el desarrollo del proyecto. Matriz de actores participantes.
                 </div>
                 <h3>
-                    <a href="#">- An·lisis de actores</a></h3>
+                    <a href="#">- An√°lisis de actores</a></h3>
                 <div>
-                    IdentificaciÛn del problema o necesidad: Como ya se habÌa expuesto, un proyecto
-                    supone la b˙squeda de una alternativa viable al planteamiento de un objetivo que
-                    est· concebido para resolver un problema o necesidad y que para ello requiere la
-                    producciÛn de bienes o servicios , de tal suerte que, una vez tomada la decisiÛn
-                    de llevar a cabo un proyecto, sea necesaria la realizaciÛn de una serie de actividades
-                    previstas que conllevar·n al logro de los objetivos propuestos para el proyecto
-                    Es un conjunto de tÈcnicas para:
+                    Identificaci√≥n del problema o necesidad: Como ya se hab√≠a expuesto, un proyecto
+                    supone la b√∫squeda de una alternativa viable al planteamiento de un objetivo que
+                    est√° concebido para resolver un problema o necesidad y que para ello requiere la
+                    producci√≥n de bienes o servicios , de tal suerte que, una vez tomada la decisi√≥n
+                    de llevar a cabo un proyecto, sea necesaria la realizaci√≥n de una serie de actividades
+                    previstas que conllevar√°n al logro de los objetivos propuestos para el proyecto
+                    Es un conjunto de t√©cnicas para:
                     <br />
                     <br />
                     <ul>
-                        <li>Analizar la situaciÛn en relaciÛn con un problema</li>
+                        <li>Analizar la situaci√≥n en relaci√≥n con un problema</li>
                         <li>Identificar los problemas principales de este contexto</li>
-                        <li>Visualizar las relaciones de causa efecto en el ·rbol de problemas &#8226; Definir
-                            el problema central de la situaciÛn</li>
+                        <li>Visualizar las relaciones de causa efecto en el √°rbol de problemas &#8226; Definir
+                            el problema central de la situaci√≥n</li>
                     </ul>
                     <br />
                     <br />
-                    EL ¡RBOL DE PROBLEMAS Es una tÈcnica que se emplea para identificar una situaciÛn
-                    problem·tica la cual se intenta solucionar mediante la intervenciÛn del proyecto
-                    utilizando una relaciÛn de tipo causa-efecto. El identificar de forma clara la situaciÛn
-                    problem·tica no siempre es un ejercicio f·cil, suele pasar que, al identificar un
-                    problema emergen muchos otros asociados algunos de los cu·les se nos pueden presentar
-                    como causas, o efectos del mismo o incluso hacer dudar sobre si, el problema inicialmente
-                    considerado esta correctamente formulado.
+                    <h3>
+                        EL √ÅRBOL DE PROBLEMAS
+                    </h3>
+                    <p>
+                        Es una t√©cnica que se emplea para identificar una situaci√≥n problem√°tica la cual
+                        se intenta solucionar mediante la intervenci√≥n del proyecto utilizando una relaci√≥n
+                        de tipo causa-efecto. El identificar de forma clara la situaci√≥n problem√°tica no
+                        siempre es un ejercicio f√°cil, suele pasar que, al identificar un problema emergen
+                        muchos otros asociados algunos de los cu√°les se nos pueden presentar como causas,
+                        o efectos del mismo o incluso hacer dudar sobre si, el problema inicialmente considerado
+                        esta correctamente formulado.
+                    </p>
                     <br />
-                    <br />
-                    øCÛmo realizar un ·rbol de problemas? Se recomienda realizar las siguientes tareas
+                    </h3> ¬øC√≥mo realizar un √°rbol de problemas?</h3>
+                    <p>
+                        Se recomienda realizar las siguientes tareas:</p>
                     <ol>
                         <li>Convoque a los miembros de su grupo de trabajo o personas de la comunidad interesadas.</li>
                         <li>Describa de forma general el objetivo del proceso y subraye en la necesidad de identificar
                             de forma concertada el problema a resolver </li>
                         <li>Entregue a cada uno de ellos un paquete de tarjetas y solicite que escriban en ellas
-                            los problemas de su comunidad, entidad y organizaciÛn solicite guardar especial
-                            cuidado de: a. Formular el problema como una situaciÛn negativa. b. Utilizar una
-                            oraciÛn corta con palabras que sean, claras, simples y concretas. c. Identificar
-                            ˙nicamente los problemas existentes. Descarte los posibles o potenciales. </li>
-                        <li>øCÛmo elaborar el ·rbol?: Dibuje el tronco de un ·rbol para representar su problema
-                            central. AÒada raÌces y radÌculas para representar las causas directas e indirectas,
+                            los problemas de su comunidad, entidad y organizaci√≥n solicite guardar especial
+                            cuidado de: a. Formular el problema como una situaci√≥n negativa. b. Utilizar una
+                            oraci√≥n corta con palabras que sean, claras, simples y concretas. c. Identificar
+                            √∫nicamente los problemas existentes. Descarte los posibles o potenciales. </li>
+                        <li>¬øC√≥mo elaborar el √°rbol?: Dibuje el tronco de un √°rbol para representar su problema
+                            central. A√±ada ra√≠ces y rad√≠culas para representar las causas directas e indirectas,
                             y ramas y ramitas para representar los efectos (o implicaciones) directos e indirectos
-                            de su problema central (ver gr·fico 03) </li>
-                        <li>Con la ayuda de un facilitador, asÌ como de todos los participantes ubique las tarjetas
-                            comience seg˙n sean causas directas, indirectas, efectos directos o indirectos
+                            de su problema central (ver gr√°fico 03) </li>
+                        <li>Con la ayuda de un facilitador, as√≠ como de todos los participantes ubique las tarjetas
+                            comience seg√∫n sean causas directas, indirectas, efectos directos o indirectos
                         </li>
-                        <li>En este nivel puede hacer uso de una matriz de Vester para la calificaciÛn de los
+                        <li>En este nivel puede hacer uso de una matriz de Vester para la calificaci√≥n de los
                             diferentes causas</li>
                     </ol>
                 </div>
@@ -414,34 +420,37 @@
         </div>
         <div>
             <h1>
-                IDENTIFICACI”N</h1>
+                IDENTIFICACI√ìN</h1>
             <p>
-                TambiÈn conocida como pre inversiÛn, comporta la primera etapa de formulaciÛn del
-                proyecto y tiene por objetivo el acopio y preparaciÛn de informaciÛn suficiente
-                y pertinente (en ocasiones organizada en estudios tÈcnicos, econÛmicos, financieros,
+                Tambi√©n conocida como pre inversi√≥n, comporta la primera etapa de formulaci√≥n del
+                proyecto y tiene por objetivo el acopio y preparaci√≥n de informaci√≥n suficiente
+                y pertinente (en ocasiones organizada en estudios t√©cnicos, econ√≥micos, financieros,
                 legales y de mercado) para determinar de forma preliminar la posibilidad real de
-                resolver un problema o satisfacer una necesidad asÌ como reducir la incertidumbre
+                resolver un problema o satisfacer una necesidad as√≠ como reducir la incertidumbre
                 en el logro de los objetivos de dicha empresa.
-                <br />
-                <a name="_Toc315687134" id="_Toc315687134">AN¡LISIS DE ACTORES PARTICIPANTES</a>
-                <br />
-                Consiste en identificar las personas, grupos, entidades o instituciones p˙blicas
-                o privadas que de alguna forma se relacionan con el proyecto. Debe incorporar los
-                intereses, expectativas representaciones y dem·s de dichos actores y que pueden
-                resultar de importancia para el proyecto:<br />
-                øCÛmo elaborar el an·lisis de la participaciÛn?<br />
-                Identifique todos aquellos actores relacionados con el proyecto y que se pudieran
-                verse beneficiados o incluso afectados por la ejecuciÛn del mismo.
-                <br />
-                Puede categorizarlos seg˙n su nivel o ·mbito (Nacional, regional, local etc.)
-                <br />
-                Puede categorizarlos tambiÈn seg˙n sean afectados, beneficiados, cooperantes, oponentes,
-                o perjudicados.<br />
-                De las anteriores categorizaciones proceda a determinar cÛmo pueden ser incorporados
-                en el desarrollo del proyecto.<br />
-                <strong><em>Matriz de actores participantes. Tabla 01 </em></strong>
             </p>
-            <table border="1" cellspacing="0" cellpadding="0" style="border: #000;">
+            <br />
+            <h3>
+                AN√ÅLISIS DE ACTORES PARTICIPANTES</h3>
+            <p>
+                Consiste en identificar las personas, grupos, entidades o instituciones p√∫blicas
+                o privadas que de alguna forma se relacionan con el proyecto. Debe incorporar los
+                intereses, expectativas representaciones y dem√°s de dichos actores y que pueden
+                resultar de importancia para el proyecto:<br />
+                ¬øC√≥mo elaborar el an√°lisis de la participaci√≥n?<br />
+                Identifique todos aquellos actores relacionados con el proyecto y que se pudieran
+                verse beneficiados o incluso afectados por la ejecuci√≥n del mismo.
+            </p>
+            <p>
+                Puede categorizarlos seg√∫n su nivel o √°mbito (Nacional, regional, local etc.) Puede
+                categorizarlos tambi√©n seg√∫n sean afectados, beneficiados, cooperantes, oponentes,
+                o perjudicados. De las anteriores categorizaciones proceda a determinar c√≥mo pueden
+                ser incorporados en el desarrollo del proyecto.
+            </p>
+            <br />
+            <strong><em>Matriz de actores participantes. Tabla 01 </em></strong>
+            <br />
+            <table class="table_class" border="1" cellspacing="0" cellpadding="0" style="border: #000;">
                 <tr>
                     <td width="121" valign="top">
                         <p>
@@ -462,115 +471,96 @@
                     </td>
                 </tr>
             </table>
+        </div>
+        <div>
+            <h1>
+                IDENTIFICACI√ìN</h1>
+            <h3>
+                ANALISIS DE ACTORES PARTICIPANTES</h3>
             <table id="jqgrid_matriz_identificacion_t">
             </table>
             <div id="jqgrid_matriz_identificacion_d">
             </div>
-        </div>
-        <div>
-            <h1>
-                IDENTIFICACI”N</h1>
-            <h3>
-                ANALISIS DE ACTORES PARTICIPANTES</h3>
-            <strong><em>Matriz de actores participantes. Tabla 01 </em></strong>
-            <table id="actores_participantes" border="1" cellspacing="0" cellpadding="0" style="border: #000;">
-                <tr style="border: 1px solid #000;">
-                    <td width="121" valign="top">
-                        <p>
-                            GRUPOS
-                        </p>
-                    </td>
-                    <td width="104" valign="top">
-                        <p>
-                            INTERESES</p>
-                    </td>
-                    <td width="173" valign="top">
-                        <p>
-                            PROBLEMA PERCIBIDO</p>
-                    </td>
-                    <td width="184" valign="top">
-                        <p>
-                            RECURSOS Y MANDATOS</p>
-                    </td>
-                </tr>
-            </table>
             <!-- Hasta n registros de la tabla actores_participantes -->
         </div>
         <div>
             <h1>
-                DISE—O Y FORMULACI”N</h1>
+                DISE√ëO Y FORMULACI√ìN</h1>
             <p>
-                IdentificaciÛn del problema o necesidad:<br />
-                Como ya se habÌa expuesto, un proyecto supone la b˙squeda de una alternativa viable
-                al planteamiento de un objetivo que est· concebido para resolver un problema o necesidad
-                y que para ello requiere la producciÛn de bienes o servicios , de tal suerte que,
-                una vez tomada la decisiÛn de llevar a cabo un proyecto, sea necesaria la realizaciÛn
-                de una serie de actividades previstas que conllevar·n al logro de los objetivos
+                Identificaci√≥n del problema o necesidad:<br />
+                Como ya se hab√≠a expuesto, un proyecto supone la b√∫squeda de una alternativa viable
+                al planteamiento de un objetivo que est√° concebido para resolver un problema o necesidad
+                y que para ello requiere la producci√≥n de bienes o servicios , de tal suerte que,
+                una vez tomada la decisi√≥n de llevar a cabo un proyecto, sea necesaria la realizaci√≥n
+                de una serie de actividades previstas que conllevar√°n al logro de los objetivos
                 propuestos para el proyecto<br />
-                Es un conjunto de tÈcnicas para:</p>
+                Es un conjunto de t√©cnicas para:</p>
             <ul>
-                <li>Analizar la situaciÛn en relaciÛn con un problema</li>
+                <li>Analizar la situaci√≥n en relaci√≥n con un problema</li>
                 <li>Identificar los problemas principales de este contexto</li>
-                <li>Visualizar las relaciones de causa efecto en el ·rbol de problemas</li>
-                <li>Definir el problema central de la situaciÛn</li>
+                <li>Visualizar las relaciones de causa efecto en el √°rbol de problemas</li>
+                <li>Definir el problema central de la situaci√≥n</li>
             </ul>
-            <h4>
-                EL ¡RBOL DE PROBLEMAS</h4>
+            <br />
+            <h3>
+                EL √ÅRBOL DE PROBLEMAS</h3>
+            <a href="/Icons/arbol_problemas_ayuda.png" target="_blank" style="width: 85%; margin: 0 auto;">
+                <img src="/Icons/arbol_problemas_ayuda.png" style="left: 50px; clear: both;" width="50%"
+                    alt="ayuda arbol problemas" /></a>
             <p>
-                Es una tÈcnica que se emplea para identificar una situaciÛn problem·tica la cual
-                se intenta solucionar mediante la intervenciÛn del proyecto utilizando una relaciÛn
+                Es una t√©cnica que se emplea para identificar una situaci√≥n problem√°tica la cual
+                se intenta solucionar mediante la intervenci√≥n del proyecto utilizando una relaci√≥n
                 de tipo causa-efecto.
                 <br />
-                El identificar de forma clara la situaciÛn problem·tica no siempre es un ejercicio
-                f·cil, suele pasar que, al identificar un problema emergen muchos otros asociados
-                algunos de los cu·les se nos pueden presentar como causas, o efectos del mismo o
+                El identificar de forma clara la situaci√≥n problem√°tica no siempre es un ejercicio
+                f√°cil, suele pasar que, al identificar un problema emergen muchos otros asociados
+                algunos de los cu√°les se nos pueden presentar como causas, o efectos del mismo o
                 incluso hacer dudar sobre si, el problema inicialmente considerado esta correctamente
                 formulado.
-                <br />
-                øCÛmo realizar un ·rbol de problemas? Se recomienda realizar las siguientes tareas</p>
+            </p>
+            <br />
+            <h3>
+                ¬øC√≥mo realizar un √°rbol de problemas?</h3>
+            <p>
+                Se recomienda realizar las siguientes tareas</p>
             <ul>
                 <li>Convoque a los miembros de su grupo de trabajo o personas de la comunidad interesadas</li>
                 <li>Describa de forma general el objetivo del proceso y subraye en la necesidad de identificar
                     de forma concertada el problema a resolver</li>
                 <li>Entregue a cada uno de ellos un paquete de tarjetas y solicite que escriban en ellas
-                    los problemas de su comunidad, entidad y organizaciÛn solicite guardar especial
+                    los problemas de su comunidad, entidad y organizaci√≥n solicite guardar especial
                     cuidado de:</li>
-                <li>
-                    <ul>
-                        <li>Formular el problema como una situaciÛn negativa.</li>
-                        <li>Utilizar una oraciÛn corta con palabras que sean, claras, simples y concretas.</li>
-                        <li>Identificar ˙nicamente los problemas existentes. Descarte los posibles o potenciales.</li>
-                    </ul>
+                <li>Formular el problema como una situaci√≥n negativa.</li>
+                <li>Utilizar una oraci√≥n corta con palabras que sean, claras, simples y concretas.</li>
+                <li>Identificar √∫nicamente los problemas existentes. Descarte los posibles o potenciales.</li>
+                <li>¬øC√≥mo elaborar el √°rbol?:
+                    <p>
+                        Dibuje el tronco de un √°rbol para representar su problema central. A√±ada ra√≠ces
+                        y rad√≠culas para representar las causas directas e indirectas, y ramas y ramitas
+                        para representar los efectos (o implicaciones) directos e indirectos de su problema
+                        central (ver gr√°fico 03)</p>
                 </li>
-                <li>øCÛmo elaborar el ·rbol?: </li>
+            </ul>
+            <ul>
+                <li>Con la ayuda de un facilitador, as√≠ como de todos los participantes ubique las tarjetas
+                    comience seg√∫n sean causas directas, indirectas, efectos directos o indirectos
+                </li>
             </ul>
             <p>
-                Dibuje el tronco de un ·rbol para representar su problema central. AÒada raÌces
-                y radÌculas para representar las causas directas e indirectas, y ramas y ramitas
-                para representar los efectos (o implicaciones) directos e indirectos de su problema
-                central (ver gr·fico 03)</p>
-            <ul>
-                <li>Con la ayuda de un facilitador, asÌ como de todos los participantes ubique las tarjetas
-                    comience seg˙n sean causas directas, indirectas, efectos directos o indirectos
-                </li>
-            </ul>
-            En este nivel puede hacer uso de una matriz de Vester para la calificaciÛn de los
-            diferentes causas o efectos (para un ejercicio de priorizaciÛn m·s complejo se recomienda
-            utilizar la matriz de vester)
+                En este nivel puede hacer uso de una matriz de Vester para la calificaci√≥n de los
+                diferentes causas o efectos (para un ejercicio de priorizaci√≥n m√°s complejo se recomienda
+                utilizar la matriz de vester)</p>
             <br />
-            <a href="/Icons/arbol_problemas_ayuda.png" target="_blank">
-                <img src="/Icons/arbol_problemas_ayuda.png" style="left: 50px; clear: both;" width="50%"
-                    alt="ayuda arbol problemas" /></a>
         </div>
         <div>
             <h1>
-                DISE—O Y FORMULACI”N</h1>
+                DISE√ëO Y FORMULACI√ìN</h1>
             <h1>
                 ARBOL DE PROBLEMAS</h1>
             <br />
             <br />
             <iframe id="if_c_e" runat="server" src="" width="100%" height="500px"></iframe>
-            <a href="#" onclick="UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val());">
+            <a href="#" onclick="UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val()); j('#if_google').trigger('click');">
                 Actualizar</a>
             <ul id="org" style="display: none;">
                 <li>Proyectos
@@ -616,57 +606,147 @@
         </div>
         <div>
             <h1>
-                EJECUCI”N SEGUIMIENTO Y MONITOREO</h1>
-            <table id="jqgrid_objetivos_t">
-            </table>
-            <div id="jqgrid_objetivos_d">
-            </div>
+                AN√ÅLISIS DE OBJETIVOS</h1>
+            <p>
+                Representa la situaci√≥n futura alcanzada mediante la soluci√≥n de los problemas previamente
+                identificados. Se logra mediante la formulaci√≥n (Redacci√≥n) de las condiciones negativas
+                del √°rbol de problemas en forma de condiciones positivas que son deseadas y realizables
+                en la pr√°ctica.</p>
+            <p>
+                Se elabora a partir del √°rbol de problemas facilitando as√≠ examinar de forma gr√°fica
+                la relaci√≥n entre medios y fines. Suele suceder que, en desarrollo del ejercicio
+                se identifica que algunos de los problemas, as√≠ como sus causas y consecuencia quedaron
+                mal planteados o redactados por lo que conviene modificar las frases existentes,
+                a√±adir nuevas frases en el contexto de las relaciones ‚Äúmedios-fines‚Äù, eliminar los
+                objetivos ‚Äì problemas mal planteados o no viables de soluci√≥n.</p>
+            <br />
+            <a href="/Icons/arbolobjetivos.png" style="width: 100%; margin: 0 auto;">
+                <img style="margin: 0 auto;" src="/Icons/arbolobjetivos.png" alt="arbolobjetivos" /></a>
+        </div>
+        <div>
+            <h1>
+                AN√ÅLISIS DE OBJETIVOS
+            </h1>
             <ul id="org_objetivos" style="display: none;">
-                <%--<li>Proyectos
-                    <ul>
-                        <li id="Li1">Causas</li>
-                        <li>Efectos <a href="http://wesnolte.com" target="_blank">Click me</a>
-                            <ul>
-                                <li>Pumpkin</li>
-                                <li><a href="http://tquila.com" target="_blank">Aubergine</a>
-                                    <p>
-                                        A link and paragraph is all we need.</p>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="fruit">Beneficios
-                            <ul>
-                                <li>Apple
-                                    <ul>
-                                        <li>Granny Smith</li>
-                                    </ul>
-                                </li>
-                                <li>Berries
-                                    <ul>
-                                        <li>Blueberry</li>
-                                        <li></li>
-                                        <li>Cucumber</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>Bread</li>
-                        <li>Chocolate
-                            <ul>
-                                <li>Topdeck</li>
-                                <li>Reese's Cups</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>--%>
             </ul>
             <div id="chart_objetivos" class="jOrgChart">
             </div>
         </div>
         <div>
             <h1>
-                EVALUACI”N (POSTERIOR)</h1>
+                <a name="_Toc315687137" id="_Toc315687137">DISE√ëO Y FORMULACI√ìN</a></h1>
+            <div>
+                <h3>
+                    El Enfoque de Marco l√≥gico (MATRIZ DE MARCO L√ìGICO)</h3>
+            </div>
+            <p>
+                La matriz de marco l√≥gico es el procedimiento para la organizaci√≥n y visualizaci√≥n
+                del proyecto facilitando la articulaci√≥n de forma sistem√°tica y l√≥gica de los objetivos
+                y resultados del mismo. De su estructuraci√≥n se desprende el seguimiento y evaluaci√≥n
+                del proyecto. En t√©rminos pr√°cticos supone que la inversi√≥n de determinados <strong>
+                    recursos</strong> soportan la realizaci√≥n de <strong>actividades</strong> que
+                permiten a su vez obtener determinaos <strong>productos</strong> que facilitan el
+                logro de un prop√≥sito y el fin.
+            </p>
+            <br />
+            <h3>
+                Estructura marco l√≥gico</h3>
+            <p>
+                El marco l√≥gico se representa en una matriz (tabla) 4 X 4. Cuatro columnas por cuatro
+                filas. Las columnas incluyen la siguiente informaci√≥n:</p>
+            <br />
+            <h3>
+                Matriz (cuatro x cuatro) Tabla 02</h3>
+            <br />
+            <table class="table_class" border="1" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="144" valign="top">
+                        <p>
+                            FIN</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            INDICADOR</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            MEDIO DE VERIFICACI√ìN</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            SUPUESTOS</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="144" valign="top">
+                        <p>
+                            PROP√ìSITO (PROCESO)</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="144" valign="top">
+                        <p>
+                            COMPONENTES (SUBPROCESO)</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="144" valign="top">
+                        <p>
+                            ACTIVIDADES</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h1>
+                DISE√ëO Y FORMULACI√ìN
+            </h1>
             <iframe id="if_marco_logico" runat="server" width="100%" height="800px"></iframe>
+        </div>
+        <div>
+            <h1>
+                EJECUCI√ìN SEGUIMIENTO Y MONITOREO
+            </h1>
+        </div>
+        <div>
+            <h1>
+                EVALUACI√ìN (POSTERIOR)</h1>
         </div>
         <div>
             <h1>

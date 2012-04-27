@@ -103,9 +103,16 @@ namespace ESM
         {
             try
             {
+                Model.Registro_Proyecto proyecto_informacion = (from p in new Model.ESMBDDataContext().Registro_Proyectos
+                                                                where p.proyecto_id == Convert.ToInt32(ban_proyecto_id.Value)
+                                                                select p).Single();
+
                 Objetos.CRegistro_Proyectos _objCRegistro_Proyectos = new Objetos.CRegistro_Proyectos();
 
-                _objCRegistro_Proyectos.AddItem(txtcargo.Value, txtdependencia.Value, Convert.ToDateTime(txtfechaelaboracion.Value), txtjustificacion.Value, txtmpp1.Value, txtmpp2.Value, txtmpp3.Value, proyecto_id);
+                if (proyecto_informacion == null)
+                    _objCRegistro_Proyectos.AddItem(txtcargo.Value, txtdependencia.Value, Convert.ToDateTime(txtfechaelaboracion.Value), txtjustificacion.Value, txtmpp1.Value, txtmpp2.Value, txtmpp3.Value, proyecto_id, txtresponsable.Value);
+                else
+                    _objCRegistro_Proyectos.UpdateItem(proyecto_informacion.Id, txtcargo.Value, txtdependencia.Value, Convert.ToDateTime(txtfechaelaboracion.Value), txtjustificacion.Value, txtmpp1.Value, txtmpp2.Value, txtmpp3.Value, txtresponsable.Value);
 
             }
             catch (Exception) { }
@@ -116,6 +123,24 @@ namespace ESM
             ban_proyecto_id.Value = cmbproyectos.SelectedValue;
             if_c_e.Attributes.Add("src", "/jqgrid_causas_efectos.aspx?proyecto_id=" + ban_proyecto_id.Value);
             if_marco_logico.Attributes.Add("src", "/jqgrid_marco_logico.aspx?proyecto_id=" + ban_proyecto_id.Value);
+
+            Model.Proyecto proyecto_informacion = (from p in new Model.ESMBDDataContext().Proyectos
+                                                   where p.Id == Convert.ToInt32(ban_proyecto_id.Value)
+                                                   select p).Single();
+
+            txtnombreproyecto.Value = proyecto_informacion.Problema;
+            txtproblema.Value = proyecto_informacion.Problema;
+
+            var registro_proyecto = proyecto_informacion.Registro_Proyectos.Single();
+
+            txtdependencia.Value = registro_proyecto.Dependencia;
+            txtfechaelaboracion.Value = registro_proyecto.Fecha.ToString();
+            txtjustificacion.Value = registro_proyecto.Justificacion;
+            txtmpp1.Value = registro_proyecto.Mpp_1;
+            txtmpp2.Value = registro_proyecto.Mpp_2;
+            txtmpp3.Value = registro_proyecto.Mpp_3;
+            txtresponsable.Value = registro_proyecto.responsable;
+            txtcargo.Value = registro_proyecto.Cargo;
         }
     }
 }
