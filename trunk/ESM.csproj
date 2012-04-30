@@ -199,6 +199,13 @@
     <Compile Include="Consolidado.aspx.designer.cs">
       <DependentUpon>Consolidado.aspx</DependentUpon>
     </Compile>
+    <Compile Include="jqgrid_ejecucion.aspx.cs">
+      <DependentUpon>jqgrid_ejecucion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="jqgrid_ejecucion.aspx.designer.cs">
+      <DependentUpon>jqgrid_ejecucion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="jqgrid_marco_logico.aspx.cs">
       <DependentUpon>jqgrid_marco_logico.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -467,6 +474,7 @@
     <Content Include="fancybox\jquery.fancybox-1.3.4.js" />
     <Content Include="fancybox\jquery.fancybox-1.3.4.pack.js" />
     <Content Include="fancybox\jquery.mousewheel-3.0.4.pack.js" />
+    <Content Include="jqgrid_ejecucion.aspx" />
     <Content Include="jqgrid_marco_logico.aspx" />
     <Content Include="Icons\cicloproyecto.png" />
     <Content Include="Icons\fondo_banco_proyectos.png" />

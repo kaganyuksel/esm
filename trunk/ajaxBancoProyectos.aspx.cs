@@ -99,19 +99,17 @@ namespace ESM
                             CargarActividades();
                         else if (Request.QueryString["modulo"].ToString() == "indicador")
                             CargarIndicadores();
+                        else if (Request.QueryString["modulo"].ToString() == "actividades_indicadores")
+                            CargarIndicadoresGroupActividades();
+                        else if (Request.QueryString["modulo"].ToString() == "plan_operativo")
+                            CargarPlanOperativo();
                     }
                     else if (Request.QueryString["actualizarproyecto"] != null && Convert.ToBoolean(Request.QueryString["actualizarproyecto"]))
-                    {
                         ActualziarProyecto(proyecto_id);
-                    }
                     else if (Request.QueryString["actualizararbolproblemas"] != null && Convert.ToBoolean(Request.QueryString["actualizararbolproblemas"]))
-                    {
                         UpdateHTMLArbolProblemas();
-                    }
                     else if (Request.QueryString["actualizararbolobjetivos"] != null && Convert.ToBoolean(Request.QueryString["actualizararbolobjetivos"]))
-                    {
                         UpdateHTMLArbolObjetivos();
-                    }
                 }
                 else
                 {
@@ -150,7 +148,11 @@ namespace ESM
                         Session.Add("ssp", Request.Form["ssp"]);
                         Session.Add("fechainicial", Request.Form["fechainicial"]);
                         Session.Add("fechafinal", Request.Form["fechafinal"]);
+                        Session.Add("medios", Request.Form["medios"]);
+                        Session.Add("supuestos", Request.Form["supuestos"]);
+                        Session.Add("descripcion", Request.Form["descripcion"]);
                         Session.Add("operacion", Request.Form["oper"]);
+                        Session.Add("tiporedaccion", Request.Form["tiporedaccion"]);
                     }
                     else if (Request.Form["actividad"] != null)
                     {
@@ -356,17 +358,71 @@ namespace ESM
             ESMBDDataContext db = new Model.ESMBDDataContext();
 
             var indicadores_col = from ind in db.Indicadores
-                                  join actividades in db.Actividades on ind.Actividad_id equals actividades.Id
-                                  join subprocesos in db.Subprocesos on actividades.Subproceso_id equals subprocesos.Id
-                                  join proyectos in db.Proyectos on subprocesos.Id equals proyectos.Id
-                                  where proyectos.Id == proyecto_id
+                                  where ind.Actividade.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id
                                   select ind;
 
             string json_to_return = "{\"page\":\"1\",\"total\":1,\"records\":\"1\",\"rows\": [";
 
             foreach (var item in indicadores_col)
             {
-                json_to_return = json_to_return + "{\"id\":\"" + item.Id.ToString() + "\",\"cell\":[\"" + item.Id + "\",\"" + item.Actividade.Actividad + "\", \"" + item.Verbo + "\", \"" + item.meta + "\",\"" + item.Unidade.Unidad + "\",\"" + item.SSP + "\",\"" + item.fecha_indicador_inicial + "\"," + item.fecha_indicador_final + "\"]} ,";
+                string ssp_val = item.SSP.ToString() == "True" ? "Si" : "No";
+                json_to_return = json_to_return + "{\"id\":\"" + item.Id.ToString() + "\",\"cell\":[\"" + item.Id + "\",\"" + item.Actividade.Actividad + "\", \"" + item.Verbo.Verbo1 + "\", \"" + item.meta + "\",\"" + item.Unidade.Unidad + "\",\"" + item.descripcion + "\",\"" + ssp_val + "\",\"" + Convert.ToDateTime(item.fecha_indicador_inicial).ToShortDateString() + "\",\"" + Convert.ToDateTime(item.fecha_indicador_final).ToShortDateString() + "\",\"" + item.Indicador + "\",\"" + item.medios + "\",\"" + item.supuestos + "\"]} ,";
+            }
+            json_to_return = json_to_return.Trim(',');
+            json_to_return = json_to_return + "]}";
+
+            Response.Write(json_to_return);
+        }
+
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        protected void CargarIndicadoresGroupActividades()
+        {
+
+            ESMBDDataContext db = new Model.ESMBDDataContext();
+
+            var indicadores_col = from ind in db.Indicadores
+                                  where ind.Actividade.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id
+                                  select ind;
+
+            string json_to_return = "{\"page\":\"1\",\"total\":1,\"records\":\"1\",\"rows\": [";
+
+            foreach (var item in indicadores_col)
+            {
+                json_to_return = json_to_return + "{\"id\":\"" + item.Id.ToString() + "\",\"cell\":[\"" + item.Id + "\",\"" + item.Actividade.Actividad + "\", \"" + item.Indicador + "\"]} ,";
+            }
+            json_to_return = json_to_return.Trim(',');
+            json_to_return = json_to_return + "]}";
+
+            Response.Write(json_to_return);
+        }
+
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        protected void CargarPlanOperativo()
+        {
+            ESMBDDataContext db = new Model.ESMBDDataContext();
+
+            var procesos_col = from procesos in db.Causas_Efectos
+                               where procesos.Proyecto_id == proyecto_id
+                               select procesos;
+
+            string json_to_return = "{\"page\":\"1\",\"total\":1,\"records\":\"1\",\"rows\": [";
+
+            int menu_id = 0;
+
+            foreach (var item in procesos_col)
+            {
+                json_to_return = json_to_return + "{\"id\":" + item.Id.ToString() + ",\"cell\":[\"" + item.Id + "\",\"" + item.Causa + "\",0,null,false,false]} ,";
+
+                var subprocesos_col = from subprocesos in db.Subprocesos
+                                      where subprocesos.Proceso_id == item.Id
+                                      select subprocesos;
+
+                foreach (var sub_item in subprocesos_col)
+                {
+                    json_to_return = json_to_return + "{\"id\":" + sub_item.Id.ToString() + ",\"cell\":[\"" + sub_item.Id + "\",\"" + sub_item.Subproceso1 + "\",1," + item.Id + ",true,false]} ,";
+                }
+
+                menu_id++;
             }
             json_to_return = json_to_return.Trim(',');
             json_to_return = json_to_return + "]}";
@@ -380,11 +436,39 @@ namespace ESM
             int verbo = Convert.ToInt32(Session["verbo"].ToString());
             int meta = Convert.ToInt32(Session["meta"].ToString());
             int unidad = Convert.ToInt32(Session["unidad"].ToString());
-            bool ssp = Convert.ToBoolean(Session["ssp"].ToString());
+            string medios = Session["medios"].ToString();
+            string supuestos = Session["supuestos"].ToString();
+            string descripcion = Session["descripcion"].ToString();
+            bool ssp = false;
+
+            if (Session["ssp"].ToString() == "Si")
+                ssp = true;
+
             DateTime fechainicial = Convert.ToDateTime(Session["fechainicial"].ToString());
             DateTime fechafinal = Convert.ToDateTime(Session["fechafinal"].ToString());
 
-            if (objCActividades.AddIndicador(actividad, "", verbo, unidad, fechainicial, fechafinal, meta, ssp))
+            Model.ESMBDDataContext db = new ESMBDDataContext();
+
+            var verbo_text = from v in db.Verbos
+                             where v.Id == verbo
+                             select v.Verbo1;
+
+            var unidad_text = from u in db.Unidades
+                              where u.Id == unidad
+                              select u.Unidad;
+
+            string indicador = "";
+
+            if (Session["tiporedaccion"].ToString() == "entre")
+            {
+                indicador = verbo_text + " " + meta + " " + descripcion + " entre " + fechainicial + " y " + fechafinal;
+            }
+            else if (Session["tiporedaccion"].ToString() == "hasta")
+            {
+                indicador = "A " + fechainicial + " " + verbo_text + " " + meta + " " + descripcion;
+            }
+
+            if (objCActividades.AddIndicador(actividad, indicador, verbo, unidad, fechainicial, fechafinal, meta, ssp, medios, supuestos, descripcion))
             {
                 Session.Remove("ind_id");
                 Session.Remove("actividad");
@@ -395,6 +479,10 @@ namespace ESM
                 Session.Remove("fechainicial");
                 Session.Remove("fechafinal");
                 Session.Remove("operacion");
+                Session.Remove("medios");
+                Session.Remove("supuestos");
+                Session.Remove("descripcion");
+                Session.Remove("tiporedaccion");
             }
         }
 
@@ -404,11 +492,41 @@ namespace ESM
             int verbo = Convert.ToInt32(Session["verbo"].ToString());
             int meta = Convert.ToInt32(Session["meta"].ToString());
             int unidad = Convert.ToInt32(Session["unidad"].ToString());
-            bool ssp = Convert.ToBoolean(Session["ssp"].ToString());
             DateTime fechainicial = Convert.ToDateTime(Session["fechainicial"].ToString());
             DateTime fechafinal = Convert.ToDateTime(Session["fechafinal"].ToString());
+            string medios = Session["medios"].ToString();
+            string supuestos = Session["supuestos"].ToString();
+            string descripcion = Session["descripcion"].ToString();
 
-            if (objCActividades.UpdateIndicador(ind_id, "", verbo, unidad, fechainicial, fechafinal, meta, ssp))
+            bool ssp = false;
+
+            if (Session["ssp"].ToString() == "Si")
+                ssp = true;
+
+
+            Model.ESMBDDataContext db = new ESMBDDataContext();
+
+            string verbo_text = (from v in db.Verbos
+                                 where v.Id == verbo
+                                 select v.Verbo1).Single();
+
+            string unidad_text = (from u in db.Unidades
+                                  where u.Id == unidad
+                                  select u.Unidad).Single();
+
+
+            string indicador = "";
+
+            if (Session["tiporedaccion"].ToString() == "entre")
+            {
+                indicador = verbo_text + " " + meta + " " + descripcion + " entre " + fechainicial + " y " + fechafinal;
+            }
+            else if (Session["tiporedaccion"].ToString() == "hasta")
+            {
+                indicador = "A " + fechainicial + " " + verbo_text + " " + meta + " " + descripcion;
+            }
+
+            if (objCActividades.UpdateIndicador(ind_id, indicador, verbo, unidad, fechainicial, fechafinal, meta, ssp, medios, supuestos, descripcion))
             {
                 Session.Remove("ind_id");
                 Session.Remove("actividad");
@@ -419,6 +537,10 @@ namespace ESM
                 Session.Remove("fechainicial");
                 Session.Remove("fechafinal");
                 Session.Remove("operacion");
+                Session.Remove("medios");
+                Session.Remove("supuestos");
+                Session.Remove("descripcion");
+                Session.Remove("tiporedaccion");
             }
         }
 

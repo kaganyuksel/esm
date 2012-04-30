@@ -35,7 +35,7 @@
                 viewrecords: true,
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
-                caption: "Marco Logico"
+                caption: "Marco Lógico"
             });
             j("#jqgrid_subp_t").jqGrid('navGrid', "#jqgrid_subp_d", { edit: true, add: true, del: false });
             j("#jqgrid_subp_t").jqGrid('inlineNav', "#jqgrid_subp_d");
@@ -66,7 +66,7 @@
                 viewrecords: true,
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
-                caption: "Marco Logico"
+                caption: "Marco Lógico"
             });
             j("#jqgrid_act_t").jqGrid('navGrid', "#jqgrid_act_d", { edit: true, add: true, del: false });
             j("#jqgrid_act_t").jqGrid('inlineNav', "#jqgrid_act_d");
@@ -75,19 +75,21 @@
             j("#jqgrid_m_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=indicador',
                 datatype: "json",
-                colNames: ['No.', 'Actividad', 'Verbo', 'Meta', 'Unidad', 'SSP', 'Fecha Inicio', 'Fecha Fin', 'Indicador', 'Medios de Verificación', 'Supuestos'],
+                colNames: ['No.', 'Actividad', 'Verbo', 'Meta', 'Unidad', 'Descripción', 'SSP', 'Fecha Inicio', 'Fecha Fin', 'Indicador', 'Medios de Verificación', 'Supuestos', 'Tipo Redacción'],
                 colModel: [
    		                    { name: 'id', index: 'id', width: 55 },
-   		                    { name: 'actividad', index: 'actividad', width: 90, editable: true, edittype: "select", editoptions: { value: j("#col_sub_procesos").val()} },
+   		                    { name: 'actividad', index: 'actividad', width: 90, editable: true, edittype: "select", editoptions: { value: j("#col_actividades").val()} },
                             { name: 'verbo', index: 'verbo', width: 90, editable: true, edittype: "select", editoptions: { value: j("#ban_options_verbos").val()} },
                             { name: 'meta', index: 'meta', width: 90, editable: true },
                             { name: 'unidad', index: 'unidad', width: 90, editable: true, edittype: "select", editoptions: { value: j("#ban_options_unidades").val()} },
-                            { name: 'ssp', index: 'ssp', width: 90, editable: true, edittype: "checkbox" },
+                            { name: 'descripcion', index: 'descripcion', width: 90, editable: true },
+                            { name: 'ssp', index: 'ssp', width: 90, editable: true, edittype: "checkbox", editoptions: { value: "Si:No"} },
                             { name: 'fechainicial', index: 'fechainicial', width: 90, editable: true },
                             { name: 'fechafinal', index: 'fechafinal', width: 90, editable: true },
                             { name: 'indicador', index: 'indicador', width: 90, editable: false },
    		                    { name: 'medios', index: 'medios', width: 100, editable: true },
-                            { name: 'supuestos', index: 'supuestos', width: 100, editable: true }
+                            { name: 'supuestos', index: 'supuestos', width: 100, editable: true },
+                            { name: 'tiporedaccion', index: 'tiporedaccion', width: 100, editable: true, edittype: "select", hidden: false, editoptions: { value: "entre:Entre;hasta:Hasta"} }
    	            ],
                 rowNum: 10,
                 rowList: [10, 20, 30],
@@ -104,7 +106,7 @@
                 viewrecords: true,
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
-                caption: "Marco Logico"
+                caption: "Marco Lógico"
             });
             j("#jqgrid_m_t").jqGrid('navGrid', "#jqgrid_m_l_d", { edit: true, add: true, del: false });
             j("#jqgrid_m_t").jqGrid('inlineNav', "#jqgrid_m_l_d");
@@ -134,6 +136,7 @@
     <input type="hidden" runat="server" name="col_procesos" id="col_procesos" value="" />
     <input type="hidden" runat="server" name="col_sub_procesos" id="col_sub_procesos"
         value="" />
+    <input type="hidden" runat="server" name="col_actividades" id="col_actividades" value="" />
     <input type="hidden" name="options_verbos" value="" runat="server" id="ban_options_verbos" />
     <input type="hidden" name="options_unidades" value="" runat="server" id="ban_options_unidades" />
     </form>

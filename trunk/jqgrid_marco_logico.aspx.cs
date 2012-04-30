@@ -45,6 +45,25 @@ namespace ESM
 
                 col_sub_procesos.Value = options_subprocesos;
 
+                #region actividades
+
+                var colactividades = from a in new Model.ESMBDDataContext().Actividades
+                                     where a.Subproceso.Causas_Efecto.Proyecto_id == Convert.ToInt32(ban_proyecto_id.Value)
+                                     select a;
+
+                string options_colactividades = "";
+
+                foreach (var item in colactividades)
+                {
+                    options_colactividades = options_colactividades + item.Id + ":" + item.Actividad + ";";
+                }
+
+                options_colactividades = options_colactividades.Trim(';');
+
+                col_actividades.Value = options_colactividades;
+
+                #endregion
+
                 var verbos = from v in new Model.ESMBDDataContext().Verbos
                              select v;
 
