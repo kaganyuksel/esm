@@ -938,7 +938,7 @@ namespace ESM.Objetos
 
         }
 
-        public bool AddIndicador(int idactividad, string indicador, int verboid, int unidadid, DateTime fecha_inicial, DateTime fecha_final, int meta_numero, bool esSSP)
+        public bool AddIndicador(int idactividad, string indicador, int verboid, int unidadid, DateTime fecha_inicial, DateTime fecha_final, int meta_numero, bool esSSP, string medios, string supuestos, string descripcion)
         {
             try
             {
@@ -952,7 +952,10 @@ namespace ESM.Objetos
                     meta = meta_numero,
                     verbo_id = verboid,
                     unidad_id = unidadid,
-                    SSP = esSSP
+                    SSP = esSSP,
+                    medios = medios,
+                    supuestos = supuestos,
+                    descripcion = descripcion
                 };
 
                 _db.Indicadores.InsertOnSubmit(objIndicadore);
@@ -964,7 +967,7 @@ namespace ESM.Objetos
 
         }
 
-        public bool UpdateIndicador(int indicadorid, string indicador, int verboid, int unidadid, DateTime fecha_inicial, DateTime fecha_final, int meta, bool esSSP)
+        public bool UpdateIndicador(int indicadorid, string indicador, int verboid, int unidadid, DateTime fecha_inicial, DateTime fecha_final, int meta, bool esSSP, string medios, string supuestos, string descripcion)
         {
             try
             {
@@ -980,6 +983,9 @@ namespace ESM.Objetos
                 indicador_actividad.verbo_id = verboid;
                 indicador_actividad.unidad_id = unidadid;
                 indicador_actividad.SSP = esSSP;
+                indicador_actividad.medios = medios;
+                indicador_actividad.supuestos = supuestos;
+                indicador_actividad.descripcion = descripcion;
 
                 _db.SubmitChanges();
 

@@ -216,9 +216,6 @@ namespace ESM.Model
     partial void InsertIndicadores_Meta(Indicadores_Meta instance);
     partial void UpdateIndicadores_Meta(Indicadores_Meta instance);
     partial void DeleteIndicadores_Meta(Indicadores_Meta instance);
-    partial void InsertIndicadore(Indicadore instance);
-    partial void UpdateIndicadore(Indicadore instance);
-    partial void DeleteIndicadore(Indicadore instance);
     partial void Insertactividades_presupuesto(actividades_presupuesto instance);
     partial void Updateactividades_presupuesto(actividades_presupuesto instance);
     partial void Deleteactividades_presupuesto(actividades_presupuesto instance);
@@ -234,12 +231,15 @@ namespace ESM.Model
     partial void InsertSubproceso(Subproceso instance);
     partial void UpdateSubproceso(Subproceso instance);
     partial void DeleteSubproceso(Subproceso instance);
-    partial void InsertActividade(Actividade instance);
-    partial void UpdateActividade(Actividade instance);
-    partial void DeleteActividade(Actividade instance);
     partial void InsertRegistro_Proyecto(Registro_Proyecto instance);
     partial void UpdateRegistro_Proyecto(Registro_Proyecto instance);
     partial void DeleteRegistro_Proyecto(Registro_Proyecto instance);
+    partial void InsertActividade(Actividade instance);
+    partial void UpdateActividade(Actividade instance);
+    partial void DeleteActividade(Actividade instance);
+    partial void InsertIndicadore(Indicadore instance);
+    partial void UpdateIndicadore(Indicadore instance);
+    partial void DeleteIndicadore(Indicadore instance);
     #endregion
 		
 		public ESMBDDataContext() : 
@@ -824,14 +824,6 @@ namespace ESM.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<Indicadore> Indicadores
-		{
-			get
-			{
-				return this.GetTable<Indicadore>();
-			}
-		}
-		
 		public System.Data.Linq.Table<actividades_presupuesto> actividades_presupuestos
 		{
 			get
@@ -872,6 +864,14 @@ namespace ESM.Model
 			}
 		}
 		
+		public System.Data.Linq.Table<Registro_Proyecto> Registro_Proyectos
+		{
+			get
+			{
+				return this.GetTable<Registro_Proyecto>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Actividade> Actividades
 		{
 			get
@@ -880,11 +880,11 @@ namespace ESM.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<Registro_Proyecto> Registro_Proyectos
+		public System.Data.Linq.Table<Indicadore> Indicadores
 		{
 			get
 			{
-				return this.GetTable<Registro_Proyecto>();
+				return this.GetTable<Indicadore>();
 			}
 		}
 	}
@@ -19341,463 +19341,6 @@ namespace ESM.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Indicadores")]
-	public partial class Indicadore : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _Actividad_id;
-		
-		private string _Indicador;
-		
-		private System.Nullable<int> _unidad_id;
-		
-		private System.Nullable<int> _verbo_id;
-		
-		private System.Nullable<System.DateTime> _fecha_indicador_inicial;
-		
-		private System.Nullable<System.DateTime> _fecha_indicador_final;
-		
-		private System.Nullable<System.DateTime> _Fecha_Creacion;
-		
-		private System.Nullable<bool> _SSP;
-		
-		private System.Nullable<int> _meta;
-		
-		private EntitySet<Indicadores_Responsable> _Indicadores_Responsables;
-		
-		private EntitySet<Indicadores_Meta> _Indicadores_Metas;
-		
-		private EntityRef<Verbo> _Verbo;
-		
-		private EntityRef<Unidade> _Unidade;
-		
-		private EntityRef<Actividade> _Actividade;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnActividad_idChanging(System.Nullable<int> value);
-    partial void OnActividad_idChanged();
-    partial void OnIndicadorChanging(string value);
-    partial void OnIndicadorChanged();
-    partial void Onunidad_idChanging(System.Nullable<int> value);
-    partial void Onunidad_idChanged();
-    partial void Onverbo_idChanging(System.Nullable<int> value);
-    partial void Onverbo_idChanged();
-    partial void Onfecha_indicador_inicialChanging(System.Nullable<System.DateTime> value);
-    partial void Onfecha_indicador_inicialChanged();
-    partial void Onfecha_indicador_finalChanging(System.Nullable<System.DateTime> value);
-    partial void Onfecha_indicador_finalChanged();
-    partial void OnFecha_CreacionChanging(System.Nullable<System.DateTime> value);
-    partial void OnFecha_CreacionChanged();
-    partial void OnSSPChanging(System.Nullable<bool> value);
-    partial void OnSSPChanged();
-    partial void OnmetaChanging(System.Nullable<int> value);
-    partial void OnmetaChanged();
-    #endregion
-		
-		public Indicadore()
-		{
-			this._Indicadores_Responsables = new EntitySet<Indicadores_Responsable>(new Action<Indicadores_Responsable>(this.attach_Indicadores_Responsables), new Action<Indicadores_Responsable>(this.detach_Indicadores_Responsables));
-			this._Indicadores_Metas = new EntitySet<Indicadores_Meta>(new Action<Indicadores_Meta>(this.attach_Indicadores_Metas), new Action<Indicadores_Meta>(this.detach_Indicadores_Metas));
-			this._Verbo = default(EntityRef<Verbo>);
-			this._Unidade = default(EntityRef<Unidade>);
-			this._Actividade = default(EntityRef<Actividade>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Actividad_id", DbType="Int")]
-		public System.Nullable<int> Actividad_id
-		{
-			get
-			{
-				return this._Actividad_id;
-			}
-			set
-			{
-				if ((this._Actividad_id != value))
-				{
-					if (this._Actividade.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnActividad_idChanging(value);
-					this.SendPropertyChanging();
-					this._Actividad_id = value;
-					this.SendPropertyChanged("Actividad_id");
-					this.OnActividad_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string Indicador
-		{
-			get
-			{
-				return this._Indicador;
-			}
-			set
-			{
-				if ((this._Indicador != value))
-				{
-					this.OnIndicadorChanging(value);
-					this.SendPropertyChanging();
-					this._Indicador = value;
-					this.SendPropertyChanged("Indicador");
-					this.OnIndicadorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unidad_id", DbType="Int")]
-		public System.Nullable<int> unidad_id
-		{
-			get
-			{
-				return this._unidad_id;
-			}
-			set
-			{
-				if ((this._unidad_id != value))
-				{
-					if (this._Unidade.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onunidad_idChanging(value);
-					this.SendPropertyChanging();
-					this._unidad_id = value;
-					this.SendPropertyChanged("unidad_id");
-					this.Onunidad_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_verbo_id", DbType="Int")]
-		public System.Nullable<int> verbo_id
-		{
-			get
-			{
-				return this._verbo_id;
-			}
-			set
-			{
-				if ((this._verbo_id != value))
-				{
-					if (this._Verbo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onverbo_idChanging(value);
-					this.SendPropertyChanging();
-					this._verbo_id = value;
-					this.SendPropertyChanged("verbo_id");
-					this.Onverbo_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha_indicador_inicial", DbType="Date")]
-		public System.Nullable<System.DateTime> fecha_indicador_inicial
-		{
-			get
-			{
-				return this._fecha_indicador_inicial;
-			}
-			set
-			{
-				if ((this._fecha_indicador_inicial != value))
-				{
-					this.Onfecha_indicador_inicialChanging(value);
-					this.SendPropertyChanging();
-					this._fecha_indicador_inicial = value;
-					this.SendPropertyChanged("fecha_indicador_inicial");
-					this.Onfecha_indicador_inicialChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha_indicador_final", DbType="Date")]
-		public System.Nullable<System.DateTime> fecha_indicador_final
-		{
-			get
-			{
-				return this._fecha_indicador_final;
-			}
-			set
-			{
-				if ((this._fecha_indicador_final != value))
-				{
-					this.Onfecha_indicador_finalChanging(value);
-					this.SendPropertyChanging();
-					this._fecha_indicador_final = value;
-					this.SendPropertyChanged("fecha_indicador_final");
-					this.Onfecha_indicador_finalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha_Creacion", DbType="Date")]
-		public System.Nullable<System.DateTime> Fecha_Creacion
-		{
-			get
-			{
-				return this._Fecha_Creacion;
-			}
-			set
-			{
-				if ((this._Fecha_Creacion != value))
-				{
-					this.OnFecha_CreacionChanging(value);
-					this.SendPropertyChanging();
-					this._Fecha_Creacion = value;
-					this.SendPropertyChanged("Fecha_Creacion");
-					this.OnFecha_CreacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SSP", DbType="Bit")]
-		public System.Nullable<bool> SSP
-		{
-			get
-			{
-				return this._SSP;
-			}
-			set
-			{
-				if ((this._SSP != value))
-				{
-					this.OnSSPChanging(value);
-					this.SendPropertyChanging();
-					this._SSP = value;
-					this.SendPropertyChanged("SSP");
-					this.OnSSPChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_meta", DbType="Int")]
-		public System.Nullable<int> meta
-		{
-			get
-			{
-				return this._meta;
-			}
-			set
-			{
-				if ((this._meta != value))
-				{
-					this.OnmetaChanging(value);
-					this.SendPropertyChanging();
-					this._meta = value;
-					this.SendPropertyChanged("meta");
-					this.OnmetaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Indicadore_Indicadores_Responsable", Storage="_Indicadores_Responsables", ThisKey="Id", OtherKey="Indicador_id")]
-		public EntitySet<Indicadores_Responsable> Indicadores_Responsables
-		{
-			get
-			{
-				return this._Indicadores_Responsables;
-			}
-			set
-			{
-				this._Indicadores_Responsables.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Indicadore_Indicadores_Meta", Storage="_Indicadores_Metas", ThisKey="Id", OtherKey="Indicador_id")]
-		public EntitySet<Indicadores_Meta> Indicadores_Metas
-		{
-			get
-			{
-				return this._Indicadores_Metas;
-			}
-			set
-			{
-				this._Indicadores_Metas.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_Indicadore", Storage="_Verbo", ThisKey="verbo_id", OtherKey="Id", IsForeignKey=true)]
-		public Verbo Verbo
-		{
-			get
-			{
-				return this._Verbo.Entity;
-			}
-			set
-			{
-				Verbo previousValue = this._Verbo.Entity;
-				if (((previousValue != value) 
-							|| (this._Verbo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Verbo.Entity = null;
-						previousValue.Indicadores.Remove(this);
-					}
-					this._Verbo.Entity = value;
-					if ((value != null))
-					{
-						value.Indicadores.Add(this);
-						this._verbo_id = value.Id;
-					}
-					else
-					{
-						this._verbo_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Verbo");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Unidade_Indicadore", Storage="_Unidade", ThisKey="unidad_id", OtherKey="Id", IsForeignKey=true)]
-		public Unidade Unidade
-		{
-			get
-			{
-				return this._Unidade.Entity;
-			}
-			set
-			{
-				Unidade previousValue = this._Unidade.Entity;
-				if (((previousValue != value) 
-							|| (this._Unidade.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Unidade.Entity = null;
-						previousValue.Indicadores.Remove(this);
-					}
-					this._Unidade.Entity = value;
-					if ((value != null))
-					{
-						value.Indicadores.Add(this);
-						this._unidad_id = value.Id;
-					}
-					else
-					{
-						this._unidad_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Unidade");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Indicadore", Storage="_Actividade", ThisKey="Actividad_id", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
-		public Actividade Actividade
-		{
-			get
-			{
-				return this._Actividade.Entity;
-			}
-			set
-			{
-				Actividade previousValue = this._Actividade.Entity;
-				if (((previousValue != value) 
-							|| (this._Actividade.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Actividade.Entity = null;
-						previousValue.Indicadores.Remove(this);
-					}
-					this._Actividade.Entity = value;
-					if ((value != null))
-					{
-						value.Indicadores.Add(this);
-						this._Actividad_id = value.Id;
-					}
-					else
-					{
-						this._Actividad_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Actividade");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Indicadores_Responsables(Indicadores_Responsable entity)
-		{
-			this.SendPropertyChanging();
-			entity.Indicadore = this;
-		}
-		
-		private void detach_Indicadores_Responsables(Indicadores_Responsable entity)
-		{
-			this.SendPropertyChanging();
-			entity.Indicadore = null;
-		}
-		
-		private void attach_Indicadores_Metas(Indicadores_Meta entity)
-		{
-			this.SendPropertyChanging();
-			entity.Indicadore = this;
-		}
-		
-		private void detach_Indicadores_Metas(Indicadores_Meta entity)
-		{
-			this.SendPropertyChanging();
-			entity.Indicadore = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.actividades_presupuesto")]
 	public partial class actividades_presupuesto : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -21073,373 +20616,6 @@ namespace ESM.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Actividades")]
-	public partial class Actividade : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _Subproceso_id;
-		
-		private string _Actividad;
-		
-		private System.Nullable<double> _Presupuesto;
-		
-		private System.Nullable<System.DateTime> _fecha;
-		
-		private EntitySet<Actividades_Medio> _Actividades_Medios;
-		
-		private EntitySet<Actividades_Responsable> _Actividades_Responsables;
-		
-		private EntitySet<Actividades_Supuesto> _Actividades_Supuestos;
-		
-		private EntitySet<Responsables_Resultado> _Responsables_Resultados;
-		
-		private EntitySet<Indicadore> _Indicadores;
-		
-		private EntitySet<actividades_presupuesto> _actividades_presupuestos;
-		
-		private EntityRef<Subproceso> _Subproceso;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnSubproceso_idChanging(System.Nullable<int> value);
-    partial void OnSubproceso_idChanged();
-    partial void OnActividadChanging(string value);
-    partial void OnActividadChanged();
-    partial void OnPresupuestoChanging(System.Nullable<double> value);
-    partial void OnPresupuestoChanged();
-    partial void OnfechaChanging(System.Nullable<System.DateTime> value);
-    partial void OnfechaChanged();
-    #endregion
-		
-		public Actividade()
-		{
-			this._Actividades_Medios = new EntitySet<Actividades_Medio>(new Action<Actividades_Medio>(this.attach_Actividades_Medios), new Action<Actividades_Medio>(this.detach_Actividades_Medios));
-			this._Actividades_Responsables = new EntitySet<Actividades_Responsable>(new Action<Actividades_Responsable>(this.attach_Actividades_Responsables), new Action<Actividades_Responsable>(this.detach_Actividades_Responsables));
-			this._Actividades_Supuestos = new EntitySet<Actividades_Supuesto>(new Action<Actividades_Supuesto>(this.attach_Actividades_Supuestos), new Action<Actividades_Supuesto>(this.detach_Actividades_Supuestos));
-			this._Responsables_Resultados = new EntitySet<Responsables_Resultado>(new Action<Responsables_Resultado>(this.attach_Responsables_Resultados), new Action<Responsables_Resultado>(this.detach_Responsables_Resultados));
-			this._Indicadores = new EntitySet<Indicadore>(new Action<Indicadore>(this.attach_Indicadores), new Action<Indicadore>(this.detach_Indicadores));
-			this._actividades_presupuestos = new EntitySet<actividades_presupuesto>(new Action<actividades_presupuesto>(this.attach_actividades_presupuestos), new Action<actividades_presupuesto>(this.detach_actividades_presupuestos));
-			this._Subproceso = default(EntityRef<Subproceso>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Subproceso_id", DbType="Int")]
-		public System.Nullable<int> Subproceso_id
-		{
-			get
-			{
-				return this._Subproceso_id;
-			}
-			set
-			{
-				if ((this._Subproceso_id != value))
-				{
-					if (this._Subproceso.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSubproceso_idChanging(value);
-					this.SendPropertyChanging();
-					this._Subproceso_id = value;
-					this.SendPropertyChanged("Subproceso_id");
-					this.OnSubproceso_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Actividad", DbType="NVarChar(2000)")]
-		public string Actividad
-		{
-			get
-			{
-				return this._Actividad;
-			}
-			set
-			{
-				if ((this._Actividad != value))
-				{
-					this.OnActividadChanging(value);
-					this.SendPropertyChanging();
-					this._Actividad = value;
-					this.SendPropertyChanged("Actividad");
-					this.OnActividadChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Presupuesto", DbType="Float")]
-		public System.Nullable<double> Presupuesto
-		{
-			get
-			{
-				return this._Presupuesto;
-			}
-			set
-			{
-				if ((this._Presupuesto != value))
-				{
-					this.OnPresupuestoChanging(value);
-					this.SendPropertyChanging();
-					this._Presupuesto = value;
-					this.SendPropertyChanged("Presupuesto");
-					this.OnPresupuestoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha", DbType="Date")]
-		public System.Nullable<System.DateTime> fecha
-		{
-			get
-			{
-				return this._fecha;
-			}
-			set
-			{
-				if ((this._fecha != value))
-				{
-					this.OnfechaChanging(value);
-					this.SendPropertyChanging();
-					this._fecha = value;
-					this.SendPropertyChanged("fecha");
-					this.OnfechaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Actividades_Medio", Storage="_Actividades_Medios", ThisKey="Id", OtherKey="Actividad_id")]
-		public EntitySet<Actividades_Medio> Actividades_Medios
-		{
-			get
-			{
-				return this._Actividades_Medios;
-			}
-			set
-			{
-				this._Actividades_Medios.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Actividades_Responsable", Storage="_Actividades_Responsables", ThisKey="Id", OtherKey="Actividad_id")]
-		public EntitySet<Actividades_Responsable> Actividades_Responsables
-		{
-			get
-			{
-				return this._Actividades_Responsables;
-			}
-			set
-			{
-				this._Actividades_Responsables.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Actividades_Supuesto", Storage="_Actividades_Supuestos", ThisKey="Id", OtherKey="Actividad_id")]
-		public EntitySet<Actividades_Supuesto> Actividades_Supuestos
-		{
-			get
-			{
-				return this._Actividades_Supuestos;
-			}
-			set
-			{
-				this._Actividades_Supuestos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Responsables_Resultado", Storage="_Responsables_Resultados", ThisKey="Id", OtherKey="Actividad_id")]
-		public EntitySet<Responsables_Resultado> Responsables_Resultados
-		{
-			get
-			{
-				return this._Responsables_Resultados;
-			}
-			set
-			{
-				this._Responsables_Resultados.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Indicadore", Storage="_Indicadores", ThisKey="Id", OtherKey="Actividad_id")]
-		public EntitySet<Indicadore> Indicadores
-		{
-			get
-			{
-				return this._Indicadores;
-			}
-			set
-			{
-				this._Indicadores.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_actividades_presupuesto", Storage="_actividades_presupuestos", ThisKey="Id", OtherKey="actividad_id")]
-		public EntitySet<actividades_presupuesto> actividades_presupuestos
-		{
-			get
-			{
-				return this._actividades_presupuestos;
-			}
-			set
-			{
-				this._actividades_presupuestos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Subproceso_Actividade", Storage="_Subproceso", ThisKey="Subproceso_id", OtherKey="Id", IsForeignKey=true)]
-		public Subproceso Subproceso
-		{
-			get
-			{
-				return this._Subproceso.Entity;
-			}
-			set
-			{
-				Subproceso previousValue = this._Subproceso.Entity;
-				if (((previousValue != value) 
-							|| (this._Subproceso.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Subproceso.Entity = null;
-						previousValue.Actividades.Remove(this);
-					}
-					this._Subproceso.Entity = value;
-					if ((value != null))
-					{
-						value.Actividades.Add(this);
-						this._Subproceso_id = value.Id;
-					}
-					else
-					{
-						this._Subproceso_id = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Subproceso");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Actividades_Medios(Actividades_Medio entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = this;
-		}
-		
-		private void detach_Actividades_Medios(Actividades_Medio entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = null;
-		}
-		
-		private void attach_Actividades_Responsables(Actividades_Responsable entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = this;
-		}
-		
-		private void detach_Actividades_Responsables(Actividades_Responsable entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = null;
-		}
-		
-		private void attach_Actividades_Supuestos(Actividades_Supuesto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = this;
-		}
-		
-		private void detach_Actividades_Supuestos(Actividades_Supuesto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = null;
-		}
-		
-		private void attach_Responsables_Resultados(Responsables_Resultado entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = this;
-		}
-		
-		private void detach_Responsables_Resultados(Responsables_Resultado entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = null;
-		}
-		
-		private void attach_Indicadores(Indicadore entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = this;
-		}
-		
-		private void detach_Indicadores(Indicadore entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = null;
-		}
-		
-		private void attach_actividades_presupuestos(actividades_presupuesto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = this;
-		}
-		
-		private void detach_actividades_presupuestos(actividades_presupuesto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Actividade = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Registro_Proyectos")]
 	public partial class Registro_Proyecto : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -21756,6 +20932,902 @@ namespace ESM.Model
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Actividades")]
+	public partial class Actividade : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Subproceso_id;
+		
+		private string _Actividad;
+		
+		private System.Nullable<double> _Presupuesto;
+		
+		private System.Nullable<System.DateTime> _fecha;
+		
+		private EntitySet<Actividades_Medio> _Actividades_Medios;
+		
+		private EntitySet<Actividades_Responsable> _Actividades_Responsables;
+		
+		private EntitySet<Actividades_Supuesto> _Actividades_Supuestos;
+		
+		private EntitySet<Responsables_Resultado> _Responsables_Resultados;
+		
+		private EntitySet<actividades_presupuesto> _actividades_presupuestos;
+		
+		private EntitySet<Indicadore> _Indicadores;
+		
+		private EntityRef<Subproceso> _Subproceso;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnSubproceso_idChanging(System.Nullable<int> value);
+    partial void OnSubproceso_idChanged();
+    partial void OnActividadChanging(string value);
+    partial void OnActividadChanged();
+    partial void OnPresupuestoChanging(System.Nullable<double> value);
+    partial void OnPresupuestoChanged();
+    partial void OnfechaChanging(System.Nullable<System.DateTime> value);
+    partial void OnfechaChanged();
+    #endregion
+		
+		public Actividade()
+		{
+			this._Actividades_Medios = new EntitySet<Actividades_Medio>(new Action<Actividades_Medio>(this.attach_Actividades_Medios), new Action<Actividades_Medio>(this.detach_Actividades_Medios));
+			this._Actividades_Responsables = new EntitySet<Actividades_Responsable>(new Action<Actividades_Responsable>(this.attach_Actividades_Responsables), new Action<Actividades_Responsable>(this.detach_Actividades_Responsables));
+			this._Actividades_Supuestos = new EntitySet<Actividades_Supuesto>(new Action<Actividades_Supuesto>(this.attach_Actividades_Supuestos), new Action<Actividades_Supuesto>(this.detach_Actividades_Supuestos));
+			this._Responsables_Resultados = new EntitySet<Responsables_Resultado>(new Action<Responsables_Resultado>(this.attach_Responsables_Resultados), new Action<Responsables_Resultado>(this.detach_Responsables_Resultados));
+			this._actividades_presupuestos = new EntitySet<actividades_presupuesto>(new Action<actividades_presupuesto>(this.attach_actividades_presupuestos), new Action<actividades_presupuesto>(this.detach_actividades_presupuestos));
+			this._Indicadores = new EntitySet<Indicadore>(new Action<Indicadore>(this.attach_Indicadores), new Action<Indicadore>(this.detach_Indicadores));
+			this._Subproceso = default(EntityRef<Subproceso>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Subproceso_id", DbType="Int")]
+		public System.Nullable<int> Subproceso_id
+		{
+			get
+			{
+				return this._Subproceso_id;
+			}
+			set
+			{
+				if ((this._Subproceso_id != value))
+				{
+					if (this._Subproceso.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSubproceso_idChanging(value);
+					this.SendPropertyChanging();
+					this._Subproceso_id = value;
+					this.SendPropertyChanged("Subproceso_id");
+					this.OnSubproceso_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Actividad", DbType="NVarChar(2000)")]
+		public string Actividad
+		{
+			get
+			{
+				return this._Actividad;
+			}
+			set
+			{
+				if ((this._Actividad != value))
+				{
+					this.OnActividadChanging(value);
+					this.SendPropertyChanging();
+					this._Actividad = value;
+					this.SendPropertyChanged("Actividad");
+					this.OnActividadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Presupuesto", DbType="Float")]
+		public System.Nullable<double> Presupuesto
+		{
+			get
+			{
+				return this._Presupuesto;
+			}
+			set
+			{
+				if ((this._Presupuesto != value))
+				{
+					this.OnPresupuestoChanging(value);
+					this.SendPropertyChanging();
+					this._Presupuesto = value;
+					this.SendPropertyChanged("Presupuesto");
+					this.OnPresupuestoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha", DbType="Date")]
+		public System.Nullable<System.DateTime> fecha
+		{
+			get
+			{
+				return this._fecha;
+			}
+			set
+			{
+				if ((this._fecha != value))
+				{
+					this.OnfechaChanging(value);
+					this.SendPropertyChanging();
+					this._fecha = value;
+					this.SendPropertyChanged("fecha");
+					this.OnfechaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Actividades_Medio", Storage="_Actividades_Medios", ThisKey="Id", OtherKey="Actividad_id")]
+		public EntitySet<Actividades_Medio> Actividades_Medios
+		{
+			get
+			{
+				return this._Actividades_Medios;
+			}
+			set
+			{
+				this._Actividades_Medios.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Actividades_Responsable", Storage="_Actividades_Responsables", ThisKey="Id", OtherKey="Actividad_id")]
+		public EntitySet<Actividades_Responsable> Actividades_Responsables
+		{
+			get
+			{
+				return this._Actividades_Responsables;
+			}
+			set
+			{
+				this._Actividades_Responsables.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Actividades_Supuesto", Storage="_Actividades_Supuestos", ThisKey="Id", OtherKey="Actividad_id")]
+		public EntitySet<Actividades_Supuesto> Actividades_Supuestos
+		{
+			get
+			{
+				return this._Actividades_Supuestos;
+			}
+			set
+			{
+				this._Actividades_Supuestos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Responsables_Resultado", Storage="_Responsables_Resultados", ThisKey="Id", OtherKey="Actividad_id")]
+		public EntitySet<Responsables_Resultado> Responsables_Resultados
+		{
+			get
+			{
+				return this._Responsables_Resultados;
+			}
+			set
+			{
+				this._Responsables_Resultados.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_actividades_presupuesto", Storage="_actividades_presupuestos", ThisKey="Id", OtherKey="actividad_id")]
+		public EntitySet<actividades_presupuesto> actividades_presupuestos
+		{
+			get
+			{
+				return this._actividades_presupuestos;
+			}
+			set
+			{
+				this._actividades_presupuestos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Indicadore", Storage="_Indicadores", ThisKey="Id", OtherKey="Actividad_id")]
+		public EntitySet<Indicadore> Indicadores
+		{
+			get
+			{
+				return this._Indicadores;
+			}
+			set
+			{
+				this._Indicadores.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Subproceso_Actividade", Storage="_Subproceso", ThisKey="Subproceso_id", OtherKey="Id", IsForeignKey=true)]
+		public Subproceso Subproceso
+		{
+			get
+			{
+				return this._Subproceso.Entity;
+			}
+			set
+			{
+				Subproceso previousValue = this._Subproceso.Entity;
+				if (((previousValue != value) 
+							|| (this._Subproceso.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Subproceso.Entity = null;
+						previousValue.Actividades.Remove(this);
+					}
+					this._Subproceso.Entity = value;
+					if ((value != null))
+					{
+						value.Actividades.Add(this);
+						this._Subproceso_id = value.Id;
+					}
+					else
+					{
+						this._Subproceso_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Subproceso");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Actividades_Medios(Actividades_Medio entity)
+		{
+			this.SendPropertyChanging();
+			entity.Actividade = this;
+		}
+		
+		private void detach_Actividades_Medios(Actividades_Medio entity)
+		{
+			this.SendPropertyChanging();
+			entity.Actividade = null;
+		}
+		
+		private void attach_Actividades_Responsables(Actividades_Responsable entity)
+		{
+			this.SendPropertyChanging();
+			entity.Actividade = this;
+		}
+		
+		private void detach_Actividades_Responsables(Actividades_Responsable entity)
+		{
+			this.SendPropertyChanging();
+			entity.Actividade = null;
+		}
+		
+		private void attach_Actividades_Supuestos(Actividades_Supuesto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Actividade = this;
+		}
+		
+		private void detach_Actividades_Supuestos(Actividades_Supuesto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Actividade = null;
+		}
+		
+		private void attach_Responsables_Resultados(Responsables_Resultado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Actividade = this;
+		}
+		
+		private void detach_Responsables_Resultados(Responsables_Resultado entity)
+		{
+			this.SendPropertyChanging();
+			entity.Actividade = null;
+		}
+		
+		private void attach_actividades_presupuestos(actividades_presupuesto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Actividade = this;
+		}
+		
+		private void detach_actividades_presupuestos(actividades_presupuesto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Actividade = null;
+		}
+		
+		private void attach_Indicadores(Indicadore entity)
+		{
+			this.SendPropertyChanging();
+			entity.Actividade = this;
+		}
+		
+		private void detach_Indicadores(Indicadore entity)
+		{
+			this.SendPropertyChanging();
+			entity.Actividade = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Indicadores")]
+	public partial class Indicadore : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Actividad_id;
+		
+		private string _Indicador;
+		
+		private System.Nullable<int> _unidad_id;
+		
+		private System.Nullable<int> _verbo_id;
+		
+		private System.Nullable<System.DateTime> _fecha_indicador_inicial;
+		
+		private System.Nullable<System.DateTime> _fecha_indicador_final;
+		
+		private System.Nullable<System.DateTime> _Fecha_Creacion;
+		
+		private System.Nullable<bool> _SSP;
+		
+		private System.Nullable<int> _meta;
+		
+		private string _medios;
+		
+		private string _supuestos;
+		
+		private string _descripcion;
+		
+		private EntitySet<Indicadores_Responsable> _Indicadores_Responsables;
+		
+		private EntitySet<Indicadores_Meta> _Indicadores_Metas;
+		
+		private EntityRef<Actividade> _Actividade;
+		
+		private EntityRef<Verbo> _Verbo;
+		
+		private EntityRef<Unidade> _Unidade;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnActividad_idChanging(System.Nullable<int> value);
+    partial void OnActividad_idChanged();
+    partial void OnIndicadorChanging(string value);
+    partial void OnIndicadorChanged();
+    partial void Onunidad_idChanging(System.Nullable<int> value);
+    partial void Onunidad_idChanged();
+    partial void Onverbo_idChanging(System.Nullable<int> value);
+    partial void Onverbo_idChanged();
+    partial void Onfecha_indicador_inicialChanging(System.Nullable<System.DateTime> value);
+    partial void Onfecha_indicador_inicialChanged();
+    partial void Onfecha_indicador_finalChanging(System.Nullable<System.DateTime> value);
+    partial void Onfecha_indicador_finalChanged();
+    partial void OnFecha_CreacionChanging(System.Nullable<System.DateTime> value);
+    partial void OnFecha_CreacionChanged();
+    partial void OnSSPChanging(System.Nullable<bool> value);
+    partial void OnSSPChanged();
+    partial void OnmetaChanging(System.Nullable<int> value);
+    partial void OnmetaChanged();
+    partial void OnmediosChanging(string value);
+    partial void OnmediosChanged();
+    partial void OnsupuestosChanging(string value);
+    partial void OnsupuestosChanged();
+    partial void OndescripcionChanging(string value);
+    partial void OndescripcionChanged();
+    #endregion
+		
+		public Indicadore()
+		{
+			this._Indicadores_Responsables = new EntitySet<Indicadores_Responsable>(new Action<Indicadores_Responsable>(this.attach_Indicadores_Responsables), new Action<Indicadores_Responsable>(this.detach_Indicadores_Responsables));
+			this._Indicadores_Metas = new EntitySet<Indicadores_Meta>(new Action<Indicadores_Meta>(this.attach_Indicadores_Metas), new Action<Indicadores_Meta>(this.detach_Indicadores_Metas));
+			this._Actividade = default(EntityRef<Actividade>);
+			this._Verbo = default(EntityRef<Verbo>);
+			this._Unidade = default(EntityRef<Unidade>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Actividad_id", DbType="Int")]
+		public System.Nullable<int> Actividad_id
+		{
+			get
+			{
+				return this._Actividad_id;
+			}
+			set
+			{
+				if ((this._Actividad_id != value))
+				{
+					if (this._Actividade.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnActividad_idChanging(value);
+					this.SendPropertyChanging();
+					this._Actividad_id = value;
+					this.SendPropertyChanged("Actividad_id");
+					this.OnActividad_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Indicador", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Indicador
+		{
+			get
+			{
+				return this._Indicador;
+			}
+			set
+			{
+				if ((this._Indicador != value))
+				{
+					this.OnIndicadorChanging(value);
+					this.SendPropertyChanging();
+					this._Indicador = value;
+					this.SendPropertyChanged("Indicador");
+					this.OnIndicadorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unidad_id", DbType="Int")]
+		public System.Nullable<int> unidad_id
+		{
+			get
+			{
+				return this._unidad_id;
+			}
+			set
+			{
+				if ((this._unidad_id != value))
+				{
+					if (this._Unidade.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onunidad_idChanging(value);
+					this.SendPropertyChanging();
+					this._unidad_id = value;
+					this.SendPropertyChanged("unidad_id");
+					this.Onunidad_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_verbo_id", DbType="Int")]
+		public System.Nullable<int> verbo_id
+		{
+			get
+			{
+				return this._verbo_id;
+			}
+			set
+			{
+				if ((this._verbo_id != value))
+				{
+					if (this._Verbo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onverbo_idChanging(value);
+					this.SendPropertyChanging();
+					this._verbo_id = value;
+					this.SendPropertyChanged("verbo_id");
+					this.Onverbo_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha_indicador_inicial", DbType="Date")]
+		public System.Nullable<System.DateTime> fecha_indicador_inicial
+		{
+			get
+			{
+				return this._fecha_indicador_inicial;
+			}
+			set
+			{
+				if ((this._fecha_indicador_inicial != value))
+				{
+					this.Onfecha_indicador_inicialChanging(value);
+					this.SendPropertyChanging();
+					this._fecha_indicador_inicial = value;
+					this.SendPropertyChanged("fecha_indicador_inicial");
+					this.Onfecha_indicador_inicialChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha_indicador_final", DbType="Date")]
+		public System.Nullable<System.DateTime> fecha_indicador_final
+		{
+			get
+			{
+				return this._fecha_indicador_final;
+			}
+			set
+			{
+				if ((this._fecha_indicador_final != value))
+				{
+					this.Onfecha_indicador_finalChanging(value);
+					this.SendPropertyChanging();
+					this._fecha_indicador_final = value;
+					this.SendPropertyChanged("fecha_indicador_final");
+					this.Onfecha_indicador_finalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha_Creacion", DbType="Date")]
+		public System.Nullable<System.DateTime> Fecha_Creacion
+		{
+			get
+			{
+				return this._Fecha_Creacion;
+			}
+			set
+			{
+				if ((this._Fecha_Creacion != value))
+				{
+					this.OnFecha_CreacionChanging(value);
+					this.SendPropertyChanging();
+					this._Fecha_Creacion = value;
+					this.SendPropertyChanged("Fecha_Creacion");
+					this.OnFecha_CreacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SSP", DbType="Bit")]
+		public System.Nullable<bool> SSP
+		{
+			get
+			{
+				return this._SSP;
+			}
+			set
+			{
+				if ((this._SSP != value))
+				{
+					this.OnSSPChanging(value);
+					this.SendPropertyChanging();
+					this._SSP = value;
+					this.SendPropertyChanged("SSP");
+					this.OnSSPChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_meta", DbType="Int")]
+		public System.Nullable<int> meta
+		{
+			get
+			{
+				return this._meta;
+			}
+			set
+			{
+				if ((this._meta != value))
+				{
+					this.OnmetaChanging(value);
+					this.SendPropertyChanging();
+					this._meta = value;
+					this.SendPropertyChanged("meta");
+					this.OnmetaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_medios", DbType="NVarChar(255)")]
+		public string medios
+		{
+			get
+			{
+				return this._medios;
+			}
+			set
+			{
+				if ((this._medios != value))
+				{
+					this.OnmediosChanging(value);
+					this.SendPropertyChanging();
+					this._medios = value;
+					this.SendPropertyChanged("medios");
+					this.OnmediosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_supuestos", DbType="NVarChar(255)")]
+		public string supuestos
+		{
+			get
+			{
+				return this._supuestos;
+			}
+			set
+			{
+				if ((this._supuestos != value))
+				{
+					this.OnsupuestosChanging(value);
+					this.SendPropertyChanging();
+					this._supuestos = value;
+					this.SendPropertyChanged("supuestos");
+					this.OnsupuestosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_descripcion", DbType="NVarChar(255)")]
+		public string descripcion
+		{
+			get
+			{
+				return this._descripcion;
+			}
+			set
+			{
+				if ((this._descripcion != value))
+				{
+					this.OndescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._descripcion = value;
+					this.SendPropertyChanged("descripcion");
+					this.OndescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Indicadore_Indicadores_Responsable", Storage="_Indicadores_Responsables", ThisKey="Id", OtherKey="Indicador_id")]
+		public EntitySet<Indicadores_Responsable> Indicadores_Responsables
+		{
+			get
+			{
+				return this._Indicadores_Responsables;
+			}
+			set
+			{
+				this._Indicadores_Responsables.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Indicadore_Indicadores_Meta", Storage="_Indicadores_Metas", ThisKey="Id", OtherKey="Indicador_id")]
+		public EntitySet<Indicadores_Meta> Indicadores_Metas
+		{
+			get
+			{
+				return this._Indicadores_Metas;
+			}
+			set
+			{
+				this._Indicadores_Metas.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Actividade_Indicadore", Storage="_Actividade", ThisKey="Actividad_id", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
+		public Actividade Actividade
+		{
+			get
+			{
+				return this._Actividade.Entity;
+			}
+			set
+			{
+				Actividade previousValue = this._Actividade.Entity;
+				if (((previousValue != value) 
+							|| (this._Actividade.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Actividade.Entity = null;
+						previousValue.Indicadores.Remove(this);
+					}
+					this._Actividade.Entity = value;
+					if ((value != null))
+					{
+						value.Indicadores.Add(this);
+						this._Actividad_id = value.Id;
+					}
+					else
+					{
+						this._Actividad_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Actividade");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verbo_Indicadore", Storage="_Verbo", ThisKey="verbo_id", OtherKey="Id", IsForeignKey=true)]
+		public Verbo Verbo
+		{
+			get
+			{
+				return this._Verbo.Entity;
+			}
+			set
+			{
+				Verbo previousValue = this._Verbo.Entity;
+				if (((previousValue != value) 
+							|| (this._Verbo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Verbo.Entity = null;
+						previousValue.Indicadores.Remove(this);
+					}
+					this._Verbo.Entity = value;
+					if ((value != null))
+					{
+						value.Indicadores.Add(this);
+						this._verbo_id = value.Id;
+					}
+					else
+					{
+						this._verbo_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Verbo");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Unidade_Indicadore", Storage="_Unidade", ThisKey="unidad_id", OtherKey="Id", IsForeignKey=true)]
+		public Unidade Unidade
+		{
+			get
+			{
+				return this._Unidade.Entity;
+			}
+			set
+			{
+				Unidade previousValue = this._Unidade.Entity;
+				if (((previousValue != value) 
+							|| (this._Unidade.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Unidade.Entity = null;
+						previousValue.Indicadores.Remove(this);
+					}
+					this._Unidade.Entity = value;
+					if ((value != null))
+					{
+						value.Indicadores.Add(this);
+						this._unidad_id = value.Id;
+					}
+					else
+					{
+						this._unidad_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Unidade");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Indicadores_Responsables(Indicadores_Responsable entity)
+		{
+			this.SendPropertyChanging();
+			entity.Indicadore = this;
+		}
+		
+		private void detach_Indicadores_Responsables(Indicadores_Responsable entity)
+		{
+			this.SendPropertyChanging();
+			entity.Indicadore = null;
+		}
+		
+		private void attach_Indicadores_Metas(Indicadores_Meta entity)
+		{
+			this.SendPropertyChanging();
+			entity.Indicadore = this;
+		}
+		
+		private void detach_Indicadores_Metas(Indicadores_Meta entity)
+		{
+			this.SendPropertyChanging();
+			entity.Indicadore = null;
 		}
 	}
 }

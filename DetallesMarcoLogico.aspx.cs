@@ -140,7 +140,7 @@ namespace ESM
                     DateTime fecha_final = Convert.ToDateTime(txtFechaFinal.Text);
                     int meta = Convert.ToInt32(Meta.Text);
 
-                    objActividades.AddIndicador(idactividad, txtindicadorg.Text, verboid, unidadid, fecha_inicial.Date, fecha_final, meta, chxSSP.Checked);
+                    //objActividades.AddIndicador(idactividad, txtindicadorg.Text, verboid, unidadid, fecha_inicial.Date, fecha_final, meta, chxSSP.Checked);
                 }
                 bool mediosvacios = objActividades.RemoveMedios(idactividad);
 
@@ -207,7 +207,7 @@ namespace ESM
                 DateTime fecha_final = Convert.ToDateTime(txtFechaFinal.Text);
                 int meta = Convert.ToInt32(Meta.Text);
                 int indicador_id = Convert.ToInt32(Session["idindicador_actividad"]);
-                objActividades.UpdateIndicador(indicador_id, txtindicadorg.Text, verboid, unidadid, fecha_inicial.Date, fecha_final, meta, chxSSP.Checked);
+                //objActividades.UpdateIndicador(indicador_id, txtindicadorg.Text, verboid, unidadid, fecha_inicial.Date, fecha_final, meta, chxSSP.Checked);
 
                 Session.Remove("idindicador_actividad");
 
