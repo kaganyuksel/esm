@@ -19,9 +19,9 @@
                 colNames: ['No.', 'Causa', 'Efecto', 'Beneficio'],
                 colModel: [
    		                    { name: 'id', index: 'id', width: 55 },
-   		                    { name: 'causa', index: 'causa', width: 90, editable: true },
-   		                    { name: 'efecto', index: 'efecto', width: 100, editable: true },
-                            { name: 'beneficio', index: 'beneficio', width: 100, editable: true }
+   		                    { name: 'causa', index: 'causa', width: 160, editable: true },
+   		                    { name: 'efecto', index: 'efecto', width: 160, editable: true },
+                            { name: 'beneficio', index: 'beneficio', width: 160, editable: true }
    	            ],
                 rowNum: 10,
                 rowList: [10, 20, 30],

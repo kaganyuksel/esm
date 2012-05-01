@@ -23,11 +23,11 @@
 
             j(".iframe").fancybox();
 
-            j("#org").jOrgChart({
+            j("#ContentPlaceHolder1_org").jOrgChart({
                 chartElement: '#chart'
             });
 
-            j("#org_objetivos").jOrgChart({
+            j("#ContentPlaceHolder1_org_objetivos").jOrgChart({
                 chartElement: '#chart_objetivos'
             });
             j('#magazine').turn({ gradients: true, acceleration: true });
@@ -208,10 +208,17 @@
             <h1>
                 INFORMACIÓN BASICA DEL PROYECTO</h1>
             <br />
-            <a id="if_google" class="iframe" href="/bancoproyectos.aspx">This goes to iframe</a>
             * Nombre de Proyecto:
-            <input type="text" style="display: block; width: 80%;" runat="server" name="nombreproblema"
-                id="txtnombreproyecto" value="" />
+            <textarea id="txtnombreproyecto" runat="server" style="display: block; width: 80%;
+                height: 100px;" cols="20" rows="50"></textarea>
+            <br />
+            * Proposito:
+            <textarea id="txtproposito" runat="server" style="display: block; width: 80%; height: 100px;"
+                cols="20" rows="50"></textarea>
+            <br />
+            * Finalidad:
+            <textarea id="txtfinalidad" runat="server" style="display: block; width: 80%; height: 100px;"
+                cols="20" rows="50"></textarea>
             <br />
             Problema Central
             <textarea cols="20" rows="50" id="txtproblema" runat="server" style="display: block;
@@ -559,10 +566,7 @@
                 ARBOL DE PROBLEMAS</h1>
             <br />
             <br />
-            <iframe id="if_c_e" runat="server" src="" width="100%" height="500px"></iframe>
-            <a href="#" onclick="UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val()); j('#if_google').trigger('click');">
-                Actualizar</a>
-            <ul id="org" style="display: none;">
+            <ul id="org" runat="server" style="display: none;">
                 <li>Proyectos
                     <ul>
                         <li id="beer">Causas</li>
@@ -603,6 +607,11 @@
             </ul>
             <div id="chart" class="jOrgChart">
             </div>
+            <br />
+            <a href="#" onclick="UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val()); j('#if_google').trigger('click');">
+                Actualizar Organigrama</a>
+            <br />
+            <iframe id="if_c_e" runat="server" src="" width="100%" height="500px"></iframe>
         </div>
         <div>
             <h1>
@@ -627,7 +636,7 @@
             <h1>
                 ANÁLISIS DE OBJETIVOS
             </h1>
-            <ul id="org_objetivos" style="display: none;">
+            <ul id="org_objetivos" runat="server" style="display: none;">
             </ul>
             <div id="chart_objetivos" class="jOrgChart">
             </div>
@@ -737,27 +746,123 @@
             <h1>
                 DISEÑO Y FORMULACIÓN
             </h1>
-            <iframe id="if_marco_logico" runat="server" width="100%" height="800px"></iframe>
+            <iframe id="if_marco_logico" runat="server" width="100%" height="1000px"></iframe>
         </div>
         <div>
             <h1>
-                EJECUCIÓN SEGUIMIENTO Y MONITOREO
-            </h1>
+                <a name="_Toc315687137" id="A1">DISEÑO Y FORMULACIÓN</a></h1>
+            <div>
+                <h3>
+                    El Enfoque de Marco lógico (MATRIZ DE MARCO LÓGICO)</h3>
+            </div>
+            <p>
+                La matriz de marco lógico es el procedimiento para la organización y visualización
+                del proyecto facilitando la articulación de forma sistemática y lógica de los objetivos
+                y resultados del mismo. De su estructuración se desprende el seguimiento y evaluación
+                del proyecto. En términos prácticos supone que la inversión de determinados <strong>
+                    recursos</strong> soportan la realización de <strong>actividades</strong> que
+                permiten a su vez obtener determinaos <strong>productos</strong> que facilitan el
+                logro de un propósito y el fin.
+            </p>
+            <br />
+            <h3>
+                Estructura marco lógico</h3>
+            <p>
+                El marco lógico se representa en una matriz (tabla) 4 X 4. Cuatro columnas por cuatro
+                filas. Las columnas incluyen la siguiente información:</p>
+            <br />
+            <h3>
+                Matriz (cuatro x cuatro) Tabla 02</h3>
+            <br />
+            <table class="table_class" border="1" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="144" valign="top">
+                        <p>
+                            FIN</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            INDICADOR</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            MEDIO DE VERIFICACIÓN</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            SUPUESTOS</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="144" valign="top">
+                        <p>
+                            PROPÓSITO (PROCESO)</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="144" valign="top">
+                        <p>
+                            COMPONENTES (SUBPROCESO)</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="144" valign="top">
+                        <p>
+                            ACTIVIDADES</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                    <td width="144" valign="top">
+                        <p>
+                            &nbsp;</p>
+                    </td>
+                </tr>
+            </table>
         </div>
         <div>
             <h1>
-                EJECUCIÓN SEGUIMIENTO Y MONITOREO
+                VISUALIZACIÓN PARA EL MARCO LÓGICO
             </h1>
-            <iframe id="if_ejecucion" runat="server" width="100%" height="800px"></iframe>
+            <iframe id="if_ejecucion" runat="server" width="100%" height="1500px"></iframe>
         </div>
-        <div>
+        <%--<div>
             <h1>
                 EVALUACIÓN (POSTERIOR)</h1>
         </div>
         <div>
             <h1>
                 REFERENCIAS BIBLIOGRAFICAS</h1>
-        </div>
+        </div>--%>
         <div>
         </div>
     </div>

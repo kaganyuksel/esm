@@ -49,14 +49,14 @@ namespace ESM
         {
             #region Insercion de Proyecto
 
-            int idproyecto = objCpoyecto.Add(txtproblema.Text, txtname_project.Text);
-            if (idproyecto != 0)
-            {
-                Session.Add("idproyecto", idproyecto);
-                alerthq.Value = "1";
-            }
-            else
-                alerthq.Value = "0";
+            //int idproyecto = objCpoyecto.Add(txtproblema.Text, txtname_project.Text);
+            //if (idproyecto != 0)
+            //{
+            //    Session.Add("idproyecto", idproyecto);
+            //    alerthq.Value = "1";
+            //}
+            //else
+            //    alerthq.Value = "0";
 
             #endregion
 
@@ -196,7 +196,7 @@ namespace ESM
         {
             Cproyecto objCproyecto = new Cproyecto();
             int idproyecto = Convert.ToInt32(hidproyecto.Value);
-            objCproyecto.Update(idproyecto, null, txtProposito.Text);
+            //objCproyecto.Update(idproyecto, null, txtProposito.Text);
 
         }
 
@@ -215,7 +215,7 @@ namespace ESM
 
         protected void lknAlmacenarFinalidad_Click(object sender, EventArgs e)
         {
-            objCpoyecto.Update(_idproyecto, null, null, txtFinalidad.Text);
+            //objCpoyecto.Update(_idproyecto, null, null, txtFinalidad.Text);
         }
 
         protected void getCronograma()

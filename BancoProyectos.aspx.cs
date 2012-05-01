@@ -47,9 +47,19 @@ namespace ESM
             {
                 string nombre_proyecto = txtnombreproyecto.Value;
                 string problema = txtproblema.Value;
+                string proposito = txtproposito.Value;
+                string finalidad = txtfinalidad.Value;
 
-                int proyecto_id = _objProyecto.Add(problema, nombre_proyecto);
-                ban_proyecto_id.Value = proyecto_id.ToString();
+                if (ban_proyecto_id.Value == "")
+                {
+                    int proyecto_id = _objProyecto.Add(problema, nombre_proyecto, proposito, finalidad);
+                    ban_proyecto_id.Value = proyecto_id.ToString();
+                }
+                else
+                {
+                    int proyecto_id = Convert.ToInt32(ban_proyecto_id.Value);
+                    _objProyecto.Update(proyecto_id, nombre_proyecto, problema, proposito, finalidad);
+                }
             }
             catch (Exception)
             { Response.Write("alert('Opss... Ocurrio un error inesperado.');"); }
@@ -131,17 +141,63 @@ namespace ESM
 
             txtnombreproyecto.Value = proyecto_informacion.Problema;
             txtproblema.Value = proyecto_informacion.Problema;
+            txtproposito.Value = proyecto_informacion.Proposito;
+            txtfinalidad.Value = proyecto_informacion.Finalidad;
 
-            var registro_proyecto = proyecto_informacion.Registro_Proyectos.Single();
+            try
+            {
+                var registro_proyecto = proyecto_informacion.Registro_Proyectos.Single();
 
-            txtdependencia.Value = registro_proyecto.Dependencia;
-            txtfechaelaboracion.Value = registro_proyecto.Fecha.ToString();
-            txtjustificacion.Value = registro_proyecto.Justificacion;
-            txtmpp1.Value = registro_proyecto.Mpp_1;
-            txtmpp2.Value = registro_proyecto.Mpp_2;
-            txtmpp3.Value = registro_proyecto.Mpp_3;
-            txtresponsable.Value = registro_proyecto.responsable;
-            txtcargo.Value = registro_proyecto.Cargo;
+                txtdependencia.Value = registro_proyecto.Dependencia;
+                txtfechaelaboracion.Value = registro_proyecto.Fecha.ToString();
+                txtjustificacion.Value = registro_proyecto.Justificacion;
+                txtmpp1.Value = registro_proyecto.Mpp_1;
+                txtmpp2.Value = registro_proyecto.Mpp_2;
+                txtmpp3.Value = registro_proyecto.Mpp_3;
+                txtresponsable.Value = registro_proyecto.responsable;
+                txtcargo.Value = registro_proyecto.Cargo;
+
+                Objetos.CEfectos objCCausas_Efecto = new Objetos.CEfectos();
+
+                var coleccion_causas_efectos = objCCausas_Efecto.getCausas_Efectos(Convert.ToInt32(ban_proyecto_id.Value));
+
+                string html = "<li>" + proyecto_informacion.Problema.Substring(0, 5) + "<ul>";
+                string causas_html = "<li>Causas<ul>";
+                string efectos_html = "<li>Efectos<ul>";
+
+                string html_objetivos = "<li>" + proyecto_informacion.Problema.Substring(0, 5) + "<ul>";
+                string beneficios_html = "<li>Beneficios<ul>";
+                string objetivos_html = "<li>Objetivos<ul>";
+
+                foreach (var item in coleccion_causas_efectos.Take(3))
+                {
+                    causas_html = causas_html + "<li>" + item.Causa.Substring(0, 6) + "</li>";
+                    efectos_html = efectos_html + "<li>" + item.Efecto.Substring(0, 6) + "</li>";
+
+                    string beneficio = item.Beneficios == null ? "No Asignado" : item.Beneficios.Substring(0, 6);
+
+                    beneficios_html = beneficios_html + "<li>" + beneficio + "</li>";
+                    objetivos_html = objetivos_html + "<li>" + item.Causa.Substring(0, 6) + "</li>";
+                }
+                causas_html = causas_html + "</ul></li>";
+                efectos_html = efectos_html + "</ul></li>";
+
+                html = html + causas_html + efectos_html + "</ul></li>";
+
+                org.InnerHtml = html;
+
+                beneficios_html = beneficios_html + "</ul></li>";
+                objetivos_html = objetivos_html + "</ul></li>";
+
+                html_objetivos = html_objetivos + beneficios_html + objetivos_html + "</ul></li>";
+
+                org_objetivos.InnerHtml = html_objetivos;
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
     }
 }
