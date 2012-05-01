@@ -103,6 +103,8 @@ namespace ESM
                             CargarIndicadoresGroupActividades();
                         else if (Request.QueryString["modulo"].ToString() == "plan_operativo")
                             CargarPlanOperativo();
+                        else if (Request.QueryString["modulo"].ToString() == "sub_act_group")
+                            CargarGroupSubprocesosActividades();
                     }
                     else if (Request.QueryString["actualizarproyecto"] != null && Convert.ToBoolean(Request.QueryString["actualizarproyecto"]))
                         ActualziarProyecto(proyecto_id);
@@ -110,6 +112,7 @@ namespace ESM
                         UpdateHTMLArbolProblemas();
                     else if (Request.QueryString["actualizararbolobjetivos"] != null && Convert.ToBoolean(Request.QueryString["actualizararbolobjetivos"]))
                         UpdateHTMLArbolObjetivos();
+
                 }
                 else
                 {
@@ -397,32 +400,40 @@ namespace ESM
         }
 
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        protected void CargarGroupSubprocesosActividades()
+        {
+            ESMBDDataContext db = new Model.ESMBDDataContext();
+
+            var actividades_col = from act in db.Actividades
+                                  where act.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id
+                                  select act;
+
+            string json_to_return = "{\"page\":\"1\",\"total\":1,\"records\":\"1\",\"rows\": [";
+
+            foreach (var item in actividades_col)
+            {
+                json_to_return = json_to_return + "{\"id\":\"" + item.Id.ToString() + "\",\"cell\":[\"" + item.Id + "\",\"" + item.Subproceso.Subproceso1 + "\", \"" + item.Actividad + "\"]} ,";
+            }
+            json_to_return = json_to_return.Trim(',');
+            json_to_return = json_to_return + "]}";
+
+            Response.Write(json_to_return);
+        }
+
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         protected void CargarPlanOperativo()
         {
             ESMBDDataContext db = new Model.ESMBDDataContext();
 
-            var procesos_col = from procesos in db.Causas_Efectos
-                               where procesos.Proyecto_id == proyecto_id
-                               select procesos;
+            var subproceso_col = from subprocesos in db.Subprocesos
+                                 where subprocesos.Causas_Efecto.Proyecto_id == proyecto_id
+                                 select subprocesos;
 
             string json_to_return = "{\"page\":\"1\",\"total\":1,\"records\":\"1\",\"rows\": [";
 
-            int menu_id = 0;
-
-            foreach (var item in procesos_col)
+            foreach (var item in subproceso_col)
             {
-                json_to_return = json_to_return + "{\"id\":" + item.Id.ToString() + ",\"cell\":[\"" + item.Id + "\",\"" + item.Causa + "\",0,null,false,false]} ,";
-
-                var subprocesos_col = from subprocesos in db.Subprocesos
-                                      where subprocesos.Proceso_id == item.Id
-                                      select subprocesos;
-
-                foreach (var sub_item in subprocesos_col)
-                {
-                    json_to_return = json_to_return + "{\"id\":" + sub_item.Id.ToString() + ",\"cell\":[\"" + sub_item.Id + "\",\"" + sub_item.Subproceso1 + "\",1," + item.Id + ",true,false]} ,";
-                }
-
-                menu_id++;
+                json_to_return = json_to_return + "{\"id\":\"" + item.Id.ToString() + "\",\"cell\":[\"" + item.Id + "\",\"" + item.Causas_Efecto.Causa + "\",\"" + item.Subproceso1 + "\"]} ,";
             }
             json_to_return = json_to_return.Trim(',');
             json_to_return = json_to_return + "]}";

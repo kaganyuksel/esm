@@ -500,14 +500,16 @@ namespace ESM.Objetos
 
         }
 
-        public int Add(string problema, string nombre_proyecto)
+        public int Add(string problema, string nombre_proyecto, string proposito, string finalidad)
         {
             try
             {
                 Proyecto objProyecto = new Proyecto
                 {
                     Proyecto1 = nombre_proyecto,
-                    Problema = problema
+                    Problema = problema,
+                    Proposito = proposito,
+                    Finalidad = finalidad
                 };
 
                 _db.Proyectos.InsertOnSubmit(objProyecto);
@@ -519,7 +521,7 @@ namespace ESM.Objetos
 
         }
 
-        public bool Update(int idproyecto, string indicador = null, string proposito = null, string finalidad = null)
+        public bool Update(int idproyecto, string nombre, string problema, string proposito, string finalidad, string indicador = null)
         {
             try
             {
@@ -530,11 +532,10 @@ namespace ESM.Objetos
                 if (indicador != null)
                     proyecto.Indicador = indicador;
 
-                if (proposito != null)
-                    proyecto.Proposito = proposito;
-
-                if (finalidad != null)
-                    proyecto.Finalidad = finalidad;
+                proyecto.Proyecto1 = nombre;
+                proyecto.Problema = problema;
+                proyecto.Proposito = proposito;
+                proyecto.Finalidad = finalidad;
 
                 _db.SubmitChanges();
 

@@ -46,7 +46,25 @@ namespace ESM {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtnombreproyecto;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtnombreproyecto;
+        
+        /// <summary>
+        /// txtproposito control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtproposito;
+        
+        /// <summary>
+        /// txtfinalidad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtfinalidad;
         
         /// <summary>
         /// txtproblema control.
@@ -157,6 +175,15 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.Button btnalmacenarregistro;
         
         /// <summary>
+        /// org control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl org;
+        
+        /// <summary>
         /// if_c_e control.
         /// </summary>
         /// <remarks>
@@ -164,6 +191,15 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl if_c_e;
+        
+        /// <summary>
+        /// org_objetivos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl org_objetivos;
         
         /// <summary>
         /// if_marco_logico control.
