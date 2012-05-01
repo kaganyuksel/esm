@@ -132,9 +132,9 @@
 
                     j("#chart").html("");
 
-                    j("#org").html(result);
+                    j("#ContentPlaceHolder1_org").html(result);
 
-                    j("#org").jOrgChart({
+                    j("#ContentPlaceHolder1_org").jOrgChart({
                         chartElement: '#chart'
                     });
                 },
@@ -151,9 +151,9 @@
 
                     j("#chart_objetivos").html("");
 
-                    j("#org_objetivos").html(result);
+                    j("#ContentPlaceHolder1_org_objetivos").html(result);
 
-                    j("#org_objetivos").jOrgChart({
+                    j("#ContentPlaceHolder1_org_objetivos").jOrgChart({
                         chartElement: '#chart_objetivos'
                     });
                 },

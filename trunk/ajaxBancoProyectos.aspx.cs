@@ -188,14 +188,14 @@ namespace ESM
                 var features_project = _objCproyecto.GetProyecto(proyecto_id);
                 var coleccion_causas_efectos = objCCausas_Efecto.getCausas_Efectos(proyecto_id);
 
-                string html = "<li>" + features_project.Problema + "<ul>";
+                string html = "<li>" + features_project.Problema.Substring(0,5) + "<ul>";
                 string causas_html = "<li>Causas<ul>";
                 string efectos_html = "<li>Efectos<ul>";
 
                 foreach (var item in coleccion_causas_efectos)
                 {
-                    causas_html = causas_html + "<li>" + item.Causa + "</li>";
-                    efectos_html = efectos_html + "<li>" + item.Efecto + "</li>";
+                    causas_html = causas_html + "<li>" + item.Causa.Substring(0,6) + "</li>";
+                    efectos_html = efectos_html + "<li>" + item.Efecto.Substring(0,6) + "</li>";
                 }
                 causas_html = causas_html + "</ul></li>";
                 efectos_html = efectos_html + "</ul></li>";
@@ -215,14 +215,15 @@ namespace ESM
                 var features_project = _objCproyecto.GetProyecto(proyecto_id);
                 var coleccion_causas_efectos = objCCausas_Efecto.getCausas_Efectos(proyecto_id);
 
-                string html = "<li>" + features_project.Problema + "<ul>";
+                string html = "<li>" + features_project.Problema.Substring(0,5) + "<ul>";
                 string beneficios_html = "<li>Beneficios<ul>";
                 string objetivos_html = "<li>Objetivos<ul>";
 
-                foreach (var item in coleccion_causas_efectos)
+                foreach (var item in coleccion_causas_efectos.Take(3))
                 {
-                    beneficios_html = beneficios_html + "<li>" + item.Beneficios + "</li>";
-                    objetivos_html = objetivos_html + "<li>" + item.Causa + "</li>";
+                    string beneficio = item.Beneficios == null ? "No Asignado" : item.Beneficios.Substring(0, 6);
+                    beneficios_html = beneficios_html + "<li>" + beneficio + "</li>";
+                    objetivos_html = objetivos_html + "<li>" + item.Causa.Substring(0,6) + "</li>";
                 }
                 beneficios_html = beneficios_html + "</ul></li>";
                 objetivos_html = objetivos_html + "</ul></li>";

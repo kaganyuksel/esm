@@ -270,7 +270,7 @@ namespace ESM
             {
                 Cproyecto objCproyecto = new Cproyecto();
 
-                objCproyecto.Update(idproyecto, txtindicadorg.Text);
+                //objCproyecto.Update(idproyecto, txtindicadorg.Text);
 
                 bool mediosvacios = objCproyecto.RemoveMedios(idproyecto);
 
