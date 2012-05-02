@@ -6,6 +6,8 @@
 <head id="Head1" runat="server">
     <link href="/Style/jqgrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
     <link href="Style/jquery-ui-1.8.15.custom.css" rel="stylesheet" type="text/css" />
+    <link href="Style/bancoproyectos.css" rel="stylesheet" type="text/css" />
+    <link href="Style/mastercustom.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="/Scripts/jquery-ui-1.8.15.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jqgrid/grid.locale-es.js" type="text/javascript"></script>
@@ -13,6 +15,8 @@
     <script type="text/javascript">
         var j = jQuery.noConflict();
         j(document).ready(function () {
+
+            j.extend(j.jgrid.edit, { width: "500" });
 
             j("#jqgrid_act_ind_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=actividades_indicadores',
@@ -109,7 +113,7 @@
 <body>
     <form id="form1" runat="server">
     <h3>
-        Relacion Procesos - Subprocesos</h3>
+        Relación Procesos - Subprocesos</h3>
     <table id="jqgrid_plan_oper_t">
     </table>
     <div id="jqgrid_plan_oper_d">
@@ -117,7 +121,7 @@
     <br />
     <br />
     <h3>
-        Relacion Subprocesos - Actividades</h3>
+        Relación Subprocesos - Actividades</h3>
     <table id="jqgrid_sub_act_t">
     </table>
     <div id="jqgrid_sub_act_d">
@@ -125,7 +129,7 @@
     <br />
     <br />
     <h3>
-        Relacion Actividades - Indicadores</h3>
+        Relación Actividades - Indicadores</h3>
     <table id="jqgrid_act_ind_t">
     </table>
     <div id="jqgrid_act_ind_d">

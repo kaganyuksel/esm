@@ -188,14 +188,14 @@ namespace ESM
                 var features_project = _objCproyecto.GetProyecto(proyecto_id);
                 var coleccion_causas_efectos = objCCausas_Efecto.getCausas_Efectos(proyecto_id);
 
-                string html = "<li>" + features_project.Problema.Substring(0,5) + "<ul>";
+                string html = "<li>" + features_project.Problema + "<ul>";
                 string causas_html = "<li>Causas<ul>";
                 string efectos_html = "<li>Efectos<ul>";
 
-                foreach (var item in coleccion_causas_efectos)
+                foreach (var item in coleccion_causas_efectos.Take(3))
                 {
-                    causas_html = causas_html + "<li>" + item.Causa.Substring(0,6) + "</li>";
-                    efectos_html = efectos_html + "<li>" + item.Efecto.Substring(0,6) + "</li>";
+                    causas_html = causas_html + "<li>" + item.Causa + "</li>";
+                    efectos_html = efectos_html + "<li>" + item.Efecto + "</li>";
                 }
                 causas_html = causas_html + "</ul></li>";
                 efectos_html = efectos_html + "</ul></li>";
@@ -215,15 +215,14 @@ namespace ESM
                 var features_project = _objCproyecto.GetProyecto(proyecto_id);
                 var coleccion_causas_efectos = objCCausas_Efecto.getCausas_Efectos(proyecto_id);
 
-                string html = "<li>" + features_project.Problema.Substring(0,5) + "<ul>";
+                string html = "<li>" + features_project.Problema + "<ul>";
                 string beneficios_html = "<li>Beneficios<ul>";
                 string objetivos_html = "<li>Objetivos<ul>";
 
                 foreach (var item in coleccion_causas_efectos.Take(3))
                 {
-                    string beneficio = item.Beneficios == null ? "No Asignado" : item.Beneficios.Substring(0, 6);
-                    beneficios_html = beneficios_html + "<li>" + beneficio + "</li>";
-                    objetivos_html = objetivos_html + "<li>" + item.Causa.Substring(0,6) + "</li>";
+                    beneficios_html = beneficios_html + "<li>" + item.Beneficios + "</li>";
+                    objetivos_html = objetivos_html + "<li>" + item.Causa + "</li>";
                 }
                 beneficios_html = beneficios_html + "</ul></li>";
                 objetivos_html = objetivos_html + "</ul></li>";
@@ -340,13 +339,13 @@ namespace ESM
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         protected void CargarActividades()
         {
-            IQueryable<Actividade> actividades_col = new CActividades().getActividadesProyecto(proyecto_id);
+            IQueryable<Actividade> actividades_col = new CActividades().getActividades(proyecto_id);
 
             string json_to_return = "{\"page\":\"1\",\"total\":1,\"records\":\"1\",\"rows\": [";
 
             foreach (var item in actividades_col)
             {
-                json_to_return = json_to_return + "{\"id\":\"" + item.Id.ToString() + "\",\"cell\":[\"" + item.Id + "\",\"" + item.Subproceso.Subproceso1 + "\", \"" + item.Actividad + "\", \"" + item.fecha + "\",\"" + item.Presupuesto + "\"]} ,";
+                json_to_return = json_to_return + "{\"id\":\"" + item.Id.ToString() + "\",\"cell\":[\"" + item.Id + "\",\"" + item.Subproceso.Subproceso1 + "\", \"" + item.Actividad + "\", \"" + Convert.ToDateTime(item.fecha).ToShortDateString() + "\",\"" + item.Presupuesto + "\"]} ,";
             }
             json_to_return = json_to_return.Trim(',');
             json_to_return = json_to_return + "]}";
@@ -581,7 +580,8 @@ namespace ESM
             int subproceso = Convert.ToInt32(Session["subproceso"].ToString());
             string actividad = Session["actividad"].ToString();
             string fecha = Session["fecha"].ToString();
-            float presupuesto = Convert.ToInt32(Session["presupuesto"].ToString());
+            decimal presupuesto_decimal = Session["presupuesto"].ToString() != "" ? Convert.ToDecimal(Session["presupuesto"].ToString()) : 0;
+            float presupuesto = Convert.ToInt64(presupuesto_decimal);
 
             if (objCActividades.Add(subproceso, actividad, presupuesto, fecha))
             {
@@ -645,7 +645,8 @@ namespace ESM
             int actividad_id = Convert.ToInt32(Session["act_id"].ToString());
             string actividad = Session["actividad"].ToString();
             string fecha = Session["fecha"].ToString();
-            float presupuesto = Convert.ToInt32(Session["presupuesto"].ToString());
+            decimal presupuesto_decimal = Convert.ToDecimal(Session["presupuesto"].ToString());
+            float presupuesto = Convert.ToInt64(presupuesto_decimal);
 
             if (objCActividades.Update(actividad_id, actividad, presupuesto, fecha))
             {

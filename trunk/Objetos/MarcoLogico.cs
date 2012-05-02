@@ -1145,7 +1145,7 @@ namespace ESM.Objetos
         {
             try
             {
-                var actividades_consulta = from a in new ESM.Model.ESMBDDataContext().Actividades
+                var actividades_consulta = from a in _db.Actividades
                                            where a.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id
                                            select a;
 

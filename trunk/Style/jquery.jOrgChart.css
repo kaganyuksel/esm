@@ -46,8 +46,23 @@
     z-index: 10;
     margin: 0 2px;
     color: #fff;
+    font-family: Arial,narrow;
+    font-size: 15px;
 }
 
+.jOrgChart_o .node
+{
+    background-color: #71A30B;
+    display: inline-block;
+    width: 85px;
+    border: 2px dashed #383838;
+    height: 60px;
+    z-index: 10;
+    margin: 0 2px;
+    color: #fff;
+    font-family: Arial,narrow;
+    font-size: 15px;
+}
 /* jQuery drag 'n drop */
 
 .drag-active

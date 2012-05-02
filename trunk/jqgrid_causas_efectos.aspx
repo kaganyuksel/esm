@@ -13,6 +13,8 @@
     <script type="text/javascript">
         var j = jQuery.noConflict();
         j(document).ready(function () {
+            j.extend(j.jgrid.edit, { width: "500" });
+
             j("#jqgrid_c_e_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=causas_efectos',
                 datatype: "json",
