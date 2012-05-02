@@ -6,6 +6,8 @@
 <head runat="server">
     <link href="/Style/jqgrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
     <link href="Style/jquery-ui-1.8.15.custom.css" rel="stylesheet" type="text/css" />
+    <link href="Style/bancoproyectos.css" rel="stylesheet" type="text/css" />
+    <link href="Style/mastercustom.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="/Scripts/jquery-ui-1.8.15.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jqgrid/grid.locale-es.js" type="text/javascript"></script>
@@ -13,6 +15,10 @@
     <script type="text/javascript">
         var j = jQuery.noConflict();
         j(document).ready(function () {
+
+            setInterval("j('#fecha, #fechainicial, #fechafinal').datepicker({dateFormat: 'dd/mm/yy'});", 1000);
+
+            j.extend(j.jgrid.edit, { width: "500" });
 
             j("#jqgrid_subp_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=subprocesos',
@@ -49,18 +55,17 @@
    		                    { name: 'subproceso', index: 'subproceso', width: 100, editable: true, edittype: "select", editoptions: { value: j("#col_sub_procesos").val()} },
                             { name: 'actividad', index: 'actividad', width: 100, editable: true },
    		                    { name: 'fecha', index: 'fecha', width: 150, editable: true },
-                            { name: 'presupuesto', index: 'presupuesto', width: 100, editable: true }
+                            { name: 'presupuesto', index: 'presupuesto', width: 100, editable: true, formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: " ", decimalPlaces: 2, defaultValue: '0'} }
    	            ],
                 rowNum: 10,
                 rowList: [10, 20, 30],
                 pager: '#jqgrid_act_d',
                 sortname: 'id',
-                //                grouping: true,
-                //                groupingView: {
-                //                    groupField: ['subproceso'],
-                //                    groupColumnShow: [false],
-                //                    groupText: ['<b>{0} - {1} Item(s)</b>']
-                //                },
+                onSelectRow: function (id) {
+                    if (id && id !== lastsel3) {
+                        j('#rowed6').jqGrid('editRow', id, true, pickdates);
+                    }
+                },
                 mytype: "POST",
                 postData: { tabla: "act", proyecto_id: function () { return j("#ban_proyecto_id").val(); } },
                 viewrecords: true,
@@ -116,18 +121,24 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    <h3>
+        Agrupación de Subprocesos por Proceso</h3>
     <table id="jqgrid_subp_t">
     </table>
     <div id="jqgrid_subp_d">
     </div>
     <br />
     <br />
+    <h3 style="color: #10852B;">
+        Agrupación de Actividades por SubProcesos</h3>
     <table id="jqgrid_act_t">
     </table>
     <div id="jqgrid_act_d">
     </div>
     <br />
     <br />
+    <h3 style="color: #DE6F2A;">
+        Agrupación de Indicadores por Actividades</h3>
     <table id="jqgrid_m_t">
     </table>
     <div id="jqgrid_m_l_d">

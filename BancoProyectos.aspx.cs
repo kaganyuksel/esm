@@ -161,23 +161,23 @@ namespace ESM
 
                 var coleccion_causas_efectos = objCCausas_Efecto.getCausas_Efectos(Convert.ToInt32(ban_proyecto_id.Value));
 
-                string html = "<li>" + proyecto_informacion.Problema.Substring(0, 5) + "<ul>";
+                string html = "<li>" + proyecto_informacion.Problema + "<ul>";
                 string causas_html = "<li>Causas<ul>";
                 string efectos_html = "<li>Efectos<ul>";
 
-                string html_objetivos = "<li>" + proyecto_informacion.Problema.Substring(0, 5) + "<ul>";
+                string html_objetivos = "<li>" + proyecto_informacion.Problema + "<ul>";
                 string beneficios_html = "<li>Beneficios<ul>";
                 string objetivos_html = "<li>Objetivos<ul>";
 
                 foreach (var item in coleccion_causas_efectos.Take(3))
                 {
-                    causas_html = causas_html + "<li>" + item.Causa.Substring(0, 6) + "</li>";
-                    efectos_html = efectos_html + "<li>" + item.Efecto.Substring(0, 6) + "</li>";
+                    causas_html = causas_html + "<li title='" + item.Causa + "'>" + item.Causa + "</li>";
+                    efectos_html = efectos_html + "<li title='" + item.Efecto + "' >" + item.Efecto + "</li>";
 
-                    string beneficio = item.Beneficios == null ? "No Asignado" : item.Beneficios.Substring(0, 6);
+                    string beneficio = item.Beneficios == null ? "No Asignado" : item.Beneficios;
 
                     beneficios_html = beneficios_html + "<li>" + beneficio + "</li>";
-                    objetivos_html = objetivos_html + "<li>" + item.Causa.Substring(0, 6) + "</li>";
+                    objetivos_html = objetivos_html + "<li>" + item.Causa + "</li>";
                 }
                 causas_html = causas_html + "</ul></li>";
                 efectos_html = efectos_html + "</ul></li>";

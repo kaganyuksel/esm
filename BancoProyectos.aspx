@@ -14,14 +14,11 @@
     <script src="/Scripts/bancoproyectos.js" type="text/javascript"></script>
     <script src="fancybox/jquery.fancybox-1.3.4.js" type="text/javascript"></script>
     <script src="fancybox/jquery.easing-1.3.pack.js" type="text/javascript"></script>
-    <%--<script src="fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>--%>
-    <%--<script src="fancybox/jquery.mousewheel-3.0.4.pack.js" type="text/javascript"></script>--%>
+    <script src="Scripts/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         var j = jQuery.noConflict();
 
         j(document).ready(function () {
-
-            j(".iframe").fancybox();
 
             j("#ContentPlaceHolder1_org").jOrgChart({
                 chartElement: '#chart'
@@ -31,6 +28,8 @@
                 chartElement: '#chart_objetivos'
             });
             j('#magazine').turn({ gradients: true, acceleration: true });
+
+            j.extend(j.jgrid.edit, { width: "500" });
 
             j("#jqgrid_table").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=fuentes_financiacion',
@@ -52,9 +51,12 @@
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
                 caption: "Fuentes de Financiación",
-                autowidth: true
+                autowidth: true,
+                add: { width: 500 },
+                edit: { width: '500px' }
+
             });
-            j("#jqgrid_table").jqGrid('navGrid', "#jqgrid_div", { edit: true, add: true, del: false });
+            j("#jqgrid_table").jqGrid('navGrid', "#jqgrid_div", { edit: true, add: true, del: false, width: 500 });
             j("#jqgrid_table").jqGrid('inlineNav', "#jqgrid_div");
 
 
@@ -84,31 +86,6 @@
             j("#jqgrid_matriz_identificacion_t").jqGrid('navGrid', "#jqgrid_matriz_identificacion_d", { edit: true, add: true, del: false });
             j("#jqgrid_matriz_identificacion_t").jqGrid('inlineNav', "#jqgrid_matriz_identificacion_d");
 
-
-
-            //            j("#jqgrid_objetivos_t").jqGrid({
-            //                url: 'ajaxBancoProyectos.aspx?modulo=objetivos',
-            //                datatype: "json",
-            //                colNames: ['No.', 'Beneficio', 'Objetivo'],
-            //                colModel: [
-            //   		                    { name: 'id', index: 'id', width: 55 },
-            //   		                    { name: 'beneficio', index: 'beneficio', width: 90, editable: true },
-            //   		                    { name: 'objetivo', index: 'objetivo', width: 100, editable: true }
-            //   	            ],
-            //                rowNum: 10,
-            //                rowList: [10, 20, 30],
-            //                pager: '#jqgrid_objetivos_d',
-            //                sortname: 'id',
-            //                //                mytype: "POST",
-            //                postData: { tabla: "objetivos", proyecto_id: function () { return j("#ContentPlaceHolder1_ban_proyecto_id").val(); } },
-            //                viewrecords: true,
-            //                sortorder: "desc",
-            //                editurl: "ajaxBancoProyectos.aspx",
-            //                caption: "Arbol Objetivos"
-            //            });
-            //            j("#jqgrid_objetivos_t").jqGrid('navGrid', "#jqgrid_objetivos_d", { edit: true, add: true, del: false });
-            //            j("#jqgrid_objetivos_t").jqGrid('inlineNav', "#jqgrid_objetivos_d");
-
             j('#accordion').accordion({ autoHeight: false,
                 navigation: true,
                 collapsible: true
@@ -120,8 +97,35 @@
                 if (j("#ContentPlaceHolder1_txtnombreproyecto").val() == "" && j("#ContentPlaceHolder1_txtproblema").val() == "")
                     return false;
             });
+            //table:last td.active
+            j('.node').qtip({
+                content: 'This is an active list element',
+                show: 'mouseover',
+                hide: 'mouseout'
+            })
+
+            setTimeout('tooltip();', 5000);
+
+
+
 
         });
+
+        setInterval('var numeric_text = j("#ContentPlaceHolder1_if_marco_logico").contents().find("#presupuesto"); j(numeric_text).change(function () { if(isNaN(j(this).val())){j(this).val("0");} });', 3000);
+
+        function tooltip() {
+            j(".node").each(function () {
+                j(this).attr("title", j(this).html());
+            });
+            j(".node").each(function () {
+                j(this).html(j(this).html().substring(0, 8));
+            });
+
+            j(".node").each(function () {
+                j(this).qtip({ content: j(this).attr("title"), show: "mouseover", hide: "mouseout", style: { name: "dark" }
+                });
+            });
+        }
 
         function UpdateArbolProblemas(id, actualizar) {
             j.ajax({
@@ -161,12 +165,16 @@
                     alert("Error " + result.status + ' ' + result.statusText);
                 }
             });
+
+            tooltip();
         }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id='magazine'>
-        <div id="page1">
+        <div class="page_magazine" id="page1">
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 1 de 13</p>
             <img src="/Icons/ProsperidadTodosFooter.png" width="150px" style="position: absolute;
                 margin-top: 50px; left: 30px;" alt="Alternate Text" />
             <img src="/Icons/MENHeader.png" width="150px" style="position: absolute; right: 30px;
@@ -204,7 +212,9 @@
             <p style="width: 100%; text-align: center;">
                 Version No. 0.1</p>
         </div>
-        <div id="basicaproyecto">
+        <div class="page_magazine" id="basicaproyecto">
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 2 de 13</p>
             <h1>
                 INFORMACIÓN BASICA DEL PROYECTO</h1>
             <br />
@@ -304,7 +314,9 @@
             <asp:Button ID="btnalmacenarregistro" Text="Almacenar información" runat="server"
                 OnClick="btnalmacenarregistro_Click" />
         </div>
-        <div>
+        <div class="page_magazine" id="page3">
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 3 de 13</p>
             <div id="accordion">
                 <h3>
                     <a href="#">Introducción</a></h3>
@@ -425,7 +437,9 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div class="page_magazine" id="page4">
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 4 de 13</p>
             <h1>
                 IDENTIFICACIÓN</h1>
             <p>
@@ -479,7 +493,9 @@
                 </tr>
             </table>
         </div>
-        <div>
+        <div class="page_magazine" id="page5">
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 5 de 13</p>
             <h1>
                 IDENTIFICACIÓN</h1>
             <h3>
@@ -490,7 +506,9 @@
             </div>
             <!-- Hasta n registros de la tabla actores_participantes -->
         </div>
-        <div>
+        <div class="page_magazine" id="page6">
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 6 de 13</p>
             <h1>
                 DISEÑO Y FORMULACIÓN</h1>
             <p>
@@ -559,7 +577,9 @@
                 utilizar la matriz de vester)</p>
             <br />
         </div>
-        <div>
+        <div class="page_magazine" id="page7">
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 7 de 13</p>
             <h1>
                 DISEÑO Y FORMULACIÓN</h1>
             <h1>
@@ -567,43 +587,6 @@
             <br />
             <br />
             <ul id="org" runat="server" style="display: none;">
-                <li>Proyectos
-                    <ul>
-                        <li id="beer">Causas</li>
-                        <li>Efectos <a href="http://wesnolte.com" target="_blank">Click me</a>
-                            <ul>
-                                <li>Pumpkin</li>
-                                <li><a href="http://tquila.com" target="_blank">Aubergine</a>
-                                    <p>
-                                        A link and paragraph is all we need.</p>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="fruit">Beneficios
-                            <ul>
-                                <li>Apple
-                                    <ul>
-                                        <li>Granny Smith</li>
-                                    </ul>
-                                </li>
-                                <li>Berries
-                                    <ul>
-                                        <li>Blueberry</li>
-                                        <li></li>
-                                        <li>Cucumber</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>Bread</li>
-                        <li>Chocolate
-                            <ul>
-                                <li>Topdeck</li>
-                                <li>Reese's Cups</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
             </ul>
             <div id="chart" class="jOrgChart">
             </div>
@@ -613,7 +596,9 @@
             <br />
             <iframe id="if_c_e" runat="server" src="" width="100%" height="500px"></iframe>
         </div>
-        <div>
+        <div class="page_magazine" id="page8">
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 8 de 13</p>
             <h1>
                 ANÁLISIS DE OBJETIVOS</h1>
             <p>
@@ -632,16 +617,20 @@
             <a href="/Icons/arbolobjetivos.png" style="width: 100%; margin: 0 auto;">
                 <img style="margin: 0 auto;" src="/Icons/arbolobjetivos.png" alt="arbolobjetivos" /></a>
         </div>
-        <div>
+        <div class="page_magazine" id="page9">
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 9 de 13</p>
             <h1>
                 ANÁLISIS DE OBJETIVOS
             </h1>
             <ul id="org_objetivos" runat="server" style="display: none;">
             </ul>
-            <div id="chart_objetivos" class="jOrgChart">
+            <div id="chart_objetivos" class="jOrgChart_o">
             </div>
         </div>
-        <div>
+        <div class="page_magazine" id="page10">
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 10 de 13</p>
             <h1>
                 <a name="_Toc315687137" id="_Toc315687137">DISEÑO Y FORMULACIÓN</a></h1>
             <div>
@@ -742,13 +731,17 @@
                 </tr>
             </table>
         </div>
-        <div>
+        <div class="page_magazine" id="page11">
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 11 de 13</p>
             <h1>
                 DISEÑO Y FORMULACIÓN
             </h1>
-            <iframe id="if_marco_logico" runat="server" width="100%" height="1000px"></iframe>
+            <iframe id="if_marco_logico" runat="server" width="100%" height="1500px"></iframe>
         </div>
-        <div>
+        <div class="page_magazine" id="page12">
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 12 de 13</p>
             <h1>
                 <a name="_Toc315687137" id="A1">DISEÑO Y FORMULACIÓN</a></h1>
             <div>
@@ -849,7 +842,9 @@
                 </tr>
             </table>
         </div>
-        <div>
+        <div class="page_magazine" id="page13">
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 13 de 13</p>
             <h1>
                 VISUALIZACIÓN PARA EL MARCO LÓGICO
             </h1>
@@ -868,5 +863,23 @@
     </div>
     <input type="hidden" name="proyecto_id" value=" " id="ban_proyecto_id" runat="server" />
     <div id="dialog_proyectos" style="dysplay: none;">
+    </div>
+    <div class="qtip qtip-stylename">
+        <div class="qtip-tip" rel="cornerValue">
+        </div>
+        <div class="qtip-wrapper">
+            <div class="qtip-borderTop">
+            </div>
+            <div class="qtip-contentWrapper">
+                <div class="qtip-title">
+                    <div class="qtip-button">
+                    </div>
+                </div>
+                <div class="qtip-content">
+                </div>
+            </div>
+            <div class="qtip-borderBottom">
+            </div>
+        </div>
     </div>
 </asp:Content>
