@@ -18,17 +18,23 @@ namespace ESM
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (ban_proyecto_id.Value != " ")
-            {
-                proyecto_id = Convert.ToInt32(ban_proyecto_id.Value);
-                ban_proyecto_id.Value = ban_proyecto_id.Value;
-            }
 
-            if (!Page.IsPostBack)
+            if (Request.IsAuthenticated)
             {
-                CargarColeccionProyectos();
-            }
 
+                if (ban_proyecto_id.Value != " ")
+                {
+                    proyecto_id = Convert.ToInt32(ban_proyecto_id.Value);
+                    ban_proyecto_id.Value = ban_proyecto_id.Value;
+                }
+
+                if (!Page.IsPostBack)
+                {
+                    CargarColeccionProyectos();
+                }
+            }
+            else
+                Response.Redirect("Login.aspx");
         }
 
         protected void btnNuevoProyecto_Click(object sender, EventArgs e)
