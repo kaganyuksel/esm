@@ -97,7 +97,7 @@
                 if (j("#ContentPlaceHolder1_txtnombreproyecto").val() == "" && j("#ContentPlaceHolder1_txtproblema").val() == "")
                     return false;
             });
-            //table:last td.active
+
             j('.node').qtip({
                 content: 'This is an active list element',
                 show: 'mouseover',

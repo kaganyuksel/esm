@@ -16,7 +16,9 @@
         var j = jQuery.noConflict();
         j(document).ready(function () {
 
-            setInterval("j('#fecha, #fechainicial, #fechafinal').datepicker({dateFormat: 'dd/mm/yy'});", 1000);
+            //            j("#htmlprocesos").val(j("#gbox_jqgrid_subp_t").html());
+
+            setInterval("j('#fecha, #fechainicial, #fechafinal').datepicker({dateFormat: 'dd/mm/yy'}); j('#htmlprocesos').val(j('#gbox_jqgrid_subp_t').html()); j('#htmlprocesos').val(j('#htmlprocesos').val().replace(/</g, '1')); j('#htmlprocesos').val(j('#htmlprocesos').val().replace(/>/g, '2'));", 1000);
 
             j.extend(j.jgrid.edit, { width: "500" });
 
@@ -121,14 +123,16 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    <p>
+        <asp:ImageButton ID="btnExportar" ImageUrl="~/Icons/print.png" runat="server" 
+            onclick="btnExportar_Click" /> Exportar
+        Marco Logico</p>
     <h3>
         Agrupación de Subprocesos por Proceso</h3>
     <table id="jqgrid_subp_t">
     </table>
     <div id="jqgrid_subp_d">
     </div>
-    <br />
-    <br />
     <h3 style="color: #10852B;">
         Agrupación de Actividades por SubProcesos</h3>
     <table id="jqgrid_act_t">
@@ -150,6 +154,7 @@
     <input type="hidden" runat="server" name="col_actividades" id="col_actividades" value="" />
     <input type="hidden" name="options_verbos" value="" runat="server" id="ban_options_verbos" />
     <input type="hidden" name="options_unidades" value="" runat="server" id="ban_options_unidades" />
+    <input type="hidden" runat="server" name="htmlprocesos" id="htmlprocesos" value="" />
     </form>
 </body>
 </html>

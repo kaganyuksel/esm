@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text;
+using System.Web.UI.HtmlControls;
 
 namespace ESM
 {
@@ -93,6 +95,72 @@ namespace ESM
                 ban_options_unidades.Value = options_unidades;
 
             }
+        }
+
+
+        protected void btnExportar_Click(object sender, ImageClickEventArgs e)
+        {
+            int proyecto_id = Convert.ToInt32(ban_proyecto_id.Value);
+
+            Model.ESMBDDataContext db = new Model.ESMBDDataContext();
+
+            var procesos = from p in db.Causas_Efectos
+                           where p.Proyecto_id == proyecto_id
+                           select p;
+
+            string html = "<table style='border: 1px solid #000;'>";
+            html = html + "<tr ><td  vertical-align: middle;'>Proceso</td><td>Subproceso</td><td>Actividad</td></tr>";
+            foreach (var procesos_item in procesos)
+            {
+                var subprocesos = from sp in db.Subprocesos
+                                  where sp.Causas_Efecto.Proyecto_id == proyecto_id && sp.Proceso_id == procesos_item.Id
+                                  select sp;
+
+                html = html + "<tr ><td  vertical-align: middle;'>" + procesos_item.Causa + "</td><td></td><td></td></tr>";
+
+                foreach (var subprocesos_item in subprocesos)
+                {
+                    var actividades = from a in db.Actividades
+                                      where a.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id && a.Subproceso_id == subprocesos_item.Id
+                                      select a;
+
+                    html = html + "<tr ><td>" + procesos_item.Causa + "</td><td>" + subprocesos_item.Subproceso1 + "</td><td></td></tr>";
+
+                    foreach (var actividades_item in actividades)
+                    {
+                        html = html + "<tr ><td>" + procesos_item.Causa + "</td><td>" + subprocesos_item.Subproceso1 + "</td><td >" + actividades_item.Actividad + "</td></tr>";
+                    }
+                }
+            }
+            html = html + "</table>";
+
+            StringBuilder objsb = new StringBuilder();
+            System.IO.StringWriter sw = new System.IO.StringWriter(objsb);
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            System.Web.UI.Page pagina = new System.Web.UI.Page();
+            var form = new HtmlForm();
+
+
+
+            var proyecto_informacion = (from proy in db.Proyectos
+                                        where proy.Id == proyecto_id
+                                        select proy).Single();
+
+            form.InnerHtml = "<h1>Proyecto: " + proyecto_informacion.Proyecto1 + "</h1>" + html;
+
+            pagina.EnableEventValidation = false;
+            pagina.DesignerInitialize();
+            pagina.Controls.Add(form);
+            pagina.RenderControl(htw);
+            Response.Clear();
+            Response.Buffer = true;
+            Response.ContentType = "application/vnd.ms-excel";
+            string nombre = "Marco Logico" + DateTime.Now.ToShortDateString().Replace('/','-');
+            Response.AddHeader("Content-Disposition", "attachment;filename=" + nombre + ".xls");
+            Response.Charset = "UTF-8";
+            Response.ContentEncoding = Encoding.Default;
+            Response.Write(objsb.ToString());
+            Response.End();
         }
     }
 }

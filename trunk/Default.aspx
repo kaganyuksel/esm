@@ -280,11 +280,11 @@
         </tr>
         <tr>
             <td style="width: 48px;">
-                <a href="/ArbolProblemas.aspx">
-                    <img height="48px" src="Icons/Template.png" alt="AyudaPreguntas" /></a>
+                <a href="/BancoProyectos.aspx">
+                    <img height="48px" src="Icons/Template.png" alt="BancoProyectos" /></a>
             </td>
             <td>
-                <h3 onclick="window.location='/ArbolProblemas.aspx'">
+                <h3 onclick="window.location='/BancoProyectos.aspx'">
                     Proyectos</h3>
                 <br />
                 Administra la información para el monitoreo de los proyectos existentes.
