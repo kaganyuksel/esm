@@ -58,12 +58,12 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.Label lblmunicipio;
         
         /// <summary>
-        /// GoogleMap1 control.
+        /// ban_direccion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Artem.Web.UI.Controls.GoogleMap GoogleMap1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden ban_direccion;
     }
 }
