@@ -1,0 +1,225 @@
+﻿.txtareacausa
+{
+    border: 2px solid #357D28;
+    border-radius: 3px 3px 3px 3px;
+    width: 50%;
+    padding-left: 10px;
+    color: #4D4D4D;
+}
+.txtareacausa:focus
+{
+    border: 2px solid #357D28;
+    border-radius: 3px 3px 3px 3px;
+    width: 50%;
+    padding-left: 10px;
+    color: #4D4D4D;
+}
+.txtareaefecto
+{
+    border: 2px solid #00A9B5;
+    border-radius: 3px 3px 3px 3px;
+    width: 50%;
+    padding-left: 10px;
+    color: #4D4D4D;
+}
+.txtareaefecto:focus
+{
+    border: 2px solid #00A9B5;
+    border-radius: 3px 3px 3px 3px;
+    width: 50%;
+    padding-left: 10px;
+    color: #4D4D4D;
+}
+.btnleft
+{
+    width: 50px;
+    height: 30px;
+    float: left;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('/Icons/back.png');
+    border: 0;
+    background-color: transparent;
+}
+.btnleft:hover
+{
+    background-image: url('/Icons/backhover.png');
+}
+.btnright
+{
+    width: 50px;
+    height: 30px;
+    float: right;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('/Icons/next.png');
+    border: 0;
+    background-color: transparent;
+}
+body
+{
+    overflow-x: hidden;
+}
+.leftone
+{
+    margin-left: 5em;
+}
+
+.lefttwo
+{
+    margin-left: 10em;
+}
+.efectos input[type="text"]
+{
+    border: 2px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    width: 50%;
+    padding-left: 10px;
+    color: #4D4D4D;
+}
+.efectos input[type="text"]:focus
+{
+    /*#005EA7*/
+    border: 2px solid #00A9B5;
+    border-radius: 3px 3px 3px 3px;
+}
+.efectos input[type="text"]:hover
+{
+    border: 2px solid #00A9B5;
+    border-radius: 3px 3px 3px 3px;
+}
+.efectos h2
+{
+    color: #00A9B5;
+}
+.causas input[type="text"]
+{
+    border: 2px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    width: 50%;
+    padding-left: 10px;
+    color: #4D4D4D;
+}
+.causas input[type="text"]:focus
+{
+    border: 2px solid #357D28;
+    border-radius: 3px 3px 3px 3px;
+}
+.causas input[type="text"]:hover
+{
+    border: 2px solid #357D28;
+    border-radius: 3px 3px 3px 3px;
+}
+.causas h2
+{
+    color: #357D28;
+}
+.problema textarea
+{
+    border: 2px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    padding-left: 10px;
+    padding-top: 5px;
+    color: #4D4D4D;
+    font-family: Tahoma;
+    font-size: 1em;
+    width: 80%;
+    height: 5em;
+}
+.problema textarea:hover
+{
+    border: 2px solid #005EA7;
+    border-radius: 3px 3px 3px 3px;
+}
+.problema input[type="text"]
+{
+    border: 2px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    width: 50%;
+    padding-left: 10px;
+    color: #4D4D4D;
+}
+.problema input[type="text"]:focus
+{
+    border: 2px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    width: 50%;
+    padding-left: 10px;
+    color: #4D4D4D;
+}
+.problema textarea:focus
+{
+    border: 2px solid #005EA7;
+    border-radius: 3px 3px 3px 3px;
+}
+.problema h2
+{
+    color: #005EA7;
+}
+.mover
+{
+    transition: display 0.5s linear;
+    -moz-transition: display 0.5s linear;
+    -webkit-transition: opacity 0.5s linear;
+    -o-transition: opacity 0.5s linear;
+    -moz-transition: margin 0.5s ease-in-out;
+    -webkit-transition: margin 0.5s ease-in-out;
+    -o-transition: margin 0.5s ease-in-out;
+    transition: margin 0.5s ease-in-out;
+}
+.past
+{
+    transition: All 0.5s linear;
+    -moz-transition: All 0.5s linear; /* Firefox 4 */
+    -webkit-transition: All 0.5s linear; /* Safari and Chrome */
+    -o-transition: All 0.5s linear; /* Opera */
+    
+    margin-left: -1166px;
+    display: none linear;
+}
+.presente
+{
+    transition: All 0.5s linear;
+    -moz-transition: All 0.5s linear; /* Firefox 4 */
+    -webkit-transition: All 0.5s linear; /* Safari and Chrome */
+    -o-transition: All 0.5s linear; /* Opera */
+    
+    display: block;
+}
+.futuro
+{
+    transition: All 0.5s linear;
+    -moz-transition: All 0.5s linear; /* Firefox 4 */
+    -webkit-transition: All 0.5s linear; /* Safari and Chrome */
+    -o-transition: All 0.5s linear; /* Opera */
+    
+    margin-left: 1166px;
+    display: none;
+}
+.opacidad
+{
+    display: none;
+}
+a.back
+{
+    width: 256px;
+    height: 73px;
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    background: #fff url(codrops_back.png) no-repeat top left;
+}
+.fechaini, .fechafin
+{
+    cursor: pointer;
+    width: 80px;
+    font-size: 10px;
+    text-align: center;
+    border: 0px;
+    background-color: Transparent;
+    height: 17px;
+}
+.style1
+{
+    font-size: 13px;
+}

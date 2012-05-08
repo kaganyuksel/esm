@@ -3,3 +3,14 @@ D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\bin\ESM.pdb
 D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\obj\Release\ResolveAssemblyReference.cache
 D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\obj\Release\ESM.dll
 D:\Xogost Desarrollo\Proyectos\MGGroup\ESM\ESM\ESM\obj\Release\ESM.pdb
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\ESM.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\ESM.pdb
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\DocumentFormat.OpenXml.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\Encrypt and decrypt.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\DocumentFormat.OpenXml.xml
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\Encrypt and decrypt.pdb
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Release\ResolveAssemblyReference.cache
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Release\RdlCompile.cache
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Release\RdlCompile.compiled
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Release\ESM.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Release\ESM.pdb

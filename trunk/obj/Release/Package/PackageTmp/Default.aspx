@@ -2,6 +2,21 @@
     Inherits="ESM._Default" %>
 
 <asp:Content ID="headContent" runat="Server" ContentPlaceHolderID="head">
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#citastext").click(function () {
+
+                var url = $("#ContentPlaceHolder1_citas").attr("href");
+                window.location = url;
+            });
+
+            if ($("#ContentPlaceHolder1_alerta_indicador").val() == "1") {
+
+            }
+
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content1" runat="Server" ContentPlaceHolderID="ContentPlaceHolder1">
     <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" />
@@ -17,14 +32,32 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-    <table class="menuprincipalbyconfiguracion" cellspacing="10">
+    <br />
+    <table class="menuprincipalbyconfiguracion" runat="server" id="ModNotificacion" visible="true"
+        cellspacing="10">
         <tr class="th">
-            <td>
-                <img alt="Modulo de Acceso a ESM" src="Icons/Security.png" />
+            <td style="width: 64px; height: 64px;">
+                <img alt="Módulo de Acceso a ESM" src="Icons/notificaciones.png" width="64px" />
             </td>
             <td colspan="3">
                 <h1>
-                    Modulo de Acceso a ESM</h1>
+                    Listado de Notificaciones</h1>
+            </td>
+        </tr>
+        <tr>
+            <td runat="server" id="t_notificaciones" class="td" colspan="4">
+            </td>
+        </tr>
+    </table>
+    <table class="menuprincipalbyconfiguracion" runat="server" id="AdministracionUsuario"
+        visible="false" cellspacing="10">
+        <tr class="th">
+            <td>
+                <img alt="Módulo de Acceso a ESM" src="Icons/Security.png" />
+            </td>
+            <td colspan="3">
+                <h1>
+                    Módulo de Acceso a ESM</h1>
             </td>
         </tr>
         <tr>
@@ -52,32 +85,32 @@
         </tr>
     </table>
     <br />
-    <br />
-    <table class="menuprincipalbyconfiguracion" cellspacing="10">
+    <table class="menuprincipalbyconfiguracion" id="AdministracionConfiguracion" runat="server"
+        visible="false" cellspacing="10">
         <tr class="th">
             <td>
-                <img src="Icons/Stationery.png" alt="Modulo de Administración y Configuración">
+                <img src="Icons/Stationery.png" alt="Módulo de Administración y Configuración">
             </td>
             <td colspan="3">
                 <h1>
-                    Modulo de Administración y Configuración</h1>
+                    Módulo de Administración y Configuración</h1>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="/InstitucionEducativa/list.aspx">
-                    <img src="Icons/Tutorial.png" alt="Institución Educativa" /></a>
+                <a href="/Establecimiento_Educativos/list.aspx">
+                    <img src="/Icons/Tutorial.png" alt="Establecimiento Educativo" /></a>
             </td>
             <td class="td">
-                <h3 onclick="window.location='/InstitucionEducativa/list.aspx'">
+                <h3 onclick="window.location='/Establecimiento_Educativos/list.aspx'">
                     Establecimiento Educativo</h3>
                 <br />
-                Almacena la información de los establecimientos educativos administrando cada una de
-                las caracteristicas des la mismas.
+                Almacena la información de los establecimientos educativos administrando cada una
+                de las caracteristicas des la mismas.
             </td>
             <td>
                 <a href="/Consultores/list.aspx">
-                    <img src="Icons/Paste.png" alt="Consultores" /></a>
+                    <img src="/Icons/Paste.png" alt="Consultores" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Consultores/list.aspx'">
@@ -90,7 +123,7 @@
         <tr>
             <td>
                 <a href="/Ambientes/list.aspx">
-                    <img src="Icons/tag.png" alt="Ambientes" /></a>
+                    <img src="/Icons/tag.png" alt="Ambientes" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Ambientes/list.aspx'">
@@ -101,7 +134,7 @@
             </td>
             <td>
                 <a href="/Procesos/list.aspx">
-                    <img src="Icons/System.png" alt="Procesos" /></a>
+                    <img src="/Icons/System.png" alt="Procesos" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Procesos/list.aspx'">
@@ -113,7 +146,7 @@
         <tr>
             <td>
                 <a href="/Componentes/list.aspx">
-                    <img src="Icons/Template.png" alt="Actores" /></a>
+                    <img src="/Icons/Template.png" alt="Actores" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Componentes/list.aspx'">
@@ -124,11 +157,11 @@
             </td>
             <td>
                 <a href="/Procesos/list.aspx">
-                    <img src="Icons/Write.png" alt="Preguntas" /></a>
+                    <img src="/Icons/Write.png" alt="Preguntas" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Preguntas/list.aspx'">
-                    Preguntas</h3>
+                    Crear Preguntas</h3>
                 <br />
                 Administra la información de las preguntas que hacen parte del formulario de evaluación,
                 teniendo en cuenta los actores y privilegiados.
@@ -136,32 +169,45 @@
         </tr>
     </table>
     <br />
-    <br />
-    <table class="menuprincipalbyconfiguracion" cellspacing="10">
+    <table id="ModEval" runat="server" class="menuprincipalbyconfiguracion" cellspacing="10">
         <tr class="th">
             <td>
-                <img src="Icons/Edit.png" alt="Modulo de Administración y Configuración">
+                <img src="/Icons/Edit.png" alt="Módulo de Administración y Configuración">
             </td>
             <td colspan="3">
                 <h1>
-                    Modulo de Evaluación</h1>
+                    Módulo de Evaluación</h1>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="/Evaluacion.aspx">
-                    <img src="Icons/Flag.png" alt="Evaluar" /></a>
+                <a id="citas" runat="server" href="/Citas.aspx">
+                    <img src="Icons/Calender.png" alt="Evaluar" /></a>
             </td>
             <td class="td">
-                <h3 onclick="window.location='/Evaluacion.aspx'">
-                    Realizar Evaluación</h3>
+                <h3 id="citastext">
+                    Citas
+                </h3>
                 <br />
-                Comienza con el proceso de evaluacion para determinar en estado del actor frente
-                a los ambientes, procesos, componentes, y preguntas.
+                Verifica las citas que existen a cada uno de los Establecimientos Educativos y Secretarías
+                de Educación.
             </td>
             <td>
+                <a href="/MenuEvaluacion.aspx">
+                    <img height="48px" src="/Icons/Certificate.png" alt="Evaluar" /></a>
+            </td>
+            <td class="td">
+                <h3 onclick="window.location='/MenuEvaluacion.aspx'">
+                    Realizar Evaluación</h3>
+                <br />
+                Comienza con el proceso de evaluación para determinar en estado del actor frente
+                a los ambientes, procesos, componentes, y preguntas.
+            </td>
+        </tr>
+        <tr id="consolidado" runat="server" visible="false">
+            <td>
                 <a href="/Consolidado.aspx">
-                    <img src="Icons/Stats.png" alt="Consolidado" /></a>
+                    <img src="/Icons/Stats.png" alt="Consolidado" /></a>
             </td>
             <td class="td">
                 <h3 onclick="window.location='/Consolidado.aspx'">
@@ -173,6 +219,92 @@
         </tr>
     </table>
     <br />
+    <table id="MEN" runat="server" visible="false" class="menuprincipalbyconfiguracion"
+        cellspacing="10">
+        <tr class="th">
+            <td>
+                <img src="/Icons/Search.png" alt="Módulo de Administración y Configuración">
+            </td>
+            <td colspan="3">
+                <h1>
+                    Módulo Consulta de Información</h1>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 48px;">
+                <a href="/AyudaPreguntas.aspx">
+                    <img height="48px" src="Icons/Help.png" alt="AyudaPreguntas" /></a>
+            </td>
+            <td>
+                <h3 onclick="window.location='/AyudaPreguntas.aspx'">
+                    Ayuda Preguntas</h3>
+                <br />
+                Visualiza las preguntas almacendas por componente y asigna una descripción para
+                las mismas.
+            </td>
+            <td style="width: 48px;">
+                <a href="/ReportesMEN.aspx">
+                    <img height="48px" src="/Icons/Stats.png" alt="ReportesMEN" /></a>
+            </td>
+            <td>
+                <h3 onclick="window.location='/ReportesMEN.aspx'">
+                    Reportes seguimiento a diligenciamiento</h3>
+                <br />
+                Visualiza las consultas generadas de acuerdo a la información almacenada.
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 48px;">
+                <a href="http://mggroupltda.com/esm_report/MenuReportes.aspx">
+                    <img height="48px" src="/Icons/statsv2.png" alt="Reportes Evaluacion" /></a>
+            </td>
+            <td>
+                <h3 onclick="window.location='http://mggroupltda.com/esm_report/MenuReportes.aspx'">
+                    Reportes Evaluación</h3>
+                <br />
+                Visualiza las consultas para el modulo de reportes evaluación
+            </td>
+        </tr>
+    </table>
+    <br />
+    <table id="ModMonitoreo" runat="server" visible="false" class="menuprincipalbyconfiguracion"
+        cellspacing="10">
+        <tr class="th">
+            <td>
+                <img src="/Icons/network.png" alt="Módulo de Administración y Configuración">
+            </td>
+            <td colspan="3">
+                <h1>
+                    Módulo Monitoreo</h1>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 48px;">
+                <a href="/BancoProyectos.aspx">
+                    <img height="48px" src="Icons/Template.png" alt="BancoProyectos" /></a>
+            </td>
+            <td>
+                <h3 onclick="window.location='/BancoProyectos.aspx'">
+                    Proyectos</h3>
+                <br />
+                Administra la información para el monitoreo de los proyectos existentes.
+            </td>
+            <td style="width: 48px;">
+                <%--<a href="/ReportesMEN.aspx">
+                    <img height="48px" src="/Icons/Stats.png" alt="ReportesMEN" /></a>--%>
+            </td>
+            <td>
+                <%--<h3 onclick="window.location='/ReportesMEN.aspx'">
+                    Reportes Consolidados</h3>
+                <br />
+                Visualiza las consultas generadas de acuerdo a la información almacenada.--%>
+            </td>
+        </tr>
+        <tr>
+        </tr>
+    </table>
     <br />
     <br />
+    <br />
+    <input type="hidden" runat="server" value="-1" id="alerta_indicador" />
 </asp:Content>

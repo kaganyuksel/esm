@@ -850,15 +850,15 @@
             </h1>
             <iframe id="if_ejecucion" runat="server" width="100%" height="1500px"></iframe>
         </div>
-        <%--<div>
+        <div>
             <h1>
-                EVALUACIÓN (POSTERIOR)</h1>
+                EJECUCIÓN</h1>
         </div>
         <div>
             <h1>
-                REFERENCIAS BIBLIOGRAFICAS</h1>
-        </div>--%>
-        <div>
+                EJECUCIÓN</h1>
+            <iframe id="if_valores_indicadores" runat="server" src="" width="800px" height="1000">
+            </iframe>
         </div>
     </div>
     <input type="hidden" name="proyecto_id" value=" " id="ban_proyecto_id" runat="server" />

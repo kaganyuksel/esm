@@ -216,7 +216,7 @@
                     <td style="width: 40%; height: 100px; vertical-align: middle; line-height: 100px;
                         font-family: 'Cabin Sketch' , cursive; text-align: left;">
                         <hgroup>
-                            <h1>
+                            <h1 style="font-size: 1.3em;">
                                 Sistema de valoración del desarrollo de competencias ciudadanas</h1>
                         </hgroup>
                     </td>

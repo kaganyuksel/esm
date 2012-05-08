@@ -1,0 +1,156 @@
+﻿.ayuda_marco
+{
+    width: 95%;
+    height: 700px;
+    border: 3px solid #F7F7F7;
+    background: #F2F2F2;
+    top: 140px;
+    right: 5%;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    -moz-box-shadow: 0px 0px 3px #8b8b8b;
+    -webkit-box-shadow: 0px 0px 3px #8b8b8b;
+    box-shadow: 0px 0px 3px #8b8b8b; /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+    overflow-y: scroll;
+}
+.ayuda_marco p
+{
+    width: 100%;
+}
+#accordion
+{
+    text-align: justify;
+}
+#magazine
+{
+    width: 90%;
+    height: 2000px;
+    margin: 50px auto;
+}
+#magazine .turn-page
+{
+    width: 400px;
+    height: 400px;
+    background-color: #fff;
+}
+#page1
+{
+    border: 3px solid #D6D6D6;
+    padding: 5 5 5 5; /*background-image: url('/Icons/fondo_banco_proyectos.png');             background-repeat: no-repeat;             background-position: right;*/
+}
+#responsables
+{
+}
+#responsables li
+{
+    text-align: justify;
+}
+#responsables input[type="text"]
+{
+    right: 50%;
+}
+
+H1
+{
+    color: #055fab;
+    margin: 20px auto;
+    width: 85%;
+    text-align: center;
+}
+
+H3
+{
+    color: #055fab;
+    margin-left: 10px;
+    font-family: Tahoma, helvetica;
+}
+
+input[type=text]
+{
+    margin-top: 15px;
+    height: 20px;
+    font-family: Tahoma,Helvetica;
+    border: 2px solid #D9D9D9;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    -moz-box-shadow: inset 0px 0px 1px 2px #e8e8e8;
+    -webkit-box-shadow: inset 0px 0px 1px 2px #e8e8e8;
+    box-shadow: inset 0px 0px 1px 2px #e8e8e8; /*Inner elements should not cover inner shadows*/ /*Chrome renders inset shadows incorrectly with border-radius*/ /*IE 7 AND 8 DO NOT SUPPORT INSET SHADOWS*/
+}
+textarea
+{
+    border: 2px solid #D9D9D9;
+    font-family: Tahoma,Helvetica;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    -moz-box-shadow: inset 0px 0px 3px 2px #e8e8e8;
+    -webkit-box-shadow: inset 0px 0px 3px 2px #e8e8e8;
+    box-shadow: inset 0px 0px 3px 2px #e8e8e8; /*Inner elements should not cover inner shadows*/ /*Chrome renders inset shadows incorrectly with border-radius*/ /*IE 7 AND 8 DO NOT SUPPORT INSET SHADOWS*/
+}
+#basicaproyecto
+{
+    color: #383838;
+    font-size: 1em;
+}
+
+p
+{
+    font-family: Tahoma,helvetica;
+    font-size: 0.9em;
+    color: #383838;
+    margin-top: 15px;
+    width: 85%;
+    text-align: justify;
+}
+
+#magazine ul li
+{
+    font-family: Tahoma,helvetica;
+    font-size: 0.9em;
+    color: #383838;
+    width: 85%;
+    text-align: justify;
+    margin: 5px auto auto 40px;
+}
+
+#magazine ul
+{
+    margin-top: 15px;
+    width: 70%;
+}
+
+#magazine a img
+{
+    border: 3px solid #383838;
+    margin: 0 auto;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    -moz-box-shadow: inset 0px 0px 2px #000000;
+    -webkit-box-shadow: inset 0px 0px 2px #000000;
+    box-shadow: inset 0px 0px 2px #000000; /*Inner elements should not cover inner shadows*/ /*Chrome renders inset shadows incorrectly with border-radius*/ /*IE 7 AND 8 DO NOT SUPPORT INSET SHADOWS*/
+}
+
+.table_class
+{
+    border: 1px solid #000;
+}
+
+.table_class td
+{
+    border: 1px solid #000;
+}
+
+.page_magazine
+{
+    border: 2px solid #D9D9D9;
+    padding: 5 5 5 5;
+    background: #ccc;
+}
+table tr td select
+{
+    max-width: 200px;
+}
