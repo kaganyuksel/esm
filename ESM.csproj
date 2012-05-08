@@ -220,6 +220,13 @@
     <Compile Include="jqgrid_causas_efectos.aspx.designer.cs">
       <DependentUpon>jqgrid_causas_efectos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="jqgrid_valores.aspx.cs">
+      <DependentUpon>jqgrid_valores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="jqgrid_valores.aspx.designer.cs">
+      <DependentUpon>jqgrid_valores.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReporteActividades.aspx.cs">
       <DependentUpon>ReporteActividades.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -479,6 +486,7 @@
     <Content Include="Icons\cicloproyecto.png" />
     <Content Include="Icons\fondo_banco_proyectos.png" />
     <Content Include="jqgrid_causas_efectos.aspx" />
+    <Content Include="jqgrid_valores.aspx" />
     <Content Include="ReporteActividades.aspx" />
     <Content Include="reportactividades.aspx" />
     <Content Include="Default.aspx" />

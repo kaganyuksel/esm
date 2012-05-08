@@ -3,61 +3,243 @@
 <!DOCTYPE html >
 <html>
 <head id="Head1" runat="server">
-    <title>ESM-Evaluacion, Sistematizacion y Monitoreo</title>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>SISTEMA DE VALORACIÓN DEL DESARROLLO DE COMPETENCIAS CIUDADANAS</title>
     <link href="Site.css" rel="stylesheet" type="text/css" />
     <link href="mastercustom.css" rel="stylesheet" type="text/css" />
-    <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch:700' rel='stylesheet'
-        type='text/css'>
+    <%--<script src="/Scripts/jquery-1.6.3-vsdoc.js" type="text/javascript"></script>--%>
     <link href="Style/jquery-ui-1.8.15.custom.css" rel="stylesheet" type="text/css" />
-    <script src="/Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
+    <%--<script src="/Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>--%>
+    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
     <script src="/Scripts/jquery-ui-1.8.15.custom.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.ui.datepicker-es.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>
     <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-27184342-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+    <script type="text/javascript">
+        var myMessages = ['info', 'warning', 'error', 'success'];
+
+        function hideAllMessages() {
+            var messagesHeights = new Array(); // this array will store height for each
+
+            for (i = 0; i < myMessages.length; i++) {
+                messagesHeights[i] = $('.' + myMessages[i]).outerHeight(); // fill array
+                $('.' + myMessages[i]).css('bottom', -messagesHeights[i]); //move element outside viewport top
+            }
+        }
+
+        function showMessage(type) {
+            $('.' + type + '-trigger').click(function () {
+                hideAllMessages();
+                $('.' + type).animate({ bottom: "0" }, 500);
+            });
+        }
         $(document).ready(function () {
-            var alto = screen.height;
-            var contenido = alto - 130;
-            $("#content").css("min-height", contenido);
+            if ($ != undefined) {
+                $(".numerico").change(function () {
+
+                    if (isNaN($(this).val())) {
+                        $(this).val("0");
+                    }
+
+                });
+
+
+                // Initially, hide them all
+                hideAllMessages();
+
+                //            $("#hora").html(new Date().getHours().toString());
+
+                // Show message
+                for (var i = 0; i < myMessages.length; i++) {
+                    showMessage(myMessages[i]);
+                }
+
+                // When message is clicked, hide it
+                $('.message').click(function () {
+                    $(this).animate({ bottom: -$(this).outerHeight() }, 500);
+                });
+
+                var alto = screen.height;
+                var contenido = alto - 130;
+                $("#content").css("min-height", contenido);
+
+                $("input:text, input:password").attr("x-webkit-speech", "x-webkit-speech");
+                $("textarea").each(function () {
+                    var pixels = parseInt($(this).css("width")) - 30;
+                    $(this).css("width", pixels + "px");
+                    $(this).parent().append("<input type='text' x-webkit-speech = 'x-webkit-speech' style='width: 15px; background: transparent; border: 0;' onwebkitspeechchange=\"textarea_change($(this),'" + $(this).attr("id") + "');\"/>");
+                });
+
+                $("#ContentPlaceHolder1_gvResultados_GridViewPager1_TextBoxPage").removeAttr("x-webkit-speech");
+                $("#ContentPlaceHolder1_gvResultados_GridViewPagergvresults_TextBoxPage").removeAttr("x-webkit-speech");
+            }
         });
+        function textarea_change(valor, control) {
+            if (!$(control).attr("readonly", true) || !$(control).attr("disabled", false)) {
+                var texto = $("#" + control).val() + valor;
+                $("#" + control).val(texto);
+                $("#" + control).val(valor.val());
+
+                valor.val("");
+                $("#" + control).focus();
+            }
+            else {
+                valor.val("");
+                $("#" + control).focus();
+            }
+        }
         
     </script>
+    <style type="text/css">
+    
+    .message
+            {
+                            -webkit-background-size: 40px 40px;
+                            -moz-background-size: 40px 40px;
+                            background-size: 40px 40px;
+                            font-size: 0.8em;
+                            background-image: -webkit-gradient(linear, left top, right bottom,
+                                                                    color-stop(.25, rgba(255, 255, 255, .05)), color-stop(.25, transparent),
+                                                                    color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .05)),
+                                                                    color-stop(.75, rgba(255, 255, 255, .05)), color-stop(.75, transparent),
+                                                                    to(transparent));
+                            background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
+                                                                    transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+                                                                    transparent 75%, transparent);
+                            background-image: -moz-linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
+                                                                    transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+                                                                    transparent 75%, transparent);
+                            background-image: -ms-linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
+                                                                    transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+                                                                    transparent 75%, transparent);
+                            background-image: -o-linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
+                                                                    transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+                                                                    transparent 75%, transparent);
+                            background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%,
+                                                                    transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%,
+                                                                    transparent 75%, transparent);
+                             -moz-box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+                             -webkit-box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+                             box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+                             width: 15%;/*100%*/
+                             height: 30px; /*no esta*/
+                             border: 1px solid;
+                             color: #fff;
+                             right: 0px;
+                             padding: 15px;
+                             position: fixed;
+                             _position: absolute;
+                             text-shadow: 0 1px 0 rgba(0,0,0,.5);
+                             -webkit-animation: animate-bg 5s linear infinite;
+                             -moz-animation: animate-bg 5s linear infinite;
+            }
+
+            .info
+            {
+                             background-color: #4ea5cd;
+                             border-color: #3b8eb5;
+            }
+
+            .error
+            {
+                             background-color: #de4343;
+                             border-color: #c43d3d;
+            }
+
+            .warning
+            {
+                             background-color: #eaaf51;
+                             border-color: #d99a36;
+            }
+
+            .success
+            {
+                             background-color: #286905;
+                             border-color: #1E5202;
+            }
+
+            .message h3
+            {
+                             margin: 0 0 5px 0;
+            }
+
+            .message p
+            {
+                             margin: 0;
+            }
+
+            @-webkit-keyframes animate-bg
+            {
+                from {
+                    background-position: 0 0;
+                }
+                to {
+                   background-position: -80px 0;
+                }
+            }
+
+        @-moz-keyframes animate-bg
+        {
+            from {
+                background-position: 0 0;
+            }
+            to {
+               background-position: -80px 0;
+            }
+        }
+    
+    </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <div id="subcuerpo" style="height: auto;">
         <form id="form1" runat="server">
-        <header>
+        <header style="z-index: 10;">
             <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
                 <tr>
                     <td>
-                        <img height="80" src="/Icons/clip_image002.jpg" alt="Ministerio de Educación" style="height: 100px;" />
+                        &nbsp;
                     </td>
                     <td style="width: 40%; height: 100px; vertical-align: middle; line-height: 100px;
                         font-family: 'Cabin Sketch' , cursive; text-align: left;">
                         <hgroup>
                             <h1>
-                                ESM</h1>
+                                Sistema de valoración del desarrollo de competencias ciudadanas</h1>
                         </hgroup>
-                        <p>
-                            Evaluación, Sistemtización y Monitoreo</p>
                     </td>
                     <td style="width: 30%; height: 100px; text-align: right;">
-                        <img height="80" src="/Icons/EducalidadHeader.png" alt="Educacion de Calidad" style="height: 100px;" />
+                        <img height="80" src="/Icons/EducalidadHeader.png" alt="Educacion de Calidad" />
+                    </td>
+                    <td style="width: 20%; height: 100px; text-align: center;">
+                        <img src="/Icons/ProsperidadTodosFooter.png" height="80px" alt="Prosperidad para Todos" />
                     </td>
                     <td style="width: 30%; height: 100px; text-align: right;">
-                        <img height="80" src="/Icons/MENHeader.png" alt="Ministerio de Educación" style="height: 100px;" />
+                        <img height="90" src="/Icons/MENHeader.png" alt="Ministerio de Educación" />
                     </td>
                 </tr>
             </table>
             <br />
         </header>
-        <div id="nav" class="ui-widget-header">
-            <section id="menu_left" style="width: 69%">
+        <div id="nav">
+            <section id="menu_left" style="width: 69%; z-index: 10;">
                 <ul>
                     <li onclick="window.location = '/Default.aspx';">Inicio</li>
                     <li onclick="window.location = '/AyudaPreguntas.aspx';">Preguntas</li>
-                    <li onclick="window.location = '/Evaluacion.aspx';">Evaluación</li>
-                    <li onclick="window.location = '/Consolidado.aspx';">Consolidado</li>
-                    <li onclick="window.location = 'http://esmllamadas.mggroupltda.com';">Agenda ESM</li>
+                    <li onclick="window.location = '/MenuEvaluacion.aspx';">Recursos</li>
+                    <li onclick="window.location = '/Manuales.aspx';">Manuales</li>
                 </ul>
             </section>
             Usuario:
@@ -69,23 +251,39 @@
             <div>
                 <%-- TODO: Habilite la presentación parcial estableciendo el atributo EnablePartialRendering en "true" para ofrecer una experiencia de exploración más regular.
              Si se deja la presentación parcial deshabilitada, se consigue una experiencia de depuración mejor cuando la aplicación está en de<!DOCTYPE html><!DOCTYPE html>sarrollo. --%>
-                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                <asp:ScriptManager ID="ScriptManager1" runat="server" AsyncPostBackTimeout="2000">
                 </asp:ScriptManager>
                 <script type="text/javascript">
                     Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(function (evt, args) {
-                        $("#accordionie").accordion();
-                        $("#accordionactor").accordion();
-                        $("#dialog:ui-dialog").dialog();
-                        $("#dialog-message").dialog();
-                        $("input:submit", ".demo").button();
-                        $(".checkclass").buttonset();
-                        $("a.pretty").prettyPhoto({
-                            callback: function () { //window.location.reload() 
-                            }, /* Called when prettyPhoto is closed */
-                            ie6_fallback: true,
-                            modal: true,
-                            social_tools: false
-                        });
+                        if ($ != undefined) {
+                            $("#accordionie").accordion();
+                            $("#accordionactor").accordion();
+                            $("#dialog:ui-dialog").dialog();
+                            $("#dialog-message").dialog();
+                            $("input:submit", ".demo").button();
+                            $(".checkclass").buttonset();
+                            $("a.pretty").prettyPhoto({
+                                callback: function () { //window.location.reload() 
+                                }, /* Called when prettyPhoto is closed */
+                                ie6_fallback: true,
+                                modal: true,
+                                social_tools: false
+                            });
+                            $("input:file", ".demo").button();
+
+
+                            $("#tabs").tabs().find(".ui-tabs-nav").sortable({ axis: "x" });
+
+                            $("#tabs").tabs({
+                                remote: true, cache: true,
+                                show: function (event, ui) {
+                                    var sel = $('#tabs').tabs('option', 'selected');
+                                    sel = sel + 1;
+                                    $("#hidLastTab").val(sel);
+                                },
+                                selected: $("#hidLastTab").val()
+                            });
+                        }
                     });
                 </script>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
@@ -93,26 +291,66 @@
             </div>
         </section>
         </form>
-        <div class="footer" style="border: 1px solid #dddddd; clear: both;">
-            <table cellpadding="80" cellspacing="30" style="margin: 0 auto; width: 100px;">
-                <tr>
-                    <td>
-                        <img src="/Icons/EducalidadFooter.png" height="80px" alt="Educacion de Calidad" />
-                    </td>
-                    <td>
-                        <img src="/Icons/ProsperidadTodosFooter.png" height="80px" alt="Prosperidad para Todos" />
-                    </td>
-                    <td>
-                        <img src="/Icons/MENFooter.png" alt="Ministerio de Educacion" height="80px" />
-                    </td>
-                    <td>
-                        <img src="/Icons/LOGO%20CISP.png" alt="CISP" height="50px" />
-                    </td>
-                    <td>
-                        <img src="/Icons/unicef.png" alt="Unicef" height="40px" />
-                    </td>
+        <div class="footer" style="border: 1px solid #dddddd; clear: both; text-align: center;">
+            <table cellpadding="80" cellspacing="30" style="margin: 0 auto; width: 100px; margin: 0 auto;">
+                <tr style="text-align: center;">
+                    <br />
+                    <a href="http://www.alianzaterra.org" target="_blank" style="text-decoration: none;
+                        color: #000000; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
+                        <p style="font-size: 9px;">
+                            <b>Desarrollado por MG Group Ltda para <span style="color: #ED9200; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
+                                Corporación Alianza Terra</span></b></p>
+                    </a></td>
                 </tr>
             </table>
+        </div>
+    </div>
+    <div class="info message">
+        <h4>
+            FYI, something just happened!</h4>
+        <p>
+            This is just an info notification message.</p>
+    </div>
+    <div class="error message">
+        <h4>
+            Ups, ocurrido un error inesperado</h4>
+        <p>
+            Corregiremos esto en breve.</p>
+    </div>
+    <div class="warning message">
+        <h4>
+            Espera, hecha un vistazo!</h4>
+        <p>
+            Existen campos que podrian estar en conflicto.</p>
+    </div>
+    <div class="success message">
+        <h4>
+            Felicidades, lo lograste!</h4>
+        <p>
+            El proceso de autoguardado finalizó con éxito. <span id="hora"></span>
+        </p>
+    </div>
+    <a href="#" style="display: none;" id="a_info" class="trigger info-trigger"></a>
+    <a href="#" style="display: none;" id="a_error" class="trigger error-trigger"></a>
+    <a href="#" style="display: none;" id="a_warning" class="trigger warning-trigger">
+    </a><a href="#" style="display: none;" id="a_succes" class="trigger success-trigger">
+    </a>
+    <div class="qtip qtip-stylename">
+        <div class="qtip-tip" rel="cornerValue">
+        </div>
+        <div class="qtip-wrapper">
+            <div class="qtip-borderTop">
+            </div>
+            <div class="qtip-contentWrapper">
+                <div class="qtip-title">
+                    <div class="qtip-button">
+                    </div>
+                </div>
+                <div class="qtip-content">
+                </div>
+            </div>
+            <div class="qtip-borderBottom">
+            </div>
         </div>
     </div>
 </body>

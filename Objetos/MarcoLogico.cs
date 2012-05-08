@@ -689,7 +689,7 @@ namespace ESM.Objetos
 
         }
 
-        public bool AddMeta_Valor(int indicador_id, DateTime fecha, int meta)
+        public bool AddMeta_Valor(int indicador_id, DateTime fecha, int meta, int ejecutado)
         {
             try
             {
@@ -697,7 +697,8 @@ namespace ESM.Objetos
                 {
                     Indicador_id = indicador_id,
                     Fecha_Meta = fecha,
-                    Meta = meta
+                    Meta = meta,
+                    Ejecutado = ejecutado
                 };
 
 
@@ -1123,6 +1124,34 @@ namespace ESM.Objetos
                                   select ind;
 
                 return indicadores;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable<Indicadore> getIndicadoresProyecto(int proyecto_id)
+        {
+            try
+            {
+                var indicadores = from ind in _db.Indicadores
+                                  where ind.Actividade.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id
+                                  select ind;
+
+                return indicadores;
+            }
+            catch (Exception) { return null; }
+
+        }
+
+        public IQueryable<Indicadores_Meta> getIndicadoresMetasProyecto(int proyecto_id)
+        {
+            try
+            {
+                var indicadores_metas = from ind in _db.Indicadores_Metas
+                                        where ind.Indicadore.Actividade.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id
+                                        select ind;
+
+                return indicadores_metas;
             }
             catch (Exception) { return null; }
 

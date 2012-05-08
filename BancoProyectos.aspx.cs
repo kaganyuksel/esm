@@ -140,6 +140,7 @@ namespace ESM
             if_c_e.Attributes.Add("src", "/jqgrid_causas_efectos.aspx?proyecto_id=" + ban_proyecto_id.Value);
             if_marco_logico.Attributes.Add("src", "/jqgrid_marco_logico.aspx?proyecto_id=" + ban_proyecto_id.Value);
             if_ejecucion.Attributes.Add("src", "/jqgrid_ejecucion.aspx?proyecto_id=" + ban_proyecto_id.Value);
+            if_valores_indicadores.Attributes.Add("src", "jqgrid_valores.aspx?proyecto_id=" + ban_proyecto_id.Value);
 
             Model.Proyecto proyecto_informacion = (from p in new Model.ESMBDDataContext().Proyectos
                                                    where p.Id == Convert.ToInt32(ban_proyecto_id.Value)

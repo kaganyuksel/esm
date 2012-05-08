@@ -37,7 +37,7 @@ namespace ESM
                 bool almaceno_correctamente = false;
                 if (li_valor_meta.Visible != true)
                 {
-                    almaceno_correctamente = new Objetos.CActividades().AddMeta_Valor(indicador_id, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtmeta_indicador.Text));
+                    //almaceno_correctamente = new Objetos.CActividades().AddMeta_Valor(indicador_id, Convert.ToDateTime(txtFecha.Text), Convert.ToInt32(txtmeta_indicador.Text));
 
                     txtFecha.Text = "";
                     txtmeta_indicador.Text = "0";

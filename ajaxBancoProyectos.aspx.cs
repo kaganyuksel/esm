@@ -69,7 +69,7 @@ namespace ESM
                             else if (operacion == "edit")
                                 EditarSubprocesos();
                         }
-                        else if (Request.QueryString["tabla".ToString()] == "act" && proyecto_id != 0)
+                        else if (Request.QueryString["tabla"] == "act" && proyecto_id != 0)
                         {
                             string operacion = Session["operacion"] == null ? "" : Session["operacion"].ToString();
                             if (operacion == "add")
@@ -77,7 +77,7 @@ namespace ESM
                             else if (operacion == "edit")
                                 EditarActividades();
                         }
-                        else if (Request.QueryString["tabla".ToString()] == "ind" && proyecto_id != 0)
+                        else if (Request.QueryString["tabla"] == "ind" && proyecto_id != 0)
                         {
                             string operacion = Session["operacion"] == null ? "" : Session["operacion"].ToString();
                             if (operacion == "add")
@@ -85,7 +85,14 @@ namespace ESM
                             else if (operacion == "edit")
                                 EditarIndicadores();
                         }
-
+                        else if (Request.QueryString["tabla"] == "ind_val_t" && proyecto_id != 0)
+                        {
+                            string operacion = Session["operacion"] == null ? "" : Session["operacion"].ToString();
+                            if (operacion == "add")
+                                AgregarIndicadoresValores();
+                            else if (operacion == "edit")
+                                EditarIndicadoresValores();
+                        }
 
                         if (Request.QueryString["modulo"].ToString() == "fuentes_financiacion")
                             CargarFuentesFinanciacion();
@@ -105,6 +112,8 @@ namespace ESM
                             CargarPlanOperativo();
                         else if (Request.QueryString["modulo"].ToString() == "sub_act_group")
                             CargarGroupSubprocesosActividades();
+                        else if (Request.QueryString["modulo"].ToString() == "ind_val")
+                            CargarIndicadoresValores();
                     }
                     else if (Request.QueryString["actualizarproyecto"] != null && Convert.ToBoolean(Request.QueryString["actualizarproyecto"]))
                         ActualziarProyecto(proyecto_id);
@@ -139,6 +148,15 @@ namespace ESM
                         Session.Add("causa", Request.Form["causa"]);
                         Session.Add("efecto", Request.Form["efecto"]);
                         Session.Add("beneficio", Request.Form["beneficio"]);
+                        Session.Add("operacion", Request.Form["oper"]);
+                    }
+                    else if (Request.Form["ejecutado"] != null)
+                    {
+                        Session.Add("ind_val_id", Request.Form["id"]);
+                        Session.Add("indicador_id", Request.Form["indicador"]);
+                        Session.Add("meta", Request.Form["meta"]);
+                        Session.Add("fecha", Request.Form["fecha"]);
+                        Session.Add("ejecutado", Request.Form["ejecutado"]);
                         Session.Add("operacion", Request.Form["oper"]);
                     }
                     else if (Request.Form["meta"] != null)
@@ -262,6 +280,26 @@ namespace ESM
             {
                 Response.Write("alert(\"Opss... Ocurrio un error inesperado.\");");
             }
+        }
+
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        protected void CargarIndicadoresValores()
+        {
+            try
+            {
+                IQueryable<Indicadores_Meta> indicadores_metas_col = new Objetos.CActividades().getIndicadoresMetasProyecto(proyecto_id);
+
+                string json_to_return = "{\"page\":\"1\",\"total\":1,\"records\":\"1\",\"rows\": [";
+
+                foreach (var item in indicadores_metas_col)
+                    json_to_return = json_to_return + "{\"id\":\"" + item.Id.ToString() + "\",\"cell\":[\"" + item.Id + "\",\"" + item.Indicadore.Indicador + "\", \"" + item.Meta + "\", \"" + item.Fecha_Meta + "\",\"" + item.Ejecutado + "\", \"/ReporteIndicadores.aspx?id=" + item.Indicadore.Id + "\"]} ,";
+
+                json_to_return = json_to_return.Trim(',');
+                json_to_return = json_to_return + "]}";
+
+                Response.Write(json_to_return);
+            }
+            catch (Exception) { Response.Write("null"); }
         }
 
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -439,6 +477,49 @@ namespace ESM
             json_to_return = json_to_return + "]}";
 
             Response.Write(json_to_return);
+        }
+
+        protected void AgregarIndicadoresValores()
+        {
+            //Session.Add("ind_val_id", Request.Form["id"]);
+
+            int indicador_id = Convert.ToInt32(Session["indicador_id"].ToString());
+            int meta = Convert.ToInt32(Session["meta"].ToString());
+            DateTime fecha = Convert.ToDateTime(Session["fecha"].ToString());
+            int ejecutado = Convert.ToInt32(Session["ejecutado"].ToString());
+
+            if (objCActividades.AddMeta_Valor(indicador_id, fecha, meta, ejecutado))
+            {
+                Session.Remove("ind_val_id");
+                Session.Remove("indicador_id");
+                Session.Remove("indicador");
+                Session.Remove("meta");
+                Session.Remove("fecha");
+                Session.Remove("ejecutado");
+                Session.Remove("operacion");
+
+            }
+        }
+
+        protected void EditarIndicadoresValores()
+        {
+            int meta_id = Convert.ToInt32(Session["ind_val_id"]);
+            int indicador_id = Convert.ToInt32(Session["indicador_id"].ToString());
+            int meta = Convert.ToInt32(Session["meta"].ToString());
+            DateTime fecha = Convert.ToDateTime(Session["fecha"].ToString());
+            int ejecutado = Convert.ToInt32(Session["ejecutado"].ToString());
+
+            if (objCActividades.UpdateMeta(meta_id, indicador_id, ejecutado, fecha))
+            {
+                Session.Remove("ind_val_id");
+                Session.Remove("indicador_id");
+                Session.Remove("indicador");
+                Session.Remove("meta");
+                Session.Remove("fecha");
+                Session.Remove("ejecutado");
+                Session.Remove("operacion");
+
+            }
         }
 
         protected void AgregarIndicadores()
