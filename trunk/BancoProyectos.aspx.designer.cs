@@ -157,13 +157,13 @@ namespace ESM {
         protected global::System.Web.UI.HtmlControls.HtmlTextArea txtjustificacion;
         
         /// <summary>
-        /// FileUpload1 control.
+        /// flupDocumentos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
+        protected global::System.Web.UI.WebControls.FileUpload flupDocumentos;
         
         /// <summary>
         /// btnalmacenarregistro control.
@@ -229,6 +229,24 @@ namespace ESM {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl if_valores_indicadores;
         
         /// <summary>
+        /// files control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload files;
+        
+        /// <summary>
+        /// list control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl list;
+        
+        /// <summary>
         /// ban_proyecto_id control.
         /// </summary>
         /// <remarks>
@@ -236,5 +254,14 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden ban_proyecto_id;
+        
+        /// <summary>
+        /// btnuploadfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnuploadfile;
     }
 }
