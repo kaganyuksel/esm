@@ -458,6 +458,44 @@ namespace ESM.Objetos
         protected ESMBDDataContext _db = new ESMBDDataContext();
 
         #endregion
+        /// <summary>
+        /// Almacena y asocia los documentos de banco de proyectos a el proyecto por parametro.
+        /// </summary>
+        /// <param name="ruta"></param>
+        /// <param name="proyecto_id"></param>
+        /// <param name="action"></param>
+        /// <param name="Id">Identificador de documento almacenado para editar (Opcional)</param>
+        /// <returns></returns>
+        public bool CargarDocumentos(string ruta, int proyecto_id, string action, int Id = 0)
+        {
+            try
+            {
+                switch (action)
+                {
+                    case "add":
+                        Documentos_Proyecto objDocumentos_Proyecto = new Documentos_Proyecto()
+                        {
+                            Ruta = ruta,
+                            proyectoid = proyecto_id
+                        };
+                        _db.Documentos_Proyectos.InsertOnSubmit(objDocumentos_Proyecto);
+                        break;
+
+                    case "update":
+                        var objDocumentos_Proyecto_single = (from d_p in _db.Documentos_Proyectos
+                                                             where d_p.Id == Id
+                                                             select d_p).Single();
+
+                        objDocumentos_Proyecto_single.Ruta = ruta;
+
+                        break;
+                }
+
+                _db.SubmitChanges();
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
 
         public IQueryable<Proyecto> GetProyectos()
         {

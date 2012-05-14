@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace ESM
 {
@@ -146,7 +147,7 @@ namespace ESM
                                                    where p.Id == Convert.ToInt32(ban_proyecto_id.Value)
                                                    select p).Single();
 
-            txtnombreproyecto.Value = proyecto_informacion.Problema;
+            txtnombreproyecto.Value = proyecto_informacion.Proyecto1;
             txtproblema.Value = proyecto_informacion.Problema;
             txtproposito.Value = proyecto_informacion.Proposito;
             txtfinalidad.Value = proyecto_informacion.Finalidad;
@@ -205,6 +206,72 @@ namespace ESM
 
             }
 
+        }
+
+        protected void UploadFiles()
+        {
+            try
+            {
+                FileUpload objFileUpload = files;
+                #region Carga de Documento
+                if (objFileUpload.PostedFile.FileName != "")
+                {
+                    string path = Server.MapPath("~/Files/Proyectos");
+
+                    if (!Directory.Exists(path + "/" + txtnombreproyecto.Value))
+                    {
+                        Directory.CreateDirectory(path + "/" + txtnombreproyecto.Value);
+                        path = path + "/" + txtnombreproyecto.Value;
+                    }
+                    else
+                        path = path + "/" + txtnombreproyecto.Value;
+
+                    path = path + "/" + objFileUpload.FileName;
+
+                    int iniciar = objFileUpload.FileName.Length - 3;
+                    int finalizar = objFileUpload.FileName.Length;
+
+                    var extencion = objFileUpload.FileName.Substring(iniciar);
+
+                    string strextencion = extencion.ToString();
+
+                    if (strextencion != "pdf" && strextencion != "zip" && strextencion != "rar" && strextencion != "doc" && strextencion != "docx")
+                    {
+                        Response.Write("<script>alert('Error el archivo no pudo ser cargado, revise el tipo de documento que intenta cargar. Formatos compatibles:pdf,doc,zip,rar.');</script>");
+                    }
+                    else
+                    {
+                        if (objFileUpload.PostedFile.ContentLength <= 5242880)
+                        {
+                            if (File.Exists(path))
+                                File.Delete(path);
+
+                            objFileUpload.PostedFile.SaveAs(path);
+
+                            if (new Objetos.Cproyecto().CargarDocumentos(objFileUpload.FileName, proyecto_id, "add", 0))
+                            {
+                                Response.Write("<script>alert('El proceso de carga para el archivo finalizó correctamente.'); setTimeout('j(\"#magazine\").turn(\"page\",16)', 100);</script>");
+                            }
+                            else
+                                File.Delete(path);
+                        }
+                        else
+                        {
+                            Response.Write("<script>alert('Para cargar un archivo se debe tener en cuenta que el tamaño sea menor o igual a 5MB');</script>");
+                        }
+                    }
+                }
+                #endregion
+            }
+            catch (Exception)
+            {
+                Response.Write("<script>alert('Error al cargar el archivo seleccionado.');</script>");
+            }
+        }
+
+        protected void btnuploadfile_Click(object sender, EventArgs e)
+        {
+            UploadFiles();
         }
     }
 }

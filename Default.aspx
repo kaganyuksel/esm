@@ -176,7 +176,7 @@
             </td>
             <td colspan="3">
                 <h1>
-                    Módulo de Evaluación</h1>
+                    Módulo de Valoración</h1>
             </td>
         </tr>
         <tr>
@@ -198,7 +198,7 @@
             </td>
             <td class="td">
                 <h3 onclick="window.location='/MenuEvaluacion.aspx'">
-                    Realizar Evaluación</h3>
+                    Realizar Valoración</h3>
                 <br />
                 Comienza con el proceso de evaluación para determinar en estado del actor frente
                 a los ambientes, procesos, componentes, y preguntas.
@@ -255,11 +255,11 @@
         </tr>
         <tr>
             <td style="width: 48px;">
-                <a href="http://mggroupltda.com/esm_report/MenuReportes.aspx">
+                <a href="http://plataformaterra.com/esm_report/MenuReportes.aspx">
                     <img height="48px" src="/Icons/statsv2.png" alt="Reportes Evaluacion" /></a>
             </td>
             <td>
-                <h3 onclick="window.location='http://mggroupltda.com/esm_report/MenuReportes.aspx'">
+                <h3 onclick="window.location='http://plataformaterra.com/esm_report/MenuReportes.aspx'">
                     Reportes Evaluación</h3>
                 <br />
                 Visualiza las consultas para el modulo de reportes evaluación

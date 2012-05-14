@@ -601,6 +601,7 @@
       <Association Name="Proyecto_Matriz_Actore" Member="Matriz_Actores" ThisKey="Id" OtherKey="proyecto_id" Type="Matriz_Actore" />
       <Association Name="Proyecto_Causas_Efecto" Member="Causas_Efectos" ThisKey="Id" OtherKey="Proyecto_id" Type="Causas_Efecto" />
       <Association Name="Proyecto_Registro_Proyecto" Member="Registro_Proyectos" ThisKey="Id" OtherKey="proyecto_id" Type="Registro_Proyecto" />
+      <Association Name="Proyecto_Documentos_Proyecto" Member="Documentos_Proyectos" ThisKey="Id" OtherKey="proyectoid" Type="Documentos_Proyecto" />
     </Type>
   </Table>
   <Table Name="dbo.Proyectos_Medios" Member="Proyectos_Medios">
@@ -998,6 +999,14 @@
       <Association Name="Actividade_Indicadore" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Verbo_Indicadore" Member="Verbo" ThisKey="verbo_id" OtherKey="Id" Type="Verbo" IsForeignKey="true" />
       <Association Name="Unidade_Indicadore" Member="Unidade" ThisKey="unidad_id" OtherKey="Id" Type="Unidade" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Documentos_Proyecto" Member="Documentos_Proyectos">
+    <Type Name="Documentos_Proyecto">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ruta" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="proyectoid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Proyecto_Documentos_Proyecto" Member="Proyecto" ThisKey="proyectoid" OtherKey="Id" Type="Proyecto" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

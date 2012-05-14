@@ -8,6 +8,7 @@ using System.Web.Script.Serialization;
 using ESM.Objetos;
 using ESM.Model;
 using System.Web.Script.Services;
+using System.IO;
 
 namespace ESM
 {
@@ -33,6 +34,9 @@ namespace ESM
 
             if (!Page.IsPostBack)
             {
+                if (Request.QueryString["file"] != null && Request.QueryString["file"].ToString() == "true")
+                    CargarFile();
+
                 if (Request.HttpMethod != "POST")
                 {
                     if (Request.QueryString["modulo"] != null && proyecto_id != 0)
@@ -812,5 +816,20 @@ namespace ESM
             }
         }
 
+        [ScriptMethod(ResponseFormat=ResponseFormat.Json)]
+        protected void CargarFile()
+        {
+            try
+            {
+                string file_path = Request.QueryString["path"].ToString();
+
+                FileInfo objFileInfo = new FileInfo(file_path);
+
+                string array_json = String.Format("{\"name\": \"{0}\",\"size\":\"{1}\"}", objFileInfo.Name, objFileInfo.Length);
+
+                Response.Write(array_json);
+            }
+            catch (Exception) { Response.Write("null"); }
+        }
     }
 }
