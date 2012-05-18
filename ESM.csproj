@@ -164,6 +164,7 @@
     <Compile Include="ArbolProblemas.aspx.designer.cs">
       <DependentUpon>ArbolProblemas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ArraList.cs" />
     <Compile Include="Ayuda.aspx.cs">
       <DependentUpon>Ayuda.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

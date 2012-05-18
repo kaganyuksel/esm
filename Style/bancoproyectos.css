@@ -219,3 +219,10 @@ table tr td select
     -webkit-border-radius: 2px;
     border-radius: 2px;
 }
+#ContentPlaceHolder1_list ul
+{
+    border: 2px solid #016591;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;    
+}

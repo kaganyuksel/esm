@@ -140,11 +140,78 @@
             setTimeout('tooltip();', 5000);
 
 
+            if (document.getElementById("ContentPlaceHolder1_ban_files").value != " ") {
+                j("#magazine").css("margin-left", "auto");
+                j("#magazine").turn("page", 16);
 
+                document.getElementById("ContentPlaceHolder1_ban_files").value = " ";
+            }
 
         });
 
         setInterval('var numeric_text = j("#ContentPlaceHolder1_if_marco_logico").contents().find("#presupuesto"); j(numeric_text).change(function () { if(isNaN(j(this).val())){j(this).val("0");} });', 3000);
+
+        function generateHtmlc_s() {
+            j(".line").each(function () {
+                j(this).attr("style", "");
+            });
+
+            j(".left").each(function () {
+                j(this).attr("style", "");
+            })
+            j(".right").each(function () {
+                j(this).attr("style", "");
+            });
+            j(".top").each(function () {
+                j(this).attr("style", "");
+            });
+            j(".down").each(function () {
+                j(this).attr("style", "");
+            });
+            j(".node").each(function () {
+                j(this).attr("style", "");
+            });
+            j(".node").each(function () {
+                j(this).attr("style", "");
+            });
+            j(".jOrgChart>table>tr>td").each(function () {
+                j(this).attr("style", "");
+            });
+
+            j(".jOrgChart .line").each(function () {
+                j(this).attr("style", j(this).attr('style') + "height: 20px; width: 4px;");
+            });
+
+            j(".jOrgChart .left").each(function () {
+                j(this).attr("style", j(this).attr('style') + "border-right: 2px solid black;");
+            })
+            j(".jOrgChart .right").each(function () {
+                j(this).attr("style", j(this).attr('style') + "border-left: 2px solid black;");
+            });
+            j(".jOrgChart .top").each(function () {
+                j(this).attr("style", j(this).attr('style') + "border-top: 3px solid black;")
+            });
+            j(".jOrgChart .down").each(function () {
+                j(this).attr("style", j(this).attr('style') + "background-color: black; margin: 0px auto;")
+            });
+            j(".jOrgChart .node").each(function () {
+                j(this).attr("style", j(this).attr('style') + "background-color: #096089; display: inline-block; width: 85px; border: 2px dashed #383838; height: 60px; z-index: 10; margin: 0 2px; color: #fff; font-family: Arial,narrow; font-size: 15px;")
+            });
+            j(".jOrgChart_o .node").each(function () {
+                j(this).attr("style", j(this).attr('style') + "background-color: #71A30B; display: inline-block; width: 85px; border: 2px dashed #383838; height: 60px; z-index: 10; margin: 0 2px; color: #fff; font-family: Arial,narrow; font-size: 15px;")
+            });
+            j(".jOrgChart td").each(function () {
+                j(this).attr("style", j(this).attr('style') + "text-align: center; vertical-align: top; padding: 0;")
+            });
+
+            var htmlc_s = j("#chart").html();
+
+            htmlc_s = htmlc_s.replace(/</g, "1");
+
+            htmlc_s = htmlc_s.replace(/>/g, "2");
+
+            j('#ContentPlaceHolder1_htmlc_s').val(htmlc_s);
+        }
 
         function tooltip() {
             j(".node").each(function () {
@@ -200,22 +267,23 @@
             });
 
             tooltip();
-            
+
         }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <ul id="nav_page" style="text-align: center;">
-        <li><span style="margin-top: 15px;" onclick="j('#magazine').turn('previous'); if(parseInt(j('#magazine').turn('page'))==1){j('#magazine').css('margin-left', '-20%');}" name="back"
+        <li><span style="margin-top: 15px; cursor: pointer;" onclick="j('#magazine').turn('previous'); if(parseInt(j('#magazine').turn('page'))==1){j('#magazine').css('margin-left', '-20%');}"
             id="back">
-            <img width="24px" src="/Icons/back_turn.png" alt="previous" /></span></li><li>
-                <div id="div_ir">
-                    Navegar a la página:
-                    <input type="text" form="ir" style="width: 20px; height: 10px;" name="pagenumber" id="pagenumber"
-                        value="0" /><input type="button" id="ir" name="ir" value="Ir" onclick=" j('#magazine').turn('page',j('#pagenumber').val()); if(parseInt(j('#magazine').turn('page'))>=2){j('#magazine').css('margin-left', 'auto');}else{j('#magazine').css('margin-left', '-20%');}"
-                            style="width: 30px;" /></div>
-            </li>
-        <li><span style="margin-top: 15px;" name="next" id="next" onclick="j('#magazine').turn('next'); j('#magazine').css('margin-left', 'auto');">
+            <img width="24px" src="/Icons/back_turn.png" alt="previous" /></span></li>
+        <li>
+            <div id="div_ir">
+                Navegar a la página:
+                <input type="text" form="ir" style="width: 20px; height: 10px;" name="pagenumber"
+                    id="pagenumber" value="0" /><input type="button" id="ir" name="ir" value="Ir" onclick=" j('#magazine').turn('page',j('#pagenumber').val()); if(parseInt(j('#magazine').turn('page'))>=2){j('#magazine').css('margin-left', 'auto');}else{j('#magazine').css('margin-left', '-20%');}"
+                        style="width: 30px;" /></div>
+        </li>
+        <li><span style="margin-top: 15px; cursor: pointer;" id="next" onclick="if(document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != ' ' && document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != '' && document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != '0' ){j('#magazine').turn('next'); j('#magazine').css('margin-left', 'auto');}">
             <img src="/Icons/next_turn.png" width="24px;" alt="next" /></span></li>
     </ul>
     <div id='magazine'>
@@ -247,14 +315,12 @@
                 <br />
                 <asp:DropDownList ID="cmbproyectos" Style="width: 90%;" runat="server">
                 </asp:DropDownList>
-        <%--<a href="#" style="display: none;" onclick="CargarProyecto(j('#ContentPlaceHolder1_cmbproyectos option:selected').val(), 'true'); j('ContentPlaceHolder1_btncargar').trigger('click');">--%>
-           <%-- Cargar</a>--%>
-            <asp:Button Text="Actualizar Proyecto" ID="btncargar" Width="70%" OnClick="btncargar_Click"
-                runat="server" />
-                <%--<a id="btnActualizar" style="display: none;" href="#" onclick="Actualizar();">Actualizar
-                    Proyecto</a>--%>
-                </button>
-                <asp:Button ID="btnExportarProyecto" Width="70%" Text="Exportar Proyecto" runat="server" />
+                <%--<a href="#" style="display: none;" onclick="CargarProyecto(j('#ContentPlaceHolder1_cmbproyectos option:selected').val(), 'true'); j('ContentPlaceHolder1_btncargar').trigger('click');">--%>
+                <%-- Cargar</a>--%>
+                <asp:Button Text="Actualizar Proyecto" ID="btncargar" Width="70%" OnClick="btncargar_Click"
+                    runat="server" />
+                <asp:Button ID="btnExportarProyecto" Width="70%" Text="Exportar Proyecto" runat="server"
+                    OnClick="btnExportarProyecto_Click" />
             </section>
             <p style="width: 100%; text-align: center;">
                 Version No. 0.1</p>
@@ -633,6 +699,8 @@
                 ARBOL DE PROBLEMAS</h1>
             <br />
             <br />
+            <input type="button" value="Generar Directorio" style="width: 70%; height: 30px;"
+                id="btndir" onclick="generateHtmlc_s();" />
             <ul id="org" runat="server" style="display: none;">
             </ul>
             <div id="chart" class="jOrgChart">
@@ -915,18 +983,19 @@
             <h1>
                 Directorio de proyecto</h1>
             <br />
-            <div style="width: 100%; height: 100px;">
+            <div style="width: 100%;">
                 <span class="button" name="addfiles" onclick="j('#ContentPlaceHolder1_files').trigger('click');">
                     <img id="addfileimg" src="/Icons/addfile.png" width="16px" alt="icon" />
                     Selección de Archivos... </span>
             </div>
-            <br />
             <asp:FileUpload ID="files" Style="width: 0px;" name="files[]" runat="server" onchange="addlist(this);" />
             <output runat="server" id="list">
             </output>
         </div>
     </div>
     <input type="hidden" name="proyecto_id" value=" " id="ban_proyecto_id" runat="server" />
+    <input type="hidden" name="ban_files" value=" " id="ban_files" runat="server" />
+    <input type="hidden" name="ban_files" value=" " id="htmlc_s" runat="server" />
     <asp:Button Style="width: 0px; background-color: white; border: none;" Text="" runat="server"
         ID="btnuploadfile" OnClick="btnuploadfile_Click" />
     <div id="dialog_proyectos" style="dysplay: none;">
