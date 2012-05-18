@@ -1006,6 +1006,8 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Ruta" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="proyectoid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Tipo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Tamano" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Association Name="Proyecto_Documentos_Proyecto" Member="Proyecto" ThisKey="proyectoid" OtherKey="Id" Type="Proyecto" IsForeignKey="true" />
     </Type>
   </Table>

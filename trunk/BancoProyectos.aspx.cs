@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
+using System.Text;
 
 namespace ESM
 {
@@ -27,6 +28,8 @@ namespace ESM
                 {
                     proyecto_id = Convert.ToInt32(ban_proyecto_id.Value);
                     ban_proyecto_id.Value = ban_proyecto_id.Value;
+
+                    refreshFiles(proyecto_id);
                 }
 
                 if (!Page.IsPostBack)
@@ -200,6 +203,8 @@ namespace ESM
                 html_objetivos = html_objetivos + beneficios_html + objetivos_html + "</ul></li>";
 
                 org_objetivos.InnerHtml = html_objetivos;
+
+                refreshFiles(Convert.ToInt32(ban_proyecto_id.Value));
             }
             catch (Exception)
             {
@@ -221,10 +226,11 @@ namespace ESM
                     if (!Directory.Exists(path + "/" + txtnombreproyecto.Value))
                     {
                         Directory.CreateDirectory(path + "/" + txtnombreproyecto.Value);
-                        path = path + "/" + txtnombreproyecto.Value;
+                        Directory.CreateDirectory(path + "/" + txtnombreproyecto.Value + "/Actas");
+                        path = path + "/" + txtnombreproyecto.Value + "/Actas";
                     }
                     else
-                        path = path + "/" + txtnombreproyecto.Value;
+                        path = path + "/" + txtnombreproyecto.Value + "/Actas";
 
                     path = path + "/" + objFileUpload.FileName;
 
@@ -241,19 +247,26 @@ namespace ESM
                     }
                     else
                     {
+                        bool update = false;
                         if (objFileUpload.PostedFile.ContentLength <= 5242880)
                         {
                             if (File.Exists(path))
+                            {
+                                update = true;
                                 File.Delete(path);
+                            }
 
                             objFileUpload.PostedFile.SaveAs(path);
 
-                            if (new Objetos.Cproyecto().CargarDocumentos(objFileUpload.FileName, proyecto_id, "add", 0))
+                            if (!update)
                             {
-                                Response.Write("<script>alert('El proceso de carga para el archivo finalizó correctamente.'); setTimeout('j(\"#magazine\").turn(\"page\",16)', 100);</script>");
+                                if (new Objetos.Cproyecto().CargarDocumentos(objFileUpload.FileName, objFileUpload.PostedFile.ContentType, objFileUpload.PostedFile.ContentLength.ToString(), proyecto_id, "add", 0))
+                                    ban_files.Value = "1";
+                                else
+                                    File.Delete(path);
                             }
                             else
-                                File.Delete(path);
+                                ban_files.Value = "1";
                         }
                         else
                         {
@@ -261,6 +274,8 @@ namespace ESM
                         }
                     }
                 }
+
+
                 #endregion
             }
             catch (Exception)
@@ -272,6 +287,134 @@ namespace ESM
         protected void btnuploadfile_Click(object sender, EventArgs e)
         {
             UploadFiles();
+            refreshFiles(proyecto_id);
+
+        }
+
+        protected void refreshFiles(int Proyecto_id)
+        {
+            var files_proyect = from d_p in new Model.ESMBDDataContext().Documentos_Proyectos
+                                where d_p.proyectoid == Proyecto_id
+                                select d_p;
+
+            string html_file = "";
+
+            foreach (var item in files_proyect)
+            {
+                html_file += "<li><strong><a href='/Files/Proyectos/" + item.Proyecto.Proyecto1 + "/Actas/" + item.Ruta + "'>" + item.Ruta + "</a></strong> ( " + item.Tipo + " ) --  Tamaño: " + (Convert.ToInt32(item.Tamano) / 1024).ToString() + "<b>KB</b></li>";
+
+            }
+
+            list.InnerHtml = "<ul>" + html_file + "</ul>";
+        }
+
+        protected void btnExportarProyecto_Click(object sender, EventArgs e)
+        {
+            string path = Server.MapPath("~/Files/Proyectos/");
+
+            if (Directory.Exists(path + txtnombreproyecto.Value))
+            {
+                if (!Directory.Exists(path + txtnombreproyecto.Value + "/Actas"))
+                    Directory.CreateDirectory(path + txtnombreproyecto.Value + "/Actas");
+                if (!Directory.Exists(path + txtnombreproyecto.Value + "/Programacion"))
+                    Directory.CreateDirectory(path + txtnombreproyecto.Value + "/Programacion");
+                if (!Directory.Exists(path + txtnombreproyecto.Value + "/M.S.E"))
+                    Directory.CreateDirectory(path + txtnombreproyecto.Value + "/M.S.E");
+
+                string path_files = path + txtnombreproyecto.Value + @"\Programacion\MarcoLogico.xls";
+                string path_files_arbol_problemas = path + txtnombreproyecto.Value + @"\Programacion\ArbolProblemas.xls";
+
+                string html_marcologico = generateMarcoLogico(proyecto_id);
+                string html_arbolproblemas = generateArbolProblemas();
+
+                if (!File.Exists(path_files))
+                {
+                    StreamWriter objFile = new StreamWriter(path_files, true, Encoding.UTF8);
+                    objFile.Write(html_marcologico);
+                    objFile.Flush();
+                    objFile.Close();
+                }
+                else
+                {
+                    File.Delete(path_files);
+
+                    StreamWriter objFile = new StreamWriter(path_files, true, Encoding.UTF8);
+                    objFile.Write(html_marcologico);
+                    objFile.Flush();
+                    objFile.Close();
+                }
+
+                if (!File.Exists(path_files_arbol_problemas))
+                {
+                    StreamWriter objFile = new StreamWriter(path_files_arbol_problemas, true, Encoding.UTF8);
+                    objFile.Write(html_arbolproblemas);
+                    objFile.Flush();
+                    objFile.Close();
+                }
+                else
+                {
+                    File.Delete(path_files_arbol_problemas);
+
+                    StreamWriter objFile = new StreamWriter(path_files_arbol_problemas, true, Encoding.UTF8);
+                    objFile.Write(html_arbolproblemas);
+                    objFile.Flush();
+                    objFile.Close();
+                }
+            }
+            else
+            {
+                Directory.CreateDirectory(path + txtnombreproyecto.Value + "/Actas");
+                Directory.CreateDirectory(path + txtnombreproyecto.Value + "/Programacion");
+                Directory.CreateDirectory(path + txtnombreproyecto.Value + "/M.S.E");
+
+            }
+
+        }
+
+        protected string generateMarcoLogico(int Proyecto_id)
+        {
+            Model.ESMBDDataContext db = new Model.ESMBDDataContext();
+
+            var procesos = from p in db.Causas_Efectos
+                           where p.Proyecto_id == Proyecto_id
+                           select p;
+
+            string html = "<table style='border: 1px solid #000;'>";
+            html = html + "<tr ><td  vertical-align: middle;'>Proceso</td><td>Subproceso</td><td>Actividad</td></tr>";
+            foreach (var procesos_item in procesos)
+            {
+                var subprocesos = from sp in db.Subprocesos
+                                  where sp.Causas_Efecto.Proyecto_id == proyecto_id && sp.Proceso_id == procesos_item.Id
+                                  select sp;
+
+                html = html + "<tr ><td  vertical-align: middle;'>" + procesos_item.Causa + "</td><td></td><td></td></tr>";
+
+                foreach (var subprocesos_item in subprocesos)
+                {
+                    var actividades = from a in db.Actividades
+                                      where a.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id && a.Subproceso_id == subprocesos_item.Id
+                                      select a;
+
+                    html = html + "<tr ><td>" + procesos_item.Causa + "</td><td>" + subprocesos_item.Subproceso1 + "</td><td></td></tr>";
+
+                    foreach (var actividades_item in actividades)
+                    {
+                        html = html + "<tr ><td>" + procesos_item.Causa + "</td><td>" + subprocesos_item.Subproceso1 + "</td><td >" + actividades_item.Actividad + "</td></tr>";
+                    }
+                }
+            }
+            html = html + "</table>";
+
+            return html;
+        }
+
+        protected string generateArbolProblemas()
+        {
+            string html_arbol_problemas = htmlc_s.Value.Replace('1', '<');
+
+            html_arbol_problemas = html_arbol_problemas.Replace('2', '>');
+
+            return html_arbol_problemas;
         }
     }
 }

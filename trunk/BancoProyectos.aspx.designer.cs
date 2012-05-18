@@ -256,6 +256,24 @@ namespace ESM {
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden ban_proyecto_id;
         
         /// <summary>
+        /// ban_files control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden ban_files;
+        
+        /// <summary>
+        /// htmlc_s control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden htmlc_s;
+        
+        /// <summary>
         /// btnuploadfile control.
         /// </summary>
         /// <remarks>

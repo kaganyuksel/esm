@@ -466,7 +466,7 @@ namespace ESM.Objetos
         /// <param name="action"></param>
         /// <param name="Id">Identificador de documento almacenado para editar (Opcional)</param>
         /// <returns></returns>
-        public bool CargarDocumentos(string ruta, int proyecto_id, string action, int Id = 0)
+        public bool CargarDocumentos(string ruta, string tipo, string tamano, int proyecto_id, string action, int Id = 0)
         {
             try
             {
@@ -476,6 +476,8 @@ namespace ESM.Objetos
                         Documentos_Proyecto objDocumentos_Proyecto = new Documentos_Proyecto()
                         {
                             Ruta = ruta,
+                            Tipo = tipo,
+                            Tamano = tamano,
                             proyectoid = proyecto_id
                         };
                         _db.Documentos_Proyectos.InsertOnSubmit(objDocumentos_Proyecto);
@@ -487,6 +489,8 @@ namespace ESM.Objetos
                                                              select d_p).Single();
 
                         objDocumentos_Proyecto_single.Ruta = ruta;
+                        objDocumentos_Proyecto_single.Tipo = tipo;
+                        objDocumentos_Proyecto_single.Tamano = tamano;
 
                         break;
                 }
