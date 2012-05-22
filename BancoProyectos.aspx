@@ -699,8 +699,6 @@
                 ARBOL DE PROBLEMAS</h1>
             <br />
             <br />
-            <input type="button" value="Generar Directorio" style="width: 70%; height: 30px;"
-                id="btndir" onclick="generateHtmlc_s();" />
             <ul id="org" runat="server" style="display: none;">
             </ul>
             <div id="chart" class="jOrgChart">
@@ -845,6 +843,10 @@
                     </td>
                 </tr>
             </table>
+            <br />
+            <div id="content_marcologico" style="width: 100%; height: 800px; overflow-y: scroll;" runat="server">
+            
+            </div>
         </div>
         <div class="page_magazine" id="page11">
             <p style="font-size: 14px; width: 90%; text-align: right;">
