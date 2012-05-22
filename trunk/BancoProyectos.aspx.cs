@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
+using ICSharpCode.SharpZipLib.Zip;
 using System.Text;
 
 namespace ESM
@@ -30,6 +31,7 @@ namespace ESM
                     ban_proyecto_id.Value = ban_proyecto_id.Value;
 
                     refreshFiles(proyecto_id);
+                    CargarMarcoLogico();
                 }
 
                 if (!Page.IsPostBack)
@@ -155,6 +157,10 @@ namespace ESM
             txtproposito.Value = proyecto_informacion.Proposito;
             txtfinalidad.Value = proyecto_informacion.Finalidad;
 
+            proyecto_id = Convert.ToInt32(ban_proyecto_id.Value);
+
+            CargarMarcoLogico();
+
             try
             {
                 var registro_proyecto = proyecto_informacion.Registro_Proyectos.Single();
@@ -217,20 +223,21 @@ namespace ESM
         {
             try
             {
+                string nombre_proyecto = txtnombreproyecto.Value.Substring(0, 15);
                 FileUpload objFileUpload = files;
                 #region Carga de Documento
                 if (objFileUpload.PostedFile.FileName != "")
                 {
                     string path = Server.MapPath("~/Files/Proyectos");
 
-                    if (!Directory.Exists(path + "/" + txtnombreproyecto.Value))
+                    if (!Directory.Exists(path + "/" + nombre_proyecto))
                     {
-                        Directory.CreateDirectory(path + "/" + txtnombreproyecto.Value);
-                        Directory.CreateDirectory(path + "/" + txtnombreproyecto.Value + "/Actas");
-                        path = path + "/" + txtnombreproyecto.Value + "/Actas";
+                        Directory.CreateDirectory(path + "/" + nombre_proyecto);
+                        Directory.CreateDirectory(path + "/" + nombre_proyecto + "/Actas");
+                        path = path + "/" + nombre_proyecto + "/Actas";
                     }
                     else
-                        path = path + "/" + txtnombreproyecto.Value + "/Actas";
+                        path = path + "/" + nombre_proyecto + "/Actas";
 
                     path = path + "/" + objFileUpload.FileName;
 
@@ -310,23 +317,27 @@ namespace ESM
 
         protected void btnExportarProyecto_Click(object sender, EventArgs e)
         {
+
+            string nombre_proyecto = txtnombreproyecto.Value.Substring(0, 15);
+
             string path = Server.MapPath("~/Files/Proyectos/");
 
-            if (Directory.Exists(path + txtnombreproyecto.Value))
+            if (Directory.Exists(path + nombre_proyecto))
             {
-                if (!Directory.Exists(path + txtnombreproyecto.Value + "/Actas"))
-                    Directory.CreateDirectory(path + txtnombreproyecto.Value + "/Actas");
-                if (!Directory.Exists(path + txtnombreproyecto.Value + "/Programacion"))
-                    Directory.CreateDirectory(path + txtnombreproyecto.Value + "/Programacion");
-                if (!Directory.Exists(path + txtnombreproyecto.Value + "/M.S.E"))
-                    Directory.CreateDirectory(path + txtnombreproyecto.Value + "/M.S.E");
+                if (!Directory.Exists(path + nombre_proyecto + "/Actas"))
+                    Directory.CreateDirectory(path + nombre_proyecto + "/Actas");
+                if (!Directory.Exists(path + nombre_proyecto + "/Programacion"))
+                    Directory.CreateDirectory(path + nombre_proyecto + "/Programacion");
+                if (!Directory.Exists(path + nombre_proyecto + "/M.S.E"))
+                    Directory.CreateDirectory(path + nombre_proyecto + "/M.S.E");
 
-                string path_files = path + txtnombreproyecto.Value + @"\Programacion\MarcoLogico.xls";
-                string path_files_arbol_problemas = path + txtnombreproyecto.Value + @"\Programacion\ArbolProblemas.xls";
+                string path_files = path + nombre_proyecto + @"\Programacion\MarcoLogico.xls";
+                string path_files_arbol_problemas = path + nombre_proyecto + @"\Programacion\ArbolProblemas.xls";
+                string path_files_arbol_objetivos = path + nombre_proyecto + @"\Programacion\ArbolObjetivos.xls";
 
                 string html_marcologico = generateMarcoLogico(proyecto_id);
                 string html_arbolproblemas = generateArbolProblemas();
-
+                string html_arbolobjetivos = generateArbolObjetivos();
                 if (!File.Exists(path_files))
                 {
                     StreamWriter objFile = new StreamWriter(path_files, true, Encoding.UTF8);
@@ -360,15 +371,122 @@ namespace ESM
                     objFile.Flush();
                     objFile.Close();
                 }
+
+                if (!File.Exists(path_files_arbol_objetivos))
+                {
+                    StreamWriter objFile = new StreamWriter(path_files_arbol_objetivos, true, Encoding.UTF8);
+                    objFile.Write(html_arbolobjetivos);
+                    objFile.Flush();
+                    objFile.Close();
+                }
+                else
+                {
+                    File.Delete(path_files_arbol_objetivos);
+
+                    StreamWriter objFile = new StreamWriter(path_files_arbol_objetivos, true, Encoding.UTF8);
+                    objFile.Write(html_arbolobjetivos);
+                    objFile.Flush();
+                    objFile.Close();
+                }
             }
             else
             {
-                Directory.CreateDirectory(path + txtnombreproyecto.Value + "/Actas");
-                Directory.CreateDirectory(path + txtnombreproyecto.Value + "/Programacion");
-                Directory.CreateDirectory(path + txtnombreproyecto.Value + "/M.S.E");
+                Directory.CreateDirectory(path + "/" + nombre_proyecto);
+
+                if (!Directory.Exists(path + nombre_proyecto + "/Actas"))
+                    Directory.CreateDirectory(path + nombre_proyecto + "/Actas");
+                if (!Directory.Exists(path + nombre_proyecto + "/Programacion"))
+                    Directory.CreateDirectory(path + nombre_proyecto + "/Programacion");
+                if (!Directory.Exists(path + nombre_proyecto + "/M.S.E"))
+                    Directory.CreateDirectory(path + nombre_proyecto + "/M.S.E");
+
+                string path_files = path + nombre_proyecto + @"\Programacion\MarcoLogico.xls";
+                string path_files_arbol_problemas = path + nombre_proyecto + @"\Programacion\ArbolProblemas.xls";
+                string path_files_arbol_objetivos = path + nombre_proyecto + @"\Programacion\ArbolObjetivos.xls";
+
+                string html_marcologico = generateMarcoLogico(proyecto_id);
+                string html_arbolproblemas = generateArbolProblemas();
+                string html_arbolobjetivos = generateArbolObjetivos();
+                if (!File.Exists(path_files))
+                {
+                    StreamWriter objFile = new StreamWriter(path_files, true, Encoding.UTF8);
+                    objFile.Write(html_marcologico);
+                    objFile.Flush();
+                    objFile.Close();
+                }
+                else
+                {
+                    File.Delete(path_files);
+
+                    StreamWriter objFile = new StreamWriter(path_files, true, Encoding.UTF8);
+                    objFile.Write(html_marcologico);
+                    objFile.Flush();
+                    objFile.Close();
+                }
+
+                if (!File.Exists(path_files_arbol_problemas))
+                {
+                    StreamWriter objFile = new StreamWriter(path_files_arbol_problemas, true, Encoding.UTF8);
+                    objFile.Write(html_arbolproblemas);
+                    objFile.Flush();
+                    objFile.Close();
+                }
+                else
+                {
+                    File.Delete(path_files_arbol_problemas);
+
+                    StreamWriter objFile = new StreamWriter(path_files_arbol_problemas, true, Encoding.UTF8);
+                    objFile.Write(html_arbolproblemas);
+                    objFile.Flush();
+                    objFile.Close();
+                }
+
+                if (!File.Exists(path_files_arbol_objetivos))
+                {
+                    StreamWriter objFile = new StreamWriter(path_files_arbol_objetivos, true, Encoding.UTF8);
+                    objFile.Write(html_arbolobjetivos);
+                    objFile.Flush();
+                    objFile.Close();
+                }
+                else
+                {
+                    File.Delete(path_files_arbol_objetivos);
+
+                    StreamWriter objFile = new StreamWriter(path_files_arbol_objetivos, true, Encoding.UTF8);
+                    objFile.Write(html_arbolobjetivos);
+                    objFile.Flush();
+                    objFile.Close();
+                }
 
             }
 
+
+            if (!File.Exists(path + nombre_proyecto + ".zip"))
+            {
+                using (var zip = new Ionic.Zip.ZipFile())
+                {
+                    zip.AddDirectory(path + "/" + nombre_proyecto);
+                    zip.Save(path + nombre_proyecto + ".zip");
+                }
+            }
+            else
+            {
+                File.Delete(path + nombre_proyecto + ".zip");
+
+                using (var zip = new Ionic.Zip.ZipFile())
+                {
+                    zip.AddDirectory(path + "/" + nombre_proyecto);
+                    zip.Save(path + nombre_proyecto + ".zip");
+                }
+            }
+
+
+            Response.Redirect("/Files/Proyectos/" + nombre_proyecto + ".zip");
+        }
+
+        protected void CargarMarcoLogico()
+        {
+            content_marcologico.InnerHtml = generateMarcoLogico(proyecto_id);
         }
 
         protected string generateMarcoLogico(int Proyecto_id)
@@ -380,14 +498,14 @@ namespace ESM
                            select p;
 
             string html = "<table style='border: 1px solid #000;'>";
-            html = html + "<tr ><td  vertical-align: middle;'>Proceso</td><td>Subproceso</td><td>Actividad</td></tr>";
+            html = html + "<tr ><td style='border: 1px solid #000;' vertical-align: middle;'>Proceso</td><td style='border: 1px solid #000;'>Subproceso</td><td style='border: 1px solid #000;'>Actividad</td></tr>";
             foreach (var procesos_item in procesos)
             {
                 var subprocesos = from sp in db.Subprocesos
                                   where sp.Causas_Efecto.Proyecto_id == proyecto_id && sp.Proceso_id == procesos_item.Id
                                   select sp;
 
-                html = html + "<tr ><td  vertical-align: middle;'>" + procesos_item.Causa + "</td><td></td><td></td></tr>";
+                html = html + "<tr ><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td></tr>";
 
                 foreach (var subprocesos_item in subprocesos)
                 {
@@ -395,11 +513,11 @@ namespace ESM
                                       where a.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id && a.Subproceso_id == subprocesos_item.Id
                                       select a;
 
-                    html = html + "<tr ><td>" + procesos_item.Causa + "</td><td>" + subprocesos_item.Subproceso1 + "</td><td></td></tr>";
+                    html = html + "<tr ><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'>" + subprocesos_item.Subproceso1 + "</td><td style='border: 1px solid #000;'></td></tr>";
 
                     foreach (var actividades_item in actividades)
                     {
-                        html = html + "<tr ><td>" + procesos_item.Causa + "</td><td>" + subprocesos_item.Subproceso1 + "</td><td >" + actividades_item.Actividad + "</td></tr>";
+                        html = html + "<tr ><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'>" + subprocesos_item.Subproceso1 + "</td><td style='border: 1px solid #000;' >" + actividades_item.Actividad + "</td></tr>";
                     }
                 }
             }
@@ -410,11 +528,58 @@ namespace ESM
 
         protected string generateArbolProblemas()
         {
-            string html_arbol_problemas = htmlc_s.Value.Replace('1', '<');
+            var arbolproblemas = from p in new Model.ESMBDDataContext().Causas_Efectos
+                                 where p.Proyecto_id == proyecto_id
+                                 select p;
 
-            html_arbol_problemas = html_arbol_problemas.Replace('2', '>');
+            string html_arbol_problemas = "<h1>Arbol Problemas</h1><h3>Efectos</h3><table><tr>";
+            string problema = "";
+            foreach (var item in arbolproblemas)
+            {
+                problema = item.Proyecto.Problema;
+                html_arbol_problemas += "<td style='border: solid 2px #000; width: 100px;'>" + item.Efecto + "</td>";
+            }
+
+            html_arbol_problemas += "</tr><tr><td style='height:100px; text-align:center;' colspan='" + arbolproblemas.Count().ToString() + "'>" + problema + "</td></tr><tr>";
+
+            foreach (var item in arbolproblemas)
+            {
+                problema = item.Proyecto.Problema;
+                html_arbol_problemas += "<td style='border: solid 2px #000; width: 100px;'>" + item.Causa + "</td>";
+            }
+
+            html_arbol_problemas += "</tr><table><h3>Causas</h3>";
 
             return html_arbol_problemas;
         }
+
+        protected string generateArbolObjetivos()
+        {
+
+            var arbolobjetivos = from p in new Model.ESMBDDataContext().Causas_Efectos
+                                 where p.Proyecto_id == proyecto_id
+                                 select p;
+
+            string html_arbol_objetivos = "<h1>Arbol Objetivos</h1><h3>Beneficios</h3><table><tr>";
+            string problema = "";
+            foreach (var item in arbolobjetivos)
+            {
+                problema = item.Proyecto.Problema;
+                html_arbol_objetivos += "<td style='border: solid 2px #000; width: 100px;'>" + item.Beneficios + "</td>";
+            }
+
+            html_arbol_objetivos += "</tr><tr><td style='height:100px; text-align:center;' colspan='" + arbolobjetivos.Count().ToString() + "'>" + problema + "</td></tr><tr>";
+
+            foreach (var item in arbolobjetivos)
+            {
+                problema = item.Proyecto.Problema;
+                html_arbol_objetivos += "<td style='border: solid 2px #000 ; width: 100px;'>" + item.Causa + "</td>";
+            }
+
+            html_arbol_objetivos += "</tr><table><h3>Objetivos</h3>";
+
+            return html_arbol_objetivos;
+        }
+
     }
 }

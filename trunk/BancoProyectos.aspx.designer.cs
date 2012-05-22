@@ -202,6 +202,15 @@ namespace ESM {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl org_objetivos;
         
         /// <summary>
+        /// content_marcologico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl content_marcologico;
+        
+        /// <summary>
         /// if_marco_logico control.
         /// </summary>
         /// <remarks>
