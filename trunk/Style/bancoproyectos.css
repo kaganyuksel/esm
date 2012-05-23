@@ -226,3 +226,8 @@ table tr td select
     -webkit-border-radius: 2px;
     border-radius: 2px;    
 }
+
+#ContentPlaceHolder1_content_marcologico table
+{
+    font-size: 13px;    
+}

@@ -939,18 +939,24 @@ namespace ESM.Objetos
         {
             try
             {
-                Actividade objActividade = new Actividade
+
+                if (actividad.Trim().Length > 0)
                 {
-                    Subproceso_id = idresultado,
-                    Actividad = actividad,
-                    Presupuesto = presupuesto,
-                    fecha = Fecha == "" ? DateTime.Now : Convert.ToDateTime(Fecha)
-                };
+                    Actividade objActividade = new Actividade
+                    {
+                        Subproceso_id = idresultado,
+                        Actividad = actividad,
+                        Presupuesto = presupuesto,
+                        fecha = Fecha == "" ? DateTime.Now : Convert.ToDateTime(Fecha)
+                    };
 
-                _db.Actividades.InsertOnSubmit(objActividade);
-                _db.SubmitChanges();
+                    _db.Actividades.InsertOnSubmit(objActividade);
+                    _db.SubmitChanges();
 
-                return true;
+                    return true;
+                }
+                else
+                    return false;
             }
             catch (Exception) { return false; }
 
@@ -960,23 +966,28 @@ namespace ESM.Objetos
         {
             try
             {
-                var actividad_consulta = (from a in _db.Actividades
-                                          where a.Id == actividadid
-                                          select a).Single();
+                if (actividad.Trim().Length > 0)
+                {
+                    var actividad_consulta = (from a in _db.Actividades
+                                              where a.Id == actividadid
+                                              select a).Single();
 
-                if (actividad != null)
-                    actividad_consulta.Actividad = actividad;
+                    if (actividad != null)
+                        actividad_consulta.Actividad = actividad;
 
-                if (presupuesto != 0)
-                    actividad_consulta.Presupuesto = presupuesto;
+                    if (presupuesto != 0)
+                        actividad_consulta.Presupuesto = presupuesto;
 
-                if (fecha != null && fecha != "")
-                    actividad_consulta.fecha = Convert.ToDateTime(fecha);
+                    if (fecha != null && fecha != "")
+                        actividad_consulta.fecha = Convert.ToDateTime(fecha);
 
 
-                _db.SubmitChanges();
+                    _db.SubmitChanges();
 
-                return true;
+                    return true;
+                }
+                else
+                    return false;
             }
             catch (Exception) { return false; }
 
@@ -1212,12 +1223,12 @@ namespace ESM.Objetos
             catch (Exception) { return null; }
 
         }
-        public IQueryable<Actividade> getActividades(int proyecto_id)
+        public IQueryable<Actividade> getActividades(int subproceso_id)
         {
             try
             {
                 var actividades_consulta = from a in _db.Actividades
-                                           where a.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id
+                                           where a.Subproceso.Id == subproceso_id
                                            select a;
 
                 return actividades_consulta;
@@ -1239,20 +1250,24 @@ namespace ESM.Objetos
         {
             try
             {
-                Subproceso objSubproceso = new Subproceso
+                if (subproceso.Trim().Length > 0)
                 {
-                    Proceso_id = idproceso,
-                    Subproceso1 = subproceso,
-                    Indicador = indicador,
-                    Supuestos = supuestos,
-                    Medios = medios
-                };
+                    Subproceso objSubproceso = new Subproceso
+                    {
+                        Proceso_id = idproceso,
+                        Subproceso1 = subproceso,
+                        Indicador = indicador,
+                        Supuestos = supuestos,
+                        Medios = medios
+                    };
 
-                _db.Subprocesos.InsertOnSubmit(objSubproceso);
-                _db.SubmitChanges();
+                    _db.Subprocesos.InsertOnSubmit(objSubproceso);
+                    _db.SubmitChanges();
 
-                //return objSubproceso.Id;
-                return true;
+                    return true;
+                }
+                else
+                    return false;
             }
             catch (Exception) { return false; }
 
@@ -1262,22 +1277,26 @@ namespace ESM.Objetos
         {
             try
             {
-                var subproceso_consulta = (from a in _db.Subprocesos
-                                           where a.Id == subprocesoid
-                                           select a).Single();
+                if (subproceso.Trim().Length > 0)
+                {
+                    var subproceso_consulta = (from a in _db.Subprocesos
+                                               where a.Id == subprocesoid
+                                               select a).Single();
 
-                if (subproceso != null)
-                    subproceso_consulta.Subproceso1 = subproceso;
+                    if (subproceso != null)
+                        subproceso_consulta.Subproceso1 = subproceso;
 
-                if (indicador != null)
-                    subproceso_consulta.Indicador = indicador;
+                    if (indicador != null)
+                        subproceso_consulta.Indicador = indicador;
 
-                subproceso_consulta.Medios = medios;
-                subproceso_consulta.Supuestos = supuestos;
+                    subproceso_consulta.Medios = medios;
+                    subproceso_consulta.Supuestos = supuestos;
 
-                _db.SubmitChanges();
+                    _db.SubmitChanges();
 
-                return true;
+                    return true;
+                }
+                else return false;
             }
             catch (Exception) { return false; }
 
