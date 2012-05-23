@@ -381,7 +381,10 @@ namespace ESM
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         protected void CargarActividades()
         {
-            IQueryable<Actividade> actividades_col = new CActividades().getActividades(proyecto_id);
+            ///TODO:JCMM: Modificación para buen funcionamiento de interfaz usuario
+            /// 23 May 2012 - 02:18 p.m.
+            int subproceso_id = Request.QueryString["subproceso_id"] == null || Request.QueryString["subproceso_id"] == "" ? 0 : Convert.ToInt32(Request.QueryString["subproceso_id"]);
+            IQueryable<Actividade> actividades_col = new CActividades().getActividades(subproceso_id);
 
             string json_to_return = "{\"page\":\"1\",\"total\":1,\"records\":\"1\",\"rows\": [";
 
@@ -402,8 +405,10 @@ namespace ESM
 
             ESMBDDataContext db = new Model.ESMBDDataContext();
 
+            int actividad_id = Request.QueryString["actividad_id"] == null || Request.QueryString["actividad_id"] == "" ? 0 : Convert.ToInt32(Request.QueryString["actividad_id"]);
+
             var indicadores_col = from ind in db.Indicadores
-                                  where ind.Actividade.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id
+                                  where ind.Actividade.Id == actividad_id
                                   select ind;
 
             string json_to_return = "{\"page\":\"1\",\"total\":1,\"records\":\"1\",\"rows\": [";
@@ -528,9 +533,21 @@ namespace ESM
 
         protected void AgregarIndicadores()
         {
+            bool metaIsNumeric = true;
             int actividad = Convert.ToInt32(Session["actividad"].ToString());
             int verbo = Convert.ToInt32(Session["verbo"].ToString());
-            int meta = Convert.ToInt32(Session["meta"].ToString());
+
+            for (int i = 0; i < Session["meta"].ToString().Length; i++)
+            {
+                bool IsNumber = char.IsNumber(Session["meta"].ToString(), i);
+                if (!IsNumber)
+                    metaIsNumeric = false;
+            }
+
+            int meta = 0;
+            if (metaIsNumeric)
+                meta = Convert.ToInt32(Session["meta"].ToString());
+
             int unidad = Convert.ToInt32(Session["unidad"].ToString());
             string medios = Session["medios"].ToString();
             string supuestos = Session["supuestos"].ToString();
@@ -545,23 +562,23 @@ namespace ESM
 
             Model.ESMBDDataContext db = new ESMBDDataContext();
 
-            var verbo_text = from v in db.Verbos
-                             where v.Id == verbo
-                             select v.Verbo1;
+            string verbo_text = (from v in db.Verbos
+                                 where v.Id == verbo
+                                 select v.Verbo1).Single();
 
-            var unidad_text = from u in db.Unidades
-                              where u.Id == unidad
-                              select u.Unidad;
+            string unidad_text = (from u in db.Unidades
+                                  where u.Id == unidad
+                                  select u.Unidad).Single();
 
             string indicador = "";
 
             if (Session["tiporedaccion"].ToString() == "entre")
             {
-                indicador = verbo_text + " " + meta + " " + descripcion + " entre " + fechainicial + " y " + fechafinal;
+                indicador = verbo_text + " " + meta + " " + descripcion + " entre " + fechainicial.ToShortDateString() + " y " + fechafinal.ToShortDateString();
             }
             else if (Session["tiporedaccion"].ToString() == "hasta")
             {
-                indicador = "A " + fechainicial + " " + verbo_text + " " + meta + " " + descripcion;
+                indicador = "A " + fechainicial.ToShortDateString() + " " + verbo_text + " " + meta + " " + descripcion;
             }
 
             if (objCActividades.AddIndicador(actividad, indicador, verbo, unidad, fechainicial, fechafinal, meta, ssp, medios, supuestos, descripcion))
@@ -816,7 +833,7 @@ namespace ESM
             }
         }
 
-        [ScriptMethod(ResponseFormat=ResponseFormat.Json)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         protected void CargarFile()
         {
             try

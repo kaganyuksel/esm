@@ -16,7 +16,7 @@
         var j = jQuery.noConflict();
         j(document).ready(function () {
 
-            j.extend(j.jgrid.edit, { width: "500" });
+            j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); } });
 
             j("#jqgrid_act_ind_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=actividades_indicadores',

@@ -62,7 +62,7 @@ namespace ESM
                 string proposito = txtproposito.Value;
                 string finalidad = txtfinalidad.Value;
 
-                if (ban_proyecto_id.Value == "")
+                if (ban_proyecto_id.Value == " ")
                 {
                     int proyecto_id = _objProyecto.Add(problema, nombre_proyecto, proposito, finalidad);
                     ban_proyecto_id.Value = proyecto_id.ToString();
@@ -72,9 +72,11 @@ namespace ESM
                     int proyecto_id = Convert.ToInt32(ban_proyecto_id.Value);
                     _objProyecto.Update(proyecto_id, nombre_proyecto, problema, proposito, finalidad);
                 }
+
+                Response.Redirect("/BancoProyectos.aspx");
             }
             catch (Exception)
-            { Response.Write("alert('Opss... Ocurrio un error inesperado.');"); }
+            { Response.Write("<script type='text/javascript'>alert('Opss... Ocurrio un error inesperado.');<script/>"); }
         }
 
         protected void ActualziarProyecto(int proyecto_id)
@@ -497,7 +499,7 @@ namespace ESM
                            where p.Proyecto_id == Proyecto_id
                            select p;
 
-            string html = "<table style='border: 1px solid #000;'>";
+            string html = "<table style='border: 1px solid #000;'><caption>Marco Logico</caption>";
             html = html + "<tr ><td style='border: 1px solid #000;' vertical-align: middle;'>Proceso</td><td style='border: 1px solid #000;'>Subproceso</td><td style='border: 1px solid #000;'>Actividad</td></tr>";
             foreach (var procesos_item in procesos)
             {

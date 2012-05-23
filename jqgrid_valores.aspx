@@ -18,7 +18,7 @@
 
             setInterval("j('#fecha').datepicker({dateFormat: 'dd/mm/yy', showAnim: 'bounce'});  j('#ejecutado').addClass('numerico');", 1000);
 
-            j.extend(j.jgrid.edit, { width: "500" });
+            j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); } });
 
             j("#jqgrid_val_ind_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=ind_val',

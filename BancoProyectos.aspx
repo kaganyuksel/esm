@@ -17,6 +17,7 @@
     <script src="Scripts/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         var fls;
+        var nuevo = false;
         var path_files = [];
         function addlist(event) {
             if (window.File) {
@@ -41,8 +42,9 @@
 
         var obj_file = null;
         var page_number = null;
-
         var j = jQuery.noConflict();
+
+        var if_marcologico;
 
         j(document).ready(function () {
 
@@ -60,9 +62,23 @@
             j("#ContentPlaceHolder1_org_objetivos").jOrgChart({
                 chartElement: '#chart_objetivos'
             });
-            j('#magazine').turn({ gradients: true, acceleration: true });
+            j('#magazine').turn({
+                gradients: true,
+                acceleration: true,
+                when: { turned: function () {
+                    if (document.getElementById("ContentPlaceHolder1_ban_proyecto_id").value == " " && j('#magazine').turn('page') == 2 && !nuevo) {
+                        j('#magazine').css('margin-left', 'auto');
+                        alert('Por favor seleccione un proyecto para continuar');
+                        j('#magazine').turn('page', 1);
+                        j('#magazine').css('margin-left', '-20%');
+                    } else if (j('#magazine').turn('page') == 2) {
+                        j('#magazine').css('margin-left', 'auto');
+                    }
+                }
+                }
+            });
 
-            j.extend(j.jgrid.edit, { width: "500" });
+        j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); } });
 
             j("#jqgrid_table").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=fuentes_financiacion',
@@ -86,12 +102,13 @@
                 caption: "Fuentes de Financiación",
                 autowidth: true,
                 add: { width: 500 },
-                edit: { width: '500px' }
+                edit: { width: '500px' },
+                afterComplete: function (response, postdata, formid) { alert("save"); }
 
             });
-            j("#jqgrid_table").jqGrid('navGrid', "#jqgrid_div", { edit: true, add: true, del: false, width: 500 });
+            //j("#jqgrid_table").jqGrid('navGrid', "#jqgrid_div", { edit: true, add: true, del: false, width: 500 });
             j("#jqgrid_table").jqGrid('inlineNav', "#jqgrid_div");
-
+            j("#jqgrid_table").navGrid('#jqgrid_div', { edit: true, add: true, del: true, search: false, view: true }, { width: 500, reloadAfterSubmit: true }, { reloadAfterSubmit: true, width: 500, closeAfterAdd: false }, { reloadAfterSubmit: true }, {});
 
 
             j("#jqgrid_matriz_identificacion_t").jqGrid({
@@ -147,9 +164,15 @@
                 document.getElementById("ContentPlaceHolder1_ban_files").value = " ";
             }
 
+            if_marcologico = j('#ContentPlaceHolder1_if_marco_logico').contents();
+
         });
 
         setInterval('var numeric_text = j("#ContentPlaceHolder1_if_marco_logico").contents().find("#presupuesto"); j(numeric_text).change(function () { if(isNaN(j(this).val())){j(this).val("0");} });', 3000);
+        var _obj;
+        function cambiomarco(obj) {
+            _obj = obj;
+        }
 
         function generateHtmlc_s() {
             j(".line").each(function () {
@@ -280,7 +303,7 @@
             <div id="div_ir">
                 Navegar a la página:
                 <input type="text" form="ir" style="width: 20px; height: 10px;" name="pagenumber"
-                    id="pagenumber" value="0" /><input type="button" id="ir" name="ir" value="Ir" onclick=" j('#magazine').turn('page',j('#pagenumber').val()); if(parseInt(j('#magazine').turn('page'))>=2){j('#magazine').css('margin-left', 'auto');}else{j('#magazine').css('margin-left', '-20%');}"
+                    id="pagenumber" value="1" /><input type="button" id="ir" name="ir" value="Ir" onclick=" if(document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != ' ' && document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != '' && document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != '0' ){j('#magazine').turn('page',j('#pagenumber').val()); if(parseInt(j('#magazine').turn('page'))>=2){j('#magazine').css('margin-left', 'auto');}else{j('#magazine').css('margin-left', '-20%');}}"
                         style="width: 30px;" /></div>
         </li>
         <li><span style="margin-top: 15px; cursor: pointer;" id="next" onclick="if(document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != ' ' && document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != '' && document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != '0' ){j('#magazine').turn('next'); j('#magazine').css('margin-left', 'auto');}">
@@ -311,7 +334,8 @@
                     Bienvenidos al Banco de Proyectos de la Subdirección de Fomento y Competencias</h1>
             </hgroup>
             <section style="margin: 0 auto; width: 60%; border: 1px solid #005EA7; text-align: center;">
-                <a href="#" onclick="j('#magazine').turn('next');">Nuevo Proyecto</a>
+                <a href="#" onclick="j('#magazine').turn('next'); j('#magazine').css('margin-left','auto'); nuevo=true;">
+                    Nuevo Proyecto</a>
                 <br />
                 <asp:DropDownList ID="cmbproyectos" Style="width: 90%;" runat="server">
                 </asp:DropDownList>
@@ -419,11 +443,6 @@
             <div id="jqgrid_div" style="width: 100%;">
             </div>
             <br />
-            * Información de Referencia (Anexos)
-            <br />
-            <div>
-                <asp:FileUpload ID="flupDocumentos" runat="server" Width="30%" />
-            </div>
             <asp:Button ID="btnalmacenarregistro" Text="Almacenar información" runat="server"
                 OnClick="btnalmacenarregistro_Click" />
         </div>
@@ -602,6 +621,36 @@
                     <td width="184" valign="top">
                         <p>
                             RECURSOS Y MANDATOS</p>
+                    </td>
+                </tr>
+                <tr style="height: 30px;">
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr style="height: 30px;">
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr style="height: 30px;">
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
                     </td>
                 </tr>
             </table>
@@ -844,8 +893,8 @@
                 </tr>
             </table>
             <br />
-            <div id="content_marcologico" style="width: 100%; height: 800px; overflow-y: scroll;" runat="server">
-            
+            <div id="content_marcologico" style="width: 100%; height: 800px; overflow-y: scroll;"
+                runat="server">
             </div>
         </div>
         <div class="page_magazine" id="page11">
