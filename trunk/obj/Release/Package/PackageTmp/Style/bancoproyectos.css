@@ -27,6 +27,10 @@
     width: 90%;
     height: 2000px;
     margin: 50px auto;
+    transition: all 0.9s;
+    -moz-transition: all 0.9s; /* Firefox 4 */
+    -webkit-transition: all 0.9s; /* Safari and Chrome */
+    -o-transition: all 0.9s; /* Opera */
 }
 #magazine .turn-page
 {
@@ -66,7 +70,7 @@ H3
     font-family: Tahoma, helvetica;
 }
 
-input[type=text]
+#magazine input[type=text]
 {
     margin-top: 15px;
     height: 20px;
@@ -153,4 +157,77 @@ p
 table tr td select
 {
     max-width: 200px;
+}
+
+#addfile
+{
+    background: #369623;
+}
+.button
+{
+    height: 40px;
+    width: 200px;
+    line-height: 0.9em;
+    text-align: right;
+    padding: 5px 15px 5px 15px;
+    font-size: 0.9em;
+    color: #fff;
+    font-family: Tahoma, Helvetica;
+    cursor: pointer;
+    background-color: #7ac24a;
+    border: 2px solid #447d0d;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+}
+
+#addfileimg
+{
+    border: none;
+}
+#div_ir
+{
+    height: 40px;
+    width: 300px;
+    display: inline;
+    color: #fff; /*font-size: 0.9em;*/
+    font-family: Tahoma, Helvetica;
+    cursor: pointer;
+    background-color: #004563;
+    border: 2px solid #016591;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    vertical-align: middle;
+    border-radius: 3px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+}
+#nav_page li
+{
+    display: inline;
+    vertical-align: middle;
+    width: 100px;
+    height: 40px;
+}
+#nav_page
+{
+    margin-top: 10px;
+}
+
+#nav_page input[type="text"]
+{
+    border: 2px solid #016591;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+#ContentPlaceHolder1_list ul
+{
+    border: 2px solid #016591;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;    
+}
+
+#ContentPlaceHolder1_content_marcologico table
+{
+    font-size: 13px;    
 }

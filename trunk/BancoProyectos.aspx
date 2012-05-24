@@ -78,7 +78,7 @@
                 }
             });
 
-        j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); } });
+            j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); } });
 
             j("#jqgrid_table").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=fuentes_financiacion',
@@ -106,7 +106,6 @@
                 afterComplete: function (response, postdata, formid) { alert("save"); }
 
             });
-            //j("#jqgrid_table").jqGrid('navGrid', "#jqgrid_div", { edit: true, add: true, del: false, width: 500 });
             j("#jqgrid_table").jqGrid('inlineNav', "#jqgrid_div");
             j("#jqgrid_table").navGrid('#jqgrid_div', { edit: true, add: true, del: true, search: false, view: true }, { width: 500, reloadAfterSubmit: true }, { reloadAfterSubmit: true, width: 500, closeAfterAdd: false }, { reloadAfterSubmit: true }, {});
 
@@ -164,76 +163,27 @@
                 document.getElementById("ContentPlaceHolder1_ban_files").value = " ";
             }
 
-            if_marcologico = j('#ContentPlaceHolder1_if_marco_logico').contents();
-
+            if (j("#ContentPlaceHolder1_ban_proyecto_id").val() != " " && j("#ContentPlaceHolder1_ban_proyecto_id").val() != "0") {
+                setInterval("j('#refreshOrganigrama').trigger('click')", 3000);
+            }
         });
 
         setInterval('var numeric_text = j("#ContentPlaceHolder1_if_marco_logico").contents().find("#presupuesto"); j(numeric_text).change(function () { if(isNaN(j(this).val())){j(this).val("0");} });', 3000);
-        var _obj;
-        function cambiomarco(obj) {
-            _obj = obj;
-        }
 
-        function generateHtmlc_s() {
-            j(".line").each(function () {
-                j(this).attr("style", "");
-            });
+        function refreshMarcoLogico() {
+            var id = j('#ContentPlaceHolder1_ban_proyecto_id').val();
+            j.ajax({
+                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&refreshMarcoLogico=true",
+                async: false,
+                success: function (result) {
+                    j("#ContentPlaceHolder1_content_marcologico").html("");
 
-            j(".left").each(function () {
-                j(this).attr("style", "");
-            })
-            j(".right").each(function () {
-                j(this).attr("style", "");
+                    j("#ContentPlaceHolder1_content_marcologico").html(result);
+                },
+                error: function (result) {
+                    // TODO:JCMM: Mensaje de Error Controlado
+                }
             });
-            j(".top").each(function () {
-                j(this).attr("style", "");
-            });
-            j(".down").each(function () {
-                j(this).attr("style", "");
-            });
-            j(".node").each(function () {
-                j(this).attr("style", "");
-            });
-            j(".node").each(function () {
-                j(this).attr("style", "");
-            });
-            j(".jOrgChart>table>tr>td").each(function () {
-                j(this).attr("style", "");
-            });
-
-            j(".jOrgChart .line").each(function () {
-                j(this).attr("style", j(this).attr('style') + "height: 20px; width: 4px;");
-            });
-
-            j(".jOrgChart .left").each(function () {
-                j(this).attr("style", j(this).attr('style') + "border-right: 2px solid black;");
-            })
-            j(".jOrgChart .right").each(function () {
-                j(this).attr("style", j(this).attr('style') + "border-left: 2px solid black;");
-            });
-            j(".jOrgChart .top").each(function () {
-                j(this).attr("style", j(this).attr('style') + "border-top: 3px solid black;")
-            });
-            j(".jOrgChart .down").each(function () {
-                j(this).attr("style", j(this).attr('style') + "background-color: black; margin: 0px auto;")
-            });
-            j(".jOrgChart .node").each(function () {
-                j(this).attr("style", j(this).attr('style') + "background-color: #096089; display: inline-block; width: 85px; border: 2px dashed #383838; height: 60px; z-index: 10; margin: 0 2px; color: #fff; font-family: Arial,narrow; font-size: 15px;")
-            });
-            j(".jOrgChart_o .node").each(function () {
-                j(this).attr("style", j(this).attr('style') + "background-color: #71A30B; display: inline-block; width: 85px; border: 2px dashed #383838; height: 60px; z-index: 10; margin: 0 2px; color: #fff; font-family: Arial,narrow; font-size: 15px;")
-            });
-            j(".jOrgChart td").each(function () {
-                j(this).attr("style", j(this).attr('style') + "text-align: center; vertical-align: top; padding: 0;")
-            });
-
-            var htmlc_s = j("#chart").html();
-
-            htmlc_s = htmlc_s.replace(/</g, "1");
-
-            htmlc_s = htmlc_s.replace(/>/g, "2");
-
-            j('#ContentPlaceHolder1_htmlc_s').val(htmlc_s);
         }
 
         function tooltip() {
@@ -753,7 +703,7 @@
             <div id="chart" class="jOrgChart">
             </div>
             <br />
-            <a href="#" onclick="UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val()); j('#if_google').trigger('click');">
+            <a id="refreshOrganigrama" href="#" onclick="UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val()); j('#if_google').trigger('click');">
                 Actualizar Organigrama</a>
             <br />
             <iframe id="if_c_e" runat="server" src="" width="100%" height="500px"></iframe>

@@ -19,7 +19,7 @@
 
             setInterval("j('#fecha, #fechainicial, #fechafinal').datepicker({dateFormat: 'dd/mm/yy'}); j('#htmlprocesos').val(j('#gbox_jqgrid_subp_t').html()); j('#htmlprocesos').val(j('#htmlprocesos').val().replace(/</g, '1')); j('#htmlprocesos').val(j('#htmlprocesos').val().replace(/>/g, '2'));", 1000);
 
-            j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); } });
+            j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); window.parent.refreshMarcoLogico(); } });
 
             j("#jqgrid_subp_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=subprocesos',
@@ -49,7 +49,17 @@
 
                     jqgrid_actividades_url = 'ajaxBancoProyectos.aspx?modulo=actividades&subproceso_id=' + jqgrid_subproceso_id;
 
-                    j("#group_subprocesos").html("Agrupación de actividades por Subproceso: " + json_subproceso_select.subproceso)
+                    j("#group_subprocesos").html(json_subproceso_select.subproceso)
+
+                    var columns_actgrid = [
+   		                    { name: 'id', index: 'id', width: 30 },
+   		                    { name: 'subproceso', index: 'subproceso', width: 100, editable: true, edittype: "select", editoptions: { value: json_subproceso_select.id.toString() + ' : ' + json_subproceso_select.subproceso.toString()} },
+                            { name: 'actividad', index: 'actividad', width: 100, editable: true },
+   		                    { name: 'fecha', index: 'fecha', width: 150, editable: true },
+                            { name: 'presupuesto', index: 'presupuesto', width: 100, editable: true, formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: " ", decimalPlaces: 2, defaultValue: '0'} }
+   	                    ];
+
+                    j('#jqgrid_act_t').setGridParam({ colModel: columns_actgrid });
 
                     j("#jqgrid_act_t").setGridParam({ url: jqgrid_actividades_url });
 
@@ -79,9 +89,27 @@
 
                     jqgrid_actividades_url = 'ajaxBancoProyectos.aspx?modulo=indicador&actividad_id=' + jqgrid_actividad_id;
 
-                    j("#group_actividades").html("Agrupación de indicadores por Actividad: " + json_actividad_select.actividad)
+                    j("#group_actividades").html(json_actividad_select.actividad)
 
                     j("#jqgrid_m_t").setGridParam({ url: jqgrid_actividades_url });
+
+                    var colums_indicgrid = [
+   		                    { name: 'id', index: 'id', width: 55 },
+   		                    { name: 'actividad', index: 'actividad', width: 90, editable: true, edittype: "select", editoptions: { value: json_actividad_select.id.toString() + ':' + json_actividad_select.actividad.toString()} },
+                            { name: 'verbo', index: 'verbo', width: 50, editable: true, edittype: "select", editoptions: { value: j("#ban_options_verbos").val()} },
+                            { name: 'meta', index: 'meta', width: 50, editable: true },
+                            { name: 'unidad', index: 'unidad', width: 50, editable: true, edittype: "select", editoptions: { value: j("#ban_options_unidades").val()} },
+                            { name: 'descripcion', index: 'descripcion', width: 50, editable: true },
+                            { name: 'ssp', index: 'ssp', width: 50, editable: true, edittype: "checkbox", editoptions: { value: "Si:No"} },
+                            { name: 'fechainicial', index: 'fechainicial', width: 50, editable: true },
+                            { name: 'fechafinal', index: 'fechafinal', width: 50, editable: true },
+                            { name: 'indicador', index: 'indicador', width: 60, editable: false },
+   		                    { name: 'medios', index: 'medios', width: 60, editable: true },
+                            { name: 'supuestos', index: 'supuestos', width: 60, editable: true },
+                            { name: 'tiporedaccion', index: 'tiporedaccion', hidden: true, width: 0, editable: true, edittype: "select", hidden: false, editoptions: { value: "entre:Entre;hasta:Hasta"} }
+   	                ];
+
+                    j('#jqgrid_m_t').setGridParam({ colModel: colums_indicgrid });
 
                     j("#jqgrid_m_t").trigger('reloadGrid');
 
@@ -119,12 +147,6 @@
                 rowList: [10, 20, 30],
                 pager: '#jqgrid_m_l_d',
                 sortname: 'id',
-                //                grouping: true,
-                //                groupingView: {
-                //                    groupField: ['actividad'],
-                //                    groupColumnShow: [false],
-                //                    groupText: ['<b>{0} - {1} Item(s)</b>']
-                //                },
                 mytype: "POST",
                 postData: { tabla: "ind", proyecto_id: function () { return j("#ban_proyecto_id").val(); } },
                 viewrecords: true,
@@ -149,16 +171,20 @@
     </table>
     <div id="jqgrid_subp_d">
     </div>
-    <h3 id="group_subprocesos" style="color: #10852B;">
+    <h3 style="color: #10852B;">
         Agrupación de Actividades por SubProcesos</h3>
+    <p id="group_subprocesos" style="color: #10852B;">
+    </p>
     <table id="jqgrid_act_t">
     </table>
     <div id="jqgrid_act_d">
     </div>
     <br />
     <br />
-    <h3 id="group_actividades" style="color: #DE6F2A;">
+    <h3 style="color: #DE6F2A;">
         Agrupación de Indicadores por Actividades</h3>
+    <p id="group_actividades" style="color: #DE6F2A;">
+    </p>
     <table id="jqgrid_m_t">
     </table>
     <div id="jqgrid_m_l_d">
