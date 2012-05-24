@@ -14,13 +14,12 @@
     <script src="/Scripts/jqgrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
     <script type="text/javascript">
         var j = jQuery.noConflict();
+        var jqgrid_subproceso_id = 0;
         j(document).ready(function () {
-
-            //            j("#htmlprocesos").val(j("#gbox_jqgrid_subp_t").html());
 
             setInterval("j('#fecha, #fechainicial, #fechafinal').datepicker({dateFormat: 'dd/mm/yy'}); j('#htmlprocesos').val(j('#gbox_jqgrid_subp_t').html()); j('#htmlprocesos').val(j('#htmlprocesos').val().replace(/</g, '1')); j('#htmlprocesos').val(j('#htmlprocesos').val().replace(/>/g, '2'));", 1000);
 
-            j.extend(j.jgrid.edit, { width: "500" });
+            j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); window.parent.refreshMarcoLogico(); } });
 
             j("#jqgrid_subp_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=subprocesos',
@@ -43,13 +42,34 @@
                 viewrecords: true,
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
-                caption: "Marco Lógico"
+                caption: "Marco Lógico",
+                onSelectRow: function (ids) {
+                    var json_subproceso_select = j("#jqgrid_subp_t").jqGrid('getRowData', ids);
+                    jqgrid_subproceso_id = json_subproceso_select.id;
+
+                    jqgrid_actividades_url = 'ajaxBancoProyectos.aspx?modulo=actividades&subproceso_id=' + jqgrid_subproceso_id;
+
+                    j("#group_subprocesos").html(json_subproceso_select.subproceso)
+
+                    var columns_actgrid = [
+   		                    { name: 'id', index: 'id', width: 30 },
+   		                    { name: 'subproceso', index: 'subproceso', width: 100, editable: true, edittype: "select", editoptions: { value: json_subproceso_select.id.toString() + ' : ' + json_subproceso_select.subproceso.toString()} },
+                            { name: 'actividad', index: 'actividad', width: 100, editable: true },
+   		                    { name: 'fecha', index: 'fecha', width: 150, editable: true },
+                            { name: 'presupuesto', index: 'presupuesto', width: 100, editable: true, formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: " ", decimalPlaces: 2, defaultValue: '0'} }
+   	                    ];
+
+                    j('#jqgrid_act_t').setGridParam({ colModel: columns_actgrid });
+
+                    j("#jqgrid_act_t").setGridParam({ url: jqgrid_actividades_url });
+
+                    j("#jqgrid_act_t").trigger('reloadGrid');
+                }
             });
             j("#jqgrid_subp_t").jqGrid('navGrid', "#jqgrid_subp_d", { edit: true, add: true, del: false });
             j("#jqgrid_subp_t").jqGrid('inlineNav', "#jqgrid_subp_d");
 
             j("#jqgrid_act_t").jqGrid({
-                url: 'ajaxBancoProyectos.aspx?modulo=actividades',
                 datatype: "json",
                 colNames: ['No.', 'SubProcesos', 'Actividades', 'Fecha', 'Presupuesto'],
                 colModel: [
@@ -63,10 +83,36 @@
                 rowList: [10, 20, 30],
                 pager: '#jqgrid_act_d',
                 sortname: 'id',
-                onSelectRow: function (id) {
-                    if (id && id !== lastsel3) {
-                        j('#rowed6').jqGrid('editRow', id, true, pickdates);
-                    }
+                onSelectRow: function (ids) {
+                    var json_actividad_select = j("#jqgrid_act_t").jqGrid('getRowData', ids);
+                    jqgrid_actividad_id = json_actividad_select.id;
+
+                    jqgrid_actividades_url = 'ajaxBancoProyectos.aspx?modulo=indicador&actividad_id=' + jqgrid_actividad_id;
+
+                    j("#group_actividades").html(json_actividad_select.actividad)
+
+                    j("#jqgrid_m_t").setGridParam({ url: jqgrid_actividades_url });
+
+                    var colums_indicgrid = [
+   		                    { name: 'id', index: 'id', width: 55 },
+   		                    { name: 'actividad', index: 'actividad', width: 90, editable: true, edittype: "select", editoptions: { value: json_actividad_select.id.toString() + ':' + json_actividad_select.actividad.toString()} },
+                            { name: 'verbo', index: 'verbo', width: 50, editable: true, edittype: "select", editoptions: { value: j("#ban_options_verbos").val()} },
+                            { name: 'meta', index: 'meta', width: 50, editable: true },
+                            { name: 'unidad', index: 'unidad', width: 50, editable: true, edittype: "select", editoptions: { value: j("#ban_options_unidades").val()} },
+                            { name: 'descripcion', index: 'descripcion', width: 50, editable: true },
+                            { name: 'ssp', index: 'ssp', width: 50, editable: true, edittype: "checkbox", editoptions: { value: "Si:No"} },
+                            { name: 'fechainicial', index: 'fechainicial', width: 50, editable: true },
+                            { name: 'fechafinal', index: 'fechafinal', width: 50, editable: true },
+                            { name: 'indicador', index: 'indicador', width: 60, editable: false },
+   		                    { name: 'medios', index: 'medios', width: 60, editable: true },
+                            { name: 'supuestos', index: 'supuestos', width: 60, editable: true },
+                            { name: 'tiporedaccion', index: 'tiporedaccion', hidden: true, width: 0, editable: true, edittype: "select", hidden: false, editoptions: { value: "entre:Entre;hasta:Hasta"} }
+   	                ];
+
+                    j('#jqgrid_m_t').setGridParam({ colModel: colums_indicgrid });
+
+                    j("#jqgrid_m_t").trigger('reloadGrid');
+
                 },
                 mytype: "POST",
                 postData: { tabla: "act", proyecto_id: function () { return j("#ban_proyecto_id").val(); } },
@@ -80,7 +126,6 @@
 
 
             j("#jqgrid_m_t").jqGrid({
-                url: 'ajaxBancoProyectos.aspx?modulo=indicador',
                 datatype: "json",
                 colNames: ['No.', 'Actividad', 'Verbo', 'Meta', 'Unidad', 'Descripción', 'SSP', 'Fecha Inicio', 'Fecha Fin', 'Indicador', 'Medios de Verificación', 'Supuestos', 'Tipo Redacción'],
                 colModel: [
@@ -102,12 +147,6 @@
                 rowList: [10, 20, 30],
                 pager: '#jqgrid_m_l_d',
                 sortname: 'id',
-                //                grouping: true,
-                //                groupingView: {
-                //                    groupField: ['actividad'],
-                //                    groupColumnShow: [false],
-                //                    groupText: ['<b>{0} - {1} Item(s)</b>']
-                //                },
                 mytype: "POST",
                 postData: { tabla: "ind", proyecto_id: function () { return j("#ban_proyecto_id").val(); } },
                 viewrecords: true,
@@ -124,9 +163,8 @@
 <body>
     <form id="form1" runat="server">
     <p>
-        <asp:ImageButton ID="btnExportar" ImageUrl="~/Icons/print.png" runat="server" 
-            onclick="btnExportar_Click" /> Exportar
-        Marco Logico</p>
+        <asp:ImageButton ID="btnExportar" ImageUrl="~/Icons/print.png" runat="server" OnClick="btnExportar_Click" />
+        Exportar Marco Logico</p>
     <h3>
         Agrupación de Subprocesos por Proceso</h3>
     <table id="jqgrid_subp_t">
@@ -135,6 +173,8 @@
     </div>
     <h3 style="color: #10852B;">
         Agrupación de Actividades por SubProcesos</h3>
+    <p id="group_subprocesos" style="color: #10852B;">
+    </p>
     <table id="jqgrid_act_t">
     </table>
     <div id="jqgrid_act_d">
@@ -143,6 +183,8 @@
     <br />
     <h3 style="color: #DE6F2A;">
         Agrupación de Indicadores por Actividades</h3>
+    <p id="group_actividades" style="color: #DE6F2A;">
+    </p>
     <table id="jqgrid_m_t">
     </table>
     <div id="jqgrid_m_l_d">
@@ -155,6 +197,7 @@
     <input type="hidden" name="options_verbos" value="" runat="server" id="ban_options_verbos" />
     <input type="hidden" name="options_unidades" value="" runat="server" id="ban_options_unidades" />
     <input type="hidden" runat="server" name="htmlprocesos" id="htmlprocesos" value="" />
+    <input type="hidden" name="marcologicoselect_id" value="" id="marcologicoselect_id" />
     </form>
 </body>
 </html>

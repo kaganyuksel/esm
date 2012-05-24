@@ -147,8 +147,8 @@
                 </td>
                 <td>
                     <h4>
-                        <a href="/Evaluacion.aspx?idrama=2">Evaluación</a></h4>
-                    Realiza el proceso de evaluación para los Establecimientos Educativos.
+                        <a href="/Evaluacion.aspx?idrama=2">Valoración</a></h4>
+                    Realiza el proceso de valoración para los Establecimientos Educativos.
                 </td>
             </tr>
             <tr>

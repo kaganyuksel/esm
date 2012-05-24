@@ -491,6 +491,12 @@
     <Content Include="fancybox\jquery.fancybox-1.3.4.js" />
     <Content Include="fancybox\jquery.fancybox-1.3.4.pack.js" />
     <Content Include="fancybox\jquery.mousewheel-3.0.4.pack.js" />
+    <Content Include="Icons\addfile.png" />
+    <Content Include="Icons\arbolobjetivos.png" />
+    <Content Include="Icons\arbol_problemas_ayuda.png" />
+    <Content Include="Icons\back_turn.png" />
+    <Content Include="Icons\next_turn.png" />
+    <Content Include="Icons\print.png" />
     <Content Include="jqgrid_ejecucion.aspx" />
     <Content Include="jqgrid_marco_logico.aspx" />
     <Content Include="Icons\cicloproyecto.png" />
@@ -562,7 +568,6 @@
     <Content Include="Icons\Forward.png" />
     <Content Include="Icons\google-maps-icon.gif" />
     <Content Include="Icons\Help.png" />
-    <Content Include="Icons\history.jpg" />
     <Content Include="Icons\Home.png" />
     <Content Include="Icons\icon-addressbook.png" />
     <Content Include="Icons\icon-ical.png" />
@@ -583,7 +588,6 @@
     <Content Include="Icons\Music.png" />
     <Content Include="Icons\nav.png" />
     <Content Include="Icons\network.png" />
-    <Content Include="Icons\news.jpg" />
     <Content Include="Icons\next.png" />
     <Content Include="Icons\notificaciones.png" />
     <Content Include="Icons\ok.png" />

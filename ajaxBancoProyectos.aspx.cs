@@ -125,7 +125,8 @@ namespace ESM
                         UpdateHTMLArbolProblemas();
                     else if (Request.QueryString["actualizararbolobjetivos"] != null && Convert.ToBoolean(Request.QueryString["actualizararbolobjetivos"]))
                         UpdateHTMLArbolObjetivos();
-
+                    else if (Request.QueryString["refreshMarcoLogico"] != null && Convert.ToBoolean(Request.QueryString["refreshMarcoLogico"]))
+                        generateMarcoLogico();
                 }
                 else
                 {
@@ -729,17 +730,21 @@ namespace ESM
 
         protected void AgregarCausasEfectos()
         {
-            string causa = Session["causa"].ToString();
-            string efecto = Session["efecto"].ToString();
-            string beneficio = Session["beneficio"].ToString();
-
-            if (objCCausas_Efecto.Add(efecto, causa, beneficio, proyecto_id, "fff"))
+            try
             {
-                Session.Remove("causa");
-                Session.Remove("efecto");
-                Session.Remove("beneficio");
-                Session.Remove("operacion");
+                string causa = Session["causa"].ToString();
+                string efecto = Session["efecto"].ToString();
+                string beneficio = Session["beneficio"].ToString();
+
+                if (objCCausas_Efecto.Add(efecto, causa, beneficio, proyecto_id, "fff"))
+                {
+                    Session.Remove("causa");
+                    Session.Remove("efecto");
+                    Session.Remove("beneficio");
+                    Session.Remove("operacion");
+                }
             }
+            catch { }
         }
 
         protected void EditarActividades()
@@ -847,6 +852,43 @@ namespace ESM
                 Response.Write(array_json);
             }
             catch (Exception) { Response.Write("null"); }
+        }
+
+        protected void generateMarcoLogico()
+        {
+            Model.ESMBDDataContext db = new Model.ESMBDDataContext();
+
+            var procesos = from p in db.Causas_Efectos
+                           where p.Proyecto_id == proyecto_id
+                           select p;
+
+            string html = "<table style='border: 1px solid #000;'><caption>Marco Logico</caption>";
+            html = html + "<tr ><td style='border: 1px solid #000;' vertical-align: middle;'>Proceso</td><td style='border: 1px solid #000;'>Subproceso</td><td style='border: 1px solid #000;'>Actividad</td></tr>";
+            foreach (var procesos_item in procesos)
+            {
+                var subprocesos = from sp in db.Subprocesos
+                                  where sp.Causas_Efecto.Proyecto_id == proyecto_id && sp.Proceso_id == procesos_item.Id
+                                  select sp;
+
+                html = html + "<tr ><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td></tr>";
+
+                foreach (var subprocesos_item in subprocesos)
+                {
+                    var actividades = from a in db.Actividades
+                                      where a.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id && a.Subproceso_id == subprocesos_item.Id
+                                      select a;
+
+                    html = html + "<tr ><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'>" + subprocesos_item.Subproceso1 + "</td><td style='border: 1px solid #000;'></td></tr>";
+
+                    foreach (var actividades_item in actividades)
+                    {
+                        html = html + "<tr ><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'>" + subprocesos_item.Subproceso1 + "</td><td style='border: 1px solid #000;' >" + actividades_item.Actividad + "</td></tr>";
+                    }
+                }
+            }
+            html = html + "</table>";
+
+            Response.Write(html);
         }
     }
 }
