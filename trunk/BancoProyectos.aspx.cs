@@ -319,171 +319,174 @@ namespace ESM
 
         protected void btnExportarProyecto_Click(object sender, EventArgs e)
         {
-
-            string nombre_proyecto = txtnombreproyecto.Value.Substring(0, 15);
-
-            string path = Server.MapPath("~/Files/Proyectos/");
-
-            if (Directory.Exists(path + nombre_proyecto))
+            try
             {
-                if (!Directory.Exists(path + nombre_proyecto + "/Actas"))
-                    Directory.CreateDirectory(path + nombre_proyecto + "/Actas");
-                if (!Directory.Exists(path + nombre_proyecto + "/Programacion"))
-                    Directory.CreateDirectory(path + nombre_proyecto + "/Programacion");
-                if (!Directory.Exists(path + nombre_proyecto + "/M.S.E"))
-                    Directory.CreateDirectory(path + nombre_proyecto + "/M.S.E");
+                string nombre_proyecto = txtnombreproyecto.Value.Substring(0, 15);
 
-                string path_files = path + nombre_proyecto + @"\Programacion\MarcoLogico.xls";
-                string path_files_arbol_problemas = path + nombre_proyecto + @"\Programacion\ArbolProblemas.xls";
-                string path_files_arbol_objetivos = path + nombre_proyecto + @"\Programacion\ArbolObjetivos.xls";
+                string path = Server.MapPath("~/Files/Proyectos/");
 
-                string html_marcologico = generateMarcoLogico(proyecto_id);
-                string html_arbolproblemas = generateArbolProblemas();
-                string html_arbolobjetivos = generateArbolObjetivos();
-                if (!File.Exists(path_files))
+                if (Directory.Exists(path + nombre_proyecto))
                 {
-                    StreamWriter objFile = new StreamWriter(path_files, true, Encoding.UTF8);
-                    objFile.Write(html_marcologico);
-                    objFile.Flush();
-                    objFile.Close();
+                    if (!Directory.Exists(path + nombre_proyecto + "/Actas"))
+                        Directory.CreateDirectory(path + nombre_proyecto + "/Actas");
+                    if (!Directory.Exists(path + nombre_proyecto + "/Programacion"))
+                        Directory.CreateDirectory(path + nombre_proyecto + "/Programacion");
+                    if (!Directory.Exists(path + nombre_proyecto + "/M.S.E"))
+                        Directory.CreateDirectory(path + nombre_proyecto + "/M.S.E");
+
+                    string path_files = path + nombre_proyecto + @"\Programacion\MarcoLogico.xls";
+                    string path_files_arbol_problemas = path + nombre_proyecto + @"\Programacion\ArbolProblemas.xls";
+                    string path_files_arbol_objetivos = path + nombre_proyecto + @"\Programacion\ArbolObjetivos.xls";
+
+                    string html_marcologico = generateMarcoLogico(proyecto_id);
+                    string html_arbolproblemas = generateArbolProblemas();
+                    string html_arbolobjetivos = generateArbolObjetivosOrg();
+                    if (!File.Exists(path_files))
+                    {
+                        StreamWriter objFile = new StreamWriter(path_files, true, Encoding.UTF8);
+                        objFile.Write(html_marcologico);
+                        objFile.Flush();
+                        objFile.Close();
+                    }
+                    else
+                    {
+                        File.Delete(path_files);
+
+                        StreamWriter objFile = new StreamWriter(path_files, true, Encoding.UTF8);
+                        objFile.Write(html_marcologico);
+                        objFile.Flush();
+                        objFile.Close();
+                    }
+
+                    if (!File.Exists(path_files_arbol_problemas))
+                    {
+                        StreamWriter objFile = new StreamWriter(path_files_arbol_problemas, true, Encoding.UTF8);
+                        objFile.Write(html_arbolproblemas);
+                        objFile.Flush();
+                        objFile.Close();
+                    }
+                    else
+                    {
+                        File.Delete(path_files_arbol_problemas);
+
+                        StreamWriter objFile = new StreamWriter(path_files_arbol_problemas, true, Encoding.UTF8);
+                        objFile.Write(html_arbolproblemas);
+                        objFile.Flush();
+                        objFile.Close();
+                    }
+
+                    if (!File.Exists(path_files_arbol_objetivos))
+                    {
+                        StreamWriter objFile = new StreamWriter(path_files_arbol_objetivos, true, Encoding.UTF8);
+                        objFile.Write(html_arbolobjetivos);
+                        objFile.Flush();
+                        objFile.Close();
+                    }
+                    else
+                    {
+                        File.Delete(path_files_arbol_objetivos);
+
+                        StreamWriter objFile = new StreamWriter(path_files_arbol_objetivos, true, Encoding.UTF8);
+                        objFile.Write(html_arbolobjetivos);
+                        objFile.Flush();
+                        objFile.Close();
+                    }
                 }
                 else
                 {
-                    File.Delete(path_files);
+                    Directory.CreateDirectory(path + "/" + nombre_proyecto);
 
-                    StreamWriter objFile = new StreamWriter(path_files, true, Encoding.UTF8);
-                    objFile.Write(html_marcologico);
-                    objFile.Flush();
-                    objFile.Close();
+                    if (!Directory.Exists(path + nombre_proyecto + "/Actas"))
+                        Directory.CreateDirectory(path + nombre_proyecto + "/Actas");
+                    if (!Directory.Exists(path + nombre_proyecto + "/Programacion"))
+                        Directory.CreateDirectory(path + nombre_proyecto + "/Programacion");
+                    if (!Directory.Exists(path + nombre_proyecto + "/M.S.E"))
+                        Directory.CreateDirectory(path + nombre_proyecto + "/M.S.E");
+
+                    string path_files = path + nombre_proyecto + @"\Programacion\MarcoLogico.xls";
+                    string path_files_arbol_problemas = path + nombre_proyecto + @"\Programacion\ArbolProblemas.xls";
+                    string path_files_arbol_objetivos = path + nombre_proyecto + @"\Programacion\ArbolObjetivos.xls";
+
+                    string html_marcologico = generateMarcoLogico(proyecto_id);
+                    string html_arbolproblemas = generateArbolProblemas();
+                    string html_arbolobjetivos = generateArbolObjetivosOrg();
+                    if (!File.Exists(path_files))
+                    {
+                        StreamWriter objFile = new StreamWriter(path_files, true, Encoding.UTF8);
+                        objFile.Write(html_marcologico);
+                        objFile.Flush();
+                        objFile.Close();
+                    }
+                    else
+                    {
+                        File.Delete(path_files);
+
+                        StreamWriter objFile = new StreamWriter(path_files, true, Encoding.UTF8);
+                        objFile.Write(html_marcologico);
+                        objFile.Flush();
+                        objFile.Close();
+                    }
+
+                    if (!File.Exists(path_files_arbol_problemas))
+                    {
+                        StreamWriter objFile = new StreamWriter(path_files_arbol_problemas, true, Encoding.UTF8);
+                        objFile.Write(html_arbolproblemas);
+                        objFile.Flush();
+                        objFile.Close();
+                    }
+                    else
+                    {
+                        File.Delete(path_files_arbol_problemas);
+
+                        StreamWriter objFile = new StreamWriter(path_files_arbol_problemas, true, Encoding.UTF8);
+                        objFile.Write(html_arbolproblemas);
+                        objFile.Flush();
+                        objFile.Close();
+                    }
+
+                    if (!File.Exists(path_files_arbol_objetivos))
+                    {
+                        StreamWriter objFile = new StreamWriter(path_files_arbol_objetivos, true, Encoding.UTF8);
+                        objFile.Write(html_arbolobjetivos);
+                        objFile.Flush();
+                        objFile.Close();
+                    }
+                    else
+                    {
+                        File.Delete(path_files_arbol_objetivos);
+
+                        StreamWriter objFile = new StreamWriter(path_files_arbol_objetivos, true, Encoding.UTF8);
+                        objFile.Write(html_arbolobjetivos);
+                        objFile.Flush();
+                        objFile.Close();
+                    }
+
                 }
 
-                if (!File.Exists(path_files_arbol_problemas))
+
+                if (!File.Exists(path + nombre_proyecto + ".zip"))
                 {
-                    StreamWriter objFile = new StreamWriter(path_files_arbol_problemas, true, Encoding.UTF8);
-                    objFile.Write(html_arbolproblemas);
-                    objFile.Flush();
-                    objFile.Close();
+                    using (var zip = new Ionic.Zip.ZipFile())
+                    {
+                        zip.AddDirectory(path + "/" + nombre_proyecto);
+                        zip.Save(path + nombre_proyecto + ".zip");
+                    }
                 }
                 else
                 {
-                    File.Delete(path_files_arbol_problemas);
+                    File.Delete(path + nombre_proyecto + ".zip");
 
-                    StreamWriter objFile = new StreamWriter(path_files_arbol_problemas, true, Encoding.UTF8);
-                    objFile.Write(html_arbolproblemas);
-                    objFile.Flush();
-                    objFile.Close();
+                    using (var zip = new Ionic.Zip.ZipFile())
+                    {
+                        zip.AddDirectory(path + "/" + nombre_proyecto);
+                        zip.Save(path + nombre_proyecto + ".zip");
+                    }
                 }
 
-                if (!File.Exists(path_files_arbol_objetivos))
-                {
-                    StreamWriter objFile = new StreamWriter(path_files_arbol_objetivos, true, Encoding.UTF8);
-                    objFile.Write(html_arbolobjetivos);
-                    objFile.Flush();
-                    objFile.Close();
-                }
-                else
-                {
-                    File.Delete(path_files_arbol_objetivos);
 
-                    StreamWriter objFile = new StreamWriter(path_files_arbol_objetivos, true, Encoding.UTF8);
-                    objFile.Write(html_arbolobjetivos);
-                    objFile.Flush();
-                    objFile.Close();
-                }
+                Response.Redirect("/Files/Proyectos/" + nombre_proyecto + ".zip");
             }
-            else
-            {
-                Directory.CreateDirectory(path + "/" + nombre_proyecto);
-
-                if (!Directory.Exists(path + nombre_proyecto + "/Actas"))
-                    Directory.CreateDirectory(path + nombre_proyecto + "/Actas");
-                if (!Directory.Exists(path + nombre_proyecto + "/Programacion"))
-                    Directory.CreateDirectory(path + nombre_proyecto + "/Programacion");
-                if (!Directory.Exists(path + nombre_proyecto + "/M.S.E"))
-                    Directory.CreateDirectory(path + nombre_proyecto + "/M.S.E");
-
-                string path_files = path + nombre_proyecto + @"\Programacion\MarcoLogico.xls";
-                string path_files_arbol_problemas = path + nombre_proyecto + @"\Programacion\ArbolProblemas.xls";
-                string path_files_arbol_objetivos = path + nombre_proyecto + @"\Programacion\ArbolObjetivos.xls";
-
-                string html_marcologico = generateMarcoLogico(proyecto_id);
-                string html_arbolproblemas = generateArbolProblemas();
-                string html_arbolobjetivos = generateArbolObjetivos();
-                if (!File.Exists(path_files))
-                {
-                    StreamWriter objFile = new StreamWriter(path_files, true, Encoding.UTF8);
-                    objFile.Write(html_marcologico);
-                    objFile.Flush();
-                    objFile.Close();
-                }
-                else
-                {
-                    File.Delete(path_files);
-
-                    StreamWriter objFile = new StreamWriter(path_files, true, Encoding.UTF8);
-                    objFile.Write(html_marcologico);
-                    objFile.Flush();
-                    objFile.Close();
-                }
-
-                if (!File.Exists(path_files_arbol_problemas))
-                {
-                    StreamWriter objFile = new StreamWriter(path_files_arbol_problemas, true, Encoding.UTF8);
-                    objFile.Write(html_arbolproblemas);
-                    objFile.Flush();
-                    objFile.Close();
-                }
-                else
-                {
-                    File.Delete(path_files_arbol_problemas);
-
-                    StreamWriter objFile = new StreamWriter(path_files_arbol_problemas, true, Encoding.UTF8);
-                    objFile.Write(html_arbolproblemas);
-                    objFile.Flush();
-                    objFile.Close();
-                }
-
-                if (!File.Exists(path_files_arbol_objetivos))
-                {
-                    StreamWriter objFile = new StreamWriter(path_files_arbol_objetivos, true, Encoding.UTF8);
-                    objFile.Write(html_arbolobjetivos);
-                    objFile.Flush();
-                    objFile.Close();
-                }
-                else
-                {
-                    File.Delete(path_files_arbol_objetivos);
-
-                    StreamWriter objFile = new StreamWriter(path_files_arbol_objetivos, true, Encoding.UTF8);
-                    objFile.Write(html_arbolobjetivos);
-                    objFile.Flush();
-                    objFile.Close();
-                }
-
-            }
-
-
-            if (!File.Exists(path + nombre_proyecto + ".zip"))
-            {
-                using (var zip = new Ionic.Zip.ZipFile())
-                {
-                    zip.AddDirectory(path + "/" + nombre_proyecto);
-                    zip.Save(path + nombre_proyecto + ".zip");
-                }
-            }
-            else
-            {
-                File.Delete(path + nombre_proyecto + ".zip");
-
-                using (var zip = new Ionic.Zip.ZipFile())
-                {
-                    zip.AddDirectory(path + "/" + nombre_proyecto);
-                    zip.Save(path + nombre_proyecto + ".zip");
-                }
-            }
-
-
-            Response.Redirect("/Files/Proyectos/" + nombre_proyecto + ".zip");
+            catch (Exception ex) { /*Error*/}
         }
 
         protected void CargarMarcoLogico()
@@ -579,6 +582,79 @@ namespace ESM
             }
 
             html_arbol_objetivos += "</tr><table><h3>Objetivos</h3>";
+
+            return html_arbol_objetivos;
+        }
+
+        protected string generateArbolObjetivosOrg()
+        {
+
+            var arbolobjetivos = from p in new Model.ESMBDDataContext().Causas_Efectos
+                                 where p.Proyecto_id == proyecto_id
+                                 select p;
+
+            var proyecto = (from p in new Model.ESMBDDataContext().Proyectos
+                            where p.Id == proyecto_id
+                            select p).Single();
+
+            string html_arbol_objetivos = "<h1>ÁRBOL OBJETIVOS " + proyecto.Proyecto1.ToUpper() + "</h1><h3 style='color : #92C414;'>BENEFICIOS</h3><table><tr>";
+            string problema = "";
+            foreach (var item in arbolobjetivos)
+            {
+                problema = item.Proyecto.Problema;
+                html_arbol_objetivos += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #92C414; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Beneficios + "</b></td><td></td><td style='width: 5px;'></td>";
+            }
+            html_arbol_objetivos += "</tr><tr>";
+            int cant_tds = (arbolobjetivos.Count() * 2);
+            int colspan_proyecto = (arbolobjetivos.Count() * 4);
+            int count_tds = 0;
+            for (int i = 0; i < (cant_tds * 2); i++)
+            {
+                if (count_tds == 1)
+                {
+                    html_arbol_objetivos += "<td style='border-left: dashed #000 2px;'></td>";
+                    count_tds++;
+                }
+                else if (count_tds == 3)
+                {
+                    html_arbol_objetivos += "<td></td>";
+                    count_tds = 0;
+                }
+                else
+                {
+                    html_arbol_objetivos += "<td ></td>";
+                    count_tds++;
+                }
+            }
+            html_arbol_objetivos += "</tr><tr><td style='height:100px; text-align:center; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'>" + problema + "</td></tr><tr>";
+
+            for (int i = 0; i < (cant_tds * 2); i++)
+            {
+                if (count_tds == 1)
+                {
+                    html_arbol_objetivos += "<td style='border-left: dashed #000 2px;'></td>";
+                    count_tds++;
+                }
+                else if (count_tds == 3)
+                {
+                    html_arbol_objetivos += "<td></td>";
+                    count_tds = 0;
+                }
+                else
+                {
+                    html_arbol_objetivos += "<td ></td>";
+                    count_tds++;
+                }
+            }
+
+            html_arbol_objetivos += "</tr><tr>";
+            foreach (var item in arbolobjetivos)
+            {
+                problema = item.Proyecto.Problema;
+                html_arbol_objetivos += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #0571AB; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Causa + "</b></td><td></td><td style='width: 5px;'></td>";
+            }
+
+            html_arbol_objetivos += "</tr></table><h3 style='color: #0571AB;'>OBJETIVOS</h3>";
 
             return html_arbol_objetivos;
         }
