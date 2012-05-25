@@ -14,7 +14,7 @@
     <script src="/Scripts/bancoproyectos.js" type="text/javascript"></script>
     <script src="fancybox/jquery.fancybox-1.3.4.js" type="text/javascript"></script>
     <script src="fancybox/jquery.easing-1.3.pack.js" type="text/javascript"></script>
-    <script src="Scripts/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>
+    <%--<script src="Scripts/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>--%>
     <script type="text/javascript">
         var fls;
         var nuevo = false;
