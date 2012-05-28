@@ -502,15 +502,27 @@ namespace ESM
                            where p.Proyecto_id == Proyecto_id
                            select p;
 
-            string html = "<table style='border: 1px solid #000;'><caption>Marco Logico</caption>";
-            html = html + "<tr ><td style='border: 1px solid #000;' vertical-align: middle;'>Proceso</td><td style='border: 1px solid #000;'>Subproceso</td><td style='border: 1px solid #000;'>Actividad</td></tr>";
+            string html = "<table border='1' cellspacing='0' style='border: 1px solid #000;'><caption>Marco Lógico</caption>";
+            html += "<tr><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'>INDICADOR</td><td style='border: 1px solid #000;'>MEDIOS DE VERIFICACIÓN</td><td style='border: 1px solid #000;'>SUPUESTOS</td></tr>";
+            int color = 0;
+            string color_cadena = "D6D6D6";
             foreach (var procesos_item in procesos)
             {
+                if (color == 0)
+                {
+                    color_cadena = "E0E0E0";
+                    color++;
+                }
+                else
+                {
+                    color_cadena = "ffffff";
+                    color = 0;
+                }
+
+                html += "<tr style='background: #" + color_cadena + "'><td style='border: 1px solid #000;'><b>PROCESO:</b></td><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><tr>";
                 var subprocesos = from sp in db.Subprocesos
                                   where sp.Causas_Efecto.Proyecto_id == proyecto_id && sp.Proceso_id == procesos_item.Id
                                   select sp;
-
-                html = html + "<tr ><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td></tr>";
 
                 foreach (var subprocesos_item in subprocesos)
                 {
@@ -518,11 +530,22 @@ namespace ESM
                                       where a.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id && a.Subproceso_id == subprocesos_item.Id
                                       select a;
 
-                    html = html + "<tr ><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'>" + subprocesos_item.Subproceso1 + "</td><td style='border: 1px solid #000;'></td></tr>";
-
+                    html += "<tr style='background: #" + color_cadena + "'><td style='border: 1px solid #000;'><b>SUBPROCESO:</b></td><td style='border: 1px solid #000;'>" + subprocesos_item.Subproceso1 + "</td><td style='border: 1px solid #000;'>" + subprocesos_item.Indicador + "</td><td style='border: 1px solid #000;'>" + subprocesos_item.Medios + "</td><td style='border: 1px solid #000;'>" + subprocesos_item.Supuestos + "</td><tr>";
+                    int count_actividades = 0;
                     foreach (var actividades_item in actividades)
                     {
-                        html = html + "<tr ><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'>" + subprocesos_item.Subproceso1 + "</td><td style='border: 1px solid #000;' >" + actividades_item.Actividad + "</td></tr>";
+                        if (count_actividades == 0)
+                        {
+                            if (actividades.Count() <= 1)
+                                html += "<tr style='background: #" + color_cadena + "'><td style='vertical-align: middle; text-align: center; border: 1px solid #000;' rowspan='" + actividades.Count() + "'><b>ACTIVIDAD:</b></td><td style='border: 1px solid #000;'>" + actividades_item.Actividad + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><tr>";
+                            else
+                                html += "<tr style='background: #" + color_cadena + "'><td style='vertical-align: middle; text-align: center; border: 1px solid #000;' rowspan='" + (actividades.Count() * 2) + "'><b>ACTIVIDAD:</b></td><td style='border: 1px solid #000;'>" + actividades_item.Actividad + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><tr>";
+                        }
+                        else
+                            html += "<tr style='background: #" + color_cadena + "'><td style='border: 1px solid #000;'>" + actividades_item.Actividad + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><tr>";
+
+                        count_actividades++;
+
                     }
                 }
             }
