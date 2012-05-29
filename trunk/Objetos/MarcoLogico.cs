@@ -455,7 +455,13 @@ namespace ESM.Objetos
     {
         #region Propiedades Publicas y Privadas
 
-        protected ESMBDDataContext _db = new ESMBDDataContext();
+        private ESMBDDataContext _db = new ESMBDDataContext();
+
+        public ESMBDDataContext DB
+        {
+            get { return _db; }
+            set { _db = value; }
+        }
 
         #endregion
         /// <summary>
