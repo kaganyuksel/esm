@@ -164,7 +164,7 @@
     <form id="form1" runat="server">
     <p>
         <asp:ImageButton ID="btnExportar" ImageUrl="~/Icons/print.png" runat="server" OnClick="btnExportar_Click" />
-        Exportar Marco Logico</p>
+        Exportar Marco Lógico</p>
     <h3>
         Agrupación de Subprocesos por Proceso</h3>
     <table id="jqgrid_subp_t">

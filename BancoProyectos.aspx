@@ -55,13 +55,13 @@
 
             j("#magazine").css("margin-left", "-20%");
 
-            j("#ContentPlaceHolder1_org").jOrgChart({
-                chartElement: '#chart'
-            });
+            //            j("#ContentPlaceHolder1_org").jOrgChart({
+            //                chartElement: '#chart'
+            //            });
 
-            j("#ContentPlaceHolder1_org_objetivos").jOrgChart({
-                chartElement: '#chart_objetivos'
-            });
+            //            j("#ContentPlaceHolder1_org_objetivos").jOrgChart({
+            //                chartElement: '#chart_objetivos'
+            //            });
             j('#magazine').turn({
                 gradients: true,
                 acceleration: true,
@@ -147,11 +147,11 @@
                     return false;
             });
 
-            j('.node').qtip({
-                content: 'This is an active list element',
-                show: 'mouseover',
-                hide: 'mouseout'
-            })
+            //            j('.node').qtip({
+            //                content: 'This is an active list element',
+            //                show: 'mouseover',
+            //                hide: 'mouseout'
+            //            })
 
             setTimeout('tooltip();', 5000);
 
@@ -163,9 +163,9 @@
                 document.getElementById("ContentPlaceHolder1_ban_files").value = " ";
             }
 
-            if (j("#ContentPlaceHolder1_ban_proyecto_id").val() != " " && j("#ContentPlaceHolder1_ban_proyecto_id").val() != "0") {
-                setInterval("j('#refreshOrganigrama').trigger('click')", 3000);
-            }
+            //            if (j("#ContentPlaceHolder1_ban_proyecto_id").val() != " " && j("#ContentPlaceHolder1_ban_proyecto_id").val() != "0") {
+            //                setInterval("j('#refreshOrganigrama').trigger('click')", 3000);
+            //            }
         });
 
         setInterval('var numeric_text = j("#ContentPlaceHolder1_if_marco_logico").contents().find("#presupuesto"); j(numeric_text).change(function () { if(isNaN(j(this).val())){j(this).val("0");} });', 3000);
@@ -200,51 +200,54 @@
             });
         }
 
-        function UpdateArbolProblemas(id, actualizar) {
-            j.ajax({
-                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolproblemas=true",
-                async: false,
-                success: function (result) {
-                    console.log(result);
+//        function UpdateArbolProblemas(id, actualizar) {
+//            j.ajax({
+//                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolproblemas=true",
+//                async: false,
+//                success: function (result) {
+//                    console.log(result);
 
-                    j("#chart").html("");
+//                    j("#chart").html("");
 
-                    j("#ContentPlaceHolder1_org").html(result);
+//                    j("#ContentPlaceHolder1_org").html(result);
 
-                    j("#ContentPlaceHolder1_org").jOrgChart({
-                        chartElement: '#chart'
-                    });
-                },
-                error: function (result) {
-                    alert("Error " + result.status + ' ' + result.statusText);
-                }
-            });
+//                    j("#ContentPlaceHolder1_org").jOrgChart({
+//                        chartElement: '#chart'
+//                    });
+//                },
+//                error: function (result) {
+//                    alert("Error " + result.status + ' ' + result.statusText);
+//                }
+//            });
 
-            j.ajax({
-                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolobjetivos=true",
-                async: false,
-                success: function (result) {
-                    console.log(result);
+//            j.ajax({
+//                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolobjetivos=true",
+//                async: false,
+//                success: function (result) {
+//                    console.log(result);
 
-                    j("#chart_objetivos").html("");
+//                    j("#chart_objetivos").html("");
 
-                    j("#ContentPlaceHolder1_org_objetivos").html(result);
+//                    j("#ContentPlaceHolder1_org_objetivos").html(result);
 
-                    j("#ContentPlaceHolder1_org_objetivos").jOrgChart({
-                        chartElement: '#chart_objetivos'
-                    });
-                },
-                error: function (result) {
-                    alert("Error " + result.status + ' ' + result.statusText);
-                }
-            });
+//                    j("#ContentPlaceHolder1_org_objetivos").jOrgChart({
+//                        chartElement: '#chart_objetivos'
+//                    });
+//                },
+//                error: function (result) {
+//                    alert("Error " + result.status + ' ' + result.statusText);
+//                }
+//            });
 
-            tooltip();
+//            tooltip();
 
-        }
+//        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <input type="hidden" name="proyecto_id" value=" " id="ban_proyecto_id" runat="server" />
+    <input type="hidden" name="ban_files" value=" " id="ban_files" runat="server" />
+    <input type="hidden" name="ban_files" value=" " id="htmlc_s" runat="server" />
     <ul id="nav_page" style="text-align: center;">
         <li><span style="margin-top: 15px; cursor: pointer;" onclick="j('#magazine').turn('previous'); if(parseInt(j('#magazine').turn('page'))==1){j('#magazine').css('margin-left', '-20%');}"
             id="back">
@@ -309,7 +312,7 @@
             <textarea id="txtnombreproyecto" runat="server" style="display: block; width: 80%;
                 height: 100px;" cols="20" rows="50"></textarea>
             <br />
-            * Proposito:
+            * Propósito:
             <textarea id="txtproposito" runat="server" style="display: block; width: 80%; height: 100px;"
                 cols="20" rows="50"></textarea>
             <br />
@@ -331,7 +334,13 @@
                         Dependencia:
                     </td>
                     <td>
-                        <input type="text" id="txtdependencia" runat="server" name="name" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea id="txtdependencia" style="width: 100%;" runat="server" name="name"></textarea>
+                    </td>
+                    <td>
                     </td>
                 </tr>
                 <tr>
@@ -339,7 +348,13 @@
                         Responsable (Nombre y Apellido):
                     </td>
                     <td>
-                        <input type="text" name="name" id="txtresponsable" runat="server" value=" " />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea name="name" style="width: 100%;" id="txtresponsable" runat="server"></textarea>
+                    </td>
+                    <td>
                     </td>
                 </tr>
                 <tr>
@@ -347,7 +362,13 @@
                         Cargo:
                     </td>
                     <td>
-                        <input type="text" name="name" runat="server" id="txtcargo" value=" " />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea name="name" style="width: 100%;" runat="server" id="txtcargo"></textarea>
+                    </td>
+                    <td>
                     </td>
                 </tr>
                 <tr>
@@ -698,13 +719,11 @@
                 ARBOL DE PROBLEMAS</h1>
             <br />
             <br />
-            <ul id="org" runat="server" style="display: none;">
-            </ul>
-            <div id="chart" class="jOrgChart">
-            </div>
+            <section id="org" runat="server">
+            </section>
             <br />
-            <a id="refreshOrganigrama" href="#" onclick="UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val()); j('#if_google').trigger('click');">
-                Actualizar Organigrama</a>
+            <%--<a id="refreshOrganigrama" href="#" onclick="UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val()); j('#if_google').trigger('click');">
+                Actualizar Organigrama</a>--%>
             <br />
             <iframe id="if_c_e" runat="server" src="" width="100%" height="500px"></iframe>
         </div>
@@ -735,10 +754,8 @@
             <h1>
                 ANÁLISIS DE OBJETIVOS
             </h1>
-            <ul id="org_objetivos" runat="server" style="display: none;">
-            </ul>
-            <div id="chart_objetivos" class="jOrgChart_o">
-            </div>
+            <section id="org_objetivos" runat="server">
+            </section>
         </div>
         <div class="page_magazine" id="page10">
             <p style="font-size: 14px; width: 90%; text-align: right;">
@@ -994,9 +1011,6 @@
             </output>
         </div>
     </div>
-    <input type="hidden" name="proyecto_id" value=" " id="ban_proyecto_id" runat="server" />
-    <input type="hidden" name="ban_files" value=" " id="ban_files" runat="server" />
-    <input type="hidden" name="ban_files" value=" " id="htmlc_s" runat="server" />
     <asp:Button Style="width: 0px; background-color: white; border: none;" Text="" runat="server"
         ID="btnuploadfile" OnClick="btnuploadfile_Click" />
     <div id="dialog_proyectos" style="dysplay: none;">

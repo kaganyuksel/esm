@@ -13,6 +13,33 @@ namespace ESM {
     public partial class BancoProyectos {
         
         /// <summary>
+        /// ban_proyecto_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden ban_proyecto_id;
+        
+        /// <summary>
+        /// ban_files control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden ban_files;
+        
+        /// <summary>
+        /// htmlc_s control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden htmlc_s;
+        
+        /// <summary>
         /// cmbproyectos control.
         /// </summary>
         /// <remarks>
@@ -91,7 +118,7 @@ namespace ESM {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtdependencia;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtdependencia;
         
         /// <summary>
         /// txtresponsable control.
@@ -100,7 +127,7 @@ namespace ESM {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtresponsable;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtresponsable;
         
         /// <summary>
         /// txtcargo control.
@@ -109,7 +136,7 @@ namespace ESM {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtcargo;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtcargo;
         
         /// <summary>
         /// txtfechaelaboracion control.
@@ -245,33 +272,6 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl list;
-        
-        /// <summary>
-        /// ban_proyecto_id control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden ban_proyecto_id;
-        
-        /// <summary>
-        /// ban_files control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden ban_files;
-        
-        /// <summary>
-        /// htmlc_s control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden htmlc_s;
         
         /// <summary>
         /// btnuploadfile control.
