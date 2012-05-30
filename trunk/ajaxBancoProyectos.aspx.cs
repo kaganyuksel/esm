@@ -208,24 +208,74 @@ namespace ESM
         {
             try
             {
-                var features_project = _objCproyecto.GetProyecto(proyecto_id);
-                var coleccion_causas_efectos = objCCausas_Efecto.getCausas_Efectos(proyecto_id);
+                var arbolproblemas = (from p in new Model.ESMBDDataContext().Causas_Efectos
+                                      where p.Proyecto_id == proyecto_id
+                                      select p).Take(3);
 
-                string html = "<li>" + features_project.Problema + "<ul>";
-                string causas_html = "<li>Causas<ul>";
-                string efectos_html = "<li>Efectos<ul>";
+                var proyecto = (from p in new Model.ESMBDDataContext().Proyectos
+                                where p.Id == proyecto_id
+                                select p).Single();
 
-                foreach (var item in coleccion_causas_efectos.Take(3))
+                string html_arbol_problemas = "<table><tr>";
+                string problema = "";
+                foreach (var item in arbolproblemas)
                 {
-                    causas_html = causas_html + "<li>" + item.Causa + "</li>";
-                    efectos_html = efectos_html + "<li>" + item.Efecto + "</li>";
+                    problema = item.Proyecto.Problema;
+                    html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #D1AC19; color: #000; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Efecto + "</b></td><td></td><td style='width: 5px;'></td>";
                 }
-                causas_html = causas_html + "</ul></li>";
-                efectos_html = efectos_html + "</ul></li>";
+                html_arbol_problemas += "</tr><tr style='height: 20px;'>";
+                int cant_tds = (arbolproblemas.Count() * 2);
+                int colspan_proyecto = (arbolproblemas.Count() * 4);
+                int count_tds = 0;
+                for (int i = 0; i < (cant_tds * 2); i++)
+                {
+                    if (count_tds == 1)
+                    {
+                        html_arbol_problemas += "<td style='border-left: dashed #000 2px;'></td>";
+                        count_tds++;
+                    }
+                    else if (count_tds == 3)
+                    {
+                        html_arbol_problemas += "<td></td>";
+                        count_tds = 0;
+                    }
+                    else
+                    {
+                        html_arbol_problemas += "<td ></td>";
+                        count_tds++;
+                    }
+                }
+                html_arbol_problemas += "</tr><tr><td style='height:100px; text-align:center; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'>" + problema + "</td></tr><tr style='height: 20px;'>";
 
-                html = html + causas_html + efectos_html + "</ul></li>";
+                for (int i = 0; i < (cant_tds * 2); i++)
+                {
+                    if (count_tds == 1)
+                    {
+                        html_arbol_problemas += "<td style='border-left: dashed #000 2px;'></td>";
+                        count_tds++;
+                    }
+                    else if (count_tds == 3)
+                    {
+                        html_arbol_problemas += "<td></td>";
+                        count_tds = 0;
+                    }
+                    else
+                    {
+                        html_arbol_problemas += "<td ></td>";
+                        count_tds++;
+                    }
+                }
 
-                Response.Write(html);
+                html_arbol_problemas += "</tr><tr>";
+                foreach (var item in arbolproblemas)
+                {
+                    problema = item.Proyecto.Problema;
+                    html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #1966D1; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Causa + "</b></td><td></td><td style='width: 5px;'></td>";
+                }
+
+                html_arbol_problemas += "</tr></table>";
+
+                Response.Write(html_arbol_problemas);
             }
             catch (Exception) { Response.Write("null"); }
 
@@ -235,24 +285,74 @@ namespace ESM
         {
             try
             {
-                var features_project = _objCproyecto.GetProyecto(proyecto_id);
-                var coleccion_causas_efectos = objCCausas_Efecto.getCausas_Efectos(proyecto_id);
+                var arbolobjetivos = (from p in new Model.ESMBDDataContext().Causas_Efectos
+                                      where p.Proyecto_id == proyecto_id
+                                      select p).Take(3);
 
-                string html = "<li>" + features_project.Problema + "<ul>";
-                string beneficios_html = "<li>Beneficios<ul>";
-                string objetivos_html = "<li>Objetivos<ul>";
+                var proyecto = (from p in new Model.ESMBDDataContext().Proyectos
+                                where p.Id == proyecto_id
+                                select p).Single();
 
-                foreach (var item in coleccion_causas_efectos.Take(3))
+                string html_arbol_objetivos = "<table><tr>";
+                string problema = "";
+                foreach (var item in arbolobjetivos)
                 {
-                    beneficios_html = beneficios_html + "<li>" + item.Beneficios + "</li>";
-                    objetivos_html = objetivos_html + "<li>" + item.Causa + "</li>";
+                    problema = item.Proyecto.Problema;
+                    html_arbol_objetivos += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #92C414; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Beneficios + "</b></td><td></td><td style='width: 5px;'></td>";
                 }
-                beneficios_html = beneficios_html + "</ul></li>";
-                objetivos_html = objetivos_html + "</ul></li>";
+                html_arbol_objetivos += "</tr><tr style='height: 20px;'>";
+                int cant_tds = (arbolobjetivos.Count() * 2);
+                int colspan_proyecto = (arbolobjetivos.Count() * 4);
+                int count_tds = 0;
+                for (int i = 0; i < (cant_tds * 2); i++)
+                {
+                    if (count_tds == 1)
+                    {
+                        html_arbol_objetivos += "<td style='border-left: dashed #000 2px;'></td>";
+                        count_tds++;
+                    }
+                    else if (count_tds == 3)
+                    {
+                        html_arbol_objetivos += "<td></td>";
+                        count_tds = 0;
+                    }
+                    else
+                    {
+                        html_arbol_objetivos += "<td ></td>";
+                        count_tds++;
+                    }
+                }
+                html_arbol_objetivos += "</tr><tr><td style='height:100px; text-align:center; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'>" + problema + "</td></tr><tr style='height: 20px;'>";
 
-                html = html + beneficios_html + objetivos_html + "</ul></li>";
+                for (int i = 0; i < (cant_tds * 2); i++)
+                {
+                    if (count_tds == 1)
+                    {
+                        html_arbol_objetivos += "<td style='border-left: dashed #000 2px;'></td>";
+                        count_tds++;
+                    }
+                    else if (count_tds == 3)
+                    {
+                        html_arbol_objetivos += "<td></td>";
+                        count_tds = 0;
+                    }
+                    else
+                    {
+                        html_arbol_objetivos += "<td ></td>";
+                        count_tds++;
+                    }
+                }
 
-                Response.Write(html);
+                html_arbol_objetivos += "</tr><tr>";
+                foreach (var item in arbolobjetivos)
+                {
+                    problema = item.Proyecto.Problema;
+                    html_arbol_objetivos += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #0571AB; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Causa + "</b></td><td></td><td style='width: 5px;'></td>";
+                }
+
+                html_arbol_objetivos += "</tr></table>";
+
+                Response.Write(html_arbol_objetivos);
             }
             catch (Exception) { Response.Write("null"); }
 

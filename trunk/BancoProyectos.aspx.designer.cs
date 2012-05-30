@@ -40,6 +40,15 @@ namespace ESM {
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden htmlc_s;
         
         /// <summary>
+        /// titulo_proyecto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl titulo_proyecto;
+        
+        /// <summary>
         /// cmbproyectos control.
         /// </summary>
         /// <remarks>

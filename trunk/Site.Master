@@ -292,15 +292,17 @@
         </section>
         </form>
         <div class="footer" style="border: 1px solid #dddddd; clear: both; text-align: center;">
-            <table cellpadding="80" cellspacing="30" style="margin: 0 auto; width: 100px; margin: 0 auto;">
-                <tr style="text-align: center;">
-                    <br />
-                    <a href="http://www.alianzaterra.org" target="_blank" style="text-decoration: none;
-                        color: #000000; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
-                        <p style="font-size: 9px;">
-                            <b>Desarrollado por MG Group Ltda para <span style="color: #ED9200; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
-                                Corporación Alianza Terra</span></b></p>
-                    </a></td>
+            <table cellpadding="80" cellspacing="30" style="margin: 0 auto; width: 100%; margin: 0 auto;">
+                <tr>
+                    <td style="text-align: center;">
+                        <br />
+                        <a href="http://www.alianzaterra.org" target="_blank" style="text-decoration: none;
+                            color: #000000; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
+                            <p style="font-size: 9px;">
+                                <b>Desarrollado por <span style="color: #ED9200; font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Helvetica, Arial, Verdana, sans-serif;">
+                                    Corporación Alianza Terra</span></b></p>
+                        </a>
+                    </td>
                 </tr>
             </table>
         </div>

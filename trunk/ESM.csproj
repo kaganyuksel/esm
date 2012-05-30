@@ -237,6 +237,13 @@
     <Compile Include="jqgrid_valores.aspx.designer.cs">
       <DependentUpon>jqgrid_valores.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Organigrama.aspx.cs">
+      <DependentUpon>Organigrama.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Organigrama.aspx.designer.cs">
+      <DependentUpon>Organigrama.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReporteActividades.aspx.cs">
       <DependentUpon>ReporteActividades.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -503,6 +510,7 @@
     <Content Include="Icons\fondo_banco_proyectos.png" />
     <Content Include="jqgrid_causas_efectos.aspx" />
     <Content Include="jqgrid_valores.aspx" />
+    <Content Include="Organigrama.aspx" />
     <Content Include="ReporteActividades.aspx" />
     <Content Include="reportactividades.aspx" />
     <Content Include="Default.aspx" />

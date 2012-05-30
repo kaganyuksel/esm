@@ -163,9 +163,9 @@
                 document.getElementById("ContentPlaceHolder1_ban_files").value = " ";
             }
 
-            //            if (j("#ContentPlaceHolder1_ban_proyecto_id").val() != " " && j("#ContentPlaceHolder1_ban_proyecto_id").val() != "0") {
-            //                setInterval("j('#refreshOrganigrama').trigger('click')", 3000);
-            //            }
+            if (j("#ContentPlaceHolder1_ban_proyecto_id").val() != " " && j("#ContentPlaceHolder1_ban_proyecto_id").val() != "0") {
+                setInterval("UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val(), true);", 3000);
+            }
         });
 
         setInterval('var numeric_text = j("#ContentPlaceHolder1_if_marco_logico").contents().find("#presupuesto"); j(numeric_text).change(function () { if(isNaN(j(this).val())){j(this).val("0");} });', 3000);
@@ -200,48 +200,42 @@
             });
         }
 
-//        function UpdateArbolProblemas(id, actualizar) {
-//            j.ajax({
-//                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolproblemas=true",
-//                async: false,
-//                success: function (result) {
-//                    console.log(result);
+        function UpdateArbolProblemas(id, actualizar) {
+            j.ajax({
+                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolproblemas=true",
+                async: false,
+                success: function (result) {
+                    console.log(result);
 
-//                    j("#chart").html("");
+                    j("#ContentPlaceHolder1_org").html("");
 
-//                    j("#ContentPlaceHolder1_org").html(result);
+                    j("#ContentPlaceHolder1_org").html(result);
 
-//                    j("#ContentPlaceHolder1_org").jOrgChart({
-//                        chartElement: '#chart'
-//                    });
-//                },
-//                error: function (result) {
-//                    alert("Error " + result.status + ' ' + result.statusText);
-//                }
-//            });
+                },
+                error: function (result) {
+                    alert("Error " + result.status + ' ' + result.statusText);
+                }
+            });
 
-//            j.ajax({
-//                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolobjetivos=true",
-//                async: false,
-//                success: function (result) {
-//                    console.log(result);
+            j.ajax({
+                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolobjetivos=true",
+                async: false,
+                success: function (result) {
+                    console.log(result);
 
-//                    j("#chart_objetivos").html("");
+                    j("#ContentPlaceHolder1_org_objetivos").html("");
 
-//                    j("#ContentPlaceHolder1_org_objetivos").html(result);
+                    j("#ContentPlaceHolder1_org_objetivos").html(result);
 
-//                    j("#ContentPlaceHolder1_org_objetivos").jOrgChart({
-//                        chartElement: '#chart_objetivos'
-//                    });
-//                },
-//                error: function (result) {
-//                    alert("Error " + result.status + ' ' + result.statusText);
-//                }
-//            });
+                },
+                error: function (result) {
+                    alert("Error " + result.status + ' ' + result.statusText);
+                }
+            });
 
-//            tooltip();
+            tooltip();
 
-//        }
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -285,6 +279,9 @@
                     Programa de competencias ciudadanas</h5>
                 <h1 style="color: #005EA7; margin: 50px auto; width: 80%; text-align: center;">
                     Bienvenidos al Banco de Proyectos de la Subdirección de Fomento y Competencias</h1>
+                <h2 style="color: #005EA7; margin: 50px auto; width: 80%; text-align: center;" id="titulo_proyecto"
+                    runat="server">
+                </h2>
             </hgroup>
             <section style="margin: 0 auto; width: 60%; border: 1px solid #005EA7; text-align: center;">
                 <a href="#" onclick="j('#magazine').turn('next'); j('#magazine').css('margin-left','auto'); nuevo=true;">
@@ -722,8 +719,8 @@
             <section id="org" runat="server">
             </section>
             <br />
-            <%--<a id="refreshOrganigrama" href="#" onclick="UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val()); j('#if_google').trigger('click');">
-                Actualizar Organigrama</a>--%>
+            <a id="refreshOrganigrama" href="" target="_blank" onclick="window.location = '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val();">
+                Visualizar Organigrama</a>
             <br />
             <iframe id="if_c_e" runat="server" src="" width="100%" height="500px"></iframe>
         </div>
@@ -756,6 +753,9 @@
             </h1>
             <section id="org_objetivos" runat="server">
             </section>
+            <br />
+            <a href="" target="_blank" onclick="window.location = '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val();">
+                Visualizar Organigrama</a>
         </div>
         <div class="page_magazine" id="page10">
             <p style="font-size: 14px; width: 90%; text-align: right;">
