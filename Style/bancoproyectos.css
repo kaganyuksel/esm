@@ -67,14 +67,14 @@ H3
 {
     color: #055fab;
     margin-left: 10px;
-    font-family: Tahoma, helvetica;
+    font-family: 'Arial Narrow', helvetica;
 }
 
 #magazine input[type=text]
 {
     margin-top: 15px;
     height: 20px;
-    font-family: Tahoma,Helvetica;
+    font-family: 'Arial Narrow',Helvetica;
     border: 2px solid #D9D9D9;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -86,7 +86,7 @@ H3
 textarea
 {
     border: 2px solid #D9D9D9;
-    font-family: Tahoma,Helvetica;
+    font-family: 'Arial Narrow',Helvetica;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
@@ -102,7 +102,7 @@ textarea
 
 p
 {
-    font-family: Tahoma,helvetica;
+    font-family: 'Arial Narrow',helvetica;
     font-size: 0.9em;
     color: #383838;
     margin-top: 15px;
@@ -112,7 +112,7 @@ p
 
 #magazine ul li
 {
-    font-family: Tahoma,helvetica;
+    font-family: 'Arial Narrow',helvetica;
     font-size: 0.9em;
     color: #383838;
     width: 85%;
@@ -172,7 +172,7 @@ table tr td select
     padding: 5px 15px 5px 15px;
     font-size: 0.9em;
     color: #fff;
-    font-family: Tahoma, Helvetica;
+    font-family: 'Arial Narrow', Helvetica;
     cursor: pointer;
     background-color: #7ac24a;
     border: 2px solid #447d0d;
@@ -191,7 +191,7 @@ table tr td select
     width: 300px;
     display: inline;
     color: #fff; /*font-size: 0.9em;*/
-    font-family: Tahoma, Helvetica;
+    font-family: 'Arial Narrow', Helvetica;
     cursor: pointer;
     background-color: #004563;
     border: 2px solid #016591;
@@ -224,10 +224,14 @@ table tr td select
     border: 2px solid #016591;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
-    border-radius: 2px;    
+    border-radius: 2px;
 }
 
 #ContentPlaceHolder1_content_marcologico table
 {
-    font-size: 13px;    
+    font-size: 13px;
+}
+div, body, #subcuerpo h1, table, tr, td, h2, h3, h4, h5, h6, p, a, ul, li, span, #subcuerpo p,input[type="text"], input[type="submit"], input[type="button"]
+{
+    font-family: 'Arial Narrow' , sans-serif;
 }
