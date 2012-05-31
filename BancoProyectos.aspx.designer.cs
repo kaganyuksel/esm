@@ -229,6 +229,15 @@ namespace ESM {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl org_objetivos;
         
         /// <summary>
+        /// if_objetivos_causas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl if_objetivos_causas;
+        
+        /// <summary>
         /// content_marcologico control.
         /// </summary>
         /// <remarks>
@@ -254,6 +263,15 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl if_ejecucion;
+        
+        /// <summary>
+        /// planoperativo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl planoperativo;
         
         /// <summary>
         /// if_valores_indicadores control.

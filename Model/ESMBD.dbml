@@ -181,14 +181,6 @@
       <Association Name="Componente_CategoryByComponente" Member="Componente" ThisKey="IdComponente" OtherKey="IdComponente" Type="Componente" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Causas" Member="Causas">
-    <Type Name="Causa">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="PAC_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Causa" Member="Causa1" Type="System.String" DbType="NText" CanBeNull="true" />
-      <Column Name="upsize_ts" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Citas" Member="Citas">
     <Type Name="Cita">
       <Column Name="IdCita" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -599,9 +591,9 @@
       <Association Name="Proyecto_Proyectos_Supuesto" Member="Proyectos_Supuestos" ThisKey="Id" OtherKey="Proyecto_supuesto_id" Type="Proyectos_Supuesto" />
       <Association Name="Proyecto_Fuentes_Financiacion" Member="Fuentes_Financiacions" ThisKey="Id" OtherKey="proyecto_id" Type="Fuentes_Financiacion" />
       <Association Name="Proyecto_Matriz_Actore" Member="Matriz_Actores" ThisKey="Id" OtherKey="proyecto_id" Type="Matriz_Actore" />
-      <Association Name="Proyecto_Causas_Efecto" Member="Causas_Efectos" ThisKey="Id" OtherKey="Proyecto_id" Type="Causas_Efecto" />
       <Association Name="Proyecto_Registro_Proyecto" Member="Registro_Proyectos" ThisKey="Id" OtherKey="proyecto_id" Type="Registro_Proyecto" />
       <Association Name="Proyecto_Documentos_Proyecto" Member="Documentos_Proyectos" ThisKey="Id" OtherKey="proyectoid" Type="Documentos_Proyecto" />
+      <Association Name="Proyecto_Causas_Efecto" Member="Causas_Efectos" ThisKey="Id" OtherKey="Proyecto_id" Type="Causas_Efecto" />
     </Type>
   </Table>
   <Table Name="dbo.Proyectos_Medios" Member="Proyectos_Medios">
@@ -918,22 +910,6 @@
       <Association Name="Proyecto_Matriz_Actore" Member="Proyecto" ThisKey="proyecto_id" OtherKey="Id" Type="Proyecto" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Causas_Efectos" Member="Causas_Efectos">
-    <Type Name="Causas_Efecto">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Proyecto_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Causa" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
-      <Column Name="Efecto" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
-      <Column Name="Proceso" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
-      <Column Name="Proceso_Detalle" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
-      <Column Name="Indicador_Resultado" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
-      <Column Name="Presupuesto" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="Beneficios" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
-      <Association Name="Causas_Efecto_Subproceso" Member="Subprocesos" ThisKey="Id" OtherKey="Proceso_id" Type="Subproceso" />
-      <Association Name="Proyecto_Causas_Efecto" Member="Proyecto" ThisKey="Proyecto_id" OtherKey="Id" Type="Proyecto" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
   <Table Name="dbo.Subprocesos" Member="Subprocesos">
     <Type Name="Subproceso">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -1009,6 +985,24 @@
       <Column Name="Tipo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Tamano" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Association Name="Proyecto_Documentos_Proyecto" Member="Proyecto" ThisKey="proyectoid" OtherKey="Id" Type="Proyecto" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Causas_Efectos" Member="Causas_Efectos">
+    <Type Name="Causas_Efecto">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Proyecto_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Causa" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Efecto" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Proceso" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Proceso_Detalle" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Indicador_Resultado" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Presupuesto" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Beneficios" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="CausaIndirecta" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="EfectoIndirecto" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Association Name="Causas_Efecto_Subproceso" Member="Subprocesos" ThisKey="Id" OtherKey="Proceso_id" Type="Subproceso" />
+      <Association Name="Proyecto_Causas_Efecto" Member="Proyecto" ThisKey="Proyecto_id" OtherKey="Id" Type="Proyecto" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>

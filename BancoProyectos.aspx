@@ -14,7 +14,6 @@
     <script src="/Scripts/bancoproyectos.js" type="text/javascript"></script>
     <script src="fancybox/jquery.fancybox-1.3.4.js" type="text/javascript"></script>
     <script src="fancybox/jquery.easing-1.3.pack.js" type="text/javascript"></script>
-    <%--<script src="Scripts/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>--%>
     <script type="text/javascript">
         var fls;
         var nuevo = false;
@@ -55,13 +54,6 @@
 
             j("#magazine").css("margin-left", "-20%");
 
-            //            j("#ContentPlaceHolder1_org").jOrgChart({
-            //                chartElement: '#chart'
-            //            });
-
-            //            j("#ContentPlaceHolder1_org_objetivos").jOrgChart({
-            //                chartElement: '#chart_objetivos'
-            //            });
             j('#magazine').turn({
                 gradients: true,
                 acceleration: true,
@@ -100,9 +92,6 @@
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
                 caption: "Fuentes de Financiación",
-                autowidth: true,
-                add: { width: 500 },
-                edit: { width: '500px' },
                 afterComplete: function (response, postdata, formid) { alert("save"); }
 
             });
@@ -146,12 +135,6 @@
                 if (j("#ContentPlaceHolder1_txtnombreproyecto").val() == "" && j("#ContentPlaceHolder1_txtproblema").val() == "")
                     return false;
             });
-
-            //            j('.node').qtip({
-            //                content: 'This is an active list element',
-            //                show: 'mouseover',
-            //                hide: 'mouseout'
-            //            })
 
             setTimeout('tooltip();', 5000);
 
@@ -289,15 +272,13 @@
                 <br />
                 <asp:DropDownList ID="cmbproyectos" Style="width: 90%;" runat="server">
                 </asp:DropDownList>
-                <%--<a href="#" style="display: none;" onclick="CargarProyecto(j('#ContentPlaceHolder1_cmbproyectos option:selected').val(), 'true'); j('ContentPlaceHolder1_btncargar').trigger('click');">--%>
-                <%-- Cargar</a>--%>
                 <asp:Button Text="Actualizar Proyecto" ID="btncargar" Width="70%" OnClick="btncargar_Click"
                     runat="server" />
                 <asp:Button ID="btnExportarProyecto" Width="70%" Text="Exportar Proyecto" runat="server"
                     OnClick="btnExportarProyecto_Click" />
             </section>
             <p style="width: 100%; text-align: center;">
-                Version No. 0.1</p>
+                Versión No. 1.0</p>
         </div>
         <div class="page_magazine" id="basicaproyecto">
             <p style="font-size: 14px; width: 90%; text-align: right;">
@@ -744,6 +725,7 @@
             <br />
             <a href="/Icons/arbolobjetivos.png" style="width: 100%; margin: 0 auto;">
                 <img style="margin: 0 auto;" src="/Icons/arbolobjetivos.png" alt="arbolobjetivos" /></a>
+
         </div>
         <div class="page_magazine" id="page9">
             <p style="font-size: 14px; width: 90%; text-align: right;">
@@ -756,6 +738,8 @@
             <br />
             <a href="" target="_blank" onclick="window.location = '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val();">
                 Visualizar Organigrama</a>
+
+            <iframe id="if_objetivos_causas" runat="server" src="" width="100%" height="600px"></iframe>
         </div>
         <div class="page_magazine" id="page10">
             <p style="font-size: 14px; width: 90%; text-align: right;">
@@ -982,6 +966,17 @@
                 VISUALIZACIÓN PARA EL MARCO LÓGICO
             </h1>
             <iframe id="if_ejecucion" runat="server" width="100%" height="1500px"></iframe>
+        </div>
+        <div>
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 13 de 13</p>
+            <h1>
+                PLAN OPERATIVO
+            </h1>
+            <div id="planoperativo" runat="server">
+            </div>
+        </div>
+        <div>
         </div>
         <div>
             <h1>

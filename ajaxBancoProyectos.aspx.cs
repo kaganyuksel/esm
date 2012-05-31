@@ -150,9 +150,18 @@ namespace ESM
                     else if (Request.Form["causa"] != null)
                     {
                         Session.Add("c_e_id", Request.Form["id"]);
-                        Session.Add("causa", Request.Form["causa"]);
-                        Session.Add("efecto", Request.Form["efecto"]);
-                        Session.Add("beneficio", Request.Form["beneficio"]);
+                        if (Request.Form["causaindirecta"] != null)
+                        {
+                            Session.Add("causa", Request.Form["causa"]);
+                            Session.Add("efecto", Request.Form["efecto"]);
+                            Session.Add("causaindirecta", Request.Form["causaindirecta"]);
+                            Session.Add("efectoindirecto", Request.Form["efectoindirecto"]);
+                        }
+                        else if (Request.Form["objetivo"] != null)
+                        {
+                            Session.Add("objetivo", Request.Form["objetivo"]);
+                            Session.Add("beneficio", Request.Form["beneficio"]);
+                        }
                         Session.Add("operacion", Request.Form["oper"]);
                     }
                     else if (Request.Form["ejecutado"] != null)
@@ -221,7 +230,7 @@ namespace ESM
                 foreach (var item in arbolproblemas)
                 {
                     problema = item.Proyecto.Problema;
-                    html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #D1AC19; color: #000; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Efecto + "</b></td><td></td><td style='width: 5px;'></td>";
+                    html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #D1AC19; color: #000; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.EfectoIndirecto + "</b></td><td></td><td style='width: 5px;'></td>";
                 }
                 html_arbol_problemas += "</tr><tr style='height: 20px;'>";
                 int cant_tds = (arbolproblemas.Count() * 2);
@@ -245,7 +254,33 @@ namespace ESM
                         count_tds++;
                     }
                 }
-                html_arbol_problemas += "</tr><tr><td style='height:100px; text-align:center; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'>" + problema + "</td></tr><tr style='height: 20px;'>";
+                html_arbol_problemas += "</tr><tr style='height: 20px;'>";
+                foreach (var item in arbolproblemas)
+                {
+                    problema = item.Proyecto.Problema;
+                    html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #D1AC19; color: #000; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Efecto + "</b></td><td></td><td style='width: 5px;'></td>";
+                }
+                html_arbol_problemas += "</tr><tr style='height: 20px;'>";
+
+                for (int i = 0; i < (cant_tds * 2); i++)
+                {
+                    if (count_tds == 1)
+                    {
+                        html_arbol_problemas += "<td style='border-left: dashed #000 2px;'></td>";
+                        count_tds++;
+                    }
+                    else if (count_tds == 3)
+                    {
+                        html_arbol_problemas += "<td></td>";
+                        count_tds = 0;
+                    }
+                    else
+                    {
+                        html_arbol_problemas += "<td ></td>";
+                        count_tds++;
+                    }
+                }
+                html_arbol_problemas += "</tr><tr><td style='height:100px; text-align:center; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'>" + problema.ToUpper() + "</td></tr><tr style='height: 20px;'>";
 
                 for (int i = 0; i < (cant_tds * 2); i++)
                 {
@@ -271,6 +306,33 @@ namespace ESM
                 {
                     problema = item.Proyecto.Problema;
                     html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #1966D1; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Causa + "</b></td><td></td><td style='width: 5px;'></td>";
+                }
+
+                html_arbol_problemas += "</tr><tr style='height: 20px;'>";
+                for (int i = 0; i < (cant_tds * 2); i++)
+                {
+                    if (count_tds == 1)
+                    {
+                        html_arbol_problemas += "<td style='border-left: dashed #000 2px;'></td>";
+                        count_tds++;
+                    }
+                    else if (count_tds == 3)
+                    {
+                        html_arbol_problemas += "<td></td>";
+                        count_tds = 0;
+                    }
+                    else
+                    {
+                        html_arbol_problemas += "<td ></td>";
+                        count_tds++;
+                    }
+                }
+                html_arbol_problemas += "</tr><tr style='height: 20px;'>";
+
+                foreach (var item in arbolproblemas)
+                {
+                    problema = item.Proyecto.Problema;
+                    html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #1966D1; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.CausaIndirecta + "</b></td><td></td><td style='width: 5px;'></td>";
                 }
 
                 html_arbol_problemas += "</tr></table>";
@@ -322,7 +384,33 @@ namespace ESM
                         count_tds++;
                     }
                 }
-                html_arbol_objetivos += "</tr><tr><td style='height:100px; text-align:center; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'>" + problema + "</td></tr><tr style='height: 20px;'>";
+
+                html_arbol_objetivos += "</tr><tr>";
+
+                html_arbol_objetivos += "<td style='height:100px; text-align:center; background: #258A0C; color: #fff; border: dashed #000; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'><b>" + proyecto.Finalidad.ToUpper() + "</b></td>";
+
+                html_arbol_objetivos += "</tr><tr style='height: 20px;'>";
+
+                for (int i = 0; i < (cant_tds * 2); i++)
+                {
+                    if (count_tds == 1)
+                    {
+                        html_arbol_objetivos += "<td style='border-left: dashed #000 2px;'></td>";
+                        count_tds++;
+                    }
+                    else if (count_tds == 3)
+                    {
+                        html_arbol_objetivos += "<td></td>";
+                        count_tds = 0;
+                    }
+                    else
+                    {
+                        html_arbol_objetivos += "<td ></td>";
+                        count_tds++;
+                    }
+                }
+
+                html_arbol_objetivos += "</tr><tr><td style='height:100px; text-align:center; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'>" + proyecto.Proposito.ToUpper() + "</td></tr><tr style='height: 20px;'>";
 
                 for (int i = 0; i < (cant_tds * 2); i++)
                 {
@@ -348,6 +436,32 @@ namespace ESM
                 {
                     problema = item.Proyecto.Problema;
                     html_arbol_objetivos += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #0571AB; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Causa + "</b></td><td></td><td style='width: 5px;'></td>";
+                }
+                html_arbol_objetivos += "</tr><tr style='height: 20px;'>";
+                for (int i = 0; i < (cant_tds * 2); i++)
+                {
+                    if (count_tds == 1)
+                    {
+                        html_arbol_objetivos += "<td style='border-left: dashed #000 2px;'></td>";
+                        count_tds++;
+                    }
+                    else if (count_tds == 3)
+                    {
+                        html_arbol_objetivos += "<td></td>";
+                        count_tds = 0;
+                    }
+                    else
+                    {
+                        html_arbol_objetivos += "<td ></td>";
+                        count_tds++;
+                    }
+                }
+
+                html_arbol_objetivos += "</tr><tr>";
+                foreach (var item in arbolobjetivos)
+                {
+                    problema = item.Proyecto.Problema;
+                    html_arbol_objetivos += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #0571AB; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>En la siguiente página se diligenciaran las actividades para este objetivo.</b></td><td></td><td style='width: 5px;'></td>";
                 }
 
                 html_arbol_objetivos += "</tr></table>";
@@ -452,7 +566,7 @@ namespace ESM
 
             foreach (var item in causas_efectos_col)
             {
-                json_to_return = json_to_return + "{\"id\":\"" + item.Id.ToString() + "\",\"cell\":[\"" + item.Id + "\",\"" + item.Causa + "\", \"" + item.Efecto + "\", \"" + item.Beneficios + "\"]} ,";
+                json_to_return = json_to_return + "{\"id\":\"" + item.Id.ToString() + "\",\"cell\":[\"" + item.Id + "\",\"" + item.Causa + "\", \"" + item.Efecto + "\", \"" + item.Beneficios + "\",\"" + item.CausaIndirecta + "\",\"" + item.EfectoIndirecto + "\",\"" + item.Proceso + "\"]} ,";
             }
             json_to_return = json_to_return.Trim(',');
             json_to_return = json_to_return + "]}";
@@ -832,16 +946,35 @@ namespace ESM
         {
             try
             {
-                string causa = Session["causa"].ToString();
-                string efecto = Session["efecto"].ToString();
-                string beneficio = Session["beneficio"].ToString();
+                string causa = null;
+                string efecto = null;
+                string causaIndirecta = null;
+                string efectoIndirecto = null;
+                string objetivo = null;
+                string beneficio = null;
 
-                if (objCCausas_Efecto.Add(efecto, causa, beneficio, proyecto_id, "fff"))
+                if (Session["causaindirecta"] != null)
+                {
+                    causa = Session["causa"].ToString();
+                    efecto = Session["efecto"].ToString();
+                    causaIndirecta = Session["causaindirecta"].ToString();
+                    efectoIndirecto = Session["efectoindirecto"].ToString();
+                }
+                else if (Session["objetivo"] != null)
+                {
+                    objetivo = Session["objetivo"].ToString();
+                    beneficio = Session["beneficio"].ToString();
+                }
+                if (objCCausas_Efecto.Add(efecto, causa, beneficio, proyecto_id, "#fff", causaIndirecta, efectoIndirecto, objetivo))
                 {
                     Session.Remove("causa");
                     Session.Remove("efecto");
                     Session.Remove("beneficio");
                     Session.Remove("operacion");
+                    Session.Remove("causaindirecta");
+                    Session.Remove("efectoindirecto");
+                    Session.Remove("objetivo");
+
                 }
             }
             catch { }
@@ -889,17 +1022,36 @@ namespace ESM
         protected void EditarCausasEfectos()
         {
             int c_e_id = Convert.ToInt32(Session["c_e_id"].ToString());
-            string causa = Session["causa"].ToString();
-            string efecto = Session["efecto"].ToString();
-            string beneficio = Session["beneficio"].ToString();
+            string causa = null;
+            string efecto = null;
+            string causaIndirecta = null;
+            string efectoIndirecto = null;
+            string objetivo = null;
+            string beneficio = null;
 
-            if (objCCausas_Efecto.Update(c_e_id, causa, efecto, beneficio))
+            if (Session["causaindirecta"] != null)
+            {
+                causa = Session["causa"].ToString();
+                efecto = Session["efecto"].ToString();
+                causaIndirecta = Session["causaindirecta"].ToString();
+                efectoIndirecto = Session["efectoindirecto"].ToString();
+            }
+            else if (Session["objetivo"] != null)
+            {
+                objetivo = Session["objetivo"].ToString();
+                beneficio = Session["beneficio"].ToString();
+            }
+
+            if (objCCausas_Efecto.Update(c_e_id, causa, efecto, beneficio, causaIndirecta, efectoIndirecto, objetivo))
             {
                 Session.Remove("c_e_id");
                 Session.Remove("causa");
                 Session.Remove("efecto");
                 Session.Remove("beneficio");
                 Session.Remove("operacion");
+                Session.Remove("causaindirecta");
+                Session.Remove("efectoindirecto");
+                Session.Remove("objetivo");
             }
         }
 

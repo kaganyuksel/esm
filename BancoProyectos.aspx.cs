@@ -32,6 +32,7 @@ namespace ESM
 
                     refreshFiles(proyecto_id);
                     CargarMarcoLogico();
+                    CargarPlanOperativo();
                 }
 
                 if (!Page.IsPostBack)
@@ -146,27 +147,29 @@ namespace ESM
 
         protected void btncargar_Click(object sender, EventArgs e)
         {
-            ban_proyecto_id.Value = cmbproyectos.SelectedValue;
-            if_c_e.Attributes.Add("src", "/jqgrid_causas_efectos.aspx?proyecto_id=" + ban_proyecto_id.Value);
-            if_marco_logico.Attributes.Add("src", "/jqgrid_marco_logico.aspx?proyecto_id=" + ban_proyecto_id.Value);
-            if_ejecucion.Attributes.Add("src", "/jqgrid_ejecucion.aspx?proyecto_id=" + ban_proyecto_id.Value);
-            if_valores_indicadores.Attributes.Add("src", "jqgrid_valores.aspx?proyecto_id=" + ban_proyecto_id.Value);
-
-            Model.Proyecto proyecto_informacion = (from p in new Model.ESMBDDataContext().Proyectos
-                                                   where p.Id == Convert.ToInt32(ban_proyecto_id.Value)
-                                                   select p).Single();
-
-            txtnombreproyecto.Value = proyecto_informacion.Proyecto1;
-            txtproblema.Value = proyecto_informacion.Problema;
-            txtproposito.Value = proyecto_informacion.Proposito;
-            txtfinalidad.Value = proyecto_informacion.Finalidad;
-
-            proyecto_id = Convert.ToInt32(ban_proyecto_id.Value);
-            titulo_proyecto.InnerHtml = "PROYECTO: " + proyecto_informacion.Proyecto1.ToUpper();
-            CargarMarcoLogico();
-
             try
             {
+                ban_proyecto_id.Value = cmbproyectos.SelectedValue;
+                if_c_e.Attributes.Add("src", "/jqgrid_causas_efectos.aspx?proyecto_id=" + ban_proyecto_id.Value + "&mod=causas");
+                if_objetivos_causas.Attributes.Add("src", "/jqgrid_causas_efectos.aspx?proyecto_id=" + ban_proyecto_id.Value + "&mod=objetivos");
+                if_marco_logico.Attributes.Add("src", "/jqgrid_marco_logico.aspx?proyecto_id=" + ban_proyecto_id.Value);
+                if_ejecucion.Attributes.Add("src", "/jqgrid_ejecucion.aspx?proyecto_id=" + ban_proyecto_id.Value);
+                if_valores_indicadores.Attributes.Add("src", "jqgrid_valores.aspx?proyecto_id=" + ban_proyecto_id.Value);
+
+                Model.Proyecto proyecto_informacion = (from p in new Model.ESMBDDataContext().Proyectos
+                                                       where p.Id == Convert.ToInt32(ban_proyecto_id.Value)
+                                                       select p).Single();
+
+                txtnombreproyecto.Value = proyecto_informacion.Proyecto1;
+                txtproblema.Value = proyecto_informacion.Problema;
+                txtproposito.Value = proyecto_informacion.Proposito;
+                txtfinalidad.Value = proyecto_informacion.Finalidad;
+
+                proyecto_id = Convert.ToInt32(ban_proyecto_id.Value);
+                titulo_proyecto.InnerHtml = "PROYECTO: " + proyecto_informacion.Proyecto1.ToUpper();
+                CargarMarcoLogico();
+                CargarPlanOperativo();
+
                 var registro_proyecto = proyecto_informacion.Registro_Proyectos.Single();
 
                 txtdependencia.Value = registro_proyecto.Dependencia;
@@ -457,7 +460,12 @@ namespace ESM
 
                 Response.Redirect("/Files/Proyectos/" + nombre_proyecto + ".zip");
             }
-            catch (Exception ex) { /*Error*/}
+            catch (Exception) { /*Error*/}
+        }
+
+        protected void CargarPlanOperativo()
+        {
+            planoperativo.InnerHtml = generatePlanOperativo(proyecto_id);
         }
 
         protected void CargarMarcoLogico()
@@ -473,7 +481,7 @@ namespace ESM
                            where p.Proyecto_id == Proyecto_id
                            select p;
 
-            string html = "<table border='1' cellspacing='0' style='border: 1px solid #000;'><caption style='border: 1px solid #000;'>Marco Lógico</caption>";
+            string html = "<table border='1' cellspacing='0' style='border: 1px solid #000;'><caption style='border: 1px solid #000;'>MARCO LÓGICO</caption>";
             html += "<tr><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'>INDICADOR</td><td style='border: 1px solid #000;'>MEDIOS DE VERIFICACIÓN</td><td style='border: 1px solid #000;'>SUPUESTOS</td></tr>";
             int color = 0;
             string color_cadena = "D6D6D6";
@@ -517,6 +525,74 @@ namespace ESM
 
                         count_actividades++;
 
+                    }
+                }
+            }
+            html = html + "</table>";
+
+            return html;
+        }
+
+        protected string generatePlanOperativo(int Proyecto_id)
+        {
+            Model.ESMBDDataContext db = new Model.ESMBDDataContext();
+
+            var procesos = from p in db.Causas_Efectos
+                           where p.Proyecto_id == Proyecto_id
+                           select p;
+
+            string html = "<table border='1' cellspacing='0' style='border: 1px solid #000;'><caption style='border: 1px solid #000;'>PLAN OPERATIVO</caption>";
+            html += "<tr><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'>INDICADOR</td><td style='border: 1px solid #000;'>MEDIOS DE VERIFICACIÓN</td><td style='border: 1px solid #000;'>SUPUESTOS</td></tr>";
+            int color = 0;
+            string color_cadena = "D6D6D6";
+            foreach (var procesos_item in procesos)
+            {
+                if (color == 0)
+                {
+                    color_cadena = "E0E0E0";
+                    color++;
+                }
+                else
+                {
+                    color_cadena = "ffffff";
+                    color = 0;
+                }
+
+                html += "<tr style='background: #" + color_cadena + "'><td style='border: 1px solid #000;'><b>PROCESO:</b></td><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><tr>";
+                var subprocesos = from sp in db.Subprocesos
+                                  where sp.Causas_Efecto.Proyecto_id == proyecto_id && sp.Proceso_id == procesos_item.Id
+                                  select sp;
+
+                foreach (var subprocesos_item in subprocesos)
+                {
+                    var actividades = from a in db.Actividades
+                                      where a.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id && a.Subproceso_id == subprocesos_item.Id
+                                      select a;
+
+                    html += "<tr style='background: #" + color_cadena + "'><td style='border: 1px solid #000;'><b>SUBPROCESO:</b></td><td style='border: 1px solid #000;'>" + subprocesos_item.Subproceso1 + "</td><td style='border: 1px solid #000;'>" + subprocesos_item.Indicador + "</td><td style='border: 1px solid #000;'>" + subprocesos_item.Medios + "</td><td style='border: 1px solid #000;'>" + subprocesos_item.Supuestos + "</td><tr>";
+
+                    foreach (var actividades_item in actividades)
+                    {
+                        html += "<tr style='background: #" + color_cadena + "'><td style='vertical-align: middle; text-align: center; border: 1px solid #000;' ><b>ACTIVIDAD:</b></td><td style='border: 1px solid #000;'>" + actividades_item.Actividad + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><tr>";
+
+                        var indicadores = from i in db.Indicadores
+                                          where i.Actividade.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id && i.Actividad_id == actividades_item.Id
+                                          select i;
+                        int count_indicadores = 0;
+                        foreach (var indicadores_item in indicadores)
+                        {
+                            if (count_indicadores == 0)
+                            {
+                                if (indicadores.Count() <= 1)
+                                    html += "<tr style='background: #" + color_cadena + "'><td style='vertical-align: middle; text-align: center; border: 1px solid #000;' rowspan='" + indicadores.Count() + "'><b>INDICADOR:</b></td><td style='border: 1px solid #000;'>" + indicadores_item.Indicador + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'>" + indicadores_item.medios + "</td><td style='border: 1px solid #000;'>" + indicadores_item.supuestos + "</td><tr>";
+                                else
+                                    html += "<tr style='background: #" + color_cadena + "'><td style='vertical-align: middle; text-align: center; border: 1px solid #000;' rowspan='" + (indicadores.Count() * 2) + "'><b>INDICADOR:</b></td><td style='border: 1px solid #000;'>" + indicadores_item.Indicador + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'>" + indicadores_item.medios + "</td><td style='border: 1px solid #000;'>" + indicadores_item.supuestos + "</td><tr>";
+                            }
+                            else
+                                html += "<tr style='background: #" + color_cadena + "'><td style='border: 1px solid #000;'>" + indicadores_item.Indicador + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'>" + indicadores_item.medios + "</td><td style='border: 1px solid #000;'>" + indicadores_item.supuestos + "</td><tr>";
+
+                            count_indicadores++;
+                        }
                     }
                 }
             }
@@ -596,7 +672,7 @@ namespace ESM
             foreach (var item in arbolproblemas)
             {
                 problema = item.Proyecto.Problema;
-                html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #D1AC19; color: #000; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Efecto + "</b></td><td></td><td style='width: 5px;'></td>";
+                html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #D1AC19; color: #000; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.EfectoIndirecto + "</b></td><td></td><td style='width: 5px;'></td>";
             }
             html_arbol_problemas += "</tr><tr style='height: 20px;'>";
             int cant_tds = (arbolproblemas.Count() * 2);
@@ -620,7 +696,33 @@ namespace ESM
                     count_tds++;
                 }
             }
-            html_arbol_problemas += "</tr><tr><td style='height:100px; text-align:center; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'>" + problema + "</td></tr><tr style='height: 20px;'>";
+            html_arbol_problemas += "</tr><tr style='height: 20px;'>";
+            foreach (var item in arbolproblemas)
+            {
+                problema = item.Proyecto.Problema;
+                html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #D1AC19; color: #000; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Efecto + "</b></td><td></td><td style='width: 5px;'></td>";
+            }
+            html_arbol_problemas += "</tr><tr style='height: 20px;'>";
+
+            for (int i = 0; i < (cant_tds * 2); i++)
+            {
+                if (count_tds == 1)
+                {
+                    html_arbol_problemas += "<td style='border-left: dashed #000 2px;'></td>";
+                    count_tds++;
+                }
+                else if (count_tds == 3)
+                {
+                    html_arbol_problemas += "<td></td>";
+                    count_tds = 0;
+                }
+                else
+                {
+                    html_arbol_problemas += "<td ></td>";
+                    count_tds++;
+                }
+            }
+            html_arbol_problemas += "</tr><tr><td style='height:100px; text-align:center; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'>" + problema.ToUpper() + "</td></tr><tr style='height: 20px;'>";
 
             for (int i = 0; i < (cant_tds * 2); i++)
             {
@@ -646,6 +748,33 @@ namespace ESM
             {
                 problema = item.Proyecto.Problema;
                 html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #1966D1; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Causa + "</b></td><td></td><td style='width: 5px;'></td>";
+            }
+
+            html_arbol_problemas += "</tr><tr style='height: 20px;'>";
+            for (int i = 0; i < (cant_tds * 2); i++)
+            {
+                if (count_tds == 1)
+                {
+                    html_arbol_problemas += "<td style='border-left: dashed #000 2px;'></td>";
+                    count_tds++;
+                }
+                else if (count_tds == 3)
+                {
+                    html_arbol_problemas += "<td></td>";
+                    count_tds = 0;
+                }
+                else
+                {
+                    html_arbol_problemas += "<td ></td>";
+                    count_tds++;
+                }
+            }
+            html_arbol_problemas += "</tr><tr style='height: 20px;'>";
+
+            foreach (var item in arbolproblemas)
+            {
+                problema = item.Proyecto.Problema;
+                html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #1966D1; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.CausaIndirecta + "</b></td><td></td><td style='width: 5px;'></td>";
             }
 
             html_arbol_problemas += "</tr></table>";
@@ -693,7 +822,33 @@ namespace ESM
                     count_tds++;
                 }
             }
-            html_arbol_objetivos += "</tr><tr><td style='height:100px; text-align:center; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'>" + problema + "</td></tr><tr style='height: 20px;'>";
+
+            html_arbol_objetivos += "</tr><tr>";
+
+            html_arbol_objetivos += "<td style='height:100px; text-align:center; vertical-align: middle; background: #258A0C; color: #fff; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'><b>" + proyecto.Finalidad.ToUpper() + "</b></td>";
+
+            html_arbol_objetivos += "</tr><tr style='height: 20px;'>";
+
+            for (int i = 0; i < (cant_tds * 2); i++)
+            {
+                if (count_tds == 1)
+                {
+                    html_arbol_objetivos += "<td style='border-left: dashed #000 2px;'></td>";
+                    count_tds++;
+                }
+                else if (count_tds == 3)
+                {
+                    html_arbol_objetivos += "<td></td>";
+                    count_tds = 0;
+                }
+                else
+                {
+                    html_arbol_objetivos += "<td ></td>";
+                    count_tds++;
+                }
+            }
+
+            html_arbol_objetivos += "</tr><tr><td style='height:100px; text-align:center; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'>" + proyecto.Proposito.ToUpper() + "</td></tr><tr style='height: 20px;'>";
 
             for (int i = 0; i < (cant_tds * 2); i++)
             {
@@ -720,6 +875,34 @@ namespace ESM
                 problema = item.Proyecto.Problema;
                 html_arbol_objetivos += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #0571AB; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Causa + "</b></td><td></td><td style='width: 5px;'></td>";
             }
+            html_arbol_objetivos += "</tr><tr style='height: 20px;'>";
+            for (int i = 0; i < (cant_tds * 2); i++)
+            {
+                if (count_tds == 1)
+                {
+                    html_arbol_objetivos += "<td style='border-left: dashed #000 2px;'></td>";
+                    count_tds++;
+                }
+                else if (count_tds == 3)
+                {
+                    html_arbol_objetivos += "<td></td>";
+                    count_tds = 0;
+                }
+                else
+                {
+                    html_arbol_objetivos += "<td ></td>";
+                    count_tds++;
+                }
+            }
+
+            html_arbol_objetivos += "</tr><tr>";
+            foreach (var item in arbolobjetivos)
+            {
+                problema = item.Proyecto.Problema;
+                html_arbol_objetivos += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #0571AB; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>En la siguiente página se diligenciaran las actividades para este objetivo.</b></td><td></td><td style='width: 5px;'></td>";
+            }
+
+
 
             html_arbol_objetivos += "</tr></table>";
 

@@ -67,32 +67,37 @@ H3
 {
     color: #055fab;
     margin-left: 10px;
-    font-family: 'Arial Narrow', helvetica;
+    font-family: 'Arial Narrow' , helvetica;
 }
 
-#magazine input[type=text]
+#magazine div input[type="text"]
 {
     margin-top: 15px;
     height: 20px;
-    font-family: 'Arial Narrow',Helvetica;
+    font-family: 'Arial Narrow' ,Helvetica;
     border: 2px solid #D9D9D9;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
-    -moz-box-shadow: inset 0px 0px 1px 2px #e8e8e8;
-    -webkit-box-shadow: inset 0px 0px 1px 2px #e8e8e8;
-    box-shadow: inset 0px 0px 1px 2px #e8e8e8; /*Inner elements should not cover inner shadows*/ /*Chrome renders inset shadows incorrectly with border-radius*/ /*IE 7 AND 8 DO NOT SUPPORT INSET SHADOWS*/
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+}
+#magazine div table tr td input[type="text"]
+{
+    height: 1.5em;
+    margin: 0px;
+    font-family: 'Arial Narrow' ,Helvetica;
+    border: 2px solid #D9D9D9;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    border-radius: 1px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
 }
 textarea
 {
     border: 2px solid #D9D9D9;
-    font-family: 'Arial Narrow',Helvetica;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
-    -moz-box-shadow: inset 0px 0px 3px 2px #e8e8e8;
-    -webkit-box-shadow: inset 0px 0px 3px 2px #e8e8e8;
-    box-shadow: inset 0px 0px 3px 2px #e8e8e8; /*Inner elements should not cover inner shadows*/ /*Chrome renders inset shadows incorrectly with border-radius*/ /*IE 7 AND 8 DO NOT SUPPORT INSET SHADOWS*/
+    font-family: 'Arial Narrow' ,Helvetica;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    
 }
 #basicaproyecto
 {
@@ -102,7 +107,7 @@ textarea
 
 p
 {
-    font-family: 'Arial Narrow',helvetica;
+    font-family: 'Arial Narrow' ,helvetica;
     font-size: 0.9em;
     color: #383838;
     margin-top: 15px;
@@ -112,7 +117,7 @@ p
 
 #magazine ul li
 {
-    font-family: 'Arial Narrow',helvetica;
+    font-family: 'Arial Narrow' ,helvetica;
     font-size: 0.9em;
     color: #383838;
     width: 85%;
@@ -172,7 +177,7 @@ table tr td select
     padding: 5px 15px 5px 15px;
     font-size: 0.9em;
     color: #fff;
-    font-family: 'Arial Narrow', Helvetica;
+    font-family: 'Arial Narrow' , Helvetica;
     cursor: pointer;
     background-color: #7ac24a;
     border: 2px solid #447d0d;
@@ -191,7 +196,7 @@ table tr td select
     width: 300px;
     display: inline;
     color: #fff; /*font-size: 0.9em;*/
-    font-family: 'Arial Narrow', Helvetica;
+    font-family: 'Arial Narrow' , Helvetica;
     cursor: pointer;
     background-color: #004563;
     border: 2px solid #016591;
@@ -212,7 +217,7 @@ table tr td select
     margin-top: 10px;
 }
 
-#nav_page input[type="text"]
+#nav_page div input[type="text"]
 {
     border: 2px solid #016591;
     -moz-border-radius: 2px;
@@ -231,7 +236,7 @@ table tr td select
 {
     font-size: 13px;
 }
-div, body, #subcuerpo h1, table, tr, td, h2, h3, h4, h5, h6, p, a, ul, li, span, #subcuerpo p,input[type="text"], input[type="submit"], input[type="button"]
+div, body, #subcuerpo h1, table, tr, td, h2, h3, h4, h5, h6, p, a, ul, li, span, #subcuerpo p, input[type="text"], input[type="submit"], input[type="button"]
 {
     font-family: 'Arial Narrow' , sans-serif;
 }

@@ -19,12 +19,15 @@
             j("#jqgrid_c_e_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=causas_efectos',
                 datatype: "json",
-                colNames: ['No.', 'Causa', 'Efecto', 'Beneficio'],
+                colNames: ['No.', 'Causa', 'Efecto', 'Beneficio', 'Causa Indirecta', 'Efecto Indirecto', 'Objetivo'],
                 colModel: [
    		                    { name: 'id', index: 'id', width: 55 },
    		                    { name: 'causa', index: 'causa', width: 160, editable: true },
    		                    { name: 'efecto', index: 'efecto', width: 160, editable: true },
-                            { name: 'beneficio', index: 'beneficio', width: 160, editable: true }
+                            { name: 'beneficio', index: 'beneficio', width: 160, editable: true, hidden: true },
+                            { name: 'causaindirecta', index: 'causaindirecta', width: 100, editable: true },
+                            { name: 'efectoindirecto', index: 'efectoindirecto', width: 100, editable: true },
+                            { name: 'objetivo', index: 'objetivo', width: 160, editable: true, hidden: true }
    	            ],
                 rowNum: 10,
                 rowList: [10, 20, 30],
@@ -35,19 +38,54 @@
                 viewrecords: true,
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
-                caption: "Causas Efectos"
+                caption: "CAUSAS -- EFECTOS"
             });
             j("#jqgrid_c_e_t").jqGrid('navGrid', "#jqgrid_c_e_d", { edit: true, add: true, del: false });
             j("#jqgrid_c_e_t").jqGrid('inlineNav', "#jqgrid_c_e_d");
+
+            j("#jqgrid_o_b_t").jqGrid({
+                url: 'ajaxBancoProyectos.aspx?modulo=causas_efectos',
+                datatype: "json",
+                colNames: ['No.', 'Causa', 'Efecto', 'Beneficio', 'Causa Indirecta', 'Efecto Indirecto', 'Objetivo'],
+                colModel: [
+   		                    { name: 'id', index: 'id', width: 55 },
+   		                    { name: 'causa', index: 'causa', width: 160, editable: true, hidden: true },
+   		                    { name: 'efecto', index: 'efecto', width: 160, editable: true, hidden: true },
+                            { name: 'beneficio', index: 'beneficio', width: 160, editable: true },
+                            { name: 'causaindirecta', index: 'causaindirecta', width: 160, editable: false, hidden: true },
+                            { name: 'efectoindirecto', index: 'efectoindirecto', width: 160, editable: false, hidden: true },
+                            { name: 'objetivo', index: 'objetivo', width: 160, editable: true }
+   	            ],
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                pager: '#jqgrid_o_b_d',
+                sortname: 'id',
+                mytype: "POST",
+                postData: { tabla: "c_e", proyecto_id: function () { return j("#ban_proyecto_id").val(); } },
+                viewrecords: true,
+                sortorder: "desc",
+                editurl: "ajaxBancoProyectos.aspx",
+                caption: "OBJETIVOS -- BENEFICIOS"
+            });
+            j("#jqgrid_o_b_t").jqGrid('navGrid', "#jqgrid_o_b_d", { edit: true, add: true, del: false });
+            j("#jqgrid_o_b_t").jqGrid('inlineNav', "#jqgrid_o_b_d");
         });
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div id="jqgrid_c_e_d">
+    <div id="mod_causas_efectos" visible="false" runat="server">
+        <table id="jqgrid_c_e_t">
+        </table>
+        <div id="jqgrid_c_e_d">
+        </div>
     </div>
-    <table id="jqgrid_c_e_t">
-    </table>
+    <div id="mod_objetivos_beneficios" visible="false" runat="server">
+        <table id="jqgrid_o_b_t">
+        </table>
+        <div id="jqgrid_o_b_d">
+        </div>
+    </div>
     <input type="hidden" runat="server" name="ban_proyecto_id" id="ban_proyecto_id" value="" />
     </form>
 </body>
