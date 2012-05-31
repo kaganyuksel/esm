@@ -22,6 +22,24 @@ namespace ESM {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// mod_causas_efectos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mod_causas_efectos;
+        
+        /// <summary>
+        /// mod_objetivos_beneficios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mod_objetivos_beneficios;
+        
+        /// <summary>
         /// ban_proyecto_id control.
         /// </summary>
         /// <remarks>

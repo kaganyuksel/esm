@@ -12,6 +12,12 @@ namespace ESM
         protected void Page_Load(object sender, EventArgs e)
         {
             ban_proyecto_id.Value = Request.QueryString["proyecto_id"].ToString();
+            string modulo = Request.QueryString["mod"];
+
+            if (modulo == "causas")
+                mod_causas_efectos.Visible = true;
+            else if (modulo == "objetivos")
+                mod_objetivos_beneficios.Visible = true;
         }
     }
 }

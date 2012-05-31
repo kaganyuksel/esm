@@ -31,7 +31,7 @@ namespace ESM.Objetos
 
         }
 
-        public bool Add(string efecto, string causa, string beneficio, int idproyecto, string color)
+        public bool Add(string efecto, string causa, string beneficio, int idproyecto, string color, string causaIndirecta, string efectoIndirecto, string objetivo)
         {
             try
             {
@@ -42,6 +42,9 @@ namespace ESM.Objetos
                     Causa = causa,
                     Beneficios = beneficio,
                     Color = color,
+                    Proceso = objetivo,
+                    CausaIndirecta = causaIndirecta,
+                    EfectoIndirecto = efectoIndirecto,
                     Proyecto_id = idproyecto
 
                 };
@@ -53,7 +56,7 @@ namespace ESM.Objetos
             catch (Exception) { return false; }
         }
 
-        public bool Update(int id, string causa = null, string proceso = null, string beneficio = null, string indicador = null)
+        public bool Update(int id, string causa = null, string proceso = null, string beneficio = null, string causaIndirecta = null, string efectoIndirecto = null, string objetivo = null, string indicador = null)
         {
             try
             {
@@ -72,6 +75,15 @@ namespace ESM.Objetos
 
                 if (indicador != null)
                     efecto.Indicador_Resultado = indicador;
+
+                if (causaIndirecta != null)
+                    efecto.CausaIndirecta = causaIndirecta;
+
+                if (efectoIndirecto != null)
+                    efecto.EfectoIndirecto = efectoIndirecto;
+
+                if (objetivo != null)
+                    efecto.Proceso = objetivo;
 
                 _db.SubmitChanges();
 
