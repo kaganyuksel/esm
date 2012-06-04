@@ -239,6 +239,8 @@
         <li><span style="margin-top: 15px; cursor: pointer;" id="next" onclick="if(document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != ' ' && document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != '' && document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != '0' ){j('#magazine').turn('next'); j('#magazine').css('margin-left', 'auto');}">
             <img src="/Icons/next_turn.png" width="24px;" alt="next" /></span></li>
     </ul>
+    <a id="refreshOrganigrama" href="" target="_blank" onclick="window.location = '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val();">
+        Visualizar Organigrama</a>
     <div id='magazine'>
         <div class="page_magazine" id="page1">
             <p style="font-size: 14px; width: 90%; text-align: right;">
@@ -700,8 +702,8 @@
             <section id="org" runat="server">
             </section>
             <br />
-            <a id="refreshOrganigrama" href="" target="_blank" onclick="window.location = '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val();">
-                Visualizar Organigrama</a>
+            <%--<a id="refreshOrganigrama" href="" target="_blank" onclick="window.location = '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val();">
+                Visualizar Organigrama</a>--%>
             <br />
             <iframe id="if_c_e" runat="server" src="" width="100%" height="500px"></iframe>
         </div>
@@ -725,7 +727,6 @@
             <br />
             <a href="/Icons/arbolobjetivos.png" style="width: 100%; margin: 0 auto;">
                 <img style="margin: 0 auto;" src="/Icons/arbolobjetivos.png" alt="arbolobjetivos" /></a>
-
         </div>
         <div class="page_magazine" id="page9">
             <p style="font-size: 14px; width: 90%; text-align: right;">
@@ -738,8 +739,8 @@
             <br />
             <a href="" target="_blank" onclick="window.location = '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val();">
                 Visualizar Organigrama</a>
-
-            <iframe id="if_objetivos_causas" runat="server" src="" width="100%" height="600px"></iframe>
+            <iframe id="if_objetivos_causas" runat="server" src="" width="100%" height="600px">
+            </iframe>
         </div>
         <div class="page_magazine" id="page10">
             <p style="font-size: 14px; width: 90%; text-align: right;">
