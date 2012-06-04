@@ -258,7 +258,7 @@ namespace ESM
                 foreach (var item in arbolproblemas)
                 {
                     problema = item.Proyecto.Problema;
-                    html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #D1AC19; color: #000; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Efecto + "</b></td><td></td><td style='width: 5px;'></td>";
+                    html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #FFC400; color: #000; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Efecto + "</b></td><td></td><td style='width: 5px;'></td>";
                 }
                 html_arbol_problemas += "</tr><tr style='height: 20px;'>";
 
@@ -280,7 +280,7 @@ namespace ESM
                         count_tds++;
                     }
                 }
-                html_arbol_problemas += "</tr><tr><td style='height:100px; text-align:center; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'>" + problema.ToUpper() + "</td></tr><tr style='height: 20px;'>";
+                html_arbol_problemas += "</tr><tr><td style='height:100px; text-align:center; background: #0f6db3; color: #fff; vertical-align: middle; border: dashed #000 2px;' colspan='" + colspan_proyecto.ToString() + "'><b>" + problema.ToUpper() + "</b></td></tr><tr style='height: 20px;'>";
 
                 for (int i = 0; i < (cant_tds * 2); i++)
                 {
@@ -332,7 +332,7 @@ namespace ESM
                 foreach (var item in arbolproblemas)
                 {
                     problema = item.Proyecto.Problema;
-                    html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #1966D1; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.CausaIndirecta + "</b></td><td></td><td style='width: 5px;'></td>";
+                    html_arbol_problemas += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #941515; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.CausaIndirecta + "</b></td><td></td><td style='width: 5px;'></td>";
                 }
 
                 html_arbol_problemas += "</tr></table>";
