@@ -97,7 +97,6 @@ textarea
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
-    
 }
 #basicaproyecto
 {
@@ -161,7 +160,9 @@ p
 }
 table tr td select
 {
-    max-width: 200px;
+    min-width: 40%;
+    max-width: 40%;
+    
 }
 
 #addfile
@@ -191,6 +192,21 @@ table tr td select
     border: none;
 }
 #div_ir
+{
+    height: 40px;
+    width: 300px;
+    display: inline;
+    color: #fff; /*font-size: 0.9em;*/
+    font-family: 'Arial Narrow' , Helvetica;
+    cursor: pointer;
+    background-color: #004563;
+    border: 2px solid #016591;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    vertical-align: middle;
+    border-radius: 3px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+}
+#ContentPlaceHolder1_proyecto_header
 {
     height: 40px;
     width: 300px;

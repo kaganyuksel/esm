@@ -591,9 +591,9 @@
       <Association Name="Proyecto_Proyectos_Supuesto" Member="Proyectos_Supuestos" ThisKey="Id" OtherKey="Proyecto_supuesto_id" Type="Proyectos_Supuesto" />
       <Association Name="Proyecto_Fuentes_Financiacion" Member="Fuentes_Financiacions" ThisKey="Id" OtherKey="proyecto_id" Type="Fuentes_Financiacion" />
       <Association Name="Proyecto_Matriz_Actore" Member="Matriz_Actores" ThisKey="Id" OtherKey="proyecto_id" Type="Matriz_Actore" />
-      <Association Name="Proyecto_Registro_Proyecto" Member="Registro_Proyectos" ThisKey="Id" OtherKey="proyecto_id" Type="Registro_Proyecto" />
       <Association Name="Proyecto_Documentos_Proyecto" Member="Documentos_Proyectos" ThisKey="Id" OtherKey="proyectoid" Type="Documentos_Proyecto" />
       <Association Name="Proyecto_Causas_Efecto" Member="Causas_Efectos" ThisKey="Id" OtherKey="Proyecto_id" Type="Causas_Efecto" />
+      <Association Name="Proyecto_Registro_Proyecto" Member="Registro_Proyectos" ThisKey="Id" OtherKey="proyecto_id" Type="Registro_Proyecto" />
     </Type>
   </Table>
   <Table Name="dbo.Proyectos_Medios" Member="Proyectos_Medios">
@@ -924,21 +924,6 @@
       <Association Name="Causas_Efecto_Subproceso" Member="Causas_Efecto" ThisKey="Proceso_id" OtherKey="Id" Type="Causas_Efecto" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Registro_Proyectos" Member="Registro_Proyectos">
-    <Type Name="Registro_Proyecto">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Dependencia" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Cargo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Mpp_1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Mpp_2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Mpp_3" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Justificacion" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="proyecto_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="responsable" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Association Name="Proyecto_Registro_Proyecto" Member="Proyecto" ThisKey="proyecto_id" OtherKey="Id" Type="Proyecto" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Actividades" Member="Actividades">
     <Type Name="Actividade">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -1003,6 +988,21 @@
       <Column Name="EfectoIndirecto" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
       <Association Name="Causas_Efecto_Subproceso" Member="Subprocesos" ThisKey="Id" OtherKey="Proceso_id" Type="Subproceso" />
       <Association Name="Proyecto_Causas_Efecto" Member="Proyecto" ThisKey="Proyecto_id" OtherKey="Id" Type="Proyecto" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Registro_Proyectos" Member="Registro_Proyectos">
+    <Type Name="Registro_Proyecto">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Dependencia" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Cargo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Mpp_1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Mpp_2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Mpp_3" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Justificacion" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="proyecto_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="responsable" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="Proyecto_Registro_Proyecto" Member="Proyecto" ThisKey="proyecto_id" OtherKey="Id" Type="Proyecto" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

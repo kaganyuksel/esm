@@ -17,21 +17,22 @@
         var jqgrid_subproceso_id = 0;
         j(document).ready(function () {
 
-            setInterval("j('#fecha, #fechainicial, #fechafinal').datepicker({dateFormat: 'dd/mm/yy'}); j('#htmlprocesos').val(j('#gbox_jqgrid_subp_t').html()); j('#htmlprocesos').val(j('#htmlprocesos').val().replace(/</g, '1')); j('#htmlprocesos').val(j('#htmlprocesos').val().replace(/>/g, '2'));", 1000);
-
-            j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); window.parent.refreshMarcoLogico(); } });
+            setInterval("j('#fecha').datepicker({dateFormat: 'dd/mm/yy', minDate: j('#min_fecha_actividades').val()});", 1000);
+            //j('#fechainicial, #fechafinal').datepicker({dateFormat: 'dd/mm/yy', minDate: j('#min_fecha_indicadores').val() });
+            var interval = null;
+            j.extend(j.jgrid.edit, { width: "600", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); window.parent.refreshMarcoLogico(); } });
 
             j("#jqgrid_subp_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=subprocesos',
                 datatype: "json",
-                colNames: ['No.', 'Proceso', 'Subproceso', 'Indicador', 'Medios', 'Supuestos'],
+                colNames: ['No.', 'Proceso/Objetivo', 'Subproceso', 'Indicador', 'Medios', 'Supuestos'],
                 colModel: [
    		                    { name: 'id', index: 'id', width: 30 },
    		                    { name: 'proceso', index: 'proceso', width: 90, editable: true, edittype: "select", editoptions: { value: j("#col_procesos").val()} },
-                            { name: 'subproceso', index: 'subproceso', width: 90, editable: true },
-   		                    { name: 'indicador', index: 'indicador', width: 90, editable: true },
-                            { name: 'medios', index: 'medios', width: 90, editable: true },
-                            { name: 'supuestos', index: 'supuestos', width: 90, editable: true }
+                            { name: 'subproceso', index: 'subproceso', edittype: "textarea", width: 90, editable: true },
+   		                    { name: 'indicador', index: 'indicador', edittype: "textarea", width: 90, editable: true },
+                            { name: 'medios', index: 'medios', width: 90, edittype: "textarea", editable: true },
+                            { name: 'supuestos', index: 'supuestos', width: 90, edittype: "textarea", editable: true }
    	            ],
                 rowNum: 10,
                 rowList: [10, 20, 30],
@@ -49,12 +50,12 @@
 
                     jqgrid_actividades_url = 'ajaxBancoProyectos.aspx?modulo=actividades&subproceso_id=' + jqgrid_subproceso_id;
 
-                    j("#group_subprocesos").html(json_subproceso_select.subproceso)
+                    j("#group_subprocesos").html("<b>" + json_subproceso_select.subproceso.toUpperCase() + "</b>")
 
                     var columns_actgrid = [
    		                    { name: 'id', index: 'id', width: 30 },
    		                    { name: 'subproceso', index: 'subproceso', width: 100, editable: true, edittype: "select", editoptions: { value: json_subproceso_select.id.toString() + ' : ' + json_subproceso_select.subproceso.toString()} },
-                            { name: 'actividad', index: 'actividad', width: 100, editable: true },
+                            { name: 'actividad', index: 'actividad', width: 100, editable: true, edittype: "textarea" },
    		                    { name: 'fecha', index: 'fecha', width: 150, editable: true },
                             { name: 'presupuesto', index: 'presupuesto', width: 100, editable: true, formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: " ", decimalPlaces: 2, defaultValue: '0'} }
    	                    ];
@@ -75,7 +76,7 @@
                 colModel: [
    		                    { name: 'id', index: 'id', width: 30 },
    		                    { name: 'subproceso', index: 'subproceso', width: 100, editable: true, edittype: "select", editoptions: { value: j("#col_sub_procesos").val()} },
-                            { name: 'actividad', index: 'actividad', width: 100, editable: true },
+                            { name: 'actividad', index: 'actividad', width: 100, editable: true, edittype: "textarea" },
    		                    { name: 'fecha', index: 'fecha', width: 150, editable: true },
                             { name: 'presupuesto', index: 'presupuesto', width: 100, editable: true, formatter: 'number', formatoptions: { decimalSeparator: ".", thousandsSeparator: " ", decimalPlaces: 2, defaultValue: '0'} }
    	            ],
@@ -89,7 +90,7 @@
 
                     jqgrid_actividades_url = 'ajaxBancoProyectos.aspx?modulo=indicador&actividad_id=' + jqgrid_actividad_id;
 
-                    j("#group_actividades").html(json_actividad_select.actividad)
+                    j("#group_actividades").html("<b>" + json_actividad_select.actividad.toUpperCase() + "</b>")
 
                     j("#jqgrid_m_t").setGridParam({ url: jqgrid_actividades_url });
 
@@ -99,15 +100,22 @@
                             { name: 'verbo', index: 'verbo', width: 50, editable: true, edittype: "select", editoptions: { value: j("#ban_options_verbos").val()} },
                             { name: 'meta', index: 'meta', width: 50, editable: true },
                             { name: 'unidad', index: 'unidad', width: 50, editable: true, edittype: "select", editoptions: { value: j("#ban_options_unidades").val()} },
-                            { name: 'descripcion', index: 'descripcion', width: 50, editable: true },
+                            { name: 'descripcion', index: 'descripcion', width: 50, edittype: "textarea", editable: true },
                             { name: 'ssp', index: 'ssp', width: 50, editable: true, edittype: "checkbox", editoptions: { value: "Si:No"} },
                             { name: 'fechainicial', index: 'fechainicial', width: 50, editable: true },
                             { name: 'fechafinal', index: 'fechafinal', width: 50, editable: true },
-                            { name: 'indicador', index: 'indicador', width: 60, editable: false },
-   		                    { name: 'medios', index: 'medios', width: 60, editable: true },
-                            { name: 'supuestos', index: 'supuestos', width: 60, editable: true },
+                            { name: 'indicador', index: 'indicador', width: 60, edittype: "textarea", editable: false },
+   		                    { name: 'medios', index: 'medios', width: 60, edittype: "textarea", editable: true },
+                            { name: 'supuestos', index: 'supuestos', width: 60, edittype: "textarea", editable: true },
                             { name: 'tiporedaccion', index: 'tiporedaccion', hidden: true, width: 0, editable: true, edittype: "select", hidden: false, editoptions: { value: "entre:Entre;hasta:Hasta"} }
    	                ];
+
+                    j('#min_fecha_indicadores').val(json_actividad_select.fecha);
+                    j('#fechainicial, #fechafinal').datepicker({ dateFormat: 'dd/mm/yy' });
+
+                    clearInterval(interval);
+
+                    interval = setInterval("j('#fechainicial, #fechafinal').datepicker('destroy'); j('#fechainicial, #fechafinal').datepicker({dateFormat: 'dd/mm/yy', minDate: j('#min_fecha_indicadores').val() });", 1000);
 
                     j('#jqgrid_m_t').setGridParam({ colModel: colums_indicgrid });
 
@@ -134,13 +142,13 @@
                             { name: 'verbo', index: 'verbo', width: 50, editable: true, edittype: "select", editoptions: { value: j("#ban_options_verbos").val()} },
                             { name: 'meta', index: 'meta', width: 50, editable: true },
                             { name: 'unidad', index: 'unidad', width: 50, editable: true, edittype: "select", editoptions: { value: j("#ban_options_unidades").val()} },
-                            { name: 'descripcion', index: 'descripcion', width: 50, editable: true },
+                            { name: 'descripcion', index: 'descripcion', width: 50, edittype: "textarea", editable: true },
                             { name: 'ssp', index: 'ssp', width: 50, editable: true, edittype: "checkbox", editoptions: { value: "Si:No"} },
                             { name: 'fechainicial', index: 'fechainicial', width: 50, editable: true },
                             { name: 'fechafinal', index: 'fechafinal', width: 50, editable: true },
-                            { name: 'indicador', index: 'indicador', width: 60, editable: false },
-   		                    { name: 'medios', index: 'medios', width: 60, editable: true },
-                            { name: 'supuestos', index: 'supuestos', width: 60, editable: true },
+                            { name: 'indicador', index: 'indicador', width: 60, edittype: "textarea", editable: false },
+   		                    { name: 'medios', index: 'medios', width: 60, edittype: "textarea", editable: true },
+                            { name: 'supuestos', index: 'supuestos', width: 60, edittype: "textarea", editable: true },
                             { name: 'tiporedaccion', index: 'tiporedaccion', hidden: true, width: 0, editable: true, edittype: "select", hidden: false, editoptions: { value: "entre:Entre;hasta:Hasta"} }
    	            ],
                 rowNum: 10,
@@ -198,6 +206,12 @@
     <input type="hidden" name="options_unidades" value="" runat="server" id="ban_options_unidades" />
     <input type="hidden" runat="server" name="htmlprocesos" id="htmlprocesos" value="" />
     <input type="hidden" name="marcologicoselect_id" value="" id="marcologicoselect_id" />
+    <input type="hidden" name="min_fecha_indicadores" id="min_fecha_indicadores" runat="server"
+        value="01/01/2012" />
+    <input type="hidden" name="max_fecha_indicadores" id="max_fecha_indicadores" runat="server"
+        value="08/06/2012" />
+    <input type="hidden" name="min_fecha_actividades" id="min_fecha_actividades" runat="server"
+        value="" />
     </form>
 </body>
 </html>

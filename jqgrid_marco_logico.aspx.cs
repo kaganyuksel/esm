@@ -17,6 +17,13 @@ namespace ESM
 
             if (ban_proyecto_id.Value != "0" && ban_proyecto_id.Value != "")
             {
+
+                var proyecto_info = (from p in new ESM.Model.ESMBDDataContext().Proyectos
+                                     where p.Id == Convert.ToInt32(ban_proyecto_id.Value)
+                                     select p).Single();
+
+                min_fecha_actividades.Value = Convert.ToDateTime(proyecto_info.Registro_Proyectos.Single().Fecha).ToString("dd/MM/yy");
+
                 Objetos.CEfectos objCEfectos = new Objetos.CEfectos();
 
                 var colprocesos = objCEfectos.getCausas_Efectos(Convert.ToInt32(ban_proyecto_id.Value));
@@ -25,7 +32,7 @@ namespace ESM
 
                 foreach (var item in colprocesos)
                 {
-                    options = options + item.Id + ":" + item.Causa + ";";
+                    options = options + item.Id + ":" + item.Proceso + ";";
                 }
 
                 options = options.Trim(';');

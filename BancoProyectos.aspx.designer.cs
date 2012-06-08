@@ -31,6 +31,15 @@ namespace ESM {
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden ban_files;
         
         /// <summary>
+        /// post_back control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden post_back;
+        
+        /// <summary>
         /// htmlc_s control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden htmlc_s;
+        
+        /// <summary>
+        /// proyecto_header control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl proyecto_header;
         
         /// <summary>
         /// titulo_proyecto control.
@@ -193,6 +211,15 @@ namespace ESM {
         protected global::System.Web.UI.HtmlControls.HtmlTextArea txtjustificacion;
         
         /// <summary>
+        /// fuentesfinanciacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fuentesfinanciacion;
+        
+        /// <summary>
         /// btnalmacenarregistro control.
         /// </summary>
         /// <remarks>
@@ -254,15 +281,6 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl if_marco_logico;
-        
-        /// <summary>
-        /// if_ejecucion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl if_ejecucion;
         
         /// <summary>
         /// planoperativo control.

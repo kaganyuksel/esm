@@ -47,6 +47,23 @@
 
         j(document).ready(function () {
 
+            j(this).scroll(function () {
+
+                var distancia = window.scrollY
+                if (distancia >= 110) {
+                    j("#nav_page").css("top", "0px");
+                    j("#nav_page").css("position", "fixed");
+                    j("#nav_page").css("margin-left", "35%");
+                    j("#nav_page").css("z-index", "5000");
+                }
+                else if (distancia <= 110) {
+                    j("#nav_page").css("top", "");
+                    j("#nav_page").css("position", "");
+                    j("#nav_page").css("margin-left", "");
+                    j("#nav_page").css("z-index", "");
+                }
+            });
+
             obj_file = document.getElementById('ContentPlaceHolder1_files');
             obj_file.addEventListener('change', addlist, false);
 
@@ -71,6 +88,11 @@
             });
 
             j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); } });
+
+            if (j("#ContentPlaceHolder1_post_back").val() == "1") {
+                j("#magazine").turn('next');
+                j("#ContentPlaceHolder1_post_back").val("");
+            }
 
             j("#jqgrid_table").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=fuentes_financiacion',
@@ -139,13 +161,24 @@
             setTimeout('tooltip();', 5000);
 
 
-            if (document.getElementById("ContentPlaceHolder1_ban_files").value != " ") {
+            if (document.getElementById("ContentPlaceHolder1_ban_files").value == "1") {
                 j("#magazine").css("margin-left", "auto");
                 j("#magazine").turn("page", 16);
 
                 document.getElementById("ContentPlaceHolder1_ban_files").value = " ";
             }
-
+            else if (document.getElementById("ContentPlaceHolder1_ban_files").value == "2") {
+                j("#magazine").css("margin-left", "auto");
+                j("#magazine").turn("page", 16);
+                alert("Para cargar un archivo se debe tener en cuenta que el tamaño sea menor o igual a 5MB");
+                document.getElementById("ContentPlaceHolder1_ban_files").value = " ";
+            }
+            else if (document.getElementById("ContentPlaceHolder1_ban_files").value == "2") {
+                j("#magazine").css("margin-left", "auto");
+                j("#magazine").turn("page", 16);
+                alert("Error al cargar el archivo seleccionado.");
+                document.getElementById("ContentPlaceHolder1_ban_files").value = " ";
+            }
             if (j("#ContentPlaceHolder1_ban_proyecto_id").val() != " " && j("#ContentPlaceHolder1_ban_proyecto_id").val() != "0") {
                 setInterval("UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val(), true);", 3000);
             }
@@ -188,8 +221,6 @@
                 url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolproblemas=true",
                 async: false,
                 success: function (result) {
-                    console.log(result);
-
                     j("#ContentPlaceHolder1_org").html("");
 
                     j("#ContentPlaceHolder1_org").html(result);
@@ -204,7 +235,6 @@
                 url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolobjetivos=true",
                 async: false,
                 success: function (result) {
-                    console.log(result);
 
                     j("#ContentPlaceHolder1_org_objetivos").html("");
 
@@ -215,21 +245,24 @@
                     alert("Error " + result.status + ' ' + result.statusText);
                 }
             });
-
-            tooltip();
-
+            j('#refreshOrganigrama').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&problemas=true');
+            j('#refreshOrganigrama_obj').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&objetivos=true');
+            j('#planaccion').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&planaccion=true');
         }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <input type="hidden" name="proyecto_id" value=" " id="ban_proyecto_id" runat="server" />
     <input type="hidden" name="ban_files" value=" " id="ban_files" runat="server" />
+    <input type="hidden" name="post_back" value=" " id="post_back" runat="server" />
     <input type="hidden" name="ban_files" value=" " id="htmlc_s" runat="server" />
     <ul id="nav_page" style="text-align: center;">
         <li><span style="margin-top: 15px; cursor: pointer;" onclick="j('#magazine').turn('previous'); if(parseInt(j('#magazine').turn('page'))==1){j('#magazine').css('margin-left', '-20%');}"
             id="back">
             <img width="24px" src="/Icons/back_turn.png" alt="previous" /></span></li>
         <li>
+            <div id="proyecto_header" runat="server">
+            </div>
             <div id="div_ir">
                 Navegar a la página:
                 <input type="text" form="ir" style="width: 20px; height: 10px;" name="pagenumber"
@@ -239,12 +272,10 @@
         <li><span style="margin-top: 15px; cursor: pointer;" id="next" onclick="if(document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != ' ' && document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != '' && document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != '0' ){j('#magazine').turn('next'); j('#magazine').css('margin-left', 'auto');}">
             <img src="/Icons/next_turn.png" width="24px;" alt="next" /></span></li>
     </ul>
-    <a id="refreshOrganigrama" href="" target="_blank" onclick="window.location = '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val();">
-        Visualizar Organigrama</a>
     <div id='magazine'>
         <div class="page_magazine" id="page1">
             <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 1 de 13</p>
+                Página 1 de 17</p>
             <img src="/Icons/ProsperidadTodosFooter.png" width="150px" style="position: absolute;
                 margin-top: 50px; left: 30px;" alt="Alternate Text" />
             <img src="/Icons/MENHeader.png" width="150px" style="position: absolute; right: 30px;
@@ -284,7 +315,7 @@
         </div>
         <div class="page_magazine" id="basicaproyecto">
             <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 2 de 13</p>
+                Página 2 de 17</p>
             <h1>
                 INFORMACIÓN BASICA DEL PROYECTO</h1>
             <br />
@@ -386,6 +417,10 @@
                 </li>
             </ul>
             <br />
+            <h3>
+                Visualización para Fuentes de Financiación</h3>
+            <div id="fuentesfinanciacion" runat="server" style="height: 300px; width: 100%; overflow-y: scroll;">
+            </div>
             <h3 style="color: #005EA7; width: 80%;">
                 * Fuentes de Financiación</h3>
             <br />
@@ -399,7 +434,7 @@
         </div>
         <div class="page_magazine" id="page3">
             <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 3 de 13</p>
+                Página 3 de 17</p>
             <div id="accordion">
                 <h3>
                     <a href="#">Introducción</a></h3>
@@ -522,7 +557,7 @@
         </div>
         <div class="page_magazine" id="page4">
             <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 4 de 13</p>
+                Página 4 de 17</p>
             <h1>
                 IDENTIFICACIÓN</h1>
             <p>
@@ -608,7 +643,7 @@
         </div>
         <div class="page_magazine" id="page5">
             <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 5 de 13</p>
+                Página 5 de 17</p>
             <h1>
                 IDENTIFICACIÓN</h1>
             <h3>
@@ -621,7 +656,7 @@
         </div>
         <div class="page_magazine" id="page6">
             <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 6 de 13</p>
+                Página 6 de 17</p>
             <h1>
                 DISEÑO Y FORMULACIÓN</h1>
             <p>
@@ -692,24 +727,23 @@
         </div>
         <div class="page_magazine" id="page7">
             <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 7 de 13</p>
+                Página 7 de 17</p>
             <h1>
                 DISEÑO Y FORMULACIÓN</h1>
             <h1>
                 ARBOL DE PROBLEMAS</h1>
             <br />
             <br />
-            <section id="org" runat="server">
+            <section id="org" runat="server" style="overflow-x: scroll;">
             </section>
             <br />
-            <%--<a id="refreshOrganigrama" href="" target="_blank" onclick="window.location = '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val();">
-                Visualizar Organigrama</a>--%>
+            <a id="refreshOrganigrama" href="" target="_blank">Visualizar Pantalla Completa</a>
             <br />
-            <iframe id="if_c_e" runat="server" src="" width="100%" height="500px"></iframe>
+            <iframe id="if_c_e" runat="server" src="" width="100%" height="900px"></iframe>
         </div>
         <div class="page_magazine" id="page8">
             <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 8 de 13</p>
+                Página 8 de 17</p>
             <h1>
                 ANÁLISIS DE OBJETIVOS</h1>
             <p>
@@ -730,21 +764,20 @@
         </div>
         <div class="page_magazine" id="page9">
             <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 9 de 13</p>
+                Página 9 de 17</p>
             <h1>
                 ANÁLISIS DE OBJETIVOS
             </h1>
-            <section id="org_objetivos" runat="server">
+            <section id="org_objetivos" runat="server" style="overflow-x: scroll;">
             </section>
             <br />
-            <a href="" target="_blank" onclick="window.location = '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val();">
-                Visualizar Organigrama</a>
-            <iframe id="if_objetivos_causas" runat="server" src="" width="100%" height="600px">
+            <a id="refreshOrganigrama_obj" href="" target="_blank">Visualizar Pantalla Completa</a>
+            <iframe id="if_objetivos_causas" runat="server" src="" width="100%" height="900px">
             </iframe>
         </div>
         <div class="page_magazine" id="page10">
             <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 10 de 13</p>
+                Página 10 de 17</p>
             <h1>
                 <a name="_Toc315687137" id="_Toc315687137">DISEÑO Y FORMULACIÓN</a></h1>
             <div>
@@ -851,149 +884,47 @@
         </div>
         <div class="page_magazine" id="page11">
             <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 11 de 13</p>
+                Página 12 de 17</p>
             <h1>
                 DISEÑO Y FORMULACIÓN
             </h1>
             <iframe id="if_marco_logico" runat="server" width="100%" height="1500px"></iframe>
         </div>
-        <div class="page_magazine" id="page12">
-            <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 12 de 13</p>
-            <h1>
-                <a name="_Toc315687137" id="A1">DISEÑO Y FORMULACIÓN</a></h1>
-            <div>
-                <h3>
-                    El Enfoque de Marco lógico (MATRIZ DE MARCO LÓGICO)</h3>
-            </div>
-            <p>
-                La matriz de marco lógico es el procedimiento para la organización y visualización
-                del proyecto facilitando la articulación de forma sistemática y lógica de los objetivos
-                y resultados del mismo. De su estructuración se desprende el seguimiento y evaluación
-                del proyecto. En términos prácticos supone que la inversión de determinados <strong>
-                    recursos</strong> soportan la realización de <strong>actividades</strong> que
-                permiten a su vez obtener determinaos <strong>productos</strong> que facilitan el
-                logro de un propósito y el fin.
-            </p>
-            <br />
-            <h3>
-                Estructura marco lógico</h3>
-            <p>
-                El marco lógico se representa en una matriz (tabla) 4 X 4. Cuatro columnas por cuatro
-                filas. Las columnas incluyen la siguiente información:</p>
-            <br />
-            <h3>
-                Matriz (cuatro x cuatro) Tabla 02</h3>
-            <br />
-            <table class="table_class" border="1" cellspacing="0" cellpadding="0">
-                <tr>
-                    <td width="144" valign="top">
-                        <p>
-                            FIN</p>
-                    </td>
-                    <td width="144" valign="top">
-                        <p>
-                            INDICADOR</p>
-                    </td>
-                    <td width="144" valign="top">
-                        <p>
-                            MEDIO DE VERIFICACIÓN</p>
-                    </td>
-                    <td width="144" valign="top">
-                        <p>
-                            SUPUESTOS</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="144" valign="top">
-                        <p>
-                            PROPÓSITO (PROCESO)</p>
-                    </td>
-                    <td width="144" valign="top">
-                        <p>
-                            &nbsp;</p>
-                    </td>
-                    <td width="144" valign="top">
-                        <p>
-                            &nbsp;</p>
-                    </td>
-                    <td width="144" valign="top">
-                        <p>
-                            &nbsp;</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="144" valign="top">
-                        <p>
-                            COMPONENTES (SUBPROCESO)</p>
-                    </td>
-                    <td width="144" valign="top">
-                        <p>
-                            &nbsp;</p>
-                    </td>
-                    <td width="144" valign="top">
-                        <p>
-                            &nbsp;</p>
-                    </td>
-                    <td width="144" valign="top">
-                        <p>
-                            &nbsp;</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="144" valign="top">
-                        <p>
-                            ACTIVIDADES</p>
-                    </td>
-                    <td width="144" valign="top">
-                        <p>
-                            &nbsp;</p>
-                    </td>
-                    <td width="144" valign="top">
-                        <p>
-                            &nbsp;</p>
-                    </td>
-                    <td width="144" valign="top">
-                        <p>
-                            &nbsp;</p>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="page_magazine" id="page13">
-            <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 13 de 13</p>
-            <h1>
-                VISUALIZACIÓN PARA EL MARCO LÓGICO
-            </h1>
-            <iframe id="if_ejecucion" runat="server" width="100%" height="1500px"></iframe>
+        <div>
         </div>
         <div>
             <p style="font-size: 14px; width: 90%; text-align: right;">
-                Página 13 de 13</p>
+                Página 13 de 17</p>
             <h1>
-                PLAN OPERATIVO
+                PLAN ACCIÓN
             </h1>
+            <a id="planaccion" target="_blank" href="">Visualizar en pantalla completa</a>
             <div id="planoperativo" runat="server">
             </div>
         </div>
         <div>
-        </div>
-        <div>
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 14 de 17</p>
             <h1>
                 EJECUCIÓN</h1>
         </div>
         <div>
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 15 de 17</p>
             <h1>
                 EJECUCIÓN</h1>
             <iframe id="if_valores_indicadores" runat="server" src="" width="800px" height="1000">
             </iframe>
         </div>
         <div>
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 16 de 17</p>
             <h1>
                 Directorio de proyecto</h1>
         </div>
         <div>
+            <p style="font-size: 14px; width: 90%; text-align: right;">
+                Página 17 de 17</p>
             <h1>
                 Directorio de proyecto</h1>
             <br />

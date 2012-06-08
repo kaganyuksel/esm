@@ -217,9 +217,9 @@ namespace ESM
         {
             try
             {
-                var arbolproblemas = (from p in new Model.ESMBDDataContext().Causas_Efectos
-                                      where p.Proyecto_id == proyecto_id
-                                      select p).Take(3);
+                var arbolproblemas = from p in new Model.ESMBDDataContext().Causas_Efectos
+                                     where p.Proyecto_id == proyecto_id
+                                     select p;
 
                 var proyecto = (from p in new Model.ESMBDDataContext().Proyectos
                                 where p.Id == proyecto_id
@@ -347,9 +347,9 @@ namespace ESM
         {
             try
             {
-                var arbolobjetivos = (from p in new Model.ESMBDDataContext().Causas_Efectos
-                                      where p.Proyecto_id == proyecto_id
-                                      select p).Take(3);
+                var arbolobjetivos = from p in new Model.ESMBDDataContext().Causas_Efectos
+                                     where p.Proyecto_id == proyecto_id
+                                     select p;
 
                 var proyecto = (from p in new Model.ESMBDDataContext().Proyectos
                                 where p.Id == proyecto_id
@@ -435,7 +435,7 @@ namespace ESM
                 foreach (var item in arbolobjetivos)
                 {
                     problema = item.Proyecto.Problema;
-                    html_arbol_objetivos += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #0571AB; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Causa + "</b></td><td></td><td style='width: 5px;'></td>";
+                    html_arbol_objetivos += "<td style='border: solid 2px #000; width: 80px; height: 80px; background: #0571AB; color: #fff; text-align: center; vertical-align: middle;' colspan='2'><b>" + item.Proceso + "</b></td><td></td><td style='width: 5px;'></td>";
                 }
                 html_arbol_objetivos += "</tr><tr style='height: 20px;'>";
                 for (int i = 0; i < (cant_tds * 2); i++)
@@ -1114,8 +1114,12 @@ namespace ESM
                            where p.Proyecto_id == proyecto_id
                            select p;
 
+            var proyecto_info = (from py in db.Proyectos
+                                 where py.Id == proyecto_id
+                                 select py).Single();
+
             string html = "<table border='1' cellspacing='0' style='border: 1px solid #000;'><caption>Marco Lógico</caption>";
-            html += "<tr><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'>INDICADOR</td><td style='border: 1px solid #000;'>MEDIOS DE VERIFICACIÓN</td><td style='border: 1px solid #000;'>SUPUESTOS</td></tr>";
+            html += "<tr><td style='border: 1px solid #000;'>" + proyecto_info.Finalidad + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'>INDICADOR</td><td style='border: 1px solid #000;'>MEDIOS DE VERIFICACIÓN</td><td style='border: 1px solid #000;'>SUPUESTOS</td></tr>";
             int color = 0;
             string color_cadena = "D6D6D6";
             foreach (var procesos_item in procesos)

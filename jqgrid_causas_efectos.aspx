@@ -14,7 +14,7 @@
     <script type="text/javascript">
         var j = jQuery.noConflict();
         j(document).ready(function () {
-            j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); } });
+            j.extend(j.jgrid.edit, { width: "600", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); } });
 
             j("#jqgrid_c_e_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=causas_efectos',
@@ -22,12 +22,12 @@
                 colNames: ['No.', 'Causa', 'Efecto', 'Beneficio', 'Causa Indirecta', 'Efecto Indirecto', 'Objetivo'],
                 colModel: [
    		                    { name: 'id', index: 'id', width: 55 },
-   		                    { name: 'causa', index: 'causa', width: 160, editable: true },
-   		                    { name: 'efecto', index: 'efecto', width: 160, editable: true },
-                            { name: 'beneficio', index: 'beneficio', width: 160, editable: true, hidden: true },
-                            { name: 'causaindirecta', index: 'causaindirecta', width: 100, editable: true },
-                            { name: 'efectoindirecto', index: 'efectoindirecto', width: 100, editable: true },
-                            { name: 'objetivo', index: 'objetivo', width: 160, editable: true, hidden: true }
+   		                    { name: 'causa', index: 'causa', edittype: "textarea", width: 160, editable: true },
+   		                    { name: 'efecto', index: 'efecto', edittype: "textarea", width: 160, editable: true },
+                            { name: 'beneficio', index: 'beneficio', edittype: "textarea", width: 160, editable: true, hidden: true },
+                            { name: 'causaindirecta', index: 'causaindirecta', edittype: "textarea", width: 100, editable: true },
+                            { name: 'efectoindirecto', index: 'efectoindirecto', edittype: "textarea", width: 100, editable: true },
+                            { name: 'objetivo', index: 'objetivo', width: 160, edittype: "textarea", editable: true, hidden: true }
    	            ],
                 rowNum: 10,
                 rowList: [10, 20, 30],
@@ -49,12 +49,12 @@
                 colNames: ['No.', 'Causa', 'Efecto', 'Beneficio', 'Causa Indirecta', 'Efecto Indirecto', 'Objetivo'],
                 colModel: [
    		                    { name: 'id', index: 'id', width: 55 },
-   		                    { name: 'causa', index: 'causa', width: 160, editable: true, hidden: true },
-   		                    { name: 'efecto', index: 'efecto', width: 160, editable: true, hidden: true },
-                            { name: 'beneficio', index: 'beneficio', width: 160, editable: true },
-                            { name: 'causaindirecta', index: 'causaindirecta', width: 160, editable: false, hidden: true },
-                            { name: 'efectoindirecto', index: 'efectoindirecto', width: 160, editable: false, hidden: true },
-                            { name: 'objetivo', index: 'objetivo', width: 160, editable: true }
+   		                    { name: 'causa', index: 'causa', width: 160, edittype: "textarea", editable: false },
+   		                    { name: 'efecto', index: 'efecto', width: 160, edittype: "textarea", editable: false },
+                            { name: 'beneficio', index: 'beneficio', width: 160, edittype: "textarea", editable: true },
+                            { name: 'causaindirecta', index: 'causaindirecta', edittype: "textarea", width: 160, editable: false, hidden: true },
+                            { name: 'efectoindirecto', index: 'efectoindirecto', edittype: "textarea", width: 160, editable: false, hidden: true },
+                            { name: 'objetivo', index: 'objetivo', width: 160, edittype: "textarea", editable: true }
    	            ],
                 rowNum: 10,
                 rowList: [10, 20, 30],
