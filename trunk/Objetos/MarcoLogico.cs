@@ -1053,6 +1053,7 @@ namespace ESM.Objetos
                 indicador_actividad.fecha_indicador_inicial = fecha_inicial;
                 indicador_actividad.fecha_indicador_final = fecha_final;
                 indicador_actividad.Fecha_Creacion = DateTime.Now.Date.AddHours(3);
+                indicador_actividad.meta = meta;
                 indicador_actividad.verbo_id = verboid;
                 indicador_actividad.unidad_id = unidadid;
                 indicador_actividad.SSP = esSSP;
