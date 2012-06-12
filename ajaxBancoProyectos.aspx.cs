@@ -147,7 +147,7 @@ namespace ESM
                         Session.Add("recursosymandatos", Request.Form["recursosymandatos"]);
                         Session.Add("operacion", Request.Form["oper"]);
                     }
-                    else if (Request.Form["causa"] != null)
+                    else if (Request.Form["causa"] != null || Request.Form["objetivo"] != null)
                     {
                         Session.Add("c_e_id", Request.Form["id"]);
                         if (Request.Form["causaindirecta"] != null)
@@ -1042,7 +1042,7 @@ namespace ESM
                 beneficio = Session["beneficio"].ToString();
             }
 
-            if (objCCausas_Efecto.Update(c_e_id, causa, efecto, beneficio, causaIndirecta, efectoIndirecto, objetivo))
+            if (objCCausas_Efecto.Update(c_e_id, causa, efecto, objetivo, beneficio, causaIndirecta, efectoIndirecto, objetivo))
             {
                 Session.Remove("c_e_id");
                 Session.Remove("causa");
@@ -1135,7 +1135,7 @@ namespace ESM
                     color = 0;
                 }
 
-                html += "<tr style='background: #" + color_cadena + "'><td style='border: 1px solid #000;'><b>PROCESO:</b></td><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><tr>";
+                html += "<tr style='background: #" + color_cadena + "'><td style='border: 1px solid #000;'><b>PROCESO:</b></td><td style='border: 1px solid #000;'>" + procesos_item.Proceso + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><tr>";
                 var subprocesos = from sp in db.Subprocesos
                                   where sp.Causas_Efecto.Proyecto_id == proyecto_id && sp.Proceso_id == procesos_item.Id
                                   select sp;

@@ -211,15 +211,6 @@ namespace ESM {
         protected global::System.Web.UI.HtmlControls.HtmlTextArea txtjustificacion;
         
         /// <summary>
-        /// fuentesfinanciacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fuentesfinanciacion;
-        
-        /// <summary>
         /// btnalmacenarregistro control.
         /// </summary>
         /// <remarks>
@@ -227,6 +218,15 @@ namespace ESM {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnalmacenarregistro;
+        
+        /// <summary>
+        /// fuentesfinanciacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fuentesfinanciacion;
         
         /// <summary>
         /// org control.
