@@ -313,11 +313,11 @@
             <p style="width: 100%; text-align: center;">
                 Versión No. 1.0</p>
         </div>
-        <div class="page_magazine" id="basicaproyecto">
+        <div class="page_magazine" id="basicaproyecto" style="overflow-y: scroll;">
             <p style="font-size: 14px; width: 90%; text-align: right;">
                 Página 2 de 17</p>
             <h1>
-                INFORMACIÓN BASICA DEL PROYECTO</h1>
+                INFORMACIÓN BÁSICA DEL PROYECTO</h1>
             <br />
             * Nombre de Proyecto:
             <textarea id="txtnombreproyecto" runat="server" style="display: block; width: 80%;
@@ -417,6 +417,9 @@
                 </li>
             </ul>
             <br />
+            <asp:Button ID="btnalmacenarregistro" Text="Almacenar información para registro de proyecto"
+                runat="server" OnClick="btnalmacenarregistro_Click" />
+            <br />
             <h3>
                 Visualización para Fuentes de Financiación</h3>
             <div id="fuentesfinanciacion" runat="server" style="height: 300px; width: 100%; overflow-y: scroll;">
@@ -429,8 +432,6 @@
             <div id="jqgrid_div" style="width: 100%;">
             </div>
             <br />
-            <asp:Button ID="btnalmacenarregistro" Text="Almacenar información" runat="server"
-                OnClick="btnalmacenarregistro_Click" />
         </div>
         <div class="page_magazine" id="page3">
             <p style="font-size: 14px; width: 90%; text-align: right;">

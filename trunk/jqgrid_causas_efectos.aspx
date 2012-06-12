@@ -67,7 +67,7 @@
                 editurl: "ajaxBancoProyectos.aspx",
                 caption: "OBJETIVOS -- BENEFICIOS"
             });
-            j("#jqgrid_o_b_t").jqGrid('navGrid', "#jqgrid_o_b_d", { edit: true, add: true, del: false });
+            j("#jqgrid_o_b_t").jqGrid('navGrid', "#jqgrid_o_b_d", { edit: true, add: false, del: false });
             j("#jqgrid_o_b_t").jqGrid('inlineNav', "#jqgrid_o_b_d");
         });
     </script>

@@ -35,6 +35,24 @@ namespace ESM.Objetos
         {
             try
             {
+                causa = causa.Replace("\n", " ");
+                causa = causa.Replace("\r", " ");
+
+                efecto = efecto.Replace("\n", " ");
+                efecto = efecto.Replace("\r", " ");
+
+                beneficio = beneficio.Replace("\n", " ");
+                beneficio = beneficio.Replace("\r", " ");
+
+                objetivo = objetivo.Replace("\n", " ");
+                objetivo = objetivo.Replace("\r", " ");
+
+                causaIndirecta = causaIndirecta.Replace("\n", " ");
+                causaIndirecta = causaIndirecta.Replace("\r", " ");
+
+                efectoIndirecto = efectoIndirecto.Replace("\n", " ");
+                efectoIndirecto = efectoIndirecto.Replace("\r", " ");
+
                 Causas_Efecto objCausas_Efecto = new Causas_Efecto
                 {
 
@@ -56,34 +74,66 @@ namespace ESM.Objetos
             catch (Exception) { return false; }
         }
 
-        public bool Update(int id, string causa = null, string proceso = null, string beneficio = null, string causaIndirecta = null, string efectoIndirecto = null, string objetivo = null, string indicador = null)
+        public bool Update(int id, string causa = null, string efecto_string = null, string proceso = null, string beneficio = null, string causaIndirecta = null, string efectoIndirecto = null, string indicador = null)
         {
             try
             {
+
                 var efecto = (from e in _db.Causas_Efectos
                               where e.Id == id
                               select e).Single();
 
                 if (causa != null)
+                {
+                    causa = causa.Replace("\n", " ");
+                    causa = causa.Replace("\r", " ");
+
                     efecto.Causa = causa;
+                }
 
                 if (proceso != null)
+                {
+                    proceso = proceso.Replace("\n", " ");
+                    proceso = proceso.Replace("\r", " ");
+
                     efecto.Proceso = proceso;
+                }
 
                 if (beneficio != null)
+                {
+                    beneficio = beneficio.Replace("\n", " ");
+                    beneficio = beneficio.Replace("\r", " ");
+
                     efecto.Beneficios = beneficio;
+                }
 
                 if (indicador != null)
                     efecto.Indicador_Resultado = indicador;
 
                 if (causaIndirecta != null)
+                {
+                    causaIndirecta = causaIndirecta.Replace("\n", " ");
+                    causaIndirecta = causaIndirecta.Replace("\r", " ");
+
                     efecto.CausaIndirecta = causaIndirecta;
+                }
 
                 if (efectoIndirecto != null)
-                    efecto.EfectoIndirecto = efectoIndirecto;
+                {
 
-                if (objetivo != null)
-                    efecto.Proceso = objetivo;
+                    efectoIndirecto = efectoIndirecto.Replace("\n", " ");
+                    efectoIndirecto = efectoIndirecto.Replace("\r", " ");
+
+                    efecto.EfectoIndirecto = efectoIndirecto;
+                }
+
+                if (efecto_string != null)
+                {
+                    efecto_string = efecto_string.Replace("\n", " ");
+                    efecto_string = efecto_string.Replace("\r", " ");
+
+                    efecto.Efecto = efecto_string;
+                }
 
                 _db.SubmitChanges();
 

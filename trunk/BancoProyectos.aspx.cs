@@ -131,20 +131,30 @@ namespace ESM
         {
             try
             {
-                Model.Registro_Proyecto proyecto_informacion = (from p in new Model.ESMBDDataContext().Registro_Proyectos
-                                                                where p.proyecto_id == Convert.ToInt32(ban_proyecto_id.Value)
-                                                                select p).Single();
+                Model.Registro_Proyecto proyecto_informacion = null;
+                try
+                {
+                    proyecto_informacion = (from p in new Model.ESMBDDataContext().Registro_Proyectos
+                                            where p.proyecto_id == Convert.ToInt32(ban_proyecto_id.Value)
+                                            select p).Single();
+                }
+                catch
+                {
+
+                }
 
                 Objetos.CRegistro_Proyectos _objCRegistro_Proyectos = new Objetos.CRegistro_Proyectos();
 
+                DateTime fecha = txtfechaelaboracion.Value.Length != 0 && txtfechaelaboracion.Value != " " ? Convert.ToDateTime(txtfechaelaboracion.Value) : DateTime.Now;
+
                 if (proyecto_informacion == null)
                 {
-                    _objCRegistro_Proyectos.AddItem(txtcargo.Value, txtdependencia.Value, Convert.ToDateTime(txtfechaelaboracion.Value), txtjustificacion.Value, txtmpp1.Value, txtmpp2.Value, txtmpp3.Value, proyecto_id, txtresponsable.Value);
+                    _objCRegistro_Proyectos.AddItem(txtcargo.Value, txtdependencia.Value, fecha, txtjustificacion.Value, txtmpp1.Value, txtmpp2.Value, txtmpp3.Value, proyecto_id, txtresponsable.Value);
                     post_back.Value = "1";
                 }
                 else
                 {
-                    _objCRegistro_Proyectos.UpdateItem(proyecto_informacion.Id, txtcargo.Value, txtdependencia.Value, Convert.ToDateTime(txtfechaelaboracion.Value), txtjustificacion.Value, txtmpp1.Value, txtmpp2.Value, txtmpp3.Value, txtresponsable.Value);
+                    _objCRegistro_Proyectos.UpdateItem(proyecto_informacion.Id, txtcargo.Value, txtdependencia.Value, fecha, txtjustificacion.Value, txtmpp1.Value, txtmpp2.Value, txtmpp3.Value, txtresponsable.Value);
                     post_back.Value = "1";
                 }
 
@@ -186,7 +196,7 @@ namespace ESM
                 var registro_proyecto = proyecto_informacion.Registro_Proyectos.Single();
 
                 txtdependencia.Value = registro_proyecto.Dependencia;
-                txtfechaelaboracion.Value = registro_proyecto.Fecha.ToString();
+                txtfechaelaboracion.Value = Convert.ToDateTime(registro_proyecto.Fecha).ToShortDateString();
                 txtjustificacion.Value = registro_proyecto.Justificacion;
                 txtmpp1.Value = registro_proyecto.Mpp_1;
                 txtmpp2.Value = registro_proyecto.Mpp_2;
@@ -554,7 +564,7 @@ namespace ESM
                         color = 0;
                     }
 
-                    html += "<tr style='background: #" + color_cadena + "'><td style='border: 1px solid #000;'><b>PROCESO/OBJETIVO:</b></td><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><tr>";
+                    html += "<tr style='background: #" + color_cadena + "'><td style='border: 1px solid #000;'><b>PROCESO/OBJETIVO:</b></td><td style='border: 1px solid #000;'>" + procesos_item.Proceso + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><tr>";
                     var subprocesos = from sp in db.Subprocesos
                                       where sp.Causas_Efecto.Proyecto_id == proyecto_id && sp.Proceso_id == procesos_item.Id
                                       select sp;
@@ -617,7 +627,7 @@ namespace ESM
                     color = 0;
                 }
 
-                html += "<tr style='background: #" + color_cadena + "'><td style='border: 1px solid #000;'><b>PROCESO:</b></td><td style='border: 1px solid #000;'>" + procesos_item.Causa + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><tr>";
+                html += "<tr style='background: #" + color_cadena + "'><td style='border: 1px solid #000;'><b>PROCESO:</b></td><td style='border: 1px solid #000;'>" + procesos_item.Proceso + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'></td><tr>";
                 var subprocesos = from sp in db.Subprocesos
                                   where sp.Causas_Efecto.Proyecto_id == proyecto_id && sp.Proceso_id == procesos_item.Id
                                   select sp;
