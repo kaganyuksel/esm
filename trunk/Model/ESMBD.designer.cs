@@ -231,15 +231,15 @@ namespace ESM.Model
     partial void InsertIndicadore(Indicadore instance);
     partial void UpdateIndicadore(Indicadore instance);
     partial void DeleteIndicadore(Indicadore instance);
-    partial void InsertDocumentos_Proyecto(Documentos_Proyecto instance);
-    partial void UpdateDocumentos_Proyecto(Documentos_Proyecto instance);
-    partial void DeleteDocumentos_Proyecto(Documentos_Proyecto instance);
     partial void InsertCausas_Efecto(Causas_Efecto instance);
     partial void UpdateCausas_Efecto(Causas_Efecto instance);
     partial void DeleteCausas_Efecto(Causas_Efecto instance);
     partial void InsertRegistro_Proyecto(Registro_Proyecto instance);
     partial void UpdateRegistro_Proyecto(Registro_Proyecto instance);
     partial void DeleteRegistro_Proyecto(Registro_Proyecto instance);
+    partial void InsertDocumentos_Proyecto(Documentos_Proyecto instance);
+    partial void UpdateDocumentos_Proyecto(Documentos_Proyecto instance);
+    partial void DeleteDocumentos_Proyecto(Documentos_Proyecto instance);
     #endregion
 		
 		public ESMBDDataContext() : 
@@ -864,14 +864,6 @@ namespace ESM.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<Documentos_Proyecto> Documentos_Proyectos
-		{
-			get
-			{
-				return this.GetTable<Documentos_Proyecto>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Causas_Efecto> Causas_Efectos
 		{
 			get
@@ -885,6 +877,14 @@ namespace ESM.Model
 			get
 			{
 				return this.GetTable<Registro_Proyecto>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Documentos_Proyecto> Documentos_Proyectos
+		{
+			get
+			{
+				return this.GetTable<Documentos_Proyecto>();
 			}
 		}
 	}
@@ -13350,11 +13350,11 @@ namespace ESM.Model
 		
 		private EntitySet<Matriz_Actore> _Matriz_Actores;
 		
-		private EntitySet<Documentos_Proyecto> _Documentos_Proyectos;
-		
 		private EntitySet<Causas_Efecto> _Causas_Efectos;
 		
 		private EntitySet<Registro_Proyecto> _Registro_Proyectos;
+		
+		private EntitySet<Documentos_Proyecto> _Documentos_Proyectos;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -13384,9 +13384,9 @@ namespace ESM.Model
 			this._Proyectos_Supuestos = new EntitySet<Proyectos_Supuesto>(new Action<Proyectos_Supuesto>(this.attach_Proyectos_Supuestos), new Action<Proyectos_Supuesto>(this.detach_Proyectos_Supuestos));
 			this._Fuentes_Financiacions = new EntitySet<Fuentes_Financiacion>(new Action<Fuentes_Financiacion>(this.attach_Fuentes_Financiacions), new Action<Fuentes_Financiacion>(this.detach_Fuentes_Financiacions));
 			this._Matriz_Actores = new EntitySet<Matriz_Actore>(new Action<Matriz_Actore>(this.attach_Matriz_Actores), new Action<Matriz_Actore>(this.detach_Matriz_Actores));
-			this._Documentos_Proyectos = new EntitySet<Documentos_Proyecto>(new Action<Documentos_Proyecto>(this.attach_Documentos_Proyectos), new Action<Documentos_Proyecto>(this.detach_Documentos_Proyectos));
 			this._Causas_Efectos = new EntitySet<Causas_Efecto>(new Action<Causas_Efecto>(this.attach_Causas_Efectos), new Action<Causas_Efecto>(this.detach_Causas_Efectos));
 			this._Registro_Proyectos = new EntitySet<Registro_Proyecto>(new Action<Registro_Proyecto>(this.attach_Registro_Proyectos), new Action<Registro_Proyecto>(this.detach_Registro_Proyectos));
+			this._Documentos_Proyectos = new EntitySet<Documentos_Proyecto>(new Action<Documentos_Proyecto>(this.attach_Documentos_Proyectos), new Action<Documentos_Proyecto>(this.detach_Documentos_Proyectos));
 			OnCreated();
 		}
 		
@@ -13602,19 +13602,6 @@ namespace ESM.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Documentos_Proyecto", Storage="_Documentos_Proyectos", ThisKey="Id", OtherKey="proyectoid")]
-		public EntitySet<Documentos_Proyecto> Documentos_Proyectos
-		{
-			get
-			{
-				return this._Documentos_Proyectos;
-			}
-			set
-			{
-				this._Documentos_Proyectos.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Causas_Efecto", Storage="_Causas_Efectos", ThisKey="Id", OtherKey="Proyecto_id")]
 		public EntitySet<Causas_Efecto> Causas_Efectos
 		{
@@ -13638,6 +13625,19 @@ namespace ESM.Model
 			set
 			{
 				this._Registro_Proyectos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Documentos_Proyecto", Storage="_Documentos_Proyectos", ThisKey="Id", OtherKey="proyectoid")]
+		public EntitySet<Documentos_Proyecto> Documentos_Proyectos
+		{
+			get
+			{
+				return this._Documentos_Proyectos;
+			}
+			set
+			{
+				this._Documentos_Proyectos.Assign(value);
 			}
 		}
 		
@@ -13709,18 +13709,6 @@ namespace ESM.Model
 			entity.Proyecto = null;
 		}
 		
-		private void attach_Documentos_Proyectos(Documentos_Proyecto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Proyecto = this;
-		}
-		
-		private void detach_Documentos_Proyectos(Documentos_Proyecto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Proyecto = null;
-		}
-		
 		private void attach_Causas_Efectos(Causas_Efecto entity)
 		{
 			this.SendPropertyChanging();
@@ -13740,6 +13728,18 @@ namespace ESM.Model
 		}
 		
 		private void detach_Registro_Proyectos(Registro_Proyecto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = null;
+		}
+		
+		private void attach_Documentos_Proyectos(Documentos_Proyecto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Proyecto = this;
+		}
+		
+		private void detach_Documentos_Proyectos(Documentos_Proyecto entity)
 		{
 			this.SendPropertyChanging();
 			entity.Proyecto = null;
@@ -21059,205 +21059,6 @@ namespace ESM.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Documentos_Proyecto")]
-	public partial class Documentos_Proyecto : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Ruta;
-		
-		private System.Nullable<int> _proyectoid;
-		
-		private string _Tipo;
-		
-		private string _Tamano;
-		
-		private EntityRef<Proyecto> _Proyecto;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnRutaChanging(string value);
-    partial void OnRutaChanged();
-    partial void OnproyectoidChanging(System.Nullable<int> value);
-    partial void OnproyectoidChanged();
-    partial void OnTipoChanging(string value);
-    partial void OnTipoChanged();
-    partial void OnTamanoChanging(string value);
-    partial void OnTamanoChanged();
-    #endregion
-		
-		public Documentos_Proyecto()
-		{
-			this._Proyecto = default(EntityRef<Proyecto>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ruta", DbType="NVarChar(255)")]
-		public string Ruta
-		{
-			get
-			{
-				return this._Ruta;
-			}
-			set
-			{
-				if ((this._Ruta != value))
-				{
-					this.OnRutaChanging(value);
-					this.SendPropertyChanging();
-					this._Ruta = value;
-					this.SendPropertyChanged("Ruta");
-					this.OnRutaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_proyectoid", DbType="Int")]
-		public System.Nullable<int> proyectoid
-		{
-			get
-			{
-				return this._proyectoid;
-			}
-			set
-			{
-				if ((this._proyectoid != value))
-				{
-					if (this._Proyecto.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnproyectoidChanging(value);
-					this.SendPropertyChanging();
-					this._proyectoid = value;
-					this.SendPropertyChanged("proyectoid");
-					this.OnproyectoidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tipo", DbType="NVarChar(255)")]
-		public string Tipo
-		{
-			get
-			{
-				return this._Tipo;
-			}
-			set
-			{
-				if ((this._Tipo != value))
-				{
-					this.OnTipoChanging(value);
-					this.SendPropertyChanging();
-					this._Tipo = value;
-					this.SendPropertyChanged("Tipo");
-					this.OnTipoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tamano", DbType="NVarChar(255)")]
-		public string Tamano
-		{
-			get
-			{
-				return this._Tamano;
-			}
-			set
-			{
-				if ((this._Tamano != value))
-				{
-					this.OnTamanoChanging(value);
-					this.SendPropertyChanging();
-					this._Tamano = value;
-					this.SendPropertyChanged("Tamano");
-					this.OnTamanoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Documentos_Proyecto", Storage="_Proyecto", ThisKey="proyectoid", OtherKey="Id", IsForeignKey=true)]
-		public Proyecto Proyecto
-		{
-			get
-			{
-				return this._Proyecto.Entity;
-			}
-			set
-			{
-				Proyecto previousValue = this._Proyecto.Entity;
-				if (((previousValue != value) 
-							|| (this._Proyecto.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Proyecto.Entity = null;
-						previousValue.Documentos_Proyectos.Remove(this);
-					}
-					this._Proyecto.Entity = value;
-					if ((value != null))
-					{
-						value.Documentos_Proyectos.Add(this);
-						this._proyectoid = value.Id;
-					}
-					else
-					{
-						this._proyectoid = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Proyecto");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Causas_Efectos")]
 	public partial class Causas_Efecto : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -21945,6 +21746,229 @@ namespace ESM.Model
 					else
 					{
 						this._proyecto_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Proyecto");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Documentos_Proyecto")]
+	public partial class Documentos_Proyecto : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Ruta;
+		
+		private System.Nullable<int> _proyectoid;
+		
+		private string _Tipo;
+		
+		private string _Tamano;
+		
+		private System.Nullable<bool> _Estado;
+		
+		private EntityRef<Proyecto> _Proyecto;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnRutaChanging(string value);
+    partial void OnRutaChanged();
+    partial void OnproyectoidChanging(System.Nullable<int> value);
+    partial void OnproyectoidChanged();
+    partial void OnTipoChanging(string value);
+    partial void OnTipoChanged();
+    partial void OnTamanoChanging(string value);
+    partial void OnTamanoChanged();
+    partial void OnEstadoChanging(System.Nullable<bool> value);
+    partial void OnEstadoChanged();
+    #endregion
+		
+		public Documentos_Proyecto()
+		{
+			this._Proyecto = default(EntityRef<Proyecto>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ruta", DbType="NVarChar(255)")]
+		public string Ruta
+		{
+			get
+			{
+				return this._Ruta;
+			}
+			set
+			{
+				if ((this._Ruta != value))
+				{
+					this.OnRutaChanging(value);
+					this.SendPropertyChanging();
+					this._Ruta = value;
+					this.SendPropertyChanged("Ruta");
+					this.OnRutaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_proyectoid", DbType="Int")]
+		public System.Nullable<int> proyectoid
+		{
+			get
+			{
+				return this._proyectoid;
+			}
+			set
+			{
+				if ((this._proyectoid != value))
+				{
+					if (this._Proyecto.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnproyectoidChanging(value);
+					this.SendPropertyChanging();
+					this._proyectoid = value;
+					this.SendPropertyChanged("proyectoid");
+					this.OnproyectoidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tipo", DbType="NVarChar(255)")]
+		public string Tipo
+		{
+			get
+			{
+				return this._Tipo;
+			}
+			set
+			{
+				if ((this._Tipo != value))
+				{
+					this.OnTipoChanging(value);
+					this.SendPropertyChanging();
+					this._Tipo = value;
+					this.SendPropertyChanged("Tipo");
+					this.OnTipoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tamano", DbType="NVarChar(255)")]
+		public string Tamano
+		{
+			get
+			{
+				return this._Tamano;
+			}
+			set
+			{
+				if ((this._Tamano != value))
+				{
+					this.OnTamanoChanging(value);
+					this.SendPropertyChanging();
+					this._Tamano = value;
+					this.SendPropertyChanged("Tamano");
+					this.OnTamanoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="Bit")]
+		public System.Nullable<bool> Estado
+		{
+			get
+			{
+				return this._Estado;
+			}
+			set
+			{
+				if ((this._Estado != value))
+				{
+					this.OnEstadoChanging(value);
+					this.SendPropertyChanging();
+					this._Estado = value;
+					this.SendPropertyChanged("Estado");
+					this.OnEstadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Proyecto_Documentos_Proyecto", Storage="_Proyecto", ThisKey="proyectoid", OtherKey="Id", IsForeignKey=true)]
+		public Proyecto Proyecto
+		{
+			get
+			{
+				return this._Proyecto.Entity;
+			}
+			set
+			{
+				Proyecto previousValue = this._Proyecto.Entity;
+				if (((previousValue != value) 
+							|| (this._Proyecto.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Proyecto.Entity = null;
+						previousValue.Documentos_Proyectos.Remove(this);
+					}
+					this._Proyecto.Entity = value;
+					if ((value != null))
+					{
+						value.Documentos_Proyectos.Add(this);
+						this._proyectoid = value.Id;
+					}
+					else
+					{
+						this._proyectoid = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Proyecto");
 				}

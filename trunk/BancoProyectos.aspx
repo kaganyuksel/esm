@@ -38,7 +38,6 @@
 
         }
 
-
         var obj_file = null;
         var page_number = null;
         var j = jQuery.noConflict();
@@ -46,6 +45,12 @@
         var if_marcologico;
 
         j(document).ready(function () {
+
+            j("#close_message").click(function () {
+
+                j("#forie").css("display", "none");
+
+            });
 
             j(this).scroll(function () {
 
@@ -246,10 +251,83 @@
                 }
             });
             j('#refreshOrganigrama').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&problemas=true');
-            j('#refreshOrganigrama_obj').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&objetivos=true');
+            j('#refreshOrganigrama_obj').attr('href', '/Organigrama.aspx ?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&objetivos=true');
             j('#planaccion').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&planaccion=true');
         }
+        function deleteFile(file) {
+            if (confirm('Esta seguro que desea eliminar el archivo.')) {
+                j.ajax({
+                    url: "ajaxBancoProyectos.aspx?deleteFile=" + file,
+                    async: false,
+                    success: function (result) {
+                        j("#a_document_" + file).parent().remove();
+                    },
+                    error: function (result) {
+
+                        alert("Error " + result.status + ' ' + result.statusText);
+                    }
+                });
+            }
+        }
     </script>
+    <style type="text/css">
+        #forie
+        {
+            vertical-align: middle;
+            width: 93.6%;
+            height: 30px;
+            line-height: 30px;
+            position: fixed;
+            bottom: 0px;
+            display: inline-block;
+            z-index: 10000;
+            font-size: 14px;
+            font-family: 'Arial Narrow';
+            background: #fff;
+            border-top: 1px solid #d6d6d6;
+            border-left: 1px solid #d6d6d6;
+            border-right: 1px solid #d6d6d6;
+            padding: 10px 10px 10px 10px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+            -moz-box-shadow: 0px 0px 1px #000000;
+            -webkit-box-shadow: 0px 0px 1px #000000;
+            box-shadow: 0px 0px 1px #000000; /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+        }
+        #forie ul
+        {
+            display: inline;
+            padding: 0 0 0 0;
+        }
+        #forie ul li
+        {
+            display: inline;
+            padding: 0 0 0 0;
+            width: 80px;
+            text-align: center;
+            font-size: 14px;
+            font-family: 'Arial Narrow';
+            padding: 5px 5px 5px 5px;
+        }
+        #forie ul li img
+        {
+            width: 36px;
+            height: 36px;
+        }
+        #forie strong
+        {
+            line-height: 30px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        #forie h3
+        {
+            color: #0f6db3;
+            display: inline;
+            font-weight: bold;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <input type="hidden" name="proyecto_id" value=" " id="ban_proyecto_id" runat="server" />
@@ -272,6 +350,26 @@
         <li><span style="margin-top: 15px; cursor: pointer;" id="next" onclick="if(document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != ' ' && document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != '' && document.getElementById('ContentPlaceHolder1_ban_proyecto_id').value != '0' ){j('#magazine').turn('next'); j('#magazine').css('margin-left', 'auto');}">
             <img src="/Icons/next_turn.png" width="24px;" alt="next" /></span></li>
     </ul>
+    <!--[if IE]>
+    <div id="forie">
+        <h3>
+            ¡Atención!</h3>
+        <strong>Para lograr un mejor desempeño en el uso adecuado de esta aplicación es recomendable
+            utilizar:</strong>
+        <ul>
+            <li><a href="https://www.google.com/chrome?hl=es">
+                <img src="/Icons/chrome.png" alt="google chrome" />Google Chrome</a> </li>
+            <li><a href="http://www.mozilla.org/en-US/firefox/new/">
+                <img src="Icons/firefox.png" alt="mozilla firefox" />Mozilla Firefox</a> </li>
+            <li><a href="http://www.apple.com/safari/download/">
+                <img src="Icons/safari.png" alt="safari" />Safari</a> </li>
+            <li><a href="http://www.opera.com/download/">
+                <img src="Icons/opera.png" alt="opera" />Opera</a> </li>
+        </ul>
+        <a id="close_message" style="margin-left: 80px;" href="#">
+            <img alt="close button" style="width: 24px; right: 0;" src="/Icons/close_bottom.png" /></a>
+    </div>
+    <![endif]-->
     <div id='magazine'>
         <div class="page_magazine" id="page1">
             <p style="font-size: 14px; width: 90%; text-align: right;">
@@ -914,8 +1012,8 @@
                 Página 15 de 17</p>
             <h1>
                 EJECUCIÓN</h1>
-            <iframe id="if_valores_indicadores" runat="server" src="" width="800px" height="1000">
-            </iframe>
+            <iframe id="if_valores_indicadores" style="overflow-y: scroll;" runat="server" src=""
+                width="100%" height="1500px"></iframe>
         </div>
         <div>
             <p style="font-size: 14px; width: 90%; text-align: right;">

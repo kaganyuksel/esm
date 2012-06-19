@@ -29,7 +29,13 @@ namespace ESM
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["proyecto_id"] != null && Request.QueryString["proyecto_id"] != "undefined" && Request.QueryString["proyecto_id"] != " " && Request.QueryString["proyecto_id"] != "")
+
+            if (Request.QueryString["deleteFile"] != null)
+            {
+                int documento_id = Convert.ToInt32(Request.QueryString["deleteFile"]);
+                deleteFile(documento_id);
+            }
+            else if (Request.QueryString["proyecto_id"] != null && Request.QueryString["proyecto_id"] != "undefined" && Request.QueryString["proyecto_id"] != " " && Request.QueryString["proyecto_id"] != "")
                 proyecto_id = Convert.ToInt32(Request.QueryString["proyecto_id"]);
 
             if (!Page.IsPostBack)
@@ -506,12 +512,14 @@ namespace ESM
         {
             try
             {
-                IQueryable<Indicadores_Meta> indicadores_metas_col = new Objetos.CActividades().getIndicadoresMetasProyecto(proyecto_id);
+                int indicador_id = Convert.ToInt32(Request.QueryString["indicador_id"]);
+
+                IQueryable<Indicadores_Meta> indicadores_metas_col = new Objetos.CActividades().getIndicadoresMetasProyecto(indicador_id);
 
                 string json_to_return = "{\"page\":\"1\",\"total\":1,\"records\":\"1\",\"rows\": [";
 
                 foreach (var item in indicadores_metas_col)
-                    json_to_return = json_to_return + "{\"id\":\"" + item.Id.ToString() + "\",\"cell\":[\"" + item.Id + "\",\"" + item.Indicadore.Indicador + "\", \"" + item.Meta + "\", \"" + item.Fecha_Meta + "\",\"" + item.Ejecutado + "\", \"/ReporteIndicadores.aspx?id=" + item.Indicadore.Id + "\"]} ,";
+                    json_to_return = json_to_return + "{\"id\":\"" + item.Id.ToString() + "\",\"cell\":[\"" + item.Id + "\",\"" + item.Indicadore.Indicador + "\", \"" + item.Meta + "\", \"" + Convert.ToDateTime(item.Fecha_Meta).ToShortDateString() + "\",\"" + item.Ejecutado + "\", \"/ReporteIndicadores.aspx?id=" + item.Indicadore.Id + "\"]} ,";
 
                 json_to_return = json_to_return.Trim(',');
                 json_to_return = json_to_return + "]}";
@@ -1168,6 +1176,28 @@ namespace ESM
             html = html + "</table>";
 
             Response.Write(html);
+        }
+
+        protected void deleteFile(int file_id)
+        {
+            try
+            {
+                var db = new ESM.Model.ESMBDDataContext();
+
+                var proyectoFile = (from dp in db.Documentos_Proyectos
+                                    where dp.Id == file_id
+                                    select dp).Single();
+
+                proyectoFile.Estado = false;
+
+                db.SubmitChanges();
+
+                Response.Write("Proceso Completado!");
+            }
+            catch (Exception)
+            {
+                Response.Write("Proceso sin éxito.");
+            }
         }
     }
 }

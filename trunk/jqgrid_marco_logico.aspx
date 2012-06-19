@@ -7,7 +7,6 @@
     <link href="/Style/jqgrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
     <link href="Style/jquery-ui-1.8.15.custom.css" rel="stylesheet" type="text/css" />
     <link href="Style/bancoproyectos.css" rel="stylesheet" type="text/css" />
-    <link href="Style/mastercustom.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="/Scripts/jquery-ui-1.8.15.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jqgrid/grid.locale-es.js" type="text/javascript"></script>
@@ -18,7 +17,7 @@
         j(document).ready(function () {
 
             setInterval("j('#fecha').datepicker({dateFormat: 'dd/mm/yy', minDate: j('#min_fecha_actividades').val()});", 1000);
-            //j('#fechainicial, #fechafinal').datepicker({dateFormat: 'dd/mm/yy', minDate: j('#min_fecha_indicadores').val() });
+
             var interval = null;
             j.extend(j.jgrid.edit, { width: "600", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); window.parent.refreshMarcoLogico(); } });
 
