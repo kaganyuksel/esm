@@ -913,6 +913,8 @@ namespace ESM.Objetos
                                                   where m.Id == Convert.ToInt32(idmeta)
                                                   select m).Single();
 
+                    _objvalor.Indicador_id = indicador_id;
+                    _objvalor.Fecha_Meta = fecha;
                     _objvalor.Ejecutado = valor;
 
                 }
@@ -1265,12 +1267,12 @@ namespace ESM.Objetos
 
         }
 
-        public IQueryable<Indicadores_Meta> getIndicadoresMetasProyecto(int proyecto_id)
+        public IQueryable<Indicadores_Meta> getIndicadoresMetasProyecto(int indicador_id)
         {
             try
             {
                 var indicadores_metas = from ind in _db.Indicadores_Metas
-                                        where ind.Indicadore.Actividade.Subproceso.Causas_Efecto.Proyecto_id == proyecto_id
+                                        where ind.Indicador_id == indicador_id
                                         select ind;
 
                 return indicadores_metas;

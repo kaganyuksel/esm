@@ -11,6 +11,8 @@ using System.Diagnostics;
 using System.Configuration;
 using ESM.Objetos;
 using EvaluationSettings;
+using ESM.Model;
+using System.Data.Linq.SqlClient;
 
 namespace ESM.Evaluacion
 {
@@ -24,180 +26,6 @@ namespace ESM.Evaluacion
 
         #region Almacenar Informacion de Evaluaciones
 
-        //protected void AlmacenarParcialDefinitiva(bool estado)
-        //{
-        //    Guid guidKey = Guid.NewGuid();
-        //    if (Session["ideval"] != null)
-        //    {
-        //        int eval = Convert.ToInt32(Session["ideval"]);
-        //        #region Almacena Evaluacion
-        //        bool valid = true;
-
-
-        //        for (int p = 0; p < 5; p++)
-        //        {
-        //            GridView objGridView = (GridView)udpnlFiltro.FindControl(String.Format("gvAmb{0}", p + 1));
-
-        //            for (int i = 0; i < objGridView.Rows.Count; i++)
-        //            {
-        //                GridViewRow objGridViewRow = objGridView.Rows[i];
-        //                Label objIdPregunta = (Label)objGridViewRow.Cells[1].FindControl("lblIdPregunta");
-        //                RadioButton objsi = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnSi");
-        //                RadioButton objno = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnNo");
-        //                CheckBox objnoapli = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnNoAplica");
-        //                if (objsi.Visible && objno.Visible)
-        //                {
-        //                    if (objsi.Checked == false && objno.Checked == false)
-        //                    {
-        //                        valid = false;
-        //                        if (!valid)
-        //                            break;
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        if (estado)
-        //        {
-        //            if (valid)
-        //            {
-        //                #region Almacena Resultados Evaluacion Definitiva
-
-        //                _objevaluacion = new EvaluationSettings.CEvaluacion();
-        //                object[,] CollectionResultados = null;
-
-        //                int posiciones = gvAmb1.Rows.Count + gvAmb2.Rows.Count + gvAmb3.Rows.Count + gvAmb4.Rows.Count + gvAmb5.Rows.Count;
-
-        //                CollectionResultados = new object[posiciones, 4];
-        //                int contador = 0;
-        //                for (int p = 0; p < 5; p++)
-        //                {
-        //                    GridView objGridView = (GridView)udpnlFiltro.FindControl(String.Format("gvAmb{0}", p + 1));
-
-        //                    for (int e = 0; e < objGridView.Rows.Count; e++)
-        //                    {
-        //                        if (objGridView.Rows[e].Enabled == true)
-        //                        {
-
-        //                            GridViewRow objGridViewRow = objGridView.Rows[e];
-        //                            Label objIdPregunta = (Label)objGridViewRow.Cells[1].FindControl("lblIdPregunta");
-        //                            RadioButton objsi = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnSi");
-        //                            RadioButton objno = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnNo");
-        //                            CheckBox objpendiente = (CheckBox)objGridViewRow.Cells[1].FindControl("chxPendiente");
-        //                            CheckBox objnoapli = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnNoAplica");
-        //                            TextBox objTextBox = (TextBox)objGridViewRow.FindControl("txtSesion");
-
-        //                            if (objsi.Checked)
-        //                            {
-
-        //                                CollectionResultados[contador, 0] = Convert.ToInt32(objIdPregunta.Text);
-        //                                CollectionResultados[contador, 1] = true;
-
-        //                            }
-        //                            else if (objno.Checked)
-        //                            {
-        //                                CollectionResultados[contador, 0] = Convert.ToInt32(objIdPregunta.Text);
-        //                                CollectionResultados[contador, 1] = false;
-        //                            }
-        //                            else if (!objno.Checked && !objsi.Checked)
-        //                            {
-        //                                CollectionResultados[contador, 0] = Convert.ToInt32(objIdPregunta.Text);
-        //                                CollectionResultados[contador, 1] = null;
-
-        //                            }
-        //                            CollectionResultados[contador, 2] = objTextBox.Text;
-        //                            CollectionResultados[contador, 3] = objpendiente.Checked;
-        //                        }
-        //                    }
-        //                    contador++;
-        //                }
-        //                if (_objevaluacion.ActualizarEvaluacion(CollectionResultados, eval, estado))
-        //                {
-        //                    string fecha = DateTime.Now.AddHours(3).ToShortTimeString();
-        //                    //string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Actualizada con exito. <br />Estado: Parcial. Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
-        //                    //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
-        //                    lbloki.InnerHtml = String.Format("Evaluación Actualizada con éxito. <br />Estado: Terminada. Hora:{0}", fecha);
-        //                    gvAmb1.Enabled = false;
-        //                    gvAmb2.Enabled = false;
-        //                    gvAmb3.Enabled = false;
-        //                    gvAmb4.Enabled = false;
-        //                    gvAmb5.Enabled = false;
-        //                    TopEvaluaciones(Convert.ToInt32(Session["idmedicion"]));
-        //                    FinalizarProcesoEvaluacionEstado();
-        //                }
-        //                else
-        //                {
-        //                    //string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Evaluación Actualizada sin exito. <br /> Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
-        //                    //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
-        //                    string fecha = DateTime.Now.AddHours(3).ToShortTimeString();
-        //                    lbloki.InnerHtml = String.Format("Evaluación Actualizada sin éxito. Hora:{0}", fecha);
-        //                    FinalizarProcesoEvaluacionEstado();
-        //                }
-
-        //                #endregion
-        //            }
-        //            else
-        //            {
-        //                //string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Actualización fallo. <br /> Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
-        //                //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
-        //                string fecha = DateTime.Now.AddHours(3).ToShortTimeString();
-        //                lbloki.InnerHtml = "No se puede bloquear la evaluación, existen preguntas sin responder";
-        //                FinalizarProcesoEvaluacionEstado();
-        //            }
-        //        }
-        //        if (!estado)
-        //        {
-        //            #region Almacena Resultados Evaluacion Definitiva
-
-        //            _objevaluacion = new EvaluationSettings.CEvaluacion();
-
-        //            int posiciones = gvAmb1.Rows.Count + gvAmb2.Rows.Count + gvAmb3.Rows.Count + gvAmb4.Rows.Count + gvAmb5.Rows.Count;
-
-        //            object[,] CollectionResultados = new object[posiciones, 4];
-        //            int contador = 0;
-        //            for (int p = 0; p < 5; p++)
-        //            {
-        //                GridView objGridView = (GridView)udpnlFiltro.FindControl(String.Format("gvAmb{0}", p + 1));
-
-        //                for (int e = 0; e < objGridView.Rows.Count; e++)
-        //                {
-        //                    if (objGridView.Rows[e].Enabled == true)
-        //                    {
-
-        //                        GridViewRow objGridViewRow = objGridView.Rows[e];
-        //                        Label objIdPregunta = (Label)objGridViewRow.Cells[1].FindControl("lblIdPregunta");
-        //                        CheckBox objsi = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnSi");
-        //                        CheckBox objno = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnNo");
-        //                        CheckBox objpendiente = (CheckBox)objGridViewRow.Cells[1].FindControl("chxPendiente");
-        //                        CheckBox objnoapli = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnNoAplica");
-        //                        TextBox objTextBox = (TextBox)objGridViewRow.FindControl("txtSesion");
-
-        //                        CollectionResultados[contador, 0] = Convert.ToInt32(objIdPregunta.Text);
-        //                        if (objsi.Checked)
-        //                            CollectionResultados[contador, 1] = true;
-        //                        else if (objno.Checked)
-        //                            CollectionResultados[contador, 1] = false;
-
-        //                        CollectionResultados[contador, 2] = objTextBox.Text;
-        //                        CollectionResultados[contador, 3] = objpendiente.Checked;
-
-        //                    }
-        //                    contador++;
-        //                }
-        //            }
-        //            if (_objevaluacion.ActualizarEvaluacion(CollectionResultados, eval, estado))
-        //            {
-        //                //string mensaje = String.Format("$('#ContentPlaceHolder1_lbloki').html('Actualización exitosa. <br /> Hora:{0}'); $('#dtimer').dialog('open');", DateTime.Now.ToShortTimeString());
-        //                //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
-        //                string fecha = DateTime.Now.AddHours(3).ToShortTimeString();
-        //                lbloki.InnerHtml = String.Format("Actualización exitosa.<br />Estado: Parcial. Hora:{0}", fecha);
-        //                FinalizarProcesoEvaluacionEstado();
-        //            }
-
-        //            #endregion
-        //        }
-        //        #endregion
-        //    }
-        //}
 
         protected void FinalizarProcesoEvaluacionEstado()
         {
@@ -208,166 +36,6 @@ namespace ESM.Evaluacion
             divmensaje.Visible = true;
         }
 
-        //protected void AlmacenarInformacion(bool estado, bool auto = false)
-        //{
-        //    bool valid = true;
-        //    Guid guidKey = Guid.NewGuid();
-
-        //    int posiciones = gvAmb1.Rows.Count + gvAmb2.Rows.Count + gvAmb3.Rows.Count + gvAmb4.Rows.Count + gvAmb5.Rows.Count;
-        //    object[,] CollectionResultados = new object[posiciones, 4];
-
-        //    for (int p = 0; p < 5; p++)
-        //    {
-        //        GridView objGridView = (GridView)udpnlFiltro.FindControl(String.Format("gvAmb{0}", p + 1));
-
-        //        for (int i = 0; i < objGridView.Rows.Count; i++)
-        //        {
-        //            GridViewRow objGridViewRow = objGridView.Rows[i];
-        //            Label objIdPregunta = (Label)objGridViewRow.Cells[1].FindControl("lblIdPregunta");
-        //            RadioButton objsi = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnSi");
-        //            RadioButton objno = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnNo");
-        //            CheckBox objnoapli = (CheckBox)objGridViewRow.Cells[1].FindControl("rbtnNoAplica");
-        //            if (objsi.Visible && objno.Visible)
-        //            {
-        //                if (objsi.Checked == false && objno.Checked == false)
-        //                {
-        //                    valid = false;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    if (!estado)
-        //    {
-        //        if (valid)
-        //        {
-        //            _objevaluacion = new EvaluationSettings.CEvaluacion();
-
-        //            int contador = 0;
-        //            for (int p = 0; p < 5; p++)
-        //            {
-        //                GridView objGridView = (GridView)udpnlFiltro.FindControl(String.Format("gvAmb{0}", p + 1));
-
-        //                for (int i = 0; i < objGridView.Rows.Count; i++)
-        //                {
-        //                    GridViewRow objGridViewRow = objGridView.Rows[i];
-        //                    Label objIdPregunta = (Label)objGridViewRow.Cells[1].FindControl("lblIdPregunta");
-        //                    RadioButton objsi = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnSi");
-        //                    RadioButton objno = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnNo");
-        //                    CheckBox objpendiente = (CheckBox)objGridViewRow.Cells[1].FindControl("chxPendiente");
-        //                    TextBox objTextBox = (TextBox)objGridViewRow.FindControl("txtsesion");
-
-        //                    CollectionResultados[contador, 0] = Convert.ToInt32(objIdPregunta.Text);
-        //                    if (objsi.Checked)
-        //                        CollectionResultados[contador, 1] = true;
-        //                    else if (objno.Checked)
-        //                        CollectionResultados[contador, 1] = false;
-
-        //                    CollectionResultados[contador, 2] = objTextBox.Text;
-        //                    CollectionResultados[contador, 3] = objpendiente.Checked;
-        //                    contador++;
-        //                }
-        //            }
-        //            int idie = Convert.ToInt32(Session["idie"]);
-        //            int idmedicion = Convert.ToInt32(Session["idmedicion"]);
-        //            int idactor = 0;
-
-        //            idactor = Convert.ToInt32(cboActores.SelectedItem.Value);
-
-        //            int idusuario = Convert.ToInt32(Session["idusuario"]);
-
-        //            if (_objevaluacion.Almacenar(CollectionResultados, idie, idmedicion, idactor, idusuario, estado, _tipo))
-        //            {
-        //                string mensaje;
-        //                string fecha = DateTime.Now.AddHours(3).ToShortTimeString();
-        //                lbloki.Visible = true;
-        //                if (estado)
-        //                    mensaje = String.Format("Evaluación Almacenada. <br />Estado: Parcial. Hora:{0})", fecha);
-        //                else
-        //                {
-        //                    mensaje = String.Format("Evaluación Almacenada. <br />Estado: Terminada. Hora:{0})", fecha);
-        //                    gvAmb1.Enabled = false;
-        //                    gvAmb2.Enabled = false;
-        //                    gvAmb3.Enabled = false;
-        //                    gvAmb4.Enabled = false;
-        //                    gvAmb5.Enabled = false;
-        //                    TopEvaluaciones(Convert.ToInt32(Session["idmedicion"]));
-        //                }
-
-        //                //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
-        //                lbloki.InnerHtml = mensaje;
-        //                FinalizarProcesoEvaluacionEstado();
-
-        //                cboActores.SelectedItem.Value = "7";
-        //            }
-        //            else
-        //            {
-        //                lbloki.InnerHtml = "No se pudo completar el proceso de almacenamiento. Faltan preguntas por responder.";
-        //                lbloki.Visible = true;
-        //                //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), "$('#dtimer').dialog('open');", true);
-        //                FinalizarProcesoEvaluacionEstado();
-        //            }
-        //        }
-        //        else
-        //        {
-        //            Alert.Show(udpnlFiltro, "No se pudo completar el proceso de almacenamiento. Faltan preguntas por responder.");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        _objevaluacion = new EvaluationSettings.CEvaluacion();
-        //        int contador = 0;
-        //        for (int p = 0; p < 5; p++)
-        //        {
-        //            GridView objGridView = (GridView)udpnlFiltro.FindControl(String.Format("gvAmb{0}", p + 1));
-
-        //            for (int i = 0; i < objGridView.Rows.Count; i++)
-        //            {
-        //                GridViewRow objGridViewRow = objGridView.Rows[i];
-        //                Label objIdPregunta = (Label)objGridViewRow.Cells[1].FindControl("lblIdPregunta");
-        //                RadioButton objsi = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnSi");
-        //                RadioButton objno = (RadioButton)objGridViewRow.Cells[1].FindControl("rbtnNo");
-        //                CheckBox objpendiente = (CheckBox)objGridViewRow.Cells[1].FindControl("chxPendiente");
-        //                TextBox objTextBox = (TextBox)objGridViewRow.FindControl("txtsesion");
-
-        //                CollectionResultados[contador, 0] = Convert.ToInt32(objIdPregunta.Text);
-        //                if (objsi.Checked)
-        //                    CollectionResultados[contador, 1] = true;
-        //                else if (objno.Checked)
-        //                    CollectionResultados[contador, 1] = false;
-
-        //                CollectionResultados[contador, 2] = objTextBox.Text;
-        //                CollectionResultados[contador, 3] = objpendiente.Checked;
-        //                contador++;
-        //            }
-        //        }
-        //        int idie = Convert.ToInt32(Session["idie"]);
-        //        int idmedicion = Convert.ToInt32(Session["idmedicion"]);
-        //        int idactor = 0;
-
-        //        idactor = Convert.ToInt32(cboActores.SelectedItem.Value);
-
-        //        int idusuario = Convert.ToInt32(Session["idusuario"]);
-        //        string mensaje;
-        //        if (_objevaluacion.Almacenar(CollectionResultados, idie, idmedicion, idactor, idusuario, estado, _tipo))
-        //        {
-        //            string fecha = DateTime.Now.AddHours(3).ToShortTimeString();
-        //            if (estado)
-        //                mensaje = String.Format("Evaluación Almacenada. <br />Estado: Parcial. Hora:{0}", fecha);
-        //            else
-        //                mensaje = String.Format("Evaluación Almacenada. <br />Estado: Terminada. Hora:{0}", fecha);
-
-        //            //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
-        //            lbloki.InnerHtml = mensaje;
-        //            FinalizarProcesoEvaluacionEstado();
-        //        }
-        //        else
-        //        {
-        //            lbloki.InnerHtml = "Guardado Fallido.";
-        //            //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), guidKey.ToString(), mensaje, true);
-        //            FinalizarProcesoEvaluacionEstado();
-        //        }
-        //    }
-        //}
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
@@ -403,48 +71,6 @@ namespace ESM.Evaluacion
             }
             ObtenerTema(gvMediciones);
         }
-
-        //protected void //btnalmacenarparcial_Click(object sender, EventArgs e)
-        //{
-        //    _objTimer.Stop();
-        //    bool exist = false;
-
-        //    string idactor = cboActores.SelectedValue;
-        //    for (int i = 0; i < gvTopEval.Rows.Count; i++)
-        //    {
-        //        if (idactor == gvTopEval.Rows[i].Cells[2].Text)
-        //            exist = true;
-        //    }
-
-        //    //if (!exist && Session["ideval"] == null)
-        //    //{
-        //    //    //AlmacenarInformacion(true);
-        //    //    Session.Add("ideval", _objevaluacion.IdEvaluacion);
-        //    //}
-        //    //else
-        //    //    //AlmacenarParcialDefinitiva(false);
-        //}
-
-        //protected void //btnDefinitiva_Click(object sender, EventArgs e)
-        //{
-        //    _objTimer.Stop();
-        //    bool exist = false;
-
-        //    string idactor = cboActores.SelectedValue;
-        //    for (int i = 0; i < gvTopEval.Rows.Count; i++)
-        //    {
-        //        if (idactor == gvTopEval.Rows[i].Cells[2].Text)
-        //            exist = true;
-        //    }
-
-        //    if (!exist && Session["ideval"] == null)
-        //    {
-        //        AlmacenarInformacion(false);
-        //        Session.Add("ideval", _objevaluacion.IdEvaluacion);
-        //    }
-        //    else
-        //        AlmacenarParcialDefinitiva(true);
-        //}
 
         #endregion
 
@@ -784,23 +410,12 @@ namespace ESM.Evaluacion
                 modEESeleccion.Visible = false;
 
                 btnMedicion.Visible = true;
-
-                //for (int i = 0; i < gvMediciones.Rows.Count; i++)
-                //{
-                //    if (i == gvMediciones.Rows.Count - 1)
-                //        gvMediciones.Rows[i].Visible = true;
-                //    else
-                //        gvMediciones.Rows[i].Visible = false;
-                //}
                 #endregion
 
 
             }
             else
             {
-                string mensaje = "No Existen Mediciones para el establecimiento educativo.";
-                //ScriptManager.RegisterStartupScript(udpnlFiltro, GetType(), "scriptalert", String.Format("alert('{0}');", mensaje), true);
-
                 #region Visualizacion de Controles
 
                 modSEseleccion.Visible = false;
@@ -811,13 +426,10 @@ namespace ESM.Evaluacion
                 modEESeleccion.Visible = false;
 
                 #endregion
-
-
             }
-            //ScriptManager.RegisterStartupScript(udpnlFiltro, udpnlFiltro.GetType(), new Guid().ToString(), "$(document).ready(function () { $.scrollTo('#btnMedicion', 800, { easing: 'elasout' });});", true);
         }
 
-        protected void Unnamed2_Click(object sender, EventArgs e)
+        protected void Buscar_Click(object sender, EventArgs e)
         {
             CRoles objCRoles = new CRoles();
             int idusuario = Convert.ToInt32(Session["idusuario"]);
@@ -856,14 +468,11 @@ namespace ESM.Evaluacion
             }
             else
             {
-                //Alert.Show(udpnlFiltro, "El actor seleccionado ya fue evaluado en la medicion actual.");
                 gvAmb1.Visible = false;
                 gvAmb2.Visible = false;
                 gvAmb3.Visible = false;
                 gvAmb4.Visible = false;
                 gvAmb5.Visible = false;
-                //btnalmacenarparcial.Visible = false;
-                //btnDefinitiva.Visible = false;
                 informacionuno.Visible = false;
             }
 
@@ -904,7 +513,6 @@ namespace ESM.Evaluacion
 
         protected void lbtnVolver_Click(object sender, EventArgs e)
         {
-            VolverSeleccion();
         }
 
         protected void btnMedicion_Click(object sender, EventArgs e)
@@ -955,7 +563,6 @@ namespace ESM.Evaluacion
 
             int idmedicion = Convert.ToInt32(objrow.Cells[1].Text);
             TopEvaluaciones(idmedicion);
-            ObtenerActoresEvaluar(gvTopEval);
 
             #region Visualizacion de Controles
             btnMedicion.Visible = false;
@@ -1087,10 +694,7 @@ namespace ESM.Evaluacion
                             }
 
                             if (listresults[e].Pregunta1.Trim().Length == 0 || listresults[e].Pregunta1 == null || listresults[e].Pregunta1 == "")
-                            {
-                                //listresults[e].Pregunta.Replace = listresults[e].Etiqueta.ToString();
                                 reload = true;
-                            }
 
                             if (reload)
                             {
@@ -1151,15 +755,11 @@ namespace ESM.Evaluacion
                     objGridView.Visible = true;
                     objGridView.Enabled = false;
                     informacionuno.Visible = false;
-                    //btnalmacenarparcial.Visible = false;
-                    //btnDefinitiva.Visible = false;
                 }
                 else
                 {
                     objGridView.Visible = true;
                     informacionuno.Visible = true;
-                    //btnalmacenarparcial.Visible = true;
-                    ////btnDefinitiva.Visible = true;
                 }
 
             }
@@ -1277,12 +877,36 @@ namespace ESM.Evaluacion
                 /*Instancio*/
                 Model.ESMBDDataContext db = new Model.ESMBDDataContext();
 
-                var rFiltro = from i in db.Establecimiento_Educativos
+                IQueryable<Establecimiento_Educativo> rFiltro = null;
+
+                if (Convert.ToInt32(Session["IDUSUARIO"]) >= 6)
+                {
+                    rFiltro = from i in db.Establecimiento_Educativos
                               where i.Nombre.Contains(texto) && i.Estado == true && i.Secretaria_Educacion.IdConsultor == idconsultor
                               select i;
+                }
+                else
+                {
+                    rFiltro = from i in db.Establecimiento_Educativos
+                              where SqlMethods.Like(i.Nombre, String.Format("%{0}%", texto)) && i.Estado == true
+                              select i;
+                    Session.Add("buscar", "si");
+                }
 
-                gvResultados.DataSourceID = null;
-                gvResultados.DataSource = rFiltro;
+                if (texto.Trim().Length != 0)
+                {
+                    gvResultados.DataSourceID = null;
+                    gvResultados.DataSource = rFiltro;
+                }
+                else
+                {
+                    if (Convert.ToInt32(Session["IDUSUARIO"]) >= 6)
+                        gvResultados.DataSource = CEE.ObtenerEEs(idconsultor);
+                    else
+                        gvResultados.DataSource = CEE.ObtenerEEs(idconsultor, false, true);
+
+                }
+
                 gvResultados.DataBind();
 
                 ObtenerTema(gvResultados);
@@ -1333,12 +957,10 @@ namespace ESM.Evaluacion
                 ObtenerTema(gvTopEval);
 
             }
-            ///TODO: JCMM: Agregar Alerta para este metodo
         }
 
         protected void EvaluarActorSeleccionado(string actorSeleccionado, int idactor)
         {
-            //btnVolverEE.Visible = false;
             gvAmb1.Visible = true;
             gvAmb2.Visible = true;
             gvAmb3.Visible = true;
@@ -1352,8 +974,6 @@ namespace ESM.Evaluacion
             lblerrorAc.Visible = false;
             lbloki.Visible = false;
             informacionuno.Visible = true;
-            //btnalmacenarparcial.Visible = true;
-            ////btnDefinitiva.Visible = true;
 
             int idie = Convert.ToInt32(Session["idie"]);
             int idmedicion = Convert.ToInt32(Session["idmedicion"]);
@@ -1373,8 +993,6 @@ namespace ESM.Evaluacion
                         gvAmb3.DataBind();
                         gvAmb4.DataBind();
                         gvAmb5.DataBind();
-                        //btnalmacenarparcial.Visible = false;
-                        //btnDefinitiva.Visible = false;
                         informacionuno.Visible = false;
                         break;
 
@@ -1383,58 +1001,36 @@ namespace ESM.Evaluacion
                         Actorespnl.BackColor = System.Drawing.Color.Black;
                         _objevaluacion.Estudiantes = true;
                         CargarPreguntas(_objevaluacion);
-                        //btnDefinitiva.Visible = true;
-                        //btnalmacenarparcial.Visible = true;
                         break;
 
                     case "Profesional de Campo":
                         _objevaluacion = new EvaluationSettings.CEvaluacion();
                         _objevaluacion.Profesional = true;
                         CargarPreguntas(_objevaluacion);
-                        //lblActorEvaluado.Text = "Profesional de Campo";
-                        //gvEvaluacion.Visible = true;
-                        //btnDefinitiva.Visible = true;
-                        //btnalmacenarparcial.Visible = true;
                         break;
 
                     case "Educador":
                         _objevaluacion = new EvaluationSettings.CEvaluacion();
                         _objevaluacion.Docentes = true;
                         CargarPreguntas(_objevaluacion);
-                        //lblActorEvaluado.Text = "Educador";
-                        //gvEvaluacion.Visible = true;
-                        //btnDefinitiva.Visible = true;
-                        //btnalmacenarparcial.Visible = true;
                         break;
 
                     case "Padre de Familia":
                         _objevaluacion = new EvaluationSettings.CEvaluacion();
                         _objevaluacion.Padres = true;
                         CargarPreguntas(_objevaluacion);
-                        //lblActorEvaluado.Text = "Padre de Familia";
-                        //gvEvaluacion.Visible = true;
-                        //btnDefinitiva.Visible = true;
-                        //btnalmacenarparcial.Visible = true;
                         break;
 
                     case "Directivos":
                         _objevaluacion = new EvaluationSettings.CEvaluacion();
                         _objevaluacion.Directivos = true;
                         CargarPreguntas(_objevaluacion);
-                        //lblActorEvaluado.Text = "Directivos";
-                        //gvEvaluacion.Visible = true;
-                        //btnDefinitiva.Visible = true;
-                        //btnalmacenarparcial.Visible = true;
                         break;
 
                     case "Secretaria de Educacion":
                         _objevaluacion = new EvaluationSettings.CEvaluacion();
                         _objevaluacion.SecretariaEducacion = true;
                         CargarPreguntas(_objevaluacion);
-                        //lblActorEvaluado.Text = "Secretaria de Educacion";
-                        //gvEvaluacion.Visible = true;
-                        //btnDefinitiva.Visible = true;
-                        //btnalmacenarparcial.Visible = true;
                         break;
                 }
 
@@ -1444,10 +1040,7 @@ namespace ESM.Evaluacion
             {
                 lblerrorAc.Text = _objevaluacion.Error;
                 lblerrorAc.Visible = true;
-                //btnalmacenarparcial.Visible = false;
-                //btnDefinitiva.Visible = false;
                 informacionuno.Visible = false;
-                //btnVolverEE.Visible = true;
                 gvAmb1.Visible = false;
                 gvAmb2.Visible = false;
                 gvAmb3.Visible = false;
@@ -1496,47 +1089,6 @@ namespace ESM.Evaluacion
 
         }
 
-        protected void VolverSeleccion()
-        {
-            //divcarga.Visible = false;
-            //txtFiltro.Enabled = true;
-            //btnBuscar.Enabled = true;
-            //titulo21.Visible = false;
-            //gvResultados.Enabled = true;
-            //titulo3.Visible = false;
-            //tituloeval.Visible = false;
-            //titulo1ie.Visible = true;
-            //infoEval.Visible = false;
-            //lbloki.Visible = false;
-            //lbtnVolver.Visible = false;
-            //titulo22.Visible = false;
-            //gvResultados.Visible = true;
-            //filtrosp.Visible = true;
-            //gvTopEval.Visible = false;
-            //infoEval.Visible = false;
-            //gvEvaluacion.Visible = false;
-            ////btnalmacenarparcial.Visible = false;
-            ////btnDefinitiva.Visible = false;
-        }
-
-        protected void ObtenerActoresEvaluar(GridView ActoresExist)
-        {
-            //cboActores.DataBind();
-
-            //for (int i = 0; i < ActoresExist.Rows.Count; i++)
-            //{
-            //    string idactor = ActoresExist.Rows[i].Cells[2].Text;
-            //    for (int a = 0; a < cboActores.Items.Count; a++)
-            //    {
-            //        if (cboActores.Items[a].Value == idactor)
-            //            cboActores.Items.Remove(new ListItem().Value = idactor.ToString());
-
-            //    }
-            //    cboActores.Enabled = true;
-            //}
-
-        }
-
         #endregion
 
         #region Eventos Para Secretaría de Educación
@@ -1546,10 +1098,6 @@ namespace ESM.Evaluacion
 
             _objevaluacion = new EvaluationSettings.CEvaluacion();
             _objevaluacion.SecretariaEducacion = true;
-            //gvEvaluacion.DataSource = _objevaluacion.LoadEvaluation();
-            //gvEvaluacion.DataBind();
-
-            //lblActorEvaluado.Text = "Secretaria de Educacion";
 
             lblCodIe.Text = objRow.Cells[2].Text;
             lblIE.Text = objRow.Cells[3].Text;
@@ -1564,14 +1112,10 @@ namespace ESM.Evaluacion
 
             ModMediciones.Visible = false;
             ModEvaluacion.Visible = true;
-            //btnDefinitiva.Visible = true;
-            //btnalmacenarparcial.Visible = true;
             informacionuno.Visible = true;
             ModDocumentos.Visible = true;
             modSEseleccion.Visible = false;
             #endregion
-
-            //ObtenerTema(gvEvaluacion);
 
         }
         #endregion
@@ -1643,7 +1187,6 @@ namespace ESM.Evaluacion
 
                 if (rol == "Administrador")
                 {
-                    /*Cargo el control gridview con el data source obtenido de instituciones educativas*/
                     gvResultados.DataSource = CEE.ObtenerEEs(objCRoles.IdConsultor, false, true);
                     gvResultados.DataBind();
                 }

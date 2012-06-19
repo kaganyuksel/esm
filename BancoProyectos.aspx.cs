@@ -290,14 +290,14 @@ namespace ESM
         protected void refreshFiles(int Proyecto_id)
         {
             var files_proyect = from d_p in new Model.ESMBDDataContext().Documentos_Proyectos
-                                where d_p.proyectoid == Proyecto_id
+                                where d_p.proyectoid == Proyecto_id && d_p.Estado == true
                                 select d_p;
 
             string html_file = "";
 
             foreach (var item in files_proyect)
             {
-                html_file += "<li><strong><a href='/Files/Proyectos/" + item.Proyecto.Proyecto1 + "/Actas/" + item.Ruta + "'>" + item.Ruta + "</a></strong> ( " + item.Tipo + " ) --  Tamaño: " + (Convert.ToInt32(item.Tamano) / 1024).ToString() + "<b>KB</b></li>";
+                html_file += "<li id='li_document_" + item.Id + "'><strong><a href='/Files/Proyectos/" + item.Proyecto.Proyecto1 + "/Actas/" + item.Ruta + "'>" + item.Ruta + "</a></strong> ( " + item.Tipo + " ) --  Tamaño: " + (Convert.ToInt32(item.Tamano) / 1024).ToString() + "<b>KB</b><a id='a_document_" + item.Id + "' href='#' onclick='deleteFile(" + item.Id + ");'><img style='border: none; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;' src='/Icons/trash.png' width='24px'/></a></li>";
 
             }
 

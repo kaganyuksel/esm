@@ -7,7 +7,6 @@
     <link href="/Style/jqgrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
     <link href="Style/jquery-ui-1.8.15.custom.css" rel="stylesheet" type="text/css" />
     <link href="Style/bancoproyectos.css" rel="stylesheet" type="text/css" />
-    <link href="Style/mastercustom.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="/Scripts/jquery-ui-1.8.15.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jqgrid/grid.locale-es.js" type="text/javascript"></script>

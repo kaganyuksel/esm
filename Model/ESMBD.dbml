@@ -591,9 +591,9 @@
       <Association Name="Proyecto_Proyectos_Supuesto" Member="Proyectos_Supuestos" ThisKey="Id" OtherKey="Proyecto_supuesto_id" Type="Proyectos_Supuesto" />
       <Association Name="Proyecto_Fuentes_Financiacion" Member="Fuentes_Financiacions" ThisKey="Id" OtherKey="proyecto_id" Type="Fuentes_Financiacion" />
       <Association Name="Proyecto_Matriz_Actore" Member="Matriz_Actores" ThisKey="Id" OtherKey="proyecto_id" Type="Matriz_Actore" />
-      <Association Name="Proyecto_Documentos_Proyecto" Member="Documentos_Proyectos" ThisKey="Id" OtherKey="proyectoid" Type="Documentos_Proyecto" />
       <Association Name="Proyecto_Causas_Efecto" Member="Causas_Efectos" ThisKey="Id" OtherKey="Proyecto_id" Type="Causas_Efecto" />
       <Association Name="Proyecto_Registro_Proyecto" Member="Registro_Proyectos" ThisKey="Id" OtherKey="proyecto_id" Type="Registro_Proyecto" />
+      <Association Name="Proyecto_Documentos_Proyecto" Member="Documentos_Proyectos" ThisKey="Id" OtherKey="proyectoid" Type="Documentos_Proyecto" />
     </Type>
   </Table>
   <Table Name="dbo.Proyectos_Medios" Member="Proyectos_Medios">
@@ -962,16 +962,6 @@
       <Association Name="Unidade_Indicadore" Member="Unidade" ThisKey="unidad_id" OtherKey="Id" Type="Unidade" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Documentos_Proyecto" Member="Documentos_Proyectos">
-    <Type Name="Documentos_Proyecto">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Ruta" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="proyectoid" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Tipo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Tamano" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="Proyecto_Documentos_Proyecto" Member="Proyecto" ThisKey="proyectoid" OtherKey="Id" Type="Proyecto" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Causas_Efectos" Member="Causas_Efectos">
     <Type Name="Causas_Efecto">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -1003,6 +993,17 @@
       <Column Name="proyecto_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="responsable" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Association Name="Proyecto_Registro_Proyecto" Member="Proyecto" ThisKey="proyecto_id" OtherKey="Id" Type="Proyecto" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Documentos_Proyecto" Member="Documentos_Proyectos">
+    <Type Name="Documentos_Proyecto">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ruta" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="proyectoid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Tipo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Tamano" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Proyecto_Documentos_Proyecto" Member="Proyecto" ThisKey="proyectoid" OtherKey="Id" Type="Proyecto" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
