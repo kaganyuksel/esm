@@ -10,6 +10,9 @@ E:\ESM\obj\Debug\ESM.dll
 E:\ESM\obj\Debug\ESM.pdb
 E:\ESM\bin\ESM.dll
 E:\ESM\bin\ESM.pdb
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Debug\ResolveAssemblyReference.cache
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Debug\RdlCompile.cache
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Debug\RdlCompile.compiled
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\ESM.dll
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\ESM.pdb
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\DocumentFormat.OpenXml.dll
@@ -19,8 +22,5 @@ E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\Ionic.B
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\Ionic.Zip.dll
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\DocumentFormat.OpenXml.xml
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\Encrypt and decrypt.pdb
-E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Debug\ResolveAssemblyReference.cache
-E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Debug\RdlCompile.cache
-E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Debug\RdlCompile.compiled
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Debug\ESM.dll
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Debug\ESM.pdb

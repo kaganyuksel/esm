@@ -229,6 +229,15 @@ namespace ESM {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl fuentesfinanciacion;
         
         /// <summary>
+        /// matrizactores_div control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl matrizactores_div;
+        
+        /// <summary>
         /// org control.
         /// </summary>
         /// <remarks>
