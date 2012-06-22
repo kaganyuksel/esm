@@ -250,6 +250,20 @@
                     alert("Error " + result.status + ' ' + result.statusText);
                 }
             });
+            j.ajax({
+                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&matrizactores=true",
+                async: false,
+                success: function (result) {
+
+                    j("#ContentPlaceHolder1_matrizactores_div").html("");
+
+                    j("#ContentPlaceHolder1_matrizactores_div").html(result);
+
+                },
+                error: function (result) {
+                    alert("Error " + result.status + ' ' + result.statusText);
+                }
+            });
             j('#refreshOrganigrama').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&problemas=true');
             j('#refreshOrganigrama_obj').attr('href', '/Organigrama.aspx ?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&objetivos=true');
             j('#planaccion').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&planaccion=true');
@@ -688,57 +702,60 @@
             <br />
             <strong><em>Matriz de actores participantes. Tabla 01 </em></strong>
             <br />
-            <table class="table_class" border="1" cellspacing="0" cellpadding="0" style="border: #000;">
-                <tr>
-                    <td width="121" valign="top">
-                        <p>
-                            GRUPOS
-                        </p>
-                    </td>
-                    <td width="104" valign="top">
-                        <p>
-                            INTERESES</p>
-                    </td>
-                    <td width="173" valign="top">
-                        <p>
-                            PROBLEMA PERCIBIDO</p>
-                    </td>
-                    <td width="184" valign="top">
-                        <p>
-                            RECURSOS Y MANDATOS</p>
-                    </td>
-                </tr>
-                <tr style="height: 30px;">
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                <tr style="height: 30px;">
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                <tr style="height: 30px;">
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-            </table>
+            <div id="matrizactores_div" style="width: 100%; height: 800px; overflow-x: scroll;
+                overflow-y: scroll;" runat="server">
+                <table class="table_class" border="1" cellspacing="0" cellpadding="0" style="border: #000;">
+                    <tr>
+                        <td width="121" valign="top">
+                            <p>
+                                GRUPOS
+                            </p>
+                        </td>
+                        <td width="104" valign="top">
+                            <p>
+                                INTERESES</p>
+                        </td>
+                        <td width="173" valign="top">
+                            <p>
+                                PROBLEMA PERCIBIDO</p>
+                        </td>
+                        <td width="184" valign="top">
+                            <p>
+                                RECURSOS Y MANDATOS</p>
+                        </td>
+                    </tr>
+                    <tr style="height: 30px;">
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr style="height: 30px;">
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr style="height: 30px;">
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div class="page_magazine" id="page5">
             <p style="font-size: 14px; width: 90%; text-align: right;">

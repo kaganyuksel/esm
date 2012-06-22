@@ -371,6 +371,13 @@
     <Compile Include="Presupuesto_actividad.aspx.designer.cs">
       <DependentUpon>Presupuesto_actividad.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReporteGeneralIndicadores.aspx.cs">
+      <DependentUpon>ReporteGeneralIndicadores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReporteGeneralIndicadores.aspx.designer.cs">
+      <DependentUpon>ReporteGeneralIndicadores.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReporteIndicadores.aspx.cs">
       <DependentUpon>ReporteIndicadores.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -730,6 +737,7 @@
     <Content Include="Pretty\js\jquery-1.4.4.min.js" />
     <Content Include="Pretty\js\jquery-1.6.1.min.js" />
     <Content Include="Pretty\js\jquery.prettyPhoto.js" />
+    <Content Include="ReporteGeneralIndicadores.aspx" />
     <Content Include="ReporteIndicadores.aspx" />
     <Content Include="ReportesMen.aspx" />
     <Content Include="reportindicadores.aspx" />
@@ -1146,6 +1154,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Actividades_Valores_PlanOperativo.rdlc" />
+    <EmbeddedResource Include="GeneralIndicadores.rdlc" />
     <EmbeddedResource Include="Indicadores_Valores_PlanOperativo.rdlc" />
     <EmbeddedResource Include="Indicadores_PlanOperativo.rdlc" />
   </ItemGroup>

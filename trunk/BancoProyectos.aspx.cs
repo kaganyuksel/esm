@@ -1226,5 +1226,27 @@ namespace ESM
 
             fuentesfinanciacion.InnerHtml = fuentes_financiacion;
         }
+
+        protected void generateMatrizActores()
+        {
+            try
+            {
+                var matriz = from m in new ESM.Model.ESMBDDataContext().Matriz_Actores
+                             where m.proyecto_id == proyecto_id
+                             select m;
+
+                string matrizActores = "<table cellspacing='0' style='width:100%; border: 1px solid #000;'><caption>Matriz Actores</caption><theader><tr><th style='border: 1px solid #000;'>GRUPOS</th><th style='border: 1px solid #000;'>INTERESES</th><th style='border: 1px solid #000;'>PROBLEMA RECIBIDO</th><th style='border: 1px solid #000;'>RECURSOS Y MANDATOS</th></tr></theader><tbody>";
+
+                foreach (var item in matriz)
+                {
+                    matrizActores += "<tr><td style='border: 1px solid #000;'>" + item.Grupos + "</td>" + "<td style='border: 1px solid #000;'>" + item.Interes + "</td>" + "<td style='border: 1px solid #000;'>" + item.Problema_Percibido + "</td><td style='border: 1px solid #000;'>" + item.Recursos_Mandatos + "</td></tr>";
+                }
+
+                matrizActores += "</table>";
+
+                matrizactores_div.InnerHtml = matrizActores;
+            }
+            catch (Exception) { }
+        }
     }
 }
