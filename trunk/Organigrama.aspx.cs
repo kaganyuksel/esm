@@ -21,6 +21,8 @@ namespace ESM
             if (Request.QueryString["pdf"] == null)
             {
 
+                style_tables.InnerHtml = "div, h1, table, tr, td { font-family: 'Arial Narrow' , sans-serif;}";
+
                 if (Request.QueryString["problemas"] != null && Convert.ToBoolean(Request.QueryString["problemas"]))
                 {
                     titulo_problemas.Visible = true;

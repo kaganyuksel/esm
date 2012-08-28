@@ -41,7 +41,7 @@ namespace ESM
 
                     rptIndicadores.LocalReport.SetParameters(new ReportParameter("NombreProyecto", proyectoInformation.Proyecto1.ToUpper()));
                     rptIndicadores.LocalReport.SetParameters(new ReportParameter("Objetivo", proyectoInformation.Proposito.ToUpper()));
-                    rptIndicadores.LocalReport.SetParameters(new ReportParameter("FechaProyecto", proyectoInformation.Fecha_Creacion.ToString()));
+                    rptIndicadores.LocalReport.SetParameters(new ReportParameter("FechaProyecto", proyectoInformation.Fecha_Creacion == null ? DateTime.Now.ToString() : proyectoInformation.Fecha_Creacion.ToString()));
                     rptIndicadores.LocalReport.SetParameters(new ReportParameter("Fecha", DateTime.Now.ToString()));
 
                     objReportDataSourceRegistroproyectos.Name = "RegistroProyecto";
@@ -69,7 +69,7 @@ namespace ESM
 
         void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
         {
-            e.DataSources.Add(new ReportDataSource("DataSet1",ldsmetas));
+            e.DataSources.Add(new ReportDataSource("DataSet1", ldsmetas));
         }
     }
 }

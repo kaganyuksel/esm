@@ -7,7 +7,7 @@
     <link href="/Style/jqgrid/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
     <link href="Style/jquery-ui-1.8.15.custom.css" rel="stylesheet" type="text/css" />
     <link href="Style/bancoproyectos.css" rel="stylesheet" type="text/css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="/Scripts/jquery-ui-1.8.15.custom.min.js" type="text/javascript"></script>
     <script src="Scripts/jqgrid/grid.locale-es.js" type="text/javascript"></script>
     <script src="/Scripts/jqgrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
@@ -15,7 +15,13 @@
         var j = jQuery.noConflict();
         j(document).ready(function () {
 
-            j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); } });
+            if (document.body.clientWidth > 1024) {
+                j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { parent.UpdateArbolProblemas(j('#ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
+            }
+            else {
+                j.extend(j.jgrid.edit, { width: "250", afterComplete: function (response, postdata, formid) { parent.UpdateArbolProblemas(j('#ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
+            }
+            
 
             j("#jqgrid_act_ind_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=actividades_indicadores',

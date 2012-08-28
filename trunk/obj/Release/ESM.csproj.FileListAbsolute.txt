@@ -17,3 +17,17 @@ E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Release
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\ICSharpCode.SharpZipLib.dll
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\Ionic.BZip2.dll
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\Ionic.Zip.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\ESM.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\ESM.pdb
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\DocumentFormat.OpenXml.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\Encrypt and decrypt.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\ICSharpCode.SharpZipLib.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\Ionic.BZip2.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\Ionic.Zip.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\DocumentFormat.OpenXml.xml
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\Encrypt and decrypt.pdb
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Release\ResolveAssemblyReference.cache
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Release\RdlCompile.cache
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Release\RdlCompile.compiled
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Release\ESM.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Release\ESM.pdb

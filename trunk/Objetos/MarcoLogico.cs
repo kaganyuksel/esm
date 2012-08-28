@@ -35,23 +35,36 @@ namespace ESM.Objetos
         {
             try
             {
-                causa = causa.Replace("\n", " ");
-                causa = causa.Replace("\r", " ");
-
-                efecto = efecto.Replace("\n", " ");
-                efecto = efecto.Replace("\r", " ");
-
-                beneficio = beneficio.Replace("\n", " ");
-                beneficio = beneficio.Replace("\r", " ");
-
-                objetivo = objetivo.Replace("\n", " ");
-                objetivo = objetivo.Replace("\r", " ");
-
-                causaIndirecta = causaIndirecta.Replace("\n", " ");
-                causaIndirecta = causaIndirecta.Replace("\r", " ");
-
-                efectoIndirecto = efectoIndirecto.Replace("\n", " ");
-                efectoIndirecto = efectoIndirecto.Replace("\r", " ");
+                if (causa != null)
+                {
+                    causa = causa.Replace("\n", " ");
+                    causa = causa.Replace("\r", " ");
+                }
+                if (efecto != null)
+                {
+                    efecto = efecto.Replace("\n", " ");
+                    efecto = efecto.Replace("\r", " ");
+                }
+                if (beneficio != null)
+                {
+                    beneficio = beneficio.Replace("\n", " ");
+                    beneficio = beneficio.Replace("\r", " ");
+                }
+                if (objetivo != null)
+                {
+                    objetivo = objetivo.Replace("\n", " ");
+                    objetivo = objetivo.Replace("\r", " ");
+                }
+                if (causaIndirecta != null)
+                {
+                    causaIndirecta = causaIndirecta.Replace("\n", " ");
+                    causaIndirecta = causaIndirecta.Replace("\r", " ");
+                }
+                if (efectoIndirecto != null)
+                {
+                    efectoIndirecto = efectoIndirecto.Replace("\n", " ");
+                    efectoIndirecto = efectoIndirecto.Replace("\r", " ");
+                }
 
                 Causas_Efecto objCausas_Efecto = new Causas_Efecto
                 {
@@ -1067,6 +1080,10 @@ namespace ESM.Objetos
         {
             try
             {
+                var actividad = (from a in _db.Actividades
+                                 where a.Id == idactividad
+                                 select a).Single();
+
                 Indicadore objIndicadore = new Indicadore
                 {
                     Actividad_id = idactividad,
@@ -1080,7 +1097,10 @@ namespace ESM.Objetos
                     SSP = esSSP,
                     medios = medios,
                     supuestos = supuestos,
-                    descripcion = descripcion
+                    descripcion = descripcion,
+                    Proceso = actividad.Subproceso.Causas_Efecto.Proceso,
+                    Subproceso = actividad.Subproceso.Subproceso1,
+                    Actividad = actividad.Actividad
                 };
 
                 _db.Indicadores.InsertOnSubmit(objIndicadore);
@@ -1097,6 +1117,8 @@ namespace ESM.Objetos
             try
             {
 
+
+
                 var indicador_actividad = (from i in _db.Indicadores
                                            where i.Id == indicadorid
                                            select i).Single();
@@ -1112,7 +1134,6 @@ namespace ESM.Objetos
                 indicador_actividad.medios = medios;
                 indicador_actividad.supuestos = supuestos;
                 indicador_actividad.descripcion = descripcion;
-
                 _db.SubmitChanges();
 
                 return true;

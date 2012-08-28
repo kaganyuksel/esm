@@ -26,6 +26,9 @@ namespace ESM
                                  where i.Id == Convert.ToInt32(indicadorid)
                                  select i).Single();
 
+                rptIndicadores.LocalReport.SetParameters(new ReportParameter("proceso", indicador.Actividade.Subproceso.Causas_Efecto.Proceso));
+                rptIndicadores.LocalReport.SetParameters(new ReportParameter("subproceso", indicador.Actividade.Subproceso.Subproceso1));
+                rptIndicadores.LocalReport.SetParameters(new ReportParameter("actividad", indicador.Actividade.Actividad));
                 rptIndicadores.LocalReport.SetParameters(new ReportParameter("indicador", indicador.Indicador));
                 rptIndicadores.LocalReport.SetParameters(new ReportParameter("meta", indicador.meta.ToString()));
 
