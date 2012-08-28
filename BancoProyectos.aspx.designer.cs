@@ -94,6 +94,15 @@ namespace ESM {
         protected global::System.Web.UI.WebControls.Button btnExportarProyecto;
         
         /// <summary>
+        /// exportpdfanchor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor exportpdfanchor;
+        
+        /// <summary>
         /// txtnombreproyecto control.
         /// </summary>
         /// <remarks>

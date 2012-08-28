@@ -940,28 +940,6 @@
       <Association Name="Subproceso_Actividade" Member="Subproceso" ThisKey="Subproceso_id" OtherKey="Id" Type="Subproceso" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Indicadores" Member="Indicadores">
-    <Type Name="Indicadore">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Actividad_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Indicador" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="unidad_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="verbo_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="fecha_indicador_inicial" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="fecha_indicador_final" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Fecha_Creacion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="SSP" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="meta" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="medios" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="supuestos" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="descripcion" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="Indicadore_Indicadores_Responsable" Member="Indicadores_Responsables" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Responsable" />
-      <Association Name="Indicadore_Indicadores_Meta" Member="Indicadores_Metas" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Meta" />
-      <Association Name="Actividade_Indicadore" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="Verbo_Indicadore" Member="Verbo" ThisKey="verbo_id" OtherKey="Id" Type="Verbo" IsForeignKey="true" />
-      <Association Name="Unidade_Indicadore" Member="Unidade" ThisKey="unidad_id" OtherKey="Id" Type="Unidade" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Causas_Efectos" Member="Causas_Efectos">
     <Type Name="Causas_Efecto">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -1004,6 +982,31 @@
       <Column Name="Tamano" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Proyecto_Documentos_Proyecto" Member="Proyecto" ThisKey="proyectoid" OtherKey="Id" Type="Proyecto" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Indicadores" Member="Indicadores">
+    <Type Name="Indicadore">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Actividad_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Indicador" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="unidad_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="verbo_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fecha_indicador_inicial" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="fecha_indicador_final" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Fecha_Creacion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SSP" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="meta" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="medios" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="supuestos" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="descripcion" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Proceso" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Subproceso" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Actividad" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Indicadore_Indicadores_Responsable" Member="Indicadores_Responsables" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Responsable" />
+      <Association Name="Indicadore_Indicadores_Meta" Member="Indicadores_Metas" ThisKey="Id" OtherKey="Indicador_id" Type="Indicadores_Meta" />
+      <Association Name="Actividade_Indicadore" Member="Actividade" ThisKey="Actividad_id" OtherKey="Id" Type="Actividade" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Verbo_Indicadore" Member="Verbo" ThisKey="verbo_id" OtherKey="Id" Type="Verbo" IsForeignKey="true" />
+      <Association Name="Unidade_Indicadore" Member="Unidade" ThisKey="unidad_id" OtherKey="Id" Type="Unidade" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

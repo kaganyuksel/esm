@@ -15,6 +15,8 @@ namespace ESM
 
             if (ban_proyecto_id.Value != "0" && ban_proyecto_id.Value != "")
             {
+                informegeneral.Attributes.Add("href", "/reportegeneralindicadores.aspx?proyecto_id=" + ban_proyecto_id.Value);
+
                 Objetos.CActividades objActividades = new Objetos.CActividades();
 
                 var colindicadores = objActividades.getIndicadoresProyecto(Convert.ToInt32(ban_proyecto_id.Value));

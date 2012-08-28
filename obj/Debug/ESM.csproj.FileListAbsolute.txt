@@ -24,3 +24,30 @@ E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\Documen
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\bin\Encrypt and decrypt.pdb
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Debug\ESM.dll
 E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\ESM\obj\Debug\ESM.pdb
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\ESM.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\ESM.pdb
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\DocumentFormat.OpenXml.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\Encrypt and decrypt.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\ICSharpCode.SharpZipLib.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\Ionic.BZip2.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\Ionic.Zip.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\DocumentFormat.OpenXml.xml
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\Encrypt and decrypt.pdb
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Debug\ResolveAssemblyReference.cache
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Debug\RdlCompile.cache
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Debug\RdlCompile.compiled
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Debug\ESM.dll
+E:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Debug\ESM.pdb
+D:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\ESM.dll
+D:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\ESM.pdb
+D:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\Encrypt and decrypt.dll
+D:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\ICSharpCode.SharpZipLib.dll
+D:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\Ionic.BZip2.dll
+D:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\Ionic.Zip.dll
+D:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\DocumentFormat.OpenXml.xml
+D:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\bin\Encrypt and decrypt.pdb
+D:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Debug\ResolveAssemblyReference.cache
+D:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Debug\RdlCompile.cache
+D:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Debug\RdlCompile.compiled
+D:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Debug\ESM.dll
+D:\MGGROUP LDTA\Proyectos\Evaluacion Sistematisacion y monitoreo\Banco Proyectos\obj\Debug\ESM.pdb

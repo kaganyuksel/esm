@@ -4,10 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Organigramas - ESM</title>
-    <style type="text/css">
+    <style runat="server" id="style_tables" type="text/css">
         div, h1, table, tr, td
         {
-            /*font-family: 'Arial Narrow' , sans-serif;*/
             page-break-after: always;
         }
         td

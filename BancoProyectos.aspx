@@ -92,7 +92,12 @@
                 }
             });
 
-            j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { alert('El proceso finalizó correctamente.'); } });
+            if (document.body.clientWidth > 1024) {
+                j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
+            }
+            else {
+                j.extend(j.jgrid.edit, { width: "300", afterComplete: function (response, postdata, formid) { UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
+            }
 
             if (j("#ContentPlaceHolder1_post_back").val() == "1") {
                 j("#magazine").turn('next');
@@ -163,9 +168,6 @@
                     return false;
             });
 
-            setTimeout('tooltip();', 5000);
-
-
             if (document.getElementById("ContentPlaceHolder1_ban_files").value == "1") {
                 j("#magazine").css("margin-left", "auto");
                 j("#magazine").turn("page", 16);
@@ -185,14 +187,33 @@
                 document.getElementById("ContentPlaceHolder1_ban_files").value = " ";
             }
             if (j("#ContentPlaceHolder1_ban_proyecto_id").val() != " " && j("#ContentPlaceHolder1_ban_proyecto_id").val() != "0") {
-                setInterval("UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val(), true);", 3000);
+                setInterval("setUrls()", 3000);
             }
         });
 
-        setInterval('var numeric_text = j("#ContentPlaceHolder1_if_marco_logico").contents().find("#presupuesto"); j(numeric_text).change(function () { if(isNaN(j(this).val())){j(this).val("0");} });', 3000);
+        function setUrls() {
+            j('#refreshOrganigrama').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&problemas=true');
+            j('#refreshOrganigrama_obj').attr('href', '/Organigrama.aspx ?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&objetivos=true');
+            j('#planaccion').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&planaccion=true');
+        }
+        setTimeout('speech()', 3000);
+        setInterval('IntervalTools()', 3000);
 
-        function refreshMarcoLogico() {
-            var id = j('#ContentPlaceHolder1_ban_proyecto_id').val();
+        function speech() {
+            j("input:text, input:password").attr("x-webkit-speech", "x-webkit-speech");
+
+            //            j("textarea").each(function () {
+            //                var pixels = parseInt(j(this).css("width")) - 30;
+            //                j(this).css("width", pixels + "px");
+            //                j(this).parent().append("<input type='text' x-webkit-speech = 'x-webkit-speech' style='width: 15px; background: transparent; border: 0;' onwebkitspeechchange=\"textarea_change($(this),'" + j(this).attr("id") + "');\"/>");
+            //            });
+        }
+
+        function IntervalTools() {
+            var numeric_text = j("#ContentPlaceHolder1_if_marco_logico").contents().find("#presupuesto"); j(numeric_text).change(function () { if (isNaN(j(this).val())) { j(this).val("0"); } });
+        }
+
+        function UpdateArbolProblemas(id, actualizar) {
             j.ajax({
                 url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&refreshMarcoLogico=true",
                 async: false,
@@ -205,23 +226,7 @@
                     // TODO:JCMM: Mensaje de Error Controlado
                 }
             });
-        }
 
-        function tooltip() {
-            j(".node").each(function () {
-                j(this).attr("title", j(this).html());
-            });
-            j(".node").each(function () {
-                j(this).html(j(this).html().substring(0, 8));
-            });
-
-            j(".node").each(function () {
-                j(this).qtip({ content: j(this).attr("title"), show: "mouseover", hide: "mouseout", style: { name: "dark" }
-                });
-            });
-        }
-
-        function UpdateArbolProblemas(id, actualizar) {
             j.ajax({
                 url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolproblemas=true",
                 async: false,
@@ -264,9 +269,6 @@
                     alert("Error " + result.status + ' ' + result.statusText);
                 }
             });
-            j('#refreshOrganigrama').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&problemas=true');
-            j('#refreshOrganigrama_obj').attr('href', '/Organigrama.aspx ?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&objetivos=true');
-            j('#planaccion').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&planaccion=true');
         }
         function deleteFile(file) {
             if (confirm('Esta seguro que desea eliminar el archivo.')) {
@@ -419,8 +421,10 @@
                 </asp:DropDownList>
                 <asp:Button Text="Actualizar Proyecto" ID="btncargar" Width="70%" OnClick="btncargar_Click"
                     runat="server" />
-                <asp:Button ID="btnExportarProyecto" Width="70%" Text="Exportar Proyecto" runat="server"
-                    OnClick="btnExportarProyecto_Click" />
+                <asp:Button ID="btnExportarProyecto" Width="70%" Text="Exportar Proyecto Como Directorio"
+                    runat="server" OnClick="btnExportarProyecto_Click" />
+                <a id="exportpdfanchor" target="_blank" style="display: inline-block;" runat="server"
+                    href="">Exportar Proyecto Como PDF</a>
             </section>
             <p style="width: 100%; text-align: center;">
                 Versión No. 1.0</p>
