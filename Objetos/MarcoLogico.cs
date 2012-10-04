@@ -156,6 +156,22 @@ namespace ESM.Objetos
 
         }
 
+        public bool DeleteItem(int causaEfecto_id)
+        {
+            try
+            {
+                var element = (from elm in _db.Causas_Efectos
+                                 where elm.Id == causaEfecto_id
+                                 select elm).Single();
+
+
+                _db.Causas_Efectos.DeleteOnSubmit(element);
+                _db.SubmitChanges();
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
         public IQueryable<Causas_Efecto> getCount(int idproyecto)
         {
             try
@@ -1743,7 +1759,21 @@ namespace ESM.Objetos
             catch (Exception) { return false; }
         }
 
+        public bool DeleteItem(int matriz_id)
+        {
+            try
+            {
+                var elementMA = (from m_a in _db.Matriz_Actores
+                                 where m_a.Id == matriz_id
+                                 select m_a).Single();
 
+
+                _db.Matriz_Actores.DeleteOnSubmit(elementMA);
+                _db.SubmitChanges();
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
 
     }
 
@@ -1816,7 +1846,20 @@ namespace ESM.Objetos
             catch (Exception) { return false; }
         }
 
+        public bool DeleteItem(int fuentes_id) {
+            try
+            {
+                var elementFF = (from f_f in _db.Fuentes_Financiacions
+                                where f_f.Id == fuentes_id
+                                select f_f).Single();
 
+
+                _db.Fuentes_Financiacions.DeleteOnSubmit(elementFF);
+                _db.SubmitChanges();
+                return true;
+            }
+            catch (Exception){ return false; }
+        }
 
     }
 

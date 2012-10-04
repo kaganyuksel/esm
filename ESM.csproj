@@ -181,12 +181,12 @@
     <Compile Include="Ayuda.aspx.designer.cs">
       <DependentUpon>Ayuda.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BancoProyectos.aspx.cs">
-      <DependentUpon>BancoProyectos.aspx</DependentUpon>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BancoProyectos.aspx.designer.cs">
-      <DependentUpon>BancoProyectos.aspx</DependentUpon>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Cita.aspx.cs">
       <DependentUpon>Cita.aspx</DependentUpon>
@@ -476,7 +476,7 @@
     <Content Include="ArbolObjetivos.aspx" />
     <Content Include="ArbolProblemas.aspx" />
     <Content Include="Ayuda.aspx" />
-    <Content Include="BancoProyectos.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="Cita.aspx" />
     <Content Include="Citas.aspx" />
     <Content Include="Consolidado.aspx" />
@@ -520,13 +520,16 @@
     <Content Include="Organigrama.aspx" />
     <Content Include="ReporteActividades.aspx" />
     <Content Include="reportactividades.aspx" />
-    <Content Include="Default.aspx" />
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Content Include="Style\bootstrap\css\bootstrap.css" />
+    <Content Include="Style\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Style\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="_Default.aspx" />
+    <Compile Include="_Default.aspx.cs">
+      <DependentUpon>_Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="_Default.aspx.designer.cs">
+      <DependentUpon>_Default.aspx</DependentUpon>
     </Compile>
     <Content Include="DetallesMarcoLogico.aspx" />
     <Content Include="DiagramaGant.aspx" />
@@ -1171,7 +1174,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>53975</DevelopmentServerPort>
+          <DevelopmentServerPort>55526</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

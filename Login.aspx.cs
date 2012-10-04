@@ -38,7 +38,7 @@ namespace ESM
         {
             Session.Add("idusuario", SecuritySesion.AutenticacionUsuario(txtUsuario.Text, txtContrasena.Text));
             if (Session["idusuario"] != null)
-                Response.Redirect("/BancoProyectos.aspx");
+                Response.Redirect("/Default.aspx");
         }
     }
 }

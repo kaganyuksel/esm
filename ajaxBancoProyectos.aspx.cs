@@ -54,6 +54,8 @@ namespace ESM
                                 AgregarFuentesFinanciacion();
                             else if (operacion == "edit")
                                 EditarFuentesFinanciacion();
+                            else if (operacion == "del")
+                                EliminarFuentesFinanciacion();
                         }
                         else if (Request.QueryString["tabla"].ToString() == "i" && proyecto_id != 0)
                         {
@@ -62,6 +64,8 @@ namespace ESM
                                 AgregarMatrizActores();
                             else if (operacion == "edit")
                                 EditarMatriz();
+                            else if (operacion == "del")
+                                EliminarMatriz();
                         }
                         else if (Request.QueryString["tabla"].ToString() == "c_e" && proyecto_id != 0)
                         {
@@ -70,6 +74,8 @@ namespace ESM
                                 AgregarCausasEfectos();
                             else if (operacion == "edit")
                                 EditarCausasEfectos();
+                            else if (operacion == "del")
+                                EliminarCausaEfecto();
                         }
                         else if (Request.QueryString["tabla".ToString()] == "subp" && proyecto_id != 0)
                         {
@@ -138,6 +144,12 @@ namespace ESM
                 }
                 else
                 {
+                    if (Request.Form["oper"] != null && Request.Form["oper"] == "del")
+                    {
+                        Session.Add("id", Request.Form["id"]);
+                        Session.Add("operacion", Request.Form["oper"]);
+                    }
+
                     if (Request.Form["tipoentidad"] != null)
                     {
                         Session.Add("f_f_id", Request.Form["id"]);
@@ -1064,6 +1076,15 @@ namespace ESM
                 Session.Remove("objetivo");
             }
         }
+        protected void EliminarCausaEfecto()
+        {
+            int id = Convert.ToInt32(Session["id"].ToString());
+            if (objCCausas_Efecto.DeleteItem(id))
+            {
+                Session.Remove("id");
+                Session.Remove("operacion");
+            }
+        }
 
         protected void EditarFuentesFinanciacion()
         {
@@ -1078,6 +1099,17 @@ namespace ESM
                 Session.Remove("tipo_entidad");
                 Session.Remove("entidadd");
                 Session.Remove("tiporecurso");
+                Session.Remove("operacion");
+            }
+        }
+
+        protected void EliminarFuentesFinanciacion()
+        {
+            int ff_id = Convert.ToInt32(Session["id"].ToString());
+
+            if (objCFuentes_Financiacion.DeleteItem(ff_id))
+            {
+                Session.Remove("id");
                 Session.Remove("operacion");
             }
         }
@@ -1099,7 +1131,16 @@ namespace ESM
                 Session.Remove("operacion");
             }
         }
+        protected void EliminarMatriz()
+        {
+            int id = Convert.ToInt32(Session["id"].ToString());
 
+            if (objCMatriz.DeleteItem(id))
+            {
+                Session.Remove("id");
+                Session.Remove("operacion");
+            }
+        }
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         protected void CargarFile()
         {
@@ -1128,7 +1169,7 @@ namespace ESM
                                  where py.Id == proyecto_id
                                  select py).Single();
 
-            string html = "<table border='1' cellspacing='0' style='border: 1px solid #000;'><caption>Marco Lógico</caption>";
+            string html = "<table border='1' cellspacing='0' style='border: 1px solid #000; width: 100%;'><caption>Marco Lógico</caption>";
             html += "<tr><td style='border: 1px solid #000;'>" + proyecto_info.Finalidad + "</td><td style='border: 1px solid #000;'></td><td style='border: 1px solid #000;'>INDICADOR</td><td style='border: 1px solid #000;'>MEDIOS DE VERIFICACIÓN</td><td style='border: 1px solid #000;'>SUPUESTOS</td></tr>";
             int color = 0;
             string color_cadena = "D6D6D6";
