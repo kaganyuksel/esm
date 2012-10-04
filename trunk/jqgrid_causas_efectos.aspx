@@ -45,7 +45,7 @@
                 editurl: "ajaxBancoProyectos.aspx",
                 caption: "CAUSAS -- EFECTOS"
             });
-            j("#jqgrid_c_e_t").jqGrid('navGrid', "#jqgrid_c_e_d", { edit: true, add: true, del: false });
+            j("#jqgrid_c_e_t").jqGrid('navGrid', "#jqgrid_c_e_d", { edit: true, add: true, del: true });
             j("#jqgrid_c_e_t").jqGrid('inlineNav', "#jqgrid_c_e_d");
 
             j("#jqgrid_o_b_t").jqGrid({

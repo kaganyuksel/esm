@@ -32,6 +32,10 @@
     -webkit-transition: all 0.9s; /* Safari and Chrome */
     -o-transition: all 0.9s; /* Opera */
 }
+#magazine #portada
+{
+    background: #fff;
+}
 #magazine .turn-page
 {
     width: 400px;
@@ -70,7 +74,7 @@ H3
     font-family: 'Arial Narrow' , helvetica;
 }
 
-#magazine div input[type="text"]
+/*#magazine div input[type="text"]
 {
     margin-top: 15px;
     height: 20px;
@@ -78,8 +82,8 @@ H3
     border: 2px solid #D9D9D9;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
-    border-radius: 2px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
-}
+    border-radius: 2px; IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS
+}*/
 #magazine div table tr td input[type="text"]
 {
     height: 1.5em;
@@ -90,9 +94,18 @@ H3
     -webkit-border-radius: 1px;
     border-radius: 1px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
 }
+.row input[type=text]
+{
+    margin-left: 50px;
+    border: 2px solid #28799C;
+    font-family: 'Arial Narrow' ,Helvetica;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px; /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+}
 textarea
 {
-    border: 2px solid #D9D9D9;
+    border: 2px solid #28799C;
     font-family: 'Arial Narrow' ,Helvetica;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -155,9 +168,43 @@ p
 .page_magazine
 {
     border: 2px solid #D9D9D9;
-    padding: 5 5 5 5;
+    /*padding: 5 5 5 5;*/
     background: #ccc;
+    /*background-image: url(/Icons/flip.jpg);*/
+    
 }
+
+.page_magazine textarea
+{
+    width: 90%;
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+    
+}
+.page_magazine .h3
+{
+    font-weight: 300;
+    width: 100%;
+    color: #fff;
+    background: #28799C;
+}
+.page_magazine .h3 h3
+{    
+    color: #fff;
+}
+.page_magazine .row
+{    
+    background: #D9D9D9;
+    padding: 5px 5px 5px 5px;
+}
+
+.th
+{
+    background: #28799C;
+    color: #fff;
+}
+
 table tr td select
 {
     min-width: 40%;
