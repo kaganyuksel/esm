@@ -14,12 +14,7 @@
     <script type="text/javascript">
         var j = jQuery.noConflict();
         j(document).ready(function () {
-            if (document.body.clientWidth > 1024) {
-                j.extend(j.jgrid.edit, { width: "600", afterComplete: function (response, postdata, formid) { parent.UpdateArbolProblemas(j('#ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
-            }
-            else {
-                j.extend(j.jgrid.edit, { width: "250", afterComplete: function (response, postdata, formid) { parent.UpdateArbolProblemas(j('#ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
-            }
+            j.extend(j.jgrid.edit, { width: parent.sizePageOne, afterComplete: function (response, postdata, formid) { parent.UpdateArbolProblemas(j('#ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
 
             j("#jqgrid_c_e_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=causas_efectos',
@@ -39,6 +34,7 @@
                 pager: '#jqgrid_c_e_d',
                 sortname: 'id',
                 mytype: "POST",
+                width: parent.sizePageOne,
                 postData: { tabla: "c_e", proyecto_id: function () { return j("#ban_proyecto_id").val(); } },
                 viewrecords: true,
                 sortorder: "desc",
@@ -66,6 +62,7 @@
                 pager: '#jqgrid_o_b_d',
                 sortname: 'id',
                 mytype: "POST",
+                width: parent.sizePageOne,
                 postData: { tabla: "c_e", proyecto_id: function () { return j("#ban_proyecto_id").val(); } },
                 viewrecords: true,
                 sortorder: "desc",

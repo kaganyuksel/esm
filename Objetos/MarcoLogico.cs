@@ -914,7 +914,6 @@ namespace ESM.Objetos
             }
         }
 
-
         public bool UpdateMeta(object idmeta, int indicador_id, int valor, DateTime fecha)
         {
             try
@@ -956,6 +955,23 @@ namespace ESM.Objetos
                 return false;
             }
         }
+
+        public bool DeleteMetaItem(int id)
+        {
+            try
+            {
+                var element = (from elm in _db.Indicadores_Metas
+                               where elm.Id == id
+                               select elm).Single();
+
+
+                _db.Indicadores_Metas.DeleteOnSubmit(element);
+                _db.SubmitChanges();
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
 
         public List<object[,]> getIndicadoresVencidos(int usuario_id)
         {
@@ -1092,6 +1108,22 @@ namespace ESM.Objetos
 
         }
 
+        public bool DeleteItem(int id)
+        {
+            try
+            {
+                var element = (from elm in _db.Actividades
+                               where elm.Id == id
+                               select elm).Single();
+
+
+                _db.Actividades.DeleteOnSubmit(element);
+                _db.SubmitChanges();
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
         public bool AddIndicador(int idactividad, string indicador, int verboid, int unidadid, DateTime fecha_inicial, DateTime fecha_final, int meta_numero, bool esSSP, string medios, string supuestos, string descripcion)
         {
             try
@@ -1156,6 +1188,22 @@ namespace ESM.Objetos
             }
             catch (Exception) { return false; }
 
+        }
+
+        public bool DeleteIndicadoresItem(int id)
+        {
+            try
+            {
+                var element = (from elm in _db.Indicadores
+                               where elm.Id == id
+                               select elm).Single();
+
+
+                _db.Indicadores.DeleteOnSubmit(element);
+                _db.SubmitChanges();
+                return true;
+            }
+            catch (Exception) { return false; }
         }
 
         public bool AddMedios(int actividadid, int medioid)
@@ -1410,6 +1458,22 @@ namespace ESM.Objetos
 
         }
 
+        public bool DeleteItem(int id)
+        {
+            try
+            {
+                var element = (from elm in _db.Subprocesos
+                               where elm.Id == id
+                               select elm).Single();
+
+
+                _db.Subprocesos.DeleteOnSubmit(element);
+                _db.SubmitChanges();
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
         public bool AddMedios(int subprocesoid, int medioid)
         {
             try
@@ -1580,6 +1644,22 @@ namespace ESM.Objetos
             }
             catch (Exception) { return false; }
 
+        }
+        
+        public bool DeleteItem(int id)
+        {
+            try
+            {
+                var element = (from elm in _db.Resultados_Proyectos
+                               where elm.Id == id
+                               select elm).Single();
+
+
+                _db.Resultados_Proyectos.DeleteOnSubmit(element);
+                _db.SubmitChanges();
+                return true;
+            }
+            catch (Exception) { return false; }
         }
 
         public bool AddMedios(int resultado_id, int medioid)

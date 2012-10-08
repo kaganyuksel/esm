@@ -84,6 +84,8 @@ namespace ESM
                                 AgregarSubprocesos();
                             else if (operacion == "edit")
                                 EditarSubprocesos();
+                            else if (operacion == "del")
+                                EliminarSubprocesos();
                         }
                         else if (Request.QueryString["tabla"] == "act" && proyecto_id != 0)
                         {
@@ -92,6 +94,8 @@ namespace ESM
                                 AgregarActividad();
                             else if (operacion == "edit")
                                 EditarActividades();
+                            else if (operacion == "del")
+                                EliminarActividades();
                         }
                         else if (Request.QueryString["tabla"] == "ind" && proyecto_id != 0)
                         {
@@ -100,6 +104,8 @@ namespace ESM
                                 AgregarIndicadores();
                             else if (operacion == "edit")
                                 EditarIndicadores();
+                            else if (operacion == "del")
+                                EliminarIndicadores();
                         }
                         else if (Request.QueryString["tabla"] == "ind_val_t" && proyecto_id != 0)
                         {
@@ -108,6 +114,8 @@ namespace ESM
                                 AgregarIndicadoresValores();
                             else if (operacion == "edit")
                                 EditarIndicadoresValores();
+                            else if (operacion == "del")
+                                EliminarIndicadoresValores();
                         }
 
                         if (Request.QueryString["modulo"].ToString() == "fuentes_financiacion")
@@ -768,6 +776,18 @@ namespace ESM
             }
         }
 
+        protected void EliminarIndicadoresValores()
+        {
+            int meta_id = Convert.ToInt32(Session["id"]);
+
+            if (objCActividades.DeleteMetaItem(meta_id))
+            {
+                Session.Remove("id");
+                Session.Remove("operacion");
+
+            }
+        }
+
         protected void AgregarIndicadores()
         {
             bool metaIsNumeric = true;
@@ -891,6 +911,18 @@ namespace ESM
                 Session.Remove("supuestos");
                 Session.Remove("descripcion");
                 Session.Remove("tiporedaccion");
+            }
+        }
+
+        protected void EliminarIndicadores()
+        {
+            int ind_id = Convert.ToInt32(Session["id"].ToString());
+
+
+            if (objCActividades.DeleteIndicadoresItem(ind_id))
+            {
+                Session.Remove("id");
+                Session.Remove("operacion");
             }
         }
 
@@ -1021,6 +1053,17 @@ namespace ESM
             }
         }
 
+        protected void EliminarActividades()
+        {
+            int actividad_id = Convert.ToInt32(Session["id"].ToString());
+
+            if (objCActividades.DeleteItem(actividad_id))
+            {
+                Session.Remove("id");
+                Session.Remove("operacion");
+            }
+        }
+
         protected void EditarSubprocesos()
         {
             int sub_id = Convert.ToInt32(Session["sub_id"].ToString());
@@ -1040,7 +1083,16 @@ namespace ESM
                 Session.Remove("operacion");
             }
         }
+        public void EliminarSubprocesos()
+        {
+            int sub_id = Convert.ToInt32(Session["id"].ToString());
 
+            if (objSubprocesos.DeleteItem(sub_id))
+            {
+                Session.Remove("id");
+                Session.Remove("operacion");
+            }
+        }
         protected void EditarCausasEfectos()
         {
             int c_e_id = Convert.ToInt32(Session["c_e_id"].ToString());
