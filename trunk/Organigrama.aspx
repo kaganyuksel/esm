@@ -17,6 +17,7 @@
     </style>
 </head>
 <body>
+    <input type="button" name="volverESM" value="Volver" onclick="window.close();"/>
     <form id="form1" runat="server">
     <div style="page-break-after: always;">
         <h1 id="titulo_problemas" runat="server">

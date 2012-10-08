@@ -15,12 +15,7 @@
         var interval = null;
         var j = jQuery.noConflict();
         j(document).ready(function () {
-            if (document.body.clientWidth > 1024) {
-                j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { parent.UpdateArbolProblemas(j('#ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
-            }
-            else {
-                j.extend(j.jgrid.edit, { width: "250", afterComplete: function (response, postdata, formid) { parent.UpdateArbolProblemas(j('#ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
-            }
+            j.extend(j.jgrid.edit, { width: parent.sizePageOne, afterComplete: function (response, postdata, formid) { parent.UpdateArbolProblemas(j('#ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
 
             j("#jqgrid_subp_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=subprocesos',
@@ -42,6 +37,7 @@
                 postData: { tabla: "subp", proyecto_id: function () { return j("#ban_proyecto_id").val(); } },
                 viewrecords: true,
                 sortorder: "desc",
+                width: parent.sizePageOne,
                 editurl: "ajaxBancoProyectos.aspx",
                 caption: "Marco Lógico",
                 onSelectRow: function (ids) {
@@ -118,6 +114,7 @@
                 postData: { tabla: "act", proyecto_id: function () { return j("#ban_proyecto_id").val(); } },
                 viewrecords: true,
                 sortorder: "desc",
+                width: parent.sizePageOne,
                 editurl: "ajaxBancoProyectos.aspx",
                 caption: "Marco Lógico"
             });
@@ -146,6 +143,7 @@
                 pager: '#jqgrid_m_l_d',
                 sortname: 'id',
                 mytype: "POST",
+                width: parent.sizePageOne,
                 onSelectRow: function (ids) {
                     var json_indicador_select = j("#jqgrid_m_t").jqGrid('getRowData', ids);
                     jqgrid_indicador_id = json_indicador_select.id;
@@ -202,13 +200,14 @@
                 pager: '#jqgrid_val_ind_d',
                 sortname: 'id',
                 mytype: "POST",
+                width: parent.sizePageOne,
                 postData: { tabla: "ind_val_t", proyecto_id: function () { return j("#ban_proyecto_id").val(); } },
                 viewrecords: true,
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
                 caption: "Marco Lógico"
             });
-            j("#jqgrid_val_ind_t").jqGrid('navGrid', "#jqgrid_val_ind_d", { edit: true, add: true, del: false });
+            j("#jqgrid_val_ind_t").jqGrid('navGrid', "#jqgrid_val_ind_d", { edit: true, add: true, del: true });
             j("#jqgrid_val_ind_t").jqGrid('inlineNav', "#jqgrid_val_ind_d");
 
         });

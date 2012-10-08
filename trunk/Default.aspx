@@ -13,51 +13,143 @@
     <script src="fancybox/jquery.fancybox-1.3.4.js" type="text/javascript"></script>
     <script src="fancybox/jquery.easing-1.3.pack.js" type="text/javascript"></script>
     <script type="text/javascript">
+        //======================================================================
+        // Definicion de variables
+        //======================================================================
         var fls;
         var nuevo = false;
         var path_files = [];
+        var obj_file = null;
+        var page_number = null;
+        var if_marcologico;
+        var sizePageOne = 0;
+        //======================================================================
+        // Fin: Definicion de variables
+        //======================================================================
+        //======================================================================
+        // Definicion de Funciones Globales con Jquery en $
+        //======================================================================
         function addlist(event) {
             if (window.File) {
                 fls = event.target.files;
-
                 var lista = [];
                 for (var i = 0, f; f = fls[i]; i++) {
                     var html_file = '<li><strong>' + f.name + '</strong> (' + f.type + ') -- ' + f.lastModifiedDate.toLocaleDateString() + '</li>';
-
                     lista.push(html_file);
                 }
-
                 var output_list = document.getElementById('ContentPlaceHolder1_list');
-
                 output_list.innerHTML = '<ul>' + lista.join('') + '</ul>';
             }
-
             j('#ContentPlaceHolder1_btnuploadfile').trigger('click');
-
         }
-
-        var obj_file = null;
-        var page_number = null;
+        //======================================================================
+        // Fin: Definicion de Funciones Globales con Jquery en $
+        //======================================================================
+        //======================================================================
+        // Se asigna la letra j para Jquery
+        //======================================================================
         var j = jQuery.noConflict();
+        //======================================================================
+        // Fin: Se asigna la letra j para Jquery
+        //======================================================================
+        //======================================================================
+        // Definicion de Funciones Globales con Jquery en j
+        //======================================================================
+        function setUrls() {
+            j('#refreshOrganigrama').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&problemas=true');
+            j('#refreshOrganigrama_obj').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&objetivos=true');
+            j('#planaccion').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&planaccion=true');
+        }
+        setTimeout('speech()', 3000);
+        setInterval('IntervalTools()', 3000);
+        function IntervalTools() {
+            var numeric_text = j("#ContentPlaceHolder1_if_marco_logico").contents().find("#presupuesto"); j(numeric_text).change(function () { if (isNaN(j(this).val())) { j(this).val("0"); } });
+        }
+        function UpdateArbolProblemas(id, actualizar) {
+            j.ajax({
+                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&refreshMarcoLogico=true",
+                async: false,
+                success: function (result) {
+                    j("#ContentPlaceHolder1_content_marcologico").html("");
 
-        var if_marcologico;
-
-        j(document).ready(function () {
-
-            j("#close_message").click(function () {
-
-                j("#forie").css("display", "none");
-
+                    j("#ContentPlaceHolder1_content_marcologico").html(result);
+                },
+                error: function (result) {
+                    // TODO:JCMM: Mensaje de Error Controlado
+                }
             });
-
+            j.ajax({
+                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolproblemas=true",
+                async: false,
+                success: function (result) {
+                    j("#ContentPlaceHolder1_org").html("");
+                    j("#ContentPlaceHolder1_org").html(result);
+                },
+                error: function (result) {
+                    alert("Error " + result.status + ' ' + result.statusText);
+                }
+            });
+            j.ajax({
+                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolobjetivos=true",
+                async: false,
+                success: function (result) {
+                    j("#ContentPlaceHolder1_org_objetivos").html("");
+                    j("#ContentPlaceHolder1_org_objetivos").html(result);
+                },
+                error: function (result) {
+                    alert("Error " + result.status + ' ' + result.statusText);
+                }
+            });
+            j.ajax({
+                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&matrizactores=true",
+                async: false,
+                success: function (result) {
+                    j("#ContentPlaceHolder1_matrizactores_div").html("");
+                    j("#ContentPlaceHolder1_matrizactores_div").html(result);
+                },
+                error: function (result) {
+                    alert("Error " + result.status + ' ' + result.statusText);
+                }
+            });
+        }
+        function deleteFile(file) {
+            if (confirm('Esta seguro que desea eliminar el archivo.')) {
+                j.ajax({
+                    url: "ajaxBancoProyectos.aspx?deleteFile=" + file,
+                    async: false,
+                    success: function (result) {
+                        j("#a_document_" + file).parent().remove();
+                    },
+                    error: function (result) {
+                        alert("Error " + result.status + ' ' + result.statusText);
+                    }
+                });
+            }
+        }
+        //======================================================================
+        // Fin: Definicion de Funciones Globales con Jquery en j
+        //======================================================================
+        //======================================================================
+        // Se ejecuta el evento cuando la pagina este lista y cargada
+        //======================================================================
+        j(document).ready(function () {
+            sizePageOne = j("#basicaproyecto").css("width");
+            if (sizePageOne != 0) {
+                sizePageOne = Math.round((parseInt(sizePageOne) * 45) / 100);
+            }
+            j("#close_message").click(function () {j("#forie").css("display", "none");});
+            //==============================================================================
+            // Procedimineto para mantener la barra superior estatica segun el scroll
+            //==============================================================================
             j(this).scroll(function () {
-
                 var distancia = window.scrollY
                 if (distancia >= 110) {
                     j("#nav_page").css("top", "0px");
                     j("#nav_page").css("position", "fixed");
-                    j("#nav_page").css("margin-left", "35%");
+                    j("#nav_page").css("margin-left", "");
                     j("#nav_page").css("z-index", "5000");
+                    j("#nav_page").css("margin", "0 auto");
+                    j("#nav_page").css("width", "100%");
                 }
                 else if (distancia <= 110) {
                     j("#nav_page").css("top", "");
@@ -66,14 +158,16 @@
                     j("#nav_page").css("z-index", "");
                 }
             });
-
+            //==============================================================================
+            // Fin: Procedimineto para mantener la barra superior estatica segun el scroll
+            //==============================================================================
+            //==============================================================================
+            // Asignacion para la division que contiene el plugin de Page Flip Trun.js
+            //==============================================================================
             obj_file = document.getElementById('ContentPlaceHolder1_files');
             obj_file.addEventListener('change', addlist, false);
-
             page_number = j("#magazine").turn('page');
-
             j("#magazine").css("margin-left", "-20%");
-
             j('#magazine').turn({
                 gradients: true,
                 acceleration: true,
@@ -85,23 +179,26 @@
                         j('#magazine').css('margin-left', '-20%');
                     } else if (j('#magazine').turn('page') == 2) {
                         j('#magazine').css('margin-left', 'auto');
+                    } else if (j('#magazine').turn('page') == 3) {
+                        j('#accordion').accordion({ autoHeight: false,
+                            navigation: true,
+                            collapsible: true
+                        });
                     }
                 }
                 }
             });
-
-            if (document.body.clientWidth > 1024) {
-                j.extend(j.jgrid.edit, { width: "500", afterComplete: function (response, postdata, formid) { UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
-            }
-            else {
-                j.extend(j.jgrid.edit, { width: "300", afterComplete: function (response, postdata, formid) { UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
-            }
-
+            //==============================================================================
+            // Fin: Asignacion para la division que contiene el plugin de Page Flip Trun.js
+            //==============================================================================
+            //==============================================================================
+            // Ejecucion de procedimiento para asignacion de Jqgrid
+            //==============================================================================
+            j.extend(j.jgrid.edit, { width: sizePageOne, afterComplete: function (response, postdata, formid) { UpdateArbolProblemas(j('#ContentPlaceHolder1_ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
             if (j("#ContentPlaceHolder1_post_back").val() == "1") {
                 j("#magazine").turn('next');
                 j("#ContentPlaceHolder1_post_back").val("");
             }
-
             j("#jqgrid_table").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=fuentes_financiacion',
                 datatype: "json",
@@ -117,18 +214,16 @@
                 pager: '#jqgrid_div',
                 sortname: 'idff',
                 mytype: "POST",
+                width: sizePageOne,
                 postData: { tabla: "f_f", proyecto_id: function () { return j("#ContentPlaceHolder1_ban_proyecto_id").val(); } },
                 viewrecords: true,
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
                 caption: "Fuentes de Financiación",
                 afterComplete: function (response, postdata, formid) { alert("save"); }
-
             });
             j("#jqgrid_table").jqGrid('inlineNav', "#jqgrid_div");
-            j("#jqgrid_table").navGrid('#jqgrid_div', { edit: true, add: true, del: true, search: false, view: true }, { width: 500, reloadAfterSubmit: true }, { reloadAfterSubmit: true, width: 500, closeAfterAdd: false }, { reloadAfterSubmit: true }, {});
-
-
+            j("#jqgrid_table").navGrid('#jqgrid_div', { edit: true, add: true, del: true, search: false, view: true }, { width: sizePageOne, reloadAfterSubmit: true }, { reloadAfterSubmit: true, width: sizePageOne, closeAfterAdd: false }, { reloadAfterSubmit: true, reloadAfterSubmit: true, width: sizePageOne, closeAfterAdd: false }, {});
             j("#jqgrid_matriz_identificacion_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=identificacion',
                 datatype: "json",
@@ -147,13 +242,16 @@
                 mytype: "POST",
                 postData: { tabla: "i", proyecto_id: function () { return j("#ContentPlaceHolder1_ban_proyecto_id").val(); } },
                 viewrecords: true,
+                width: sizePageOne,
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
                 caption: "Fuentes de Financiación"
             });
             j("#jqgrid_matriz_identificacion_t").jqGrid('navGrid', "#jqgrid_matriz_identificacion_d", { edit: true, add: true, del: true });
             j("#jqgrid_matriz_identificacion_t").jqGrid('inlineNav', "#jqgrid_matriz_identificacion_d");
-
+            //==============================================================================
+            // Fin: Ejecucion de procedimiento para asignacion de Jqgrid
+            //==============================================================================
             j('#accordion').accordion({ autoHeight: false,
                 navigation: true,
                 collapsible: true
@@ -189,100 +287,7 @@
             }
         });
 
-        function setUrls() {
-            j('#refreshOrganigrama').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&problemas=true');
-            j('#refreshOrganigrama_obj').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&objetivos=true');
-            j('#planaccion').attr('href', '/Organigrama.aspx?proyecto_id=' + j('#ContentPlaceHolder1_ban_proyecto_id').val() + '&planaccion=true');
-        }
-        setTimeout('speech()', 3000);
-        setInterval('IntervalTools()', 3000);
-
-//        function speech() {
-//            j("input:text, input:password").attr("x-webkit-speech", "x-webkit-speech");
-
-//            //            j("textarea").each(function () {
-//            //                var pixels = parseInt(j(this).css("width")) - 30;
-//            //                j(this).css("width", pixels + "px");
-//            //                j(this).parent().append("<input type='text' x-webkit-speech = 'x-webkit-speech' style='width: 15px; background: transparent; border: 0;' onwebkitspeechchange=\"textarea_change($(this),'" + j(this).attr("id") + "');\"/>");
-//            //            });
-//        }
-
-        function IntervalTools() {
-            var numeric_text = j("#ContentPlaceHolder1_if_marco_logico").contents().find("#presupuesto"); j(numeric_text).change(function () { if (isNaN(j(this).val())) { j(this).val("0"); } });
-        }
-
-        function UpdateArbolProblemas(id, actualizar) {
-            j.ajax({
-                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&refreshMarcoLogico=true",
-                async: false,
-                success: function (result) {
-                    j("#ContentPlaceHolder1_content_marcologico").html("");
-
-                    j("#ContentPlaceHolder1_content_marcologico").html(result);
-                },
-                error: function (result) {
-                    // TODO:JCMM: Mensaje de Error Controlado
-                }
-            });
-
-            j.ajax({
-                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolproblemas=true",
-                async: false,
-                success: function (result) {
-                    j("#ContentPlaceHolder1_org").html("");
-
-                    j("#ContentPlaceHolder1_org").html(result);
-
-                },
-                error: function (result) {
-                    alert("Error " + result.status + ' ' + result.statusText);
-                }
-            });
-
-            j.ajax({
-                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&actualizararbolobjetivos=true",
-                async: false,
-                success: function (result) {
-
-                    j("#ContentPlaceHolder1_org_objetivos").html("");
-
-                    j("#ContentPlaceHolder1_org_objetivos").html(result);
-
-                },
-                error: function (result) {
-                    alert("Error " + result.status + ' ' + result.statusText);
-                }
-            });
-            j.ajax({
-                url: "ajaxBancoProyectos.aspx?proyecto_id=" + id + "&matrizactores=true",
-                async: false,
-                success: function (result) {
-
-                    j("#ContentPlaceHolder1_matrizactores_div").html("");
-
-                    j("#ContentPlaceHolder1_matrizactores_div").html(result);
-
-                },
-                error: function (result) {
-                    alert("Error " + result.status + ' ' + result.statusText);
-                }
-            });
-        }
-        function deleteFile(file) {
-            if (confirm('Esta seguro que desea eliminar el archivo.')) {
-                j.ajax({
-                    url: "ajaxBancoProyectos.aspx?deleteFile=" + file,
-                    async: false,
-                    success: function (result) {
-                        j("#a_document_" + file).parent().remove();
-                    },
-                    error: function (result) {
-
-                        alert("Error " + result.status + ' ' + result.statusText);
-                    }
-                });
-            }
-        }
+        
     </script>
     <style type="text/css">
         #forie
@@ -353,6 +358,7 @@
             id="back">
             <img width="24px" src="/Icons/back_turn.png" alt="previous" /></span></li>
         <li>
+            <input type="button" value="Guardar" onclick="j('#ContentPlaceHolder1_btnalmacenarregistro').trigger('click');"/>
             <div id="proyecto_header" runat="server">
             </div>
             <div id="div_ir">

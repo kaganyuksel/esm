@@ -19,12 +19,8 @@
             setInterval("j('#fecha').datepicker({dateFormat: 'dd/mm/yy', minDate: j('#min_fecha_actividades').val()});", 1000);
 
             var interval = null;
-            if (document.body.clientWidth > 1024) {
-                j.extend(j.jgrid.edit, { width: "600", afterComplete: function (response, postdata, formid) { parent.UpdateArbolProblemas(j('#ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
-            }
-            else {
-                j.extend(j.jgrid.edit, { width: "250", afterComplete: function (response, postdata, formid) { parent.UpdateArbolProblemas(j('#ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
-            }
+            j.extend(j.jgrid.edit, { width: parent.sizePageOne, afterComplete: function (response, postdata, formid) { parent.UpdateArbolProblemas(j('#ban_proyecto_id').val(), true); alert('El proceso finalizó correctamente.'); } });
+            
 
             j("#jqgrid_subp_t").jqGrid({
                 url: 'ajaxBancoProyectos.aspx?modulo=subprocesos',
@@ -43,6 +39,7 @@
                 pager: '#jqgrid_subp_d',
                 sortname: 'id',
                 mytype: "POST",
+                width: parent.sizePageOne,
                 postData: { tabla: "subp", proyecto_id: function () { return j("#ban_proyecto_id").val(); } },
                 viewrecords: true,
                 sortorder: "desc",
@@ -71,7 +68,7 @@
                     j("#jqgrid_act_t").trigger('reloadGrid');
                 }
             });
-            j("#jqgrid_subp_t").jqGrid('navGrid', "#jqgrid_subp_d", { edit: true, add: true, del: false });
+            j("#jqgrid_subp_t").jqGrid('navGrid', "#jqgrid_subp_d", { edit: true, add: true, del: true });
             j("#jqgrid_subp_t").jqGrid('inlineNav', "#jqgrid_subp_d");
 
             j("#jqgrid_act_t").jqGrid({
@@ -129,11 +126,12 @@
                 mytype: "POST",
                 postData: { tabla: "act", proyecto_id: function () { return j("#ban_proyecto_id").val(); } },
                 viewrecords: true,
+                width: parent.sizePageOne,
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
                 caption: "Marco Lógico"
             });
-            j("#jqgrid_act_t").jqGrid('navGrid', "#jqgrid_act_d", { edit: true, add: true, del: false });
+            j("#jqgrid_act_t").jqGrid('navGrid', "#jqgrid_act_d", { edit: true, add: true, del: true });
             j("#jqgrid_act_t").jqGrid('inlineNav', "#jqgrid_act_d");
 
 
@@ -160,13 +158,14 @@
                 pager: '#jqgrid_m_l_d',
                 sortname: 'id',
                 mytype: "POST",
+                width: parent.sizePageOne,
                 postData: { tabla: "ind", proyecto_id: function () { return j("#ban_proyecto_id").val(); } },
                 viewrecords: true,
                 sortorder: "desc",
                 editurl: "ajaxBancoProyectos.aspx",
                 caption: "Marco Lógico"
             });
-            j("#jqgrid_m_t").jqGrid('navGrid', "#jqgrid_m_l_d", { edit: true, add: true, del: false });
+            j("#jqgrid_m_t").jqGrid('navGrid', "#jqgrid_m_l_d", { edit: true, add: true, del: true });
             j("#jqgrid_m_t").jqGrid('inlineNav', "#jqgrid_m_l_d");
 
         });
